@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Threading;
+using EmuLoader.Classes;
+
+namespace EmuLoader.Forms
+{
+    public partial class FormMessage : FormBase
+    {
+        private static FormMessage instance;
+        private static Thread t;
+        private static string messageGlobal;
+        
+        public FormMessage()
+        {
+            InitializeComponent();
+        }
+
+        private void FormMessage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public static void ShowMessage(string message)
+        {
+            messageGlobal = message;
+           
+            if (t != null)
+            {
+                t.Abort();
+            }
+
+            if (instance != null)
+            {
+                //instance.Close();
+            }
+
+            ThreadStart start = new ThreadStart(DoWork);
+            t = new Thread(start);
+            t.Start();
+        }
+
+        private static void DoWork()
+        {
+            instance = new FormMessage();
+            instance.labelMessage.Text = messageGlobal;
+
+            int pos = (int)((instance.Width - instance.labelMessage.Width) / 2);
+            instance.labelMessage.Location = new Point(pos, instance.labelMessage.Height);
+            instance.ShowDialog();
+        }
+
+        public static void CloseMessage()
+        {
+            instance.Close();
+        }
+    }
+}
