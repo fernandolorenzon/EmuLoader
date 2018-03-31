@@ -43,11 +43,19 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonSync = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonStopProcess = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.labelProgress = new System.Windows.Forms.Label();
+            this.labelId = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.labelBoxart = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.labelGameplay = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 98);
+            this.label2.Location = new System.Drawing.Point(80, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 2;
@@ -81,7 +89,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 124);
+            this.label3.Location = new System.Drawing.Point(66, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 13);
             this.label3.TabIndex = 3;
@@ -90,7 +98,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 152);
+            this.label4.Location = new System.Drawing.Point(60, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 13);
             this.label4.TabIndex = 4;
@@ -99,7 +107,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 176);
+            this.label5.Location = new System.Drawing.Point(56, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(127, 13);
             this.label5.TabIndex = 5;
@@ -108,7 +116,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 204);
+            this.label6.Location = new System.Drawing.Point(39, 214);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(144, 13);
             this.label6.TabIndex = 6;
@@ -117,7 +125,7 @@
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
-            this.labelGenre.Location = new System.Drawing.Point(182, 98);
+            this.labelGenre.Location = new System.Drawing.Point(211, 110);
             this.labelGenre.Name = "labelGenre";
             this.labelGenre.Size = new System.Drawing.Size(10, 13);
             this.labelGenre.TabIndex = 7;
@@ -126,7 +134,7 @@
             // labelPublisher
             // 
             this.labelPublisher.AutoSize = true;
-            this.labelPublisher.Location = new System.Drawing.Point(182, 124);
+            this.labelPublisher.Location = new System.Drawing.Point(211, 136);
             this.labelPublisher.Name = "labelPublisher";
             this.labelPublisher.Size = new System.Drawing.Size(10, 13);
             this.labelPublisher.TabIndex = 8;
@@ -135,7 +143,7 @@
             // labelDeveloper
             // 
             this.labelDeveloper.AutoSize = true;
-            this.labelDeveloper.Location = new System.Drawing.Point(182, 152);
+            this.labelDeveloper.Location = new System.Drawing.Point(211, 164);
             this.labelDeveloper.Name = "labelDeveloper";
             this.labelDeveloper.Size = new System.Drawing.Size(10, 13);
             this.labelDeveloper.TabIndex = 9;
@@ -144,7 +152,7 @@
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(182, 176);
+            this.labelDescription.Location = new System.Drawing.Point(211, 188);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(10, 13);
             this.labelDescription.TabIndex = 10;
@@ -153,7 +161,7 @@
             // labelYearReleased
             // 
             this.labelYearReleased.AutoSize = true;
-            this.labelYearReleased.Location = new System.Drawing.Point(182, 204);
+            this.labelYearReleased.Location = new System.Drawing.Point(211, 214);
             this.labelYearReleased.Name = "labelYearReleased";
             this.labelYearReleased.Size = new System.Drawing.Size(10, 13);
             this.labelYearReleased.TabIndex = 11;
@@ -190,16 +198,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(802, 54);
             this.flowLayoutPanel1.TabIndex = 14;
             // 
-            // buttonClose
-            // 
-            this.buttonClose.Location = new System.Drawing.Point(165, 3);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 45);
-            this.buttonClose.TabIndex = 14;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
             // buttonStopProcess
             // 
             this.buttonStopProcess.Location = new System.Drawing.Point(84, 3);
@@ -209,6 +207,16 @@
             this.buttonStopProcess.Text = "Stop Process";
             this.buttonStopProcess.UseVisualStyleBackColor = true;
             this.buttonStopProcess.Click += new System.EventHandler(this.buttonStopProcess_Click);
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(165, 3);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 45);
+            this.buttonClose.TabIndex = 14;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // label7
             // 
@@ -236,11 +244,91 @@
             this.labelProgress.TabIndex = 17;
             this.labelProgress.Text = "-";
             // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Location = new System.Drawing.Point(211, 88);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(10, 13);
+            this.labelId.TabIndex = 19;
+            this.labelId.Text = "-";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 88);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(171, 13);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Roms with no TheGamesDB.net Id";
+            // 
+            // labelBoxart
+            // 
+            this.labelBoxart.AutoSize = true;
+            this.labelBoxart.Location = new System.Drawing.Point(211, 239);
+            this.labelBoxart.Name = "labelBoxart";
+            this.labelBoxart.Size = new System.Drawing.Size(10, 13);
+            this.labelBoxart.TabIndex = 21;
+            this.labelBoxart.Text = "-";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(48, 239);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(135, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Roms with no Boxart image";
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Location = new System.Drawing.Point(211, 263);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(10, 13);
+            this.labelTitle.TabIndex = 23;
+            this.labelTitle.Text = "-";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(58, 263);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(125, 13);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Roms with no Title image";
+            // 
+            // labelGameplay
+            // 
+            this.labelGameplay.AutoSize = true;
+            this.labelGameplay.Location = new System.Drawing.Point(211, 287);
+            this.labelGameplay.Name = "labelGameplay";
+            this.labelGameplay.Size = new System.Drawing.Size(10, 13);
+            this.labelGameplay.TabIndex = 25;
+            this.labelGameplay.Text = "-";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(33, 287);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(150, 13);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "Roms with no gameplay image";
+            // 
             // FormSyncRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 476);
+            this.Controls.Add(this.labelGameplay);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.labelTitle);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.labelBoxart);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.labelId);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -289,5 +377,13 @@
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonStopProcess;
+        private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelBoxart;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelGameplay;
+        private System.Windows.Forms.Label label14;
     }
 }

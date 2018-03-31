@@ -670,7 +670,6 @@ namespace EmuLoader.Classes
 
                             game.Genre = PrioritizeGenre(gameGenres);
                         }
-
                     }
                 }
 
@@ -732,6 +731,76 @@ namespace EmuLoader.Classes
             Genre.Set(genre);
 
             return genre;
+        }
+
+        public static List<string> GetRomImagesByPlatform(string platform, string folder)
+        {
+            var rootDir = Environment.CurrentDirectory;
+            var imagesDir = rootDir + "\\Pictures\\" + platform + "\\" + folder;
+            var result = new List<string>();
+
+            if (!Directory.Exists(imagesDir)) return result;
+
+            var images = Directory.GetFiles(imagesDir);
+
+            foreach (var item in images)
+            {
+                result.Add(Functions.GetFileNameNoExtension(item));
+            }
+
+            return result;
+        }
+
+        public static bool GetGameArtUrls(string gameId, out string boxArt, out string title, out string gameplay)
+        {
+            bool result = false;
+            boxArt = string.Empty;
+            title = string.Empty;
+            gameplay = string.Empty;
+
+            try
+            {
+                string xml = string.Empty;
+
+                using (WebClient client = new WebClient())
+                {
+                    xml = client.DownloadString(new Uri("http://thegamesdb.net/api/GetArt.php?id=" + gameId));
+                }
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
+
+                foreach (XmlNode item in doc.ChildNodes[1].ChildNodes[1].ChildNodes)
+                {
+                    if (item.Name == "boxart" && item.Attributes.Count > 0 && item.Attributes[0].Name == "side" && item.Attributes[0].Value == "front")
+                    {
+                        boxArt = "http://thegamesdb.net/banners/" + item.InnerText;
+                        result = true;
+                        continue;
+                    }
+
+                    if (item.Name == "banner")
+                    {
+                        title = "http://thegamesdb.net/banners/" + item.InnerText;
+                        result = true;
+                        continue;
+                    }
+
+                    if (item.Name == "screenshot")
+                    {
+                        gameplay = "http://thegamesdb.net/banners/" + item.ChildNodes[0].InnerText;
+                        result = true;
+                        continue;
+                    }
+
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
         }
     }
 }

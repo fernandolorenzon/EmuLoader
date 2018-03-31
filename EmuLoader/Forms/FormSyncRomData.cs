@@ -1,7 +1,9 @@
 ﻿using EmuLoader.Classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -19,6 +21,9 @@ namespace EmuLoader.Forms
         string platformId;
         int syncRomsCount;
         List<Rom> notSyncedRoms = new List<Rom>();
+        List<string> missingBoxartImages = null;
+        List<string> missingTitleImages = null;
+        List<string> missingGameplayImages = null;
 
         public FormSyncRomData()
         {
@@ -76,12 +81,16 @@ namespace EmuLoader.Forms
                     SetOtherProperties();
                     var count2 = syncRomsCount;
 
+                    SetImages();
+                    var count3 = syncRomsCount;
 
                     LogMessage(count.ToString() + " roms Id/Year updated successfully!");
                     LogMessage(count2.ToString() + " roms details updated successfully!");
+                    LogMessage(count3.ToString() + " roms images updated successfully!");
 
-                    MessageBox.Show(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
-                                    count2.ToString() + " roms details updated successfully!"
+                MessageBox.Show(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
+                                count2.ToString() + " roms details updated successfully!" + Environment.NewLine +
+                                count3.ToString() + " roms images updated successfully!"
                         );
 
                     comboBoxPlatform_SelectedIndexChanged(sender, e);
@@ -273,22 +282,140 @@ namespace EmuLoader.Forms
             }
         }
 
+
+        private void SetImages()
+        {
+            if (progressBar.Maximum > progressBar.Value)
+            {
+                labelProgress.Invoke((MethodInvoker)delegate
+                {
+                    progressBar.Maximum = progressBar.Value;
+                });
+            }
+
+            syncRomsCount = 0;
+
+            var romsList = Roms.Select(x => x.Name).ToList();
+
+            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && 
+                                    (missingBoxartImages.Contains(x.Name) || 
+                                    missingTitleImages.Contains(x.Name) || 
+                                    missingGameplayImages.Contains(x.Name))).ToList();
+
+            bool updated = false;
+            syncRomsCount = 0;
+            ThreadStopped = false;
+
+            progressBar.Invoke((MethodInvoker)delegate
+            {
+                progressBar.Value = 0;
+            });
+
+            foreach (var rom in notSyncedRoms)
+            {
+                if (StopThread)
+                {
+                    StopThread = false;
+                    Thread.CurrentThread.Abort();
+                    comboBoxPlatform_SelectedIndexChanged(null, new EventArgs());
+                }
+
+                if (progressBar.Maximum > progressBar.Value)
+                {
+                    progressBar.Invoke((MethodInvoker)delegate
+                    {
+                        progressBar.Value++;
+                    });
+                }
+
+                var boxArtMissing = missingBoxartImages.Contains(rom.Name);
+                var titleMissing = missingTitleImages.Contains(rom.Name);
+                var gameplayMissing = missingGameplayImages.Contains(rom.Name);
+
+                if (boxArtMissing || titleMissing || gameplayMissing)
+                {
+                    string boxUrl = string.Empty;
+                    string titleUrl = string.Empty;
+                    string gameplayUrl = string.Empty;
+
+                    var found = Functions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
+
+                    if (!found) continue;
+
+                    syncRomsCount++;
+
+                    if (boxArtMissing)
+                    {
+                        LogMessage("UPDATING BOXART IMAGE - " + rom.Name);
+                        SaveImage(boxUrl, rom, Values.BoxartFolder);
+                    }
+
+                    if (titleMissing)
+                    {
+                        LogMessage("UPDATING TILE IMAGE - " + rom.Name);
+                        SaveImage(titleUrl, rom, Values.TitleFolder);
+                    }
+
+                    if (gameplayMissing)
+                    {
+                        LogMessage("UPDATING GAMEPLAY IMAGE - " + rom.Name);
+                        SaveImage(gameplayUrl, rom, Values.GameplayFolder);
+                    }
+                }
+            }
+        }
+
+        private void SaveImage(string url, Rom rom, string folder)
+        {
+            if (string.IsNullOrEmpty(url)) return;
+
+            string extension = url.Substring(url.LastIndexOf("."));
+            string imagePath = "image" + extension;
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(new Uri(url), imagePath);
+            }
+
+            Functions.SavePicture(rom, imagePath, folder);
+            File.Delete(imagePath);
+        }
+
         private void comboBoxPlatform_SelectedIndexChanged(object sender, EventArgs e)
         {
+            labelId.Text = "-";
             labelGenre.Text = "-";
             labelPublisher.Text = "-";
             labelDeveloper.Text = "-";
             labelDescription.Text = "-";
             labelYearReleased.Text = "-";
+            labelBoxart.Text = "-";
+            labelTitle.Text = "-";
+            labelGameplay.Text = "-";
 
             Roms.Clear();
             Roms.AddRange(Rom.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
 
+            labelId.Text = Roms.Where(x => string.IsNullOrEmpty(x.Id)).Count().ToString();
             labelGenre.Text = Roms.Where(x => x.Genre == null).Count().ToString();
             labelPublisher.Text = Roms.Where(x => string.IsNullOrEmpty(x.Publisher)).Count().ToString();
             labelDeveloper.Text = Roms.Where(x => string.IsNullOrEmpty(x.Developer)).Count().ToString();
             labelDescription.Text = Roms.Where(x => string.IsNullOrEmpty(x.Description)).Count().ToString();
             labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
+
+            var boxartImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
+            var titleImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
+            var gameplayImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+
+            var romsList = Roms.Select(x => x.Name).ToList();
+
+            missingBoxartImages = romsList.Except(boxartImages).ToList();
+            missingTitleImages = romsList.Except(titleImages).ToList();
+            missingGameplayImages = romsList.Except(gameplayImages).ToList();
+
+            labelBoxart.Text = missingBoxartImages.Count().ToString();
+            labelTitle.Text = missingTitleImages.Count().ToString();
+            labelGameplay.Text = missingGameplayImages.Count().ToString();
         }
 
         private void LogMessage(string message)
