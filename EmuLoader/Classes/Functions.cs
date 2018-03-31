@@ -552,6 +552,59 @@ namespace EmuLoader.Classes
             }
         }
 
+        public static Rom GetGameByName(string platformId, string name)
+        {
+            Rom game = null;
+
+            try
+            {
+                string xml = string.Empty;
+
+                using (WebClient client = new WebClient())
+                {
+                    var url = string.Format("http://thegamesdb.net/api/GetGame.php?name={0}&platformid={1}", name, platformId);
+                    xml = client.DownloadString(new Uri(url));
+                }
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
+
+                var genres = Genre.GetAll();
+
+                foreach (XmlNode gameNode in doc.ChildNodes[1].ChildNodes)
+                {
+                    var platformNode = gameNode.SelectSingleNode("PlatformId");
+
+                    if (platformNode == null || (platformNode != null && platformNode.InnerText != platformId)) continue;
+
+                    foreach (XmlNode contentNode in gameNode.ChildNodes)
+                    {
+                        if (contentNode.Name.ToLower() == "id")
+                        {
+                            game = new Rom();
+                            game.Id = contentNode.InnerText;
+                        }
+
+                        if (contentNode.Name.ToLower() == "releasedate")
+                        {
+                            if (game == null)
+                            {
+                                game = new Rom();
+                            }
+
+                            game.YearReleased = GetYear(contentNode);
+                        }
+                    }
+                }
+
+                return game;
+            }
+            catch (Exception ex)
+            {
+                return game;
+            }
+        }
+
         public static Rom GetGameDetails(string gameId)
         {
             Rom game = new Rom();

@@ -16,8 +16,9 @@ namespace EmuLoader.Forms
         public bool Updated { get; set; }
         bool StopThread = false;
         bool ThreadStopped = false;
-
+        string platformId;
         int syncRomsCount;
+        List<Rom> notSyncedRoms = new List<Rom>();
 
         public FormSyncRomData()
         {
@@ -39,9 +40,10 @@ namespace EmuLoader.Forms
         {
             try
             {
-
+                platformId = comboBoxPlatform.SelectedValue.ToString();
                 textBoxLog.Text = "";
                 progressBar.Value = 0;
+                notSyncedRoms = Roms.Where(x => string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased)).ToList();
                 LogMessage("GETTING GAMES LIST...");
 
                 Updated = true;
@@ -61,6 +63,8 @@ namespace EmuLoader.Forms
                     MessageBox.Show("An Error ocurred", "Error");
                     return;
                 }
+
+                progressBar.Maximum = notSyncedRoms.Count * 2;
 
                 new Thread(() =>
                 {
@@ -97,13 +101,28 @@ namespace EmuLoader.Forms
         private void SetIdAndYear()
         {
             syncRomsCount = 0;
-            var notSyncedRoms = Roms.Where(x => string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased)).ToList();
+            
             bool updated = false;
             ThreadStopped = false;
             bool found = false;
+            string gameNameToDelete = string.Empty;
 
             foreach (var rom in notSyncedRoms)
             {
+                if (found && !string.IsNullOrEmpty(gameNameToDelete))
+                {
+                    games.RemoveAll(x => x.Name == gameNameToDelete);
+                    gameNameToDelete = string.Empty;
+                }
+
+                if (progressBar.Maximum > progressBar.Value)
+                {
+                    labelProgress.Invoke((MethodInvoker)delegate
+                    {
+                        progressBar.Value++;
+                    });
+                }
+
                 if (StopThread)
                 {
                     StopThread = false;
@@ -120,6 +139,7 @@ namespace EmuLoader.Forms
 
                     if (romName == gameName)
                     {
+                        gameNameToDelete = game.Name;
                         found = true;
 
                         if (string.IsNullOrEmpty(rom.Id) && !string.IsNullOrEmpty(game.Id))
@@ -142,13 +162,46 @@ namespace EmuLoader.Forms
                             updated = false;
                         }
 
-                        continue;
+                        break;
                     }
                 }
 
                 if (!found)
                 {
                     LogMessage("NOT FOUND - " + rom.Name);
+                    LogMessage("TRYING THE HARD WAY - " + rom.Name);
+                    var gameName = Functions.RemoveSubstring(rom.Name, '(', ')');
+                    gameName = Functions.RemoveSubstring(gameName, '[', ']').Trim();
+
+                    var game = Functions.GetGameByName(platformId, gameName);
+
+                    if (game == null)
+                    {
+                        LogMessage("REALLY NOT FOUND - " + rom.Name);
+                        continue;
+                    }
+
+                    found = true;
+
+                    if (string.IsNullOrEmpty(rom.Id) && !string.IsNullOrEmpty(game.Id))
+                    {
+                        rom.Id = game.Id;
+                        updated = true;
+                    }
+
+                    if (string.IsNullOrEmpty(rom.YearReleased) && !string.IsNullOrEmpty(game.YearReleased))
+                    {
+                        rom.YearReleased = game.YearReleased;
+                        updated = true;
+                    }
+
+                    if (updated)
+                    {
+                        syncRomsCount++;
+                        LogMessage("ID AND YEAR SET - " + rom.Name);
+                        Rom.Set(rom);
+                        updated = false;
+                    }
                 }
             }
 
@@ -158,11 +211,6 @@ namespace EmuLoader.Forms
         private void SetOtherProperties()
         {
             var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer) || string.IsNullOrEmpty(x.Description) || x.Genre == null)).ToList();
-
-            progressBar.Invoke((MethodInvoker)delegate
-            {
-                progressBar.Maximum = notSyncedRoms.Count;
-            });
 
             bool updated = false;
             syncRomsCount = 0;
