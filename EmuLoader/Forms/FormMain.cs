@@ -405,6 +405,11 @@ namespace EmuLoader.Forms
                 {
                     if (!row.Visible) continue;
                     Rom rom = (Rom)row.Tag;
+
+                    var message = MessageBox.Show(string.Format("Do you want to remove {0} ?", rom.Name), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (message.ToString() == "No") continue;
+
                     Rom.Delete(rom);
                     Functions.RemoveRomPics(rom);
                     dataGridView.Rows.Remove(row);
