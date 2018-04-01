@@ -297,7 +297,10 @@ namespace EmuLoader.Forms
         private void buttonSearchInDB_Click(object sender, EventArgs e)
         {
             string url = "http://thegamesdb.net/search/?string={0}&function=Search";
-            url = string.Format(url, textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " "));
+            string name = textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " ").Replace(" ", "+");
+            name = Functions.RemoveSubstring(name, '[', ']');
+            name = Functions.RemoveSubstring(name, '(', ')');
+            url = string.Format(url, name);
 
             ProcessStartInfo sInfo = new ProcessStartInfo(url);
             Process.Start(sInfo);

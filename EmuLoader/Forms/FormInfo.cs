@@ -17,25 +17,25 @@ namespace EmuLoader.Forms
         {
             InitializeComponent();
 
-            textBox1.AppendText("Id" + Environment.NewLine);
+            textBox1.AppendText("ID" + Environment.NewLine);
             textBox1.AppendText(rom.Id + Environment.NewLine + Environment.NewLine);
 
-            textBox1.AppendText("Name" + Environment.NewLine);
+            textBox1.AppendText("NAME" + Environment.NewLine);
             textBox1.AppendText(rom.Name + Environment.NewLine + Environment.NewLine);
 
-            textBox1.AppendText("Developer" + Environment.NewLine);
-            textBox1.AppendText(rom.Developer + Environment.NewLine + Environment.NewLine);
-
-            textBox1.AppendText("Publisher" + Environment.NewLine);
+            textBox1.AppendText("PUBLISHER" + Environment.NewLine);
             textBox1.AppendText(rom.Publisher + Environment.NewLine + Environment.NewLine);
 
-            textBox1.AppendText("Description" + Environment.NewLine);
+            textBox1.AppendText("DEVELOPER" + Environment.NewLine);
+            textBox1.AppendText(rom.Developer + Environment.NewLine + Environment.NewLine);
+
+            textBox1.AppendText("DESCRIPTION" + Environment.NewLine);
             textBox1.AppendText(rom.Description + Environment.NewLine + Environment.NewLine);
 
-            textBox1.AppendText("Year Released" + Environment.NewLine);
+            textBox1.AppendText("YEAR RELEASED" + Environment.NewLine);
             textBox1.AppendText(rom.YearReleased + Environment.NewLine + Environment.NewLine);
 
-            textBox1.AppendText("Genre" + Environment.NewLine);
+            textBox1.AppendText("GENRE" + Environment.NewLine);
             textBox1.AppendText(rom.Genre != null ? rom.Genre.Name : "" + Environment.NewLine + Environment.NewLine);
         }
     }
