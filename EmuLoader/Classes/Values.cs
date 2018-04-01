@@ -12,7 +12,7 @@ namespace EmuLoader.Classes
         public static string GameplayFolder = "gameplay";
         public static string DefaultCommand = "%EMUPATH% %ROMPATH%";
 
-        public static string PlatformsXML = 
+        public static string PlatformsXML =
             @"<Data>
             <Platforms>
                 <Platform>
@@ -99,6 +99,11 @@ namespace EmuLoader.Classes
                     <id>24</id>
                     <name>NeoGeo</name>
                     <alias>neogeo</alias>
+                </Platform>
+                <Platform>
+                    <id>4923</id>
+                    <name>Neo Geo Pocket Color</name>
+                    <alias>neo-geo-pocket-color</alias>
                 </Platform>
                 <Platform>
                     <id>4912</id>
