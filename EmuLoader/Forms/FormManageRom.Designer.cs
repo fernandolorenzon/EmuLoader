@@ -82,6 +82,10 @@
             this.Description = new System.Windows.Forms.Label();
             this.textBoxYearReleased = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.textBoxId = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.buttonOpenDB = new System.Windows.Forms.Button();
+            this.buttonSearchInDB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -411,9 +415,9 @@
             this.groupBox1.Controls.Add(this.buttonPath);
             this.groupBox1.Controls.Add(this.labelPath);
             this.groupBox1.Controls.Add(this.textBoxEmulatorExe);
-            this.groupBox1.Location = new System.Drawing.Point(15, 495);
+            this.groupBox1.Location = new System.Drawing.Point(15, 539);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(620, 168);
+            this.groupBox1.Size = new System.Drawing.Size(620, 124);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Override emulator config";
@@ -423,7 +427,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(12, 108);
+            this.label10.Location = new System.Drawing.Point(12, 99);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(187, 13);
             this.label10.TabIndex = 25;
@@ -434,7 +438,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(12, 95);
+            this.label9.Location = new System.Drawing.Point(12, 86);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(219, 13);
             this.label9.TabIndex = 24;
@@ -443,7 +447,7 @@
             // textBoxCommand
             // 
             this.textBoxCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxCommand.Location = new System.Drawing.Point(324, 49);
+            this.textBoxCommand.Location = new System.Drawing.Point(324, 40);
             this.textBoxCommand.Name = "textBoxCommand";
             this.textBoxCommand.Size = new System.Drawing.Size(273, 20);
             this.textBoxCommand.TabIndex = 22;
@@ -453,7 +457,7 @@
             // 
             this.labelCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(321, 25);
+            this.labelCommand.Location = new System.Drawing.Point(321, 16);
             this.labelCommand.Name = "labelCommand";
             this.labelCommand.Size = new System.Drawing.Size(54, 13);
             this.labelCommand.TabIndex = 21;
@@ -462,7 +466,7 @@
             // buttonPath
             // 
             this.buttonPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPath.Location = new System.Drawing.Point(282, 47);
+            this.buttonPath.Location = new System.Drawing.Point(282, 38);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(36, 23);
             this.buttonPath.TabIndex = 18;
@@ -474,7 +478,7 @@
             // 
             this.labelPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(12, 25);
+            this.labelPath.Location = new System.Drawing.Point(12, 16);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(69, 13);
             this.labelPath.TabIndex = 20;
@@ -484,7 +488,7 @@
             // 
             this.textBoxEmulatorExe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEmulatorExe.Location = new System.Drawing.Point(15, 48);
+            this.textBoxEmulatorExe.Location = new System.Drawing.Point(15, 39);
             this.textBoxEmulatorExe.Name = "textBoxEmulatorExe";
             this.textBoxEmulatorExe.Size = new System.Drawing.Size(261, 20);
             this.textBoxEmulatorExe.TabIndex = 19;
@@ -569,11 +573,52 @@
             this.label12.TabIndex = 39;
             this.label12.Text = "Year Released";
             // 
+            // textBoxId
+            // 
+            this.textBoxId.Location = new System.Drawing.Point(382, 439);
+            this.textBoxId.MaxLength = 4;
+            this.textBoxId.Name = "textBoxId";
+            this.textBoxId.Size = new System.Drawing.Size(139, 20);
+            this.textBoxId.TabIndex = 42;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(379, 418);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(104, 13);
+            this.label13.TabIndex = 41;
+            this.label13.Text = "TheGamesDB.net Id";
+            // 
+            // buttonOpenDB
+            // 
+            this.buttonOpenDB.Location = new System.Drawing.Point(382, 465);
+            this.buttonOpenDB.Name = "buttonOpenDB";
+            this.buttonOpenDB.Size = new System.Drawing.Size(110, 68);
+            this.buttonOpenDB.TabIndex = 43;
+            this.buttonOpenDB.Text = "Show TheGamesDB entry";
+            this.buttonOpenDB.UseVisualStyleBackColor = true;
+            this.buttonOpenDB.Click += new System.EventHandler(this.buttonOpenDB_Click);
+            // 
+            // buttonSearchInDB
+            // 
+            this.buttonSearchInDB.Location = new System.Drawing.Point(502, 465);
+            this.buttonSearchInDB.Name = "buttonSearchInDB";
+            this.buttonSearchInDB.Size = new System.Drawing.Size(110, 68);
+            this.buttonSearchInDB.TabIndex = 44;
+            this.buttonSearchInDB.Text = "Check in TheGamesDB";
+            this.buttonSearchInDB.UseVisualStyleBackColor = true;
+            this.buttonSearchInDB.Click += new System.EventHandler(this.buttonSearchInDB_Click);
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 704);
+            this.Controls.Add(this.buttonSearchInDB);
+            this.Controls.Add(this.buttonOpenDB);
+            this.Controls.Add(this.textBoxId);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.textBoxYearReleased);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBoxDescription);
@@ -683,5 +728,9 @@
         private System.Windows.Forms.Label Description;
         private System.Windows.Forms.TextBox textBoxYearReleased;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxId;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button buttonOpenDB;
+        private System.Windows.Forms.Button buttonSearchInDB;
     }
 }

@@ -625,6 +625,17 @@ namespace EmuLoader.Classes
 
                 foreach (XmlNode item in doc.ChildNodes[1].ChildNodes[1].ChildNodes)
                 {
+                    if (item.Name.ToLower() == "releasedate")
+                    {
+                        game.YearReleased = GetYear(item);
+                    }
+
+                    if (item.Name == "GameTitle")
+                    {
+                        game.Name = item.InnerText;
+                        continue;
+                    }
+
                     if (item.Name == "Overview")
                     {
                         game.Description = string.IsNullOrEmpty(game.Description) ? item.InnerText : game.Description;

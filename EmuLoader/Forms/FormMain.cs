@@ -1579,6 +1579,5 @@ namespace EmuLoader.Forms
                 FillYearReleasedFilter();
             }
         }
-
     }
 }

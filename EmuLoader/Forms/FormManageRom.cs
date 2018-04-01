@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.IO;
+using System.Diagnostics;
 
 namespace EmuLoader.Forms
 {
@@ -34,6 +35,7 @@ namespace EmuLoader.Forms
             textBoxDeveloper.Text = rom.Developer;
             textBoxDescription.Text = rom.Description;
             textBoxYearReleased.Text = rom.YearReleased;
+            textBoxId.Text = rom.Id;
 
             List<RomLabel> labels = RomLabel.GetAll();
 
@@ -103,6 +105,7 @@ namespace EmuLoader.Forms
             SelectedRom.Developer = textBoxDeveloper.Text;
             SelectedRom.Description = textBoxDescription.Text;
             SelectedRom.YearReleased = textBoxYearReleased.Text;
+            SelectedRom.Id = textBoxId.Text;
 
             if (textBoxChangeFileName.Text != SelectedRom.GetFileName())
             {
@@ -276,5 +279,28 @@ namespace EmuLoader.Forms
         }
 
         #endregion
+
+        private void buttonOpenDB_Click(object sender, EventArgs e)
+        {
+            if (textBoxId.Text == string.Empty)
+            {
+                MessageBox.Show("TheGameDB Id is empty.");
+                return;
+            }
+
+            var game = Functions.GetGameDetails(textBoxId.Text);
+            game.Id = textBoxId.Text;
+            FormInfo info = new FormInfo(game);
+            info.Show();
+        }
+
+        private void buttonSearchInDB_Click(object sender, EventArgs e)
+        {
+            string url = "http://thegamesdb.net/search/?string={0}&function=Search";
+            url = string.Format(url, textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " "));
+
+            ProcessStartInfo sInfo = new ProcessStartInfo(url);
+            Process.Start(sInfo);
+        }
     }
 }
