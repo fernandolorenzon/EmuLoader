@@ -48,7 +48,7 @@ namespace EmuLoader.Forms
                 platformId = comboBoxPlatform.SelectedValue.ToString();
                 textBoxLog.Text = "";
                 progressBar.Value = 0;
-                notSyncedRoms = Roms.Where(x => string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased)).ToList();
+                notSyncedRoms = Roms.Where(x => string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased) || string.IsNullOrEmpty(x.DBName)).ToList();
                 LogMessage("GETTING GAMES LIST...");
 
                 Updated = true;
@@ -83,6 +83,13 @@ namespace EmuLoader.Forms
 
                     SetImages();
                     var count3 = syncRomsCount;
+
+                    XML.SaveXml();
+
+                    progressBar.Invoke((MethodInvoker)delegate
+                    {
+                        progressBar.Value = progressBar.Maximum;
+                    });
 
                     LogMessage(count.ToString() + " roms Id/Year updated successfully!");
                     LogMessage(count2.ToString() + " roms details updated successfully!");
@@ -120,7 +127,7 @@ namespace EmuLoader.Forms
             {
                 if (found && !string.IsNullOrEmpty(gameNameToDelete))
                 {
-                    games.RemoveAll(x => x.Name == gameNameToDelete);
+                    games.RemoveAll(x => x.DBName == gameNameToDelete);
                     gameNameToDelete = string.Empty;
                 }
 
@@ -144,11 +151,11 @@ namespace EmuLoader.Forms
 
                 foreach (var game in games)
                 {
-                    var gameName = Functions.TrimRomName(game.Name);
+                    var gameName = Functions.TrimRomName(game.DBName);
 
                     if (romName == gameName)
                     {
-                        gameNameToDelete = game.Name;
+                        gameNameToDelete = game.DBName;
                         found = true;
 
                         if (string.IsNullOrEmpty(rom.Id) && !string.IsNullOrEmpty(game.Id))
@@ -160,6 +167,12 @@ namespace EmuLoader.Forms
                         if (string.IsNullOrEmpty(rom.YearReleased) && !string.IsNullOrEmpty(game.YearReleased))
                         {
                             rom.YearReleased = game.YearReleased;
+                            updated = true;
+                        }
+
+                        if (string.IsNullOrEmpty(rom.DBName) && !string.IsNullOrEmpty(game.DBName))
+                        {
+                            rom.DBName = game.DBName;
                             updated = true;
                         }
 
@@ -236,7 +249,7 @@ namespace EmuLoader.Forms
 
                 if (progressBar.Maximum > progressBar.Value)
                 {
-                    labelProgress.Invoke((MethodInvoker)delegate
+                    progressBar.Invoke((MethodInvoker)delegate
                     {
                         progressBar.Value++;
                     });
@@ -287,7 +300,7 @@ namespace EmuLoader.Forms
         {
             if (progressBar.Maximum > progressBar.Value)
             {
-                labelProgress.Invoke((MethodInvoker)delegate
+                progressBar.Invoke((MethodInvoker)delegate
                 {
                     progressBar.Maximum = progressBar.Value;
                 });

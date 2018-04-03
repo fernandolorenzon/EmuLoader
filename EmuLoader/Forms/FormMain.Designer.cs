@@ -96,8 +96,11 @@
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.comboBoxLabels = new System.Windows.Forms.ComboBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.flowLayoutPanelImages = new System.Windows.Forms.FlowLayoutPanel();
             this.columnIconMain = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnRomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnRomDBName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFilename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,8 +109,7 @@
             this.columnPublisher = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDeveloper = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.flowLayoutPanelImages = new System.Windows.Forms.FlowLayoutPanel();
+            this.showRomDBNameColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripEditRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -375,6 +377,7 @@
             this.columnsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showPathColumnToolStripMenuItem,
             this.showFilenameToolStripMenuItem,
+            this.showRomDBNameColumnToolStripMenuItem,
             this.showPlatformColumnToolStripMenuItem,
             this.showGenreColumnToolStripMenuItem,
             this.showLabelsColumnToolStripMenuItem,
@@ -395,7 +398,7 @@
             this.showPathColumnToolStripMenuItem.CheckOnClick = true;
             this.showPathColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPathColumnToolStripMenuItem.Name = "showPathColumnToolStripMenuItem";
-            this.showPathColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showPathColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showPathColumnToolStripMenuItem.Text = "Show Path Column";
             this.showPathColumnToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItemShowPathColumn_CheckedChanged);
             // 
@@ -405,7 +408,7 @@
             this.showFilenameToolStripMenuItem.CheckOnClick = true;
             this.showFilenameToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showFilenameToolStripMenuItem.Name = "showFilenameToolStripMenuItem";
-            this.showFilenameToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showFilenameToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showFilenameToolStripMenuItem.Text = "Show Filename Column";
             this.showFilenameToolStripMenuItem.Click += new System.EventHandler(this.showFilenameToolStripMenuItem_Click);
             // 
@@ -415,7 +418,7 @@
             this.showPlatformColumnToolStripMenuItem.CheckOnClick = true;
             this.showPlatformColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPlatformColumnToolStripMenuItem.Name = "showPlatformColumnToolStripMenuItem";
-            this.showPlatformColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showPlatformColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showPlatformColumnToolStripMenuItem.Text = "Show Emulator Column";
             this.showPlatformColumnToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItemShowPlatformColumn_CheckedChanged);
             // 
@@ -425,7 +428,7 @@
             this.showGenreColumnToolStripMenuItem.CheckOnClick = true;
             this.showGenreColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showGenreColumnToolStripMenuItem.Name = "showGenreColumnToolStripMenuItem";
-            this.showGenreColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showGenreColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showGenreColumnToolStripMenuItem.Text = "Show Genre Column";
             this.showGenreColumnToolStripMenuItem.Click += new System.EventHandler(this.showGenreColumnToolStripMenuItem_Click);
             // 
@@ -435,7 +438,7 @@
             this.showLabelsColumnToolStripMenuItem.CheckOnClick = true;
             this.showLabelsColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showLabelsColumnToolStripMenuItem.Name = "showLabelsColumnToolStripMenuItem";
-            this.showLabelsColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showLabelsColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showLabelsColumnToolStripMenuItem.Text = "Show Labels Column";
             this.showLabelsColumnToolStripMenuItem.Click += new System.EventHandler(this.showLabelsColumnToolStripMenuItem_Click);
             // 
@@ -445,7 +448,7 @@
             this.showDeveloperColumnToolStripMenuItem.CheckOnClick = true;
             this.showDeveloperColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showDeveloperColumnToolStripMenuItem.Name = "showDeveloperColumnToolStripMenuItem";
-            this.showDeveloperColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showDeveloperColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showDeveloperColumnToolStripMenuItem.Text = "Show Developer Column";
             this.showDeveloperColumnToolStripMenuItem.Click += new System.EventHandler(this.showDeveloperColumnToolStripMenuItem_Click);
             // 
@@ -455,7 +458,7 @@
             this.showPublisherColumnToolStripMenuItem.CheckOnClick = true;
             this.showPublisherColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPublisherColumnToolStripMenuItem.Name = "showPublisherColumnToolStripMenuItem";
-            this.showPublisherColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showPublisherColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showPublisherColumnToolStripMenuItem.Text = "Show Publisher Column";
             this.showPublisherColumnToolStripMenuItem.Click += new System.EventHandler(this.showPublisherColumnToolStripMenuItem_Click);
             // 
@@ -465,7 +468,7 @@
             this.showYearReleasedColumnToolStripMenuItem.CheckOnClick = true;
             this.showYearReleasedColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showYearReleasedColumnToolStripMenuItem.Name = "showYearReleasedColumnToolStripMenuItem";
-            this.showYearReleasedColumnToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showYearReleasedColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showYearReleasedColumnToolStripMenuItem.Text = "Show Year Column";
             this.showYearReleasedColumnToolStripMenuItem.Click += new System.EventHandler(this.showYearReleasedColumnToolStripMenuItem_Click);
             // 
@@ -475,7 +478,7 @@
             this.showBoxArtToolStripMenuItem.CheckOnClick = true;
             this.showBoxArtToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showBoxArtToolStripMenuItem.Name = "showBoxArtToolStripMenuItem";
-            this.showBoxArtToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showBoxArtToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showBoxArtToolStripMenuItem.Text = "Show Box Art";
             this.showBoxArtToolStripMenuItem.Click += new System.EventHandler(this.showBoxArtToolStripMenuItem_Click);
             // 
@@ -485,7 +488,7 @@
             this.showTitleToolStripMenuItem.CheckOnClick = true;
             this.showTitleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showTitleToolStripMenuItem.Name = "showTitleToolStripMenuItem";
-            this.showTitleToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showTitleToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showTitleToolStripMenuItem.Text = "Show Title Art";
             this.showTitleToolStripMenuItem.Click += new System.EventHandler(this.showTitleToolStripMenuItem_Click);
             // 
@@ -495,7 +498,7 @@
             this.showGameplayArtToolStripMenuItem.CheckOnClick = true;
             this.showGameplayArtToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showGameplayArtToolStripMenuItem.Name = "showGameplayArtToolStripMenuItem";
-            this.showGameplayArtToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showGameplayArtToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showGameplayArtToolStripMenuItem.Text = "Show Gameplay Art";
             this.showGameplayArtToolStripMenuItem.Click += new System.EventHandler(this.showGameplayArtToolStripMenuItem_Click);
             // 
@@ -505,7 +508,7 @@
             this.showPlatformsListToolStripMenuItem.CheckOnClick = true;
             this.showPlatformsListToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPlatformsListToolStripMenuItem.Name = "showPlatformsListToolStripMenuItem";
-            this.showPlatformsListToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.showPlatformsListToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showPlatformsListToolStripMenuItem.Text = "Show Platforms List";
             this.showPlatformsListToolStripMenuItem.Click += new System.EventHandler(this.showPlatformsListToolStripMenuItem_Click);
             // 
@@ -768,6 +771,7 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnIconMain,
             this.columnRomName,
+            this.columnRomDBName,
             this.columnRomPath,
             this.columnFilename,
             this.columnPlatform,
@@ -796,6 +800,29 @@
             this.dataGridView.Leave += new System.EventHandler(this.dataGridView_Leave);
             this.dataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseDown);
             // 
+            // panelBottom
+            // 
+            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panelBottom.Controls.Add(this.labelTotal);
+            this.panelBottom.Controls.Add(this.labelTotalRomsCount);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 658);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(860, 29);
+            this.panelBottom.TabIndex = 17;
+            // 
+            // flowLayoutPanelImages
+            // 
+            this.flowLayoutPanelImages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxBoxart);
+            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxTitle);
+            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxGameplay);
+            this.flowLayoutPanelImages.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanelImages.Location = new System.Drawing.Point(860, 0);
+            this.flowLayoutPanelImages.Name = "flowLayoutPanelImages";
+            this.flowLayoutPanelImages.Size = new System.Drawing.Size(230, 687);
+            this.flowLayoutPanelImages.TabIndex = 16;
+            // 
             // columnIconMain
             // 
             this.columnIconMain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -814,6 +841,13 @@
             this.columnRomName.HeaderText = "Rom Name";
             this.columnRomName.Name = "columnRomName";
             this.columnRomName.ReadOnly = true;
+            // 
+            // columnRomDBName
+            // 
+            this.columnRomDBName.FillWeight = 90F;
+            this.columnRomDBName.HeaderText = "DB Name";
+            this.columnRomDBName.Name = "columnRomDBName";
+            this.columnRomDBName.ReadOnly = true;
             // 
             // columnRomPath
             // 
@@ -871,28 +905,15 @@
             this.columnYearReleased.Name = "columnYearReleased";
             this.columnYearReleased.ReadOnly = true;
             // 
-            // panelBottom
+            // showRomDBNameColumnToolStripMenuItem
             // 
-            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panelBottom.Controls.Add(this.labelTotal);
-            this.panelBottom.Controls.Add(this.labelTotalRomsCount);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 658);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(860, 29);
-            this.panelBottom.TabIndex = 17;
-            // 
-            // flowLayoutPanelImages
-            // 
-            this.flowLayoutPanelImages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxBoxart);
-            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxTitle);
-            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxGameplay);
-            this.flowLayoutPanelImages.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelImages.Location = new System.Drawing.Point(860, 0);
-            this.flowLayoutPanelImages.Name = "flowLayoutPanelImages";
-            this.flowLayoutPanelImages.Size = new System.Drawing.Size(230, 687);
-            this.flowLayoutPanelImages.TabIndex = 16;
+            this.showRomDBNameColumnToolStripMenuItem.Checked = true;
+            this.showRomDBNameColumnToolStripMenuItem.CheckOnClick = true;
+            this.showRomDBNameColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showRomDBNameColumnToolStripMenuItem.Name = "showRomDBNameColumnToolStripMenuItem";
+            this.showRomDBNameColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showRomDBNameColumnToolStripMenuItem.Text = "Show DB Rom Name Column";
+            this.showRomDBNameColumnToolStripMenuItem.Click += new System.EventHandler(this.showRomDBNameColumnToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -994,8 +1015,17 @@
         private System.Windows.Forms.ToolStripMenuItem showPublisherColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showYearReleasedColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showFilenameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem syncRomsToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxDeveloper;
+        private System.Windows.Forms.Label labelYearReleased;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxPublisher;
+        private System.Windows.Forms.ComboBox comboBoxYearReleased;
+        private System.Windows.Forms.ToolStripMenuItem showRomDBNameColumnToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn columnIconMain;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnRomDBName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFilename;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPlatform;
@@ -1004,12 +1034,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPublisher;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDeveloper;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
-        private System.Windows.Forms.ToolStripMenuItem syncRomsToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxDeveloper;
-        private System.Windows.Forms.Label labelYearReleased;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxPublisher;
-        private System.Windows.Forms.ComboBox comboBoxYearReleased;
     }
 }

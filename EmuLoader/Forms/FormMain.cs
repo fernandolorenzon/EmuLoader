@@ -51,6 +51,7 @@ namespace EmuLoader.Forms
                 columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnGenre");
                 columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnLabels");
                 columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnPath");
+                columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnRomDBName");
                 columnFilename.Visible = showFilenameToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnFileName");
                 columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnDeveloper");
                 columnPublisher.Visible = showPublisherColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnPublisher");
@@ -474,6 +475,27 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void showRomDBNameColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked;
+
+                if (updating) return;
+
+                Config.SetElementVisibility("ColumnRomDBName", columnRomPath.Visible);
+                XML.SaveXml();
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void showFilenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -843,6 +865,7 @@ namespace EmuLoader.Forms
             FormManageRom form = new FormManageRom(rom);
             form.ShowDialog();
             dataGridView.SelectedRows[0].Cells["columnRomName"].Value = rom.Name;
+            dataGridView.SelectedRows[0].Cells["columnRomDBName"].Value = rom.DBName;
             dataGridView.SelectedRows[0].Cells["columnRomPath"].Value = rom.Path;
             dataGridView.SelectedRows[0].Cells["columnDeveloper"].Value = rom.Developer;
             dataGridView.SelectedRows[0].Cells["columnPublisher"].Value = rom.Publisher;
@@ -1334,6 +1357,7 @@ namespace EmuLoader.Forms
 
                 row.Cells["columnRomName"].Value = rom.Name;
                 row.Cells["columnRomPath"].Value = rom.Path;
+                row.Cells["columnRomDBName"].Value = rom.DBName;
                 row.Cells["columnFilename"].Value = rom.GetFileName();
                 row.Cells["columnDeveloper"].Value = rom.Developer;
                 row.Cells["columnPublisher"].Value = rom.Publisher;

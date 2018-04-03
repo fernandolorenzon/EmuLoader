@@ -86,6 +86,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.buttonOpenDB = new System.Windows.Forms.Button();
             this.buttonSearchInDB = new System.Windows.Forms.Button();
+            this.textBoxDBName = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -610,11 +612,30 @@
             this.buttonSearchInDB.UseVisualStyleBackColor = true;
             this.buttonSearchInDB.Click += new System.EventHandler(this.buttonSearchInDB_Click);
             // 
+            // textBoxDBName
+            // 
+            this.textBoxDBName.Location = new System.Drawing.Point(382, 22);
+            this.textBoxDBName.Name = "textBoxDBName";
+            this.textBoxDBName.ReadOnly = true;
+            this.textBoxDBName.Size = new System.Drawing.Size(253, 20);
+            this.textBoxDBName.TabIndex = 46;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(379, 6);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(123, 13);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "TheGamesDB.net Name";
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 704);
+            this.Controls.Add(this.textBoxDBName);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.buttonSearchInDB);
             this.Controls.Add(this.buttonOpenDB);
             this.Controls.Add(this.textBoxId);
@@ -732,5 +753,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button buttonOpenDB;
         private System.Windows.Forms.Button buttonSearchInDB;
+        private System.Windows.Forms.TextBox textBoxDBName;
+        private System.Windows.Forms.Label label14;
     }
 }

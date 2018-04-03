@@ -13,6 +13,8 @@ namespace EmuLoader.Classes
 
         public string Name { get; set; }
 
+        public string DBName { get; set; }
+
         public string Extension { get; private set; }
 
         public string Path
@@ -97,6 +99,7 @@ namespace EmuLoader.Classes
                 Rom rom = new Rom(Functions.GetXmlAttribute(node, "Path"));
                 rom.Id = Functions.GetXmlAttribute(node, "Id");
                 rom.Name = Functions.GetXmlAttribute(node, "Name");
+                rom.DBName = Functions.GetXmlAttribute(node, "DBName");
                 rom.Platform = Platform.Get(Functions.GetXmlAttribute(node, "Platform"));
                 rom.Genre = Genre.Get(Functions.GetXmlAttribute(node, "Genre"));
                 rom.Publisher = Functions.GetXmlAttribute(node, "Publisher");
@@ -130,6 +133,7 @@ namespace EmuLoader.Classes
 
             Functions.CreateOrSetXmlAttribute(node, "Id", rom.Id);
             Functions.CreateOrSetXmlAttribute(node, "Name", rom.Name);
+            Functions.CreateOrSetXmlAttribute(node, "DBName", rom.DBName);
             Functions.CreateOrSetXmlAttribute(node, "Path", rom.Path);
             Functions.CreateOrSetXmlAttribute(node, "Platform", rom.Platform == null ? "" : rom.Platform.Name);
             Functions.CreateOrSetXmlAttribute(node, "Genre", rom.Genre == null ? "" : rom.Genre.Name);
@@ -160,6 +164,7 @@ namespace EmuLoader.Classes
 
             Functions.CreateOrSetXmlAttribute(node, "Id", newRom.Id);
             Functions.CreateOrSetXmlAttribute(node, "Name", newRom.Name);
+            Functions.CreateOrSetXmlAttribute(node, "DBName", newRom.DBName);
             Functions.CreateOrSetXmlAttribute(node, "Path", newRom.Path);
             Functions.CreateOrSetXmlAttribute(node, "Platform", newRom.Platform == null ? "" : newRom.Platform.Name);
             Functions.CreateOrSetXmlAttribute(node, "Genre", newRom.Genre == null ? "" : newRom.Genre.Name);
@@ -185,6 +190,7 @@ namespace EmuLoader.Classes
         {
             XmlNode node = XML.xmlDoc.CreateNode(XmlNodeType.Element, "Rom", "");
             node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
+            node.Attributes.Append(XML.xmlDoc.CreateAttribute("DBName"));
             node.Attributes.Append(XML.xmlDoc.CreateAttribute("Path"));
             node.Attributes.Append(XML.xmlDoc.CreateAttribute("Platform"));
             node.Attributes.Append(XML.xmlDoc.CreateAttribute("Genre"));

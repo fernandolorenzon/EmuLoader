@@ -539,7 +539,7 @@ namespace EmuLoader.Classes
                     games.Add(new Rom()
                     {
                         Id = item.ChildNodes[0].InnerText,
-                        Name = item.ChildNodes[1].InnerText,
+                        DBName = item.ChildNodes[1].InnerText,
                         YearReleased = GetYear(item.ChildNodes[2])
                     });
                 }

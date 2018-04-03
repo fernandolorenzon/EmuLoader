@@ -31,6 +31,7 @@ namespace EmuLoader.Forms
             SelectedRom = rom;
             textBoxChangeFileName.Text = rom.Path.Substring(rom.Path.LastIndexOf("\\") + 1);
             textBoxChangeRomName.Text = rom.Name;
+            textBoxDBName.Text = rom.DBName;
             textBoxPublisher.Text = rom.Publisher;
             textBoxDeveloper.Text = rom.Developer;
             textBoxDescription.Text = rom.Description;
@@ -105,6 +106,8 @@ namespace EmuLoader.Forms
             SelectedRom.Developer = textBoxDeveloper.Text;
             SelectedRom.Description = textBoxDescription.Text;
             SelectedRom.YearReleased = textBoxYearReleased.Text;
+            SelectedRom.DBName = textBoxDBName.Text;
+
             SelectedRom.Id = textBoxId.Text;
 
             if (textBoxChangeFileName.Text != SelectedRom.GetFileName())
@@ -298,6 +301,7 @@ namespace EmuLoader.Forms
         {
             string url = "http://thegamesdb.net/search/?string={0}&function=Search";
             string name = textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " ").Replace(" ", "+");
+
             name = Functions.RemoveSubstring(name, '[', ']');
             name = Functions.RemoveSubstring(name, '(', ')');
             url = string.Format(url, name);
