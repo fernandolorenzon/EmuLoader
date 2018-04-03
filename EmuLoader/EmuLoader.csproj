@@ -101,6 +101,12 @@
     <Compile Include="Forms\FormInfo.Designer.cs">
       <DependentUpon>FormInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormPurgeRomData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPurgeRomData.Designer.cs">
+      <DependentUpon>FormPurgeRomData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormRegister.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInfo.resx">
       <DependentUpon>FormInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPurgeRomData.resx">
+      <DependentUpon>FormPurgeRomData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRegister.resx">
       <DependentUpon>FormRegister.cs</DependentUpon>

@@ -217,6 +217,12 @@ namespace EmuLoader.Forms
                         updated = true;
                     }
 
+                    if (string.IsNullOrEmpty(rom.DBName) && !string.IsNullOrEmpty(game.DBName))
+                    {
+                        rom.DBName = game.DBName;
+                        updated = true;
+                    }
+
                     if (updated)
                     {
                         syncRomsCount++;

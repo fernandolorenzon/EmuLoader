@@ -578,7 +578,7 @@
             // textBoxId
             // 
             this.textBoxId.Location = new System.Drawing.Point(382, 439);
-            this.textBoxId.MaxLength = 4;
+            this.textBoxId.MaxLength = 10;
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(139, 20);
             this.textBoxId.TabIndex = 42;

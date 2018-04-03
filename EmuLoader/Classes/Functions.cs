@@ -249,17 +249,7 @@ namespace EmuLoader.Classes
             trimmed = trimmed.Replace("the ", "").Replace("the_", "").Replace(" the", "").Replace("_the", "");
             trimmed = trimmed.Replace(".jpg", "").Replace(".gif", "").Replace(".png", "");
             trimmed = trimmed.Replace(" in ", "").Replace(" on ", "").Replace(" at ", "");
-            trimmed = trimmed.Replace("-", "").Replace("_", "").Replace("'", "").Replace(" ", "").Replace(".", "").Replace(",", "");
-            //trimmed = trimmed.Replace("(u)", "").Replace("(j)", "").Replace("(e)", "");
-            //trimmed = trimmed.Replace("(usa)", "").Replace("(jpn)", "").Replace("(eur)", "");
-            //trimmed = trimmed.Replace("(japan)", "").Replace("(europe)", "").Replace("(prototype)", "");
-            //trimmed = trimmed.Replace("(m3)", "").Replace("(m4)", "").Replace("(m5)", "").Replace("(m6)", "");
-            //trimmed = trimmed.Replace("(v1.0)", "").Replace("(v1.1)", "").Replace("(v1.2)", "");
-            //trimmed = trimmed.Replace("(world)", "").Replace("(japan, europe)", "").Replace("(usa, europe)", "");
-            //trimmed = trimmed.Replace("usa", "").Replace("jpn", "").Replace("eur", "");
-            //trimmed = trimmed.Replace("(w)", "").Replace("(ju)", "").Replace("(ue)", "").Replace("[f1]", "");
-            //trimmed = trimmed.Replace("(x)", "").Replace("(jue)", "").Replace("[s]", "");
-            //trimmed = trimmed.Replace("(b0)", "").Replace("(b1)", "").Replace("[f1]", "").Replace("[c]", "");
+            trimmed = trimmed.Replace("-", "").Replace("_", "").Replace(":", "").Replace("'", "").Replace(" ", "").Replace(".", "").Replace(",", "");
             trimmed = trimmed.Replace("[!]", "").Replace("!", "").Replace("?", "").Replace("&", "").Replace(" ", "").Replace(" ", "");
 
             return trimmed;
@@ -573,9 +563,9 @@ namespace EmuLoader.Classes
 
                 foreach (XmlNode gameNode in doc.ChildNodes[1].ChildNodes)
                 {
-                    var platformNode = gameNode.SelectSingleNode("PlatformId");
+                    //var platformNode = gameNode.SelectSingleNode("PlatformId");
 
-                    if (platformNode == null || (platformNode != null && platformNode.InnerText != platformId)) continue;
+                    //if (platformNode == null || (platformNode != null && platformNode.InnerText != platformId)) continue;
 
                     foreach (XmlNode contentNode in gameNode.ChildNodes)
                     {
@@ -583,6 +573,15 @@ namespace EmuLoader.Classes
                         {
                             game = new Rom();
                             game.Id = contentNode.InnerText;
+                        }
+                        if (contentNode.Name.ToLower() == "gametitle")
+                        {
+                            if (game == null)
+                            {
+                                game = new Rom();
+                            }
+
+                            game.DBName = contentNode.InnerText;
                         }
 
                         if (contentNode.Name.ToLower() == "releasedate")

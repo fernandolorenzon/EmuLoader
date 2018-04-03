@@ -1603,5 +1603,24 @@ namespace EmuLoader.Forms
                 FillYearReleasedFilter();
             }
         }
+
+        private void purgeRomDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPurgeRomData form = new FormPurgeRomData();
+            form.ShowDialog();
+
+
+            if (form.Updated)
+            {
+                Rom.Fill();
+                FillGenreFilter();
+                FilterRoms();
+                FillEmuFilter();
+                FillPlatformGrid();
+                FillPublisherFilter();
+                FillDeveloperFilter();
+                FillYearReleasedFilter();
+            }
+        }
     }
 }
