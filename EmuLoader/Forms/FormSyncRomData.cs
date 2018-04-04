@@ -363,19 +363,19 @@ namespace EmuLoader.Forms
 
                     syncRomsCount++;
 
-                    if (boxArtMissing)
+                    if (boxArtMissing && !string.IsNullOrEmpty(boxUrl))
                     {
                         LogMessage("UPDATING BOXART IMAGE - " + rom.Name);
                         SaveImage(boxUrl, rom, Values.BoxartFolder);
                     }
 
-                    if (titleMissing)
+                    if (titleMissing && !string.IsNullOrEmpty(titleUrl))
                     {
                         LogMessage("UPDATING TILE IMAGE - " + rom.Name);
                         SaveImage(titleUrl, rom, Values.TitleFolder);
                     }
 
-                    if (gameplayMissing)
+                    if (gameplayMissing && !string.IsNullOrEmpty(gameplayUrl))
                     {
                         LogMessage("UPDATING GAMEPLAY IMAGE - " + rom.Name);
                         SaveImage(gameplayUrl, rom, Values.GameplayFolder);
