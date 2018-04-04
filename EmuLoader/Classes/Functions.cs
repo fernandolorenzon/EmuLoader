@@ -561,11 +561,13 @@ namespace EmuLoader.Classes
 
                 var genres = Genre.GetAll();
 
+                var games = new List<string>();
+
                 foreach (XmlNode gameNode in doc.ChildNodes[1].ChildNodes)
                 {
-                    //var platformNode = gameNode.SelectSingleNode("PlatformId");
+                    var platformNode = gameNode.SelectSingleNode("PlatformId");
 
-                    //if (platformNode == null || (platformNode != null && platformNode.InnerText != platformId)) continue;
+                    if (platformNode == null || (platformNode != null && platformNode.InnerText != platformId)) continue;
 
                     foreach (XmlNode contentNode in gameNode.ChildNodes)
                     {
@@ -574,6 +576,7 @@ namespace EmuLoader.Classes
                             game = new Rom();
                             game.Id = contentNode.InnerText;
                         }
+
                         if (contentNode.Name.ToLower() == "gametitle")
                         {
                             if (game == null)
@@ -594,14 +597,16 @@ namespace EmuLoader.Classes
                             game.YearReleased = GetYear(contentNode);
                         }
                     }
-                }
 
-                return game;
+                    return game;
+                }
             }
             catch (Exception ex)
             {
                 return game;
             }
+
+            return game;
         }
 
         public static Rom GetGameDetails(string gameId)
