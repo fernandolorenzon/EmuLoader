@@ -117,7 +117,7 @@ namespace EmuLoader.Forms
                 {
                     progressBar1.Value++;
                     successfulFind++;
-                    Functions.SavePicture(rom, imageFound, type);
+                    Functions.SavePicture(rom, imageFound, type, checkBoxSaveAsJpg.Checked);
                 }
                 else
                 {

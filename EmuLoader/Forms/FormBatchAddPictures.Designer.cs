@@ -41,6 +41,7 @@
             this.textBoxDir = new System.Windows.Forms.TextBox();
             this.buttonAddDir = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -52,11 +53,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Choose Emulator/Platform";
             // 
-            // comboBoxChooseEmulator
+            // comboBoxChoosePlatform
             // 
             this.comboBoxChoosePlatform.FormattingEnabled = true;
             this.comboBoxChoosePlatform.Location = new System.Drawing.Point(15, 44);
-            this.comboBoxChoosePlatform.Name = "comboBoxChooseEmulator";
+            this.comboBoxChoosePlatform.Name = "comboBoxChoosePlatform";
             this.comboBoxChoosePlatform.Size = new System.Drawing.Size(247, 21);
             this.comboBoxChoosePlatform.TabIndex = 1;
             // 
@@ -112,7 +113,7 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(15, 213);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 230);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
@@ -122,7 +123,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(96, 213);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 230);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 10;
@@ -154,11 +155,24 @@
             this.progressBar1.Size = new System.Drawing.Size(350, 23);
             this.progressBar1.TabIndex = 13;
             // 
+            // checkBoxSaveAsJpg
+            // 
+            this.checkBoxSaveAsJpg.AutoSize = true;
+            this.checkBoxSaveAsJpg.Checked = true;
+            this.checkBoxSaveAsJpg.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSaveAsJpg.Location = new System.Drawing.Point(15, 190);
+            this.checkBoxSaveAsJpg.Name = "checkBoxSaveAsJpg";
+            this.checkBoxSaveAsJpg.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxSaveAsJpg.TabIndex = 14;
+            this.checkBoxSaveAsJpg.Text = "Save as JPG";
+            this.checkBoxSaveAsJpg.UseVisualStyleBackColor = true;
+            // 
             // FormBatchAddPictures
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 309);
+            this.Controls.Add(this.checkBoxSaveAsJpg);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonAddDir);
             this.Controls.Add(this.textBoxDir);
@@ -194,5 +208,6 @@
         private System.Windows.Forms.TextBox textBoxDir;
         private System.Windows.Forms.Button buttonAddDir;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
     }
 }

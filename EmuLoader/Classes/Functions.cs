@@ -9,6 +9,7 @@ using System.Linq;
 using System.Xml;
 using System.Net;
 using System.Threading;
+using System.Drawing.Imaging;
 
 namespace EmuLoader.Classes
 {
@@ -202,7 +203,7 @@ namespace EmuLoader.Classes
             return path.Remove(path.LastIndexOf("\\"));
         }
 
-        public static void SavePicture(Rom rom, string picturePath, string folder)
+        public static void SavePicture(Rom rom, string picturePath, string folder, bool saveAsJpg)
         {
             if (rom == null || string.IsNullOrEmpty(picturePath) || string.IsNullOrEmpty(folder)) return;
 
@@ -226,11 +227,26 @@ namespace EmuLoader.Classes
                 File.Delete(oldPic);
             }
 
+            bool convert = saveAsJpg && GetFileExtension(picturePath) != ".jpg";
+
+            if (convert)
+            {
+                using (Image image = Image.FromFile(picturePath))
+                {
+                    picturePath = "newfile.jpg";
+                    image.Save(picturePath, ImageFormat.Jpeg);
+                }
+            }
+
             FileInfo pic = new FileInfo(picturePath);
-            string filename = pic.FullName.Substring(pic.FullName.LastIndexOf("\\") + 1);
             string destinationFile = categoryPath + "\\" + rom.Name + pic.Extension;
             pic.CopyTo(destinationFile, true);
             pic = null;
+
+            if (convert)
+            {
+                File.Delete(picturePath);
+            }
         }
 
         public static string TrimRomName(string name)

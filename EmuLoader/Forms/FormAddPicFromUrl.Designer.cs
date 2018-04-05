@@ -33,6 +33,7 @@
             this.buttonSaveImage = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonCopySave = new System.Windows.Forms.Button();
+            this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -46,9 +47,11 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(12, 41);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(339, 20);
+            this.textBox1.Size = new System.Drawing.Size(389, 20);
             this.textBox1.TabIndex = 1;
             // 
             // buttonSaveImage
@@ -81,11 +84,24 @@
             this.buttonCopySave.UseVisualStyleBackColor = true;
             this.buttonCopySave.Click += new System.EventHandler(this.buttonCopySave_Click);
             // 
+            // checkBoxSaveAsJpg
+            // 
+            this.checkBoxSaveAsJpg.AutoSize = true;
+            this.checkBoxSaveAsJpg.Checked = true;
+            this.checkBoxSaveAsJpg.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSaveAsJpg.Location = new System.Drawing.Point(15, 67);
+            this.checkBoxSaveAsJpg.Name = "checkBoxSaveAsJpg";
+            this.checkBoxSaveAsJpg.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxSaveAsJpg.TabIndex = 5;
+            this.checkBoxSaveAsJpg.Text = "Save as JPG";
+            this.checkBoxSaveAsJpg.UseVisualStyleBackColor = true;
+            // 
             // FormAddPicFromUrl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 183);
+            this.ClientSize = new System.Drawing.Size(413, 209);
+            this.Controls.Add(this.checkBoxSaveAsJpg);
             this.Controls.Add(this.buttonCopySave);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSaveImage);
@@ -105,5 +121,6 @@
         private System.Windows.Forms.Button buttonSaveImage;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonCopySave;
+        private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
     }
 }

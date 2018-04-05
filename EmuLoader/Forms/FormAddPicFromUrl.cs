@@ -31,7 +31,7 @@ namespace EmuLoader.Forms
                     client.DownloadFile(new Uri(textBox1.Text), imagePath);
                 }
 
-                Functions.SavePicture(SelectedRom, imagePath, ImageType);
+                Functions.SavePicture(SelectedRom, imagePath, ImageType, checkBoxSaveAsJpg.Checked);
                 File.Delete(imagePath);
                 Close();
             }
@@ -53,7 +53,7 @@ namespace EmuLoader.Forms
                     client.DownloadFile(new Uri(textBox1.Text), imagePath);
                 }
 
-                Functions.SavePicture(SelectedRom, imagePath, ImageType);
+                Functions.SavePicture(SelectedRom, imagePath, ImageType, checkBoxSaveAsJpg.Checked);
                 File.Delete(imagePath);
                 Close();
             }

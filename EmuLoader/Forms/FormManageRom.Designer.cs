@@ -88,6 +88,7 @@
             this.buttonSearchInDB = new System.Windows.Forms.Button();
             this.textBoxDBName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -629,11 +630,24 @@
             this.label14.TabIndex = 45;
             this.label14.Text = "TheGamesDB.net Name";
             // 
+            // checkBoxSaveAsJpg
+            // 
+            this.checkBoxSaveAsJpg.AutoSize = true;
+            this.checkBoxSaveAsJpg.Checked = true;
+            this.checkBoxSaveAsJpg.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSaveAsJpg.Location = new System.Drawing.Point(15, 492);
+            this.checkBoxSaveAsJpg.Name = "checkBoxSaveAsJpg";
+            this.checkBoxSaveAsJpg.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxSaveAsJpg.TabIndex = 47;
+            this.checkBoxSaveAsJpg.Text = "Save as JPG";
+            this.checkBoxSaveAsJpg.UseVisualStyleBackColor = true;
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 704);
+            this.Controls.Add(this.checkBoxSaveAsJpg);
             this.Controls.Add(this.textBoxDBName);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.buttonSearchInDB);
@@ -755,5 +769,6 @@
         private System.Windows.Forms.Button buttonSearchInDB;
         private System.Windows.Forms.TextBox textBoxDBName;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
     }
 }

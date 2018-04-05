@@ -159,17 +159,17 @@ namespace EmuLoader.Forms
 
             if (!string.IsNullOrEmpty(textBoxBoxartImage.Text) && File.Exists(textBoxBoxartImage.Text))
             {
-                Functions.SavePicture(SelectedRom, textBoxBoxartImage.Text, Values.BoxartFolder);
+                Functions.SavePicture(SelectedRom, textBoxBoxartImage.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
             }
 
             if (!string.IsNullOrEmpty(textBoxTitleImage.Text) && File.Exists(textBoxTitleImage.Text))
             {
-                Functions.SavePicture(SelectedRom, textBoxTitleImage.Text, Values.TitleFolder);
+                Functions.SavePicture(SelectedRom, textBoxTitleImage.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
             }
 
             if (!string.IsNullOrEmpty(textBoxGameplayImage.Text) && File.Exists(textBoxGameplayImage.Text))
             {
-                Functions.SavePicture(SelectedRom, textBoxGameplayImage.Text, Values.GameplayFolder);
+                Functions.SavePicture(SelectedRom, textBoxGameplayImage.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
             }
 
             if (!string.IsNullOrEmpty(textBoxEmulatorExe.Text) && !string.IsNullOrEmpty(textBoxCommand.Text))

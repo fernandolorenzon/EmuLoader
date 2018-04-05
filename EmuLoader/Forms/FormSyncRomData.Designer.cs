@@ -56,6 +56,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.labelGameplay = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -316,11 +317,24 @@
             this.label14.TabIndex = 24;
             this.label14.Text = "Roms with no gameplay image";
             // 
+            // checkBoxSaveAsJpg
+            // 
+            this.checkBoxSaveAsJpg.AutoSize = true;
+            this.checkBoxSaveAsJpg.Checked = true;
+            this.checkBoxSaveAsJpg.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSaveAsJpg.Location = new System.Drawing.Point(15, 322);
+            this.checkBoxSaveAsJpg.Name = "checkBoxSaveAsJpg";
+            this.checkBoxSaveAsJpg.Size = new System.Drawing.Size(124, 17);
+            this.checkBoxSaveAsJpg.TabIndex = 26;
+            this.checkBoxSaveAsJpg.Text = "Save images as JPG";
+            this.checkBoxSaveAsJpg.UseVisualStyleBackColor = true;
+            // 
             // FormSyncRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 476);
+            this.Controls.Add(this.checkBoxSaveAsJpg);
             this.Controls.Add(this.labelGameplay);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.labelTitle);
@@ -385,5 +399,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label labelGameplay;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
     }
 }

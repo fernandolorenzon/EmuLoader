@@ -396,7 +396,7 @@ namespace EmuLoader.Forms
                 client.DownloadFile(new Uri(url), imagePath);
             }
 
-            Functions.SavePicture(rom, imagePath, folder);
+            Functions.SavePicture(rom, imagePath, folder, checkBoxSaveAsJpg.Checked);
             File.Delete(imagePath);
         }
 
