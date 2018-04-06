@@ -96,96 +96,103 @@ namespace EmuLoader.Forms
         #region Events
 
         private void buttonSave_Click(object sender, EventArgs e)
-         {
-            SelectedRom.Labels.Clear();
-
-            SelectedRom.Platform = (Platform)comboBoxPlatform.SelectedItem;
-            SelectedRom.Genre = (Genre)comboBoxGenre.SelectedItem;
-
-            SelectedRom.Publisher = textBoxPublisher.Text;
-            SelectedRom.Developer = textBoxDeveloper.Text;
-            SelectedRom.Description = textBoxDescription.Text;
-            SelectedRom.YearReleased = textBoxYearReleased.Text;
-            SelectedRom.DBName = textBoxDBName.Text;
-
-            SelectedRom.Id = textBoxId.Text;
-
-            if (textBoxChangeFileName.Text != SelectedRom.GetFileName())
+        {
+            try
             {
-                string oldPath = SelectedRom.Path;
-                string newPath = Functions.GetRomDirectory(SelectedRom.Path) + "\\" + textBoxChangeFileName.Text;
-                File.Move(oldPath, newPath);
-                Rom.Delete(SelectedRom);
-                SelectedRom.Path = newPath;
+                SelectedRom.Labels.Clear();
 
-                if (checkBoxChangeZippedName.Checked && Functions.GetFileExtension(newPath) == ".zip")
+                SelectedRom.Platform = (Platform)comboBoxPlatform.SelectedItem;
+                SelectedRom.Genre = (Genre)comboBoxGenre.SelectedItem;
+
+                SelectedRom.Publisher = textBoxPublisher.Text;
+                SelectedRom.Developer = textBoxDeveloper.Text;
+                SelectedRom.Description = textBoxDescription.Text;
+                SelectedRom.YearReleased = textBoxYearReleased.Text;
+                SelectedRom.DBName = textBoxDBName.Text;
+
+                SelectedRom.Id = textBoxId.Text;
+
+                if (textBoxChangeFileName.Text != SelectedRom.GetFileName())
                 {
-                    Functions.ChangeRomNameInsideZip(newPath);
-                }
-            }
+                    string oldPath = SelectedRom.Path;
+                    string newPath = Functions.GetRomDirectory(SelectedRom.Path) + "\\" + textBoxChangeFileName.Text;
+                    File.Move(oldPath, newPath);
+                    Rom.Delete(SelectedRom);
+                    SelectedRom.Path = newPath;
 
-            if (textBoxChangeRomName.Text != SelectedRom.Name)
-            {
-                string boxpic = Functions.GetRomPicture(SelectedRom, Values.BoxartFolder);
-                string titlepic = Functions.GetRomPicture(SelectedRom, Values.TitleFolder);
-                string gameplaypic = Functions.GetRomPicture(SelectedRom, Values.GameplayFolder);
-
-                if (!string.IsNullOrEmpty(boxpic))
-                {
-                    File.Move(boxpic, boxpic.Substring(0, boxpic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + boxpic.Substring(boxpic.LastIndexOf(".")));
+                    if (checkBoxChangeZippedName.Checked && Functions.GetFileExtension(newPath) == ".zip")
+                    {
+                        Functions.ChangeRomNameInsideZip(newPath);
+                    }
                 }
 
-                if (!string.IsNullOrEmpty(titlepic))
+                if (textBoxChangeRomName.Text != SelectedRom.Name)
                 {
-                    File.Move(titlepic, titlepic.Substring(0, titlepic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + titlepic.Substring(titlepic.LastIndexOf(".")));
+                    string boxpic = Functions.GetRomPicture(SelectedRom, Values.BoxartFolder);
+                    string titlepic = Functions.GetRomPicture(SelectedRom, Values.TitleFolder);
+                    string gameplaypic = Functions.GetRomPicture(SelectedRom, Values.GameplayFolder);
+
+                    if (!string.IsNullOrEmpty(boxpic))
+                    {
+                        File.Move(boxpic, boxpic.Substring(0, boxpic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + boxpic.Substring(boxpic.LastIndexOf(".")));
+                    }
+
+                    if (!string.IsNullOrEmpty(titlepic))
+                    {
+                        File.Move(titlepic, titlepic.Substring(0, titlepic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + titlepic.Substring(titlepic.LastIndexOf(".")));
+                    }
+
+                    if (!string.IsNullOrEmpty(gameplaypic))
+                    {
+                        File.Move(gameplaypic, gameplaypic.Substring(0, gameplaypic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + gameplaypic.Substring(gameplaypic.LastIndexOf(".")));
+                    }
+
+                    SelectedRom.Name = textBoxChangeRomName.Text;
                 }
 
-                if (!string.IsNullOrEmpty(gameplaypic))
+                foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    File.Move(gameplaypic, gameplaypic.Substring(0, gameplaypic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + gameplaypic.Substring(gameplaypic.LastIndexOf(".")));
+                    if (((CheckState)row.Cells[columnCheck.Index].Value) == CheckState.Checked)
+                    {
+                        RomLabel label = (RomLabel)row.Tag;
+                        SelectedRom.Labels.Add((RomLabel)row.Tag);
+                    }
                 }
 
-                SelectedRom.Name = textBoxChangeRomName.Text;
-            }
-
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                if (((CheckState)row.Cells[columnCheck.Index].Value) == CheckState.Checked)
+                if (!string.IsNullOrEmpty(textBoxBoxartImage.Text) && File.Exists(textBoxBoxartImage.Text))
                 {
-                    RomLabel label = (RomLabel)row.Tag;
-                    SelectedRom.Labels.Add((RomLabel)row.Tag);
+                    Functions.SavePicture(SelectedRom, textBoxBoxartImage.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
                 }
-            }
 
-            if (!string.IsNullOrEmpty(textBoxBoxartImage.Text) && File.Exists(textBoxBoxartImage.Text))
-            {
-                Functions.SavePicture(SelectedRom, textBoxBoxartImage.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
-            }
+                if (!string.IsNullOrEmpty(textBoxTitleImage.Text) && File.Exists(textBoxTitleImage.Text))
+                {
+                    Functions.SavePicture(SelectedRom, textBoxTitleImage.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
+                }
 
-            if (!string.IsNullOrEmpty(textBoxTitleImage.Text) && File.Exists(textBoxTitleImage.Text))
-            {
-                Functions.SavePicture(SelectedRom, textBoxTitleImage.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
-            }
+                if (!string.IsNullOrEmpty(textBoxGameplayImage.Text) && File.Exists(textBoxGameplayImage.Text))
+                {
+                    Functions.SavePicture(SelectedRom, textBoxGameplayImage.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
+                }
 
-            if (!string.IsNullOrEmpty(textBoxGameplayImage.Text) && File.Exists(textBoxGameplayImage.Text))
-            {
-                Functions.SavePicture(SelectedRom, textBoxGameplayImage.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
-            }
+                if (!string.IsNullOrEmpty(textBoxEmulatorExe.Text) && !string.IsNullOrEmpty(textBoxCommand.Text))
+                {
+                    SelectedRom.EmulatorExe = textBoxEmulatorExe.Text;
+                    SelectedRom.Command = textBoxCommand.Text;
+                }
+                else
+                {
+                    SelectedRom.EmulatorExe = "";
+                    SelectedRom.Command = "";
+                }
 
-            if (!string.IsNullOrEmpty(textBoxEmulatorExe.Text) && !string.IsNullOrEmpty(textBoxCommand.Text))
-            {
-                SelectedRom.EmulatorExe = textBoxEmulatorExe.Text;
-                SelectedRom.Command = textBoxCommand.Text;
+                Rom.Set(SelectedRom);
+                XML.SaveXml();
+                Close();
             }
-            else
+            catch (Exception ex)
             {
-                SelectedRom.EmulatorExe = "";
-                SelectedRom.Command = "";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            Rom.Set(SelectedRom);
-            XML.SaveXml();
-            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -222,6 +229,82 @@ namespace EmuLoader.Forms
         private void buttonCopyToRom_Click(object sender, EventArgs e)
         {
             textBoxChangeRomName.Text = textBoxChangeFileName.Text.Replace(Functions.GetFileExtension(textBoxChangeFileName.Text), "");
+        }
+
+        private void buttonOpenDB_Click(object sender, EventArgs e)
+        {
+            if (textBoxId.Text == string.Empty)
+            {
+                MessageBox.Show("TheGameDB Id is empty.");
+                return;
+            }
+
+            var game = Functions.GetGameDetails(textBoxId.Text);
+            game.Id = textBoxId.Text;
+            FormInfo info = new FormInfo(game);
+            info.Show();
+        }
+
+        private void buttonGetRomData_Click(object sender, EventArgs e)
+        {
+            if (textBoxId.Text == string.Empty)
+            {
+                MessageBox.Show("TheGameDB Id is empty.");
+                return;
+            }
+
+            var game = Functions.GetGameDetails(textBoxId.Text);
+
+            textBoxDBName.Text = game.DBName;
+            textBoxPublisher.Text = game.Publisher;
+            textBoxDeveloper.Text = game.Developer;
+            textBoxDescription.Text = game.Description;
+            textBoxYearReleased.Text = game.YearReleased;
+
+            if (comboBoxGenre.SelectedText == "")
+            {
+                comboBoxGenre.SelectedValue = game.Genre;
+            }
+        }
+
+        private void buttonSearchInDB_Click(object sender, EventArgs e)
+        {
+            string url = "http://thegamesdb.net/search/?string={0}&function=Search";
+            string name = textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " ").Replace(" ", "+");
+
+            name = Functions.RemoveSubstring(name, '[', ']');
+            name = Functions.RemoveSubstring(name, '(', ')');
+            url = string.Format(url, name);
+
+            ProcessStartInfo sInfo = new ProcessStartInfo(url);
+            Process.Start(sInfo);
+        }
+
+        private void buttonCopyDBName_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxDBName.Text.Trim())) return;
+
+            int bracketindex = textBoxChangeFileName.Text.IndexOf('[');
+            int parindex = textBoxChangeFileName.Text.IndexOf('(');
+            int suffixIndex = 0;
+
+            if (bracketindex > -1 && parindex == -1)
+            {
+                suffixIndex = bracketindex;
+            }
+            else if (bracketindex == -1 && parindex > -1)
+            {
+                suffixIndex = parindex;
+            }
+            else if (bracketindex > -1 && parindex > -1)
+            {
+                suffixIndex = bracketindex > parindex ? parindex : bracketindex;
+            }
+
+            string suffix = suffixIndex == 0 ? "" : Functions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
+
+            textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -") + " " + suffix;
+            textBoxChangeFileName.Text = textBoxChangeRomName.Text + Functions.GetFileExtension(textBoxChangeFileName.Text);
         }
 
         private void buttonPath_Click(object sender, EventArgs e)
@@ -282,32 +365,5 @@ namespace EmuLoader.Forms
         }
 
         #endregion
-
-        private void buttonOpenDB_Click(object sender, EventArgs e)
-        {
-            if (textBoxId.Text == string.Empty)
-            {
-                MessageBox.Show("TheGameDB Id is empty.");
-                return;
-            }
-
-            var game = Functions.GetGameDetails(textBoxId.Text);
-            game.Id = textBoxId.Text;
-            FormInfo info = new FormInfo(game);
-            info.Show();
-        }
-
-        private void buttonSearchInDB_Click(object sender, EventArgs e)
-        {
-            string url = "http://thegamesdb.net/search/?string={0}&function=Search";
-            string name = textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " ").Replace(" ", "+");
-
-            name = Functions.RemoveSubstring(name, '[', ']');
-            name = Functions.RemoveSubstring(name, '(', ')');
-            url = string.Format(url, name);
-
-            ProcessStartInfo sInfo = new ProcessStartInfo(url);
-            Process.Start(sInfo);
-        }
     }
 }

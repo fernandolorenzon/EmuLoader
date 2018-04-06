@@ -652,7 +652,7 @@ namespace EmuLoader.Classes
 
                     if (item.Name == "GameTitle")
                     {
-                        game.Name = item.InnerText;
+                        game.DBName = item.InnerText;
                         continue;
                     }
 
