@@ -872,15 +872,16 @@ namespace EmuLoader.Forms
             FormManageRom form = new FormManageRom(rom);
             form.ShowDialog();
             dataGridView.SelectedRows[0].Cells["columnRomName"].Value = rom.Name;
+            dataGridView.SelectedRows[0].Cells["columnRomName"].ToolTipText = rom.Description;
             dataGridView.SelectedRows[0].Cells["columnRomDBName"].Value = rom.DBName;
             dataGridView.SelectedRows[0].Cells["columnRomPath"].Value = rom.Path;
             dataGridView.SelectedRows[0].Cells["columnDeveloper"].Value = rom.Developer;
             dataGridView.SelectedRows[0].Cells["columnPublisher"].Value = rom.Publisher;
             dataGridView.SelectedRows[0].Cells["columnYearReleased"].Value = rom.YearReleased;
-            dataGridView.SelectedRows[0].Cells["columnPlatform"].Value = rom.Platform == null ? "" : rom.Platform.Name;
+            dataGridView.SelectedRows[0].Cells["columnPlatform"].Value = rom.Platform == null ? string.Empty : rom.Platform.Name;
             dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.BackColor = rom.Platform == null ? dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.BackColor : rom.Platform.Color;
             dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.ForeColor = rom.Platform == null ? dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.ForeColor : Functions.SetFontContrast(rom.Platform.Color);
-            dataGridView.SelectedRows[0].Cells["columnGenre"].Value = rom.Genre == null ? "" : rom.Genre.Name;
+            dataGridView.SelectedRows[0].Cells["columnGenre"].Value = rom.Genre == null ? string.Empty : rom.Genre.Name;
             dataGridView.SelectedRows[0].Cells["columnGenre"].Style.BackColor = rom.Genre == null ? dataGridView.SelectedRows[0].Cells["columnGenre"].Style.BackColor : rom.Genre.Color;
             dataGridView.SelectedRows[0].Cells["columnGenre"].Style.ForeColor = rom.Genre == null ? dataGridView.SelectedRows[0].Cells["columnGenre"].Style.ForeColor : Functions.SetFontContrast(rom.Genre.Color);
 
@@ -1389,6 +1390,8 @@ namespace EmuLoader.Forms
                     row.Cells["columnGenre"].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
                 }
 
+                row.Cells[1].ToolTipText = rom.Description;
+
                 FillLabelCell(rom, row);
                 row.Tag = rom;
             }
@@ -1408,7 +1411,7 @@ namespace EmuLoader.Forms
             comboBoxPlatform.DisplayMember = "Name";
             comboBoxPlatform.ValueMember = "Name";
 
-            if (platform == "")
+            if (string.IsNullOrEmpty(platform))
             {
                 comboBoxPlatform.SelectedIndex = 0;
             }

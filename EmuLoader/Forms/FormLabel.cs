@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +12,7 @@ namespace EmuLoader.Forms
         #region Members
 
         public bool Updated = false;
+        private bool updating = false;
 
         #endregion
 
@@ -33,12 +32,19 @@ namespace EmuLoader.Forms
             buttonAdd.Click += buttonAdd_Click;
             buttonDelete.Click += buttonDelete_Click;
 
+            Updated = false;
+            updating = true;
+            dataGridView.ClearSelection();
+            dataGridView.Rows.Clear();
+
             List<RomLabel> labels = RomLabel.GetAll();
 
             foreach (RomLabel label in labels)
             {
                 AddToGrid(label, -1);
             }
+
+            updating = false;
         }
 
         private void textBoxName_TextChanged(object sender, EventArgs e)
@@ -55,6 +61,8 @@ namespace EmuLoader.Forms
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            updating = true;
+
             int index = -1;
             RomLabel label = null;
 
@@ -89,12 +97,12 @@ namespace EmuLoader.Forms
             label.Color = buttonColor.BackColor;
             RomLabel.Set(label);
             AddToGrid(label, index);
+            updating = false;
             Clean();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-
             if (dataGridView.SelectedRows.Count < 1) return;
 
             RomLabel label = (RomLabel)dataGridView.SelectedRows[0].Tag;
@@ -125,13 +133,15 @@ namespace EmuLoader.Forms
 
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            if (updating) return;
+
             if (dataGridView.SelectedRows.Count == 0)
             {
                 buttonDelete.Enabled = false;
             }
             else
             {
-                buttonDelete.Enabled = true;
+                SetForm();
             }
         }
 
@@ -154,6 +164,11 @@ namespace EmuLoader.Forms
         {
             if (dataGridView.SelectedRows.Count < 1) return;
 
+            SetForm();
+        }
+
+        private void SetForm()
+        {
             DataGridViewRow row = dataGridView.SelectedRows[0];
             EmuLoader.Classes.RomLabel label = (EmuLoader.Classes.RomLabel)row.Tag;
             textBoxName.Text = label.Name;

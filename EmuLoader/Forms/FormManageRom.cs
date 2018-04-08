@@ -74,8 +74,8 @@ namespace EmuLoader.Forms
             comboBoxGenre.DisplayMember = "Name";
             comboBoxGenre.ValueMember = "Name";
 
-            comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? "" : SelectedRom.Platform.Name;
-            comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? "" : SelectedRom.Genre.Name;
+            comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? string.Empty : SelectedRom.Platform.Name;
+            comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? string.Empty : SelectedRom.Genre.Name;
 
             if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
             {
@@ -84,8 +84,8 @@ namespace EmuLoader.Forms
             }
             else
             {
-                SelectedRom.EmulatorExe = "";
-                SelectedRom.Command = "";
+                SelectedRom.EmulatorExe = string.Empty;
+                SelectedRom.Command = string.Empty;
             }
 
             LoadPictures();
@@ -181,8 +181,13 @@ namespace EmuLoader.Forms
                 }
                 else
                 {
-                    SelectedRom.EmulatorExe = "";
-                    SelectedRom.Command = "";
+                    SelectedRom.EmulatorExe = string.Empty;
+                    SelectedRom.Command = string.Empty;
+                }
+
+                if (string.IsNullOrEmpty(SelectedRom.Id))
+                {
+                    SelectedRom.DBName = string.Empty;
                 }
 
                 Rom.Set(SelectedRom);
@@ -228,7 +233,7 @@ namespace EmuLoader.Forms
 
         private void buttonCopyToRom_Click(object sender, EventArgs e)
         {
-            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Replace(Functions.GetFileExtension(textBoxChangeFileName.Text), "");
+            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Replace(Functions.GetFileExtension(textBoxChangeFileName.Text), string.Empty);
         }
 
         private void buttonOpenDB_Click(object sender, EventArgs e)
@@ -261,7 +266,7 @@ namespace EmuLoader.Forms
             textBoxDescription.Text = game.Description;
             textBoxYearReleased.Text = game.YearReleased;
 
-            if (comboBoxGenre.SelectedText == "")
+            if (string.IsNullOrEmpty(comboBoxGenre.SelectedText))
             {
                 comboBoxGenre.SelectedValue = game.Genre;
             }
@@ -270,7 +275,7 @@ namespace EmuLoader.Forms
         private void buttonSearchInDB_Click(object sender, EventArgs e)
         {
             string url = "http://thegamesdb.net/search/?string={0}&function=Search";
-            string name = textBoxChangeRomName.Text.Replace("[!]", "").Replace("!", "").Replace("&", " ").Replace(" ", "+");
+            string name = textBoxChangeRomName.Text.Replace("[!]", string.Empty).Replace("!", string.Empty).Replace("&", " ").Replace(" ", "+");
 
             name = Functions.RemoveSubstring(name, '[', ']');
             name = Functions.RemoveSubstring(name, '(', ')');
@@ -301,7 +306,7 @@ namespace EmuLoader.Forms
                 suffixIndex = bracketindex > parindex ? parindex : bracketindex;
             }
 
-            string suffix = suffixIndex == 0 ? "" : Functions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
+            string suffix = suffixIndex == 0 ? string.Empty : Functions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
 
             textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -") + " " + suffix;
             textBoxChangeFileName.Text = textBoxChangeRomName.Text + Functions.GetFileExtension(textBoxChangeFileName.Text);

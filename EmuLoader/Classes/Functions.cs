@@ -53,24 +53,6 @@ namespace EmuLoader.Classes
             };
 
             proc.Start();
-
-            //string exe = rom.Platform.Path;
-            //string arguments = rom.Platform.Command.Replace("%EMUPATH%", "")
-            //    .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
-            //    .Replace("%ROMNAME%", GetFileNameNoExtension(rom.Path))
-            //    .Replace("%ROMFILE%", GetFileName(rom.Path));
-
-            //ProcessStartInfo startInfo = new ProcessStartInfo(exe);
-
-            //if (arguments.IndexOf(' ') == 0)
-            //{
-            //    arguments = arguments.Substring(1);
-            //}
-
-            //startInfo.Arguments = arguments;
-            //Process p = new Process();
-
-            //p = Process.Start(startInfo);
         }
 
         public static void OpenApplicationByCMD(Rom rom)
@@ -635,6 +617,7 @@ namespace EmuLoader.Classes
 
                 using (WebClient client = new WebClient())
                 {
+                    client.Encoding = System.Text.Encoding.UTF8;
                     xml = client.DownloadString(new Uri("http://thegamesdb.net/api/GetGame.php?id=" + gameId));
                 }
 

@@ -200,14 +200,7 @@ namespace EmuLoader.Forms
             }
             else
             {
-                buttonDelete.Enabled = true;
-
-                string iconPath = Functions.GetPlatformPicture(((Platform)dataGridView.SelectedRows[0].Tag).Name);
-
-                if (!string.IsNullOrEmpty(iconPath))
-                {
-                    pictureBoxIcon.Load(iconPath);
-                }
+                SetForm();
             }
         }
 
@@ -229,7 +222,11 @@ namespace EmuLoader.Forms
         private void dataGridView_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count < 1) return;
+            SetForm();
+        }
 
+        private void SetForm()
+        {
             DataGridViewRow row = dataGridView.SelectedRows[0];
             Platform platform = (Platform)row.Tag;
 
