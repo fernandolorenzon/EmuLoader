@@ -65,7 +65,7 @@ namespace EmuLoader.Forms
                 FilteredRoms.Clear();
                 FilteredRoms.AddRange(Rom.GetAll());
                 AddRomsToGrid(FilteredRoms);
-                FillEmuFilter();
+                FillPlatformFilter();
                 FillLabelFilter();
                 FillGenreFilter();
                 FillPublisherFilter();
@@ -116,12 +116,17 @@ namespace EmuLoader.Forms
         {
             try
             {
+                string genre = comboBoxGenre.SelectedValue.ToString();
+
                 FormGenre form = new FormGenre();
 
                 if (form.ShowDialogBool())
                 {
-                    FillGenreFilter();
-                    buttonClear_Click(sender, e);
+                    Genre.Fill();
+                    Rom.Fill();
+                    FilterRoms();
+                    FillGenreFilter(genre);
+                    FillPlatformGrid();
                 }
             }
             catch (Exception ex)
@@ -134,6 +139,8 @@ namespace EmuLoader.Forms
         {
             try
             {
+                string platform = comboBoxPlatform.SelectedValue.ToString();
+
                 FormPlatform form = new FormPlatform();
 
                 if (form.ShowDialogBool() && form.Updated)
@@ -141,7 +148,7 @@ namespace EmuLoader.Forms
                     Platform.Fill();
                     Rom.Fill();
                     FilterRoms();
-                    FillEmuFilter();
+                    FillPlatformFilter(platform);
                     FillPlatformGrid();
                 }
             }
@@ -1390,16 +1397,26 @@ namespace EmuLoader.Forms
             dataGridView.ResumeLayout();
         }
 
-        private void FillEmuFilter()
+        private void FillPlatformFilter(string platform = "")
         {
             updating = true;
-            List<Platform> emus = Platform.GetAll().Where(x => x.ShowInFilter).ToList();
-            emus.Insert(0, new Platform());
-            emus.Insert(1, new Platform() { Name = "<none>" });
-            comboBoxPlatform.DataSource = emus;
+
+            List<Platform> platforms = Platform.GetAll().Where(x => x.ShowInFilter).ToList();
+            platforms.Insert(0, new Platform());
+            platforms.Insert(1, new Platform() { Name = "<none>" });
+            comboBoxPlatform.DataSource = platforms;
             comboBoxPlatform.DisplayMember = "Name";
             comboBoxPlatform.ValueMember = "Name";
-            comboBoxPlatform.SelectedIndex = 0;
+
+            if (platform == "")
+            {
+                comboBoxPlatform.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBoxPlatform.SelectedValue = platform;
+            }
+
             updating = false;
         }
 
@@ -1416,7 +1433,7 @@ namespace EmuLoader.Forms
             updating = false;
         }
 
-        private void FillGenreFilter()
+        private void FillGenreFilter(string genre = "")
         {
             updating = true;
             List<Genre> genres = Genre.GetAll();
@@ -1425,7 +1442,16 @@ namespace EmuLoader.Forms
             comboBoxGenre.DataSource = genres;
             comboBoxGenre.DisplayMember = "Name";
             comboBoxGenre.ValueMember = "Name";
-            comboBoxGenre.SelectedIndex = 0;
+
+            if (genre == "")
+            {
+                comboBoxGenre.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBoxGenre.SelectedValue = genre;
+            }
+
             updating = false;
         }
 
@@ -1596,7 +1622,7 @@ namespace EmuLoader.Forms
                 Rom.Fill();
                 FillGenreFilter();
                 FilterRoms();
-                FillEmuFilter();
+                FillPlatformFilter();
                 FillPlatformGrid();
                 FillPublisherFilter();
                 FillDeveloperFilter();
@@ -1615,7 +1641,7 @@ namespace EmuLoader.Forms
                 Rom.Fill();
                 FillGenreFilter();
                 FilterRoms();
-                FillEmuFilter();
+                FillPlatformFilter();
                 FillPlatformGrid();
                 FillPublisherFilter();
                 FillDeveloperFilter();
