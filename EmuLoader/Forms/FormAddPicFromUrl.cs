@@ -11,13 +11,13 @@ namespace EmuLoader.Forms
     public partial class FormAddPicFromUrl : FormBase
     {
         private Rom SelectedRom;
-        private string ImageType;
+        private string PictureType;
 
         public FormAddPicFromUrl(Rom rom, string imageType)
         {
             InitializeComponent();
             SelectedRom = rom;
-            ImageType = imageType;
+            PictureType = imageType;
         }
 
         private void buttonCopySave_Click(object sender, EventArgs e)
@@ -25,7 +25,7 @@ namespace EmuLoader.Forms
             try
             {
                 textBox1.Text = Clipboard.GetText();
-                SaveImageFromUrl();
+                SavePictureFromUrl();
             }
             catch (Exception ex)
             {
@@ -33,11 +33,11 @@ namespace EmuLoader.Forms
             }
         }
 
-        private void buttonSaveImage_Click(object sender, EventArgs e)
+        private void buttonSavePicture_Click(object sender, EventArgs e)
         {
             try
             {
-                SaveImageFromUrl();
+                SavePictureFromUrl();
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace EmuLoader.Forms
             }
         }
 
-        private void SaveImageFromUrl()
+        private void SavePictureFromUrl()
         {
             string extension = textBox1.Text.Substring(textBox1.Text.LastIndexOf("."));
             string imagePath = "image" + extension;
@@ -60,7 +60,7 @@ namespace EmuLoader.Forms
                 client.DownloadFile(new Uri(textBox1.Text), imagePath);
             }
 
-            Functions.SavePicture(SelectedRom, imagePath, ImageType, checkBoxSaveAsJpg.Checked);
+            Functions.SavePicture(SelectedRom, imagePath, PictureType, checkBoxSaveAsJpg.Checked);
             File.Delete(imagePath);
             Close();
         }

@@ -75,16 +75,16 @@
             this.labelGenre = new System.Windows.Forms.Label();
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.labelEmulator = new System.Windows.Forms.Label();
-            this.tabPageImages = new System.Windows.Forms.TabPage();
+            this.tabPagePictures = new System.Windows.Forms.TabPage();
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
-            this.buttonFindGameplayImage = new System.Windows.Forms.Button();
-            this.textBoxGameplayImage = new System.Windows.Forms.TextBox();
+            this.buttonFindGameplayPicture = new System.Windows.Forms.Button();
+            this.textBoxGameplayPicture = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.buttonFindTitleImage = new System.Windows.Forms.Button();
-            this.textBoxTitleImage = new System.Windows.Forms.TextBox();
+            this.buttonFindTitlePicture = new System.Windows.Forms.Button();
+            this.textBoxTitlePicture = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonFindBoxartImage = new System.Windows.Forms.Button();
-            this.textBoxBoxartImage = new System.Windows.Forms.TextBox();
+            this.buttonFindBoxartPicture = new System.Windows.Forms.Button();
+            this.textBoxBoxartPicture = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -95,11 +95,12 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonCheckList = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.tabPageImages.SuspendLayout();
+            this.tabPagePictures.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).BeginInit();
@@ -117,7 +118,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageGeneral);
-            this.tabControl.Controls.Add(this.tabPageImages);
+            this.tabControl.Controls.Add(this.tabPagePictures);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -127,6 +128,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.buttonCheckList);
             this.tabPageGeneral.Controls.Add(this.buttonGetRomData);
             this.tabPageGeneral.Controls.Add(this.label11);
             this.tabPageGeneral.Controls.Add(this.buttonCopyDBName);
@@ -169,9 +171,9 @@
             // 
             // buttonGetRomData
             // 
-            this.buttonGetRomData.Location = new System.Drawing.Point(253, 362);
+            this.buttonGetRomData.Location = new System.Drawing.Point(203, 362);
             this.buttonGetRomData.Name = "buttonGetRomData";
-            this.buttonGetRomData.Size = new System.Drawing.Size(110, 68);
+            this.buttonGetRomData.Size = new System.Drawing.Size(83, 83);
             this.buttonGetRomData.TabIndex = 98;
             this.buttonGetRomData.Text = "Get and Overwrite Rom Data from DB";
             this.buttonGetRomData.UseVisualStyleBackColor = true;
@@ -282,9 +284,9 @@
             // 
             // buttonSearchInDB
             // 
-            this.buttonSearchInDB.Location = new System.Drawing.Point(137, 362);
+            this.buttonSearchInDB.Location = new System.Drawing.Point(110, 362);
             this.buttonSearchInDB.Name = "buttonSearchInDB";
-            this.buttonSearchInDB.Size = new System.Drawing.Size(110, 68);
+            this.buttonSearchInDB.Size = new System.Drawing.Size(83, 83);
             this.buttonSearchInDB.TabIndex = 83;
             this.buttonSearchInDB.Text = "Check in TheGamesDB";
             this.buttonSearchInDB.UseVisualStyleBackColor = true;
@@ -294,7 +296,7 @@
             // 
             this.buttonOpenDB.Location = new System.Drawing.Point(21, 362);
             this.buttonOpenDB.Name = "buttonOpenDB";
-            this.buttonOpenDB.Size = new System.Drawing.Size(110, 68);
+            this.buttonOpenDB.Size = new System.Drawing.Size(83, 83);
             this.buttonOpenDB.TabIndex = 82;
             this.buttonOpenDB.Text = "Show TheGamesDB entry";
             this.buttonOpenDB.UseVisualStyleBackColor = true;
@@ -550,31 +552,31 @@
             this.labelEmulator.TabIndex = 48;
             this.labelEmulator.Text = "Choose Emulator";
             // 
-            // tabPageImages
+            // tabPagePictures
             // 
-            this.tabPageImages.Controls.Add(this.checkBoxSaveAsJpg);
-            this.tabPageImages.Controls.Add(this.buttonFindGameplayImage);
-            this.tabPageImages.Controls.Add(this.textBoxGameplayImage);
-            this.tabPageImages.Controls.Add(this.label3);
-            this.tabPageImages.Controls.Add(this.buttonFindTitleImage);
-            this.tabPageImages.Controls.Add(this.textBoxTitleImage);
-            this.tabPageImages.Controls.Add(this.label2);
-            this.tabPageImages.Controls.Add(this.buttonFindBoxartImage);
-            this.tabPageImages.Controls.Add(this.textBoxBoxartImage);
-            this.tabPageImages.Controls.Add(this.label4);
-            this.tabPageImages.Controls.Add(this.label5);
-            this.tabPageImages.Controls.Add(this.label7);
-            this.tabPageImages.Controls.Add(this.label6);
-            this.tabPageImages.Controls.Add(this.pictureBoxGameplay);
-            this.tabPageImages.Controls.Add(this.pictureBoxTitle);
-            this.tabPageImages.Controls.Add(this.pictureBoxBoxart);
-            this.tabPageImages.Location = new System.Drawing.Point(4, 22);
-            this.tabPageImages.Name = "tabPageImages";
-            this.tabPageImages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImages.Size = new System.Drawing.Size(805, 678);
-            this.tabPageImages.TabIndex = 1;
-            this.tabPageImages.Text = "Images";
-            this.tabPageImages.UseVisualStyleBackColor = true;
+            this.tabPagePictures.Controls.Add(this.checkBoxSaveAsJpg);
+            this.tabPagePictures.Controls.Add(this.buttonFindGameplayPicture);
+            this.tabPagePictures.Controls.Add(this.textBoxGameplayPicture);
+            this.tabPagePictures.Controls.Add(this.label3);
+            this.tabPagePictures.Controls.Add(this.buttonFindTitlePicture);
+            this.tabPagePictures.Controls.Add(this.textBoxTitlePicture);
+            this.tabPagePictures.Controls.Add(this.label2);
+            this.tabPagePictures.Controls.Add(this.buttonFindBoxartPicture);
+            this.tabPagePictures.Controls.Add(this.textBoxBoxartPicture);
+            this.tabPagePictures.Controls.Add(this.label4);
+            this.tabPagePictures.Controls.Add(this.label5);
+            this.tabPagePictures.Controls.Add(this.label7);
+            this.tabPagePictures.Controls.Add(this.label6);
+            this.tabPagePictures.Controls.Add(this.pictureBoxGameplay);
+            this.tabPagePictures.Controls.Add(this.pictureBoxTitle);
+            this.tabPagePictures.Controls.Add(this.pictureBoxBoxart);
+            this.tabPagePictures.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePictures.Name = "tabPagePictures";
+            this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePictures.Size = new System.Drawing.Size(805, 678);
+            this.tabPagePictures.TabIndex = 1;
+            this.tabPagePictures.Text = "Pictures";
+            this.tabPagePictures.UseVisualStyleBackColor = true;
             // 
             // checkBoxSaveAsJpg
             // 
@@ -588,22 +590,22 @@
             this.checkBoxSaveAsJpg.Text = "Save as JPG";
             this.checkBoxSaveAsJpg.UseVisualStyleBackColor = true;
             // 
-            // buttonFindGameplayImage
+            // buttonFindGameplayPicture
             // 
-            this.buttonFindGameplayImage.Location = new System.Drawing.Point(367, 107);
-            this.buttonFindGameplayImage.Name = "buttonFindGameplayImage";
-            this.buttonFindGameplayImage.Size = new System.Drawing.Size(75, 23);
-            this.buttonFindGameplayImage.TabIndex = 106;
-            this.buttonFindGameplayImage.Text = "Find Image";
-            this.buttonFindGameplayImage.UseVisualStyleBackColor = true;
-            this.buttonFindGameplayImage.Click += new System.EventHandler(this.buttonFindGameplayImage_Click);
+            this.buttonFindGameplayPicture.Location = new System.Drawing.Point(367, 107);
+            this.buttonFindGameplayPicture.Name = "buttonFindGameplayPicture";
+            this.buttonFindGameplayPicture.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindGameplayPicture.TabIndex = 106;
+            this.buttonFindGameplayPicture.Text = "Find Picture";
+            this.buttonFindGameplayPicture.UseVisualStyleBackColor = true;
+            this.buttonFindGameplayPicture.Click += new System.EventHandler(this.buttonFindGameplayPicture_Click);
             // 
-            // textBoxGameplayImage
+            // textBoxGameplayPicture
             // 
-            this.textBoxGameplayImage.Location = new System.Drawing.Point(11, 110);
-            this.textBoxGameplayImage.Name = "textBoxGameplayImage";
-            this.textBoxGameplayImage.Size = new System.Drawing.Size(350, 20);
-            this.textBoxGameplayImage.TabIndex = 105;
+            this.textBoxGameplayPicture.Location = new System.Drawing.Point(11, 110);
+            this.textBoxGameplayPicture.Name = "textBoxGameplayPicture";
+            this.textBoxGameplayPicture.Size = new System.Drawing.Size(350, 20);
+            this.textBoxGameplayPicture.TabIndex = 105;
             // 
             // label3
             // 
@@ -612,24 +614,24 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(125, 13);
             this.label3.TabIndex = 104;
-            this.label3.Text = "Choose Gameplay Image";
+            this.label3.Text = "Choose Gameplay Picture";
             // 
-            // buttonFindTitleImage
+            // buttonFindTitlePicture
             // 
-            this.buttonFindTitleImage.Location = new System.Drawing.Point(367, 69);
-            this.buttonFindTitleImage.Name = "buttonFindTitleImage";
-            this.buttonFindTitleImage.Size = new System.Drawing.Size(75, 23);
-            this.buttonFindTitleImage.TabIndex = 103;
-            this.buttonFindTitleImage.Text = "Find Image";
-            this.buttonFindTitleImage.UseVisualStyleBackColor = true;
-            this.buttonFindTitleImage.Click += new System.EventHandler(this.buttonFindTitleImage_Click);
+            this.buttonFindTitlePicture.Location = new System.Drawing.Point(367, 69);
+            this.buttonFindTitlePicture.Name = "buttonFindTitlePicture";
+            this.buttonFindTitlePicture.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindTitlePicture.TabIndex = 103;
+            this.buttonFindTitlePicture.Text = "Find Picture";
+            this.buttonFindTitlePicture.UseVisualStyleBackColor = true;
+            this.buttonFindTitlePicture.Click += new System.EventHandler(this.buttonFindTitlePicture_Click);
             // 
-            // textBoxTitleImage
+            // textBoxTitlePicture
             // 
-            this.textBoxTitleImage.Location = new System.Drawing.Point(11, 71);
-            this.textBoxTitleImage.Name = "textBoxTitleImage";
-            this.textBoxTitleImage.Size = new System.Drawing.Size(350, 20);
-            this.textBoxTitleImage.TabIndex = 102;
+            this.textBoxTitlePicture.Location = new System.Drawing.Point(11, 71);
+            this.textBoxTitlePicture.Name = "textBoxTitlePicture";
+            this.textBoxTitlePicture.Size = new System.Drawing.Size(350, 20);
+            this.textBoxTitlePicture.TabIndex = 102;
             // 
             // label2
             // 
@@ -638,24 +640,24 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 13);
             this.label2.TabIndex = 101;
-            this.label2.Text = "Choose Title Image";
+            this.label2.Text = "Choose Title Picture";
             // 
-            // buttonFindBoxartImage
+            // buttonFindBoxartPicture
             // 
-            this.buttonFindBoxartImage.Location = new System.Drawing.Point(367, 30);
-            this.buttonFindBoxartImage.Name = "buttonFindBoxartImage";
-            this.buttonFindBoxartImage.Size = new System.Drawing.Size(75, 23);
-            this.buttonFindBoxartImage.TabIndex = 100;
-            this.buttonFindBoxartImage.Text = "Find Image";
-            this.buttonFindBoxartImage.UseVisualStyleBackColor = true;
-            this.buttonFindBoxartImage.Click += new System.EventHandler(this.buttonFindBoxartImage_Click);
+            this.buttonFindBoxartPicture.Location = new System.Drawing.Point(367, 30);
+            this.buttonFindBoxartPicture.Name = "buttonFindBoxartPicture";
+            this.buttonFindBoxartPicture.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindBoxartPicture.TabIndex = 100;
+            this.buttonFindBoxartPicture.Text = "Find Picture";
+            this.buttonFindBoxartPicture.UseVisualStyleBackColor = true;
+            this.buttonFindBoxartPicture.Click += new System.EventHandler(this.buttonFindBoxartPicture_Click);
             // 
-            // textBoxBoxartImage
+            // textBoxBoxartPicture
             // 
-            this.textBoxBoxartImage.Location = new System.Drawing.Point(11, 32);
-            this.textBoxBoxartImage.Name = "textBoxBoxartImage";
-            this.textBoxBoxartImage.Size = new System.Drawing.Size(350, 20);
-            this.textBoxBoxartImage.TabIndex = 99;
+            this.textBoxBoxartPicture.Location = new System.Drawing.Point(11, 32);
+            this.textBoxBoxartPicture.Name = "textBoxBoxartPicture";
+            this.textBoxBoxartPicture.Size = new System.Drawing.Size(350, 20);
+            this.textBoxBoxartPicture.TabIndex = 99;
             // 
             // label4
             // 
@@ -664,7 +666,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 13);
             this.label4.TabIndex = 98;
-            this.label4.Text = "Choose Box Art Image";
+            this.label4.Text = "Choose Box Art Picture";
             // 
             // label5
             // 
@@ -756,6 +758,16 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // buttonCheckList
+            // 
+            this.buttonCheckList.Location = new System.Drawing.Point(292, 362);
+            this.buttonCheckList.Name = "buttonCheckList";
+            this.buttonCheckList.Size = new System.Drawing.Size(83, 83);
+            this.buttonCheckList.TabIndex = 99;
+            this.buttonCheckList.Text = "Check Platform Games List";
+            this.buttonCheckList.UseVisualStyleBackColor = true;
+            this.buttonCheckList.Click += new System.EventHandler(this.buttonCheckList_Click);
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,8 +784,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.tabPageImages.ResumeLayout(false);
-            this.tabPageImages.PerformLayout();
+            this.tabPagePictures.ResumeLayout(false);
+            this.tabPagePictures.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).EndInit();
@@ -826,16 +838,16 @@
         private System.Windows.Forms.Label labelGenre;
         private System.Windows.Forms.ComboBox comboBoxPlatform;
         private System.Windows.Forms.Label labelEmulator;
-        private System.Windows.Forms.TabPage tabPageImages;
+        private System.Windows.Forms.TabPage tabPagePictures;
         private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
-        private System.Windows.Forms.Button buttonFindGameplayImage;
-        private System.Windows.Forms.TextBox textBoxGameplayImage;
+        private System.Windows.Forms.Button buttonFindGameplayPicture;
+        private System.Windows.Forms.TextBox textBoxGameplayPicture;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button buttonFindTitleImage;
-        private System.Windows.Forms.TextBox textBoxTitleImage;
+        private System.Windows.Forms.Button buttonFindTitlePicture;
+        private System.Windows.Forms.TextBox textBoxTitlePicture;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonFindBoxartImage;
-        private System.Windows.Forms.TextBox textBoxBoxartImage;
+        private System.Windows.Forms.Button buttonFindBoxartPicture;
+        private System.Windows.Forms.TextBox textBoxBoxartPicture;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
@@ -848,5 +860,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonGetRomData;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button buttonCheckList;
     }
 }

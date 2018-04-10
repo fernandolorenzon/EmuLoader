@@ -116,6 +116,13 @@ namespace EmuLoader.Forms
                 {
                     string oldPath = SelectedRom.Path;
                     string newPath = Functions.GetRomDirectory(SelectedRom.Path) + "\\" + textBoxChangeFileName.Text;
+
+                    if (File.Exists(newPath))
+                    {
+                        MessageBox.Show("A file named \"" + newPath + "\" already exists!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     File.Move(oldPath, newPath);
                     Rom.Delete(SelectedRom);
                     SelectedRom.Path = newPath;
@@ -159,19 +166,19 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                if (!string.IsNullOrEmpty(textBoxBoxartImage.Text) && File.Exists(textBoxBoxartImage.Text))
+                if (!string.IsNullOrEmpty(textBoxBoxartPicture.Text) && File.Exists(textBoxBoxartPicture.Text))
                 {
-                    Functions.SavePicture(SelectedRom, textBoxBoxartImage.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
+                    Functions.SavePicture(SelectedRom, textBoxBoxartPicture.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
                 }
 
-                if (!string.IsNullOrEmpty(textBoxTitleImage.Text) && File.Exists(textBoxTitleImage.Text))
+                if (!string.IsNullOrEmpty(textBoxTitlePicture.Text) && File.Exists(textBoxTitlePicture.Text))
                 {
-                    Functions.SavePicture(SelectedRom, textBoxTitleImage.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
+                    Functions.SavePicture(SelectedRom, textBoxTitlePicture.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
                 }
 
-                if (!string.IsNullOrEmpty(textBoxGameplayImage.Text) && File.Exists(textBoxGameplayImage.Text))
+                if (!string.IsNullOrEmpty(textBoxGameplayPicture.Text) && File.Exists(textBoxGameplayPicture.Text))
                 {
-                    Functions.SavePicture(SelectedRom, textBoxGameplayImage.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
+                    Functions.SavePicture(SelectedRom, textBoxGameplayPicture.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
                 }
 
                 if (!string.IsNullOrEmpty(textBoxEmulatorExe.Text) && !string.IsNullOrEmpty(textBoxCommand.Text))
@@ -205,25 +212,25 @@ namespace EmuLoader.Forms
             Close();
         }
 
-        private void buttonFindBoxartImage_Click(object sender, EventArgs e)
+        private void buttonFindBoxartPicture_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
-            textBoxBoxartImage.Text = open.FileName;
+            textBoxBoxartPicture.Text = open.FileName;
         }
 
-        private void buttonFindTitleImage_Click(object sender, EventArgs e)
+        private void buttonFindTitlePicture_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
-            textBoxTitleImage.Text = open.FileName;
+            textBoxTitlePicture.Text = open.FileName;
         }
 
-        private void buttonFindGameplayImage_Click(object sender, EventArgs e)
+        private void buttonFindGameplayPicture_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
-            textBoxGameplayImage.Text = open.FileName;
+            textBoxGameplayPicture.Text = open.FileName;
         }
 
         private void buttonCopyToFile_Click(object sender, EventArgs e)
@@ -312,6 +319,16 @@ namespace EmuLoader.Forms
             textBoxChangeFileName.Text = textBoxChangeRomName.Text + Functions.GetFileExtension(textBoxChangeFileName.Text);
         }
 
+        private void buttonCheckList_Click(object sender, EventArgs e)
+        {
+            if (SelectedRom.Platform == null) return;
+            if (string.IsNullOrEmpty(SelectedRom.Platform.Id)) return;
+
+            var url = "http://thegamesdb.net/api/GetPlatformGames.php?platform=" + SelectedRom.Platform.Id;
+            ProcessStartInfo sInfo = new ProcessStartInfo(url);
+            Process.Start(sInfo);
+        }
+
         private void buttonPath_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -370,5 +387,6 @@ namespace EmuLoader.Forms
         }
 
         #endregion
+
     }
 }

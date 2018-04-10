@@ -114,8 +114,6 @@ namespace EmuLoader.Classes
 
                 RomList.Add(rom);
             }
-
-            XML.SaveXml();
         }
 
         public static bool Set(Rom rom)

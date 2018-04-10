@@ -11,7 +11,6 @@ namespace EmuLoader.Forms
     {
         #region Members
 
-        public bool Updated = false;
         private bool updating = false;
 
         #endregion
@@ -32,7 +31,6 @@ namespace EmuLoader.Forms
             buttonAdd.Click += buttonAdd_Click;
             buttonDelete.Click += buttonDelete_Click;
 
-            Updated = false;
             updating = true;
             dataGridView.ClearSelection();
             dataGridView.Rows.Clear();
@@ -89,7 +87,6 @@ namespace EmuLoader.Forms
                 genre = (Genre)row.Tag;
                 textBoxName.Enabled = true;
                 buttonAdd.Text = "Add";
-                Updated = true;
             }
 
             genre.Name = textBoxName.Text.Trim();
@@ -97,6 +94,7 @@ namespace EmuLoader.Forms
             AddToGrid(genre, index);
             Genre.Set(genre);
             updating = false;
+            Updated = true;
             Clean();
         }
 
@@ -123,6 +121,7 @@ namespace EmuLoader.Forms
                 dataGridView.Rows.Remove(item);
             }
 
+            Updated = true;
             Clean();
         }
 
@@ -200,12 +199,6 @@ namespace EmuLoader.Forms
             row.Cells["columnColor"].Style.BackColor = genre.Color;
             row.Cells["columnColor"].Style.ForeColor = Functions.SetFontContrast(genre.Color);
             row.Tag = genre;
-        }
-
-        public bool ShowDialogBool()
-        {
-            ShowDialog();
-            return Updated;
         }
 
         private void Clean()

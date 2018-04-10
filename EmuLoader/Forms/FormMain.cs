@@ -60,7 +60,7 @@ namespace EmuLoader.Forms
                 pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked = Config.GetElementVisibility("TitleArt");
                 pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked = Config.GetElementVisibility("GameplayArt");
                 dataGridViewPlatforms.Visible = showPlatformsListToolStripMenuItem.Checked = Config.GetElementVisibility("PlatformsList");
-                flowLayoutPanelImages.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
+                flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 //FormMessage.ShowMessage("Filling Grid...");
                 FilteredRoms.Clear();
                 FilteredRoms.AddRange(Rom.GetAll());
@@ -100,7 +100,7 @@ namespace EmuLoader.Forms
             {
                 FormLabel form = new FormLabel();
 
-                if (form.ShowDialogBool())
+                if (form.ShowDialogUpdated())
                 {
                     FillLabelFilter();
                     buttonClear_Click(sender, e);
@@ -116,17 +116,16 @@ namespace EmuLoader.Forms
         {
             try
             {
-                string genre = comboBoxGenre.SelectedValue.ToString();
+                string genre = comboBoxGenre.SelectedValue == null ? string.Empty : comboBoxGenre.SelectedValue.ToString();
 
                 FormGenre form = new FormGenre();
 
-                if (form.ShowDialogBool())
+                if (form.ShowDialogUpdated())
                 {
                     Genre.Fill();
                     Rom.Fill();
                     FilterRoms();
                     FillGenreFilter(genre);
-                    FillPlatformGrid();
                 }
             }
             catch (Exception ex)
@@ -139,11 +138,11 @@ namespace EmuLoader.Forms
         {
             try
             {
-                string platform = comboBoxPlatform.SelectedValue.ToString();
+                string platform = comboBoxPlatform.SelectedValue == null ? string.Empty : comboBoxPlatform.SelectedValue.ToString();
 
                 FormPlatform form = new FormPlatform();
 
-                if (form.ShowDialogBool() && form.Updated)
+                if (form.ShowDialogUpdated())
                 {
                     Platform.Fill();
                     Rom.Fill();
@@ -848,13 +847,13 @@ namespace EmuLoader.Forms
             timerFilter.Start();
         }
 
-        private void batchAddImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void batchAddPicturesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormBatchAddPictures form = new FormBatchAddPictures();
             form.ShowDialog();
         }
 
-        private void batchRemoveImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void batchRemovePicturesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dataGridView.ClearSelection();
             pictureBoxBoxart.Image = null;
@@ -895,14 +894,14 @@ namespace EmuLoader.Forms
             {
                 if (!pictureBoxBoxart.Visible && showBoxArtToolStripMenuItem.Checked)
                 {
-                    flowLayoutPanelImages.Visible = true;
+                    flowLayoutPanelPictures.Visible = true;
                 }
 
                 pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked;
                 Config.SetElementVisibility("BoxArt", pictureBoxBoxart.Visible);
                 XML.SaveXml();
 
-                flowLayoutPanelImages.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
+                flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 FormMain_ResizeEnd(sender, e);
             }
             catch (OperationCanceledException ioex)
@@ -921,14 +920,14 @@ namespace EmuLoader.Forms
             {
                 if (!pictureBoxTitle.Visible && showTitleToolStripMenuItem.Checked)
                 {
-                    flowLayoutPanelImages.Visible = true;
+                    flowLayoutPanelPictures.Visible = true;
                 }
 
                 pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked;
                 Config.SetElementVisibility("TitleArt", pictureBoxTitle.Visible);
                 XML.SaveXml();
 
-                flowLayoutPanelImages.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
+                flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 FormMain_ResizeEnd(sender, e);
             }
             catch (OperationCanceledException ioex)
@@ -947,14 +946,14 @@ namespace EmuLoader.Forms
             {
                 if (!pictureBoxGameplay.Visible && showGameplayArtToolStripMenuItem.Checked)
                 {
-                    flowLayoutPanelImages.Visible = true;
+                    flowLayoutPanelPictures.Visible = true;
                 }
 
                 pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked;
                 Config.SetElementVisibility("GameplayArt", pictureBoxGameplay.Visible);
                 XML.SaveXml();
 
-                flowLayoutPanelImages.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
+                flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 FormMain_ResizeEnd(sender, e);
             }
             catch (OperationCanceledException ioex)
@@ -1031,27 +1030,27 @@ namespace EmuLoader.Forms
             XML.SaveXml();
 
             int imagesHeightTotal = pictureBoxBoxart.Size.Height * 3;
-            int heightLeft = flowLayoutPanelImages.Size.Height - imagesHeightTotal;
+            int heightLeft = flowLayoutPanelPictures.Size.Height - imagesHeightTotal;
 
             if (heightLeft < 25 && heightLeft > 0) return;
 
             if (heightLeft > 0)
             {
-                int heightForEachImage = Convert.ToInt32(heightLeft / 3) + pictureBoxBoxart.Size.Height - 6;
+                int heightForEachPicture = Convert.ToInt32(heightLeft / 3) + pictureBoxBoxart.Size.Height - 6;
 
-                flowLayoutPanelImages.Size = new Size(heightForEachImage + 6, dataGridView.Size.Height);
-                pictureBoxBoxart.Size = new Size(heightForEachImage, heightForEachImage);
-                pictureBoxTitle.Size = new Size(heightForEachImage, heightForEachImage);
-                pictureBoxGameplay.Size = new Size(heightForEachImage, heightForEachImage);
+                flowLayoutPanelPictures.Size = new Size(heightForEachPicture + 6, dataGridView.Size.Height);
+                pictureBoxBoxart.Size = new Size(heightForEachPicture, heightForEachPicture);
+                pictureBoxTitle.Size = new Size(heightForEachPicture, heightForEachPicture);
+                pictureBoxGameplay.Size = new Size(heightForEachPicture, heightForEachPicture);
             }
             else
             {
-                int heightForEachImage = pictureBoxBoxart.Size.Height - 6 - Convert.ToInt32(heightLeft * -1 / 3);
+                int heightForEachPicture = pictureBoxBoxart.Size.Height - 6 - Convert.ToInt32(heightLeft * -1 / 3);
 
-                flowLayoutPanelImages.Size = new Size(heightForEachImage + 6, dataGridView.Size.Height);
-                pictureBoxBoxart.Size = new Size(heightForEachImage, heightForEachImage);
-                pictureBoxTitle.Size = new Size(heightForEachImage, heightForEachImage);
-                pictureBoxGameplay.Size = new Size(heightForEachImage, heightForEachImage);
+                flowLayoutPanelPictures.Size = new Size(heightForEachPicture + 6, dataGridView.Size.Height);
+                pictureBoxBoxart.Size = new Size(heightForEachPicture, heightForEachPicture);
+                pictureBoxTitle.Size = new Size(heightForEachPicture, heightForEachPicture);
+                pictureBoxGameplay.Size = new Size(heightForEachPicture, heightForEachPicture);
             }
         }
 
@@ -1244,13 +1243,20 @@ namespace EmuLoader.Forms
 
         private void dataGridView_MouseDown(object sender, MouseEventArgs e)
         {
-            if ((dataGridView.Location.X + dataGridView.Size.Width) < e.X) return;
-
-            if (e.Button == MouseButtons.Right)
+            try
             {
-                var hti = dataGridView.HitTest(e.X, e.Y);
-                dataGridView.ClearSelection();
-                dataGridView.Rows[hti.RowIndex].Selected = true;
+                if ((dataGridView.Location.X + dataGridView.Size.Width) < e.X) return;
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hti = dataGridView.HitTest(e.X, e.Y);
+                    dataGridView.ClearSelection();
+                    dataGridView.Rows[hti.RowIndex].Selected = true;
+                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -1618,9 +1624,8 @@ namespace EmuLoader.Forms
         private void syncRomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormSyncRomData form = new FormSyncRomData();
-            form.ShowDialog();
 
-            if (form.Updated)
+            if (form.ShowDialogUpdated())
             {
                 Rom.Fill();
                 FillGenreFilter();

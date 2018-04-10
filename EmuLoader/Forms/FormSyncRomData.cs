@@ -15,15 +15,14 @@ namespace EmuLoader.Forms
         Thread threadSetIdAndYear;
         List<Rom> Roms = new List<Rom>();
         List<Rom> games = new List<Rom>();
-        public bool Updated { get; set; }
         bool StopThread = false;
         bool ThreadStopped = false;
         string platformId;
         int syncRomsCount;
         List<Rom> notSyncedRoms = new List<Rom>();
-        List<string> missingBoxartImages = null;
-        List<string> missingTitleImages = null;
-        List<string> missingGameplayImages = null;
+        List<string> missingBoxartPictures = null;
+        List<string> missingTitlePictures = null;
+        List<string> missingGameplayPictures = null;
 
         public FormSyncRomData()
         {
@@ -45,6 +44,8 @@ namespace EmuLoader.Forms
         {
             try
             {
+                comboBoxPlatform.Enabled = false;
+                buttonSync.Enabled = false;
                 platformId = comboBoxPlatform.SelectedValue.ToString();
                 textBoxLog.Text = "";
                 progressBar.Value = 0;
@@ -56,6 +57,8 @@ namespace EmuLoader.Forms
                 if (comboBoxPlatform.SelectedValue == null || string.IsNullOrEmpty(comboBoxPlatform.SelectedValue.ToString()) || comboBoxPlatform.SelectedValue.ToString() == "0")
                 {
                     MessageBox.Show(string.Format("The platform {0} doesn't have an associated TheGamesDB.net Id. Update the platform Id in the Platform screen first.", comboBoxPlatform.SelectedText));
+                    comboBoxPlatform.Enabled = true;
+                    buttonSync.Enabled = true;
                     return;
                 }
 
@@ -66,6 +69,8 @@ namespace EmuLoader.Forms
                 if (games == null)
                 {
                     MessageBox.Show("An Error ocurred", "Error");
+                    comboBoxPlatform.Enabled = true;
+                    buttonSync.Enabled = true;
                     return;
                 }
 
@@ -81,7 +86,7 @@ namespace EmuLoader.Forms
                     SetOtherProperties();
                     var count2 = syncRomsCount;
 
-                    SetImages();
+                    SetPictures();
                     var count3 = syncRomsCount;
 
                     XML.SaveXml();
@@ -95,12 +100,16 @@ namespace EmuLoader.Forms
                     LogMessage(count2.ToString() + " roms details updated successfully!");
                     LogMessage(count3.ToString() + " roms images updated successfully!");
 
-                MessageBox.Show(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
+                    MessageBox.Show(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
                                 count2.ToString() + " roms details updated successfully!" + Environment.NewLine +
                                 count3.ToString() + " roms images updated successfully!"
                         );
 
                     comboBoxPlatform_SelectedIndexChanged(sender, e);
+
+                    comboBoxPlatform.Enabled = true;
+                    buttonSync.Enabled = true;
+
                 }).Start();
 
             }
@@ -302,7 +311,7 @@ namespace EmuLoader.Forms
         }
 
 
-        private void SetImages()
+        private void SetPictures()
         {
             if (progressBar.Maximum > progressBar.Value)
             {
@@ -317,17 +326,17 @@ namespace EmuLoader.Forms
             var romsList = Roms.Select(x => x.Name).ToList();
 
             var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && 
-                                    (missingBoxartImages.Contains(x.Name) || 
-                                    missingTitleImages.Contains(x.Name) || 
-                                    missingGameplayImages.Contains(x.Name))).ToList();
+                                    (missingBoxartPictures.Contains(x.Name) || 
+                                    missingTitlePictures.Contains(x.Name) || 
+                                    missingGameplayPictures.Contains(x.Name))).ToList();
 
-            bool updated = false;
             syncRomsCount = 0;
             ThreadStopped = false;
 
             progressBar.Invoke((MethodInvoker)delegate
             {
                 progressBar.Value = 0;
+                progressBar.Maximum = notSyncedRoms.Count;
             });
 
             foreach (var rom in notSyncedRoms)
@@ -347,9 +356,9 @@ namespace EmuLoader.Forms
                     });
                 }
 
-                var boxArtMissing = missingBoxartImages.Contains(rom.Name);
-                var titleMissing = missingTitleImages.Contains(rom.Name);
-                var gameplayMissing = missingGameplayImages.Contains(rom.Name);
+                var boxArtMissing = missingBoxartPictures.Contains(rom.Name);
+                var titleMissing = missingTitlePictures.Contains(rom.Name);
+                var gameplayMissing = missingGameplayPictures.Contains(rom.Name);
 
                 if (boxArtMissing || titleMissing || gameplayMissing)
                 {
@@ -359,32 +368,40 @@ namespace EmuLoader.Forms
 
                     var found = Functions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
 
-                    if (!found) continue;
+                    var updateBoxart = boxArtMissing && !string.IsNullOrEmpty(boxUrl);
+                    var updateTitle = titleMissing && !string.IsNullOrEmpty(titleUrl);
+                    var updateGameplay = gameplayMissing && !string.IsNullOrEmpty(gameplayUrl);
+
+                    if (!found || (!updateBoxart && !updateTitle && !updateGameplay))
+                    {
+                        LogMessage("MISSING PICTURES NOT FOUND - " + rom.Name);
+                        continue;
+                    }
 
                     syncRomsCount++;
 
-                    if (boxArtMissing && !string.IsNullOrEmpty(boxUrl))
+                    if (updateBoxart)
                     {
-                        LogMessage("UPDATING BOXART IMAGE - " + rom.Name);
-                        SaveImage(boxUrl, rom, Values.BoxartFolder);
+                        LogMessage("UPDATING BOXART PICTURE - " + rom.Name);
+                        SavePicture(boxUrl, rom, Values.BoxartFolder);
                     }
 
-                    if (titleMissing && !string.IsNullOrEmpty(titleUrl))
+                    if (updateTitle)
                     {
-                        LogMessage("UPDATING TILE IMAGE - " + rom.Name);
-                        SaveImage(titleUrl, rom, Values.TitleFolder);
+                        LogMessage("UPDATING TILE PICTURE - " + rom.Name);
+                        SavePicture(titleUrl, rom, Values.TitleFolder);
                     }
 
-                    if (gameplayMissing && !string.IsNullOrEmpty(gameplayUrl))
+                    if (updateGameplay)
                     {
-                        LogMessage("UPDATING GAMEPLAY IMAGE - " + rom.Name);
-                        SaveImage(gameplayUrl, rom, Values.GameplayFolder);
+                        LogMessage("UPDATING GAMEPLAY PICTURE - " + rom.Name);
+                        SavePicture(gameplayUrl, rom, Values.GameplayFolder);
                     }
                 }
             }
         }
 
-        private void SaveImage(string url, Rom rom, string folder)
+        private void SavePicture(string url, Rom rom, string folder)
         {
             if (string.IsNullOrEmpty(url)) return;
 
@@ -422,19 +439,19 @@ namespace EmuLoader.Forms
             labelDescription.Text = Roms.Where(x => string.IsNullOrEmpty(x.Description)).Count().ToString();
             labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
 
-            var boxartImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
-            var titleImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
-            var gameplayImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+            var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
+            var titlePictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
+            var gameplayPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
 
             var romsList = Roms.Select(x => x.Name).ToList();
 
-            missingBoxartImages = romsList.Except(boxartImages).ToList();
-            missingTitleImages = romsList.Except(titleImages).ToList();
-            missingGameplayImages = romsList.Except(gameplayImages).ToList();
+            missingBoxartPictures = romsList.Except(boxartPictures).ToList();
+            missingTitlePictures = romsList.Except(titlePictures).ToList();
+            missingGameplayPictures = romsList.Except(gameplayPictures).ToList();
 
-            labelBoxart.Text = missingBoxartImages.Count().ToString();
-            labelTitle.Text = missingTitleImages.Count().ToString();
-            labelGameplay.Text = missingGameplayImages.Count().ToString();
+            labelBoxart.Text = missingBoxartPictures.Count().ToString();
+            labelTitle.Text = missingTitlePictures.Count().ToString();
+            labelGameplay.Text = missingGameplayPictures.Count().ToString();
         }
 
         private void LogMessage(string message)
@@ -464,6 +481,8 @@ namespace EmuLoader.Forms
         {
             StopThread = true;
             XML.SaveXml();
+            comboBoxPlatform.Enabled = true;
+            buttonSync.Enabled = true;
         }
     }
 }

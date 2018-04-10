@@ -16,9 +16,9 @@ namespace EmuLoader.Forms
         List<Rom> Roms = new List<Rom>();
         string platformId;
         public bool Updated { get; set; }
-        List<string> missingBoxartImages = null;
-        List<string> missingTitleImages = null;
-        List<string> missingGameplayImages = null;
+        List<string> missingBoxartPictures = null;
+        List<string> missingTitlePictures = null;
+        List<string> missingGameplayPictures = null;
 
         public FormPurgeRomData()
         {
@@ -56,19 +56,19 @@ namespace EmuLoader.Forms
             labelDescription.Text = Roms.Where(x => string.IsNullOrEmpty(x.Description)).Count().ToString();
             labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
 
-            var boxartImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
-            var titleImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
-            var gameplayImages = Functions.GetRomImagesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+            var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
+            var titlePictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
+            var gameplayPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
 
             var romsList = Roms.Select(x => x.Name).ToList();
 
-            missingBoxartImages = romsList.Except(boxartImages).ToList();
-            missingTitleImages = romsList.Except(titleImages).ToList();
-            missingGameplayImages = romsList.Except(gameplayImages).ToList();
+            missingBoxartPictures = romsList.Except(boxartPictures).ToList();
+            missingTitlePictures = romsList.Except(titlePictures).ToList();
+            missingGameplayPictures = romsList.Except(gameplayPictures).ToList();
 
-            labelBoxart.Text = missingBoxartImages.Count().ToString();
-            labelTitle.Text = missingTitleImages.Count().ToString();
-            labelGameplay.Text = missingGameplayImages.Count().ToString();
+            labelBoxart.Text = missingBoxartPictures.Count().ToString();
+            labelTitle.Text = missingTitlePictures.Count().ToString();
+            labelGameplay.Text = missingGameplayPictures.Count().ToString();
         }
 
         private void buttonPurge_Click(object sender, EventArgs e)

@@ -54,8 +54,8 @@
             this.addRomDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addRomPackInDirectoryStructureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeInvalidEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.batchAddImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.batchRemoveImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchAddPicturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchRemovePicturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEditDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.platformsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +112,7 @@
             this.columnDeveloper = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.flowLayoutPanelImages = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStripEditRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -122,7 +122,7 @@
             this.groupBoxFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panelBottom.SuspendLayout();
-            this.flowLayoutPanelImages.SuspendLayout();
+            this.flowLayoutPanelPictures.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonRomOpenFolder
@@ -289,8 +289,8 @@
             this.addRomDirectoryToolStripMenuItem,
             this.addRomPackInDirectoryStructureToolStripMenuItem,
             this.removeInvalidEntriesToolStripMenuItem,
-            this.batchAddImagesToolStripMenuItem,
-            this.batchRemoveImagesToolStripMenuItem});
+            this.batchAddPicturesToolStripMenuItem,
+            this.batchRemovePicturesToolStripMenuItem});
             this.romsToolStripMenuItem.Name = "romsToolStripMenuItem";
             this.romsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.romsToolStripMenuItem.Text = "Roms";
@@ -323,19 +323,19 @@
             this.removeInvalidEntriesToolStripMenuItem.Text = "Remove Invalid Rom Entries";
             this.removeInvalidEntriesToolStripMenuItem.Click += new System.EventHandler(this.toolStripButtonRemoveInvalid_Click);
             // 
-            // batchAddImagesToolStripMenuItem
+            // batchAddPicturesToolStripMenuItem
             // 
-            this.batchAddImagesToolStripMenuItem.Name = "batchAddImagesToolStripMenuItem";
-            this.batchAddImagesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
-            this.batchAddImagesToolStripMenuItem.Text = "Batch Add Images";
-            this.batchAddImagesToolStripMenuItem.Click += new System.EventHandler(this.batchAddImagesToolStripMenuItem_Click);
+            this.batchAddPicturesToolStripMenuItem.Name = "batchAddPicturesToolStripMenuItem";
+            this.batchAddPicturesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.batchAddPicturesToolStripMenuItem.Text = "Batch Add Pictures";
+            this.batchAddPicturesToolStripMenuItem.Click += new System.EventHandler(this.batchAddPicturesToolStripMenuItem_Click);
             // 
-            // batchRemoveImagesToolStripMenuItem
+            // batchRemovePicturesToolStripMenuItem
             // 
-            this.batchRemoveImagesToolStripMenuItem.Name = "batchRemoveImagesToolStripMenuItem";
-            this.batchRemoveImagesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
-            this.batchRemoveImagesToolStripMenuItem.Text = "Batch Remove Images";
-            this.batchRemoveImagesToolStripMenuItem.Click += new System.EventHandler(this.batchRemoveImagesToolStripMenuItem_Click);
+            this.batchRemovePicturesToolStripMenuItem.Name = "batchRemovePicturesToolStripMenuItem";
+            this.batchRemovePicturesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.batchRemovePicturesToolStripMenuItem.Text = "Batch Remove Pictures";
+            this.batchRemovePicturesToolStripMenuItem.Click += new System.EventHandler(this.batchRemovePicturesToolStripMenuItem_Click);
             // 
             // manageRomToolStripMenuItem
             // 
@@ -928,17 +928,17 @@
             this.panelBottom.Size = new System.Drawing.Size(822, 29);
             this.panelBottom.TabIndex = 17;
             // 
-            // flowLayoutPanelImages
+            // flowLayoutPanelPictures
             // 
-            this.flowLayoutPanelImages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxBoxart);
-            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxTitle);
-            this.flowLayoutPanelImages.Controls.Add(this.pictureBoxGameplay);
-            this.flowLayoutPanelImages.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelImages.Location = new System.Drawing.Point(822, 0);
-            this.flowLayoutPanelImages.Name = "flowLayoutPanelImages";
-            this.flowLayoutPanelImages.Size = new System.Drawing.Size(230, 687);
-            this.flowLayoutPanelImages.TabIndex = 16;
+            this.flowLayoutPanelPictures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxBoxart);
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
+            this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(822, 0);
+            this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
+            this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
+            this.flowLayoutPanelPictures.TabIndex = 16;
             // 
             // FormMain
             // 
@@ -950,7 +950,7 @@
             this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelBottom);
-            this.Controls.Add(this.flowLayoutPanelImages);
+            this.Controls.Add(this.flowLayoutPanelPictures);
             this.Controls.Add(this.dataGridViewPlatforms);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -975,7 +975,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
-            this.flowLayoutPanelImages.ResumeLayout(false);
+            this.flowLayoutPanelPictures.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1019,7 +1019,7 @@
         private System.Windows.Forms.PictureBox pictureBoxGameplay;
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.Label labelTotalRomsCount;
-        private System.Windows.Forms.ToolStripMenuItem batchAddImagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem batchAddPicturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageRomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePlatformToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeGenreToolStripMenuItem;
@@ -1028,12 +1028,12 @@
         private System.Windows.Forms.ToolStripMenuItem showTitleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showGameplayArtToolStripMenuItem;
         private System.Windows.Forms.Panel panelBottom;
-        private System.Windows.Forms.ToolStripMenuItem batchRemoveImagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem batchRemovePicturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAppFolderToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn ColumnIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPlatforms;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelImages;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelPictures;
         private System.Windows.Forms.ToolStripMenuItem showPlatformsListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addRomPackInDirectoryStructureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showDeveloperColumnToolStripMenuItem;

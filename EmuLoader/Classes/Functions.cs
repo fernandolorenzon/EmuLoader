@@ -425,7 +425,7 @@ namespace EmuLoader.Classes
             if (!string.IsNullOrEmpty(boxart))
             {
                 Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(boxart,
-                Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
+                Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
                 Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
             }
 
@@ -434,7 +434,7 @@ namespace EmuLoader.Classes
             if (!string.IsNullOrEmpty(titleart))
             {
                 Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(titleart,
-                Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
+                Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
                 Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
             }
 
@@ -443,7 +443,7 @@ namespace EmuLoader.Classes
             if (!string.IsNullOrEmpty(gameplayart))
             {
                 Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(gameplayart,
-                Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
+                Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
                 Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
             }
         }
@@ -747,7 +747,7 @@ namespace EmuLoader.Classes
             return genre;
         }
 
-        public static List<string> GetRomImagesByPlatform(string platform, string folder)
+        public static List<string> GetRomPicturesByPlatform(string platform, string folder)
         {
             var rootDir = Environment.CurrentDirectory;
             var imagesDir = rootDir + "\\Pictures\\" + platform + "\\" + folder;

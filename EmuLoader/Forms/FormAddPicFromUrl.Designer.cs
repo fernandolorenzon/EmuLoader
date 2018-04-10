@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonSaveImage = new System.Windows.Forms.Button();
+            this.buttonSavePicture = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonCopySave = new System.Windows.Forms.Button();
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
@@ -54,15 +54,15 @@
             this.textBox1.Size = new System.Drawing.Size(389, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // buttonSaveImage
+            // buttonSavePicture
             // 
-            this.buttonSaveImage.Location = new System.Drawing.Point(155, 119);
-            this.buttonSaveImage.Name = "buttonSaveImage";
-            this.buttonSaveImage.Size = new System.Drawing.Size(75, 40);
-            this.buttonSaveImage.TabIndex = 2;
-            this.buttonSaveImage.Text = "Save Image";
-            this.buttonSaveImage.UseVisualStyleBackColor = true;
-            this.buttonSaveImage.Click += new System.EventHandler(this.buttonSaveImage_Click);
+            this.buttonSavePicture.Location = new System.Drawing.Point(155, 119);
+            this.buttonSavePicture.Name = "buttonSavePicture";
+            this.buttonSavePicture.Size = new System.Drawing.Size(75, 40);
+            this.buttonSavePicture.TabIndex = 2;
+            this.buttonSavePicture.Text = "Save Picture";
+            this.buttonSavePicture.UseVisualStyleBackColor = true;
+            this.buttonSavePicture.Click += new System.EventHandler(this.buttonSavePicture_Click);
             // 
             // buttonCancel
             // 
@@ -80,7 +80,7 @@
             this.buttonCopySave.Name = "buttonCopySave";
             this.buttonCopySave.Size = new System.Drawing.Size(137, 40);
             this.buttonCopySave.TabIndex = 4;
-            this.buttonCopySave.Text = "Copy from Clipboard and Save Image";
+            this.buttonCopySave.Text = "Copy from Clipboard and Save Picture";
             this.buttonCopySave.UseVisualStyleBackColor = true;
             this.buttonCopySave.Click += new System.EventHandler(this.buttonCopySave_Click);
             // 
@@ -104,7 +104,7 @@
             this.Controls.Add(this.checkBoxSaveAsJpg);
             this.Controls.Add(this.buttonCopySave);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSaveImage);
+            this.Controls.Add(this.buttonSavePicture);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Name = "FormAddPicFromUrl";
@@ -118,7 +118,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonSaveImage;
+        private System.Windows.Forms.Button buttonSavePicture;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonCopySave;
         private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;

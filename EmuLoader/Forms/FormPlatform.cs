@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.IO;
@@ -13,7 +12,6 @@ namespace EmuLoader.Forms
     {
         #region Members
 
-        public bool Updated = false;
         private bool updating = false;
         #endregion
 
@@ -33,7 +31,6 @@ namespace EmuLoader.Forms
             buttonAdd.Click += buttonAdd_Click;
             buttonDelete.Click += buttonDelete_Click;
 
-            Updated = false;
             updating = true;
             dataGridView.ClearSelection();
             dataGridView.Rows.Clear();
@@ -88,7 +85,6 @@ namespace EmuLoader.Forms
         {
             Platform platform = null;
             int index = -1;
-            Updated = true;
             updating = true;
 
             if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
@@ -148,7 +144,7 @@ namespace EmuLoader.Forms
 
             Platform.Set(platform);
             AddToGrid(platform, index);
-
+            Updated = true;
             updating = false;
             Clean();
         }
@@ -177,6 +173,7 @@ namespace EmuLoader.Forms
                 dataGridView.Rows.Remove(item);
             }
 
+            Updated = true;
             Clean();
         }
 
@@ -257,7 +254,7 @@ namespace EmuLoader.Forms
         private void buttonIconPath_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Images | *.png;*.jpg;*.ico;*.bmp;*.gif|" +
+            open.Filter = "Pictures | *.png;*.jpg;*.ico;*.bmp;*.gif|" +
                               "All | *.*";
 
             open.ShowDialog();
@@ -305,12 +302,6 @@ namespace EmuLoader.Forms
             row.Cells["columnShowInFilter"].Value = platform.ShowInFilter;
             row.Cells["columnShowInList"].Value = platform.ShowInList;
             row.Tag = platform;
-        }
-
-        public bool ShowDialogBool()
-        {
-            ShowDialog();
-            return Updated;
         }
 
         private void Clean()
