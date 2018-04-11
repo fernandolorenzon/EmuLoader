@@ -276,6 +276,11 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+            Functions.ShowCommandHelp();
+        }
+
         #endregion
 
         #region Methods
@@ -324,5 +329,6 @@ namespace EmuLoader.Forms
         }
 
         #endregion
+
     }
 }

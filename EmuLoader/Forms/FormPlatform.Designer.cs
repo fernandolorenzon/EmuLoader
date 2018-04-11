@@ -55,6 +55,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxPlatformsDB = new System.Windows.Forms.ComboBox();
+            this.buttonHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -227,7 +228,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCommand.Location = new System.Drawing.Point(486, 107);
             this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(290, 20);
+            this.textBoxCommand.Size = new System.Drawing.Size(264, 20);
             this.textBoxCommand.TabIndex = 12;
             this.textBoxCommand.Text = "%EMUPATH% %ROMPATH%";
             this.toolTip1.SetToolTip(this.textBoxCommand, resources.GetString("textBoxCommand.ToolTip"));
@@ -271,6 +272,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonHelp);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.comboBoxPlatformsDB);
             this.panel1.Controls.Add(this.label1);
@@ -309,6 +311,18 @@
             this.comboBoxPlatformsDB.Name = "comboBoxPlatformsDB";
             this.comboBoxPlatformsDB.Size = new System.Drawing.Size(290, 21);
             this.comboBoxPlatformsDB.TabIndex = 17;
+            // 
+            // buttonHelp
+            // 
+            this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.buttonHelp.ForeColor = System.Drawing.Color.Black;
+            this.buttonHelp.Location = new System.Drawing.Point(756, 105);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(24, 23);
+            this.buttonHelp.TabIndex = 27;
+            this.buttonHelp.Text = "?";
+            this.buttonHelp.UseVisualStyleBackColor = false;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
             // 
             // FormPlatform
             // 
@@ -360,5 +374,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxPlatformsDB;
+        private System.Windows.Forms.Button buttonHelp;
     }
 }

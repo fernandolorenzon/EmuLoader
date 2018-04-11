@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.IO;
 using System.Diagnostics;
+using System.Text;
 
 namespace EmuLoader.Forms
 {
@@ -12,7 +13,6 @@ namespace EmuLoader.Forms
     {
         #region Members
 
-        public bool Updated = false;
         private Rom SelectedRom { get; set; }
 
         #endregion
@@ -37,6 +37,7 @@ namespace EmuLoader.Forms
             textBoxDescription.Text = rom.Description;
             textBoxYearReleased.Text = rom.YearReleased;
             textBoxId.Text = rom.Id;
+            labelPlatform.Text = rom.Platform == null ? "-" : rom.Platform.Name;
 
             List<RomLabel> labels = RomLabel.GetAll();
 
@@ -253,8 +254,37 @@ namespace EmuLoader.Forms
 
             var game = Functions.GetGameDetails(textBoxId.Text);
             game.Id = textBoxId.Text;
-            FormInfo info = new FormInfo(game);
+            StringBuilder text = new StringBuilder("");
+
+            text.Append("ID" + Environment.NewLine);
+            text.Append(game.Id + Environment.NewLine + Environment.NewLine);
+
+            text.Append("NAME" + Environment.NewLine);
+            text.Append(game.Name + Environment.NewLine + Environment.NewLine);
+
+            text.Append("PUBLISHER" + Environment.NewLine);
+            text.Append(game.Publisher + Environment.NewLine + Environment.NewLine);
+
+            text.Append("DEVELOPER" + Environment.NewLine);
+            text.Append(game.Developer + Environment.NewLine + Environment.NewLine);
+
+            text.Append("DESCRIPTION" + Environment.NewLine);
+            text.Append(game.Description + Environment.NewLine + Environment.NewLine);
+
+            text.Append("YEAR RELEASED" + Environment.NewLine);
+            text.Append(game.YearReleased + Environment.NewLine + Environment.NewLine);
+
+            text.Append("GENRE" + Environment.NewLine);
+            text.Append(game.Genre != null ? game.Genre.Name : "" + Environment.NewLine + Environment.NewLine);
+
+
+            FormInfo info = new FormInfo(text.ToString());
             info.Show();
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+            Functions.ShowCommandHelp();
         }
 
         private void buttonGetRomData_Click(object sender, EventArgs e)
@@ -265,13 +295,44 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var game = Functions.GetGameDetails(textBoxId.Text);
+            //string boxUrl = string.Empty;
+            //string titleUrl = string.Empty;
+            //string gameplayUrl = string.Empty;
 
+            //var found = Functions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
+
+            var game = Functions.GetGameDetails(textBoxId.Text);
             textBoxDBName.Text = game.DBName;
-            textBoxPublisher.Text = game.Publisher;
-            textBoxDeveloper.Text = game.Developer;
-            textBoxDescription.Text = game.Description;
-            textBoxYearReleased.Text = game.YearReleased;
+
+            if (radioButtonOnlyMissing.Checked)
+            {
+                if (string.IsNullOrEmpty(textBoxPublisher.Text))
+                {
+                    textBoxPublisher.Text = game.Publisher;
+                }
+
+                if (string.IsNullOrEmpty(textBoxDeveloper.Text))
+                {
+                    textBoxDeveloper.Text = game.Developer;
+                }
+
+                if (string.IsNullOrEmpty(textBoxDescription.Text))
+                {
+                    textBoxDescription.Text = game.Description;
+                }
+
+                if (string.IsNullOrEmpty(textBoxYearReleased.Text))
+                {
+                    textBoxYearReleased.Text = game.YearReleased;
+                }
+            }
+            else
+            {
+                textBoxPublisher.Text = game.Publisher;
+                textBoxDeveloper.Text = game.Developer;
+                textBoxDescription.Text = game.Description;
+                textBoxYearReleased.Text = game.YearReleased;
+            }
 
             if (string.IsNullOrEmpty(comboBoxGenre.SelectedText))
             {
