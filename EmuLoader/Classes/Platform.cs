@@ -7,10 +7,9 @@ using System.IO;
 
 namespace EmuLoader.Classes
 {
-    public class Platform
+    public class Platform : Base
     {
         private static Dictionary<string, Platform> platforms { get; set; }
-        public string Name { get; set; }
         public string EmulatorExe { get; set; }
         public Color Color { get; set; }
         public bool ShowInList { get; set; }

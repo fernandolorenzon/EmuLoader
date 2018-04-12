@@ -7,10 +7,9 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Classes
 {
-    public class Genre
+    public class Genre : Base
     {
         private static Dictionary<string, Genre> genres { get; set; }
-        public string Name {get; set;}
         public Color Color {get; set;}
         public CheckState CheckState { get; set; }
 

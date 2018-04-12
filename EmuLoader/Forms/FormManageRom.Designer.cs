@@ -425,7 +425,7 @@
             // 
             this.textBoxPublisher.Location = new System.Drawing.Point(596, 265);
             this.textBoxPublisher.Name = "textBoxPublisher";
-            this.textBoxPublisher.Size = new System.Drawing.Size(186, 20);
+            this.textBoxPublisher.Size = new System.Drawing.Size(201, 20);
             this.textBoxPublisher.TabIndex = 93;
             // 
             // label8
@@ -442,7 +442,7 @@
             this.textBoxDBName.Location = new System.Drawing.Point(401, 180);
             this.textBoxDBName.Name = "textBoxDBName";
             this.textBoxDBName.ReadOnly = true;
-            this.textBoxDBName.Size = new System.Drawing.Size(351, 20);
+            this.textBoxDBName.Size = new System.Drawing.Size(396, 20);
             this.textBoxDBName.TabIndex = 95;
             // 
             // textBoxChangeFileName

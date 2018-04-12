@@ -489,7 +489,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnRomDBName", columnRomPath.Visible);
+                Config.SetElementVisibility("ColumnRomDBName", columnRomDBName.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -809,6 +809,7 @@ namespace EmuLoader.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void comboBoxLabels_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -867,25 +868,17 @@ namespace EmuLoader.Forms
         {
             if (dataGridView.SelectedRows.Count == 0) return;
 
+            var row = dataGridView.SelectedRows[0];
             Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
             FormManageRom form = new FormManageRom(rom);
-            form.ShowDialog();
-            dataGridView.SelectedRows[0].Cells["columnRomName"].Value = rom.Name;
-            dataGridView.SelectedRows[0].Cells["columnRomName"].ToolTipText = rom.Description;
-            dataGridView.SelectedRows[0].Cells["columnRomDBName"].Value = rom.DBName;
-            dataGridView.SelectedRows[0].Cells["columnRomPath"].Value = rom.Path;
-            dataGridView.SelectedRows[0].Cells["columnDeveloper"].Value = rom.Developer;
-            dataGridView.SelectedRows[0].Cells["columnPublisher"].Value = rom.Publisher;
-            dataGridView.SelectedRows[0].Cells["columnYearReleased"].Value = rom.YearReleased;
-            dataGridView.SelectedRows[0].Cells["columnPlatform"].Value = rom.Platform == null ? string.Empty : rom.Platform.Name;
-            dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.BackColor = rom.Platform == null ? dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.BackColor : rom.Platform.Color;
-            dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.ForeColor = rom.Platform == null ? dataGridView.SelectedRows[0].Cells["columnPlatform"].Style.ForeColor : Functions.SetFontContrast(rom.Platform.Color);
-            dataGridView.SelectedRows[0].Cells["columnGenre"].Value = rom.Genre == null ? string.Empty : rom.Genre.Name;
-            dataGridView.SelectedRows[0].Cells["columnGenre"].Style.BackColor = rom.Genre == null ? dataGridView.SelectedRows[0].Cells["columnGenre"].Style.BackColor : rom.Genre.Color;
-            dataGridView.SelectedRows[0].Cells["columnGenre"].Style.ForeColor = rom.Genre == null ? dataGridView.SelectedRows[0].Cells["columnGenre"].Style.ForeColor : Functions.SetFontContrast(rom.Genre.Color);
-
-            FillLabelCell(rom, dataGridView.SelectedRows[0]);
-            LoadPictures();
+            if (form.ShowDialogUpdated())
+            {
+                LoadGridRow(rom, row);
+                FillLabelCell(rom, dataGridView.SelectedRows[0]);
+                FillGenreFilter();
+                LoadPictures();
+            }
+            
         }
 
         private void showBoxArtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1117,6 +1110,41 @@ namespace EmuLoader.Forms
             FilterRoms();
         }
 
+        private void syncRomsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSyncRomData form = new FormSyncRomData();
+
+            if (form.ShowDialogUpdated())
+            {
+                Rom.Fill();
+                FillGenreFilter();
+                FilterRoms();
+                FillPlatformFilter();
+                FillPlatformGrid();
+                FillPublisherFilter();
+                FillDeveloperFilter();
+                FillYearReleasedFilter();
+            }
+        }
+
+        private void purgeRomDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPurgeRomData form = new FormPurgeRomData();
+            form.ShowDialog();
+
+
+            if (form.Updated)
+            {
+                Rom.Fill();
+                FillGenreFilter();
+                FilterRoms();
+                FillPlatformFilter();
+                FillPlatformGrid();
+                FillPublisherFilter();
+                FillDeveloperFilter();
+                FillYearReleasedFilter();
+            }
+        }
         #endregion
 
         #region Grid Events
@@ -1369,34 +1397,7 @@ namespace EmuLoader.Forms
                 int rowId = dataGridView.Rows.Add();
                 DataGridViewRow row = dataGridView.Rows[rowId];
 
-                row.Cells["columnRomName"].Value = rom.Name;
-                row.Cells["columnRomPath"].Value = rom.Path;
-                row.Cells["columnRomDBName"].Value = rom.DBName;
-                row.Cells["columnFilename"].Value = rom.GetFileName();
-                row.Cells["columnDeveloper"].Value = rom.Developer;
-                row.Cells["columnPublisher"].Value = rom.Publisher;
-                row.Cells["columnYearReleased"].Value = rom.YearReleased;
-
-                if (rom.Platform != null)
-                {
-                    if (rom.Platform.Icon != null)
-                    {
-                        row.Cells["ColumnIconMain"].Value = rom.Platform.Icon;
-                    }
-
-                    row.Cells["columnPlatform"].Value = rom.Platform.Name;
-                    row.Cells["columnPlatform"].Style.BackColor = rom.Platform.Color;
-                    row.Cells["columnPlatform"].Style.ForeColor = Functions.SetFontContrast(rom.Platform.Color);
-                }
-
-                if (rom.Genre != null)
-                {
-                    row.Cells["columnGenre"].Value = rom.Genre.Name;
-                    row.Cells["columnGenre"].Style.BackColor = rom.Genre.Color;
-                    row.Cells["columnGenre"].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
-                }
-
-                row.Cells[1].ToolTipText = rom.Description;
+                LoadGridRow(rom, row);
 
                 FillLabelCell(rom, row);
                 row.Tag = rom;
@@ -1404,6 +1405,38 @@ namespace EmuLoader.Forms
 
             labelTotalRomsCount.Text = roms.Count.ToString();
             dataGridView.ResumeLayout();
+        }
+
+        private static void LoadGridRow(Rom rom, DataGridViewRow row)
+        {
+            row.Cells["columnRomName"].Value = rom.Name;
+            row.Cells["columnRomPath"].Value = rom.Path;
+            row.Cells["columnRomDBName"].Value = rom.DBName;
+            row.Cells["columnFilename"].Value = rom.GetFileName();
+            row.Cells["columnDeveloper"].Value = rom.Developer;
+            row.Cells["columnPublisher"].Value = rom.Publisher;
+            row.Cells["columnYearReleased"].Value = rom.YearReleased;
+
+            if (rom.Platform != null)
+            {
+                if (rom.Platform.Icon != null)
+                {
+                    row.Cells["ColumnIconMain"].Value = rom.Platform.Icon;
+                }
+
+                row.Cells["columnPlatform"].Value = rom.Platform.Name;
+                row.Cells["columnPlatform"].Style.BackColor = rom.Platform.Color;
+                row.Cells["columnPlatform"].Style.ForeColor = Functions.SetFontContrast(rom.Platform.Color);
+            }
+
+            if (rom.Genre != null)
+            {
+                row.Cells["columnGenre"].Value = rom.Genre.Name;
+                row.Cells["columnGenre"].Style.BackColor = rom.Genre.Color;
+                row.Cells["columnGenre"].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
+            }
+
+            row.Cells[1].ToolTipText = rom.Description;
         }
 
         private void FillPlatformFilter(string platform = "")
@@ -1621,40 +1654,5 @@ namespace EmuLoader.Forms
 
         #endregion
 
-        private void syncRomsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormSyncRomData form = new FormSyncRomData();
-
-            if (form.ShowDialogUpdated())
-            {
-                Rom.Fill();
-                FillGenreFilter();
-                FilterRoms();
-                FillPlatformFilter();
-                FillPlatformGrid();
-                FillPublisherFilter();
-                FillDeveloperFilter();
-                FillYearReleasedFilter();
-            }
-        }
-
-        private void purgeRomDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormPurgeRomData form = new FormPurgeRomData();
-            form.ShowDialog();
-
-
-            if (form.Updated)
-            {
-                Rom.Fill();
-                FillGenreFilter();
-                FilterRoms();
-                FillPlatformFilter();
-                FillPlatformGrid();
-                FillPublisherFilter();
-                FillDeveloperFilter();
-                FillYearReleasedFilter();
-            }
-        }
     }
 }

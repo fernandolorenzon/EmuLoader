@@ -69,11 +69,7 @@ namespace EmuLoader.Forms
             comboBoxPlatform.DisplayMember = "Name";
             comboBoxPlatform.ValueMember = "Name";
 
-            List<Genre> genres = Genre.GetAll();
-            genres.Insert(0, new Genre());
-            comboBoxGenre.DataSource = genres;
-            comboBoxGenre.DisplayMember = "Name";
-            comboBoxGenre.ValueMember = "Name";
+            LoadComboBoxGenres();
 
             comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? string.Empty : SelectedRom.Platform.Name;
             comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? string.Empty : SelectedRom.Genre.Name;
@@ -90,6 +86,15 @@ namespace EmuLoader.Forms
             }
 
             LoadPictures();
+        }
+
+        private void LoadComboBoxGenres()
+        {
+            List<Genre> genres = Genre.GetAll();
+            genres.Insert(0, new Genre());
+            comboBoxGenre.DataSource = genres;
+            comboBoxGenre.DisplayMember = "Name";
+            comboBoxGenre.ValueMember = "Name";
         }
 
         #endregion
@@ -200,6 +205,7 @@ namespace EmuLoader.Forms
 
                 Rom.Set(SelectedRom);
                 XML.SaveXml();
+                Updated = true;
                 Close();
             }
             catch (Exception ex)
@@ -325,19 +331,23 @@ namespace EmuLoader.Forms
                 {
                     textBoxYearReleased.Text = game.YearReleased;
                 }
+
+                if (string.IsNullOrEmpty(comboBoxGenre.Text))
+                {
+                    LoadComboBoxGenres();
+                    comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
+                }
             }
             else
             {
+                LoadComboBoxGenres();
                 textBoxPublisher.Text = game.Publisher;
                 textBoxDeveloper.Text = game.Developer;
                 textBoxDescription.Text = game.Description;
                 textBoxYearReleased.Text = game.YearReleased;
+                comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
             }
 
-            if (string.IsNullOrEmpty(comboBoxGenre.SelectedText))
-            {
-                comboBoxGenre.SelectedValue = game.Genre;
-            }
         }
 
         private void buttonSearchInDB_Click(object sender, EventArgs e)

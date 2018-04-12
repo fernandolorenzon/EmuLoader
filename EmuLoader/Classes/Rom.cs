@@ -4,14 +4,12 @@ using System.Linq;
 
 namespace EmuLoader.Classes
 {
-    public class Rom
+    public class Rom : Base
     {
         private static List<Rom> RomList { get; set; }
         private string path;
 
         public string Id { get; set; }
-
-        public string Name { get; set; }
 
         public string DBName { get; set; }
 

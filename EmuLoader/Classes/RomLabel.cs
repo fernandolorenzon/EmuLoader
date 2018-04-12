@@ -7,10 +7,9 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Classes
 {
-    public class RomLabel
+    public class RomLabel : Base
     {
         private static Dictionary<string, RomLabel> labels { get; set; }
-        public string Name {get; set;}
         public Color Color {get; set;}
         public CheckState CheckState { get; set; }
 

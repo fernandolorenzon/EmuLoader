@@ -25,6 +25,10 @@ namespace EmuLoader.Classes
             attrPath.Value = "true";
             config.Attributes.Append(attrPath);
 
+            XmlAttribute attrDBName = xmlDoc.CreateAttribute("ColumnRomDBName");
+            attrPath.Value = "false";
+            config.Attributes.Append(attrDBName);
+
             XmlAttribute attrFileName = xmlDoc.CreateAttribute("ColumnFileName");
             attrFileName.Value = "false";
             config.Attributes.Append(attrFileName);

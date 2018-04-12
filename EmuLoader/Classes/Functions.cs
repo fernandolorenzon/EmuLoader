@@ -821,21 +821,21 @@ namespace EmuLoader.Classes
         public static void ShowCommandHelp()
         {
             string text =
-"Available variables:" + Environment.NewLine + Environment.NewLine +
+            "Available variables:" + Environment.NewLine + Environment.NewLine +
 
-"%EMUPATH% -The emulator exe -> c:\\snes\\snes9x.exe" + Environment.NewLine +
-"%ROMPATH% -The rom path and file -> c:\\snes\\roms\\Super Mario (U).zip" + Environment.NewLine +
-"%ROMNAME% -The rom display name->Super Mario(U)" + Environment.NewLine +
-"%ROMFILE% -The rom file->Super Mario(U).zip" + Environment.NewLine + Environment.NewLine +
+            "%EMUPATH% -The emulator exe -> c:\\snes\\snes9x.exe" + Environment.NewLine +
+            "%ROMPATH% -The rom path and file -> c:\\snes\\roms\\Super Mario (U).zip" + Environment.NewLine +
+            "%ROMNAME% -The rom display name->Super Mario(U)" + Environment.NewLine +
+            "%ROMFILE% -The rom file->Super Mario(U).zip" + Environment.NewLine + Environment.NewLine +
 
 
-"Most console emulators use the standard: %EMUPATH% %ROMPATH%" + Environment.NewLine +
-"Arcade emulators use this: %EMUPATH% %ROMNAME%" + Environment.NewLine + Environment.NewLine +
+            "Most console emulators use the standard: %EMUPATH% %ROMPATH%" + Environment.NewLine +
+            "Arcade emulators use this: %EMUPATH% %ROMNAME%" + Environment.NewLine + Environment.NewLine +
 
-"Retroarch (change the core filename) -> %EMUPATH% -L cores\\[CORE_NAME].dll %ROMPATH%" + Environment.NewLine +
-"Snes9x/ZSnes/VBA/Gens -> %EMUPATH% %ROMPATH%" + Environment.NewLine +
-"nullDC -> %EMUPATH% -config nullDC:Emulator.Autostart=1 -config ImageReader:LoadDefaultImage=1 -config ImageReader:DefaultImage=%ROMPATH% -nogui" + Environment.NewLine +
-"Nebula -> %EMUPATH% %ROMNAME%";
+            "Retroarch (change the core filename) -> %EMUPATH% -L cores\\[CORE_NAME].dll %ROMPATH%" + Environment.NewLine +
+            "Snes9x/ZSnes/VBA/Gens -> %EMUPATH% %ROMPATH%" + Environment.NewLine +
+            "nullDC -> %EMUPATH% -config nullDC:Emulator.Autostart=1 -config ImageReader:LoadDefaultImage=1 -config ImageReader:DefaultImage=%ROMPATH% -nogui" + Environment.NewLine +
+            "Nebula -> %EMUPATH% %ROMNAME%";
 
             FormInfo info = new FormInfo(text.ToString());
             info.Show();
