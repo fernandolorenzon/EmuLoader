@@ -684,6 +684,8 @@ namespace EmuLoader.Forms
                 comboBoxYearReleased.SelectedIndex = 0;
                 updating = false;
                 FilterRoms();
+                SelectRandomRom();
+                LoadPictures();
             }
             catch (OperationCanceledException ioex)
             {
@@ -1404,6 +1406,7 @@ namespace EmuLoader.Forms
             }
 
             labelTotalRomsCount.Text = roms.Count.ToString();
+            dataGridView.ClearSelection();
             dataGridView.ResumeLayout();
         }
 
