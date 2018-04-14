@@ -242,12 +242,12 @@ namespace EmuLoader.Forms
 
         private void buttonCopyToFile_Click(object sender, EventArgs e)
         {
-            textBoxChangeFileName.Text = textBoxChangeRomName.Text + Functions.GetFileExtension(textBoxChangeFileName.Text);
+            textBoxChangeFileName.Text = textBoxChangeRomName.Text.Trim() + Functions.GetFileExtension(textBoxChangeFileName.Text);
         }
 
         private void buttonCopyToRom_Click(object sender, EventArgs e)
         {
-            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Replace(Functions.GetFileExtension(textBoxChangeFileName.Text), string.Empty);
+            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Trim().Replace(Functions.GetFileExtension(textBoxChangeFileName.Text), string.Empty);
         }
 
         private void buttonOpenDB_Click(object sender, EventArgs e)
@@ -386,8 +386,19 @@ namespace EmuLoader.Forms
 
             string suffix = suffixIndex == 0 ? string.Empty : Functions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
 
-            textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -") + " " + suffix;
+            if (checkBoxKeepSuffix.Checked)
+            {
+                textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -") + " " + suffix;
+            }
+            else
+            {
+                textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -");
+            }
+
             textBoxChangeFileName.Text = textBoxChangeRomName.Text + Functions.GetFileExtension(textBoxChangeFileName.Text);
+
+            textBoxChangeRomName.Text = textBoxChangeRomName.Text.Trim();
+            textBoxChangeFileName.Text = textBoxChangeFileName.Text.Trim();
         }
 
         private void buttonCheckList_Click(object sender, EventArgs e)

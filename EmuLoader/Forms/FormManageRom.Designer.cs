@@ -103,6 +103,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkBoxKeepSuffix = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -137,6 +138,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxKeepSuffix);
             this.tabPageGeneral.Controls.Add(this.panel2);
             this.tabPageGeneral.Controls.Add(this.groupBox1);
             this.tabPageGeneral.Controls.Add(this.panel1);
@@ -847,6 +849,18 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // checkBoxKeepSuffix
+            // 
+            this.checkBoxKeepSuffix.AutoSize = true;
+            this.checkBoxKeepSuffix.Checked = true;
+            this.checkBoxKeepSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxKeepSuffix.Location = new System.Drawing.Point(482, 206);
+            this.checkBoxKeepSuffix.Name = "checkBoxKeepSuffix";
+            this.checkBoxKeepSuffix.Size = new System.Drawing.Size(78, 17);
+            this.checkBoxKeepSuffix.TabIndex = 102;
+            this.checkBoxKeepSuffix.Text = "Keep suffix";
+            this.checkBoxKeepSuffix.UseVisualStyleBackColor = true;
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -951,5 +965,6 @@
         private System.Windows.Forms.RadioButton radioButtonOverwrite;
         private System.Windows.Forms.RadioButton radioButtonOnlyMissing;
         private System.Windows.Forms.Button buttonHelp;
+        private System.Windows.Forms.CheckBox checkBoxKeepSuffix;
     }
 }
