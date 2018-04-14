@@ -90,7 +90,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -108,7 +108,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -130,7 +130,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -153,43 +153,50 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void addRomDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog open = new FolderBrowserDialog();
-
-            if (open.ShowDialog() == DialogResult.Cancel)
+            try
             {
-                return;
-            }
+                FolderBrowserDialog open = new FolderBrowserDialog();
 
-            if (open.SelectedPath.Length == 0)
-            {
-                return;
-            }
-
-            var romsPath = Directory.GetFiles(open.SelectedPath);
-
-            List<Rom> romList = new List<Rom>();
-
-            foreach (string s in romsPath)
-            {
-                Rom r = new Rom(s);
-                Rom old = Rom.Get(r.Path);
-
-                if (old != null)
+                if (open.ShowDialog() == DialogResult.Cancel)
                 {
-                    r = old;
+                    return;
                 }
 
-                romList.Add(r);
-            }
+                if (open.SelectedPath.Length == 0)
+                {
+                    return;
+                }
 
-            FormChoose.ChoosePlatform(romList);
-            FilterRoms();
+                var romsPath = Directory.GetFiles(open.SelectedPath);
+
+                List<Rom> romList = new List<Rom>();
+
+                foreach (string s in romsPath)
+                {
+                    Rom r = new Rom(s);
+                    Rom old = Rom.Get(r.Path);
+
+                    if (old != null)
+                    {
+                        r = old;
+                    }
+
+                    romList.Add(r);
+                }
+
+                FormChoose.ChoosePlatform(romList);
+                FilterRoms();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void toolStripButtonAddRom_Click(object sender, EventArgs e)
@@ -247,7 +254,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -263,7 +270,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -279,7 +286,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -295,7 +302,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -334,7 +341,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -373,7 +380,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -400,7 +407,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -428,7 +435,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -456,7 +463,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -477,7 +484,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -498,7 +505,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -519,7 +526,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -540,7 +547,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -561,7 +568,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -582,7 +589,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -601,9 +608,9 @@ namespace EmuLoader.Forms
             {
                 return;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -624,7 +631,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -645,7 +652,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -666,7 +673,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -693,7 +700,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -713,7 +720,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -741,7 +748,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -756,7 +763,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -769,7 +776,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -782,7 +789,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -795,7 +802,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -808,7 +815,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -821,7 +828,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -834,7 +841,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -852,35 +859,55 @@ namespace EmuLoader.Forms
 
         private void batchAddPicturesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormBatchAddPictures form = new FormBatchAddPictures();
-            form.ShowDialog();
+            try
+            {
+                FormBatchAddPictures form = new FormBatchAddPictures();
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void batchRemovePicturesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView.ClearSelection();
-            pictureBoxBoxart.Image = null;
-            pictureBoxTitle.Image = null;
-            pictureBoxGameplay.Image = null;
-            FormBatchRemovePictures form = new FormBatchRemovePictures();
-            form.ShowDialog();
+            try
+            {
+                dataGridView.ClearSelection();
+                pictureBoxBoxart.Image = null;
+                pictureBoxTitle.Image = null;
+                pictureBoxGameplay.Image = null;
+                FormBatchRemovePictures form = new FormBatchRemovePictures();
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void manageRomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 0) return;
-
-            var row = dataGridView.SelectedRows[0];
-            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-            FormManageRom form = new FormManageRom(rom);
-            if (form.ShowDialogUpdated())
+            try
             {
-                LoadGridRow(rom, row);
-                FillLabelCell(rom, dataGridView.SelectedRows[0]);
-                FillGenreFilter();
-                LoadPictures();
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                var row = dataGridView.SelectedRows[0];
+                Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+                FormManageRom form = new FormManageRom(rom);
+                if (form.ShowDialogUpdated())
+                {
+                    LoadGridRow(rom, row);
+                    FillLabelCell(rom, dataGridView.SelectedRows[0]);
+                    FillGenreFilter();
+                    LoadPictures();
+                }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void showBoxArtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -905,7 +932,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -931,7 +958,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -957,32 +984,53 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void pictureBoxBoxart_DoubleClick(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 0) return;
+            try
+            {
+                if (dataGridView.SelectedRows.Count == 0) return;
 
-            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-            CopyFromUrl(rom, Values.BoxartFolder);
+                Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+                CopyFromUrl(rom, Values.BoxartFolder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBoxTitle_DoubleClick(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 0) return;
+            try
+            {
+                if (dataGridView.SelectedRows.Count == 0) return;
 
-            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-            CopyFromUrl(rom, Values.TitleFolder);
+                Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+                CopyFromUrl(rom, Values.TitleFolder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void pictureBoxGameplay_DoubleClick(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 0) return;
+            try
+            {
+                if (dataGridView.SelectedRows.Count == 0) return;
 
-            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-            CopyFromUrl(rom, Values.GameplayFolder);
+                Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+                CopyFromUrl(rom, Values.GameplayFolder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void openAppFolderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -997,156 +1045,197 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 0) return;
-
-            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-
             try
             {
-                ProcessStartInfo sInfo = new ProcessStartInfo(rom.Path);
-                Process.Start(sInfo);
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+
+                try
+                {
+                    ProcessStartInfo sInfo = new ProcessStartInfo(rom.Path);
+                    Process.Start(sInfo);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void FormMain_ResizeEnd(object sender, EventArgs e)
         {
-            XML.SetConfig("Height", this.Height.ToString());
-            XML.SetConfig("Width", this.Width.ToString());
-            XML.SaveXml();
 
-            int imagesHeightTotal = pictureBoxBoxart.Size.Height * 3;
-            int heightLeft = flowLayoutPanelPictures.Size.Height - imagesHeightTotal;
-
-            if (heightLeft < 25 && heightLeft > 0) return;
-
-            if (heightLeft > 0)
+            try
             {
-                int heightForEachPicture = Convert.ToInt32(heightLeft / 3) + pictureBoxBoxart.Size.Height - 6;
+                XML.SetConfig("Height", this.Height.ToString());
+                XML.SetConfig("Width", this.Width.ToString());
+                XML.SaveXml();
 
-                flowLayoutPanelPictures.Size = new Size(heightForEachPicture + 6, dataGridView.Size.Height);
-                pictureBoxBoxart.Size = new Size(heightForEachPicture, heightForEachPicture);
-                pictureBoxTitle.Size = new Size(heightForEachPicture, heightForEachPicture);
-                pictureBoxGameplay.Size = new Size(heightForEachPicture, heightForEachPicture);
+                int imagesHeightTotal = pictureBoxBoxart.Size.Height * 3;
+                int heightLeft = flowLayoutPanelPictures.Size.Height - imagesHeightTotal;
+
+                if (heightLeft < 25 && heightLeft > 0) return;
+
+                if (heightLeft > 0)
+                {
+                    int heightForEachPicture = Convert.ToInt32(heightLeft / 3) + pictureBoxBoxart.Size.Height - 6;
+
+                    flowLayoutPanelPictures.Size = new Size(heightForEachPicture + 6, dataGridView.Size.Height);
+                    pictureBoxBoxart.Size = new Size(heightForEachPicture, heightForEachPicture);
+                    pictureBoxTitle.Size = new Size(heightForEachPicture, heightForEachPicture);
+                    pictureBoxGameplay.Size = new Size(heightForEachPicture, heightForEachPicture);
+                }
+                else
+                {
+                    int heightForEachPicture = pictureBoxBoxart.Size.Height - 6 - Convert.ToInt32(heightLeft * -1 / 3);
+
+                    flowLayoutPanelPictures.Size = new Size(heightForEachPicture + 6, dataGridView.Size.Height);
+                    pictureBoxBoxart.Size = new Size(heightForEachPicture, heightForEachPicture);
+                    pictureBoxTitle.Size = new Size(heightForEachPicture, heightForEachPicture);
+                    pictureBoxGameplay.Size = new Size(heightForEachPicture, heightForEachPicture);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                int heightForEachPicture = pictureBoxBoxart.Size.Height - 6 - Convert.ToInt32(heightLeft * -1 / 3);
-
-                flowLayoutPanelPictures.Size = new Size(heightForEachPicture + 6, dataGridView.Size.Height);
-                pictureBoxBoxart.Size = new Size(heightForEachPicture, heightForEachPicture);
-                pictureBoxTitle.Size = new Size(heightForEachPicture, heightForEachPicture);
-                pictureBoxGameplay.Size = new Size(heightForEachPicture, heightForEachPicture);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
         {
-
-            // When window state changes
-            if (WindowState != LastWindowState)
+            try
             {
-                LastWindowState = WindowState;
-
-                if (WindowState == FormWindowState.Maximized)
+                // When window state changes
+                if (WindowState != LastWindowState)
                 {
-                    FormMain_ResizeEnd(sender, e);
-                }
+                    LastWindowState = WindowState;
 
-                if (WindowState == FormWindowState.Normal)
-                {
-                    FormMain_ResizeEnd(sender, e);
+                    if (WindowState == FormWindowState.Maximized)
+                    {
+                        FormMain_ResizeEnd(sender, e);
+                    }
+
+                    if (WindowState == FormWindowState.Normal)
+                    {
+                        FormMain_ResizeEnd(sender, e);
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void addRomPackInDirectoryStructureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog open = new FolderBrowserDialog();
-
-            if (open.ShowDialog() == DialogResult.Cancel)
+            try
             {
-                return;
-            }
+                FolderBrowserDialog open = new FolderBrowserDialog();
 
-            if (open.SelectedPath.Length == 0)
-            {
-                return;
-            }
-
-            var directories = Directory.GetDirectories(open.SelectedPath);
-            List<Rom> romList = new List<Rom>();
-
-            foreach (var path in directories)
-            {
-                var files = Directory.GetFiles(path);
-
-                foreach (var item in files)
+                if (open.ShowDialog() == DialogResult.Cancel)
                 {
-                    if (item.EndsWith(".cue") || item.EndsWith(".ccd") || item.EndsWith(".rom") || item.EndsWith(".gdi"))
+                    return;
+                }
+
+                if (open.SelectedPath.Length == 0)
+                {
+                    return;
+                }
+
+                var directories = Directory.GetDirectories(open.SelectedPath);
+                List<Rom> romList = new List<Rom>();
+
+                foreach (var path in directories)
+                {
+                    var files = Directory.GetFiles(path);
+
+                    foreach (var item in files)
                     {
-                        Rom r = new Rom(item);
-                        Rom old = Rom.Get(r.Path);
-
-                        if (old != null)
+                        if (item.EndsWith(".cue") || item.EndsWith(".ccd") || item.EndsWith(".rom") || item.EndsWith(".gdi"))
                         {
-                            r = old;
-                        }
+                            Rom r = new Rom(item);
+                            Rom old = Rom.Get(r.Path);
 
-                        romList.Add(r);
+                            if (old != null)
+                            {
+                                r = old;
+                            }
+
+                            romList.Add(r);
+                        }
                     }
                 }
-            }
 
-            FormChoose.ChoosePlatform(romList);
-            FilterRoms();
+                FormChoose.ChoosePlatform(romList);
+                FilterRoms();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void syncRomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormSyncRomData form = new FormSyncRomData();
-
-            if (form.ShowDialogUpdated())
+            try
             {
-                Rom.Fill();
-                FillGenreFilter();
-                FilterRoms();
-                FillPlatformFilter();
-                FillPlatformGrid();
-                FillPublisherFilter();
-                FillDeveloperFilter();
-                FillYearReleasedFilter();
+                FormSyncRomData form = new FormSyncRomData();
+
+                if (form.ShowDialogUpdated())
+                {
+                    Rom.Fill();
+                    FillGenreFilter();
+                    FilterRoms();
+                    FillPlatformFilter();
+                    FillPlatformGrid();
+                    FillPublisherFilter();
+                    FillDeveloperFilter();
+                    FillYearReleasedFilter();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void purgeRomDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormPurgeRomData form = new FormPurgeRomData();
-            form.ShowDialog();
-
-
-            if (form.Updated)
+            try
             {
-                Rom.Fill();
-                FillGenreFilter();
-                FilterRoms();
-                FillPlatformFilter();
-                FillPlatformGrid();
-                FillPublisherFilter();
-                FillDeveloperFilter();
-                FillYearReleasedFilter();
+                FormPurgeRomData form = new FormPurgeRomData();
+                form.ShowDialog();
+
+                if (form.Updated)
+                {
+                    Rom.Fill();
+                    FillGenreFilter();
+                    FilterRoms();
+                    FillPlatformFilter();
+                    FillPlatformGrid();
+                    FillPublisherFilter();
+                    FillDeveloperFilter();
+                    FillYearReleasedFilter();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         #endregion
 
         #region Grid Events

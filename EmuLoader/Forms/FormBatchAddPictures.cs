@@ -115,7 +115,11 @@ namespace EmuLoader.Forms
 
                 if (found)
                 {
-                    progressBar1.Value++;
+                    if (progressBar1.Value < progressBar1.Maximum)
+                    {
+                        progressBar1.Value++;
+                    }
+
                     successfulFind++;
                     Functions.SavePicture(rom, imageFound, type, checkBoxSaveAsJpg.Checked);
                 }

@@ -82,9 +82,13 @@ namespace EmuLoader.Forms
                     SetIdAndYear();
                     var count = syncRomsCount;
 
+                    XML.SaveXml();
+
                     //threadSetOtherProperties.Start();
                     SetOtherProperties();
                     var count2 = syncRomsCount;
+
+                    XML.SaveXml();
 
                     SetPictures();
                     var count3 = syncRomsCount;
@@ -126,7 +130,7 @@ namespace EmuLoader.Forms
         private void SetIdAndYear()
         {
             syncRomsCount = 0;
-            
+
             bool updated = false;
             ThreadStopped = false;
             bool found = false;
@@ -325,9 +329,9 @@ namespace EmuLoader.Forms
 
             var romsList = Roms.Select(x => x.Name).ToList();
 
-            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && 
-                                    (missingBoxartPictures.Contains(x.Name) || 
-                                    missingTitlePictures.Contains(x.Name) || 
+            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) &&
+                                    (missingBoxartPictures.Contains(x.Name) ||
+                                    missingTitlePictures.Contains(x.Name) ||
                                     missingGameplayPictures.Contains(x.Name))).ToList();
 
             syncRomsCount = 0;
@@ -419,39 +423,115 @@ namespace EmuLoader.Forms
 
         private void comboBoxPlatform_SelectedIndexChanged(object sender, EventArgs e)
         {
-            labelId.Text = "-";
-            labelGenre.Text = "-";
-            labelPublisher.Text = "-";
-            labelDeveloper.Text = "-";
-            labelDescription.Text = "-";
-            labelYearReleased.Text = "-";
-            labelBoxart.Text = "-";
-            labelTitle.Text = "-";
-            labelGameplay.Text = "-";
+            try
+            {
+                labelId.Invoke((MethodInvoker)delegate
+                {
+                    labelId.Text = "-";
+                });
 
-            Roms.Clear();
-            Roms.AddRange(Rom.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
+                labelGenre.Invoke((MethodInvoker)delegate
+                {
+                    labelGenre.Text = "-";
+                });
 
-            labelId.Text = Roms.Where(x => string.IsNullOrEmpty(x.Id)).Count().ToString();
-            labelGenre.Text = Roms.Where(x => x.Genre == null).Count().ToString();
-            labelPublisher.Text = Roms.Where(x => string.IsNullOrEmpty(x.Publisher)).Count().ToString();
-            labelDeveloper.Text = Roms.Where(x => string.IsNullOrEmpty(x.Developer)).Count().ToString();
-            labelDescription.Text = Roms.Where(x => string.IsNullOrEmpty(x.Description)).Count().ToString();
-            labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
+                labelPublisher.Invoke((MethodInvoker)delegate
+                {
+                    labelPublisher.Text = "-";
+                });
 
-            var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
-            var titlePictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
-            var gameplayPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+                labelDeveloper.Invoke((MethodInvoker)delegate
+                {
+                    labelDeveloper.Text = "-";
+                });
 
-            var romsList = Roms.Select(x => x.Name).ToList();
+                labelDescription.Invoke((MethodInvoker)delegate
+                {
+                    labelDescription.Text = "-";
+                });
 
-            missingBoxartPictures = romsList.Except(boxartPictures).ToList();
-            missingTitlePictures = romsList.Except(titlePictures).ToList();
-            missingGameplayPictures = romsList.Except(gameplayPictures).ToList();
+                labelYearReleased.Invoke((MethodInvoker)delegate
+                {
+                    labelYearReleased.Text = "-";
+                });
 
-            labelBoxart.Text = missingBoxartPictures.Count().ToString();
-            labelTitle.Text = missingTitlePictures.Count().ToString();
-            labelGameplay.Text = missingGameplayPictures.Count().ToString();
+                labelBoxart.Invoke((MethodInvoker)delegate
+                {
+                    labelBoxart.Text = "-";
+                });
+
+                labelTitle.Invoke((MethodInvoker)delegate
+                {
+                    labelTitle.Text = "-";
+                });
+
+                labelGameplay.Invoke((MethodInvoker)delegate
+                {
+                    labelGameplay.Text = "-";
+                });
+
+                Roms.Clear();
+                Roms.AddRange(Rom.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
+
+                labelId.Invoke((MethodInvoker)delegate
+                {
+                    labelId.Text = Roms.Where(x => string.IsNullOrEmpty(x.Id)).Count().ToString();
+                });
+
+                labelGenre.Invoke((MethodInvoker)delegate
+                {
+                    labelGenre.Text = Roms.Where(x => x.Genre == null).Count().ToString();
+                });
+
+                labelPublisher.Invoke((MethodInvoker)delegate
+                {
+                    labelPublisher.Text = Roms.Where(x => string.IsNullOrEmpty(x.Publisher)).Count().ToString();
+                });
+
+                labelDeveloper.Invoke((MethodInvoker)delegate
+                {
+                    labelDeveloper.Text = Roms.Where(x => string.IsNullOrEmpty(x.Developer)).Count().ToString();
+                });
+
+                labelDescription.Invoke((MethodInvoker)delegate
+                {
+                    labelDescription.Text = Roms.Where(x => string.IsNullOrEmpty(x.Description)).Count().ToString();
+                });
+
+                labelYearReleased.Invoke((MethodInvoker)delegate
+                {
+                    labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
+                });
+
+                var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
+                var titlePictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
+                var gameplayPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+
+                var romsList = Roms.Select(x => x.Name).ToList();
+
+                missingBoxartPictures = romsList.Except(boxartPictures).ToList();
+                missingTitlePictures = romsList.Except(titlePictures).ToList();
+                missingGameplayPictures = romsList.Except(gameplayPictures).ToList();
+
+                labelBoxart.Invoke((MethodInvoker)delegate
+                {
+                    labelBoxart.Text = missingBoxartPictures.Count().ToString();
+                });
+
+                labelTitle.Invoke((MethodInvoker)delegate
+                {
+                    labelTitle.Text = missingTitlePictures.Count().ToString();
+                });
+
+                labelGameplay.Invoke((MethodInvoker)delegate
+                {
+                    labelGameplay.Text = missingGameplayPictures.Count().ToString();
+                });
+            }
+            catch
+            {
+                XML.SaveXml();
+            }
         }
 
         private void LogMessage(string message)
@@ -471,18 +551,30 @@ namespace EmuLoader.Forms
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            StopThread = true;
-            Thread.Sleep(1000);
-            XML.SaveXml();
-            Close();
+            try
+            {
+                StopThread = true;
+                Thread.Sleep(1000);
+                Close();
+            }
+            finally
+            {
+                XML.SaveXml();
+            }
         }
 
         private void buttonStopProcess_Click(object sender, EventArgs e)
         {
-            StopThread = true;
-            XML.SaveXml();
-            comboBoxPlatform.Enabled = true;
-            buttonSync.Enabled = true;
+            try
+            {
+                StopThread = true;
+                comboBoxPlatform.Enabled = true;
+                buttonSync.Enabled = true;
+            }
+            finally
+            {
+                XML.SaveXml();
+            }
         }
     }
 }
