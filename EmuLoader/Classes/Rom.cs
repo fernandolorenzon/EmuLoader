@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using System.Linq;
+using System.IO;
 
 namespace EmuLoader.Classes
 {
@@ -180,6 +181,22 @@ namespace EmuLoader.Classes
         {
             RomList.Remove(rom);
             return XML.DelRom(rom.Path);
+        }
+
+        public bool IsRomPack()
+        {
+            var ext = Functions.GetFileExtension(this.Path).ToLower();
+
+            if (ext == ".gdi" || ext == ".ccd" || ext == ".cue" || ext == ".rom")
+            {
+                FileInfo file = new FileInfo(this.Path);
+                if (file.Directory.Name.ToLower() == this.Name.ToLower())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static XmlNode SetRomNode()
