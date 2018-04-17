@@ -266,7 +266,7 @@ namespace EmuLoader.Forms
             text.Append(game.Id + Environment.NewLine + Environment.NewLine);
 
             text.Append("NAME" + Environment.NewLine);
-            text.Append(game.Name + Environment.NewLine + Environment.NewLine);
+            text.Append(game.DBName + Environment.NewLine + Environment.NewLine);
 
             text.Append("PUBLISHER" + Environment.NewLine);
             text.Append(game.Publisher + Environment.NewLine + Environment.NewLine);
