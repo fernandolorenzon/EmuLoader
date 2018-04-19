@@ -121,10 +121,6 @@ namespace EmuLoader.Forms
             {
                 MessageBox.Show(ex.Message, "Error");
             }
-            finally
-            {
-                XML.SaveXml();
-            }
         }
 
         private void SetIdAndYear()

@@ -662,9 +662,6 @@ namespace EmuLoader.Classes
                     {
                         if (game.Genre != null) continue;
 
-                        bool hasAction = Genre.Get("Action") != null;
-                        bool hasAdventure = Genre.Get("Adventure") != null;
-
                         List<Genre> gameGenres = new List<Genre>();
 
                         foreach (XmlNode genreNode in item.ChildNodes)
@@ -672,6 +669,7 @@ namespace EmuLoader.Classes
                             if (string.IsNullOrEmpty(genreNode.InnerText)) continue;
 
                             var matchGenre = genres.Where(x => x.Name == genreNode.InnerText).FirstOrDefault();
+                            Genre newGenre = null;
 
                             if (matchGenre != null)
                             {
@@ -679,11 +677,18 @@ namespace EmuLoader.Classes
                             }
                             else
                             {
-                                gameGenres.Add(AddNewGenre(genreNode.InnerText));
-                                genres.Add(game.Genre);
+                                newGenre = CreateNewGenre(genreNode.InnerText);
+                                gameGenres.Add(newGenre);
                             }
 
                             game.Genre = PrioritizeGenre(gameGenres);
+
+                            //If the genre set to the rom is a newly created one, it must be saved
+                            if (newGenre != null && (newGenre.Name == game.Genre.Name))
+                            {
+                                genres.Add(newGenre);
+                                Genre.Set(newGenre);
+                            }
                         }
                     }
                 }
@@ -735,15 +740,13 @@ namespace EmuLoader.Classes
             return string.Empty;
         }
 
-        public static Genre AddNewGenre(string name)
+        public static Genre CreateNewGenre(string name)
         {
             Genre genre = new Genre();
             genre.Name = name;
             genre.CheckState = System.Windows.Forms.CheckState.Checked;
             Random r = new Random();
             genre.Color = Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255));
-
-            Genre.Set(genre);
 
             return genre;
         }
