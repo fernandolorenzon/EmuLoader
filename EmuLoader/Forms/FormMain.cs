@@ -893,6 +893,8 @@ namespace EmuLoader.Forms
             {
                 if (dataGridView.SelectedRows.Count == 0) return;
 
+                var currentGenre = comboBoxGenre.Text;
+
                 var row = dataGridView.SelectedRows[0];
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 FormManageRom form = new FormManageRom(rom);
@@ -902,6 +904,7 @@ namespace EmuLoader.Forms
                     FillLabelCell(rom, dataGridView.SelectedRows[0]);
                     FillGenreFilter();
                     LoadPictures();
+                    comboBoxGenre.Text = currentGenre;
                 }
             }
             catch (Exception ex)
