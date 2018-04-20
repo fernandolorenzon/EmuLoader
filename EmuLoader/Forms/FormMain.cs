@@ -1258,7 +1258,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1266,7 +1266,7 @@ namespace EmuLoader.Forms
         {
             try
             {
-                if (e.KeyData == Keys.Enter)
+                if (e.KeyData == Keys.Space)
                 {
                     dataGridView_DoubleClick(sender, e);
                 }
@@ -1287,7 +1287,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1299,7 +1299,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1318,7 +1318,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1330,7 +1330,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1359,7 +1359,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1376,9 +1376,9 @@ namespace EmuLoader.Forms
                     dataGridView.Rows[hti.RowIndex].Selected = true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1390,9 +1390,9 @@ namespace EmuLoader.Forms
                 dataGridViewPlatforms.ClearSelection();
                 dataGridViewPlatforms.Rows[hti.RowIndex].Selected = true;
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
