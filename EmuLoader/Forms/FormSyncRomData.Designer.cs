@@ -57,6 +57,8 @@
             this.labelGameplay = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
+            this.labelRating = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -322,18 +324,38 @@
             this.checkBoxSaveAsJpg.AutoSize = true;
             this.checkBoxSaveAsJpg.Checked = true;
             this.checkBoxSaveAsJpg.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSaveAsJpg.Location = new System.Drawing.Point(15, 322);
+            this.checkBoxSaveAsJpg.Location = new System.Drawing.Point(12, 342);
             this.checkBoxSaveAsJpg.Name = "checkBoxSaveAsJpg";
             this.checkBoxSaveAsJpg.Size = new System.Drawing.Size(124, 17);
             this.checkBoxSaveAsJpg.TabIndex = 26;
             this.checkBoxSaveAsJpg.Text = "Save images as JPG";
             this.checkBoxSaveAsJpg.UseVisualStyleBackColor = true;
             // 
+            // labelRating
+            // 
+            this.labelRating.AutoSize = true;
+            this.labelRating.Location = new System.Drawing.Point(211, 312);
+            this.labelRating.Name = "labelRating";
+            this.labelRating.Size = new System.Drawing.Size(10, 13);
+            this.labelRating.TabIndex = 28;
+            this.labelRating.Text = "-";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(83, 312);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 13);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Roms with no rating";
+            // 
             // FormSyncRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 476);
+            this.Controls.Add(this.labelRating);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.checkBoxSaveAsJpg);
             this.Controls.Add(this.labelGameplay);
             this.Controls.Add(this.label14);
@@ -400,5 +422,7 @@
         private System.Windows.Forms.Label labelGameplay;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
+        private System.Windows.Forms.Label labelRating;
+        private System.Windows.Forms.Label label11;
     }
 }

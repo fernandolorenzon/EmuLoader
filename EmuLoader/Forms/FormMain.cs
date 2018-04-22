@@ -56,6 +56,7 @@ namespace EmuLoader.Forms
                 columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnDeveloper");
                 columnPublisher.Visible = showPublisherColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnPublisher");
                 columnYearReleased.Visible = showYearReleasedColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnYearReleased");
+                columnRating.Visible = showRatingColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnRating");
                 pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked = Config.GetElementVisibility("BoxArt");
                 pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked = Config.GetElementVisibility("TitleArt");
                 pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked = Config.GetElementVisibility("GameplayArt");
@@ -644,6 +645,27 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 Config.SetElementVisibility("ColumnYearReleased", columnYearReleased.Visible);
+                XML.SaveXml();
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void showRatingColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                columnRating.Visible = showRatingColumnToolStripMenuItem.Checked;
+
+                if (updating) return;
+
+                Config.SetElementVisibility("ColumnRating", columnRating.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -1511,6 +1533,20 @@ namespace EmuLoader.Forms
             row.Cells["columnDeveloper"].Value = rom.Developer;
             row.Cells["columnPublisher"].Value = rom.Publisher;
             row.Cells["columnYearReleased"].Value = rom.YearReleased;
+            row.Cells["columnRating"].Value = rom.Rating != 0 ? rom.Rating.ToString("0#.#") : string.Empty;
+
+            if (rom.Rating >= 7)
+            {
+                row.Cells["columnRating"].Style.BackColor = Color.LightGreen;
+            }
+            else if (rom.Rating >= 4)
+            {
+                row.Cells["columnRating"].Style.BackColor = Color.LightYellow;
+            }
+            else if (rom.Rating > 0)
+            {
+                row.Cells["columnRating"].Style.BackColor = Color.IndianRed;
+            }
 
             if (rom.Platform != null)
             {

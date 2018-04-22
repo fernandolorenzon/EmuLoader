@@ -111,9 +111,15 @@ namespace EmuLoader.Forms
 
                     comboBoxPlatform_SelectedIndexChanged(sender, e);
 
-                    comboBoxPlatform.Enabled = true;
-                    buttonSync.Enabled = true;
+                    comboBoxPlatform.Invoke((MethodInvoker)delegate
+                    {
+                        comboBoxPlatform.Enabled = true;
+                    });
 
+                    buttonSync.Invoke((MethodInvoker)delegate
+                    {
+                        buttonSync.Enabled = true;
+                    });
                 }).Start();
 
             }
@@ -247,7 +253,7 @@ namespace EmuLoader.Forms
 
         private void SetOtherProperties()
         {
-            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer) || string.IsNullOrEmpty(x.Description) || x.Genre == null)).ToList();
+            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer) || string.IsNullOrEmpty(x.Description) || x.Genre == null || (x.Rating == null || x.Rating == 0))).ToList();
 
             bool updated = false;
             syncRomsCount = 0;
@@ -296,6 +302,12 @@ namespace EmuLoader.Forms
                 if (rom.Genre == null && game.Genre != null)
                 {
                     rom.Genre = game.Genre;
+                    updated = true;
+                }
+
+                if ((rom.Rating == null || rom.Rating == 0) && (game.Rating != null && game.Rating > 0))
+                {
+                    rom.Rating = game.Rating;
                     updated = true;
                 }
 
@@ -466,6 +478,11 @@ namespace EmuLoader.Forms
                     labelGameplay.Text = "-";
                 });
 
+                labelRating.Invoke((MethodInvoker)delegate
+                {
+                    labelRating.Text = "-";
+                });
+
                 Roms.Clear();
                 Roms.AddRange(Rom.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
 
@@ -497,6 +514,11 @@ namespace EmuLoader.Forms
                 labelYearReleased.Invoke((MethodInvoker)delegate
                 {
                     labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
+                });
+
+                labelRating.Invoke((MethodInvoker)delegate
+                {
+                    labelRating.Text = Roms.Where(x => x.Rating == null || x.Rating == 0).Count().ToString();
                 });
 
                 var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);

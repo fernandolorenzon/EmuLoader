@@ -113,6 +113,11 @@ namespace EmuLoader.Forms
                         item.Genre = null;
                     }
 
+                    if (checkBoxRating.Checked)
+                    {
+                        item.Rating = 0;
+                    }
+
                     Rom.Set(item);
                 }
 

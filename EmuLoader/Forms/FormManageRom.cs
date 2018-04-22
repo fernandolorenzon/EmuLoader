@@ -38,6 +38,7 @@ namespace EmuLoader.Forms
             textBoxYearReleased.Text = rom.YearReleased;
             textBoxId.Text = rom.Id;
             labelPlatform.Text = rom.Platform == null ? "-" : rom.Platform.Name;
+            textBoxRating.Text = rom.Rating != 0 ? rom.Rating.ToString("#.#") : string.Empty;
 
             List<RomLabel> labels = RomLabel.GetAll();
 
@@ -115,6 +116,16 @@ namespace EmuLoader.Forms
                 SelectedRom.Description = textBoxDescription.Text;
                 SelectedRom.YearReleased = textBoxYearReleased.Text;
                 SelectedRom.DBName = textBoxDBName.Text;
+
+                float rating = 0;
+
+                if (float.TryParse(textBoxRating.Text, out rating))
+                {
+                    if (rating > 0 && rating <= 10)
+                    {
+                        SelectedRom.Rating = rating;
+                    }
+                }
 
                 SelectedRom.Id = textBoxId.Text;
 
@@ -238,7 +249,7 @@ namespace EmuLoader.Forms
                 {
                     File.Move(oldPath, newPath);
                 }
-                
+
                 Rom.Delete(SelectedRom);
                 SelectedRom.Path = newPath;
 
@@ -318,7 +329,10 @@ namespace EmuLoader.Forms
             text.Append(game.YearReleased + Environment.NewLine + Environment.NewLine);
 
             text.Append("GENRE" + Environment.NewLine);
-            text.Append(game.Genre != null ? game.Genre.Name : "" + Environment.NewLine + Environment.NewLine);
+            text.Append(game.Genre != null ? game.Genre.Name + Environment.NewLine + Environment.NewLine : "" + Environment.NewLine + Environment.NewLine);
+
+            text.Append("RATING" + Environment.NewLine);
+            text.Append(game.Rating != 0 ? game.Rating.ToString("#.#") : "" + Environment.NewLine + Environment.NewLine);
 
 
             FormInfo info = new FormInfo(text.ToString());
@@ -337,12 +351,6 @@ namespace EmuLoader.Forms
                 MessageBox.Show("TheGameDB Id is empty.");
                 return;
             }
-
-            //string boxUrl = string.Empty;
-            //string titleUrl = string.Empty;
-            //string gameplayUrl = string.Empty;
-
-            //var found = Functions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
 
             var game = Functions.GetGameDetails(textBoxId.Text);
             textBoxDBName.Text = game.DBName;
@@ -369,6 +377,11 @@ namespace EmuLoader.Forms
                     textBoxYearReleased.Text = game.YearReleased;
                 }
 
+                if (string.IsNullOrEmpty(textBoxRating.Text))
+                {
+                    textBoxRating.Text = game.Rating.ToString("#.#");
+                }
+
                 if (string.IsNullOrEmpty(comboBoxGenre.Text))
                 {
                     LoadComboBoxGenres();
@@ -382,6 +395,8 @@ namespace EmuLoader.Forms
                 textBoxDeveloper.Text = game.Developer;
                 textBoxDescription.Text = game.Description;
                 textBoxYearReleased.Text = game.YearReleased;
+                textBoxRating.Text = game.Rating.ToString("#.#");
+
                 comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
             }
 

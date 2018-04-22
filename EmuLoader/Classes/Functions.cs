@@ -11,6 +11,7 @@ using System.Net;
 using System.Threading;
 using System.Drawing.Imaging;
 using EmuLoader.Forms;
+using System.Globalization;
 
 namespace EmuLoader.Classes
 {
@@ -655,6 +656,12 @@ namespace EmuLoader.Classes
                     if (item.Name == "Developer")
                     {
                         game.Developer = string.IsNullOrEmpty(game.Developer) ? item.InnerText : game.Developer;
+                        continue;
+                    }
+
+                    if (item.Name == "Rating")
+                    {
+                        game.Rating = game.Rating == 0 || string.IsNullOrEmpty(item.InnerText) ? float.Parse(item.InnerText.Replace(",", "."), CultureInfo.InvariantCulture) : game.Rating;
                         continue;
                     }
 

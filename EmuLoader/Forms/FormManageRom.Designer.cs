@@ -34,6 +34,7 @@
             this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxKeepSuffix = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.labelPlatform = new System.Windows.Forms.Label();
@@ -103,7 +104,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.checkBoxKeepSuffix = new System.Windows.Forms.CheckBox();
+            this.textBoxRating = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -138,6 +140,8 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.textBoxRating);
+            this.tabPageGeneral.Controls.Add(this.label16);
             this.tabPageGeneral.Controls.Add(this.checkBoxKeepSuffix);
             this.tabPageGeneral.Controls.Add(this.panel2);
             this.tabPageGeneral.Controls.Add(this.groupBox1);
@@ -173,6 +177,18 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxKeepSuffix
+            // 
+            this.checkBoxKeepSuffix.AutoSize = true;
+            this.checkBoxKeepSuffix.Checked = true;
+            this.checkBoxKeepSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxKeepSuffix.Location = new System.Drawing.Point(482, 206);
+            this.checkBoxKeepSuffix.Name = "checkBoxKeepSuffix";
+            this.checkBoxKeepSuffix.Size = new System.Drawing.Size(78, 17);
+            this.checkBoxKeepSuffix.TabIndex = 102;
+            this.checkBoxKeepSuffix.Text = "Keep suffix";
+            this.checkBoxKeepSuffix.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -849,17 +865,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // checkBoxKeepSuffix
+            // textBoxRating
             // 
-            this.checkBoxKeepSuffix.AutoSize = true;
-            this.checkBoxKeepSuffix.Checked = true;
-            this.checkBoxKeepSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxKeepSuffix.Location = new System.Drawing.Point(482, 206);
-            this.checkBoxKeepSuffix.Name = "checkBoxKeepSuffix";
-            this.checkBoxKeepSuffix.Size = new System.Drawing.Size(78, 17);
-            this.checkBoxKeepSuffix.TabIndex = 102;
-            this.checkBoxKeepSuffix.Text = "Keep suffix";
-            this.checkBoxKeepSuffix.UseVisualStyleBackColor = true;
+            this.textBoxRating.Location = new System.Drawing.Point(596, 304);
+            this.textBoxRating.MaxLength = 4;
+            this.textBoxRating.Name = "textBoxRating";
+            this.textBoxRating.Size = new System.Drawing.Size(201, 20);
+            this.textBoxRating.TabIndex = 104;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(593, 288);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(80, 13);
+            this.label16.TabIndex = 103;
+            this.label16.Text = "Rating - 0 to 10";
             // 
             // FormManageRom
             // 
@@ -966,5 +987,7 @@
         private System.Windows.Forms.RadioButton radioButtonOnlyMissing;
         private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.CheckBox checkBoxKeepSuffix;
+        private System.Windows.Forms.TextBox textBoxRating;
+        private System.Windows.Forms.Label label16;
     }
 }

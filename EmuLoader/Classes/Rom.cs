@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Linq;
 using System.IO;
+using System;
 
 namespace EmuLoader.Classes
 {
@@ -46,6 +47,8 @@ namespace EmuLoader.Classes
         public string Publisher { get; set; }
 
         public string Description { get; set; }
+
+        public float Rating { get; set; }
 
         public List<RomLabel> Labels;
 
@@ -106,6 +109,13 @@ namespace EmuLoader.Classes
                 rom.YearReleased = Functions.GetXmlAttribute(node,"YearReleased");
                 rom.Description = Functions.GetXmlAttribute(node, "Description");
 
+                float result = 0;
+
+                if (float.TryParse(Functions.GetXmlAttribute(node, "Rating"), out result))
+                {
+                    rom.Rating = result;
+                }
+
                 foreach (XmlNode labelNode in node.ChildNodes[0].ChildNodes)
                 {
                     rom.Labels.Add(RomLabel.Get(labelNode.InnerText));
@@ -140,6 +150,7 @@ namespace EmuLoader.Classes
             Functions.CreateOrSetXmlAttribute(node, "Publisher", rom.Publisher);
             Functions.CreateOrSetXmlAttribute(node, "Developer", rom.Developer);
             Functions.CreateOrSetXmlAttribute(node, "Description", rom.Description);
+            Functions.CreateOrSetXmlAttribute(node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
 
             SetRomLabels(rom, node);
 

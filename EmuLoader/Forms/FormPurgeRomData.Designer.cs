@@ -57,6 +57,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxRating = new System.Windows.Forms.CheckBox();
+            this.labelRating = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,7 +174,7 @@
             // labelGameplay
             // 
             this.labelGameplay.AutoSize = true;
-            this.labelGameplay.Location = new System.Drawing.Point(419, 285);
+            this.labelGameplay.Location = new System.Drawing.Point(419, 308);
             this.labelGameplay.Name = "labelGameplay";
             this.labelGameplay.Size = new System.Drawing.Size(10, 13);
             this.labelGameplay.TabIndex = 43;
@@ -180,7 +183,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(241, 285);
+            this.label14.Location = new System.Drawing.Point(241, 308);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(150, 13);
             this.label14.TabIndex = 42;
@@ -189,7 +192,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(419, 261);
+            this.labelTitle.Location = new System.Drawing.Point(419, 284);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(10, 13);
             this.labelTitle.TabIndex = 41;
@@ -198,7 +201,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(266, 261);
+            this.label12.Location = new System.Drawing.Point(266, 284);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(125, 13);
             this.label12.TabIndex = 40;
@@ -207,7 +210,7 @@
             // labelBoxart
             // 
             this.labelBoxart.AutoSize = true;
-            this.labelBoxart.Location = new System.Drawing.Point(419, 237);
+            this.labelBoxart.Location = new System.Drawing.Point(419, 260);
             this.labelBoxart.Name = "labelBoxart";
             this.labelBoxart.Size = new System.Drawing.Size(10, 13);
             this.labelBoxart.TabIndex = 39;
@@ -216,7 +219,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(256, 237);
+            this.label10.Location = new System.Drawing.Point(256, 260);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(135, 13);
             this.label10.TabIndex = 38;
@@ -330,11 +333,42 @@
             this.label2.TabIndex = 26;
             this.label2.Text = "Roms with no Genre";
             // 
+            // checkBoxRating
+            // 
+            this.checkBoxRating.AutoSize = true;
+            this.checkBoxRating.Location = new System.Drawing.Point(15, 247);
+            this.checkBoxRating.Name = "checkBoxRating";
+            this.checkBoxRating.Size = new System.Drawing.Size(57, 17);
+            this.checkBoxRating.TabIndex = 44;
+            this.checkBoxRating.Text = "Rating";
+            this.checkBoxRating.UseVisualStyleBackColor = true;
+            // 
+            // labelRating
+            // 
+            this.labelRating.AutoSize = true;
+            this.labelRating.Location = new System.Drawing.Point(419, 235);
+            this.labelRating.Name = "labelRating";
+            this.labelRating.Size = new System.Drawing.Size(10, 13);
+            this.labelRating.TabIndex = 46;
+            this.labelRating.Text = "-";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(286, 235);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 13);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "Roms with no Rating";
+            // 
             // FormPurgeRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 502);
+            this.Controls.Add(this.labelRating);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.checkBoxRating);
             this.Controls.Add(this.labelGameplay);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.labelTitle);
@@ -403,5 +437,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBoxRating;
+        private System.Windows.Forms.Label labelRating;
+        private System.Windows.Forms.Label label8;
     }
 }
