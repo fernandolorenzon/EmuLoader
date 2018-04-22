@@ -268,7 +268,7 @@
             // labelBoxart
             // 
             this.labelBoxart.AutoSize = true;
-            this.labelBoxart.Location = new System.Drawing.Point(211, 239);
+            this.labelBoxart.Location = new System.Drawing.Point(211, 264);
             this.labelBoxart.Name = "labelBoxart";
             this.labelBoxart.Size = new System.Drawing.Size(10, 13);
             this.labelBoxart.TabIndex = 21;
@@ -277,7 +277,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(48, 239);
+            this.label10.Location = new System.Drawing.Point(48, 264);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(135, 13);
             this.label10.TabIndex = 20;
@@ -286,7 +286,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(211, 263);
+            this.labelTitle.Location = new System.Drawing.Point(211, 288);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(10, 13);
             this.labelTitle.TabIndex = 23;
@@ -295,7 +295,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(58, 263);
+            this.label12.Location = new System.Drawing.Point(58, 288);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(125, 13);
             this.label12.TabIndex = 22;
@@ -304,7 +304,7 @@
             // labelGameplay
             // 
             this.labelGameplay.AutoSize = true;
-            this.labelGameplay.Location = new System.Drawing.Point(211, 287);
+            this.labelGameplay.Location = new System.Drawing.Point(211, 312);
             this.labelGameplay.Name = "labelGameplay";
             this.labelGameplay.Size = new System.Drawing.Size(10, 13);
             this.labelGameplay.TabIndex = 25;
@@ -313,7 +313,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(33, 287);
+            this.label14.Location = new System.Drawing.Point(33, 312);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(150, 13);
             this.label14.TabIndex = 24;
@@ -334,7 +334,7 @@
             // labelRating
             // 
             this.labelRating.AutoSize = true;
-            this.labelRating.Location = new System.Drawing.Point(211, 312);
+            this.labelRating.Location = new System.Drawing.Point(211, 239);
             this.labelRating.Name = "labelRating";
             this.labelRating.Size = new System.Drawing.Size(10, 13);
             this.labelRating.TabIndex = 28;
@@ -343,7 +343,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(83, 312);
+            this.label11.Location = new System.Drawing.Point(83, 239);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(100, 13);
             this.label11.TabIndex = 27;
