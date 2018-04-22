@@ -114,7 +114,7 @@
             // checkBoxPublisher
             // 
             this.checkBoxPublisher.AutoSize = true;
-            this.checkBoxPublisher.Location = new System.Drawing.Point(15, 109);
+            this.checkBoxPublisher.Location = new System.Drawing.Point(15, 133);
             this.checkBoxPublisher.Name = "checkBoxPublisher";
             this.checkBoxPublisher.Size = new System.Drawing.Size(69, 17);
             this.checkBoxPublisher.TabIndex = 17;
@@ -124,7 +124,7 @@
             // checkBoxDeveloper
             // 
             this.checkBoxDeveloper.AutoSize = true;
-            this.checkBoxDeveloper.Location = new System.Drawing.Point(15, 132);
+            this.checkBoxDeveloper.Location = new System.Drawing.Point(15, 156);
             this.checkBoxDeveloper.Name = "checkBoxDeveloper";
             this.checkBoxDeveloper.Size = new System.Drawing.Size(75, 17);
             this.checkBoxDeveloper.TabIndex = 18;
@@ -134,7 +134,7 @@
             // checkBoxDescription
             // 
             this.checkBoxDescription.AutoSize = true;
-            this.checkBoxDescription.Location = new System.Drawing.Point(15, 155);
+            this.checkBoxDescription.Location = new System.Drawing.Point(15, 179);
             this.checkBoxDescription.Name = "checkBoxDescription";
             this.checkBoxDescription.Size = new System.Drawing.Size(79, 17);
             this.checkBoxDescription.TabIndex = 19;
@@ -144,7 +144,7 @@
             // checkBoxYearReleased
             // 
             this.checkBoxYearReleased.AutoSize = true;
-            this.checkBoxYearReleased.Location = new System.Drawing.Point(15, 178);
+            this.checkBoxYearReleased.Location = new System.Drawing.Point(15, 202);
             this.checkBoxYearReleased.Name = "checkBoxYearReleased";
             this.checkBoxYearReleased.Size = new System.Drawing.Size(96, 17);
             this.checkBoxYearReleased.TabIndex = 20;
@@ -154,7 +154,7 @@
             // checkBoxDBName
             // 
             this.checkBoxDBName.AutoSize = true;
-            this.checkBoxDBName.Location = new System.Drawing.Point(15, 201);
+            this.checkBoxDBName.Location = new System.Drawing.Point(15, 248);
             this.checkBoxDBName.Name = "checkBoxDBName";
             this.checkBoxDBName.Size = new System.Drawing.Size(72, 17);
             this.checkBoxDBName.TabIndex = 21;
@@ -164,7 +164,7 @@
             // checkBoxGenre
             // 
             this.checkBoxGenre.AutoSize = true;
-            this.checkBoxGenre.Location = new System.Drawing.Point(15, 224);
+            this.checkBoxGenre.Location = new System.Drawing.Point(15, 107);
             this.checkBoxGenre.Name = "checkBoxGenre";
             this.checkBoxGenre.Size = new System.Drawing.Size(55, 17);
             this.checkBoxGenre.TabIndex = 22;
@@ -336,7 +336,7 @@
             // checkBoxRating
             // 
             this.checkBoxRating.AutoSize = true;
-            this.checkBoxRating.Location = new System.Drawing.Point(15, 247);
+            this.checkBoxRating.Location = new System.Drawing.Point(15, 225);
             this.checkBoxRating.Name = "checkBoxRating";
             this.checkBoxRating.Size = new System.Drawing.Size(57, 17);
             this.checkBoxRating.TabIndex = 44;

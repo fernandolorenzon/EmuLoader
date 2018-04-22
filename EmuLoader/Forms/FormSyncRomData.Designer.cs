@@ -172,6 +172,9 @@
             // 
             // textBoxLog
             // 
+            this.textBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxLog.Location = new System.Drawing.Point(376, 52);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
