@@ -148,7 +148,14 @@ namespace EmuLoader.Classes
 
                 foreach (var file in files)
                 {
-                    var rom = new Rom(file);
+                    var rom = Rom.Get(file);
+
+                    if (rom == null)
+                    {
+                        rom = new Rom(file);
+                        rom.Platform = this;
+                    }
+
                     Rom.Set(rom);
                     addedAny = true;
                 }

@@ -84,6 +84,7 @@
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnPlatforms = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxDeveloper = new System.Windows.Forms.ComboBox();
@@ -114,7 +115,6 @@
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonRescan = new System.Windows.Forms.Button();
             this.contextMenuStripEditRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -279,7 +279,7 @@
             this.openAppFolderToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(822, 24);
+            this.menuStrip.Size = new System.Drawing.Size(726, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -572,6 +572,8 @@
             // 
             this.dataGridViewPlatforms.AllowUserToAddRows = false;
             this.dataGridViewPlatforms.AllowUserToDeleteRows = false;
+            this.dataGridViewPlatforms.AllowUserToResizeColumns = false;
+            this.dataGridViewPlatforms.AllowUserToResizeRows = false;
             this.dataGridViewPlatforms.ColumnHeadersHeight = 25;
             this.dataGridViewPlatforms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewPlatforms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -579,7 +581,7 @@
             this.columnPlatforms});
             this.dataGridViewPlatforms.Cursor = System.Windows.Forms.Cursors.Default;
             this.dataGridViewPlatforms.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridViewPlatforms.Location = new System.Drawing.Point(1052, 0);
+            this.dataGridViewPlatforms.Location = new System.Drawing.Point(956, 0);
             this.dataGridViewPlatforms.Name = "dataGridViewPlatforms";
             this.dataGridViewPlatforms.ReadOnly = true;
             this.dataGridViewPlatforms.RowHeadersVisible = false;
@@ -635,16 +637,27 @@
             this.groupBoxFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxFilter.Location = new System.Drawing.Point(0, 24);
             this.groupBoxFilter.Name = "groupBoxFilter";
-            this.groupBoxFilter.Size = new System.Drawing.Size(822, 98);
+            this.groupBoxFilter.Size = new System.Drawing.Size(726, 98);
             this.groupBoxFilter.TabIndex = 8;
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
+            // 
+            // buttonRescan
+            // 
+            this.buttonRescan.Enabled = false;
+            this.buttonRescan.Location = new System.Drawing.Point(134, 65);
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.Size = new System.Drawing.Size(120, 23);
+            this.buttonRescan.TabIndex = 17;
+            this.buttonRescan.Text = "Rescan Roms";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // buttonClear
             // 
             this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClear.Location = new System.Drawing.Point(721, 14);
+            this.buttonClear.Location = new System.Drawing.Point(625, 14);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(98, 81);
             this.buttonClear.TabIndex = 2;
@@ -718,7 +731,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(260, 68);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(439, 18);
+            this.textBoxFilter.Size = new System.Drawing.Size(343, 18);
             this.textBoxFilter.TabIndex = 10;
             this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
             this.textBoxFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxFilter_KeyPress);
@@ -834,7 +847,7 @@
             this.dataGridView.RowTemplate.Height = 30;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(822, 536);
+            this.dataGridView.Size = new System.Drawing.Size(726, 536);
             this.dataGridView.TabIndex = 3;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
@@ -941,7 +954,7 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 658);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(822, 29);
+            this.panelBottom.Size = new System.Drawing.Size(726, 29);
             this.panelBottom.TabIndex = 17;
             // 
             // flowLayoutPanelPictures
@@ -951,28 +964,17 @@
             this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
             this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
             this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(822, 0);
+            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(726, 0);
             this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
             this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
             this.flowLayoutPanelPictures.TabIndex = 16;
-            // 
-            // buttonRescan
-            // 
-            this.buttonRescan.Enabled = false;
-            this.buttonRescan.Location = new System.Drawing.Point(134, 65);
-            this.buttonRescan.Name = "buttonRescan";
-            this.buttonRescan.Size = new System.Drawing.Size(120, 23);
-            this.buttonRescan.TabIndex = 17;
-            this.buttonRescan.Text = "Rescan Roms";
-            this.buttonRescan.UseVisualStyleBackColor = true;
-            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1185, 687);
+            this.ClientSize = new System.Drawing.Size(1089, 687);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.menuStrip);

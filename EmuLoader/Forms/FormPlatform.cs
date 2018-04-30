@@ -114,6 +114,12 @@ namespace EmuLoader.Forms
                 buttonAdd.Text = "Add";
             }
 
+            if(!string.IsNullOrEmpty(textBoxDefaultRomPath.Text) && string.IsNullOrEmpty(textBoxDefaultRomExtensions.Text))
+            {
+                MessageBox.Show("Default rom extensions must also be filled");
+                return;
+            }
+
             platform.Id = comboBoxPlatformsDB.SelectedValue.ToString();
             platform.Name = textBoxName.Text.Trim();
             platform.EmulatorExe = textBoxPath.Text.Trim();

@@ -1429,6 +1429,9 @@ namespace EmuLoader.Forms
             try
             {
                 var hti = dataGridViewPlatforms.HitTest(e.X, e.Y);
+
+                if (hti.RowIndex == -1) return;
+
                 dataGridViewPlatforms.ClearSelection();
                 dataGridViewPlatforms.Rows[hti.RowIndex].Selected = true;
             }
