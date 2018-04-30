@@ -163,6 +163,7 @@ namespace EmuLoader.Forms
             try
             {
                 FolderBrowserDialog open = new FolderBrowserDialog();
+                open.SelectedPath = Environment.CurrentDirectory;
 
                 if (open.ShowDialog() == DialogResult.Cancel)
                 {
@@ -174,25 +175,14 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                var romsPath = Directory.GetFiles(open.SelectedPath);
+                var platform = FormChoose.ChoosePlatform();
 
-                List<Rom> romList = new List<Rom>();
-
-                foreach (string s in romsPath)
+                if (platform != null)
                 {
-                    Rom r = new Rom(s);
-                    Rom old = Rom.Get(r.Path);
-
-                    if (old != null)
-                    {
-                        r = old;
-                    }
-
-                    romList.Add(r);
+                    platform.AddRomsFromDirectory(open.SelectedPath);
+                    XML.SaveXml();
+                    FilterRoms();
                 }
-
-                FormChoose.ChoosePlatform(romList);
-                FilterRoms();
             }
             catch (Exception ex)
             {
@@ -205,6 +195,7 @@ namespace EmuLoader.Forms
             try
             {
                 OpenFileDialog open = new OpenFileDialog();
+                open.InitialDirectory = Environment.CurrentDirectory;
 
                 open.Filter = "Roms | *.zip;*.smc;*.fig;*.gba;*.gbc;*.gb;*.pce;*.n64;*.smd;*.sms;*.ccd;*.cue;*.bin;*.iso;*.gdi;*.cdi|" +
                               "Zip | *.zip|" +
@@ -235,22 +226,15 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                List<Rom> romList = new List<Rom>();
+                var platform = FormChoose.ChoosePlatform();
 
-                foreach (string s in open.FileNames)
+                if (platform != null)
                 {
-                    Rom r = new Rom(s);
-                    Rom old = Rom.Get(r.Path);
-
-                    if (old != null)
-                    {
-                        r = old;
-                    }
-
-                    romList.Add(r);
+                    platform.AddRomsFiles(open.FileNames);
+                    XML.SaveXml();
+                    FilterRoms();
                 }
 
-                FormChoose.ChoosePlatform(romList);
                 FilterRoms();
             }
             catch (Exception ex)
@@ -318,7 +302,15 @@ namespace EmuLoader.Forms
                     romList.Add((Rom)row.Tag);
                 }
 
-                FormChoose.ChoosePlatform(romList);
+                var platform = FormChoose.ChoosePlatform();
+
+                if (platform == null)
+                {
+                    return;
+                }
+
+                platform.ChangeRomsPlatform(romList);
+                XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -416,19 +408,42 @@ namespace EmuLoader.Forms
         {
             try
             {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                List<Rom> roms = new List<Classes.Rom>();
+
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     if (!row.Visible) continue;
-                    Rom rom = (Rom)row.Tag;
 
-                    var message = MessageBox.Show(string.Format("Do you want to remove {0} ?", rom.Name), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    roms.Add((Rom)row.Tag);
+                }
 
-                    if (message.ToString() == "No") continue;
+                var message = string.Empty;
 
+                if (roms.Count == 1)
+                {
+                    message = string.Format("Do you want to remove \"{0}\" ? (Keep the rom file)", roms[0].Name);
+                }
+                else
+                {
+                    message = string.Format("Do you want to remove {0} roms ? (Keep the rom files)", roms.Count);
+                }
+
+                var result = MessageBox.Show(message, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result.ToString() == "No") return;
+
+                foreach (var rom in roms)
+                {
                     Rom.Delete(rom);
                     Functions.RemoveRomPics(rom);
-                    dataGridView.Rows.Remove(row);
                     FilteredRoms.Remove(rom);
+                }
+
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    dataGridView.Rows.Remove(row);
                 }
 
                 labelTotalRomsCount.Text = FilteredRoms.Count.ToString();
@@ -795,6 +810,8 @@ namespace EmuLoader.Forms
             {
                 if (updating) return;
                 FilterRoms();
+
+                buttonRescan.Enabled = comboBoxPlatform.Text != string.Empty;
             }
             catch (Exception ex)
             {
@@ -1168,6 +1185,7 @@ namespace EmuLoader.Forms
             try
             {
                 FolderBrowserDialog open = new FolderBrowserDialog();
+                open.SelectedPath = Environment.CurrentDirectory;
 
                 if (open.ShowDialog() == DialogResult.Cancel)
                 {
@@ -1179,32 +1197,14 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                var directories = Directory.GetDirectories(open.SelectedPath);
-                List<Rom> romList = new List<Rom>();
+                var platform = FormChoose.ChoosePlatform();
 
-                foreach (var path in directories)
+                if (platform != null)
                 {
-                    var files = Directory.GetFiles(path);
-
-                    foreach (var item in files)
-                    {
-                        if (item.EndsWith(".cue") || item.EndsWith(".ccd") || item.EndsWith(".rom") || item.EndsWith(".gdi"))
-                        {
-                            Rom r = new Rom(item);
-                            Rom old = Rom.Get(r.Path);
-
-                            if (old != null)
-                            {
-                                r = old;
-                            }
-
-                            romList.Add(r);
-                        }
-                    }
+                    platform.AddRomPacksFromDirectory(open.SelectedPath);
+                    XML.SaveXml();
+                    FilterRoms();
                 }
-
-                FormChoose.ChoosePlatform(romList);
-                FilterRoms();
             }
             catch (Exception ex)
             {
@@ -1258,6 +1258,26 @@ namespace EmuLoader.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            if (comboBoxPlatform.SelectedItem == null || comboBoxPlatform.SelectedIndex == 1)
+            {
+                MessageBox.Show("No platform selected.");
+                return;
+            }
+
+            var platform = (Platform)comboBoxPlatform.SelectedItem;
+
+            var result = platform.RescanRoms();
+
+            if (result)
+            {
+                XML.SaveXml();
+                Rom.Fill();
+                FilterRoms();
             }
         }
 
@@ -1441,12 +1461,12 @@ namespace EmuLoader.Forms
             FilteredRoms.Clear();
             DateTime begin = DateTime.Now;
             string text;
-            Platform emu;
+            Platform platform;
             RomLabel label;
             Genre genre;
 
             text = textBoxFilter.Text;
-            emu = comboBoxPlatform.SelectedItem == null ? (Platform)comboBoxPlatform.Items[0] : (Platform)comboBoxPlatform.SelectedItem;
+            platform = comboBoxPlatform.SelectedItem == null ? (Platform)comboBoxPlatform.Items[0] : (Platform)comboBoxPlatform.SelectedItem;
             label = comboBoxLabels.SelectedItem == null ? (RomLabel)comboBoxLabels.Items[0] : (RomLabel)comboBoxLabels.SelectedItem;
             genre = comboBoxGenre.SelectedItem == null ? (Genre)comboBoxGenre.Items[0] : (Genre)comboBoxGenre.SelectedItem;
             string publisher = comboBoxPublisher.Text;
@@ -1460,7 +1480,7 @@ namespace EmuLoader.Forms
             dataGridView.SuspendLayout();
             Thread.BeginCriticalRegion();
 
-            if (filter == "" && emu.Name == "" && label.Name == "" && genre.Name == "" && publisher == "" && developer == "" && year == "")
+            if (filter == "" && platform.Name == "" && label.Name == "" && genre.Name == "" && publisher == "" && developer == "" && year == "")
             {
                 foreach (Rom item in Rom.GetAll())
                 {
@@ -1472,22 +1492,74 @@ namespace EmuLoader.Forms
                 int index = 0;
                 try
                 {
-                    foreach (Rom rom in Rom.GetAll())
+                    var roms = Rom.GetAll();
+
+                    if (!string.IsNullOrEmpty(platform.Name))
                     {
-                        if ((filter == "" || rom.Name.ToLower().Contains(filter))
-                            && (publisher == "" || rom.Publisher == publisher)
-                            && (developer == "" || rom.Developer == developer)
-                            && (year == "" || rom.YearReleased == year)
-                            && ((emu.Name == "<none>" && rom.Platform == null) || (emu.Name == "" || rom.Platform != null && rom.Platform.Name == emu.Name))
-                            && ((genre.Name == "<none>" && rom.Genre == null) || (genre.Name == "" || rom.Genre != null && rom.Genre.Name == genre.Name))
-                            && ((label.Name == "<none>" && (rom.Labels == null || rom.Labels.Count == 0)) || (label.Name == "" || rom.Labels != null && rom.Labels.Count(l => l.Name == label.Name) > 0)))
-                        {
-
-                            FilteredRoms.Add(rom);
-                        }
-
-                        index++;
+                        var filterRoms = platform.Name == "<none>" ? roms.Where(x => x.Platform == null).ToList() : roms.Where(x => x.Platform.Name == platform.Name).ToList();
+                        FilteredRoms = filterRoms;
                     }
+
+                    if (!string.IsNullOrEmpty(genre.Name))
+                    {
+                        var filterRoms = genre.Name == "<none>" ? FilteredRoms.Where(x => x.Genre == null).ToList() : FilteredRoms.Where(x => x.Genre.Name == genre.Name).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+                    if (!string.IsNullOrEmpty(label.Name))
+                    {
+                        var filterRoms = label.Name == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == label.Name)).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+                    if (!string.IsNullOrEmpty(label.Name))
+                    {
+                        var filterRoms = label.Name == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == label.Name)).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+                    if (!string.IsNullOrEmpty(publisher))
+                    {
+                        var filterRoms = publisher == "<none>" ? FilteredRoms.Where(x => x.Publisher == string.Empty).ToList() : FilteredRoms.Where(x => x.Publisher == publisher).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+                    if (!string.IsNullOrEmpty(developer))
+                    {
+                        var filterRoms = developer == "<none>" ? FilteredRoms.Where(x => x.Developer == string.Empty).ToList() : FilteredRoms.Where(x => x.Developer == developer).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+                    if (!string.IsNullOrEmpty(year))
+                    {
+                        var filterRoms = year == "<none>" ? FilteredRoms.Where(x => x.YearReleased == string.Empty).ToList() : FilteredRoms.Where(x => x.YearReleased == year).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+                    if (!string.IsNullOrEmpty(filter))
+                    {
+                        var filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.ToLower())).ToList();
+                        FilteredRoms = filterRoms;
+                    }
+
+
+
+                    //foreach (Rom rom in Rom.GetAll())
+                    //{
+                    //    if ((filter == "" || rom.Name.ToLower().Contains(filter))
+                    //        && (publisher == "" || rom.Publisher == publisher)
+                    //        && (developer == "" || rom.Developer == developer)
+                    //        && (year == "" || rom.YearReleased == year)
+                    //        && ((platform.Name == "<none>" && rom.Platform == null) || (platform.Name == "" || rom.Platform != null && rom.Platform.Name == platform.Name))
+                    //        && ((genre.Name == "<none>" && rom.Genre == null) || (genre.Name == "" || rom.Genre != null && rom.Genre.Name == genre.Name))
+                    //        && ((label.Name == "<none>" && (rom.Labels == null || rom.Labels.Count == 0)) || (label.Name == "" || rom.Labels != null && rom.Labels.Count(l => l.Name == label.Name) > 0)))
+                    //    {
+
+                    //        FilteredRoms.Add(rom);
+                    //    }
+
+                    //    index++;
+                    //}
                 }
                 catch (Exception ex)
                 {

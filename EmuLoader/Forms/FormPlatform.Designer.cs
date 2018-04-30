@@ -53,9 +53,14 @@
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonDefaultRomPath = new System.Windows.Forms.Button();
+            this.textBoxDefaultRomPath = new System.Windows.Forms.TextBox();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxPlatformsDB = new System.Windows.Forms.ComboBox();
+            this.textBoxDefaultRomExtensions = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -80,7 +85,7 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(788, 353);
+            this.dataGridView.Size = new System.Drawing.Size(788, 407);
             this.dataGridView.TabIndex = 1;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
@@ -130,7 +135,7 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(15, 106);
+            this.textBoxName.Location = new System.Drawing.Point(15, 86);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(173, 20);
             this.textBoxName.TabIndex = 2;
@@ -139,7 +144,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(12, 84);
+            this.labelName.Location = new System.Drawing.Point(12, 64);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(76, 13);
             this.labelName.TabIndex = 4;
@@ -147,7 +152,7 @@
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(194, 107);
+            this.textBoxPath.Location = new System.Drawing.Point(193, 86);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(245, 20);
             this.textBoxPath.TabIndex = 4;
@@ -155,7 +160,7 @@
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(191, 84);
+            this.labelPath.Location = new System.Drawing.Point(191, 64);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(69, 13);
             this.labelPath.TabIndex = 6;
@@ -163,7 +168,7 @@
             // 
             // buttonPath
             // 
-            this.buttonPath.Location = new System.Drawing.Point(444, 105);
+            this.buttonPath.Location = new System.Drawing.Point(444, 85);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(36, 23);
             this.buttonPath.TabIndex = 3;
@@ -175,7 +180,7 @@
             // 
             this.buttonColor.BackColor = System.Drawing.Color.White;
             this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColor.Location = new System.Drawing.Point(292, 24);
+            this.buttonColor.Location = new System.Drawing.Point(289, 6);
             this.buttonColor.Name = "buttonColor";
             this.buttonColor.Size = new System.Drawing.Size(50, 50);
             this.buttonColor.TabIndex = 6;
@@ -193,7 +198,7 @@
             this.checkBoxShowInLinksList.AutoSize = true;
             this.checkBoxShowInLinksList.Checked = true;
             this.checkBoxShowInLinksList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(15, 132);
+            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(15, 165);
             this.checkBoxShowInLinksList.Name = "checkBoxShowInLinksList";
             this.checkBoxShowInLinksList.Size = new System.Drawing.Size(112, 17);
             this.checkBoxShowInLinksList.TabIndex = 9;
@@ -205,7 +210,7 @@
             this.checkBoxShowInFilters.AutoSize = true;
             this.checkBoxShowInFilters.Checked = true;
             this.checkBoxShowInFilters.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInFilters.Location = new System.Drawing.Point(194, 132);
+            this.checkBoxShowInFilters.Location = new System.Drawing.Point(194, 165);
             this.checkBoxShowInFilters.Name = "checkBoxShowInFilters";
             this.checkBoxShowInFilters.Size = new System.Drawing.Size(95, 17);
             this.checkBoxShowInFilters.TabIndex = 10;
@@ -215,7 +220,7 @@
             // labelCommand
             // 
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(483, 84);
+            this.labelCommand.Location = new System.Drawing.Point(483, 64);
             this.labelCommand.Name = "labelCommand";
             this.labelCommand.Size = new System.Drawing.Size(54, 13);
             this.labelCommand.TabIndex = 11;
@@ -225,7 +230,7 @@
             // 
             this.textBoxCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCommand.Location = new System.Drawing.Point(486, 107);
+            this.textBoxCommand.Location = new System.Drawing.Point(486, 87);
             this.textBoxCommand.Name = "textBoxCommand";
             this.textBoxCommand.Size = new System.Drawing.Size(264, 20);
             this.textBoxCommand.TabIndex = 12;
@@ -235,7 +240,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 24);
+            this.label1.Location = new System.Drawing.Point(68, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 14;
@@ -243,7 +248,7 @@
             // 
             // textBoxPlatformIcon
             // 
-            this.textBoxPlatformIcon.Location = new System.Drawing.Point(68, 46);
+            this.textBoxPlatformIcon.Location = new System.Drawing.Point(68, 34);
             this.textBoxPlatformIcon.Name = "textBoxPlatformIcon";
             this.textBoxPlatformIcon.Size = new System.Drawing.Size(173, 20);
             this.textBoxPlatformIcon.TabIndex = 13;
@@ -251,7 +256,7 @@
             // 
             // buttonIconPath
             // 
-            this.buttonIconPath.Location = new System.Drawing.Point(250, 44);
+            this.buttonIconPath.Location = new System.Drawing.Point(247, 31);
             this.buttonIconPath.Name = "buttonIconPath";
             this.buttonIconPath.Size = new System.Drawing.Size(36, 23);
             this.buttonIconPath.TabIndex = 15;
@@ -262,7 +267,7 @@
             // pictureBoxIcon
             // 
             this.pictureBoxIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxIcon.Location = new System.Drawing.Point(12, 24);
+            this.pictureBoxIcon.Location = new System.Drawing.Point(12, 6);
             this.pictureBoxIcon.Name = "pictureBoxIcon";
             this.pictureBoxIcon.Size = new System.Drawing.Size(50, 50);
             this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -271,6 +276,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxDefaultRomExtensions);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.buttonDefaultRomPath);
+            this.panel1.Controls.Add(this.textBoxDefaultRomPath);
             this.panel1.Controls.Add(this.buttonHelp);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.comboBoxPlatformsDB);
@@ -289,17 +299,43 @@
             this.panel1.Controls.Add(this.checkBoxShowInLinksList);
             this.panel1.Controls.Add(this.buttonColor);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 353);
+            this.panel1.Location = new System.Drawing.Point(0, 407);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(788, 164);
+            this.panel1.Size = new System.Drawing.Size(788, 188);
             this.panel1.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 113);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Default Rom Path";
+            // 
+            // buttonDefaultRomPath
+            // 
+            this.buttonDefaultRomPath.Location = new System.Drawing.Point(444, 134);
+            this.buttonDefaultRomPath.Name = "buttonDefaultRomPath";
+            this.buttonDefaultRomPath.Size = new System.Drawing.Size(36, 23);
+            this.buttonDefaultRomPath.TabIndex = 30;
+            this.buttonDefaultRomPath.Text = "...";
+            this.buttonDefaultRomPath.UseVisualStyleBackColor = true;
+            this.buttonDefaultRomPath.Click += new System.EventHandler(this.buttonDefaultRomPath_Click);
+            // 
+            // textBoxDefaultRomPath
+            // 
+            this.textBoxDefaultRomPath.Location = new System.Drawing.Point(18, 135);
+            this.textBoxDefaultRomPath.Name = "textBoxDefaultRomPath";
+            this.textBoxDefaultRomPath.Size = new System.Drawing.Size(420, 20);
+            this.textBoxDefaultRomPath.TabIndex = 28;
             // 
             // buttonHelp
             // 
             this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.buttonHelp.ForeColor = System.Drawing.Color.Black;
-            this.buttonHelp.Location = new System.Drawing.Point(756, 105);
+            this.buttonHelp.Location = new System.Drawing.Point(756, 85);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(24, 23);
             this.buttonHelp.TabIndex = 27;
@@ -310,7 +346,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(483, 24);
+            this.label2.Location = new System.Drawing.Point(483, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 13);
             this.label2.TabIndex = 18;
@@ -319,16 +355,33 @@
             // comboBoxPlatformsDB
             // 
             this.comboBoxPlatformsDB.FormattingEnabled = true;
-            this.comboBoxPlatformsDB.Location = new System.Drawing.Point(486, 46);
+            this.comboBoxPlatformsDB.Location = new System.Drawing.Point(486, 34);
             this.comboBoxPlatformsDB.Name = "comboBoxPlatformsDB";
             this.comboBoxPlatformsDB.Size = new System.Drawing.Size(290, 21);
             this.comboBoxPlatformsDB.TabIndex = 17;
+            // 
+            // textBoxDefaultRomExtensions
+            // 
+            this.textBoxDefaultRomExtensions.Location = new System.Drawing.Point(485, 135);
+            this.textBoxDefaultRomExtensions.Name = "textBoxDefaultRomExtensions";
+            this.textBoxDefaultRomExtensions.Size = new System.Drawing.Size(291, 20);
+            this.textBoxDefaultRomExtensions.TabIndex = 31;
+            this.textBoxDefaultRomExtensions.Text = "zip";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(483, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(296, 13);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "Default Extensions (separate with comma \",\": zip,rom,smc,gb)";
             // 
             // FormPlatform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 573);
+            this.ClientSize = new System.Drawing.Size(788, 651);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(481, 486);
@@ -375,5 +428,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxPlatformsDB;
         private System.Windows.Forms.Button buttonHelp;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonDefaultRomPath;
+        private System.Windows.Forms.TextBox textBoxDefaultRomPath;
+        private System.Windows.Forms.TextBox textBoxDefaultRomExtensions;
+        private System.Windows.Forms.Label label4;
     }
 }

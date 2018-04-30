@@ -66,6 +66,8 @@ namespace EmuLoader.Forms
         private void buttonPath_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = Environment.CurrentDirectory;
+
             open.Filter = "EXE | *.exe";
             open.ShowDialog();
 
@@ -119,6 +121,8 @@ namespace EmuLoader.Forms
             platform.ShowInFilter = checkBoxShowInFilters.Checked;
             platform.ShowInList = checkBoxShowInLinksList.Checked;
             platform.Command = textBoxCommand.Text;
+            platform.DefaultRomPath = textBoxDefaultRomPath.Text;
+            platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
 
             if (File.Exists(textBoxPlatformIcon.Text))
             {
@@ -247,6 +251,8 @@ namespace EmuLoader.Forms
             checkBoxShowInFilters.Checked = platform.ShowInFilter;
             checkBoxShowInLinksList.Checked = platform.ShowInList;
             textBoxCommand.Text = platform.Command;
+            textBoxDefaultRomPath.Text = platform.DefaultRomPath;
+            textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
             textBoxName.Enabled = false;
             buttonAdd.Text = "Update";
         }
@@ -262,6 +268,24 @@ namespace EmuLoader.Forms
             if (string.IsNullOrEmpty(open.FileName)) return;
 
             textBoxPlatformIcon.Text = open.FileName;
+        }
+
+        private void buttonDefaultRomPath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog open = new FolderBrowserDialog();
+            open.SelectedPath = Environment.CurrentDirectory;
+
+            if (open.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            if (open.SelectedPath.Length == 0)
+            {
+                return;
+            }
+
+            textBoxDefaultRomPath.Text = open.SelectedPath;
         }
 
         private void textBoxEmulatorIcon_TextChanged(object sender, EventArgs e)
@@ -311,13 +335,15 @@ namespace EmuLoader.Forms
 
         private void Clean()
         {
-            textBoxName.Text = "";
-            textBoxPath.Text = "";
+            textBoxName.Text = string.Empty;
+            textBoxPath.Text = string.Empty;
             textBoxCommand.Text = Values.DefaultCommand;
             buttonColor.BackColor = Color.White;
-            textBoxPlatformIcon.Text = "";
+            textBoxPlatformIcon.Text = string.Empty;
             dataGridView.ClearSelection();
             comboBoxPlatformsDB.SelectedValue = "0";
+            textBoxDefaultRomPath.Text = string.Empty;
+            textBoxDefaultRomExtensions.Text = "zip";
 
             if (dataGridView.Rows.Count == 0)
             {

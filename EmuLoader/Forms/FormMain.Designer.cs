@@ -114,6 +114,7 @@
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.contextMenuStripEditRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -613,6 +614,7 @@
             // groupBoxFilter
             // 
             this.groupBoxFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.groupBoxFilter.Controls.Add(this.buttonRescan);
             this.groupBoxFilter.Controls.Add(this.buttonClear);
             this.groupBoxFilter.Controls.Add(this.label1);
             this.groupBoxFilter.Controls.Add(this.comboBoxDeveloper);
@@ -654,7 +656,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(513, 14);
+            this.label1.Location = new System.Drawing.Point(384, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 16;
@@ -664,7 +666,7 @@
             // 
             this.comboBoxDeveloper.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxDeveloper.FormattingEnabled = true;
-            this.comboBoxDeveloper.Location = new System.Drawing.Point(515, 30);
+            this.comboBoxDeveloper.Location = new System.Drawing.Point(386, 30);
             this.comboBoxDeveloper.Name = "comboBoxDeveloper";
             this.comboBoxDeveloper.Size = new System.Drawing.Size(120, 20);
             this.comboBoxDeveloper.TabIndex = 15;
@@ -674,7 +676,7 @@
             // 
             this.labelYearReleased.AutoSize = true;
             this.labelYearReleased.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelYearReleased.Location = new System.Drawing.Point(640, 14);
+            this.labelYearReleased.Location = new System.Drawing.Point(511, 14);
             this.labelYearReleased.Name = "labelYearReleased";
             this.labelYearReleased.Size = new System.Drawing.Size(77, 12);
             this.labelYearReleased.TabIndex = 14;
@@ -684,7 +686,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(387, 14);
+            this.label3.Location = new System.Drawing.Point(258, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 12);
             this.label3.TabIndex = 13;
@@ -694,7 +696,7 @@
             // 
             this.comboBoxPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPublisher.FormattingEnabled = true;
-            this.comboBoxPublisher.Location = new System.Drawing.Point(389, 30);
+            this.comboBoxPublisher.Location = new System.Drawing.Point(260, 30);
             this.comboBoxPublisher.Name = "comboBoxPublisher";
             this.comboBoxPublisher.Size = new System.Drawing.Size(120, 20);
             this.comboBoxPublisher.TabIndex = 11;
@@ -704,7 +706,7 @@
             // 
             this.comboBoxYearReleased.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxYearReleased.FormattingEnabled = true;
-            this.comboBoxYearReleased.Location = new System.Drawing.Point(642, 30);
+            this.comboBoxYearReleased.Location = new System.Drawing.Point(513, 30);
             this.comboBoxYearReleased.Name = "comboBoxYearReleased";
             this.comboBoxYearReleased.Size = new System.Drawing.Size(93, 20);
             this.comboBoxYearReleased.TabIndex = 12;
@@ -714,9 +716,9 @@
             // 
             this.textBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFilter.Location = new System.Drawing.Point(11, 67);
+            this.textBoxFilter.Location = new System.Drawing.Point(260, 68);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(686, 18);
+            this.textBoxFilter.Size = new System.Drawing.Size(439, 18);
             this.textBoxFilter.TabIndex = 10;
             this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
             this.textBoxFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxFilter_KeyPress);
@@ -725,7 +727,7 @@
             // 
             this.labelGenre.AutoSize = true;
             this.labelGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGenre.Location = new System.Drawing.Point(137, 14);
+            this.labelGenre.Location = new System.Drawing.Point(8, 14);
             this.labelGenre.Name = "labelGenre";
             this.labelGenre.Size = new System.Drawing.Size(35, 12);
             this.labelGenre.TabIndex = 9;
@@ -735,7 +737,7 @@
             // 
             this.comboBoxGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxGenre.FormattingEnabled = true;
-            this.comboBoxGenre.Location = new System.Drawing.Point(137, 30);
+            this.comboBoxGenre.Location = new System.Drawing.Point(8, 30);
             this.comboBoxGenre.Name = "comboBoxGenre";
             this.comboBoxGenre.Size = new System.Drawing.Size(120, 20);
             this.comboBoxGenre.TabIndex = 8;
@@ -745,7 +747,7 @@
             // 
             this.labelFilterRom.AutoSize = true;
             this.labelFilterRom.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFilterRom.Location = new System.Drawing.Point(9, 52);
+            this.labelFilterRom.Location = new System.Drawing.Point(263, 52);
             this.labelFilterRom.Name = "labelFilterRom";
             this.labelFilterRom.Size = new System.Drawing.Size(60, 12);
             this.labelFilterRom.TabIndex = 5;
@@ -755,7 +757,7 @@
             // 
             this.labelLabels.AutoSize = true;
             this.labelLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLabels.Location = new System.Drawing.Point(263, 14);
+            this.labelLabels.Location = new System.Drawing.Point(134, 14);
             this.labelLabels.Name = "labelLabels";
             this.labelLabels.Size = new System.Drawing.Size(32, 12);
             this.labelLabels.TabIndex = 7;
@@ -765,7 +767,7 @@
             // 
             this.labelEmulatorFilter.AutoSize = true;
             this.labelEmulatorFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEmulatorFilter.Location = new System.Drawing.Point(9, 14);
+            this.labelEmulatorFilter.Location = new System.Drawing.Point(6, 52);
             this.labelEmulatorFilter.Name = "labelEmulatorFilter";
             this.labelEmulatorFilter.Size = new System.Drawing.Size(48, 12);
             this.labelEmulatorFilter.TabIndex = 6;
@@ -775,7 +777,7 @@
             // 
             this.comboBoxPlatform.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPlatform.FormattingEnabled = true;
-            this.comboBoxPlatform.Location = new System.Drawing.Point(11, 30);
+            this.comboBoxPlatform.Location = new System.Drawing.Point(8, 68);
             this.comboBoxPlatform.Name = "comboBoxPlatform";
             this.comboBoxPlatform.Size = new System.Drawing.Size(120, 20);
             this.comboBoxPlatform.TabIndex = 3;
@@ -785,7 +787,7 @@
             // 
             this.comboBoxLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxLabels.FormattingEnabled = true;
-            this.comboBoxLabels.Location = new System.Drawing.Point(263, 30);
+            this.comboBoxLabels.Location = new System.Drawing.Point(134, 30);
             this.comboBoxLabels.Name = "comboBoxLabels";
             this.comboBoxLabels.Size = new System.Drawing.Size(120, 20);
             this.comboBoxLabels.TabIndex = 4;
@@ -954,6 +956,17 @@
             this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
             this.flowLayoutPanelPictures.TabIndex = 16;
             // 
+            // buttonRescan
+            // 
+            this.buttonRescan.Enabled = false;
+            this.buttonRescan.Location = new System.Drawing.Point(134, 65);
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.Size = new System.Drawing.Size(120, 23);
+            this.buttonRescan.TabIndex = 17;
+            this.buttonRescan.Text = "Rescan Roms";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1077,5 +1090,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
         private System.Windows.Forms.ToolStripMenuItem showRatingColumnToolStripMenuItem;
+        private System.Windows.Forms.Button buttonRescan;
     }
 }
