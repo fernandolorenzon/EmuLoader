@@ -10,6 +10,7 @@ namespace EmuLoader.Forms
         private static Type selectedType;
         private List<Rom> RomList;
         public Platform SelectedPlatform { get; set; }
+        public Genre SelectedGenre { get; set; }
 
         private FormChoose()
         {
@@ -69,26 +70,23 @@ namespace EmuLoader.Forms
                 {
                     SelectedPlatform = null;
                 }
-
-                SelectedPlatform = selected;
+                else
+                {
+                    SelectedPlatform = selected;
+                }
             }
             else if (selectedType == typeof(Genre))
             {
                 Genre selected = (Genre)comboBox.SelectedItem;
 
-                if (selected.Name == "")
+                if (selected.Name == string.Empty)
                 {
-                    selected = null;
+                    SelectedGenre = null;
                 }
-
-                foreach (var item in RomList)
+                else
                 {
-                    item.Genre = selected;
-                    Rom.Set(item);
+                    SelectedGenre = selected;
                 }
-
-                XML.SaveXml();
-
             }
 
             instance.Close();
@@ -107,10 +105,11 @@ namespace EmuLoader.Forms
             return instance.SelectedPlatform;
         }
 
-        public static void ChooseGenre(List<Rom> romList)
+        public static Genre ChooseGenre(List<Rom> romList)
         {
             instance = new FormChoose(typeof(Genre), romList);
-            instance.ShowDialog();
+            var result = instance.ShowDialogUpdated();
+            return instance.SelectedGenre;
         }
     }
 }

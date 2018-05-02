@@ -83,6 +83,17 @@ namespace EmuLoader.Classes
             return true;
         }
 
+        public static bool ChangeRomsGenre(List<Rom> roms, Genre genre)
+        {
+            foreach (var item in roms)
+            {
+                item.Genre = genre;
+                Rom.Set(item);
+            }
+
+            return true;
+        }
+
         public static bool Delete(string name)
         {
             genres.Remove(name);

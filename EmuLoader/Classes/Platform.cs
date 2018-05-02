@@ -237,11 +237,11 @@ namespace EmuLoader.Classes
             return true;
         }
 
-        public bool ChangeRomsPlatform(List<Rom> roms)
+        public static bool ChangeRomsPlatform(List<Rom> roms, Platform platform)
         {
             foreach (var item in roms)
             {
-                item.Platform = this;
+                item.Platform = platform;
                 Rom.Set(item);
             }
 
