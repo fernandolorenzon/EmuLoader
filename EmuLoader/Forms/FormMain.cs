@@ -174,15 +174,12 @@ namespace EmuLoader.Forms
                 {
                     return;
                 }
-
-                var platform = FormChoose.ChoosePlatform();
-
-                if (platform != null)
-                {
-                    platform.AddRomsFromDirectory(open.SelectedPath);
-                    XML.SaveXml();
-                    FilterRoms();
-                }
+                
+                Platform platform = null;
+                FormChoose.ChoosePlatform(out platform);
+                Rom.AddRomsFromDirectory(platform, open.SelectedPath);
+                XML.SaveXml();
+                FilterRoms();
             }
             catch (Exception ex)
             {
@@ -226,14 +223,11 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                var platform = FormChoose.ChoosePlatform();
-
-                if (platform != null)
-                {
-                    platform.AddRomsFiles(open.FileNames);
-                    XML.SaveXml();
-                    FilterRoms();
-                }
+                Platform platform = null;
+                FormChoose.ChoosePlatform(out platform);
+                Rom.AddRomsFiles(platform, open.FileNames);
+                XML.SaveXml();
+                FilterRoms();
 
                 FilterRoms();
             }
@@ -295,6 +289,10 @@ namespace EmuLoader.Forms
         {
             try
             {
+                Platform selected = null;
+
+                if (!FormChoose.ChoosePlatform(out selected)) return;
+
                 List<Rom> romList = new List<Rom>();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -302,9 +300,7 @@ namespace EmuLoader.Forms
                     romList.Add((Rom)row.Tag);
                 }
 
-                var platform = FormChoose.ChoosePlatform();
-                
-                Platform.ChangeRomsPlatform(romList, platform);
+                Rom.ChangeRomsPlatform(romList, selected);
                 XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -337,6 +333,10 @@ namespace EmuLoader.Forms
         {
             try
             {
+                Genre selected = null;
+
+                if (!FormChoose.ChooseGenre(out selected)) return;
+
                 List<Rom> romList = new List<Rom>();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -344,8 +344,7 @@ namespace EmuLoader.Forms
                     romList.Add((Rom)row.Tag);
                 }
 
-                var genre = FormChoose.ChooseGenre(romList);
-                Genre.ChangeRomsGenre(romList, genre);
+                Genre.ChangeRomsGenre(romList, selected);
                 XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -378,6 +377,10 @@ namespace EmuLoader.Forms
         {
             try
             {
+                List<RomLabel> labels = null;
+
+                if (!FormChooseList.ChooseLabel(out labels)) return;
+
                 List<Rom> roms = new List<Rom>();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -386,7 +389,8 @@ namespace EmuLoader.Forms
                     roms.Add((Rom)row.Tag);
                 }
 
-                FormChooseList.ChooseLabel(roms);
+                Rom.ChangeRomLabels(roms, labels);
+                XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -1194,11 +1198,11 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                var platform = FormChoose.ChoosePlatform();
+                Platform selected = null;
 
-                if (platform != null)
+                if (FormChoose.ChoosePlatform(out selected))
                 {
-                    platform.AddRomPacksFromDirectory(open.SelectedPath);
+                    Rom.AddRomPacksFromDirectory(selected, open.SelectedPath);
                     XML.SaveXml();
                     FilterRoms();
                 }
@@ -1716,16 +1720,24 @@ namespace EmuLoader.Forms
 
         private void FillLabelCell(Rom rom, DataGridViewRow row)
         {
-            row.Cells["columnLabels"].Value = "";
+            row.Cells[columnLabels.Index].Value = "";
 
             if (rom.Labels.Count > 0)
             {
                 foreach (RomLabel label in rom.Labels)
                 {
-                    row.Cells["columnLabels"].Value += " | " + label.Name;
+                    row.Cells[columnLabels.Index].Value += " | " + label.Name;
                 }
 
-                row.Cells["columnLabels"].Value = row.Cells["columnLabels"].Value.ToString().Substring(3);
+                row.Cells[columnLabels.Index].Style.BackColor = rom.Labels[0].Color;
+                row.Cells[columnLabels.Index].Style.ForeColor = Functions.SetFontContrast(rom.Labels[0].Color);
+
+                row.Cells[columnLabels.Index].Value = row.Cells["columnLabels"].Value.ToString().Substring(3);
+            }
+            else
+            {
+                row.Cells[columnLabels.Index].Style.BackColor = Color.White;
+                row.Cells[columnLabels.Index].Style.ForeColor = Color.Black;
             }
         }
 

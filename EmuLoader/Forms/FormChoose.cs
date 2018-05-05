@@ -8,7 +8,6 @@ namespace EmuLoader.Forms
     {
         private static FormChoose instance;
         private static Type selectedType;
-        private List<Rom> RomList;
         public Platform SelectedPlatform { get; set; }
         public Genre SelectedGenre { get; set; }
 
@@ -17,11 +16,10 @@ namespace EmuLoader.Forms
             InitializeComponent();
         }
 
-        private FormChoose(Type type, List<Rom> romList = null)
+        private FormChoose(Type type)
             : this()
         {
             selectedType = type;
-            RomList = romList;
 
             if (type == typeof(Platform))
             {
@@ -30,8 +28,8 @@ namespace EmuLoader.Forms
                 comboBox.DataSource = emus;
                 comboBox.DisplayMember = "Name";
                 comboBox.ValueMember = "Name";
-                labelChoose.Text += " Emulator";
-                this.Text += " Emulator";
+                labelChoose.Text = "Choose Platform";
+                this.Text = "Choose Platform";
             }
             else if (type == typeof(RomLabel))
             {
@@ -40,8 +38,8 @@ namespace EmuLoader.Forms
                 comboBox.DataSource = labels;
                 comboBox.DisplayMember = "Name";
                 comboBox.ValueMember = "Name";
-                labelChoose.Text += " Label";
-                this.Text += " Label";
+                labelChoose.Text = "Choose Label";
+                this.Text = "Choose Label";
             }
             else if (type == typeof(Genre))
             {
@@ -50,8 +48,8 @@ namespace EmuLoader.Forms
                 comboBox.DataSource = genres;
                 comboBox.DisplayMember = "Name";
                 comboBox.ValueMember = "Name";
-                labelChoose.Text += " Genre";
-                this.Text += " Genre";
+                labelChoose.Text = "Choose Genre";
+                this.Text = "Choose Genre";
             }
         }
 
@@ -89,27 +87,31 @@ namespace EmuLoader.Forms
                 }
             }
 
+            Updated = true;
             instance.Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             SelectedPlatform = null;
+            Updated = false;
             instance.Close();
         }
 
-        public static Platform ChoosePlatform()
+        public static bool ChoosePlatform(out Platform selectedPlatform)
         {
             instance = new FormChoose(typeof(Platform));
             var result = instance.ShowDialogUpdated();
-            return instance.SelectedPlatform;
+            selectedPlatform = instance.SelectedPlatform;
+            return result;
         }
 
-        public static Genre ChooseGenre(List<Rom> romList)
+        public static bool ChooseGenre(out Genre selectedGenre)
         {
-            instance = new FormChoose(typeof(Genre), romList);
+            instance = new FormChoose(typeof(Genre));
             var result = instance.ShowDialogUpdated();
-            return instance.SelectedGenre;
+            selectedGenre = instance.SelectedGenre;
+            return result;
         }
     }
 }

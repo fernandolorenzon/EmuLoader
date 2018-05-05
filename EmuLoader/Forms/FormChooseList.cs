@@ -10,18 +10,16 @@ namespace EmuLoader.Forms
     {
         private static FormChooseList instance;
         private static bool changed = false;
-        private List<Rom> RomList;
+        private List<RomLabel> selectedLabels = null;
 
         private FormChooseList()
         {
             InitializeComponent();
         }
 
-        private FormChooseList(Type type, List<Rom> romList)
+        private FormChooseList(Type type)
             : this()
         {
-            RomList = romList;
-
             if (type == typeof(RomLabel))
             {
                 List<RomLabel> labels = RomLabel.GetAll();
@@ -35,7 +33,7 @@ namespace EmuLoader.Forms
                     row.Cells[columnColor.Index].Style.BackColor = label.Color;
                     row.Cells[columnColor.Index].Style.ForeColor = Functions.SetFontContrast(label.Color);
 
-                    this.Text += " Label";
+                    this.Text = "Choose Label";
 
                     row.Tag = label;
                     dataGridView.Rows.Add(row);
@@ -57,7 +55,7 @@ namespace EmuLoader.Forms
         {
             if (changed)
             {
-                List<RomLabel> selectedLabels = new List<RomLabel>();
+                selectedLabels = new List<RomLabel>();
 
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
@@ -69,47 +67,28 @@ namespace EmuLoader.Forms
                         selectedLabels.Add((RomLabel)row.Tag);
                     }
                 }
-
-                foreach (var item in RomList)
-                {
-                    item.Labels = selectedLabels;
-                    Rom.Set(item);
-                }
-
-                XML.SaveXml();
             }
 
+            Updated = true;
             instance.Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            Updated = false;
             instance.Close();
         }
 
-        public static void ChooseLabel(List<Rom> roms)
+        public static bool ChooseLabel(out List<RomLabel> labels)
         {
-            instance = new FormChooseList(typeof(RomLabel), roms);
+            labels = new List<RomLabel>();
+            instance = new FormChooseList(typeof(RomLabel));
 
             foreach (DataGridViewRow row in instance.dataGridView.Rows)
             {
                 row.Cells[instance.columnCheck.Index].Value = CheckState.Unchecked;
                 bool found = false;
                 bool notfound = false;
-
-                foreach (Rom rom in roms)
-                {
-                    int count = (from l in rom.Labels where l.Name == ((RomLabel)row.Tag).Name select l).Count();
-
-                    if (count > 0)
-                    {
-                        found = true;
-                    }
-                    else
-                    {
-                        notfound = true;
-                    }
-                }
 
                 if (found && !notfound)
                 {
@@ -128,7 +107,9 @@ namespace EmuLoader.Forms
                 notfound = false;
             }
 
-            instance.ShowDialog();
+            var result = instance.ShowDialogUpdated();
+            labels = instance.selectedLabels;
+            return result;
         }
     }
 }

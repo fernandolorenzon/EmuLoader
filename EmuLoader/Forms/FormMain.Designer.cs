@@ -101,6 +101,8 @@
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.comboBoxLabels = new System.Windows.Forms.ComboBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
             this.columnIconMain = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnRomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomDBName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,8 +115,6 @@
             this.columnDeveloper = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStripEditRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -160,7 +160,6 @@
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
-            this.contextMenuStripEditRom.OwnerItem = this.selectedRomsOptionsToolStripMenuItem;
             this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 158);
             // 
             // changePlatformToolStripMenuItem
@@ -857,6 +856,29 @@
             this.dataGridView.Leave += new System.EventHandler(this.dataGridView_Leave);
             this.dataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseDown);
             // 
+            // panelBottom
+            // 
+            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panelBottom.Controls.Add(this.labelTotal);
+            this.panelBottom.Controls.Add(this.labelTotalRomsCount);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 658);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(726, 29);
+            this.panelBottom.TabIndex = 17;
+            // 
+            // flowLayoutPanelPictures
+            // 
+            this.flowLayoutPanelPictures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxBoxart);
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
+            this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(726, 0);
+            this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
+            this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
+            this.flowLayoutPanelPictures.TabIndex = 16;
+            // 
             // columnIconMain
             // 
             this.columnIconMain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -934,7 +956,7 @@
             // 
             // columnYearReleased
             // 
-            this.columnYearReleased.FillWeight = 30F;
+            this.columnYearReleased.FillWeight = 20F;
             this.columnYearReleased.HeaderText = "Year";
             this.columnYearReleased.Name = "columnYearReleased";
             this.columnYearReleased.ReadOnly = true;
@@ -945,29 +967,6 @@
             this.columnRating.HeaderText = "Rating";
             this.columnRating.Name = "columnRating";
             this.columnRating.ReadOnly = true;
-            // 
-            // panelBottom
-            // 
-            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panelBottom.Controls.Add(this.labelTotal);
-            this.panelBottom.Controls.Add(this.labelTotalRomsCount);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 658);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(726, 29);
-            this.panelBottom.TabIndex = 17;
-            // 
-            // flowLayoutPanelPictures
-            // 
-            this.flowLayoutPanelPictures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxBoxart);
-            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
-            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
-            this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(726, 0);
-            this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
-            this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
-            this.flowLayoutPanelPictures.TabIndex = 16;
             // 
             // FormMain
             // 
@@ -1079,6 +1078,8 @@
         private System.Windows.Forms.ToolStripMenuItem romDataOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem syncRomsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purgeRomDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showRatingColumnToolStripMenuItem;
+        private System.Windows.Forms.Button buttonRescan;
         private System.Windows.Forms.DataGridViewImageColumn columnIconMain;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomDBName;
@@ -1091,7 +1092,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDeveloper;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
-        private System.Windows.Forms.ToolStripMenuItem showRatingColumnToolStripMenuItem;
-        private System.Windows.Forms.Button buttonRescan;
     }
 }

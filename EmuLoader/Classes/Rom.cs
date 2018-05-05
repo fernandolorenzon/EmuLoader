@@ -242,5 +242,100 @@ namespace EmuLoader.Classes
             }
         }
 
+
+        public static bool AddRomsFiles(Platform platform, string[] files)
+        {
+            List<Rom> romList = new List<Rom>();
+
+            foreach (var item in files)
+            {
+                Rom r = new Rom(item);
+                Rom old = Rom.Get(r.Path);
+
+                if (old != null)
+                {
+                    r = old;
+                }
+
+                r.Platform = platform;
+                Rom.Set(r);
+            }
+
+            return true;
+        }
+
+        public static bool AddRomsFromDirectory(Platform platform, string directory)
+        {
+            List<Rom> romList = new List<Rom>();
+            var files = Directory.GetFiles(directory);
+
+            foreach (var item in files)
+            {
+                Rom r = new Rom(item);
+                Rom old = Rom.Get(r.Path);
+
+                if (old != null)
+                {
+                    r = old;
+                }
+
+                r.Platform = platform;
+                Rom.Set(r);
+            }
+
+            return true;
+        }
+
+        public static bool AddRomPacksFromDirectory(Platform platform, string directory)
+        {
+            List<Rom> romList = new List<Rom>();
+            var directories = Directory.GetDirectories(directory);
+
+            foreach (var path in directories)
+            {
+                var files = Directory.GetFiles(path);
+
+                foreach (var item in files)
+                {
+                    if (item.EndsWith(".cue") || item.EndsWith(".ccd") || item.EndsWith(".rom") || item.EndsWith(".gdi"))
+                    {
+                        Rom r = new Rom(item);
+                        Rom old = Rom.Get(r.Path);
+
+                        if (old != null)
+                        {
+                            r = old;
+                        }
+
+                        r.Platform = platform;
+                        Rom.Set(r);
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static bool ChangeRomsPlatform(List<Rom> roms, Platform platform)
+        {
+            foreach (var item in roms)
+            {
+                item.Platform = platform;
+                Rom.Set(item);
+            }
+
+            return true;
+        }
+
+        public static bool ChangeRomLabels(List<Rom> roms, List<RomLabel> labels)
+        {
+            foreach (var item in roms)
+            {
+                item.Labels = labels;
+                Rom.Set(item);
+            }
+
+            return true;
+        }
     }
 }
