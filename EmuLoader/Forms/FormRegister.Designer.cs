@@ -32,6 +32,7 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,11 +63,23 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.buttonAdd);
             this.flowLayoutPanel1.Controls.Add(this.buttonDelete);
+            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 368);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(598, 56);
             this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonCancel.Location = new System.Drawing.Point(165, 3);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 48);
+            this.buttonCancel.TabIndex = 2;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = false;
             // 
             // FormRegister
             // 
@@ -87,5 +100,6 @@
         protected System.Windows.Forms.Button buttonAdd;
         protected System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        protected System.Windows.Forms.Button buttonCancel;
     }
 }

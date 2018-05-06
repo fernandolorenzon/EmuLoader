@@ -30,6 +30,7 @@ namespace EmuLoader.Forms
         {
             buttonAdd.Click += buttonAdd_Click;
             buttonDelete.Click += buttonDelete_Click;
+            buttonCancel.Click += buttonCancel_Click;
 
             updating = true;
             dataGridView.ClearSelection();
@@ -125,6 +126,11 @@ namespace EmuLoader.Forms
             Clean();
         }
 
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Clean();
+        }
+
         private void buttonColor_Click(object sender, EventArgs e)
         {
             try
@@ -145,16 +151,6 @@ namespace EmuLoader.Forms
             if (dataGridView.SelectedRows.Count < 1) return;
 
             SetForm();
-        }
-
-        private void SetForm()
-        {
-            DataGridViewRow row = dataGridView.SelectedRows[0];
-            Genre genre = (Genre)row.Tag;
-            textBoxName.Text = genre.Name;
-            buttonColor.BackColor = genre.Color;
-            textBoxName.Enabled = false;
-            buttonAdd.Text = "Update";
         }
 
         private void FormGenre_FormClosed(object sender, FormClosedEventArgs e)
@@ -214,6 +210,17 @@ namespace EmuLoader.Forms
                 buttonDelete.Enabled = false;
                 buttonAdd.Text = "Add";
             }
+        }
+
+        private void SetForm()
+        {
+            DataGridViewRow row = dataGridView.SelectedRows[0];
+            Genre genre = (Genre)row.Tag;
+            textBoxName.Text = genre.Name;
+            buttonColor.BackColor = genre.Color;
+            textBoxName.Enabled = false;
+            buttonAdd.Text = "Update";
+            buttonDelete.Enabled = true;
         }
 
         #endregion

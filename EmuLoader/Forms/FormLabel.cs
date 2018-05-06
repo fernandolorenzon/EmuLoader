@@ -30,6 +30,7 @@ namespace EmuLoader.Forms
         {
             buttonAdd.Click += buttonAdd_Click;
             buttonDelete.Click += buttonDelete_Click;
+            buttonCancel.Click += buttonCancel_Click;
 
             updating = true;
             dataGridView.ClearSelection();
@@ -124,6 +125,11 @@ namespace EmuLoader.Forms
             Clean();
         }
 
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Clean();
+        }
+
         private void FormLabel_FormClosed(object sender, FormClosedEventArgs e)
         {
             XML.SaveXml();
@@ -173,6 +179,7 @@ namespace EmuLoader.Forms
             buttonColor.BackColor = label.Color;
             textBoxName.Enabled = false;
             buttonAdd.Text = "Update";
+            buttonDelete.Enabled = true;
         }
 
         #endregion

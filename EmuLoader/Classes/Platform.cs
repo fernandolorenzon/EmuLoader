@@ -161,7 +161,9 @@ namespace EmuLoader.Classes
                 }
             }
 
-            return addedAny;
+            var addedAnyRomPack = Rom.AddRomPacksFromDirectory(this, this.DefaultRomPath);
+
+            return addedAny || addedAnyRomPack;
         }
 
     }

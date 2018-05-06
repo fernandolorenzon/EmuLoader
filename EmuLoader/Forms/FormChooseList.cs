@@ -6,7 +6,7 @@ using EmuLoader.Classes;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormChooseList : FormBase
+    public partial class FormChooseList : FormRegister
     {
         private static FormChooseList instance;
         private static bool changed = false;
@@ -43,7 +43,9 @@ namespace EmuLoader.Forms
 
         private void FormChoose_Load(object sender, EventArgs e)
         {
-
+            buttonAdd.Click += buttonOk_Click;
+            buttonCancel.Click += buttonCancel_Click;
+            buttonDelete.Visible = false;
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

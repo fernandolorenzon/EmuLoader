@@ -4,7 +4,7 @@ using EmuLoader.Classes;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormChoose : FormBase
+    public partial class FormChoose : FormRegister
     {
         private static FormChoose instance;
         private static Type selectedType;
@@ -55,7 +55,9 @@ namespace EmuLoader.Forms
 
         private void FormChoose_Load(object sender, EventArgs e)
         {
-
+            buttonAdd.Click += buttonOk_Click;
+            buttonCancel.Click += buttonCancel_Click;
+            buttonDelete.Visible = false;
         }
 
         private void buttonOk_Click(object sender, EventArgs e)

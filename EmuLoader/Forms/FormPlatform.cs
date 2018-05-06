@@ -30,6 +30,7 @@ namespace EmuLoader.Forms
         {
             buttonAdd.Click += buttonAdd_Click;
             buttonDelete.Click += buttonDelete_Click;
+            buttonCancel.Click += buttonCancel_Click;
 
             updating = true;
             dataGridView.ClearSelection();
@@ -187,6 +188,11 @@ namespace EmuLoader.Forms
             Clean();
         }
 
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Clean();
+        }
+
         private void FormEmulator_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (Updated)
@@ -261,6 +267,7 @@ namespace EmuLoader.Forms
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
             textBoxName.Enabled = false;
             buttonAdd.Text = "Update";
+            buttonDelete.Enabled = true;
         }
 
         private void buttonIconPath_Click(object sender, EventArgs e)

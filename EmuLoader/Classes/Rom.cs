@@ -290,6 +290,7 @@ namespace EmuLoader.Classes
         {
             List<Rom> romList = new List<Rom>();
             var directories = Directory.GetDirectories(directory);
+            bool addedAny = false;
 
             foreach (var path in directories)
             {
@@ -306,6 +307,10 @@ namespace EmuLoader.Classes
                         {
                             r = old;
                         }
+                        else
+                        {
+                            addedAny = true;
+                        }
 
                         r.Platform = platform;
                         Rom.Set(r);
@@ -313,7 +318,7 @@ namespace EmuLoader.Classes
                 }
             }
 
-            return true;
+            return addedAny;
         }
 
         public static bool ChangeRomsPlatform(List<Rom> roms, Platform platform)
