@@ -6,6 +6,7 @@ using EmuLoader.Classes;
 using System.IO;
 using System.Diagnostics;
 using System.Text;
+using EmuLoader.Business;
 
 namespace EmuLoader.Forms
 {
@@ -14,6 +15,9 @@ namespace EmuLoader.Forms
         #region Members
 
         private Rom SelectedRom { get; set; }
+        private string boxToDeleteIfCanceled;
+        private string titleToDeleteIfCanceled;
+        private string gameplayToDeleteIfCanceled;
 
         #endregion
 
@@ -176,17 +180,17 @@ namespace EmuLoader.Forms
         {
             if (!string.IsNullOrEmpty(textBoxBoxartPicture.Text) && File.Exists(textBoxBoxartPicture.Text))
             {
-                Functions.SavePicture(SelectedRom, textBoxBoxartPicture.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
+                RomFunctions.SavePicture(SelectedRom, textBoxBoxartPicture.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
             }
 
             if (!string.IsNullOrEmpty(textBoxTitlePicture.Text) && File.Exists(textBoxTitlePicture.Text))
             {
-                Functions.SavePicture(SelectedRom, textBoxTitlePicture.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
+                RomFunctions.SavePicture(SelectedRom, textBoxTitlePicture.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
             }
 
             if (!string.IsNullOrEmpty(textBoxGameplayPicture.Text) && File.Exists(textBoxGameplayPicture.Text))
             {
-                Functions.SavePicture(SelectedRom, textBoxGameplayPicture.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
+                RomFunctions.SavePicture(SelectedRom, textBoxGameplayPicture.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
             }
         }
 
@@ -194,9 +198,9 @@ namespace EmuLoader.Forms
         {
             if (textBoxChangeRomName.Text != SelectedRom.Name)
             {
-                string boxpic = Functions.GetRomPicture(SelectedRom, Values.BoxartFolder);
-                string titlepic = Functions.GetRomPicture(SelectedRom, Values.TitleFolder);
-                string gameplaypic = Functions.GetRomPicture(SelectedRom, Values.GameplayFolder);
+                string boxpic = RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder);
+                string titlepic = RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder);
+                string gameplaypic = RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder);
 
                 if (!string.IsNullOrEmpty(boxpic))
                 {
@@ -226,12 +230,12 @@ namespace EmuLoader.Forms
                 if (SelectedRom.IsRomPack())
                 {
                     FileInfo file = new FileInfo(SelectedRom.Path);
-                    newDir = file.Directory.Parent.FullName + "\\" + Functions.GetFileNameNoExtension(textBoxChangeFileName.Text);
+                    newDir = file.Directory.Parent.FullName + "\\" + RomFunctions.GetFileNameNoExtension(textBoxChangeFileName.Text);
                     newPath = newDir + "\\" + textBoxChangeFileName.Text;
                 }
                 else
                 {
-                    newPath = Functions.GetRomDirectory(SelectedRom.Path) + "\\" + textBoxChangeFileName.Text;
+                    newPath = RomFunctions.GetRomDirectory(SelectedRom.Path) + "\\" + textBoxChangeFileName.Text;
                 }
 
                 if (File.Exists(newPath))
@@ -253,9 +257,9 @@ namespace EmuLoader.Forms
                 Rom.Delete(SelectedRom);
                 SelectedRom.Path = newPath;
 
-                if (checkBoxChangeZippedName.Checked && Functions.GetFileExtension(newPath) == ".zip")
+                if (checkBoxChangeZippedName.Checked && RomFunctions.GetFileExtension(newPath) == ".zip")
                 {
-                    Functions.ChangeRomNameInsideZip(newPath);
+                    RomFunctions.ChangeRomNameInsideZip(newPath);
                 }
             }
 
@@ -264,6 +268,21 @@ namespace EmuLoader.Forms
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(boxToDeleteIfCanceled))
+            {
+                File.Delete(boxToDeleteIfCanceled);
+            }
+
+            if (!string.IsNullOrEmpty(titleToDeleteIfCanceled))
+            {
+                File.Delete(titleToDeleteIfCanceled);
+            }
+
+            if (!string.IsNullOrEmpty(gameplayToDeleteIfCanceled))
+            {
+                File.Delete(gameplayToDeleteIfCanceled);
+            }
+
             Close();
         }
 
@@ -290,12 +309,12 @@ namespace EmuLoader.Forms
 
         private void buttonCopyToFile_Click(object sender, EventArgs e)
         {
-            textBoxChangeFileName.Text = textBoxChangeRomName.Text.Trim() + Functions.GetFileExtension(textBoxChangeFileName.Text);
+            textBoxChangeFileName.Text = textBoxChangeRomName.Text.Trim() + RomFunctions.GetFileExtension(textBoxChangeFileName.Text);
         }
 
         private void buttonCopyToRom_Click(object sender, EventArgs e)
         {
-            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Trim().Replace(Functions.GetFileExtension(textBoxChangeFileName.Text), string.Empty);
+            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Trim().Replace(RomFunctions.GetFileExtension(textBoxChangeFileName.Text), string.Empty);
         }
 
         private void buttonOpenDB_Click(object sender, EventArgs e)
@@ -306,7 +325,7 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var game = Functions.GetGameDetails(textBoxId.Text);
+            var game = SyncDataFunctions.GetGameDetails(textBoxId.Text);
             game.Id = textBoxId.Text;
             StringBuilder text = new StringBuilder("");
 
@@ -346,60 +365,111 @@ namespace EmuLoader.Forms
 
         private void buttonGetRomData_Click(object sender, EventArgs e)
         {
-            if (textBoxId.Text == string.Empty)
+            try
             {
-                MessageBox.Show("TheGameDB Id is empty.");
-                return;
-            }
+                FormWait.ShowWait();
 
-            var game = Functions.GetGameDetails(textBoxId.Text);
-            textBoxDBName.Text = game.DBName;
-
-            if (radioButtonOnlyMissing.Checked)
-            {
-                if (string.IsNullOrEmpty(textBoxPublisher.Text))
+                if (textBoxId.Text == string.Empty)
                 {
-                    textBoxPublisher.Text = game.Publisher;
+                    MessageBox.Show("TheGameDB Id is empty.");
+                    return;
                 }
 
-                if (string.IsNullOrEmpty(textBoxDeveloper.Text))
-                {
-                    textBoxDeveloper.Text = game.Developer;
-                }
+                var game = SyncDataFunctions.GetGameDetails(textBoxId.Text);
 
-                if (string.IsNullOrEmpty(textBoxDescription.Text))
-                {
-                    textBoxDescription.Text = game.Description;
-                }
+                textBoxDBName.Text = game.DBName;
 
-                if (string.IsNullOrEmpty(textBoxYearReleased.Text))
+                if (radioButtonOnlyMissing.Checked)
                 {
-                    textBoxYearReleased.Text = game.YearReleased;
-                }
+                    if (string.IsNullOrEmpty(textBoxPublisher.Text))
+                    {
+                        textBoxPublisher.Text = game.Publisher;
+                    }
 
-                if (string.IsNullOrEmpty(textBoxRating.Text))
-                {
-                    textBoxRating.Text = game.Rating.ToString("#.#");
-                }
+                    if (string.IsNullOrEmpty(textBoxDeveloper.Text))
+                    {
+                        textBoxDeveloper.Text = game.Developer;
+                    }
 
-                if (string.IsNullOrEmpty(comboBoxGenre.Text))
+                    if (string.IsNullOrEmpty(textBoxDescription.Text))
+                    {
+                        textBoxDescription.Text = game.Description;
+                    }
+
+                    if (string.IsNullOrEmpty(textBoxYearReleased.Text))
+                    {
+                        textBoxYearReleased.Text = game.YearReleased;
+                    }
+
+                    if (string.IsNullOrEmpty(textBoxRating.Text))
+                    {
+                        textBoxRating.Text = game.Rating.ToString("#.#");
+                    }
+
+                    if (string.IsNullOrEmpty(comboBoxGenre.Text))
+                    {
+                        LoadComboBoxGenres();
+                        comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
+                    }
+                }
+                else
                 {
                     LoadComboBoxGenres();
+                    textBoxPublisher.Text = game.Publisher;
+                    textBoxDeveloper.Text = game.Developer;
+                    textBoxDescription.Text = game.Description;
+                    textBoxYearReleased.Text = game.YearReleased;
+                    textBoxRating.Text = game.Rating.ToString("#.#");
+
                     comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
                 }
+
+
+                var box = RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder);
+                var title = RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder);
+                var gameplay = RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder);
+
+                bool missingBox = string.IsNullOrEmpty(box);
+                bool missingTitle = string.IsNullOrEmpty(title);
+                bool missingGameplay = string.IsNullOrEmpty(gameplay);
+
+                if (!missingBox && !missingTitle && !missingGameplay) return;
+
+                string boxUrl = string.Empty;
+                string titleUrl = string.Empty;
+                string gameplayUrl = string.Empty;
+
+                var found = SyncDataFunctions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
+
+                if (!found) return;
+
+                if (missingBox)
+                {
+                    RomFunctions.SavePicture(SelectedRom, boxUrl, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
+                    boxToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder);
+                }
+
+                if (missingTitle && !string.IsNullOrEmpty(titleUrl))
+                {
+                    RomFunctions.SavePicture(SelectedRom, titleUrl, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
+                    titleToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder);
+                }
+
+                if (missingGameplay && !string.IsNullOrEmpty(gameplayUrl))
+                {
+                    RomFunctions.SavePicture(SelectedRom, gameplayUrl, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
+                    gameplayToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                LoadComboBoxGenres();
-                textBoxPublisher.Text = game.Publisher;
-                textBoxDeveloper.Text = game.Developer;
-                textBoxDescription.Text = game.Description;
-                textBoxYearReleased.Text = game.YearReleased;
-                textBoxRating.Text = game.Rating.ToString("#.#");
-
-                comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
+                FormWait.CloseWait();
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            finally
+            {
+                FormWait.CloseWait();
+            }
         }
 
         private void buttonSearchInDB_Click(object sender, EventArgs e)
@@ -407,8 +477,8 @@ namespace EmuLoader.Forms
             string url = "http://thegamesdb.net/search/?string={0}&function=Search";
             string name = textBoxChangeRomName.Text.Replace("[!]", string.Empty).Replace("!", string.Empty).Replace("&", " ").Replace(" ", "+");
 
-            name = Functions.RemoveSubstring(name, '[', ']');
-            name = Functions.RemoveSubstring(name, '(', ')');
+            name = RomFunctions.RemoveSubstring(name, '[', ']');
+            name = RomFunctions.RemoveSubstring(name, '(', ')');
             url = string.Format(url, name);
 
             ProcessStartInfo sInfo = new ProcessStartInfo(url);
@@ -436,7 +506,7 @@ namespace EmuLoader.Forms
                 suffixIndex = bracketindex > parindex ? parindex : bracketindex;
             }
 
-            string suffix = suffixIndex == 0 ? string.Empty : Functions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
+            string suffix = suffixIndex == 0 ? string.Empty : RomFunctions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
 
             if (checkBoxKeepSuffix.Checked)
             {
@@ -447,7 +517,7 @@ namespace EmuLoader.Forms
                 textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -");
             }
 
-            textBoxChangeFileName.Text = textBoxChangeRomName.Text + Functions.GetFileExtension(textBoxChangeFileName.Text);
+            textBoxChangeFileName.Text = textBoxChangeRomName.Text + RomFunctions.GetFileExtension(textBoxChangeFileName.Text);
 
             textBoxChangeRomName.Text = textBoxChangeRomName.Text.Trim();
             textBoxChangeFileName.Text = textBoxChangeFileName.Text.Trim();
@@ -499,19 +569,19 @@ namespace EmuLoader.Forms
                 pictureBoxTitle.Image = null;
                 pictureBoxGameplay.Image = null;
 
-                if (!string.IsNullOrEmpty(Functions.GetRomPicture(SelectedRom, Values.BoxartFolder)))
+                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder)))
                 {
-                    pictureBoxBoxart.Image = Functions.CreateBitmap(Functions.GetRomPicture(SelectedRom, Values.BoxartFolder));
+                    pictureBoxBoxart.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder));
                 }
 
-                if (!string.IsNullOrEmpty(Functions.GetRomPicture(SelectedRom, Values.TitleFolder)))
+                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder)))
                 {
-                    pictureBoxTitle.Image = Functions.CreateBitmap(Functions.GetRomPicture(SelectedRom, Values.TitleFolder));
+                    pictureBoxTitle.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder));
                 }
 
-                if (!string.IsNullOrEmpty(Functions.GetRomPicture(SelectedRom, Values.GameplayFolder)))
+                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder)))
                 {
-                    pictureBoxGameplay.Image = Functions.CreateBitmap(Functions.GetRomPicture(SelectedRom, Values.GameplayFolder));
+                    pictureBoxGameplay.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder));
                 }
             }
             catch (Exception ex)

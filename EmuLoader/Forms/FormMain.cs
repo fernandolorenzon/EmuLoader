@@ -5,9 +5,9 @@ using System.Windows.Forms;
 using System.IO;
 using System.Linq;
 using EmuLoader.Classes;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Diagnostics;
+using EmuLoader.Business;
 
 namespace EmuLoader.Forms
 {
@@ -177,7 +177,7 @@ namespace EmuLoader.Forms
                 
                 Platform platform = null;
                 FormChoose.ChoosePlatform(out platform);
-                Rom.AddRomsFromDirectory(platform, open.SelectedPath);
+                RomFunctions.AddRomsFromDirectory(platform, open.SelectedPath);
                 XML.SaveXml();
                 FilterRoms();
             }
@@ -225,7 +225,7 @@ namespace EmuLoader.Forms
 
                 Platform platform = null;
                 FormChoose.ChoosePlatform(out platform);
-                Rom.AddRomsFiles(platform, open.FileNames);
+                RomFunctions.AddRomsFiles(platform, open.FileNames);
                 XML.SaveXml();
                 FilterRoms();
 
@@ -244,7 +244,7 @@ namespace EmuLoader.Forms
             try
             {
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-                ProcessStartInfo sInfo = new ProcessStartInfo(Functions.GetRomPicture(rom, Values.BoxartFolder));
+                ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.BoxartFolder));
                 Process.Start(sInfo);
             }
             catch (Exception ex)
@@ -260,7 +260,7 @@ namespace EmuLoader.Forms
             try
             {
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-                ProcessStartInfo sInfo = new ProcessStartInfo(Functions.GetRomPicture(rom, Values.TitleFolder));
+                ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.TitleFolder));
                 Process.Start(sInfo);
             }
             catch (Exception ex)
@@ -276,7 +276,7 @@ namespace EmuLoader.Forms
             try
             {
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-                ProcessStartInfo sInfo = new ProcessStartInfo(Functions.GetRomPicture(rom, Values.GameplayFolder));
+                ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.GameplayFolder));
                 Process.Start(sInfo);
             }
             catch (Exception ex)
@@ -300,7 +300,7 @@ namespace EmuLoader.Forms
                     romList.Add((Rom)row.Tag);
                 }
 
-                Rom.ChangeRomsPlatform(romList, selected);
+                RomFunctions.ChangeRomsPlatform(romList, selected);
                 XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -389,7 +389,7 @@ namespace EmuLoader.Forms
                     roms.Add((Rom)row.Tag);
                 }
 
-                Rom.ChangeRomLabels(roms, labels);
+                RomFunctions.ChangeRomLabels(roms, labels);
                 XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -438,7 +438,7 @@ namespace EmuLoader.Forms
                 foreach (var rom in roms)
                 {
                     Rom.Delete(rom);
-                    Functions.RemoveRomPics(rom);
+                    RomFunctions.RemoveRomPics(rom);
                     FilteredRoms.Remove(rom);
                 }
 
@@ -469,7 +469,7 @@ namespace EmuLoader.Forms
 
                 dataGridView.Rows.Remove(row);
                 Rom.Delete(rom);
-                Functions.RemoveRomPics(rom);
+                RomFunctions.RemoveRomPics(rom);
                 FilteredRoms.Remove(rom);
                 labelTotalRomsCount.Text = FilteredRoms.Count.ToString();
                 XML.SaveXml();
@@ -773,7 +773,7 @@ namespace EmuLoader.Forms
                     if (!File.Exists(rom.Path))
                     {
                         Rom.Delete(rom);
-                        Functions.RemoveRomPics(rom);
+                        RomFunctions.RemoveRomPics(rom);
                     }
                 }
 
@@ -1202,7 +1202,7 @@ namespace EmuLoader.Forms
 
                 if (FormChoose.ChoosePlatform(out selected))
                 {
-                    Rom.AddRomPacksFromDirectory(selected, open.SelectedPath);
+                    RomFunctions.AddRomPacksFromDirectory(selected, open.SelectedPath);
                     XML.SaveXml();
                     FilterRoms();
                 }
@@ -1299,7 +1299,7 @@ namespace EmuLoader.Forms
                 }
 
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
-                Functions.RunPlatform(rom);
+                RunAppFunctions.RunPlatform(rom);
             }
             catch (Exception ex)
             {
@@ -1400,7 +1400,7 @@ namespace EmuLoader.Forms
                     platform = (Platform)dataGridViewPlatforms.SelectedRows[0].Tag;
                 }
 
-                Functions.RunPlatform(platform);
+                RunAppFunctions.RunPlatform(platform);
             }
             catch (Exception ex)
             {
@@ -1797,19 +1797,19 @@ namespace EmuLoader.Forms
 
                 if (rom.Platform == null) return;
 
-                if (!string.IsNullOrEmpty(Functions.GetRomPicture(rom, Values.BoxartFolder)))
+                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(rom, Values.BoxartFolder)))
                 {
-                    pictureBoxBoxart.Image = Functions.CreateBitmap(Functions.GetRomPicture(rom, Values.BoxartFolder));
+                    pictureBoxBoxart.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(rom, Values.BoxartFolder));
                 }
 
-                if (!string.IsNullOrEmpty(Functions.GetRomPicture(rom, Values.TitleFolder)))
+                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(rom, Values.TitleFolder)))
                 {
-                    pictureBoxTitle.Image = Functions.CreateBitmap(Functions.GetRomPicture(rom, Values.TitleFolder));
+                    pictureBoxTitle.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(rom, Values.TitleFolder));
                 }
 
-                if (!string.IsNullOrEmpty(Functions.GetRomPicture(rom, Values.GameplayFolder)))
+                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(rom, Values.GameplayFolder)))
                 {
-                    pictureBoxGameplay.Image = Functions.CreateBitmap(Functions.GetRomPicture(rom, Values.GameplayFolder));
+                    pictureBoxGameplay.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(rom, Values.GameplayFolder));
                 }
             }
             catch (Exception ex)

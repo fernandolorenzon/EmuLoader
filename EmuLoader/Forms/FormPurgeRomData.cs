@@ -1,4 +1,5 @@
-﻿using EmuLoader.Classes;
+﻿using EmuLoader.Business;
+using EmuLoader.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,9 +57,9 @@ namespace EmuLoader.Forms
             labelDescription.Text = Roms.Where(x => string.IsNullOrEmpty(x.Description)).Count().ToString();
             labelYearReleased.Text = Roms.Where(x => string.IsNullOrEmpty(x.YearReleased)).Count().ToString();
 
-            var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
-            var titlePictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
-            var gameplayPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+            var boxartPictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
+            var titlePictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
+            var gameplayPictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
 
             var romsList = Roms.Select(x => x.Name).ToList();
 

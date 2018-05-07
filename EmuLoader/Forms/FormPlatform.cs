@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.IO;
+using EmuLoader.Business;
 
 namespace EmuLoader.Forms
 {
@@ -249,7 +250,7 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            string iconPath = Functions.GetPlatformPicture(((Platform)dataGridView.SelectedRows[0].Tag).Name);
+            string iconPath = RomFunctions.GetPlatformPicture(((Platform)dataGridView.SelectedRows[0].Tag).Name);
 
             if (!string.IsNullOrEmpty(iconPath))
             {

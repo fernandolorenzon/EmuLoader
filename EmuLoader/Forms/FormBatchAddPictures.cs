@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.IO;
+using EmuLoader.Business;
 
 namespace EmuLoader.Forms
 {
@@ -61,9 +58,9 @@ namespace EmuLoader.Forms
                         x.Platform != null &&
                         x.Platform.Name == emu.Name &&
                         (
-                            (radioButtonBoxart.Checked && string.IsNullOrEmpty(Functions.GetRomPicture(x, Values.BoxartFolder))) ||
-                            (radioButtonTitle.Checked && string.IsNullOrEmpty(Functions.GetRomPicture(x, Values.TitleFolder))) ||
-                            (radioButtonGameplay.Checked && string.IsNullOrEmpty(Functions.GetRomPicture(x, Values.GameplayFolder)))
+                            (radioButtonBoxart.Checked && string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.BoxartFolder))) ||
+                            (radioButtonTitle.Checked && string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.TitleFolder))) ||
+                            (radioButtonGameplay.Checked && string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.GameplayFolder)))
                         )
                 ).ToList();
 
@@ -75,22 +72,22 @@ namespace EmuLoader.Forms
 
             foreach (var item in images)
             {
-                imageRegion.Add(Functions.GetFileName(item), Functions.DetectRegion(item));
+                imageRegion.Add(RomFunctions.GetFileName(item), RomFunctions.DetectRegion(item));
             }
 
             foreach (var rom in roms)
             {
                 bool found = false;
-                string romTrimmed = Functions.TrimRomName(rom.Name);
+                string romTrimmed = RomFunctions.TrimRomName(rom.Name);
 
-                var romRegion = Functions.DetectRegion(rom.Name);
+                var romRegion = RomFunctions.DetectRegion(rom.Name);
                 string imageFound = "";
 
                 foreach (var image in images)
                 {
-                    string imageTrimmed = Functions.TrimRomName(image);
+                    string imageTrimmed = RomFunctions.TrimRomName(image);
 
-                    if (imageTrimmed == romTrimmed && imageRegion[Functions.GetFileName(image)] == romRegion)
+                    if (imageTrimmed == romTrimmed && imageRegion[RomFunctions.GetFileName(image)] == romRegion)
                     {
                         found = true;
                         imageFound = image;
@@ -102,7 +99,7 @@ namespace EmuLoader.Forms
                 {
                     foreach (var image in images)
                     {
-                        string imageTrimmed = Functions.TrimRomName(image);
+                        string imageTrimmed = RomFunctions.TrimRomName(image);
 
                         if (imageTrimmed == romTrimmed)
                         {
@@ -121,7 +118,7 @@ namespace EmuLoader.Forms
                     }
 
                     successfulFind++;
-                    Functions.SavePicture(rom, imageFound, type, checkBoxSaveAsJpg.Checked);
+                    RomFunctions.SavePicture(rom, imageFound, type, checkBoxSaveAsJpg.Checked);
                 }
                 else
                 {

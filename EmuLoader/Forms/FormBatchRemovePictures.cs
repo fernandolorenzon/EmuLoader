@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.IO;
+using EmuLoader.Business;
 
 namespace EmuLoader.Forms
 {
@@ -35,9 +32,9 @@ namespace EmuLoader.Forms
                         x.Platform != null &&
                         x.Platform.Name == emu.Name &&
                         (
-                            (radioButtonBoxart.Checked && !string.IsNullOrEmpty(Functions.GetRomPicture(x, Values.BoxartFolder))) ||
-                            (radioButtonTitle.Checked && !string.IsNullOrEmpty(Functions.GetRomPicture(x, Values.TitleFolder))) ||
-                            (radioButtonGameplay.Checked && !string.IsNullOrEmpty(Functions.GetRomPicture(x, Values.GameplayFolder)))
+                            (radioButtonBoxart.Checked && !string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.BoxartFolder))) ||
+                            (radioButtonTitle.Checked && !string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.TitleFolder))) ||
+                            (radioButtonGameplay.Checked && !string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.GameplayFolder)))
                         )
                 ).ToList();
 
@@ -49,27 +46,27 @@ namespace EmuLoader.Forms
             {
                 if (type == Values.BoxartFolder) {
 
-                    if (File.Exists(Functions.GetRomPicture(rom, Values.BoxartFolder)))
+                    if (File.Exists(RomFunctions.GetRomPicture(rom, Values.BoxartFolder)))
                     {
-                        File.Delete(Functions.GetRomPicture(rom, Values.BoxartFolder));
+                        File.Delete(RomFunctions.GetRomPicture(rom, Values.BoxartFolder));
                     }
 
                     successfulFind++;
                 }
                 else if (type == Values.TitleFolder)
                 {
-                    if (File.Exists(Functions.GetRomPicture(rom, Values.TitleFolder)))
+                    if (File.Exists(RomFunctions.GetRomPicture(rom, Values.TitleFolder)))
                     {
-                        File.Delete(Functions.GetRomPicture(rom, Values.TitleFolder));
+                        File.Delete(RomFunctions.GetRomPicture(rom, Values.TitleFolder));
                     }
 
                     successfulFind++;
                 }
                 else if (type == Values.GameplayFolder)
                 {
-                    if (File.Exists(Functions.GetRomPicture(rom, Values.GameplayFolder)))
+                    if (File.Exists(RomFunctions.GetRomPicture(rom, Values.GameplayFolder)))
                     {
-                        File.Delete(Functions.GetRomPicture(rom, Values.GameplayFolder));
+                        File.Delete(RomFunctions.GetRomPicture(rom, Values.GameplayFolder));
                     }
 
                     successfulFind++;

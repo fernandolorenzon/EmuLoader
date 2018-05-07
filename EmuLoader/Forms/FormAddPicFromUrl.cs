@@ -1,4 +1,5 @@
-﻿using EmuLoader.Classes;
+﻿using EmuLoader.Business;
+using EmuLoader.Classes;
 using System;
 using System.IO;
 using System.Net;
@@ -60,7 +61,7 @@ namespace EmuLoader.Forms
                 client.DownloadFile(new Uri(textBox1.Text), imagePath);
             }
 
-            Functions.SavePicture(SelectedRom, imagePath, PictureType, checkBoxSaveAsJpg.Checked);
+            RomFunctions.SavePicture(SelectedRom, imagePath, PictureType, checkBoxSaveAsJpg.Checked);
             File.Delete(imagePath);
             Close();
         }

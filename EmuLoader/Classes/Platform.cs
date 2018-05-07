@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml;
 using System.Drawing;
 using System.IO;
+using EmuLoader.Business;
 
 namespace EmuLoader.Classes
 {
@@ -46,7 +47,7 @@ namespace EmuLoader.Classes
                 platform.DefaultRomExtensions = Functions.GetXmlAttribute(node, "DefaultRomExtensions");
                 platform.Color = Color.FromArgb(Convert.ToInt32(Functions.GetXmlAttribute(node, "Color")));
 
-                string icon = Functions.GetPlatformPicture(platform.Name);
+                string icon = RomFunctions.GetPlatformPicture(platform.Name);
                 platform.Icon = Functions.CreateBitmap(icon);
                 platforms.Add(platform.Name, platform);
             }
@@ -161,7 +162,7 @@ namespace EmuLoader.Classes
                 }
             }
 
-            var addedAnyRomPack = Rom.AddRomPacksFromDirectory(this, this.DefaultRomPath);
+            var addedAnyRomPack = RomFunctions.AddRomPacksFromDirectory(this, DefaultRomPath);
 
             return addedAny || addedAnyRomPack;
         }

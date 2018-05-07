@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using EmuLoader.Classes;
 using System.Linq;
+using EmuLoader.Business;
 
 namespace EmuLoader.Forms
 {

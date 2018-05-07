@@ -1,9 +1,8 @@
 ﻿using EmuLoader.Classes;
+using EmuLoader.Business;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -62,7 +61,7 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                games = Functions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString());
+                games = SyncDataFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString());
 
                 LogMessage(string.Format("{0} games found at online DB for the {1} platform", games.Count, comboBoxPlatform.Text));
 
@@ -161,12 +160,12 @@ namespace EmuLoader.Forms
                     comboBoxPlatform_SelectedIndexChanged(null, new EventArgs());
                 }
 
-                var romName = Functions.TrimRomName(rom.Name);
+                var romName = RomFunctions.TrimRomName(rom.Name);
                 found = false;
 
                 foreach (var game in games)
                 {
-                    var gameName = Functions.TrimRomName(game.DBName);
+                    var gameName = RomFunctions.TrimRomName(game.DBName);
 
                     if (romName == gameName)
                     {
@@ -207,10 +206,10 @@ namespace EmuLoader.Forms
                 {
                     LogMessage("NOT FOUND - " + rom.Name);
                     LogMessage("TRYING THE HARD WAY - " + rom.Name);
-                    var gameName = Functions.RemoveSubstring(rom.Name, '(', ')');
-                    gameName = Functions.RemoveSubstring(gameName, '[', ']').Trim();
+                    var gameName = RomFunctions.RemoveSubstring(rom.Name, '(', ')');
+                    gameName = RomFunctions.RemoveSubstring(gameName, '[', ']').Trim();
 
-                    var game = Functions.GetGameByName(platformId, gameName);
+                    var game = SyncDataFunctions.GetGameByName(platformId, gameName);
 
                     if (game == null)
                     {
@@ -277,7 +276,7 @@ namespace EmuLoader.Forms
                 }
 
                 LogMessage("UPDATING - " + rom.Name);
-                var game = Functions.GetGameDetails(rom.Id);
+                var game = SyncDataFunctions.GetGameDetails(rom.Id);
 
                 if (game == null) continue;
 
@@ -378,7 +377,7 @@ namespace EmuLoader.Forms
                     string titleUrl = string.Empty;
                     string gameplayUrl = string.Empty;
 
-                    var found = Functions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
+                    var found = SyncDataFunctions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
 
                     var updateBoxart = boxArtMissing && !string.IsNullOrEmpty(boxUrl);
                     var updateTitle = titleMissing && !string.IsNullOrEmpty(titleUrl);
@@ -395,38 +394,22 @@ namespace EmuLoader.Forms
                     if (updateBoxart)
                     {
                         LogMessage("UPDATING BOXART PICTURE - " + rom.Name);
-                        SavePicture(boxUrl, rom, Values.BoxartFolder);
+                        SyncDataFunctions.SavePictureFromUrl(rom, boxUrl, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
                     }
 
                     if (updateTitle)
                     {
                         LogMessage("UPDATING TILE PICTURE - " + rom.Name);
-                        SavePicture(titleUrl, rom, Values.TitleFolder);
+                        SyncDataFunctions.SavePictureFromUrl(rom, titleUrl, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
                     }
 
                     if (updateGameplay)
                     {
                         LogMessage("UPDATING GAMEPLAY PICTURE - " + rom.Name);
-                        SavePicture(gameplayUrl, rom, Values.GameplayFolder);
+                        SyncDataFunctions.SavePictureFromUrl(rom, gameplayUrl, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
                     }
                 }
             }
-        }
-
-        private void SavePicture(string url, Rom rom, string folder)
-        {
-            if (string.IsNullOrEmpty(url)) return;
-
-            string extension = url.Substring(url.LastIndexOf("."));
-            string imagePath = "image" + extension;
-
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFile(new Uri(url), imagePath);
-            }
-
-            Functions.SavePicture(rom, imagePath, folder, checkBoxSaveAsJpg.Checked);
-            File.Delete(imagePath);
         }
 
         private void comboBoxPlatform_SelectedIndexChanged(object sender, EventArgs e)
@@ -521,9 +504,9 @@ namespace EmuLoader.Forms
                     labelRating.Text = Roms.Where(x => x.Rating == null || x.Rating == 0).Count().ToString();
                 });
 
-                var boxartPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
-                var titlePictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
-                var gameplayPictures = Functions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
+                var boxartPictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.BoxartFolder);
+                var titlePictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
+                var gameplayPictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
 
                 var romsList = Roms.Select(x => x.Name).ToList();
 
