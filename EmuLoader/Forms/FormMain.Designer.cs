@@ -616,7 +616,7 @@
             // 
             // groupBoxFilter
             // 
-            this.groupBoxFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.groupBoxFilter.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.groupBoxFilter.Controls.Add(this.buttonRescan);
             this.groupBoxFilter.Controls.Add(this.buttonClear);
             this.groupBoxFilter.Controls.Add(this.label1);
@@ -635,7 +635,8 @@
             this.groupBoxFilter.Controls.Add(this.comboBoxLabels);
             this.groupBoxFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBoxFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxFilter.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.groupBoxFilter.Location = new System.Drawing.Point(0, 24);
             this.groupBoxFilter.Name = "groupBoxFilter";
             this.groupBoxFilter.Size = new System.Drawing.Size(726, 98);
@@ -646,6 +647,8 @@
             // buttonRescan
             // 
             this.buttonRescan.Enabled = false;
+            this.buttonRescan.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRescan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonRescan.Location = new System.Drawing.Point(134, 65);
             this.buttonRescan.Name = "buttonRescan";
             this.buttonRescan.Size = new System.Drawing.Size(120, 23);
@@ -657,10 +660,11 @@
             // buttonClear
             // 
             this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClear.Location = new System.Drawing.Point(625, 14);
+            this.buttonClear.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonClear.Location = new System.Drawing.Point(625, 17);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(98, 81);
+            this.buttonClear.Size = new System.Drawing.Size(98, 78);
             this.buttonClear.TabIndex = 2;
             this.buttonClear.Text = "Clear Filter";
             this.buttonClear.UseVisualStyleBackColor = true;
@@ -669,10 +673,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(384, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 12);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 16;
             this.label1.Text = "Developer";
             // 
@@ -689,20 +693,20 @@
             // labelYearReleased
             // 
             this.labelYearReleased.AutoSize = true;
-            this.labelYearReleased.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelYearReleased.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelYearReleased.Location = new System.Drawing.Point(511, 14);
             this.labelYearReleased.Name = "labelYearReleased";
-            this.labelYearReleased.Size = new System.Drawing.Size(77, 12);
+            this.labelYearReleased.Size = new System.Drawing.Size(84, 14);
             this.labelYearReleased.TabIndex = 14;
             this.labelYearReleased.Text = "Year Released";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(258, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 12);
+            this.label3.Size = new System.Drawing.Size(60, 14);
             this.label3.TabIndex = 13;
             this.label3.Text = "Publisher";
             // 
@@ -732,7 +736,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(260, 68);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(343, 18);
+            this.textBoxFilter.Size = new System.Drawing.Size(343, 21);
             this.textBoxFilter.TabIndex = 10;
             this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
             this.textBoxFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxFilter_KeyPress);
@@ -740,10 +744,10 @@
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
-            this.labelGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGenre.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGenre.Location = new System.Drawing.Point(8, 14);
             this.labelGenre.Name = "labelGenre";
-            this.labelGenre.Size = new System.Drawing.Size(35, 12);
+            this.labelGenre.Size = new System.Drawing.Size(40, 14);
             this.labelGenre.TabIndex = 9;
             this.labelGenre.Text = "Genre";
             // 
@@ -760,30 +764,30 @@
             // labelFilterRom
             // 
             this.labelFilterRom.AutoSize = true;
-            this.labelFilterRom.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFilterRom.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFilterRom.Location = new System.Drawing.Point(263, 52);
             this.labelFilterRom.Name = "labelFilterRom";
-            this.labelFilterRom.Size = new System.Drawing.Size(60, 12);
+            this.labelFilterRom.Size = new System.Drawing.Size(65, 14);
             this.labelFilterRom.TabIndex = 5;
             this.labelFilterRom.Text = "Rom Name";
             // 
             // labelLabels
             // 
             this.labelLabels.AutoSize = true;
-            this.labelLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLabels.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLabels.Location = new System.Drawing.Point(134, 14);
             this.labelLabels.Name = "labelLabels";
-            this.labelLabels.Size = new System.Drawing.Size(32, 12);
+            this.labelLabels.Size = new System.Drawing.Size(36, 14);
             this.labelLabels.TabIndex = 7;
             this.labelLabels.Text = "Label";
             // 
             // labelEmulatorFilter
             // 
             this.labelEmulatorFilter.AutoSize = true;
-            this.labelEmulatorFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEmulatorFilter.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEmulatorFilter.Location = new System.Drawing.Point(6, 52);
             this.labelEmulatorFilter.Name = "labelEmulatorFilter";
-            this.labelEmulatorFilter.Size = new System.Drawing.Size(48, 12);
+            this.labelEmulatorFilter.Size = new System.Drawing.Size(55, 14);
             this.labelEmulatorFilter.TabIndex = 6;
             this.labelEmulatorFilter.Text = "Platform";
             // 
@@ -960,10 +964,11 @@
             // 
             // panelBottom
             // 
-            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panelBottom.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.panelBottom.Controls.Add(this.labelTotal);
             this.panelBottom.Controls.Add(this.labelTotalRomsCount);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panelBottom.Location = new System.Drawing.Point(0, 658);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(726, 29);
