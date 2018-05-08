@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonRomOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonRomRemoveRom = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,8 +102,6 @@
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.comboBoxLabels = new System.Windows.Forms.ComboBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
             this.columnIconMain = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnRomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomDBName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +114,8 @@
             this.columnDeveloper = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStripEditRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -160,6 +161,7 @@
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
+            this.contextMenuStripEditRom.OwnerItem = this.selectedRomsOptionsToolStripMenuItem;
             this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 158);
             // 
             // changePlatformToolStripMenuItem
@@ -815,9 +817,9 @@
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.BackgroundColor = System.Drawing.Color.Lavender;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -841,8 +843,19 @@
             this.dataGridView.Location = new System.Drawing.Point(0, 122);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView.RowTemplate.Height = 30;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
@@ -855,29 +868,6 @@
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             this.dataGridView.Leave += new System.EventHandler(this.dataGridView_Leave);
             this.dataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseDown);
-            // 
-            // panelBottom
-            // 
-            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panelBottom.Controls.Add(this.labelTotal);
-            this.panelBottom.Controls.Add(this.labelTotalRomsCount);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 658);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(726, 29);
-            this.panelBottom.TabIndex = 17;
-            // 
-            // flowLayoutPanelPictures
-            // 
-            this.flowLayoutPanelPictures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxBoxart);
-            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
-            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
-            this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(726, 0);
-            this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
-            this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
-            this.flowLayoutPanelPictures.TabIndex = 16;
             // 
             // columnIconMain
             // 
@@ -967,6 +957,29 @@
             this.columnRating.HeaderText = "Rating";
             this.columnRating.Name = "columnRating";
             this.columnRating.ReadOnly = true;
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panelBottom.Controls.Add(this.labelTotal);
+            this.panelBottom.Controls.Add(this.labelTotalRomsCount);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 658);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(726, 29);
+            this.panelBottom.TabIndex = 17;
+            // 
+            // flowLayoutPanelPictures
+            // 
+            this.flowLayoutPanelPictures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxBoxart);
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
+            this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
+            this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(726, 0);
+            this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
+            this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
+            this.flowLayoutPanelPictures.TabIndex = 16;
             // 
             // FormMain
             // 

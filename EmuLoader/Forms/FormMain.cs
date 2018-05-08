@@ -1623,6 +1623,8 @@ namespace EmuLoader.Forms
                 row.Cells["columnGenre"].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
             }
 
+            row.Cells["columnRating"].Style.ForeColor = Color.Black;
+
             row.Cells[1].ToolTipText = rom.Description;
         }
 
@@ -1735,8 +1737,8 @@ namespace EmuLoader.Forms
             }
             else
             {
-                row.Cells[columnLabels.Index].Style.BackColor = Color.White;
-                row.Cells[columnLabels.Index].Style.ForeColor = Color.Black;
+                row.Cells[columnLabels.Index].Style.BackColor = row.Cells[columnRomName.Index].Style.BackColor;
+                row.Cells[columnLabels.Index].Style.ForeColor = row.Cells[columnRomName.Index].Style.ForeColor;
             }
         }
 
