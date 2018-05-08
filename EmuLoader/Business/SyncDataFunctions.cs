@@ -266,18 +266,25 @@ namespace EmuLoader.Business
 
         public static void SavePictureFromUrl(Rom rom, string url, string folder, bool saveAsJPG)
         {
-            if (string.IsNullOrEmpty(url)) return;
-
-            string extension = url.Substring(url.LastIndexOf("."));
-            string imagePath = "image" + extension;
-
-            using (WebClient client = new WebClient())
+            try
             {
-                client.DownloadFile(new Uri(url), imagePath);
-            }
+                if (string.IsNullOrEmpty(url)) return;
 
-            RomFunctions.SavePicture(rom, imagePath, folder, saveAsJPG);
-            File.Delete(imagePath);
+                string extension = url.Substring(url.LastIndexOf("."));
+                string imagePath = "image" + extension;
+
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(new Uri(url), imagePath);
+                }
+
+                RomFunctions.SavePicture(rom, imagePath, folder, saveAsJPG);
+                File.Delete(imagePath);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

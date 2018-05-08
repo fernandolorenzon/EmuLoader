@@ -1225,7 +1225,6 @@ namespace EmuLoader.Forms
                     Rom.Fill();
                     FillGenreFilter();
                     FilterRoms();
-                    FillPlatformFilter();
                     FillPlatformGrid();
                     FillPublisherFilter();
                     FillDeveloperFilter();
