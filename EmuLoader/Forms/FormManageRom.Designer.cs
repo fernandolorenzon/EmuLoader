@@ -34,6 +34,8 @@
             this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.textBoxRating = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.checkBoxKeepSuffix = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
@@ -104,8 +106,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBoxRating = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.checkBoxUseAlternate = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -177,6 +178,23 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // textBoxRating
+            // 
+            this.textBoxRating.Location = new System.Drawing.Point(596, 304);
+            this.textBoxRating.MaxLength = 4;
+            this.textBoxRating.Name = "textBoxRating";
+            this.textBoxRating.Size = new System.Drawing.Size(201, 20);
+            this.textBoxRating.TabIndex = 104;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(593, 288);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(80, 13);
+            this.label16.TabIndex = 103;
+            this.label16.Text = "Rating - 0 to 10";
             // 
             // checkBoxKeepSuffix
             // 
@@ -264,6 +282,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxUseAlternate);
             this.groupBox1.Controls.Add(this.buttonHelp);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
@@ -581,7 +600,7 @@
             // labelChooseLabel
             // 
             this.labelChooseLabel.AutoSize = true;
-            this.labelChooseLabel.Location = new System.Drawing.Point(19, 346);
+            this.labelChooseLabel.Location = new System.Drawing.Point(3, 328);
             this.labelChooseLabel.Name = "labelChooseLabel";
             this.labelChooseLabel.Size = new System.Drawing.Size(77, 13);
             this.labelChooseLabel.TabIndex = 53;
@@ -596,11 +615,11 @@
             this.columnCheck,
             this.columnName,
             this.columnColor});
-            this.dataGridView.Location = new System.Drawing.Point(6, 362);
+            this.dataGridView.Location = new System.Drawing.Point(6, 351);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(377, 139);
+            this.dataGridView.Size = new System.Drawing.Size(377, 159);
             this.dataGridView.TabIndex = 52;
             // 
             // columnCheck
@@ -628,7 +647,7 @@
             // comboBoxGenre
             // 
             this.comboBoxGenre.FormattingEnabled = true;
-            this.comboBoxGenre.Location = new System.Drawing.Point(179, 320);
+            this.comboBoxGenre.Location = new System.Drawing.Point(179, 304);
             this.comboBoxGenre.Name = "comboBoxGenre";
             this.comboBoxGenre.Size = new System.Drawing.Size(204, 21);
             this.comboBoxGenre.TabIndex = 51;
@@ -636,7 +655,7 @@
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
-            this.labelGenre.Location = new System.Drawing.Point(176, 304);
+            this.labelGenre.Location = new System.Drawing.Point(176, 288);
             this.labelGenre.Name = "labelGenre";
             this.labelGenre.Size = new System.Drawing.Size(75, 13);
             this.labelGenre.TabIndex = 50;
@@ -645,7 +664,7 @@
             // comboBoxPlatform
             // 
             this.comboBoxPlatform.FormattingEnabled = true;
-            this.comboBoxPlatform.Location = new System.Drawing.Point(6, 320);
+            this.comboBoxPlatform.Location = new System.Drawing.Point(6, 304);
             this.comboBoxPlatform.Name = "comboBoxPlatform";
             this.comboBoxPlatform.Size = new System.Drawing.Size(167, 21);
             this.comboBoxPlatform.TabIndex = 49;
@@ -653,7 +672,7 @@
             // labelEmulator
             // 
             this.labelEmulator.AutoSize = true;
-            this.labelEmulator.Location = new System.Drawing.Point(3, 304);
+            this.labelEmulator.Location = new System.Drawing.Point(3, 288);
             this.labelEmulator.Name = "labelEmulator";
             this.labelEmulator.Size = new System.Drawing.Size(87, 13);
             this.labelEmulator.TabIndex = 48;
@@ -865,22 +884,15 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // textBoxRating
+            // checkBoxUseAlternate
             // 
-            this.textBoxRating.Location = new System.Drawing.Point(596, 304);
-            this.textBoxRating.MaxLength = 4;
-            this.textBoxRating.Name = "textBoxRating";
-            this.textBoxRating.Size = new System.Drawing.Size(201, 20);
-            this.textBoxRating.TabIndex = 104;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(593, 288);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(80, 13);
-            this.label16.TabIndex = 103;
-            this.label16.Text = "Rating - 0 to 10";
+            this.checkBoxUseAlternate.AutoSize = true;
+            this.checkBoxUseAlternate.Location = new System.Drawing.Point(355, 70);
+            this.checkBoxUseAlternate.Name = "checkBoxUseAlternate";
+            this.checkBoxUseAlternate.Size = new System.Drawing.Size(198, 17);
+            this.checkBoxUseAlternate.TabIndex = 27;
+            this.checkBoxUseAlternate.Text = "Use Alternate Emulator from Platform";
+            this.checkBoxUseAlternate.UseVisualStyleBackColor = true;
             // 
             // FormManageRom
             // 
@@ -989,5 +1001,6 @@
         private System.Windows.Forms.CheckBox checkBoxKeepSuffix;
         private System.Windows.Forms.TextBox textBoxRating;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox checkBoxUseAlternate;
     }
 }

@@ -43,6 +43,7 @@ namespace EmuLoader.Forms
             textBoxId.Text = rom.Id;
             labelPlatform.Text = rom.Platform == null ? "-" : rom.Platform.Name;
             textBoxRating.Text = rom.Rating != 0 ? rom.Rating.ToString("#.#") : string.Empty;
+            checkBoxUseAlternate.Checked = rom.UseAlternateEmulator;
 
             List<RomLabel> labels = RomLabel.GetAll();
 
@@ -159,6 +160,8 @@ namespace EmuLoader.Forms
                     SelectedRom.EmulatorExe = string.Empty;
                     SelectedRom.Command = string.Empty;
                 }
+
+                SelectedRom.UseAlternateEmulator = checkBoxUseAlternate.Checked;
 
                 if (string.IsNullOrEmpty(SelectedRom.Id))
                 {

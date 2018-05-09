@@ -123,6 +123,12 @@
   <metadata name="columnColor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="columnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="columnColor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -130,6 +136,17 @@
     <value>138, 17</value>
   </metadata>
   <data name="textBoxCommand.ToolTip" xml:space="preserve">
+    <value>Available variables:
+
+%EMUPATH% - The emulator exe -&gt; c:\snes\snes9x.exe
+%ROMPATH% - The rom path and file -&gt; c:\snes\roms\Super Mario (U).zip
+%ROMNAME% - The rom display name -&gt; Super Mario (U)
+%ROMFILE% - The rom file -&gt; Super Mario (U).zip
+
+Most console emulators use the standard: %EMUPATH% %ROMPATH%
+Arcade emulators use this: %EMUPATH% %ROMFILE%</value>
+  </data>
+  <data name="textBoxAlternateCommand.ToolTip" xml:space="preserve">
     <value>Available variables:
 
 %EMUPATH% - The emulator exe -&gt; c:\snes\snes9x.exe

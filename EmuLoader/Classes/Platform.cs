@@ -12,10 +12,12 @@ namespace EmuLoader.Classes
     {
         private static Dictionary<string, Platform> platforms { get; set; }
         public string EmulatorExe { get; set; }
+        public string Command { get; set; }
+        public string EmulatorExeAlt { get; set; }
+        public string CommandAlt { get; set; }
         public Color Color { get; set; }
         public bool ShowInList { get; set; }
         public bool ShowInFilter { get; set; }
-        public string Command { get; set; }
         public string DefaultRomPath { get; set; }
         public string DefaultRomExtensions { get; set; }
         public string Id { get; set; }
@@ -40,9 +42,11 @@ namespace EmuLoader.Classes
                 platform.Id = Functions.GetXmlAttribute(node, "Id");
                 platform.Name = Functions.GetXmlAttribute(node, "Name");
                 platform.EmulatorExe = Functions.GetXmlAttribute(node, "EmulatorExe");
+                platform.Command = Functions.GetXmlAttribute(node, "Command");
+                platform.EmulatorExeAlt = Functions.GetXmlAttribute(node, "EmulatorExeAlt");
+                platform.CommandAlt = Functions.GetXmlAttribute(node, "CommandAlt");
                 platform.ShowInList = Convert.ToBoolean(Functions.GetXmlAttribute(node, "ShowInList"));
                 platform.ShowInFilter = Convert.ToBoolean(Functions.GetXmlAttribute(node, "ShowInFilter"));
-                platform.Command = Functions.GetXmlAttribute(node, "Command");
                 platform.DefaultRomPath = Functions.GetXmlAttribute(node, "DefaultRomPath");
                 platform.DefaultRomExtensions = Functions.GetXmlAttribute(node, "DefaultRomExtensions");
                 platform.Color = Color.FromArgb(Convert.ToInt32(Functions.GetXmlAttribute(node, "Color")));
@@ -98,8 +102,10 @@ namespace EmuLoader.Classes
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Id"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("EmulatorExe"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Command"));
+                node.Attributes.Append(XML.xmlDoc.CreateAttribute("EmulatorExeAlt"));
+                node.Attributes.Append(XML.xmlDoc.CreateAttribute("CommandAlt"));
+                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("ShowInList"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("ShowInFilter"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomPath"));
@@ -112,8 +118,10 @@ namespace EmuLoader.Classes
             Functions.CreateOrSetXmlAttribute(node, "Id", platform.Id);
             Functions.CreateOrSetXmlAttribute(node, "Name", platform.Name);
             Functions.CreateOrSetXmlAttribute(node, "EmulatorExe", platform.EmulatorExe);
-            Functions.CreateOrSetXmlAttribute(node, "Color", platform.Color.ToArgb().ToString());
             Functions.CreateOrSetXmlAttribute(node, "Command", platform.Command);
+            Functions.CreateOrSetXmlAttribute(node, "EmulatorExeAlt", platform.EmulatorExeAlt);
+            Functions.CreateOrSetXmlAttribute(node, "CommandAlt", platform.CommandAlt);
+            Functions.CreateOrSetXmlAttribute(node, "Color", platform.Color.ToArgb().ToString());
             Functions.CreateOrSetXmlAttribute(node, "ShowInList", platform.ShowInList.ToString());
             Functions.CreateOrSetXmlAttribute(node, "ShowInFilter", platform.ShowInFilter.ToString());
             Functions.CreateOrSetXmlAttribute(node, "DefaultRomPath", platform.DefaultRomPath);

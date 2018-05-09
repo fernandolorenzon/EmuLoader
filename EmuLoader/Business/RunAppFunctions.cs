@@ -8,8 +8,8 @@ namespace EmuLoader.Business
     {
         public static void OpenApplication(Rom rom)
         {
-            string exe = rom.Platform.EmulatorExe;
-            string command = rom.Platform.Command;
+            string exe = rom.UseAlternateEmulator ? rom.Platform.EmulatorExeAlt : rom.Platform.EmulatorExe;
+            string command = rom.UseAlternateEmulator ? rom.Platform.CommandAlt : rom.Platform.Command;
 
             if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
             {

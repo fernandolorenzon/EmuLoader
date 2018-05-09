@@ -85,6 +85,27 @@ namespace EmuLoader.Forms
             }
         }
 
+
+        private void buttonAlternatePath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = Environment.CurrentDirectory;
+
+            open.Filter = "EXE | *.exe";
+            open.ShowDialog();
+
+            if (string.IsNullOrEmpty(open.FileName)) return;
+
+            textBoxAlternatePath.Text = open.FileName;
+
+            if (string.IsNullOrEmpty(open.FileName)) return;
+
+            if (string.IsNullOrEmpty(textBoxCommand.Text))
+            {
+                textBoxAlternateCommand.Text = Values.DefaultCommand;
+            }
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Platform platform = null;
@@ -125,10 +146,12 @@ namespace EmuLoader.Forms
             platform.Id = comboBoxPlatformsDB.SelectedValue.ToString();
             platform.Name = textBoxName.Text.Trim();
             platform.EmulatorExe = textBoxPath.Text.Trim();
+            platform.Command = textBoxCommand.Text;
+            platform.EmulatorExeAlt = textBoxAlternatePath.Text.Trim();
+            platform.CommandAlt = textBoxAlternateCommand.Text;
             platform.Color = buttonColor.BackColor;
             platform.ShowInFilter = checkBoxShowInFilters.Checked;
             platform.ShowInList = checkBoxShowInLinksList.Checked;
-            platform.Command = textBoxCommand.Text;
             platform.DefaultRomPath = textBoxDefaultRomPath.Text;
             platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
 
@@ -260,10 +283,12 @@ namespace EmuLoader.Forms
             comboBoxPlatformsDB.SelectedValue = platform.Id == "" ? "0" : platform.Id;
             textBoxName.Text = platform.Name;
             textBoxPath.Text = platform.EmulatorExe;
+            textBoxCommand.Text = platform.Command;
+            textBoxAlternatePath.Text = platform.EmulatorExeAlt;
+            textBoxAlternateCommand.Text = platform.CommandAlt;
             buttonColor.BackColor = platform.Color;
             checkBoxShowInFilters.Checked = platform.ShowInFilter;
             checkBoxShowInLinksList.Checked = platform.ShowInList;
-            textBoxCommand.Text = platform.Command;
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
             textBoxName.Enabled = false;
@@ -317,6 +342,18 @@ namespace EmuLoader.Forms
         private void buttonHelp_Click(object sender, EventArgs e)
         {
             Functions.ShowCommandHelp();
+        }
+
+        private void buttonSwap_Click(object sender, EventArgs e)
+        {
+            var aux = textBoxPath.Text;
+            textBoxPath.Text = textBoxAlternatePath.Text;
+            textBoxAlternatePath.Text = aux;
+
+            aux = textBoxCommand.Text;
+            textBoxCommand.Text = textBoxAlternateCommand.Text;
+            textBoxAlternateCommand.Text = aux;
+
         }
 
         #endregion
