@@ -11,6 +11,27 @@ namespace EmuLoader.Business
 {
     public static class SyncDataFunctions
     {
+        public static string DiscoverGameId(Rom rom)
+        {
+            if (rom.Platform == null) return string.Empty;
+
+            if (string.IsNullOrEmpty(rom.Platform.Id)) return string.Empty;
+
+            var games = GetGamesListByPlatform(rom.Platform.Id);
+            var romName = RomFunctions.TrimRomName(rom.Name);
+
+            foreach (var game in games)
+            {
+                var gameName = RomFunctions.TrimRomName(game.DBName);
+                
+                if (gameName == romName)
+                {
+                    return game.Id;
+                }
+            }
+
+            return string.Empty;
+        }
 
         public static List<Rom> GetGamesListByPlatform(string platformId)
         {

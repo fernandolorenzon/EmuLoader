@@ -374,8 +374,13 @@ namespace EmuLoader.Forms
 
                 if (textBoxId.Text == string.Empty)
                 {
-                    MessageBox.Show("TheGameDB Id is empty.");
-                    return;
+                    textBoxId.Text = SyncDataFunctions.DiscoverGameId(SelectedRom);
+
+                    if (string.IsNullOrEmpty(textBoxId.Text))
+                    {
+                        MessageBox.Show("Could not discover TheGamesDB Id");
+                        return;
+                    }
                 }
 
                 var game = SyncDataFunctions.GetGameDetails(textBoxId.Text);
