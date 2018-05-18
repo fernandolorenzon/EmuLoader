@@ -51,18 +51,7 @@ namespace EmuLoader.Forms
             comboBoxPlatformsDB.DataSource = list;
 
             updating = false;
-        }
-
-        private void textBoxName_TextChanged(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == "")
-            {
-                buttonAdd.Enabled = false;
-            }
-            else
-            {
-                buttonAdd.Enabled = true;
-            }
+            Clean();
         }
 
         private void buttonPath_Click(object sender, EventArgs e)
@@ -114,7 +103,7 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
             {
-                MessageBox.Show("Can not save without a valid name.");
+                MessageBox.Show("Can not save without a valid name.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -137,7 +126,7 @@ namespace EmuLoader.Forms
                 buttonAdd.Text = "Add";
             }
 
-            if(!string.IsNullOrEmpty(textBoxDefaultRomPath.Text) && string.IsNullOrEmpty(textBoxDefaultRomExtensions.Text))
+            if (!string.IsNullOrEmpty(textBoxDefaultRomPath.Text) && string.IsNullOrEmpty(textBoxDefaultRomExtensions.Text))
             {
                 MessageBox.Show("Default rom extensions must also be filled");
                 return;
@@ -262,40 +251,6 @@ namespace EmuLoader.Forms
             SetForm();
         }
 
-        private void SetForm()
-        {
-            DataGridViewRow row = dataGridView.SelectedRows[0];
-            Platform platform = (Platform)row.Tag;
-
-            if (platform == null)
-            {
-                dataGridView.ClearSelection();
-                return;
-            }
-
-            string iconPath = RomFunctions.GetPlatformPicture(((Platform)dataGridView.SelectedRows[0].Tag).Name);
-
-            if (!string.IsNullOrEmpty(iconPath))
-            {
-                pictureBoxIcon.Load(iconPath);
-            }
-
-            comboBoxPlatformsDB.SelectedValue = platform.Id == "" ? "0" : platform.Id;
-            textBoxName.Text = platform.Name;
-            textBoxPath.Text = platform.EmulatorExe;
-            textBoxCommand.Text = platform.Command;
-            textBoxAlternatePath.Text = platform.EmulatorExeAlt;
-            textBoxAlternateCommand.Text = platform.CommandAlt;
-            buttonColor.BackColor = platform.Color;
-            checkBoxShowInFilters.Checked = platform.ShowInFilter;
-            checkBoxShowInLinksList.Checked = platform.ShowInList;
-            textBoxDefaultRomPath.Text = platform.DefaultRomPath;
-            textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
-            textBoxName.Enabled = false;
-            buttonAdd.Text = "Update";
-            buttonDelete.Enabled = true;
-        }
-
         private void buttonIconPath_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -384,8 +339,9 @@ namespace EmuLoader.Forms
             row.Tag = platform;
         }
 
-        private void Clean()
+        protected override void Clean()
         {
+            base.Clean();
             textBoxName.Text = string.Empty;
             textBoxPath.Text = string.Empty;
             textBoxCommand.Text = Values.DefaultCommand;
@@ -395,17 +351,42 @@ namespace EmuLoader.Forms
             comboBoxPlatformsDB.SelectedValue = "0";
             textBoxDefaultRomPath.Text = string.Empty;
             textBoxDefaultRomExtensions.Text = "zip";
+            textBoxName.Enabled = true;
+        }
 
-            if (dataGridView.Rows.Count == 0)
+        protected override void SetForm()
+        {
+            base.SetForm();
+            DataGridViewRow row = dataGridView.SelectedRows[0];
+            Platform platform = (Platform)row.Tag;
+
+            if (platform == null)
             {
-                textBoxName.Enabled = true;
-                buttonAdd.Enabled = true;
-                buttonDelete.Enabled = false;
-                buttonAdd.Text = "Add";
+                dataGridView.ClearSelection();
+                return;
             }
+
+            string iconPath = RomFunctions.GetPlatformPicture(((Platform)dataGridView.SelectedRows[0].Tag).Name);
+
+            if (!string.IsNullOrEmpty(iconPath))
+            {
+                pictureBoxIcon.Load(iconPath);
+            }
+
+            comboBoxPlatformsDB.SelectedValue = platform.Id == "" ? "0" : platform.Id;
+            textBoxName.Text = platform.Name;
+            textBoxPath.Text = platform.EmulatorExe;
+            textBoxCommand.Text = platform.Command;
+            textBoxAlternatePath.Text = platform.EmulatorExeAlt;
+            textBoxAlternateCommand.Text = platform.CommandAlt;
+            buttonColor.BackColor = platform.Color;
+            checkBoxShowInFilters.Checked = platform.ShowInFilter;
+            checkBoxShowInLinksList.Checked = platform.ShowInList;
+            textBoxDefaultRomPath.Text = platform.DefaultRomPath;
+            textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
+            textBoxName.Enabled = false;
         }
 
         #endregion
-
     }
 }

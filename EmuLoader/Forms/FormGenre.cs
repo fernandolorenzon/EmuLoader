@@ -45,6 +45,7 @@ namespace EmuLoader.Forms
             }
 
             updating = false;
+            Clean();
         }
 
         private void textBoxName_TextChanged(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
             {
-                MessageBox.Show("Can not save without a valid name.");
+                MessageBox.Show("Can not save without a valid name.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -198,30 +199,24 @@ namespace EmuLoader.Forms
             row.Tag = genre;
         }
 
-        private void Clean()
+        protected override void Clean()
         {
+            base.Clean();
             textBoxName.Text = "";
             buttonColor.BackColor = Color.White;
             dataGridView.ClearSelection();
-
-            if (dataGridView.Rows.Count == 0)
-            {
-                textBoxName.Enabled = true;
-                buttonAdd.Enabled = true;
-                buttonDelete.Enabled = false;
-                buttonAdd.Text = "Add";
-            }
+            textBoxName.Enabled = true;
         }
 
-        private void SetForm()
+        protected override void SetForm()
         {
+            base.SetForm();
             DataGridViewRow row = dataGridView.SelectedRows[0];
             Genre genre = (Genre)row.Tag;
             textBoxName.Text = genre.Name;
             buttonColor.BackColor = genre.Color;
             textBoxName.Enabled = false;
             buttonAdd.Text = "Update";
-            buttonDelete.Enabled = true;
         }
 
         #endregion

@@ -8,10 +8,24 @@ namespace EmuLoader.Forms
         {
             InitializeComponent();
         }
-
-        private void FormRegister_Load(object sender, EventArgs e)
+        
+        private void buttonClose_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        protected virtual void SetForm()
+        {
+            buttonDelete.Enabled = true;
+            buttonCancel.Enabled = true;
+            buttonAdd.Text = "Update";
+        }
+
+        protected virtual void Clean()
+        {
+            buttonCancel.Enabled = false;
+            buttonAdd.Enabled = true;
+            buttonAdd.Text = "Add";
         }
     }
 }

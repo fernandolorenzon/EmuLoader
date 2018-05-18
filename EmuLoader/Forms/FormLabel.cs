@@ -45,18 +45,7 @@ namespace EmuLoader.Forms
             }
 
             updating = false;
-        }
-
-        private void textBoxName_TextChanged(object sender, EventArgs e)
-        {
-            if (textBoxName.Text == "")
-            {
-                buttonAdd.Enabled = false;
-            }
-            else
-            {
-                buttonAdd.Enabled = true;
-            }
+            Clean();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -68,7 +57,7 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
             {
-                MessageBox.Show("Can not save without a valid name.");
+                MessageBox.Show("Can not save without a valid name.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -172,17 +161,6 @@ namespace EmuLoader.Forms
             SetForm();
         }
 
-        private void SetForm()
-        {
-            DataGridViewRow row = dataGridView.SelectedRows[0];
-            EmuLoader.Classes.RomLabel label = (EmuLoader.Classes.RomLabel)row.Tag;
-            textBoxName.Text = label.Name;
-            buttonColor.BackColor = label.Color;
-            textBoxName.Enabled = false;
-            buttonAdd.Text = "Update";
-            buttonDelete.Enabled = true;
-        }
-
         #endregion
 
         #region Methods
@@ -208,19 +186,23 @@ namespace EmuLoader.Forms
             row.Tag = label;
         }
 
-        private void Clean()
+        protected override void Clean()
         {
+            base.Clean();
             textBoxName.Text = "";
             buttonColor.BackColor = Color.White;
             dataGridView.ClearSelection();
+            textBoxName.Enabled = true;
+        }
 
-            if (dataGridView.Rows.Count == 0)
-            {
-                textBoxName.Enabled = true;
-                buttonAdd.Enabled = true;
-                buttonDelete.Enabled = false;
-                buttonAdd.Text = "Add";
-            }
+        protected override void SetForm()
+        {
+            base.SetForm();
+            DataGridViewRow row = dataGridView.SelectedRows[0];
+            EmuLoader.Classes.RomLabel label = (EmuLoader.Classes.RomLabel)row.Tag;
+            textBoxName.Text = label.Name;
+            buttonColor.BackColor = label.Color;
+            textBoxName.Enabled = false;
         }
 
         #endregion
