@@ -63,8 +63,6 @@ namespace EmuLoader.Forms
 
                 games = SyncDataFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString());
 
-                LogMessage(string.Format("{0} games found at online DB for the {1} platform", games.Count, comboBoxPlatform.Text));
-
                 if (games == null)
                 {
                     MessageBox.Show("An Error ocurred", "Error");
@@ -72,6 +70,8 @@ namespace EmuLoader.Forms
                     buttonSync.Enabled = true;
                     return;
                 }
+
+                LogMessage(string.Format("{0} games found at online DB for the {1} platform", games.Count, comboBoxPlatform.Text));
 
                 progressBar.Maximum = notSyncedRoms.Count * 2;
 
@@ -252,7 +252,7 @@ namespace EmuLoader.Forms
 
         private void SetOtherProperties()
         {
-            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer) || string.IsNullOrEmpty(x.Description) || x.Genre == null || (x.Rating == null || x.Rating == 0))).ToList();
+            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.DBName) || string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer) || string.IsNullOrEmpty(x.Description) || x.Genre == null || (x.Rating == null || x.Rating == 0))).ToList();
 
             bool updated = false;
             syncRomsCount = 0;
@@ -279,6 +279,12 @@ namespace EmuLoader.Forms
                 var game = SyncDataFunctions.GetGameDetails(rom.Id);
 
                 if (game == null) continue;
+
+                if (string.IsNullOrEmpty(rom.DBName) && !string.IsNullOrEmpty(game.DBName))
+                {
+                    rom.DBName = game.DBName;
+                    updated = true;
+                }
 
                 if (string.IsNullOrEmpty(rom.Publisher) && !string.IsNullOrEmpty(game.Publisher))
                 {

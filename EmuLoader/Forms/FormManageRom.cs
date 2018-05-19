@@ -370,7 +370,7 @@ namespace EmuLoader.Forms
         {
             try
             {
-                FormWait.ShowWait();
+                //FormWait.ShowWait(this);
 
                 if (textBoxId.Text == string.Empty)
                 {
@@ -384,6 +384,12 @@ namespace EmuLoader.Forms
                 }
 
                 var game = SyncDataFunctions.GetGameDetails(textBoxId.Text);
+
+                if (game == null)
+                {
+                    MessageBox.Show("Could not get rom data", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 textBoxDBName.Text = game.DBName;
 
@@ -441,7 +447,11 @@ namespace EmuLoader.Forms
                 bool missingTitle = string.IsNullOrEmpty(title);
                 bool missingGameplay = string.IsNullOrEmpty(gameplay);
 
-                if (!missingBox && !missingTitle && !missingGameplay) return;
+                if (!missingBox && !missingTitle && !missingGameplay)
+                {
+                    //FormWait.CloseWait();
+                    return;
+                }
 
                 string boxUrl = string.Empty;
                 string titleUrl = string.Empty;
@@ -449,7 +459,11 @@ namespace EmuLoader.Forms
 
                 var found = SyncDataFunctions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
 
-                if (!found) return;
+                if (!found)
+                {
+                    //FormWait.CloseWait();
+                    return;
+                }
 
                 if (missingBox)
                 {
@@ -471,12 +485,12 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                FormWait.CloseWait();
+                //FormWait.CloseWait();
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                FormWait.CloseWait();
+                //FormWait.CloseWait();
             }
         }
 

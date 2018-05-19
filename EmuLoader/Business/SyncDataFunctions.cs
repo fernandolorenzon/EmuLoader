@@ -18,6 +18,9 @@ namespace EmuLoader.Business
             if (string.IsNullOrEmpty(rom.Platform.Id)) return string.Empty;
 
             var games = GetGamesListByPlatform(rom.Platform.Id);
+
+            if (games == null) return string.Empty;
+
             var romName = RomFunctions.TrimRomName(rom.Name);
 
             foreach (var game in games)
@@ -41,8 +44,11 @@ namespace EmuLoader.Business
 
                 using (WebClient client = new WebClient())
                 {
+                    client.Encoding = System.Text.Encoding.UTF8;
                     xml = client.DownloadString(new Uri("http://thegamesdb.net/api/GetPlatformGames.php?platform=" + platformId));
                 }
+
+                if (string.IsNullOrEmpty(xml)) return null;
 
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(xml);
@@ -77,6 +83,7 @@ namespace EmuLoader.Business
 
                 using (WebClient client = new WebClient())
                 {
+                    client.Encoding = System.Text.Encoding.UTF8;
                     var url = string.Format("http://thegamesdb.net/api/GetGame.php?name={0}&platformid={1}", name, platformId);
                     xml = client.DownloadString(new Uri(url));
                 }
@@ -229,7 +236,7 @@ namespace EmuLoader.Business
             }
             catch (Exception ex)
             {
-                return game;
+                return null;
             }
         }
 
@@ -246,6 +253,7 @@ namespace EmuLoader.Business
 
                 using (WebClient client = new WebClient())
                 {
+                    client.Encoding = System.Text.Encoding.UTF8;
                     xml = client.DownloadString(new Uri("http://thegamesdb.net/api/GetArt.php?id=" + gameId));
                 }
 
@@ -296,6 +304,7 @@ namespace EmuLoader.Business
 
                 using (WebClient client = new WebClient())
                 {
+                    client.Encoding = System.Text.Encoding.UTF8;
                     client.DownloadFile(new Uri(url), imagePath);
                 }
 

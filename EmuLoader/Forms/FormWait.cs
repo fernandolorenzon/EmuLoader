@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
@@ -11,13 +12,17 @@ namespace EmuLoader.Forms
             InitializeComponent();
         }
 
-        public static void ShowWait()
+        public static void ShowWait(Form parent)
         {
             if (instance == null)
             {
                 instance = new FormWait();
             }
 
+            var centerX = parent.Width + (parent.Location.X/2);
+            var centerY = parent.Height + (parent.Location.Y/2);
+
+            instance.Location = new System.Drawing.Point(centerX - Convert.ToInt32((instance.Width/2)), centerY - Convert.ToInt32((instance.Height / 2)));
             instance.Show();
         }
 
