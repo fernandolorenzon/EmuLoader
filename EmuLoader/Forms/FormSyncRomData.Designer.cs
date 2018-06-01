@@ -59,6 +59,8 @@
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.labelRating = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.buttonLockIds = new System.Windows.Forms.Button();
+            this.buttonUnlockIds = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -196,6 +198,8 @@
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.buttonSync);
+            this.flowLayoutPanel1.Controls.Add(this.buttonLockIds);
+            this.flowLayoutPanel1.Controls.Add(this.buttonUnlockIds);
             this.flowLayoutPanel1.Controls.Add(this.buttonStopProcess);
             this.flowLayoutPanel1.Controls.Add(this.buttonClose);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -206,7 +210,7 @@
             // 
             // buttonStopProcess
             // 
-            this.buttonStopProcess.Location = new System.Drawing.Point(84, 3);
+            this.buttonStopProcess.Location = new System.Drawing.Point(300, 3);
             this.buttonStopProcess.Name = "buttonStopProcess";
             this.buttonStopProcess.Size = new System.Drawing.Size(75, 45);
             this.buttonStopProcess.TabIndex = 15;
@@ -216,7 +220,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(165, 3);
+            this.buttonClose.Location = new System.Drawing.Point(381, 3);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 45);
             this.buttonClose.TabIndex = 14;
@@ -352,6 +356,26 @@
             this.label11.TabIndex = 27;
             this.label11.Text = "Roms with no rating";
             // 
+            // buttonLockIds
+            // 
+            this.buttonLockIds.Location = new System.Drawing.Point(84, 3);
+            this.buttonLockIds.Name = "buttonLockIds";
+            this.buttonLockIds.Size = new System.Drawing.Size(98, 45);
+            this.buttonLockIds.TabIndex = 16;
+            this.buttonLockIds.Text = "Lock Empty Ids";
+            this.buttonLockIds.UseVisualStyleBackColor = true;
+            this.buttonLockIds.Click += new System.EventHandler(this.buttonLockIds_Click);
+            // 
+            // buttonUnlockIds
+            // 
+            this.buttonUnlockIds.Location = new System.Drawing.Point(188, 3);
+            this.buttonUnlockIds.Name = "buttonUnlockIds";
+            this.buttonUnlockIds.Size = new System.Drawing.Size(106, 45);
+            this.buttonUnlockIds.TabIndex = 17;
+            this.buttonUnlockIds.Text = "Unlock Locked Ids";
+            this.buttonUnlockIds.UseVisualStyleBackColor = true;
+            this.buttonUnlockIds.Click += new System.EventHandler(this.buttonUnlockIds_Click);
+            // 
             // FormSyncRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,5 +451,7 @@
         private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
         private System.Windows.Forms.Label labelRating;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button buttonLockIds;
+        private System.Windows.Forms.Button buttonUnlockIds;
     }
 }

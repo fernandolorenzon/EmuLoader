@@ -14,6 +14,8 @@ namespace EmuLoader.Classes
         public string Id { get; set; }
         public string DBName { get; set; }
         public string Extension { get; private set; }
+        public bool IdLocked { get; set; }
+
         private string path;
         public string Path
         {
@@ -98,8 +100,10 @@ namespace EmuLoader.Classes
                 rom.Developer = Functions.GetXmlAttribute(node, "Developer");
                 rom.YearReleased = Functions.GetXmlAttribute(node,"YearReleased");
                 rom.Description = Functions.GetXmlAttribute(node, "Description");
-                var alt = Functions.GetXmlAttribute(node, "UseAlternateEmulator");
-                rom.UseAlternateEmulator = string.IsNullOrEmpty(alt) ? false : Convert.ToBoolean(alt);
+                var idLocked = Functions.GetXmlAttribute(node, "IdLocked");
+                rom.IdLocked = string.IsNullOrEmpty(idLocked) ? false : Convert.ToBoolean(idLocked);
+                var useAlternate = Functions.GetXmlAttribute(node, "UseAlternateEmulator");
+                rom.UseAlternateEmulator = string.IsNullOrEmpty(useAlternate) ? false : Convert.ToBoolean(useAlternate);
 
                 float result = 0;
 
@@ -143,6 +147,7 @@ namespace EmuLoader.Classes
             Functions.CreateOrSetXmlAttribute(node, "Developer", rom.Developer);
             Functions.CreateOrSetXmlAttribute(node, "Description", rom.Description);
             Functions.CreateOrSetXmlAttribute(node, "UseAlternateEmulator", rom.UseAlternateEmulator.ToString());
+            Functions.CreateOrSetXmlAttribute(node, "IdLocked", rom.IdLocked.ToString());
             Functions.CreateOrSetXmlAttribute(node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
 
             RomFunctions.SetRomLabels(rom, node);
@@ -176,6 +181,7 @@ namespace EmuLoader.Classes
             Functions.CreateOrSetXmlAttribute(node, "Developer", newRom.Developer);
             Functions.CreateOrSetXmlAttribute(node, "Description", newRom.Description);
             Functions.CreateOrSetXmlAttribute(node, "UseAlternateEmulator", newRom.UseAlternateEmulator.ToString());
+            Functions.CreateOrSetXmlAttribute(node, "IdLocked", newRom.IdLocked.ToString());
 
             RomFunctions.SetRomLabels(newRom, node);
 

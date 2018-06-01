@@ -45,6 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelRom = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxUseAlternate = new System.Windows.Forms.CheckBox();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -106,7 +107,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.checkBoxUseAlternate = new System.Windows.Forms.CheckBox();
+            this.checkBoxIdLocked = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -141,6 +142,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxIdLocked);
             this.tabPageGeneral.Controls.Add(this.textBoxRating);
             this.tabPageGeneral.Controls.Add(this.label16);
             this.tabPageGeneral.Controls.Add(this.checkBoxKeepSuffix);
@@ -181,7 +183,7 @@
             // 
             // textBoxRating
             // 
-            this.textBoxRating.Location = new System.Drawing.Point(596, 304);
+            this.textBoxRating.Location = new System.Drawing.Point(596, 317);
             this.textBoxRating.MaxLength = 4;
             this.textBoxRating.Name = "textBoxRating";
             this.textBoxRating.Size = new System.Drawing.Size(201, 20);
@@ -190,7 +192,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(593, 288);
+            this.label16.Location = new System.Drawing.Point(593, 301);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(80, 13);
             this.label16.TabIndex = 103;
@@ -298,6 +300,16 @@
             this.groupBox1.TabIndex = 72;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Override emulator config";
+            // 
+            // checkBoxUseAlternate
+            // 
+            this.checkBoxUseAlternate.AutoSize = true;
+            this.checkBoxUseAlternate.Location = new System.Drawing.Point(355, 70);
+            this.checkBoxUseAlternate.Name = "checkBoxUseAlternate";
+            this.checkBoxUseAlternate.Size = new System.Drawing.Size(198, 17);
+            this.checkBoxUseAlternate.TabIndex = 27;
+            this.checkBoxUseAlternate.Text = "Use Alternate Emulator from Platform";
+            this.checkBoxUseAlternate.UseVisualStyleBackColor = true;
             // 
             // buttonHelp
             // 
@@ -442,7 +454,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(401, 245);
+            this.label11.Location = new System.Drawing.Point(401, 258);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 97;
@@ -460,7 +472,7 @@
             // 
             // textBoxPublisher
             // 
-            this.textBoxPublisher.Location = new System.Drawing.Point(596, 265);
+            this.textBoxPublisher.Location = new System.Drawing.Point(596, 278);
             this.textBoxPublisher.Name = "textBoxPublisher";
             this.textBoxPublisher.Size = new System.Drawing.Size(201, 20);
             this.textBoxPublisher.TabIndex = 93;
@@ -468,7 +480,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(593, 245);
+            this.label8.Location = new System.Drawing.Point(593, 258);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 13);
             this.label8.TabIndex = 92;
@@ -525,7 +537,7 @@
             // 
             // textBoxYearReleased
             // 
-            this.textBoxYearReleased.Location = new System.Drawing.Point(401, 304);
+            this.textBoxYearReleased.Location = new System.Drawing.Point(401, 317);
             this.textBoxYearReleased.MaxLength = 4;
             this.textBoxYearReleased.Name = "textBoxYearReleased";
             this.textBoxYearReleased.Size = new System.Drawing.Size(189, 20);
@@ -534,7 +546,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(401, 288);
+            this.label12.Location = new System.Drawing.Point(401, 301);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 13);
             this.label12.TabIndex = 78;
@@ -542,17 +554,17 @@
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(401, 351);
+            this.textBoxDescription.Location = new System.Drawing.Point(401, 361);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxDescription.Size = new System.Drawing.Size(396, 159);
+            this.textBoxDescription.Size = new System.Drawing.Size(396, 149);
             this.textBoxDescription.TabIndex = 77;
             // 
             // Description
             // 
             this.Description.AutoSize = true;
-            this.Description.Location = new System.Drawing.Point(399, 331);
+            this.Description.Location = new System.Drawing.Point(401, 345);
             this.Description.Name = "Description";
             this.Description.Size = new System.Drawing.Size(60, 13);
             this.Description.TabIndex = 76;
@@ -560,7 +572,7 @@
             // 
             // textBoxDeveloper
             // 
-            this.textBoxDeveloper.Location = new System.Drawing.Point(402, 265);
+            this.textBoxDeveloper.Location = new System.Drawing.Point(402, 278);
             this.textBoxDeveloper.Name = "textBoxDeveloper";
             this.textBoxDeveloper.Size = new System.Drawing.Size(188, 20);
             this.textBoxDeveloper.TabIndex = 75;
@@ -884,15 +896,15 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // checkBoxUseAlternate
+            // checkBoxIdLocked
             // 
-            this.checkBoxUseAlternate.AutoSize = true;
-            this.checkBoxUseAlternate.Location = new System.Drawing.Point(355, 70);
-            this.checkBoxUseAlternate.Name = "checkBoxUseAlternate";
-            this.checkBoxUseAlternate.Size = new System.Drawing.Size(198, 17);
-            this.checkBoxUseAlternate.TabIndex = 27;
-            this.checkBoxUseAlternate.Text = "Use Alternate Emulator from Platform";
-            this.checkBoxUseAlternate.UseVisualStyleBackColor = true;
+            this.checkBoxIdLocked.AutoSize = true;
+            this.checkBoxIdLocked.Location = new System.Drawing.Point(404, 238);
+            this.checkBoxIdLocked.Name = "checkBoxIdLocked";
+            this.checkBoxIdLocked.Size = new System.Drawing.Size(74, 17);
+            this.checkBoxIdLocked.TabIndex = 105;
+            this.checkBoxIdLocked.Text = "Locked Id";
+            this.checkBoxIdLocked.UseVisualStyleBackColor = true;
             // 
             // FormManageRom
             // 
@@ -1002,5 +1014,6 @@
         private System.Windows.Forms.TextBox textBoxRating;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox checkBoxUseAlternate;
+        private System.Windows.Forms.CheckBox checkBoxIdLocked;
     }
 }

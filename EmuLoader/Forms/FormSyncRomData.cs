@@ -48,7 +48,7 @@ namespace EmuLoader.Forms
                 platformId = comboBoxPlatform.SelectedValue.ToString();
                 textBoxLog.Text = "";
                 progressBar.Value = 0;
-                notSyncedRoms = Roms.Where(x => string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased) || string.IsNullOrEmpty(x.DBName)).ToList();
+                notSyncedRoms = Roms.Where(x => !x.IdLocked && (string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased) || string.IsNullOrEmpty(x.DBName))).ToList();
                 LogMessage("GETTING GAMES LIST...");
 
                 Updated = true;
@@ -126,6 +126,59 @@ namespace EmuLoader.Forms
             {
                 MessageBox.Show(ex.Message, "Error");
             }
+        }
+
+        private void buttonLockIds_Click(object sender, EventArgs e)
+        {
+            var roms = Rom.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text && !x.IdLocked && (string.IsNullOrEmpty(x.Id) || x.Id.Length == 10)).ToList();
+
+            if (roms == null || roms.Count == 0)
+            {
+                MessageBox.Show("There are no roms with empty Ids", "Information");
+                comboBoxPlatform.Enabled = true;
+                buttonSync.Enabled = true;
+                return;
+            }
+
+            progressBar.Maximum = roms.Count;
+            progressBar.Value = 0;
+
+            foreach (var item in roms)
+            {
+                item.IdLocked = true;
+                item.Id = string.Empty;
+                Rom.Set(item);
+                progressBar.Value++;
+            }
+
+            XML.SaveXml();
+            MessageBox.Show(string.Format("{0} rom Ids locked successfully!", roms.Count));
+        }
+
+        private void buttonUnlockIds_Click(object sender, EventArgs e)
+        {
+            var roms = Rom.GetAll().Where(x => x.Platform.Name == comboBoxPlatform.Text && x.IdLocked).ToList();
+
+            if (roms == null || roms.Count == 0)
+            {
+                MessageBox.Show("There are no roms with locked Ids", "Information");
+                comboBoxPlatform.Enabled = true;
+                buttonSync.Enabled = true;
+                return;
+            }
+
+            progressBar.Maximum = roms.Count;
+            progressBar.Value = 0;
+
+            foreach (var item in roms)
+            {
+                item.IdLocked = false;
+                Rom.Set(item);
+                progressBar.Value++;
+            }
+
+            XML.SaveXml();
+            MessageBox.Show(string.Format("{0} rom Ids unlocked successfully!", roms.Count));
         }
 
         private void SetIdAndYear()
@@ -583,5 +636,6 @@ namespace EmuLoader.Forms
                 XML.SaveXml();
             }
         }
+
     }
 }

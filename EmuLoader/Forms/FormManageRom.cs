@@ -44,6 +44,7 @@ namespace EmuLoader.Forms
             labelPlatform.Text = rom.Platform == null ? "-" : rom.Platform.Name;
             textBoxRating.Text = rom.Rating != 0 ? rom.Rating.ToString("#.#") : string.Empty;
             checkBoxUseAlternate.Checked = rom.UseAlternateEmulator;
+            checkBoxIdLocked.Checked = rom.IdLocked;
 
             List<RomLabel> labels = RomLabel.GetAll();
 
@@ -121,6 +122,7 @@ namespace EmuLoader.Forms
                 SelectedRom.Description = textBoxDescription.Text;
                 SelectedRom.YearReleased = textBoxYearReleased.Text;
                 SelectedRom.DBName = textBoxDBName.Text;
+                SelectedRom.IdLocked = checkBoxIdLocked.Checked;
 
                 float rating = 0;
 
