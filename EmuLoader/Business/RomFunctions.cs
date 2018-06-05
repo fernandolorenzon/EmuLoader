@@ -31,7 +31,8 @@ namespace EmuLoader.Business
             trimmed = trimmed.Replace(".jpg", "").Replace(".gif", "").Replace(".png", "");
             trimmed = trimmed.Replace(" in ", "").Replace(" on ", "").Replace(" at ", "");
             trimmed = trimmed.Replace("-", "").Replace("_", "").Replace(":", "").Replace("'", "").Replace(" ", "").Replace(".", "").Replace(",", "");
-            trimmed = trimmed.Replace("[!]", "").Replace("!", "").Replace("?", "").Replace("&", "").Replace(" ", "").Replace(" ", "");
+            trimmed = trimmed.Replace(" and ", "").Replace("versus", "vs");
+            trimmed = trimmed.Replace("[!]", "").Replace("!", "").Replace("?", "").Replace("&", "").Replace("  ", "").Replace(" ", "").Replace(" ", "");
 
             return trimmed;
         }
