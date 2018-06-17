@@ -460,8 +460,16 @@ namespace EmuLoader.Forms
         {
             try
             {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
                 DataGridViewRow row = dataGridView.SelectedRows[0];
                 Rom rom = (Rom)row.Tag;
+
+                var message = string.Format("Do you want to remove \"{0}\" ? (Remove to recycle bin)", rom.Name);
+
+                var result = MessageBox.Show(message, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result.ToString() == "No") return;
 
                 Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(rom.Path,
                     Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
@@ -938,13 +946,18 @@ namespace EmuLoader.Forms
                 var row = dataGridView.SelectedRows[0];
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 FormManageRom form = new FormManageRom(rom);
+
                 if (form.ShowDialogUpdated())
                 {
                     LoadGridRow(rom, row);
                     FillLabelCell(rom, dataGridView.SelectedRows[0]);
-                    FillGenreFilter();
                     LoadPictures();
-                    comboBoxGenre.Text = currentGenre;
+
+                    if (currentGenre != rom.Genre.Name)
+                    {
+                        FillGenreFilter();
+                        comboBoxGenre.Text = currentGenre;
+                    }
                 }
             }
             catch (Exception ex)
