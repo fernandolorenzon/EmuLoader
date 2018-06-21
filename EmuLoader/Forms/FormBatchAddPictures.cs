@@ -79,7 +79,6 @@ namespace EmuLoader.Forms
             {
                 bool found = false;
                 string romTrimmed = RomFunctions.TrimRomName(rom.Name);
-
                 var romRegion = RomFunctions.DetectRegion(rom.Name);
                 string imageFound = "";
 

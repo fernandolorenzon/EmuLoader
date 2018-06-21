@@ -953,7 +953,7 @@ namespace EmuLoader.Forms
                     FillLabelCell(rom, dataGridView.SelectedRows[0]);
                     LoadPictures();
 
-                    if (currentGenre != rom.Genre.Name)
+                    if (rom.Genre != null && currentGenre != rom.Genre.Name)
                     {
                         FillGenreFilter();
                         comboBoxGenre.Text = currentGenre;

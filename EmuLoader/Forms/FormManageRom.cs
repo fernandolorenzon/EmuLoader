@@ -114,8 +114,8 @@ namespace EmuLoader.Forms
             {
                 SelectedRom.Labels.Clear();
 
-                SelectedRom.Platform = (Platform)comboBoxPlatform.SelectedItem;
-                SelectedRom.Genre = (Genre)comboBoxGenre.SelectedItem;
+                SelectedRom.Platform = string.IsNullOrEmpty(comboBoxPlatform.Text) ? null : (Platform)comboBoxPlatform.SelectedItem;
+                SelectedRom.Genre = string.IsNullOrEmpty(comboBoxGenre.Text) ? null : (Genre)comboBoxGenre.SelectedItem;
 
                 SelectedRom.Publisher = textBoxPublisher.Text;
                 SelectedRom.Developer = textBoxDeveloper.Text;
