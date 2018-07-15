@@ -4,3 +4,5 @@
 *.suo
 /EmuLoader/bin
 /EmuLoader/obj
+/Tests/bin/Debug
+/Tests/obj

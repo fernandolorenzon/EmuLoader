@@ -1,7 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmuLoader", "EmuLoader\EmuLoader.csproj", "{A60EACCB-A069-420A-B288-A11A41AD89E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{36CEF5C5-0BD5-4B8C-848B-0D24C7128090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{A60EACCB-A069-420A-B288-A11A41AD89E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A60EACCB-A069-420A-B288-A11A41AD89E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A60EACCB-A069-420A-B288-A11A41AD89E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36CEF5C5-0BD5-4B8C-848B-0D24C7128090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36CEF5C5-0BD5-4B8C-848B-0D24C7128090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36CEF5C5-0BD5-4B8C-848B-0D24C7128090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36CEF5C5-0BD5-4B8C-848B-0D24C7128090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
