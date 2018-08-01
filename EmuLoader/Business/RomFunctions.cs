@@ -25,17 +25,55 @@ namespace EmuLoader.Business
 
             trimmed = RemoveSubstring(trimmed, '(', ')');
             trimmed = RemoveSubstring(trimmed, '[', ']');
-
-            trimmed = trimmed.Replace(" ii", " 2").Replace(" iii", " 3").Replace(" iv", " 4");
+            trimmed = trimmed.Replace("'s", "").Replace(" no ", "");
+            trimmed = trimmed.Replace(" iv", " 4").Replace(" iii", " 3").Replace(" ii", " 2");
             trimmed = trimmed.Replace("the ", "").Replace("the_", "").Replace(" the", "").Replace("_the", "");
             trimmed = trimmed.Replace(".jpg", "").Replace(".gif", "").Replace(".png", "");
             trimmed = trimmed.Replace(" in ", "").Replace(" on ", "").Replace(" at ", "");
-            trimmed = trimmed.Replace("ou", "").Replace("o", "").Replace("uu", "u").Replace("oh", "o");
+            trimmed = trimmed.Replace("ou", "o").Replace("uu", "u").Replace("oh", "o").Replace("yu", "u").Replace("yo", "o").Replace("syo", "sho");
             trimmed = trimmed.Replace("-", "").Replace("_", "").Replace(":", "").Replace("'", "").Replace(".", "").Replace(",", "");
             trimmed = trimmed.Replace(" and ", "").Replace("versus", "vs");
+            trimmed = trimmed.Replace("aa", "a").Replace("ee", "e").Replace("oo", "o");
             trimmed = trimmed.Replace("[!]", "").Replace("!", "").Replace("?", "").Replace("&", "").Replace("  ", "").Replace(" ", "").Replace(" ", "");
 
             return trimmed;
+        }
+
+        public static bool MatchImages(string[] images, Dictionary<string, Classes.Region> imageRegion, string romName, out string imageFoundPath)
+        {
+            imageFoundPath = string.Empty;
+            bool found = false;
+            string romTrimmed = RomFunctions.TrimRomName(romName);
+            var romRegion = RomFunctions.DetectRegion(romName);
+
+            foreach (var image in images)
+            {
+                string imageTrimmed = RomFunctions.TrimRomName(image);
+
+                if (imageTrimmed == romTrimmed && imageRegion[RomFunctions.GetFileName(image)] == romRegion)
+                {
+                    found = true;
+                    imageFoundPath = image;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                foreach (var image in images)
+                {
+                    string imageTrimmed = RomFunctions.TrimRomName(image);
+
+                    if (imageTrimmed == romTrimmed)
+                    {
+                        found = true;
+                        imageFoundPath = image;
+                        break;
+                    }
+                }
+            }
+
+            return found;
         }
 
         public static string RemoveSubstring(string text, char start, char end)

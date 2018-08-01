@@ -77,51 +77,19 @@ namespace EmuLoader.Forms
 
             foreach (var rom in roms)
             {
-                bool found = false;
-                string romTrimmed = RomFunctions.TrimRomName(rom.Name);
-                var romRegion = RomFunctions.DetectRegion(rom.Name);
-                string imageFound = "";
-
-                foreach (var image in images)
-                {
-                    string imageTrimmed = RomFunctions.TrimRomName(image);
-
-                    if (imageTrimmed == romTrimmed && imageRegion[RomFunctions.GetFileName(image)] == romRegion)
-                    {
-                        found = true;
-                        imageFound = image;
-                        break;
-                    }
-                }
-
-                if (!found)
-                {
-                    foreach (var image in images)
-                    {
-                        string imageTrimmed = RomFunctions.TrimRomName(image);
-
-                        if (imageTrimmed == romTrimmed)
-                        {
-                            found = true;
-                            imageFound = image;
-                            break;
-                        }
-                    }
-                }
+                string imageFoundPath;
+                var found = RomFunctions.MatchImages(images, imageRegion, rom.Name, out imageFoundPath);
 
                 if (found)
                 {
+                    successfulFind++;
+
                     if (progressBar1.Value < progressBar1.Maximum)
                     {
                         progressBar1.Value++;
                     }
 
-                    successfulFind++;
-                    RomFunctions.SavePicture(rom, imageFound, type, checkBoxSaveAsJpg.Checked);
-                }
-                else
-                {
-                    string log = "image: " + romTrimmed;
+                    RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
                 }
             }
 
