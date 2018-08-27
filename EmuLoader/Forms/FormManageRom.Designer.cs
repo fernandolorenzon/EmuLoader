@@ -34,6 +34,7 @@
             this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxIdLocked = new System.Windows.Forms.CheckBox();
             this.textBoxRating = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.checkBoxKeepSuffix = new System.Windows.Forms.CheckBox();
@@ -107,7 +108,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.checkBoxIdLocked = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -137,7 +137,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(813, 649);
+            this.tabControl.Size = new System.Drawing.Size(813, 645);
             this.tabControl.TabIndex = 47;
             // 
             // tabPageGeneral
@@ -176,10 +176,20 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(805, 623);
+            this.tabPageGeneral.Size = new System.Drawing.Size(805, 619);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIdLocked
+            // 
+            this.checkBoxIdLocked.AutoSize = true;
+            this.checkBoxIdLocked.Location = new System.Drawing.Point(404, 238);
+            this.checkBoxIdLocked.Name = "checkBoxIdLocked";
+            this.checkBoxIdLocked.Size = new System.Drawing.Size(74, 17);
+            this.checkBoxIdLocked.TabIndex = 105;
+            this.checkBoxIdLocked.Text = "Locked Id";
+            this.checkBoxIdLocked.UseVisualStyleBackColor = true;
             // 
             // textBoxRating
             // 
@@ -294,7 +304,7 @@
             this.groupBox1.Controls.Add(this.labelPath);
             this.groupBox1.Controls.Add(this.textBoxEmulatorExe);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(3, 516);
+            this.groupBox1.Location = new System.Drawing.Point(3, 512);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(799, 104);
             this.groupBox1.TabIndex = 72;
@@ -711,7 +721,7 @@
             this.tabPagePictures.Location = new System.Drawing.Point(4, 22);
             this.tabPagePictures.Name = "tabPagePictures";
             this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePictures.Size = new System.Drawing.Size(805, 623);
+            this.tabPagePictures.Size = new System.Drawing.Size(805, 619);
             this.tabPagePictures.TabIndex = 1;
             this.tabPagePictures.Text = "Pictures";
             this.tabPagePictures.UseVisualStyleBackColor = true;
@@ -732,9 +742,9 @@
             // 
             this.buttonFindGameplayPicture.Location = new System.Drawing.Point(367, 107);
             this.buttonFindGameplayPicture.Name = "buttonFindGameplayPicture";
-            this.buttonFindGameplayPicture.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindGameplayPicture.Size = new System.Drawing.Size(125, 23);
             this.buttonFindGameplayPicture.TabIndex = 106;
-            this.buttonFindGameplayPicture.Text = "Find Picture";
+            this.buttonFindGameplayPicture.Text = "Find &Gameplay Picture";
             this.buttonFindGameplayPicture.UseVisualStyleBackColor = true;
             this.buttonFindGameplayPicture.Click += new System.EventHandler(this.buttonFindGameplayPicture_Click);
             // 
@@ -758,9 +768,9 @@
             // 
             this.buttonFindTitlePicture.Location = new System.Drawing.Point(367, 69);
             this.buttonFindTitlePicture.Name = "buttonFindTitlePicture";
-            this.buttonFindTitlePicture.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindTitlePicture.Size = new System.Drawing.Size(125, 23);
             this.buttonFindTitlePicture.TabIndex = 103;
-            this.buttonFindTitlePicture.Text = "Find Picture";
+            this.buttonFindTitlePicture.Text = "Find &Title Picture";
             this.buttonFindTitlePicture.UseVisualStyleBackColor = true;
             this.buttonFindTitlePicture.Click += new System.EventHandler(this.buttonFindTitlePicture_Click);
             // 
@@ -784,9 +794,9 @@
             // 
             this.buttonFindBoxartPicture.Location = new System.Drawing.Point(367, 30);
             this.buttonFindBoxartPicture.Name = "buttonFindBoxartPicture";
-            this.buttonFindBoxartPicture.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindBoxartPicture.Size = new System.Drawing.Size(125, 23);
             this.buttonFindBoxartPicture.TabIndex = 100;
-            this.buttonFindBoxartPicture.Text = "Find Picture";
+            this.buttonFindBoxartPicture.Text = "Find &Box Picture";
             this.buttonFindBoxartPicture.UseVisualStyleBackColor = true;
             this.buttonFindBoxartPicture.Click += new System.EventHandler(this.buttonFindBoxartPicture_Click);
             // 
@@ -871,7 +881,7 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonSave);
             this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 649);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 645);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(813, 55);
             this.flowLayoutPanel1.TabIndex = 48;
@@ -896,21 +906,11 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // checkBoxIdLocked
-            // 
-            this.checkBoxIdLocked.AutoSize = true;
-            this.checkBoxIdLocked.Location = new System.Drawing.Point(404, 238);
-            this.checkBoxIdLocked.Name = "checkBoxIdLocked";
-            this.checkBoxIdLocked.Size = new System.Drawing.Size(74, 17);
-            this.checkBoxIdLocked.TabIndex = 105;
-            this.checkBoxIdLocked.Text = "Locked Id";
-            this.checkBoxIdLocked.UseVisualStyleBackColor = true;
-            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 704);
+            this.ClientSize = new System.Drawing.Size(813, 700);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "FormManageRom";

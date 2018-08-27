@@ -161,7 +161,6 @@
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
-            this.contextMenuStripEditRom.OwnerItem = this.selectedRomsOptionsToolStripMenuItem;
             this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 158);
             // 
             // changePlatformToolStripMenuItem
@@ -198,7 +197,7 @@
             this.selectedRomsOptionsToolStripMenuItem.Enabled = false;
             this.selectedRomsOptionsToolStripMenuItem.Name = "selectedRomsOptionsToolStripMenuItem";
             this.selectedRomsOptionsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.selectedRomsOptionsToolStripMenuItem.Text = "Quick Actions";
+            this.selectedRomsOptionsToolStripMenuItem.Text = "&Quick Actions";
             // 
             // timerFilter
             // 
@@ -280,7 +279,7 @@
             this.openAppFolderToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(726, 24);
+            this.menuStrip.Size = new System.Drawing.Size(638, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -295,7 +294,7 @@
             this.batchRemovePicturesToolStripMenuItem});
             this.romsToolStripMenuItem.Name = "romsToolStripMenuItem";
             this.romsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.romsToolStripMenuItem.Text = "Roms";
+            this.romsToolStripMenuItem.Text = "&Roms";
             // 
             // addRomFileToolStripMenuItem
             // 
@@ -344,7 +343,7 @@
             this.manageRomToolStripMenuItem.Enabled = false;
             this.manageRomToolStripMenuItem.Name = "manageRomToolStripMenuItem";
             this.manageRomToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.manageRomToolStripMenuItem.Text = "Edit Rom";
+            this.manageRomToolStripMenuItem.Text = "&Edit Rom";
             this.manageRomToolStripMenuItem.Click += new System.EventHandler(this.manageRomToolStripMenuItem_Click);
             // 
             // addEditDeleteToolStripMenuItem
@@ -355,26 +354,26 @@
             this.labelsToolStripMenuItem});
             this.addEditDeleteToolStripMenuItem.Name = "addEditDeleteToolStripMenuItem";
             this.addEditDeleteToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
-            this.addEditDeleteToolStripMenuItem.Text = "Add/Edit/Delete";
+            this.addEditDeleteToolStripMenuItem.Text = "&Add/Edit/Delete";
             // 
             // platformsToolStripMenuItem
             // 
             this.platformsToolStripMenuItem.Name = "platformsToolStripMenuItem";
-            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.platformsToolStripMenuItem.Text = "Platforms";
             this.platformsToolStripMenuItem.Click += new System.EventHandler(this.managePlatformToolStripButton_Click);
             // 
             // genresToolStripMenuItem
             // 
             this.genresToolStripMenuItem.Name = "genresToolStripMenuItem";
-            this.genresToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.genresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.genresToolStripMenuItem.Text = "Genres";
             this.genresToolStripMenuItem.Click += new System.EventHandler(this.manageGenreToolStripMenuItem_Click);
             // 
             // labelsToolStripMenuItem
             // 
             this.labelsToolStripMenuItem.Name = "labelsToolStripMenuItem";
-            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.labelsToolStripMenuItem.Text = "Labels";
             this.labelsToolStripMenuItem.Click += new System.EventHandler(this.manageLabelToolStripButton_Click);
             // 
@@ -397,7 +396,7 @@
             this.showPlatformsListToolStripMenuItem});
             this.columnsToolStripMenuItem.Name = "columnsToolStripMenuItem";
             this.columnsToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.columnsToolStripMenuItem.Text = "Visibility";
+            this.columnsToolStripMenuItem.Text = "&Visibility";
             // 
             // showPathColumnToolStripMenuItem
             // 
@@ -546,7 +545,7 @@
             this.purgeRomDataToolStripMenuItem});
             this.romDataOptionsToolStripMenuItem.Name = "romDataOptionsToolStripMenuItem";
             this.romDataOptionsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
-            this.romDataOptionsToolStripMenuItem.Text = "Rom Data Options";
+            this.romDataOptionsToolStripMenuItem.Text = "Rom &Data Options";
             // 
             // syncRomsToolStripMenuItem
             // 
@@ -566,7 +565,7 @@
             // 
             this.openAppFolderToolStripMenuItem.Name = "openAppFolderToolStripMenuItem";
             this.openAppFolderToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.openAppFolderToolStripMenuItem.Text = "Open App Folder";
+            this.openAppFolderToolStripMenuItem.Text = "&Open App Folder";
             this.openAppFolderToolStripMenuItem.Click += new System.EventHandler(this.openAppFolderToolStripMenuItem_Click);
             // 
             // dataGridViewPlatforms
@@ -582,7 +581,7 @@
             this.columnPlatforms});
             this.dataGridViewPlatforms.Cursor = System.Windows.Forms.Cursors.Default;
             this.dataGridViewPlatforms.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridViewPlatforms.Location = new System.Drawing.Point(956, 0);
+            this.dataGridViewPlatforms.Location = new System.Drawing.Point(868, 0);
             this.dataGridViewPlatforms.Name = "dataGridViewPlatforms";
             this.dataGridViewPlatforms.ReadOnly = true;
             this.dataGridViewPlatforms.RowHeadersVisible = false;
@@ -639,7 +638,7 @@
             this.groupBoxFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.groupBoxFilter.Location = new System.Drawing.Point(0, 24);
             this.groupBoxFilter.Name = "groupBoxFilter";
-            this.groupBoxFilter.Size = new System.Drawing.Size(726, 98);
+            this.groupBoxFilter.Size = new System.Drawing.Size(638, 98);
             this.groupBoxFilter.TabIndex = 8;
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
@@ -662,7 +661,7 @@
             this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonClear.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonClear.Location = new System.Drawing.Point(625, 17);
+            this.buttonClear.Location = new System.Drawing.Point(537, 17);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(98, 78);
             this.buttonClear.TabIndex = 2;
@@ -736,7 +735,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(260, 68);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(343, 21);
+            this.textBoxFilter.Size = new System.Drawing.Size(255, 21);
             this.textBoxFilter.TabIndex = 10;
             this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
             this.textBoxFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxFilter_KeyPress);
@@ -863,7 +862,7 @@
             this.dataGridView.RowTemplate.Height = 30;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(726, 536);
+            this.dataGridView.Size = new System.Drawing.Size(638, 536);
             this.dataGridView.TabIndex = 3;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
@@ -971,7 +970,7 @@
             this.panelBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panelBottom.Location = new System.Drawing.Point(0, 658);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(726, 29);
+            this.panelBottom.Size = new System.Drawing.Size(638, 29);
             this.panelBottom.TabIndex = 17;
             // 
             // flowLayoutPanelPictures
@@ -981,7 +980,7 @@
             this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
             this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
             this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(726, 0);
+            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(638, 0);
             this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
             this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
             this.flowLayoutPanelPictures.TabIndex = 16;
@@ -991,7 +990,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1089, 687);
+            this.ClientSize = new System.Drawing.Size(1001, 687);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.menuStrip);
