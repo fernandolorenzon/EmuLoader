@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Xml;
 using EmuLoader.Forms;
 using EmuLoader.Classes;
+using System.IO;
 
 namespace EmuLoader.Business
 {
-
     public static class Functions
     {
         public static Color SetFontContrast(Color backColor)
@@ -99,6 +99,27 @@ namespace EmuLoader.Business
 
             FormInfo info = new FormInfo(text.ToString());
             info.Show();
+        }
+
+        public static string LoadAPIKEY()
+        {
+            if (!File.Exists(Values.apikeyfile))
+            {
+                File.Create(Values.apikeyfile);
+            }
+            else
+            {
+                var result = File.ReadAllText(Values.apikeyfile);
+
+                if (string.IsNullOrEmpty(result))
+                {
+                    throw new Exception("APIKEY not found");
+                }
+
+                return result.Trim();
+            }
+
+            return "";
         }
     }
 }

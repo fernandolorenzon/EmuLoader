@@ -304,17 +304,13 @@ namespace EmuLoader.Business
             return genres[0];
         }
 
-        public static string GetYear(XmlNode date)
+        public static string GetYear(string date)
         {
-            if (date == null) return string.Empty;
+            if (string.IsNullOrEmpty(date)) return string.Empty;
 
-            var dateString = date.InnerText;
+            if (date.Length == 4) return date;
 
-            if (string.IsNullOrEmpty(dateString)) return string.Empty;
-
-            if (dateString.Length == 4) return dateString;
-
-            if (dateString.Length == 10) return dateString.Substring(6);
+            if (date.Length == 10) return date.Substring(6);
 
             return string.Empty;
         }

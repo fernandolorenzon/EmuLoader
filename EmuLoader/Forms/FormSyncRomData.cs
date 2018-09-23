@@ -61,7 +61,7 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                games = SyncDataFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString());
+                games = APIFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString());
 
                 if (games == null)
                 {
@@ -262,7 +262,7 @@ namespace EmuLoader.Forms
                     var gameName = RomFunctions.RemoveSubstring(rom.Name, '(', ')');
                     gameName = RomFunctions.RemoveSubstring(gameName, '[', ']').Trim();
 
-                    var game = SyncDataFunctions.GetGameByName(platformId, gameName);
+                    var game = APIFunctions.GetGameByName(platformId, gameName);
 
                     if (game == null)
                     {
@@ -329,7 +329,7 @@ namespace EmuLoader.Forms
                 }
 
                 LogMessage("UPDATING - " + rom.Name);
-                var game = SyncDataFunctions.GetGameDetails(rom.Id);
+                var game = APIFunctions.GetGameDetails(rom.Id);
 
                 if (game == null) continue;
 
@@ -436,7 +436,7 @@ namespace EmuLoader.Forms
                     string titleUrl = string.Empty;
                     string gameplayUrl = string.Empty;
 
-                    var found = SyncDataFunctions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
+                    var found = APIFunctions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
 
                     var updateBoxart = boxArtMissing && !string.IsNullOrEmpty(boxUrl);
                     var updateTitle = titleMissing && !string.IsNullOrEmpty(titleUrl);

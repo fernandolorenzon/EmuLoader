@@ -4,6 +4,7 @@ namespace EmuLoader.Classes
 {
     public static class Values
     {
+        public static string apikeyfile = "apikey.txt";
         public static string PicturesPath = "Pictures";
         public static int max = 255 * 3;
         public static int Threshold = Convert.ToInt32(max / 2);

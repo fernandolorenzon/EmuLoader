@@ -330,7 +330,7 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var game = SyncDataFunctions.GetGameDetails(textBoxId.Text);
+            var game = APIFunctions.GetGameDetails(textBoxId.Text);
             game.Id = textBoxId.Text;
             StringBuilder text = new StringBuilder("");
 
@@ -385,7 +385,7 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                var game = SyncDataFunctions.GetGameDetails(textBoxId.Text);
+                var game = APIFunctions.GetGameDetails(textBoxId.Text);
 
                 if (game == null)
                 {
@@ -459,7 +459,7 @@ namespace EmuLoader.Forms
                 string titleUrl = string.Empty;
                 string gameplayUrl = string.Empty;
 
-                var found = SyncDataFunctions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
+                var found = APIFunctions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
 
                 if (!found)
                 {
