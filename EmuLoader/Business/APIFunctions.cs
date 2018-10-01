@@ -1,8 +1,10 @@
 ﻿using EmuLoader.Classes;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Xml;
@@ -71,6 +73,9 @@ namespace EmuLoader.Business
 
                 var genres = Genre.GetAll();
 
+                //var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                //var result = jobject.SelectToken("data.games").ToList();
+
                 var part = json.Substring(json.IndexOf("games\":") + 7);
                 part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
                 var list = JsonConvert.DeserializeObject<List<API_Game>>(part);
@@ -101,6 +106,8 @@ namespace EmuLoader.Business
         {
             try
             {
+                var publishers = GetPublishers();
+
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
                 var url = baseurl + "/Games/ByGameID?apikey=" + key + "&id=" + gameId;
@@ -115,15 +122,12 @@ namespace EmuLoader.Business
 
                 var genres = Genre.GetAll();
 
-                var part = json.Substring(json.IndexOf("games\":") + 7);
-                part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
-                var raw = JsonConvert.DeserializeObject(part);
-                var game = JsonConvert.DeserializeObject<API_Game>(part);
-
                 var result = new Rom();
-                result.Id = game.id.ToString();
-                result.DBName = game.game_title;
-                result.YearReleased = RomFunctions.GetYear(game.release_date);
+
+                var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                result.Id = gameId;
+                result.DBName = jobject.SelectToken("data.games").ToList()[0].SelectToken("game_title").ToString();
+                result.YearReleased = RomFunctions.GetYear(jobject.SelectToken("data.games").ToList()[0].SelectToken("release_date").ToString());
 
                 return result;
             }
@@ -155,31 +159,14 @@ namespace EmuLoader.Business
 
                 if (string.IsNullOrEmpty(json)) return false;
 
-                var genres = Genre.GetAll();
-
-                var part = json.Substring(json.IndexOf("games\":") + 7);
-                part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
-                var list = JsonConvert.DeserializeObject<List<API_Image>>(part);
-
-                foreach (var item in list)
+                if (json.Contains(string.Format(@"boxart\/front\/{0}-1.jpg", gameId)))
                 {
-                    if(item.type == "boxart")
-                    {
-                        boxArt = item.filename;
-                        continue;
-                    }
+                    boxArt = string.Format("https://cdn.thegamesdb.net/images/medium/boxart/front/{0}-1.jpg", gameId);
+                }
 
-                    if (item.type == "screenshot")
-                    {
-                        title = item.filename;
-                        continue;
-                    }
-
-                    if (item.type == "screenshot")
-                    {
-                        gameplay = item.filename;
-                        continue;
-                    }
+                if (json.Contains(string.Format(@"screenshots\/{0}-1.jpg", gameId)))
+                {
+                    gameplay = string.Format("https://cdn.thegamesdb.net/images/medium/screenshots/{0}-1.jpg", gameId);
                 }
 
                 return true;
@@ -188,8 +175,55 @@ namespace EmuLoader.Business
             {
                 return false;
             }
+        }
 
-            return false;
+        public static Dictionary<int, string> GetPublishers()
+        {
+            var result = new Dictionary<int, string>();
+
+            try
+            {
+                if (File.Exists(Values.PublishersFile))
+                {
+                    return readPublishers();
+                }
+
+                string key = Functions.LoadAPIKEY();
+                string json = string.Empty;
+                var url = baseurl + "/Games/Publishers?apikey=" + key;
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Encoding = System.Text.Encoding.UTF8;
+                    json = client.DownloadString(new Uri(url));
+                }
+
+                if (string.IsNullOrEmpty(json)) return result;
+
+                File.WriteAllText(Values.PublishersFile, json);
+
+                return readPublishers();
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+        }
+
+        private static Dictionary<int, string> readPublishers()
+        {
+            var text = File.ReadAllText(Values.PublishersFile);
+            var jobject = (JObject)JsonConvert.DeserializeObject(text);
+
+            var publishers = jobject.SelectToken("data.publishers").ToList();
+            Dictionary<int, string> result = new Dictionary<int, string>();
+
+            foreach (var item in publishers)
+            {
+                result.Add(Convert.ToInt32(item.SelectToken("id")), item.SelectToken("name").ToString());
+            }
+
+            return result;
         }
     }
 }

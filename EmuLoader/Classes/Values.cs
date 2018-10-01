@@ -12,7 +12,7 @@ namespace EmuLoader.Classes
         public static string TitleFolder = "title";
         public static string GameplayFolder = "gameplay";
         public static string DefaultCommand = "%EMUPATH% %ROMPATH%";
-
+        public static string PublishersFile = "publishers.json";
         public static string PlatformsXML =
             @"<Data>
             <Platforms>

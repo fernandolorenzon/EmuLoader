@@ -310,7 +310,7 @@ namespace EmuLoader.Business
 
             if (date.Length == 4) return date;
 
-            if (date.Length == 10) return date.Substring(6);
+            if (date.Length == 10) return date.Substring(0, 4);
 
             return string.Empty;
         }
