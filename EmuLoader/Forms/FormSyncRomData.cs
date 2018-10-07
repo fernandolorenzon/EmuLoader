@@ -125,6 +125,8 @@ namespace EmuLoader.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
+                buttonStopProcess_Click(null, e);
+                textBoxLog.Text = "";
             }
         }
 

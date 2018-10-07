@@ -113,7 +113,7 @@ namespace EmuLoader.Business
 
                 if (string.IsNullOrEmpty(result))
                 {
-                    throw new Exception("APIKEY not found");
+                    throw new APIException("APIKEY not found");
                 }
 
                 return result.Trim();

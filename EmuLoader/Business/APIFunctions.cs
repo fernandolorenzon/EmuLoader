@@ -49,6 +49,10 @@ namespace EmuLoader.Business
 
                 return games.OrderBy(x => x.Name).ToList();
             }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
+            }
             catch (Exception ex)
             {
                 return null;
@@ -94,6 +98,10 @@ namespace EmuLoader.Business
                     return games[0];
                 }
             }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
+            }
             catch (Exception ex)
             {
                 return null;
@@ -130,6 +138,10 @@ namespace EmuLoader.Business
                 result.YearReleased = RomFunctions.GetYear(jobject.SelectToken("data.games").ToList()[0].SelectToken("release_date").ToString());
 
                 return result;
+            }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {
@@ -171,6 +183,10 @@ namespace EmuLoader.Business
 
                 return true;
             }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
+            }
             catch (Exception ex)
             {
                 return false;
@@ -203,6 +219,10 @@ namespace EmuLoader.Business
                 File.WriteAllText(Values.PublishersFile, json);
 
                 return readPublishers();
+            }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {

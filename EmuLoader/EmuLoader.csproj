@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\APIFunctions.cs" />
+    <Compile Include="Classes\APIException.cs" />
     <Compile Include="Classes\API_Game.cs" />
     <Compile Include="Classes\API_Image.cs" />
     <Compile Include="Classes\Base.cs" />
