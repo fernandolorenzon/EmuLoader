@@ -10,11 +10,20 @@ namespace Tests
     public class ApiTest
     {
         [TestMethod]
+        public void GetGamesListJSONByPlatform_Test()
+        {
+            XML.LoadXml();
+            Genre.Fill();
+            var games = APIFunctions.GetGamesListJSONByPlatform("6");
+
+            Assert.IsNotNull(games);
+        }
+        [TestMethod]
         public void GetGamesListByPlatform_Test()
         {
             XML.LoadXml();
             Genre.Fill();
-            var games = APIFunctions.GetGamesListByPlatform("1");
+            var games = APIFunctions.GetGamesListByPlatform("6");
 
             Assert.IsNotNull(games);
         }

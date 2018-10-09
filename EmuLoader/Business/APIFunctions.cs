@@ -13,38 +13,90 @@ namespace EmuLoader.Business
 {
     public static class APIFunctions
     {
-        static string baseurl = "https://api.thegamesdb.net";
+        public static string GetGamesListJSONByPlatform(string platformId)
+        {
+            try
+            {
+                string games = string.Empty;
+                string key = Functions.LoadAPIKEY();
+                string json = string.Empty;
+                var url = Values.BaseAPIURL + "/Games/ByPlatformID?apikey=" + key + "&id=" + platformId;
+
+                while (true)
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        client.Encoding = System.Text.Encoding.UTF8;
+                        json = client.DownloadString(new Uri(url));
+                    }
+
+                    if (string.IsNullOrEmpty(json)) return null;
+
+                    var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                    games += jobject.SelectToken("data.games").ToString();
+
+                    var next = jobject.SelectToken("pages.next").ToString();
+
+                    if (string.IsNullOrEmpty(next))
+                    {
+                        break;
+                    }
+
+                    url = next;
+                }
+
+                return games;
+            }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         public static List<Rom> GetGamesListByPlatform(string platformId)
         {
             try
             {
+                List<Rom> games = new List<Rom>();
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = baseurl + "/Games/ByPlatformID?apikey=" + key + "&id=" + platformId;
+                var url = Values.BaseAPIURL + "/Games/ByPlatformID?apikey=" + key + "&id=" + platformId;
 
-                using (WebClient client = new WebClient())
+                while (true)
                 {
-                    client.Encoding = System.Text.Encoding.UTF8;
-                    json = client.DownloadString(new Uri(url));
-                }
-
-                if (string.IsNullOrEmpty(json)) return null;
-
-                var part = json.Substring(json.IndexOf("games\":") + 7);
-                part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
-                var list = JsonConvert.DeserializeObject<List<API_Game>>(part);
-
-                List<Rom> games = new List<Rom>();
-
-                foreach (var game in list)
-                {
-                    games.Add(new Rom()
+                    using (WebClient client = new WebClient())
                     {
-                        Id = game.id.ToString(),
-                        DBName = game.game_title,
-                        YearReleased = RomFunctions.GetYear(game.release_date)
-                    });
+                        client.Encoding = System.Text.Encoding.UTF8;
+                        json = client.DownloadString(new Uri(url));
+                    }
+
+                    if (string.IsNullOrEmpty(json)) return null;
+
+                    var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                    var gamesJson = jobject.SelectToken("data.games").ToList();
+
+                    foreach (var game in gamesJson)
+                    {
+                        games.Add(new Rom()
+                        {
+                            Id = game.SelectToken("id").ToString(),
+                            DBName = game.SelectToken("game_title").ToString(),
+                            YearReleased = RomFunctions.GetYear(game.SelectToken("release_date").ToString())
+                        });
+                    }
+
+                    var next = jobject.SelectToken("pages.next").ToString();
+
+                    if (string.IsNullOrEmpty(next))
+                    {
+                        break;
+                    }
+
+                    url = next;
                 }
 
                 return games.OrderBy(x => x.Name).ToList();
@@ -65,7 +117,7 @@ namespace EmuLoader.Business
             {
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = baseurl + "/Games/ByGameName?apikey=" + key + "&name=" + name + "&platform=" + platformId;
+                var url = Values.BaseAPIURL + "/Games/ByGameName?apikey=" + key + "&name=" + name + "&platform=" + platformId;
 
                 using (WebClient client = new WebClient())
                 {
@@ -118,7 +170,7 @@ namespace EmuLoader.Business
 
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = baseurl + "/Games/ByGameID?apikey=" + key + "&id=" + gameId;
+                var url = Values.BaseAPIURL + "/Games/ByGameID?apikey=" + key + "&id=" + gameId;
 
                 using (WebClient client = new WebClient())
                 {
@@ -161,7 +213,7 @@ namespace EmuLoader.Business
             {
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = baseurl + "/Games/Images?apikey=" + key + "&games_id=" + gameId;
+                var url = Values.BaseAPIURL + "/Games/Images?apikey=" + key + "&games_id=" + gameId;
 
                 using (WebClient client = new WebClient())
                 {
@@ -206,7 +258,7 @@ namespace EmuLoader.Business
 
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = baseurl + "/Games/Publishers?apikey=" + key;
+                var url = Values.BaseAPIURL + "/Games/Publishers?apikey=" + key;
 
                 using (WebClient client = new WebClient())
                 {

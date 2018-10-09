@@ -13,6 +13,7 @@ namespace EmuLoader.Classes
         public static string GameplayFolder = "gameplay";
         public static string DefaultCommand = "%EMUPATH% %ROMPATH%";
         public static string PublishersFile = "publishers.json";
+        public static string BaseAPIURL = "https://api.thegamesdb.net";
         public static string PlatformsXML =
             @"<Data>
             <Platforms>

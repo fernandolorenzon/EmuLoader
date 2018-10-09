@@ -498,12 +498,21 @@ namespace EmuLoader.Forms
 
         private void buttonSearchInDB_Click(object sender, EventArgs e)
         {
-            string url = "http://thegamesdb.net/search/?string={0}&function=Search";
+            string url = "https://thegamesdb.net/search.php?name={0}&platform_id%5B%5D={1}";
             string name = textBoxChangeRomName.Text.Replace("[!]", string.Empty).Replace("!", string.Empty).Replace("&", " ").Replace(" ", "+");
 
             name = RomFunctions.RemoveSubstring(name, '[', ']');
             name = RomFunctions.RemoveSubstring(name, '(', ')');
-            url = string.Format(url, name);
+            var platform = Platform.GetAll().Where(x => x.Name == comboBoxPlatform.SelectedValue.ToString()).FirstOrDefault();
+
+            if (platform != null)
+            {
+                url = string.Format(url, name, platform.Id);
+            }
+            else
+            {
+                url = string.Format(url, name, comboBoxPlatform.SelectedValue);
+            }
 
             ProcessStartInfo sInfo = new ProcessStartInfo(url);
             Process.Start(sInfo);
@@ -552,8 +561,10 @@ namespace EmuLoader.Forms
             if (SelectedRom.Platform == null) return;
             if (string.IsNullOrEmpty(SelectedRom.Platform.Id)) return;
 
-            var url = "http://thegamesdb.net/api/GetPlatformGames.php?platform=" + SelectedRom.Platform.Id;
-            ProcessStartInfo sInfo = new ProcessStartInfo(url);
+            var json = APIFunctions.GetGamesListJSONByPlatform(SelectedRom.Platform.Id);
+            var file = SelectedRom.Platform.Name + ".json";
+            File.WriteAllText(file, json);
+            ProcessStartInfo sInfo = new ProcessStartInfo(file);
             Process.Start(sInfo);
         }
 
