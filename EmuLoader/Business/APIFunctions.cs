@@ -45,6 +45,8 @@ namespace EmuLoader.Business
                     url = next;
                 }
 
+                games = games.Replace("][", ",");
+                File.WriteAllText(games, json);
                 return games;
             }
             catch (APIException ex)
@@ -57,49 +59,36 @@ namespace EmuLoader.Business
             }
         }
 
-        public static List<Rom> GetGamesListByPlatform(string platformId)
+        public static List<Rom> GetGamesListByPlatform(string platformId, string json)
         {
             try
             {
-                List<Rom> games = new List<Rom>();
-                string key = Functions.LoadAPIKEY();
-                string json = string.Empty;
-                var url = Values.BaseAPIURL + "/Games/ByPlatformID?apikey=" + key + "&id=" + platformId;
-
-                while (true)
+                if (string.IsNullOrEmpty(json))
                 {
-                    using (WebClient client = new WebClient())
+                    json = GetGamesListJSONByPlatform(platformId);
+                }
+
+                if (json == null)
+                {
+                    throw new APIException("Cound not get json");
+                }
+
+                var jobject = (JArray)JsonConvert.DeserializeObject(json);
+                List<Rom> games = new List<Rom>();
+
+                foreach (var game in jobject)
+                {
+                    var objGame = (JObject)game;
+                    games.Add(new Rom()
                     {
-                        client.Encoding = System.Text.Encoding.UTF8;
-                        json = client.DownloadString(new Uri(url));
-                    }
-
-                    if (string.IsNullOrEmpty(json)) return null;
-
-                    var jobject = (JObject)JsonConvert.DeserializeObject(json);
-                    var gamesJson = jobject.SelectToken("data.games").ToList();
-
-                    foreach (var game in gamesJson)
-                    {
-                        games.Add(new Rom()
-                        {
-                            Id = game.SelectToken("id").ToString(),
-                            DBName = game.SelectToken("game_title").ToString(),
-                            YearReleased = RomFunctions.GetYear(game.SelectToken("release_date").ToString())
-                        });
-                    }
-
-                    var next = jobject.SelectToken("pages.next").ToString();
-
-                    if (string.IsNullOrEmpty(next))
-                    {
-                        break;
-                    }
-
-                    url = next;
+                        Id = objGame.SelectToken("id").ToString(),
+                        DBName = objGame.SelectToken("game_title").ToString(),
+                        YearReleased = RomFunctions.GetYear(objGame.SelectToken("release_date").ToString())
+                    });
                 }
 
                 return games.OrderBy(x => x.Name).ToList();
+
             }
             catch (APIException ex)
             {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace EmuLoader.Forms
 {
@@ -61,7 +62,16 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-                games = APIFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString());
+
+                var file = comboBoxPlatform.Text + ".json";
+                var json = string.Empty;
+
+                if (File.Exists(file))
+                {
+                    json = File.ReadAllText(file);
+                }
+
+                games = APIFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString(), json);
 
                 if (games == null)
                 {
@@ -79,20 +89,26 @@ namespace EmuLoader.Forms
                 {
                     //threadSetIdAndYear.Start();
                     SetIdAndYear();
-                    var count = syncRomsCount;
+                    int count = 0;
+                    int count2 = 0;
+                    int count3 = 0;
 
+                    count = syncRomsCount;
                     XML.SaveXml();
 
-                    //threadSetOtherProperties.Start();
-                    SetOtherProperties();
-                    var count2 = syncRomsCount;
+                    if (!checkBoxBasicSync.Checked)
+                    {
+                        //threadSetOtherProperties.Start();
+                        SetOtherProperties();
+                        count2 = syncRomsCount;
 
-                    XML.SaveXml();
+                        XML.SaveXml();
 
-                    SetPictures();
-                    var count3 = syncRomsCount;
+                        SetPictures();
+                        count3 = syncRomsCount;
 
-                    XML.SaveXml();
+                        XML.SaveXml();
+                    }
 
                     progressBar.Invoke((MethodInvoker)delegate
                     {
@@ -260,44 +276,48 @@ namespace EmuLoader.Forms
                 if (!found)
                 {
                     LogMessage("NOT FOUND - " + rom.Name);
-                    LogMessage("TRYING THE HARD WAY - " + rom.Name);
-                    var gameName = RomFunctions.RemoveSubstring(rom.Name, '(', ')');
-                    gameName = RomFunctions.RemoveSubstring(gameName, '[', ']').Trim();
 
-                    var game = APIFunctions.GetGameByName(platformId, gameName);
-
-                    if (game == null)
+                    if (!checkBoxBasicSync.Checked)
                     {
-                        LogMessage("REALLY NOT FOUND - " + rom.Name);
-                        continue;
-                    }
+                        LogMessage("TRYING THE HARD WAY - " + rom.Name);
+                        var gameName = RomFunctions.RemoveSubstring(rom.Name, '(', ')');
+                        gameName = RomFunctions.RemoveSubstring(gameName, '[', ']').Trim();
 
-                    found = true;
+                        var game = APIFunctions.GetGameByName(platformId, gameName);
 
-                    if (string.IsNullOrEmpty(rom.Id) && !string.IsNullOrEmpty(game.Id))
-                    {
-                        rom.Id = game.Id;
-                        updated = true;
-                    }
+                        if (game == null)
+                        {
+                            LogMessage("REALLY NOT FOUND - " + rom.Name);
+                            continue;
+                        }
 
-                    if (string.IsNullOrEmpty(rom.YearReleased) && !string.IsNullOrEmpty(game.YearReleased))
-                    {
-                        rom.YearReleased = game.YearReleased;
-                        updated = true;
-                    }
+                        found = true;
 
-                    if (string.IsNullOrEmpty(rom.DBName) && !string.IsNullOrEmpty(game.DBName))
-                    {
-                        rom.DBName = game.DBName;
-                        updated = true;
-                    }
+                        if (string.IsNullOrEmpty(rom.Id) && !string.IsNullOrEmpty(game.Id))
+                        {
+                            rom.Id = game.Id;
+                            updated = true;
+                        }
 
-                    if (updated)
-                    {
-                        syncRomsCount++;
-                        LogMessage("ID AND YEAR SET - " + rom.Name);
-                        Rom.Set(rom);
-                        updated = false;
+                        if (string.IsNullOrEmpty(rom.YearReleased) && !string.IsNullOrEmpty(game.YearReleased))
+                        {
+                            rom.YearReleased = game.YearReleased;
+                            updated = true;
+                        }
+
+                        if (string.IsNullOrEmpty(rom.DBName) && !string.IsNullOrEmpty(game.DBName))
+                        {
+                            rom.DBName = game.DBName;
+                            updated = true;
+                        }
+
+                        if (updated)
+                        {
+                            syncRomsCount++;
+                            LogMessage("ID AND YEAR SET - " + rom.Name);
+                            Rom.Set(rom);
+                            updated = false;
+                        }
                     }
                 }
             }

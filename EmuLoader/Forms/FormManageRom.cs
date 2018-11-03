@@ -561,9 +561,19 @@ namespace EmuLoader.Forms
             if (SelectedRom.Platform == null) return;
             if (string.IsNullOrEmpty(SelectedRom.Platform.Id)) return;
 
-            var json = APIFunctions.GetGamesListJSONByPlatform(SelectedRom.Platform.Id);
             var file = SelectedRom.Platform.Name + ".json";
-            File.WriteAllText(file, json);
+            string json = string.Empty;
+
+            if (File.Exists(file))
+            {
+                json = File.ReadAllText(file);
+            }
+
+            if (json == string.Empty)
+            {
+                json = APIFunctions.GetGamesListJSONByPlatform(SelectedRom.Platform.Id);
+            }
+            
             ProcessStartInfo sInfo = new ProcessStartInfo(file);
             Process.Start(sInfo);
         }

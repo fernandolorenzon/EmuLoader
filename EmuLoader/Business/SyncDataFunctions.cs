@@ -13,7 +13,15 @@ namespace EmuLoader.Business
 
             if (string.IsNullOrEmpty(rom.Platform.Id)) return string.Empty;
 
-            var games = APIFunctions.GetGamesListByPlatform(rom.Platform.Id);
+            var file = rom.Platform.Name + ".json";
+            var json = string.Empty;
+
+            if (File.Exists(file))
+            {
+                json = File.ReadAllText(file);
+            }
+
+            var games = APIFunctions.GetGamesListByPlatform(rom.Platform.Id, json);
 
             if (games == null) return string.Empty;
 

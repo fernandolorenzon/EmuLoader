@@ -23,7 +23,7 @@ namespace Tests
         {
             XML.LoadXml();
             Genre.Fill();
-            var games = APIFunctions.GetGamesListByPlatform("6");
+            var games = APIFunctions.GetGamesListByPlatform("6", "");
 
             Assert.IsNotNull(games);
         }

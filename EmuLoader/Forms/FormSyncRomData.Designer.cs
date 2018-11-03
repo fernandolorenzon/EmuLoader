@@ -43,6 +43,8 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonSync = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonLockIds = new System.Windows.Forms.Button();
+            this.buttonUnlockIds = new System.Windows.Forms.Button();
             this.buttonStopProcess = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,8 +61,7 @@
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.labelRating = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.buttonLockIds = new System.Windows.Forms.Button();
-            this.buttonUnlockIds = new System.Windows.Forms.Button();
+            this.checkBoxBasicSync = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,7 +182,7 @@
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(414, 364);
+            this.textBoxLog.Size = new System.Drawing.Size(414, 388);
             this.textBoxLog.TabIndex = 12;
             // 
             // buttonSync
@@ -203,10 +204,30 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonStopProcess);
             this.flowLayoutPanel1.Controls.Add(this.buttonClose);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 422);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 446);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(802, 54);
             this.flowLayoutPanel1.TabIndex = 14;
+            // 
+            // buttonLockIds
+            // 
+            this.buttonLockIds.Location = new System.Drawing.Point(84, 3);
+            this.buttonLockIds.Name = "buttonLockIds";
+            this.buttonLockIds.Size = new System.Drawing.Size(98, 45);
+            this.buttonLockIds.TabIndex = 16;
+            this.buttonLockIds.Text = "Lock Empty Ids";
+            this.buttonLockIds.UseVisualStyleBackColor = true;
+            this.buttonLockIds.Click += new System.EventHandler(this.buttonLockIds_Click);
+            // 
+            // buttonUnlockIds
+            // 
+            this.buttonUnlockIds.Location = new System.Drawing.Point(188, 3);
+            this.buttonUnlockIds.Name = "buttonUnlockIds";
+            this.buttonUnlockIds.Size = new System.Drawing.Size(106, 45);
+            this.buttonUnlockIds.TabIndex = 17;
+            this.buttonUnlockIds.Text = "Unlock Locked Ids";
+            this.buttonUnlockIds.UseVisualStyleBackColor = true;
+            this.buttonUnlockIds.Click += new System.EventHandler(this.buttonUnlockIds_Click);
             // 
             // buttonStopProcess
             // 
@@ -239,7 +260,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(4, 374);
+            this.progressBar.Location = new System.Drawing.Point(4, 417);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(366, 23);
             this.progressBar.TabIndex = 16;
@@ -248,7 +269,7 @@
             // 
             this.labelProgress.AutoSize = true;
             this.labelProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProgress.Location = new System.Drawing.Point(1, 358);
+            this.labelProgress.Location = new System.Drawing.Point(1, 401);
             this.labelProgress.Name = "labelProgress";
             this.labelProgress.Size = new System.Drawing.Size(11, 13);
             this.labelProgress.TabIndex = 17;
@@ -356,31 +377,24 @@
             this.label11.TabIndex = 27;
             this.label11.Text = "Roms with no rating";
             // 
-            // buttonLockIds
+            // checkBoxBasicSync
             // 
-            this.buttonLockIds.Location = new System.Drawing.Point(84, 3);
-            this.buttonLockIds.Name = "buttonLockIds";
-            this.buttonLockIds.Size = new System.Drawing.Size(98, 45);
-            this.buttonLockIds.TabIndex = 16;
-            this.buttonLockIds.Text = "Lock Empty Ids";
-            this.buttonLockIds.UseVisualStyleBackColor = true;
-            this.buttonLockIds.Click += new System.EventHandler(this.buttonLockIds_Click);
-            // 
-            // buttonUnlockIds
-            // 
-            this.buttonUnlockIds.Location = new System.Drawing.Point(188, 3);
-            this.buttonUnlockIds.Name = "buttonUnlockIds";
-            this.buttonUnlockIds.Size = new System.Drawing.Size(106, 45);
-            this.buttonUnlockIds.TabIndex = 17;
-            this.buttonUnlockIds.Text = "Unlock Locked Ids";
-            this.buttonUnlockIds.UseVisualStyleBackColor = true;
-            this.buttonUnlockIds.Click += new System.EventHandler(this.buttonUnlockIds_Click);
+            this.checkBoxBasicSync.AutoSize = true;
+            this.checkBoxBasicSync.Checked = true;
+            this.checkBoxBasicSync.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxBasicSync.Location = new System.Drawing.Point(12, 365);
+            this.checkBoxBasicSync.Name = "checkBoxBasicSync";
+            this.checkBoxBasicSync.Size = new System.Drawing.Size(164, 17);
+            this.checkBoxBasicSync.TabIndex = 29;
+            this.checkBoxBasicSync.Text = "Only sync Id, Name and Year";
+            this.checkBoxBasicSync.UseVisualStyleBackColor = true;
             // 
             // FormSyncRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 476);
+            this.ClientSize = new System.Drawing.Size(802, 500);
+            this.Controls.Add(this.checkBoxBasicSync);
             this.Controls.Add(this.labelRating);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.checkBoxSaveAsJpg);
@@ -453,5 +467,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button buttonLockIds;
         private System.Windows.Forms.Button buttonUnlockIds;
+        private System.Windows.Forms.CheckBox checkBoxBasicSync;
     }
 }

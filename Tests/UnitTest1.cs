@@ -12,8 +12,8 @@ namespace Tests
         [TestMethod]
         public void TestMethod1()
         {
-            var romname = RomFunctions.TrimRomName("4-nin Shougi");
-            var imagename = RomFunctions.TrimRomName("4 Nin Shogi.jpg");
+            var romname = RomFunctions.TrimRomName("Battletoads and Double Dragon");
+            var imagename = RomFunctions.TrimRomName("Battletoads & Double Dragon");
 
             Assert.AreEqual(romname, imagename);
         }
