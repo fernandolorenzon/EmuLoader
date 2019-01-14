@@ -202,6 +202,12 @@
     </Compile>
     <Compile Include="Business\Functions.cs" />
     <Compile Include="Classes\RomLabel.cs" />
+    <Compile Include="Forms\FormSyncUsingXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSyncUsingXML.Designer.cs">
+      <DependentUpon>FormSyncUsingXML.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSyncRomData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSyncUsingXML.resx">
+      <DependentUpon>FormSyncUsingXML.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSyncRomData.resx">
       <DependentUpon>FormSyncRomData.cs</DependentUpon>

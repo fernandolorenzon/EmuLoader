@@ -46,9 +46,6 @@
             this.timerFilter = new System.Windows.Forms.Timer(this.components);
             this.labelTotalRomsCount = new System.Windows.Forms.Label();
             this.labelTotal = new System.Windows.Forms.Label();
-            this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
-            this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.romsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addRomFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,16 +113,20 @@
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
+            this.syncUsingRetropieXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
+            this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
+            this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.contextMenuStripEditRom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).BeginInit();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlatforms)).BeginInit();
             this.groupBoxFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.flowLayoutPanelPictures.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRomOpenFolder
@@ -161,6 +162,7 @@
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
+            this.contextMenuStripEditRom.OwnerItem = this.selectedRomsOptionsToolStripMenuItem;
             this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 158);
             // 
             // changePlatformToolStripMenuItem
@@ -225,47 +227,6 @@
             this.labelTotal.Size = new System.Drawing.Size(75, 13);
             this.labelTotal.TabIndex = 14;
             this.labelTotal.Text = "Total Roms:";
-            // 
-            // pictureBoxGameplay
-            // 
-            this.pictureBoxGameplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxGameplay.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxGameplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxGameplay.Location = new System.Drawing.Point(3, 459);
-            this.pictureBoxGameplay.Name = "pictureBoxGameplay";
-            this.pictureBoxGameplay.Size = new System.Drawing.Size(222, 222);
-            this.pictureBoxGameplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxGameplay.TabIndex = 13;
-            this.pictureBoxGameplay.TabStop = false;
-            this.pictureBoxGameplay.DoubleClick += new System.EventHandler(this.pictureBoxGameplay_DoubleClick);
-            this.pictureBoxGameplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameplay_MouseClick);
-            // 
-            // pictureBoxTitle
-            // 
-            this.pictureBoxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxTitle.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxTitle.Location = new System.Drawing.Point(3, 231);
-            this.pictureBoxTitle.Name = "pictureBoxTitle";
-            this.pictureBoxTitle.Size = new System.Drawing.Size(222, 222);
-            this.pictureBoxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxTitle.TabIndex = 12;
-            this.pictureBoxTitle.TabStop = false;
-            this.pictureBoxTitle.DoubleClick += new System.EventHandler(this.pictureBoxTitle_DoubleClick);
-            this.pictureBoxTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTitle_MouseClick);
-            // 
-            // pictureBoxBoxart
-            // 
-            this.pictureBoxBoxart.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxBoxart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxBoxart.Location = new System.Drawing.Point(3, 3);
-            this.pictureBoxBoxart.Name = "pictureBoxBoxart";
-            this.pictureBoxBoxart.Size = new System.Drawing.Size(222, 222);
-            this.pictureBoxBoxart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxBoxart.TabIndex = 11;
-            this.pictureBoxBoxart.TabStop = false;
-            this.pictureBoxBoxart.DoubleClick += new System.EventHandler(this.pictureBoxBoxart_DoubleClick);
-            this.pictureBoxBoxart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBoxart_MouseClick);
             // 
             // menuStrip
             // 
@@ -359,21 +320,21 @@
             // platformsToolStripMenuItem
             // 
             this.platformsToolStripMenuItem.Name = "platformsToolStripMenuItem";
-            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.platformsToolStripMenuItem.Text = "Platforms";
             this.platformsToolStripMenuItem.Click += new System.EventHandler(this.managePlatformToolStripButton_Click);
             // 
             // genresToolStripMenuItem
             // 
             this.genresToolStripMenuItem.Name = "genresToolStripMenuItem";
-            this.genresToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.genresToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.genresToolStripMenuItem.Text = "Genres";
             this.genresToolStripMenuItem.Click += new System.EventHandler(this.manageGenreToolStripMenuItem_Click);
             // 
             // labelsToolStripMenuItem
             // 
             this.labelsToolStripMenuItem.Name = "labelsToolStripMenuItem";
-            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.labelsToolStripMenuItem.Text = "Labels";
             this.labelsToolStripMenuItem.Click += new System.EventHandler(this.manageLabelToolStripButton_Click);
             // 
@@ -542,7 +503,8 @@
             // 
             this.romDataOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.syncRomsToolStripMenuItem,
-            this.purgeRomDataToolStripMenuItem});
+            this.purgeRomDataToolStripMenuItem,
+            this.syncUsingRetropieXMLToolStripMenuItem});
             this.romDataOptionsToolStripMenuItem.Name = "romDataOptionsToolStripMenuItem";
             this.romDataOptionsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.romDataOptionsToolStripMenuItem.Text = "Rom &Data Options";
@@ -550,14 +512,14 @@
             // syncRomsToolStripMenuItem
             // 
             this.syncRomsToolStripMenuItem.Name = "syncRomsToolStripMenuItem";
-            this.syncRomsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.syncRomsToolStripMenuItem.Text = "Sync Rom Data";
+            this.syncRomsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.syncRomsToolStripMenuItem.Text = "Sync Rom Data Online";
             this.syncRomsToolStripMenuItem.Click += new System.EventHandler(this.syncRomsToolStripMenuItem_Click);
             // 
             // purgeRomDataToolStripMenuItem
             // 
             this.purgeRomDataToolStripMenuItem.Name = "purgeRomDataToolStripMenuItem";
-            this.purgeRomDataToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.purgeRomDataToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.purgeRomDataToolStripMenuItem.Text = "Purge Rom Data";
             this.purgeRomDataToolStripMenuItem.Click += new System.EventHandler(this.purgeRomDataToolStripMenuItem_Click);
             // 
@@ -985,6 +947,54 @@
             this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
             this.flowLayoutPanelPictures.TabIndex = 16;
             // 
+            // syncUsingRetropieXMLToolStripMenuItem
+            // 
+            this.syncUsingRetropieXMLToolStripMenuItem.Name = "syncUsingRetropieXMLToolStripMenuItem";
+            this.syncUsingRetropieXMLToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.syncUsingRetropieXMLToolStripMenuItem.Text = "Sync Using Retropie XML";
+            this.syncUsingRetropieXMLToolStripMenuItem.Click += new System.EventHandler(this.syncUsingRetropieXMLToolStripMenuItem_Click);
+            // 
+            // pictureBoxBoxart
+            // 
+            this.pictureBoxBoxart.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxBoxart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxBoxart.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxBoxart.Name = "pictureBoxBoxart";
+            this.pictureBoxBoxart.Size = new System.Drawing.Size(222, 222);
+            this.pictureBoxBoxart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxBoxart.TabIndex = 11;
+            this.pictureBoxBoxart.TabStop = false;
+            this.pictureBoxBoxart.DoubleClick += new System.EventHandler(this.pictureBoxBoxart_DoubleClick);
+            this.pictureBoxBoxart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBoxart_MouseClick);
+            // 
+            // pictureBoxTitle
+            // 
+            this.pictureBoxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxTitle.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxTitle.Location = new System.Drawing.Point(3, 231);
+            this.pictureBoxTitle.Name = "pictureBoxTitle";
+            this.pictureBoxTitle.Size = new System.Drawing.Size(222, 222);
+            this.pictureBoxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxTitle.TabIndex = 12;
+            this.pictureBoxTitle.TabStop = false;
+            this.pictureBoxTitle.DoubleClick += new System.EventHandler(this.pictureBoxTitle_DoubleClick);
+            this.pictureBoxTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTitle_MouseClick);
+            // 
+            // pictureBoxGameplay
+            // 
+            this.pictureBoxGameplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxGameplay.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxGameplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxGameplay.Location = new System.Drawing.Point(3, 459);
+            this.pictureBoxGameplay.Name = "pictureBoxGameplay";
+            this.pictureBoxGameplay.Size = new System.Drawing.Size(222, 222);
+            this.pictureBoxGameplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxGameplay.TabIndex = 13;
+            this.pictureBoxGameplay.TabStop = false;
+            this.pictureBoxGameplay.DoubleClick += new System.EventHandler(this.pictureBoxGameplay_DoubleClick);
+            this.pictureBoxGameplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameplay_MouseClick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1009,9 +1019,6 @@
             this.ResizeEnd += new System.EventHandler(this.FormMain_ResizeEnd);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.contextMenuStripEditRom.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlatforms)).EndInit();
@@ -1021,6 +1028,9 @@
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.flowLayoutPanelPictures.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1109,5 +1119,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDeveloper;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
+        private System.Windows.Forms.ToolStripMenuItem syncUsingRetropieXMLToolStripMenuItem;
     }
 }

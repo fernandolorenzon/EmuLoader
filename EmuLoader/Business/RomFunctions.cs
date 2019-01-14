@@ -323,6 +323,8 @@ namespace EmuLoader.Business
             Random r = new Random();
             genre.Color = Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255));
 
+            Genre.Set(genre);
+
             return genre;
         }
 

@@ -976,6 +976,23 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void syncUsingRetropieXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormSyncUsingXML form = new FormSyncUsingXML();
+
+                if (form.ShowDialogUpdated())
+                {
+                    FilterRoms();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void showBoxArtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
