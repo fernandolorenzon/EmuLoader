@@ -103,50 +103,66 @@ namespace EmuLoader.Forms
 
                     if (rom != null)
                     {
-                        if (string.IsNullOrEmpty(rom.YearReleased) && !string.IsNullOrEmpty(selectedNode.ChildNodes[4].InnerText) && selectedNode.ChildNodes[4].InnerText.Length > 3)
+                        foreach (XmlNode childNode in selectedNode.ChildNodes)
                         {
-                            rom.YearReleased = selectedNode.ChildNodes[4].InnerText.Substring(0, 4);
-                            updated = true;
-                        }
-
-                        if (string.IsNullOrEmpty(rom.DBName))
-                        {
-                            rom.DBName = selectedNode.ChildNodes[1].InnerText;
-                            updated = true;
-                        }
-
-                        if (string.IsNullOrEmpty(rom.Description))
-                        {
-                            rom.Description = selectedNode.ChildNodes[2].InnerText;
-                            updated = true;
-                        }
-
-                        if (string.IsNullOrEmpty(rom.Publisher))
-                        {
-                            rom.Publisher = selectedNode.ChildNodes[6].InnerText;
-                            updated = true;
-                        }
-
-                        if (string.IsNullOrEmpty(rom.Developer))
-                        {
-                            rom.Developer = selectedNode.ChildNodes[5].InnerText;
-                            updated = true;
-                        }
-
-                        var genrename = selectedNode.ChildNodes[7].InnerText;
-
-                        if (rom.Genre == null && !string.IsNullOrEmpty(genrename))
-                        {
-                            updated = true;
-                            var genre = Genre.Get(genrename);
-
-                            if (genre == null)
+                            if (childNode.Name == "releasedate")
                             {
-                                //genre = RomFunctions.CreateNewGenre(genrename);
+                                if (string.IsNullOrEmpty(rom.YearReleased) && !string.IsNullOrEmpty(selectedNode.InnerText) && selectedNode.InnerText.Length > 3)
+                                {
+                                    rom.YearReleased = childNode.InnerText.Substring(0, 4);
+                                    updated = true;
+                                }
                             }
-                            else
+                            else if (childNode.Name == "name")
                             {
-                                rom.Genre = genre;
+                                if (string.IsNullOrEmpty(rom.DBName))
+                                {
+                                    rom.DBName = childNode.InnerText;
+                                    updated = true;
+                                }
+                            }
+                            else if (childNode.Name == "desc")
+                            {
+                                if (string.IsNullOrEmpty(rom.Description))
+                                {
+                                    rom.Description = childNode.InnerText;
+                                    updated = true;
+                                }
+                            }
+                            else if (childNode.Name == "publisher")
+                            {
+                                if (string.IsNullOrEmpty(rom.Publisher))
+                                {
+                                    rom.Publisher = childNode.InnerText;
+                                    updated = true;
+                                }
+                            }
+                            else if (childNode.Name == "developer")
+                            {
+                                if (string.IsNullOrEmpty(rom.Developer))
+                                {
+                                    rom.Developer = childNode.InnerText;
+                                    updated = true;
+                                }
+                            }
+                            else if (childNode.Name == "genre")
+                            {
+                                var genrename = childNode.InnerText;
+
+                                if (rom.Genre == null && !string.IsNullOrEmpty(genrename))
+                                {
+                                    updated = true;
+                                    var genre = Genre.Get(genrename);
+
+                                    if (genre == null)
+                                    {
+                                        //genre = RomFunctions.CreateNewGenre(genrename);
+                                    }
+                                    else
+                                    {
+                                        rom.Genre = genre;
+                                    }
+                                }
                             }
                         }
 
