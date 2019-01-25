@@ -44,7 +44,14 @@ namespace EmuLoader.Business
                 }
 
                 games = games.Replace("][", ",");
-                File.WriteAllText(games, json);
+
+                var platform = Platform.GetAll().FirstOrDefault(x => x.Id == platformId);
+
+                if (platform != null)
+                {
+                    File.WriteAllText(platform.Name + ".json", games);
+                }
+
                 return games;
             }
             catch (APIException ex)

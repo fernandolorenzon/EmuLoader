@@ -14,6 +14,7 @@ namespace Tests
         {
             XML.LoadXml();
             Genre.Fill();
+            Platform.Fill();
             var games = APIFunctions.GetGamesListJSONByPlatform("6");
 
             Assert.IsNotNull(games);
