@@ -161,6 +161,7 @@ namespace EmuLoader.Business
             try
             {
                 var publishers = GetPublishers();
+                var developers = GetDevelopers();
 
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
@@ -179,9 +180,29 @@ namespace EmuLoader.Business
                 var result = new Rom();
 
                 var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                var jgame = jobject.SelectToken("data.games").First();
                 result.Id = gameId;
-                result.DBName = jobject.SelectToken("data.games").ToList()[0].SelectToken("game_title").ToString();
-                result.YearReleased = RomFunctions.GetYear(jobject.SelectToken("data.games").ToList()[0].SelectToken("release_date").ToString());
+                result.DBName = jgame.SelectToken("game_title").ToString();
+                result.YearReleased = RomFunctions.GetYear(jgame.SelectToken("release_date").ToString());
+                //result.Description = jobject.SelectToken("data.games").First().SelectToken("description").ToString();
+
+                try
+                {
+                    result.Publisher = publishers[Convert.ToInt32(jgame.SelectToken("publisher").ToString())];
+                }
+                catch
+                {
+
+                }
+
+                try
+                {
+                    result.Developer = developers[Convert.ToInt32(jgame.SelectToken("developers").First().ToString())];
+                }
+                catch
+                {
+
+                }
 
                 return result;
             }
@@ -252,7 +273,7 @@ namespace EmuLoader.Business
 
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = Values.BaseAPIURL + "/Games/Publishers?apikey=" + key;
+                var url = Values.BaseAPIURL + "/Publishers?apikey=" + key;
 
                 using (WebClient client = new WebClient())
                 {
@@ -286,7 +307,68 @@ namespace EmuLoader.Business
 
             foreach (var item in publishers)
             {
-                result.Add(Convert.ToInt32(item.SelectToken("id")), item.SelectToken("name").ToString());
+                var key = Convert.ToInt32(item.First().SelectToken("id"));
+
+                if (result.ContainsKey(key)) continue;
+
+                result.Add(key, item.First().SelectToken("name").ToString());
+            }
+
+            return result;
+        }
+
+        public static Dictionary<int, string> GetDevelopers()
+        {
+            var result = new Dictionary<int, string>();
+
+            try
+            {
+                if (File.Exists(Values.DevelopersFile))
+                {
+                    return readDevelopers();
+                }
+
+                string key = Functions.LoadAPIKEY();
+                string json = string.Empty;
+                var url = Values.BaseAPIURL + "/Developers?apikey=" + key;
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Encoding = System.Text.Encoding.UTF8;
+                    json = client.DownloadString(new Uri(url));
+                }
+
+                if (string.IsNullOrEmpty(json)) return result;
+
+                File.WriteAllText(Values.DevelopersFile, json);
+
+                return readDevelopers();
+            }
+            catch (APIException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+        }
+
+        private static Dictionary<int, string> readDevelopers()
+        {
+            var text = File.ReadAllText(Values.DevelopersFile);
+            var jobject = (JObject)JsonConvert.DeserializeObject(text);
+
+            var publishers = jobject.SelectToken("data.developers").ToList();
+            Dictionary<int, string> result = new Dictionary<int, string>();
+
+            foreach (var item in publishers)
+            {
+                var key = Convert.ToInt32(item.First().SelectToken("id"));
+
+                if (result.ContainsKey(key)) continue;
+
+                result.Add(key, item.First().SelectToken("name").ToString());
             }
 
             return result;

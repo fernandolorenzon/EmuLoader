@@ -424,22 +424,22 @@ namespace EmuLoader.Forms
 
                     if (string.IsNullOrEmpty(comboBoxGenre.Text))
                     {
-                        LoadComboBoxGenres();
                         comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
                     }
                 }
                 else
                 {
-                    LoadComboBoxGenres();
                     textBoxPublisher.Text = game.Publisher;
                     textBoxDeveloper.Text = game.Developer;
                     textBoxDescription.Text = game.Description;
                     textBoxYearReleased.Text = game.YearReleased;
                     textBoxRating.Text = game.Rating.ToString("#.#");
 
-                    comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
+                    if (string.IsNullOrEmpty(comboBoxGenre.Text))
+                    {
+                        comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
+                    }
                 }
-
 
                 var box = RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder);
                 var title = RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder);
