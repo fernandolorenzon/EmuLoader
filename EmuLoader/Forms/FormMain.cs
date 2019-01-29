@@ -389,14 +389,21 @@ namespace EmuLoader.Forms
             {
                 List<RomLabel> labels = null;
 
-                if (!FormChooseList.ChooseLabel(out labels)) return;
-
                 List<Rom> roms = new List<Rom>();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     if (!row.Visible) continue;
                     roms.Add((Rom)row.Tag);
+                }
+
+                if (roms.Count == 1)
+                {
+                    if (!FormChooseList.ChooseLabel(roms[0].Labels, out labels)) return;
+                }
+                else
+                {
+                    if (!FormChooseList.ChooseLabel(out labels)) return;
                 }
 
                 RomFunctions.ChangeRomLabels(roms, labels);

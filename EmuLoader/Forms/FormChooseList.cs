@@ -113,5 +113,29 @@ namespace EmuLoader.Forms
             labels = instance.selectedLabels;
             return result;
         }
+
+        public static bool ChooseLabel(List<RomLabel> selectedLabels, out List<RomLabel> labels)
+        {
+            labels = new List<RomLabel>();
+            instance = new FormChooseList(typeof(RomLabel));
+
+            foreach (DataGridViewRow row in instance.dataGridView.Rows)
+            {
+                bool found = selectedLabels == null ? false : selectedLabels.Exists(x => x.Name == row.Cells[instance.columnName.Index].Value);
+
+                if (found)
+                {
+                    row.Cells[instance.columnCheck.Index].Value = CheckState.Checked;
+                }
+                else
+                {
+                    row.Cells[instance.columnCheck.Index].Value = CheckState.Unchecked;
+                }
+            }
+
+            var result = instance.ShowDialogUpdated();
+            labels = instance.selectedLabels;
+            return result;
+        }
     }
 }
