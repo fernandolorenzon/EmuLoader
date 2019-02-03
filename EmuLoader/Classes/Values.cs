@@ -243,6 +243,11 @@ namespace EmuLoader.Classes
                     <name>TurboGrafx 16</name>
                     <alias>turbografx-16</alias>
                 </Platform>
+                <Platform>
+                    <id>4955</id>
+                    <name>TurboGrafx CD</name>
+                    <alias>turbo-grafx-cd</alias>
+                </Platform>
             </Platforms>
         </Data>";
     }
