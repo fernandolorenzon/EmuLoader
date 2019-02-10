@@ -248,6 +248,11 @@ namespace EmuLoader.Classes
                     <name>TurboGrafx CD</name>
                     <alias>turbo-grafx-cd</alias>
                 </Platform>
+                <Platform>
+                    <id>4936</id>
+                    <name>Famicom Disk System</name>
+                    <alias>fds</alias>
+                </Platform>
             </Platforms>
         </Data>";
     }
