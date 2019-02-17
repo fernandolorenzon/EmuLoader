@@ -469,7 +469,10 @@ namespace EmuLoader.Business
 
                 foreach (var item in files)
                 {
-                    if (item.EndsWith(".cue") || item.EndsWith(".ccd") || item.EndsWith(".rom") || item.EndsWith(".gdi"))
+                    var exts = platform.DefaultRomExtensions.Split(',').ToList();
+                    var fileExt = GetFileExtension(item);
+
+                    if (exts.Contains(fileExt.Replace(".", "")))
                     {
                         Rom r = new Rom(item);
                         Rom old = Rom.Get(r.Path);
