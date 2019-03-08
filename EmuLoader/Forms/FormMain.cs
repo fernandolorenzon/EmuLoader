@@ -1371,6 +1371,18 @@ namespace EmuLoader.Forms
                     FilteredRoms.AddRange(Rom.GetAll());
                     AddRomsToGrid(FilteredRoms);
                 }
+                else if (e.KeyData == Keys.G)
+                {
+                    changeGenreToolStripMenuItem_Click(sender, null);
+                }
+                else if (e.KeyData == Keys.L)
+                {
+                    changeLabelsToolStripMenuItem_Click(sender, null);
+                }
+                else if (e.KeyData == Keys.P)
+                {
+                    changePlatformToolStripMenuItem_Click(sender, null);
+                }
             }
             catch (OperationCanceledException ioex)
             {

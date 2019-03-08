@@ -30,6 +30,9 @@ namespace EmuLoader.Forms
                 comboBox.ValueMember = "Name";
                 labelChoose.Text = "Choose Platform";
                 this.Text = "Choose Platform";
+                buttonCancel.Visible = false;
+                buttonClose.Text = "Cancel and close";
+                buttonAdd.Text = "Save and close";
             }
             else if (type == typeof(RomLabel))
             {
@@ -40,6 +43,9 @@ namespace EmuLoader.Forms
                 comboBox.ValueMember = "Name";
                 labelChoose.Text = "Choose Label";
                 this.Text = "Choose Label";
+                buttonCancel.Visible = false;
+                buttonClose.Text = "Cancel and close";
+                buttonAdd.Text = "Save and close";
             }
             else if (type == typeof(Genre))
             {
@@ -50,6 +56,9 @@ namespace EmuLoader.Forms
                 comboBox.ValueMember = "Name";
                 labelChoose.Text = "Choose Genre";
                 this.Text = "Choose Genre";
+                buttonCancel.Visible = false;
+                buttonClose.Text = "Cancel and close";
+                buttonAdd.Text = "Save and close";
             }
         }
 

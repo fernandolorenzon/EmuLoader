@@ -253,6 +253,11 @@ namespace EmuLoader.Classes
                     <name>Famicom Disk System</name>
                     <alias>fds</alias>
                 </Platform>
+               <Platform>
+                    <id>4956</id>
+                    <name>Neo Geo CD</name>
+                    <alias>neo-geo-cd</alias>
+                </Platform>
             </Platforms>
         </Data>";
     }

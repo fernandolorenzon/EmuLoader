@@ -34,6 +34,9 @@ namespace EmuLoader.Forms
                     row.Cells[columnColor.Index].Style.ForeColor = Functions.SetFontContrast(label.Color);
 
                     this.Text = "Choose Label";
+                    buttonCancel.Visible = false;
+                    buttonClose.Text = "Cancel and close";
+                    buttonAdd.Text = "Save and close";
 
                     row.Tag = label;
                     dataGridView.Rows.Add(row);
@@ -44,7 +47,6 @@ namespace EmuLoader.Forms
         private void FormChoose_Load(object sender, EventArgs e)
         {
             buttonAdd.Click += buttonOk_Click;
-            buttonCancel.Click += buttonCancel_Click;
             buttonDelete.Visible = false;
         }
 
@@ -72,12 +74,6 @@ namespace EmuLoader.Forms
             }
 
             Updated = true;
-            instance.Close();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Updated = false;
             instance.Close();
         }
 
