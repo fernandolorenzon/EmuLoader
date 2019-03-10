@@ -1409,6 +1409,9 @@ namespace EmuLoader.Forms
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (updating) return;
+
+            labelSelectedRomsCount.Text = dataGridView.SelectedRows.Count.ToString();
+
             EnableDisableButtonsBySelection();
             LoadPictures();
         }

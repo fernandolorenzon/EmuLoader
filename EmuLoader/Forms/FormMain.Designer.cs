@@ -77,6 +77,7 @@
             this.romDataOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purgeRomDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.syncUsingRetropieXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAppFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewPlatforms = new System.Windows.Forms.DataGridView();
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -112,8 +113,9 @@
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.labelSelectedRoms = new System.Windows.Forms.Label();
+            this.labelSelectedRomsCount = new System.Windows.Forms.Label();
             this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
-            this.syncUsingRetropieXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
@@ -211,7 +213,7 @@
             this.labelTotalRomsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelTotalRomsCount.AutoSize = true;
             this.labelTotalRomsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRomsCount.Location = new System.Drawing.Point(85, 7);
+            this.labelTotalRomsCount.Location = new System.Drawing.Point(75, 7);
             this.labelTotalRomsCount.Name = "labelTotalRomsCount";
             this.labelTotalRomsCount.Size = new System.Drawing.Size(14, 13);
             this.labelTotalRomsCount.TabIndex = 15;
@@ -522,6 +524,13 @@
             this.purgeRomDataToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.purgeRomDataToolStripMenuItem.Text = "Purge Rom Data";
             this.purgeRomDataToolStripMenuItem.Click += new System.EventHandler(this.purgeRomDataToolStripMenuItem_Click);
+            // 
+            // syncUsingRetropieXMLToolStripMenuItem
+            // 
+            this.syncUsingRetropieXMLToolStripMenuItem.Name = "syncUsingRetropieXMLToolStripMenuItem";
+            this.syncUsingRetropieXMLToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.syncUsingRetropieXMLToolStripMenuItem.Text = "Sync Using Retropie XML";
+            this.syncUsingRetropieXMLToolStripMenuItem.Click += new System.EventHandler(this.syncUsingRetropieXMLToolStripMenuItem_Click);
             // 
             // openAppFolderToolStripMenuItem
             // 
@@ -926,6 +935,8 @@
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.panelBottom.Controls.Add(this.labelSelectedRoms);
+            this.panelBottom.Controls.Add(this.labelSelectedRomsCount);
             this.panelBottom.Controls.Add(this.labelTotal);
             this.panelBottom.Controls.Add(this.labelTotalRomsCount);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -934,6 +945,28 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(638, 29);
             this.panelBottom.TabIndex = 17;
+            // 
+            // labelSelectedRoms
+            // 
+            this.labelSelectedRoms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelSelectedRoms.AutoSize = true;
+            this.labelSelectedRoms.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectedRoms.Location = new System.Drawing.Point(131, 7);
+            this.labelSelectedRoms.Name = "labelSelectedRoms";
+            this.labelSelectedRoms.Size = new System.Drawing.Size(96, 13);
+            this.labelSelectedRoms.TabIndex = 16;
+            this.labelSelectedRoms.Text = "Selected Roms:";
+            // 
+            // labelSelectedRomsCount
+            // 
+            this.labelSelectedRomsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelSelectedRomsCount.AutoSize = true;
+            this.labelSelectedRomsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectedRomsCount.Location = new System.Drawing.Point(224, 7);
+            this.labelSelectedRomsCount.Name = "labelSelectedRomsCount";
+            this.labelSelectedRomsCount.Size = new System.Drawing.Size(14, 13);
+            this.labelSelectedRomsCount.TabIndex = 17;
+            this.labelSelectedRomsCount.Text = "0";
             // 
             // flowLayoutPanelPictures
             // 
@@ -946,13 +979,6 @@
             this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
             this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
             this.flowLayoutPanelPictures.TabIndex = 16;
-            // 
-            // syncUsingRetropieXMLToolStripMenuItem
-            // 
-            this.syncUsingRetropieXMLToolStripMenuItem.Name = "syncUsingRetropieXMLToolStripMenuItem";
-            this.syncUsingRetropieXMLToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.syncUsingRetropieXMLToolStripMenuItem.Text = "Sync Using Retropie XML";
-            this.syncUsingRetropieXMLToolStripMenuItem.Click += new System.EventHandler(this.syncUsingRetropieXMLToolStripMenuItem_Click);
             // 
             // pictureBoxBoxart
             // 
@@ -1120,5 +1146,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
         private System.Windows.Forms.ToolStripMenuItem syncUsingRetropieXMLToolStripMenuItem;
+        private System.Windows.Forms.Label labelSelectedRoms;
+        private System.Windows.Forms.Label labelSelectedRomsCount;
     }
 }
