@@ -13,7 +13,7 @@ namespace EmuLoader.Business
 
             if (string.IsNullOrEmpty(rom.Platform.Id)) return string.Empty;
 
-            var file = rom.Platform.Name + ".json";
+            var file = Values.JsonFolder + "\\" + rom.Platform.Name + ".json";
             var json = string.Empty;
 
             if (File.Exists(file))

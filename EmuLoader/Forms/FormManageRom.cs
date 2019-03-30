@@ -561,7 +561,7 @@ namespace EmuLoader.Forms
             if (SelectedRom.Platform == null) return;
             if (string.IsNullOrEmpty(SelectedRom.Platform.Id)) return;
 
-            var file = SelectedRom.Platform.Name + ".json";
+            var file = Values.JsonFolder + "\\" + SelectedRom.Platform.Name + ".json";
             string json = string.Empty;
 
             if (File.Exists(file))

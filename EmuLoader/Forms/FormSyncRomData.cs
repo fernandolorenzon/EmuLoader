@@ -63,7 +63,7 @@ namespace EmuLoader.Forms
                 }
 
 
-                var file = comboBoxPlatform.Text + ".json";
+                var file = Values.JsonFolder + "\\" + comboBoxPlatform.Text + ".json";
                 var json = string.Empty;
 
                 if (File.Exists(file))

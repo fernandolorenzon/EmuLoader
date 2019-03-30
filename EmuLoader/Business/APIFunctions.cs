@@ -49,7 +49,12 @@ namespace EmuLoader.Business
 
                 if (platform != null)
                 {
-                    File.WriteAllText(platform.Name + ".json", games);
+                    if (!Directory.Exists(Values.JsonFolder))
+                    {
+                        Directory.CreateDirectory(Values.JsonFolder);
+                    }
+
+                    File.WriteAllText(Values.JsonFolder + "\\" + platform.Name + ".json", games);
                 }
 
                 return games;
@@ -266,7 +271,7 @@ namespace EmuLoader.Business
 
             try
             {
-                if (File.Exists(Values.PublishersFile))
+                if (File.Exists(Values.JsonFolder + "\\" + Values.PublishersFile))
                 {
                     return readPublishers();
                 }
@@ -283,7 +288,7 @@ namespace EmuLoader.Business
 
                 if (string.IsNullOrEmpty(json)) return result;
 
-                File.WriteAllText(Values.PublishersFile, json);
+                File.WriteAllText(Values.JsonFolder + "\\" + Values.PublishersFile, json);
 
                 return readPublishers();
             }
@@ -299,7 +304,7 @@ namespace EmuLoader.Business
 
         private static Dictionary<int, string> readPublishers()
         {
-            var text = File.ReadAllText(Values.PublishersFile);
+            var text = File.ReadAllText(Values.JsonFolder + "\\" + Values.PublishersFile);
             var jobject = (JObject)JsonConvert.DeserializeObject(text);
 
             var publishers = jobject.SelectToken("data.publishers").ToList();
@@ -323,7 +328,7 @@ namespace EmuLoader.Business
 
             try
             {
-                if (File.Exists(Values.DevelopersFile))
+                if (File.Exists(Values.JsonFolder + "\\" + Values.DevelopersFile))
                 {
                     return readDevelopers();
                 }
@@ -340,7 +345,7 @@ namespace EmuLoader.Business
 
                 if (string.IsNullOrEmpty(json)) return result;
 
-                File.WriteAllText(Values.DevelopersFile, json);
+                File.WriteAllText(Values.JsonFolder + "\\" + Values.DevelopersFile, json);
 
                 return readDevelopers();
             }
@@ -356,7 +361,7 @@ namespace EmuLoader.Business
 
         private static Dictionary<int, string> readDevelopers()
         {
-            var text = File.ReadAllText(Values.DevelopersFile);
+            var text = File.ReadAllText(Values.JsonFolder + "\\" + Values.DevelopersFile);
             var jobject = (JObject)JsonConvert.DeserializeObject(text);
 
             var publishers = jobject.SelectToken("data.developers").ToList();
