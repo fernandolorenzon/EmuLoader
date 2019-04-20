@@ -5,11 +5,39 @@ using System.Xml;
 using EmuLoader.Forms;
 using EmuLoader.Classes;
 using System.IO;
+using System.Text;
 
 namespace EmuLoader.Business
 {
     public static class Functions
     {
+        public static string RemoveSubstring(string text, char start, char end)
+        {
+            char[] textArray = text.ToCharArray();
+            StringBuilder result = new StringBuilder();
+            bool copy = true;
+
+            foreach (char c in textArray)
+            {
+                if (c == start)
+                {
+                    copy = false;
+                }
+
+                if (copy)
+                {
+                    result.Append(c);
+                }
+
+                if (c == end)
+                {
+                    copy = true;
+                }
+            }
+
+            return result.ToString();
+        }
+
         public static Color SetFontContrast(Color backColor)
         {
             int total = backColor.R + backColor.G + backColor.B;

@@ -280,8 +280,8 @@ namespace EmuLoader.Forms
                     if (!checkBoxBasicSync.Checked)
                     {
                         LogMessage("TRYING THE HARD WAY - " + rom.Name);
-                        var gameName = RomFunctions.RemoveSubstring(rom.Name, '(', ')');
-                        gameName = RomFunctions.RemoveSubstring(gameName, '[', ']').Trim();
+                        var gameName = Functions.RemoveSubstring(rom.Name, '(', ')');
+                        gameName = Functions.RemoveSubstring(gameName, '[', ']').Trim();
 
                         var game = APIFunctions.GetGameByName(platformId, gameName);
 

@@ -919,7 +919,15 @@ namespace EmuLoader.Forms
         private void textBoxFilter_TextChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            timerFilter.Start();
+
+            if (textBoxFilter.Text.StartsWith("p:"))
+            {
+                timerFilter.Stop();
+            }
+            else
+            {
+                timerFilter.Start();
+            }
         }
 
         private void batchAddPicturesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1541,77 +1549,12 @@ namespace EmuLoader.Forms
             string year = comboBoxYearReleased.Text;
 
             string filter = text.ToLower();
-
             if (updating) return;
 
             dataGridView.SuspendLayout();
             Thread.BeginCriticalRegion();
 
-            FilteredRoms = Rom.GetAll();
-
-            if (!string.IsNullOrEmpty(filter) ||
-                !string.IsNullOrEmpty(platform.Name) ||
-                !string.IsNullOrEmpty(label.Name) ||
-                !string.IsNullOrEmpty(genre.Name) ||
-                !string.IsNullOrEmpty(publisher) ||
-                !string.IsNullOrEmpty(developer) ||
-                !string.IsNullOrEmpty(year))
-            {
-                try
-                {
-                    if (!string.IsNullOrEmpty(platform.Name))
-                    {
-                        var filterRoms = platform.Name == "<none>" ? FilteredRoms.Where(x => x.Platform == null).ToList() : FilteredRoms.Where(x => x.Platform != null && x.Platform.Name == platform.Name).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(genre.Name))
-                    {
-                        var filterRoms = genre.Name == "<none>" ? FilteredRoms.Where(x => x.Genre == null).ToList() : FilteredRoms.Where(x => x.Genre != null && x.Genre.Name == genre.Name).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(label.Name))
-                    {
-                        var filterRoms = label.Name == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == label.Name)).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(label.Name))
-                    {
-                        var filterRoms = label.Name == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == label.Name)).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(publisher))
-                    {
-                        var filterRoms = publisher == "<none>" ? FilteredRoms.Where(x => x.Publisher == string.Empty).ToList() : FilteredRoms.Where(x => x.Publisher == publisher).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(developer))
-                    {
-                        var filterRoms = developer == "<none>" ? FilteredRoms.Where(x => x.Developer == string.Empty).ToList() : FilteredRoms.Where(x => x.Developer == developer).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(year))
-                    {
-                        var filterRoms = year == "<none>" ? FilteredRoms.Where(x => x.YearReleased == string.Empty).ToList() : FilteredRoms.Where(x => x.YearReleased == year).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-
-                    if (!string.IsNullOrEmpty(filter))
-                    {
-                        var filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.ToLower())).ToList();
-                        FilteredRoms = filterRoms;
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
+            FilteredRoms = FilterFunctions.FilterRoms(filter, platform.Name, label.Name, genre.Name, publisher, developer, year);
 
             Thread.EndCriticalRegion();
             dataGridView.ResumeLayout();

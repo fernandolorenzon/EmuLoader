@@ -501,8 +501,8 @@ namespace EmuLoader.Forms
             string url = "https://thegamesdb.net/search.php?name={0}&platform_id%5B%5D={1}";
             string name = textBoxChangeRomName.Text.Replace("[!]", string.Empty).Replace("!", string.Empty).Replace("&", " ").Replace(" ", "+");
 
-            name = RomFunctions.RemoveSubstring(name, '[', ']');
-            name = RomFunctions.RemoveSubstring(name, '(', ')');
+            name = Functions.RemoveSubstring(name, '[', ']');
+            name = Functions.RemoveSubstring(name, '(', ')');
             var platform = Platform.GetAll().Where(x => x.Name == comboBoxPlatform.SelectedValue.ToString()).FirstOrDefault();
 
             if (platform != null)

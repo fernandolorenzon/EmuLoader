@@ -23,8 +23,8 @@ namespace EmuLoader.Business
                 trimmed = trimmed.Substring(trimmed.LastIndexOf("\\") + 1);
             }
 
-            trimmed = RemoveSubstring(trimmed, '(', ')');
-            trimmed = RemoveSubstring(trimmed, '[', ']');
+            trimmed = Functions.RemoveSubstring(trimmed, '(', ')');
+            trimmed = Functions.RemoveSubstring(trimmed, '[', ']');
             trimmed = trimmed.Replace("'s", "").Replace(" no ", "");
             trimmed = trimmed.Replace(" iv", " 4").Replace(" iii", " 3").Replace(" ii", " 2");
             trimmed = trimmed.Replace("the ", "").Replace("the_", "").Replace(" the", "").Replace("_the", "");
@@ -74,33 +74,6 @@ namespace EmuLoader.Business
             }
 
             return found;
-        }
-
-        public static string RemoveSubstring(string text, char start, char end)
-        {
-            char[] textArray = text.ToCharArray();
-            StringBuilder result = new StringBuilder();
-            bool copy = true;
-
-            foreach (char c in textArray)
-            {
-                if (c == start)
-                {
-                    copy = false;
-                }
-
-                if (copy)
-                {
-                    result.Append(c);
-                }
-
-                if (c == end)
-                {
-                    copy = true;
-                }
-            }
-
-            return result.ToString();
         }
 
         public static Classes.Region DetectRegion(string name)
