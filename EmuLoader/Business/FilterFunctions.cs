@@ -27,7 +27,7 @@ namespace EmuLoader.Business
                 string.IsNullOrEmpty(publisher) &&
                 string.IsNullOrEmpty(developer) &&
                 string.IsNullOrEmpty(year) &&
-                platforms.Count > 0)
+                platforms.Count == 0)
             {
                 return FilteredRoms;
             }
