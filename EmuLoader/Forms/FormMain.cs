@@ -1519,8 +1519,11 @@ namespace EmuLoader.Forms
 
         private void CopyFromUrl(Rom rom, string imageType)
         {
+            var romName = Functions.RemoveSubstring(rom.Name, '(', ')');
+            romName = Functions.RemoveSubstring(romName, '[', ']');
             string url = "http://www.google.com/search?q={0} {1} {2}&source=lnms&tbm=isch&sa=X";
-            url = string.Format(url, rom.Name.Replace("[!]", "").Replace("!", "").Replace("&", " "), rom.Platform.Name, imageType);
+            url = string.Format(url, romName.Replace("[!]", "").Replace("!", "").Replace("&", " "), rom.Platform.Name, imageType);
+
             url = url.Replace("boxart", "box");
 
             ProcessStartInfo sInfo = new ProcessStartInfo(url);
@@ -1855,6 +1858,5 @@ namespace EmuLoader.Forms
         }
 
         #endregion
-
     }
 }
