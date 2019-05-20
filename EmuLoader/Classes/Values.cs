@@ -4,6 +4,7 @@ namespace EmuLoader.Classes
 {
     public static class Values
     {
+        public static string xmlPath = "EmuLoader.xml";
         public static string apikeyfile = "apikey.txt";
         public static string PicturesPath = "Pictures";
         public static int max = 255 * 3;

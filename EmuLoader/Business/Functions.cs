@@ -149,5 +149,33 @@ namespace EmuLoader.Business
 
             return "";
         }
+
+        public static bool BackupDB()
+        {
+            if (!Directory.Exists(Values.BackupFolder))
+            {
+                Directory.CreateDirectory(Values.BackupFolder);
+            }
+
+            var date = DateTime.Now.ToString("yyyyMMdd");
+            string backupname = date + "-backup.zip";
+
+            if(File.Exists(Values.BackupFolder + "\\" + backupname))
+            {
+                return true;
+            }
+
+            if (!Directory.Exists(date))
+            {
+                Directory.CreateDirectory(date);
+            }
+
+            File.Copy(Values.xmlPath, date + "\\" + Values.xmlPath);
+            System.IO.Compression.ZipFile.CreateFromDirectory(date, backupname);
+            File.Move(backupname, Values.BackupFolder + "\\" + backupname);
+            File.Delete(date + "\\" + Values.xmlPath);
+            Directory.Delete(date);
+            return true;
+        }
     }
 }

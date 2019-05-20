@@ -9,7 +9,6 @@ namespace EmuLoader.Classes
     public static class XML
     {
         public static XmlDocument xmlDoc;
-        private static string xmlPath = "EmuLoader.xml";
 
         #region -- General --
 
@@ -82,7 +81,7 @@ namespace EmuLoader.Classes
             xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Labels"));
             xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Genres"));
             xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Roms"));
-            xmlDoc.Save(xmlPath);
+            xmlDoc.Save(Values.xmlPath);
         }
 
         public static XmlDocument LoadXml()
@@ -91,9 +90,9 @@ namespace EmuLoader.Classes
 
             try
             {
-                if (File.Exists(xmlPath))
+                if (File.Exists(Values.xmlPath))
                 {
-                    xmlDoc.Load(xmlPath);
+                    xmlDoc.Load(Values.xmlPath);
                 }
                 else
                 {
@@ -102,9 +101,9 @@ namespace EmuLoader.Classes
             }
             catch
             {
-                if (File.Exists(xmlPath))
+                if (File.Exists(Values.xmlPath))
                 {
-                    File.Delete(xmlPath);
+                    File.Delete(Values.xmlPath);
                     LoadXml();
                 }
             }
@@ -114,7 +113,7 @@ namespace EmuLoader.Classes
 
         public static void SaveXml()
         {
-            xmlDoc.Save(xmlPath);
+            xmlDoc.Save(Values.xmlPath);
         }
 
         public static XmlNode GetParentNode(string elementName)

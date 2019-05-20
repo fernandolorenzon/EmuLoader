@@ -85,6 +85,15 @@ namespace EmuLoader.Forms
                 }
 
                 SelectRandomRom();
+
+                try
+                {
+                    Functions.BackupDB();
+                }
+                catch (Exception backupEx)
+                {
+                    MessageBox.Show(backupEx.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //FormMessage.CloseMessage();
                 //DateTime end = DateTime.Now;
                 //MessageBox.Show((end - begin).ToString());
