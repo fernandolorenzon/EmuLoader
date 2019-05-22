@@ -130,7 +130,7 @@ namespace EmuLoader.Classes
                 node = SetRomNode();
 
                 node.AppendChild(XML.xmlDoc.CreateNode(XmlNodeType.Element, "Labels", ""));
-                XML.GetRomParentNode().AppendChild(node);
+                XML.GetParentNode("Rom").AppendChild(node);
                 RomList.Add(rom);
             }
 
@@ -164,7 +164,7 @@ namespace EmuLoader.Classes
                 node = SetRomNode();
 
                 node.AppendChild(XML.xmlDoc.CreateNode(XmlNodeType.Element, "Labels", ""));
-                XML.GetRomParentNode().AppendChild(node);
+                XML.GetParentNode("Rom").AppendChild(node);
                 RomList.Add(newRom);
             }
 

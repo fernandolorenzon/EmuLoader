@@ -81,6 +81,37 @@ namespace EmuLoader.Classes
             xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Labels"));
             xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Genres"));
             xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Roms"));
+
+            XmlElement filter = xmlDoc.CreateElement("Filter");
+            XmlAttribute attrFilterPlatform = xmlDoc.CreateAttribute("Platform");
+            attrFilterPlatform.Value = "";
+            config.Attributes.Append(attrFilterPlatform);
+
+            XmlAttribute attrFilterGenre = xmlDoc.CreateAttribute("Genre");
+            attrFilterGenre.Value = "";
+            config.Attributes.Append(attrFilterGenre);
+
+            XmlAttribute attrFilterLabel = xmlDoc.CreateAttribute("Label");
+            attrFilterLabel.Value = "";
+            config.Attributes.Append(attrFilterLabel);
+
+            XmlAttribute attrFilterYear = xmlDoc.CreateAttribute("Year");
+            attrFilterYear.Value = "";
+            config.Attributes.Append(attrFilterYear);
+
+            XmlAttribute attrFilterPublisher = xmlDoc.CreateAttribute("Publisher");
+            attrFilterPublisher.Value = "";
+            config.Attributes.Append(attrFilterPublisher);
+
+            XmlAttribute attrFilterDeveloper = xmlDoc.CreateAttribute("Developer");
+            attrFilterDeveloper.Value = "";
+            config.Attributes.Append(attrFilterDeveloper);
+
+            XmlAttribute attrFilterName = xmlDoc.CreateAttribute("Name");
+            attrFilterName.Value = "";
+            config.Attributes.Append(attrFilterName);
+
+            xmlDoc.ChildNodes[1].AppendChild(filter);
             xmlDoc.Save(Values.xmlPath);
         }
 
@@ -343,23 +374,11 @@ namespace EmuLoader.Classes
 
         #region -- Rom --
 
-        public static XmlNode GetRomParentNode()
-        {
-            try
-            {
-                return xmlDoc.ChildNodes[1].ChildNodes[4];
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public static XmlNodeList GetRomNodes()
         {
             try
             {
-                return GetRomParentNode().ChildNodes;
+                return GetParentNode("Roms").ChildNodes;
             }
             catch
             {
@@ -395,7 +414,7 @@ namespace EmuLoader.Classes
 
             if (node != null)
             {
-                GetRomParentNode().RemoveChild(node);
+                GetParentNode("Roms").RemoveChild(node);
                 return true;
             }
 
@@ -403,6 +422,51 @@ namespace EmuLoader.Classes
         }
 
         #endregion
-        
+
+        #region -- Filter --
+
+        public static string GetFilter(string key)
+        {
+            try
+            {
+                return GetParentNode("Filter").Attributes[key].Value;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public static bool SetFilter(string key, string value)
+        {
+            try
+            {
+                XmlNode config = GetParentNode("Filter");
+                bool ok = false;
+
+                foreach (XmlAttribute item in config.Attributes)
+                {
+                    if (item.Name == key)
+                    {
+                        item.Value = value;
+                        ok = true;
+                    }
+                }
+
+                if (ok) return true;
+
+                XmlAttribute attr = xmlDoc.CreateAttribute(key);
+                attr.Value = value;
+                config.Attributes.Append(attr);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
     }
 }

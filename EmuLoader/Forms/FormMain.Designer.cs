@@ -1041,6 +1041,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Emu Loader";
             this.MaximizedBoundsChanged += new System.EventHandler(this.FormMain_ResizeEnd);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_Close);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResizeEnd += new System.EventHandler(this.FormMain_ResizeEnd);
             this.Resize += new System.EventHandler(this.FormMain_Resize);

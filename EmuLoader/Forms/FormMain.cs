@@ -63,15 +63,50 @@ namespace EmuLoader.Forms
                 dataGridViewPlatforms.Visible = showPlatformsListToolStripMenuItem.Checked = Config.GetElementVisibility("PlatformsList");
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 //FormMessage.ShowMessage("Filling Grid...");
-                FilteredRoms.Clear();
-                FilteredRoms.AddRange(Rom.GetAll());
-                AddRomsToGrid(FilteredRoms);
+
                 FillPlatformFilter();
                 FillLabelFilter();
                 FillGenreFilter();
                 FillPublisherFilter();
                 FillDeveloperFilter();
                 FillYearReleasedFilter();
+
+                string name, platform, label, genre, publisher, developer, year = "";
+                FilterFunctions.GetFilter(out name, out platform, out label, out genre, out publisher, out developer, out year);
+                textBoxFilter.Text = name;
+
+                if (!string.IsNullOrEmpty(platform))
+                {
+                    comboBoxPlatform.SelectedValue = platform;
+                }
+
+                if (!string.IsNullOrEmpty(label))
+                {
+                    comboBoxLabels.SelectedValue = label;
+                }
+
+                if (!string.IsNullOrEmpty(genre))
+                {
+                    comboBoxGenre.SelectedValue = genre;
+                }
+
+                if (!string.IsNullOrEmpty(developer))
+                {
+                    comboBoxDeveloper.SelectedText = developer;
+                }
+
+                if (!string.IsNullOrEmpty(publisher))
+                {
+                    comboBoxPublisher.SelectedText = publisher;
+                }
+
+                if (!string.IsNullOrEmpty(year))
+                {
+                    comboBoxYearReleased.SelectedText = year;
+                }
+
+                FilterRoms();
+
                 updating = false;
                 dataGridView.ClearSelection();
 
@@ -94,6 +129,7 @@ namespace EmuLoader.Forms
                 {
                     MessageBox.Show(backupEx.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
                 //FormMessage.CloseMessage();
                 //DateTime end = DateTime.Now;
                 //MessageBox.Show((end - begin).ToString());
@@ -102,6 +138,12 @@ namespace EmuLoader.Forms
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FormMain_Close(object sender, FormClosedEventArgs e)
+        {
+            FilterFunctions.SaveFilter(textBoxFilter.Text, comboBoxPlatform.SelectedValue.ToString(), comboBoxLabels.SelectedValue.ToString(), comboBoxGenre.SelectedValue.ToString(), comboBoxPublisher.SelectedValue.ToString(), comboBoxDeveloper.SelectedValue.ToString(), comboBoxYearReleased.SelectedValue.ToString());
+            XML.SaveXml();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -1862,7 +1904,7 @@ namespace EmuLoader.Forms
         {
             if (Rom.Count() < 2) return;
 
-            int random = new Random().Next(0, Rom.Count() - 1);
+            int random = new Random().Next(0, dataGridView.Rows.Count - 1);
             dataGridView.CurrentCell = dataGridView.Rows[random].Cells[0];
         }
 
