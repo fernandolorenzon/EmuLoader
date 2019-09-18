@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmuLoader.Classes
+namespace EmuLoader.Core.Classes
 {
     public static class Config
     {

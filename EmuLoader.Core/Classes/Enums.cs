@@ -1,4 +1,4 @@
-﻿namespace EmuLoader.Classes
+﻿namespace EmuLoader.Core.Classes
 {
     public enum Region
     {

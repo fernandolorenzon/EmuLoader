@@ -1,9 +1,9 @@
-﻿using EmuLoader.Classes;
+﻿using EmuLoader.Core.Classes;
 using System;
 using System.IO;
 using System.Net;
 
-namespace EmuLoader.Business
+namespace EmuLoader.Core.Business
 {
     public static class SyncDataFunctions
     {

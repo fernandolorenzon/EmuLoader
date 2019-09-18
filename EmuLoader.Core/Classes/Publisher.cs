@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EmuLoader.Classes
+namespace EmuLoader.Core.Classes
 {
     public static class Publisher
     {

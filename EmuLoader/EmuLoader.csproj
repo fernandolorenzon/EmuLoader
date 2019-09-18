@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TrackFileAccess>false</TrackFileAccess>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EmuLoader</RootNamespace>
     <AssemblyName>EmuLoader</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -74,35 +74,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\APIFunctions.cs" />
-    <Compile Include="Business\FilterFunctions.cs" />
-    <Compile Include="Classes\APIException.cs" />
-    <Compile Include="Classes\API_Game.cs" />
-    <Compile Include="Classes\API_Image.cs" />
-    <Compile Include="Classes\Base.cs" />
-    <Compile Include="Classes\Config.cs" />
-    <Compile Include="Classes\Enums.cs" />
-    <Compile Include="Business\RunAppFunctions.cs" />
-    <Compile Include="Business\SyncDataFunctions.cs" />
-    <Compile Include="Business\RomFunctions.cs" />
-    <Compile Include="Classes\YearReleased.cs" />
-    <Compile Include="Classes\Developer.cs" />
-    <Compile Include="Classes\Publisher.cs" />
-    <Compile Include="Classes\Values.cs" />
     <Compile Include="Forms\FormAddPicFromUrl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,7 +137,6 @@
     <Compile Include="Forms\FormBase.Designer.cs">
       <DependentUpon>FormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Genre.cs" />
     <Compile Include="Forms\FormGenre.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,7 +149,6 @@
     <Compile Include="Forms\FormChooseList.Designer.cs">
       <DependentUpon>FormChooseList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Platform.cs" />
     <Compile Include="Forms\FormChoose.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,8 +179,6 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\Functions.cs" />
-    <Compile Include="Classes\RomLabel.cs" />
     <Compile Include="Forms\FormSyncUsingXML.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,7 +268,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -302,8 +277,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Classes\Rom.cs" />
-    <Compile Include="Classes\XML.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmuLoader.ico" />
@@ -333,6 +306,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmuLoader.Core\EmuLoader.Core.csproj">
+      <Project>{bf65773b-77c2-4c65-beba-ad94b92bd4ad}</Project>
+      <Name>EmuLoader.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

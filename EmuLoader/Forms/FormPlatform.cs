@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
-using EmuLoader.Classes;
 using System.IO;
-using EmuLoader.Business;
+using EmuLoader.Core.Classes;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -296,7 +296,9 @@ namespace EmuLoader.Forms
 
         private void buttonHelp_Click(object sender, EventArgs e)
         {
-            Functions.ShowCommandHelp();
+            var result = Functions.ShowCommandHelp();
+            FormInfo info = new FormInfo(result);
+            info.Show();
         }
 
         private void buttonSwap_Click(object sender, EventArgs e)

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using EmuLoader.Classes;
-using EmuLoader.Business;
+using EmuLoader.Core.Classes;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -107,7 +107,7 @@ namespace EmuLoader.Forms
 
             foreach (DataGridViewRow item in dataGridView.SelectedRows)
             {
-                EmuLoader.Classes.RomLabel.Delete(item.Cells[0].Value.ToString());
+                EmuLoader.Core.Classes.RomLabel.Delete(item.Cells[0].Value.ToString());
                 dataGridView.Rows.Remove(item);
             }
 
@@ -199,7 +199,7 @@ namespace EmuLoader.Forms
         {
             base.SetForm();
             DataGridViewRow row = dataGridView.SelectedRows[0];
-            EmuLoader.Classes.RomLabel label = (EmuLoader.Classes.RomLabel)row.Tag;
+            EmuLoader.Core.Classes.RomLabel label = (EmuLoader.Core.Classes.RomLabel)row.Tag;
             textBoxName.Text = label.Name;
             buttonColor.BackColor = label.Color;
             textBoxName.Enabled = false;

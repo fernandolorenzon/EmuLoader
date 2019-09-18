@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
 using System.Threading;
 using System.Diagnostics;
-using EmuLoader.Business;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -479,7 +479,7 @@ namespace EmuLoader.Forms
             {
                 if (dataGridView.SelectedRows.Count == 0) return;
 
-                List<Rom> roms = new List<Classes.Rom>();
+                List<Rom> roms = new List<Rom>();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {

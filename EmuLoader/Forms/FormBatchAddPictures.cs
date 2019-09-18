@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
 using System.IO;
-using EmuLoader.Business;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -68,7 +68,7 @@ namespace EmuLoader.Forms
             progressBar1.Maximum = roms.Count < images.Length ? roms.Count : images.Length;
             string type = radioButtonBoxart.Checked ? Values.BoxartFolder : radioButtonTitle.Checked ? Values.TitleFolder : Values.GameplayFolder;
 
-            Dictionary<string, EmuLoader.Classes.Region> imageRegion = new Dictionary<string, Classes.Region>();
+            Dictionary<string, Region> imageRegion = new Dictionary<string, Region>();
 
             foreach (var item in images)
             {

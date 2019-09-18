@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EmuLoader.Business;
 using System.Collections.Generic;
-using EmuLoader.Classes;
+using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
 
 namespace Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class RomFunctionsTest
     {
         [TestMethod]
         public void TestMethod1()

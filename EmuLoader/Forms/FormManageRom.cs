@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
 using System.IO;
 using System.Diagnostics;
 using System.Text;
-using EmuLoader.Business;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {

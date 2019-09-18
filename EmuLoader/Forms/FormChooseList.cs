@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EmuLoader.Classes;
-using EmuLoader.Business;
+using EmuLoader.Core.Classes;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -64,9 +64,9 @@ namespace EmuLoader.Forms
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
                     RomLabel label = (RomLabel)row.Tag;
-                    label.CheckState = (CheckState)row.Cells[columnCheck.Index].Value;
+                    label.Checked = (CheckState)row.Cells[columnCheck.Index].Value == CheckState.Checked;
 
-                    if (label.CheckState == CheckState.Checked)
+                    if (label.Checked)
                     {
                         selectedLabels.Add((RomLabel)row.Tag);
                     }

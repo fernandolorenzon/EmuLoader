@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
 
 namespace EmuLoader.Forms
 {

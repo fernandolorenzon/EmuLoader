@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-using EmuLoader.Forms;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
 using System.IO;
 using System.Text;
 
-namespace EmuLoader.Business
+namespace EmuLoader.Core.Business
 {
     public static class Functions
     {
@@ -106,7 +105,7 @@ namespace EmuLoader.Business
             node.Attributes[attributeName].Value = value;
         }
 
-        public static void ShowCommandHelp()
+        public static string ShowCommandHelp()
         {
             string text =
             "Available variables:" + Environment.NewLine + Environment.NewLine +
@@ -125,8 +124,7 @@ namespace EmuLoader.Business
             "nullDC -> %EMUPATH% -config nullDC:Emulator.Autostart=1 -config ImageReader:LoadDefaultImage=1 -config ImageReader:DefaultImage=%ROMPATH% -nogui" + Environment.NewLine +
             "Nebula -> %EMUPATH% %ROMNAME%";
 
-            FormInfo info = new FormInfo(text.ToString());
-            info.Show();
+            return text;
         }
 
         public static string LoadAPIKEY()

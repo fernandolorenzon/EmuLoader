@@ -1,10 +1,8 @@
-﻿using EmuLoader.Business;
-using EmuLoader.Classes;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
 using System;
 using System.IO;
 using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace EmuLoader.Forms

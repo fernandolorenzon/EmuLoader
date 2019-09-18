@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmuLoader.Classes
+namespace EmuLoader.Core.Classes
 {
     public class API_Game
     {

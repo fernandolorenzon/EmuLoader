@@ -1,8 +1,8 @@
-﻿using EmuLoader.Classes;
+﻿using EmuLoader.Core.Classes;
 using System;
 using System.Diagnostics;
 
-namespace EmuLoader.Business
+namespace EmuLoader.Core.Business
 {
     public static class RunAppFunctions
     {

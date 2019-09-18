@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Text;
 using System.Xml;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
+using System.IO;
 
-namespace EmuLoader.Business
+namespace EmuLoader.Core.Business
 {
     public static class RomFunctions
     {
@@ -239,10 +237,10 @@ namespace EmuLoader.Business
                 string romZipped = GetFileName(rompath);
 
                 Directory.CreateDirectory(folder);
-                ZipFile.ExtractToDirectory(rompath, folder);
+                System.IO.Compression.ZipFile.ExtractToDirectory(rompath, folder);
                 string romUnzipped = GetFileName(Directory.GetFiles(folder)[0]);
                 File.Move(folder + "\\" + romUnzipped, folder + "\\" + GetFileNameNoExtension(rompath) + GetFileExtension(romUnzipped));
-                ZipFile.CreateFromDirectory(folder, Environment.CurrentDirectory + "\\" + romZipped);
+                System.IO.Compression.ZipFile.CreateFromDirectory(folder, Environment.CurrentDirectory + "\\" + romZipped);
                 File.Delete(rompath);
                 File.Move(Environment.CurrentDirectory + "\\" + romZipped, rompath);
                 Directory.Delete(folder, true);
@@ -292,7 +290,7 @@ namespace EmuLoader.Business
         {
             Genre genre = new Genre();
             genre.Name = name;
-            genre.CheckState = System.Windows.Forms.CheckState.Checked;
+            genre.Checked = true;
             Random r = new Random();
             genre.Color = Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255));
 

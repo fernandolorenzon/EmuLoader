@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using EmuLoader.Classes;
+using EmuLoader.Core.Classes;
 using System.IO;
-using EmuLoader.Business;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
