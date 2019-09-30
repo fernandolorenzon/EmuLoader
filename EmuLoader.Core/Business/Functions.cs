@@ -5,11 +5,31 @@ using System.Xml;
 using EmuLoader.Core.Classes;
 using System.IO;
 using System.Text;
+using System.Net;
 
 namespace EmuLoader.Core.Business
 {
     public static class Functions
     {
+        public static void SavePictureFromUrl(Rom rom, string url, string pictureType, bool saveAsJpg)
+        {
+            string extension = url.Substring(url.LastIndexOf("."));
+            string imagePath = "image" + extension;
+
+            if (url.ToLower().Contains("https:"))
+            {
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            }
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(new Uri(url), imagePath);
+            }
+
+            RomFunctions.SavePicture(rom, imagePath, pictureType, saveAsJpg);
+            File.Delete(imagePath);
+        }
+
         public static string RemoveSubstring(string text, char start, char end)
         {
             char[] textArray = text.ToCharArray();

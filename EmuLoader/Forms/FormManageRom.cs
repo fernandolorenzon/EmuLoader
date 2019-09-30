@@ -112,63 +112,39 @@ namespace EmuLoader.Forms
         {
             try
             {
-                SelectedRom.Labels.Clear();
-
-                SelectedRom.Platform = string.IsNullOrEmpty(comboBoxPlatform.Text) ? null : (Platform)comboBoxPlatform.SelectedItem;
-                SelectedRom.Genre = string.IsNullOrEmpty(comboBoxGenre.Text) ? null : (Genre)comboBoxGenre.SelectedItem;
-
-                SelectedRom.Publisher = textBoxPublisher.Text;
-                SelectedRom.Developer = textBoxDeveloper.Text;
-                SelectedRom.Description = textBoxDescription.Text;
-                SelectedRom.YearReleased = textBoxYearReleased.Text;
-                SelectedRom.DBName = textBoxDBName.Text;
-                SelectedRom.IdLocked = checkBoxIdLocked.Checked;
-
-                float rating = 0;
-
-                if (float.TryParse(textBoxRating.Text, out rating))
-                {
-                    if (rating > 0 && rating <= 10)
-                    {
-                        SelectedRom.Rating = rating;
-                    }
-                }
-
-                SelectedRom.Id = textBoxId.Text;
-
-                RenameRomFile();
-                RenameRomPictures();
-
-                SelectedRom.Name = textBoxChangeRomName.Text;
+                List<RomLabel> labels = new List<RomLabel>();
 
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
                     if (((CheckState)row.Cells[columnCheck.Index].Value) == CheckState.Checked)
                     {
                         RomLabel label = (RomLabel)row.Tag;
-                        SelectedRom.Labels.Add((RomLabel)row.Tag);
+                        labels.Add(label);
                     }
                 }
 
-                SaveRomPictures();
-
-                if (!string.IsNullOrEmpty(textBoxEmulatorExe.Text) && !string.IsNullOrEmpty(textBoxCommand.Text))
-                {
-                    SelectedRom.EmulatorExe = textBoxEmulatorExe.Text;
-                    SelectedRom.Command = textBoxCommand.Text;
-                }
-                else
-                {
-                    SelectedRom.EmulatorExe = string.Empty;
-                    SelectedRom.Command = string.Empty;
-                }
-
-                SelectedRom.UseAlternateEmulator = checkBoxUseAlternate.Checked;
-
-                if (string.IsNullOrEmpty(SelectedRom.Id))
-                {
-                    SelectedRom.DBName = string.Empty;
-                }
+                SelectedRom = RomFunctions.SetRom(SelectedRom,
+                    textBoxId.Text,
+                    textBoxChangeFileName.Text,
+                    textBoxChangeRomName.Text,
+                    comboBoxPlatform.Text,
+                    comboBoxGenre.Text,
+                    labels,
+                    textBoxPublisher.Text,
+                    textBoxDeveloper.Text,
+                    textBoxDescription.Text,
+                    textBoxYearReleased.Text,
+                    textBoxDBName.Text,
+                    textBoxRating.Text,
+                    checkBoxIdLocked.Checked,
+                    checkBoxChangeZippedName.Checked,
+                    textBoxBoxartPicture.Text, 
+                    textBoxTitlePicture.Text, 
+                    textBoxGameplayPicture.Text, 
+                    checkBoxSaveAsJpg.Checked,
+                    textBoxEmulatorExe.Text,
+                    textBoxCommand.Text,
+                    checkBoxUseAlternate.Checked);
 
                 Rom.Set(SelectedRom);
                 XML.SaveXml();
@@ -179,96 +155,6 @@ namespace EmuLoader.Forms
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void SaveRomPictures()
-        {
-            if (!string.IsNullOrEmpty(textBoxBoxartPicture.Text) && File.Exists(textBoxBoxartPicture.Text))
-            {
-                RomFunctions.SavePicture(SelectedRom, textBoxBoxartPicture.Text, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
-            }
-
-            if (!string.IsNullOrEmpty(textBoxTitlePicture.Text) && File.Exists(textBoxTitlePicture.Text))
-            {
-                RomFunctions.SavePicture(SelectedRom, textBoxTitlePicture.Text, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
-            }
-
-            if (!string.IsNullOrEmpty(textBoxGameplayPicture.Text) && File.Exists(textBoxGameplayPicture.Text))
-            {
-                RomFunctions.SavePicture(SelectedRom, textBoxGameplayPicture.Text, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
-            }
-        }
-
-        private void RenameRomPictures()
-        {
-            if (textBoxChangeRomName.Text != SelectedRom.Name)
-            {
-                string boxpic = RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder);
-                string titlepic = RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder);
-                string gameplaypic = RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder);
-
-                if (!string.IsNullOrEmpty(boxpic))
-                {
-                    File.Move(boxpic, boxpic.Substring(0, boxpic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + boxpic.Substring(boxpic.LastIndexOf(".")));
-                }
-
-                if (!string.IsNullOrEmpty(titlepic))
-                {
-                    File.Move(titlepic, titlepic.Substring(0, titlepic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + titlepic.Substring(titlepic.LastIndexOf(".")));
-                }
-
-                if (!string.IsNullOrEmpty(gameplaypic))
-                {
-                    File.Move(gameplaypic, gameplaypic.Substring(0, gameplaypic.LastIndexOf("\\")) + "\\" + textBoxChangeRomName.Text + gameplaypic.Substring(gameplaypic.LastIndexOf(".")));
-                }
-            }
-        }
-
-        private bool RenameRomFile()
-        {
-            if (textBoxChangeFileName.Text != SelectedRom.GetFileName())
-            {
-                string oldPath = SelectedRom.Path;
-                string newPath = string.Empty;
-                string newDir = string.Empty;
-
-                if (SelectedRom.IsRomPack())
-                {
-                    FileInfo file = new FileInfo(SelectedRom.Path);
-                    newDir = file.Directory.Parent.FullName + "\\" + RomFunctions.GetFileNameNoExtension(textBoxChangeFileName.Text);
-                    newPath = newDir + "\\" + textBoxChangeFileName.Text;
-                }
-                else
-                {
-                    newPath = RomFunctions.GetRomDirectory(SelectedRom.Path) + "\\" + textBoxChangeFileName.Text;
-                }
-
-                if (File.Exists(newPath))
-                {
-                    throw new Exception("A file named \"" + newPath + "\" already exists!");
-                }
-
-                if (!string.IsNullOrEmpty(newDir))
-                {
-                    DirectoryInfo oldPathDir = new FileInfo(oldPath).Directory;
-                    oldPathDir.MoveTo(newDir);
-                    File.Move(newDir + "\\" + SelectedRom.GetFileName(), newPath);
-                }
-                else
-                {
-                    File.Move(oldPath, newPath);
-                }
-
-                Rom.Delete(SelectedRom);
-                SelectedRom.Path = newPath;
-
-                if (checkBoxChangeZippedName.Checked && RomFunctions.GetFileExtension(newPath) == ".zip")
-                {
-                    RomFunctions.ChangeRomNameInsideZip(newPath);
-                }
-            }
-
-            return true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -522,38 +408,13 @@ namespace EmuLoader.Forms
         {
             if (string.IsNullOrEmpty(textBoxDBName.Text.Trim())) return;
 
-            int bracketindex = textBoxChangeFileName.Text.IndexOf('[');
-            int parindex = textBoxChangeFileName.Text.IndexOf('(');
-            int suffixIndex = 0;
+            string romName = textBoxChangeRomName.Text;
+            string fileName = textBoxChangeFileName.Text;
 
-            if (bracketindex > -1 && parindex == -1)
-            {
-                suffixIndex = bracketindex;
-            }
-            else if (bracketindex == -1 && parindex > -1)
-            {
-                suffixIndex = parindex;
-            }
-            else if (bracketindex > -1 && parindex > -1)
-            {
-                suffixIndex = bracketindex > parindex ? parindex : bracketindex;
-            }
+            RomFunctions.CopyDBName(textBoxDBName.Text, checkBoxKeepSuffix.Checked, out romName, out fileName);
 
-            string suffix = suffixIndex == 0 ? string.Empty : RomFunctions.GetFileNameNoExtension(textBoxChangeFileName.Text).Substring(suffixIndex);
-
-            if (checkBoxKeepSuffix.Checked)
-            {
-                textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -") + " " + suffix;
-            }
-            else
-            {
-                textBoxChangeRomName.Text = textBoxDBName.Text.Replace(":", " -");
-            }
-
-            textBoxChangeFileName.Text = textBoxChangeRomName.Text + RomFunctions.GetFileExtension(textBoxChangeFileName.Text);
-
-            textBoxChangeRomName.Text = textBoxChangeRomName.Text.Trim();
-            textBoxChangeFileName.Text = textBoxChangeFileName.Text.Trim();
+            textBoxChangeRomName.Text = romName;
+            textBoxChangeFileName.Text = fileName;
         }
 
         private void buttonCheckList_Click(object sender, EventArgs e)

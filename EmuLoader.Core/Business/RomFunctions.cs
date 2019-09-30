@@ -12,6 +12,197 @@ namespace EmuLoader.Core.Business
     public static class RomFunctions
     {
 
+        public static void SaveRomPictures(Rom rom, string boxPath, string titlePath, string gameplayPath, bool saveAsJpg)
+        {
+            if (!string.IsNullOrEmpty(boxPath) && File.Exists(boxPath))
+            {
+                RomFunctions.SavePicture(rom, boxPath, Values.BoxartFolder, saveAsJpg);
+            }
+
+            if (!string.IsNullOrEmpty(titlePath) && File.Exists(titlePath))
+            {
+                RomFunctions.SavePicture(rom, titlePath, Values.TitleFolder, saveAsJpg);
+            }
+
+            if (!string.IsNullOrEmpty(gameplayPath) && File.Exists(gameplayPath))
+            {
+                RomFunctions.SavePicture(rom, gameplayPath, Values.GameplayFolder, saveAsJpg);
+            }
+        }
+
+        public static bool RenameRomFile(Rom rom, string changeFileName, bool changeZipFileName)
+        {
+            if (changeFileName != rom.GetFileName())
+            {
+                string oldPath = rom.Path;
+                string newPath = string.Empty;
+                string newDir = string.Empty;
+
+                if (rom.IsRomPack())
+                {
+                    FileInfo file = new FileInfo(rom.Path);
+                    newDir = file.Directory.Parent.FullName + "\\" + RomFunctions.GetFileNameNoExtension(changeFileName);
+                    newPath = newDir + "\\" + changeFileName;
+                }
+                else
+                {
+                    newPath = RomFunctions.GetRomDirectory(rom.Path) + "\\" + changeFileName;
+                }
+
+                if (File.Exists(newPath))
+                {
+                    throw new Exception("A file named \"" + newPath + "\" already exists!");
+                }
+
+                if (!string.IsNullOrEmpty(newDir))
+                {
+                    DirectoryInfo oldPathDir = new FileInfo(oldPath).Directory;
+                    oldPathDir.MoveTo(newDir);
+                    File.Move(newDir + "\\" + rom.GetFileName(), newPath);
+                }
+                else
+                {
+                    File.Move(oldPath, newPath);
+                }
+
+                Rom.Delete(rom);
+                rom.Path = newPath;
+
+                if (changeZipFileName && RomFunctions.GetFileExtension(newPath) == ".zip")
+                {
+                    RomFunctions.ChangeRomNameInsideZip(newPath);
+                }
+            }
+
+            return true;
+        }
+
+        public static void RenameRomPictures(Rom rom, string changeRomName)
+        {
+            if (changeRomName != rom.Name)
+            {
+                string boxpic = RomFunctions.GetRomPicture(rom, Values.BoxartFolder);
+                string titlepic = RomFunctions.GetRomPicture(rom, Values.TitleFolder);
+                string gameplaypic = RomFunctions.GetRomPicture(rom, Values.GameplayFolder);
+
+                if (!string.IsNullOrEmpty(boxpic))
+                {
+                    File.Move(boxpic, boxpic.Substring(0, boxpic.LastIndexOf("\\")) + "\\" + changeRomName + boxpic.Substring(boxpic.LastIndexOf(".")));
+                }
+
+                if (!string.IsNullOrEmpty(titlepic))
+                {
+                    File.Move(titlepic, titlepic.Substring(0, titlepic.LastIndexOf("\\")) + "\\" + changeRomName + titlepic.Substring(titlepic.LastIndexOf(".")));
+                }
+
+                if (!string.IsNullOrEmpty(gameplaypic))
+                {
+                    File.Move(gameplaypic, gameplaypic.Substring(0, gameplaypic.LastIndexOf("\\")) + "\\" + changeRomName + gameplaypic.Substring(gameplaypic.LastIndexOf(".")));
+                }
+            }
+        }
+
+        public static Rom SetRom(Rom rom, string id, string fileName,
+            string romName, string platform, string genre, List<RomLabel> labels, string publisher,
+            string developer, string description, string year, string dbName,
+            string rating, bool idLocked, bool changeZipName,
+            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg,
+            string emulatorExe, string command, bool useAlternate)
+        {
+            rom.Labels.Clear();
+
+            rom.Platform = string.IsNullOrEmpty(platform) ? null : Platform.Get(platform);
+            rom.Genre = string.IsNullOrEmpty(genre) ? null : Genre.Get(genre);
+
+            rom.Publisher = publisher;
+            rom.Developer = developer;
+            rom.Description = description;
+            rom.YearReleased = year;
+            rom.DBName = dbName;
+            rom.IdLocked = idLocked;
+
+            float ratingParse = 0;
+
+            if (float.TryParse(rating, out ratingParse))
+            {
+                if (ratingParse > 0 && ratingParse <= 10)
+                {
+                    rom.Rating = ratingParse;
+                }
+            }
+
+            rom.Id = id;
+
+            RomFunctions.RenameRomFile(rom, fileName, changeZipName);
+            RomFunctions.RenameRomPictures(rom, romName);
+
+            rom.Name = romName;
+            rom.Labels.AddRange(labels);
+
+            RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
+
+            if (!string.IsNullOrEmpty(emulatorExe) && !string.IsNullOrEmpty(command))
+            {
+                rom.EmulatorExe = emulatorExe;
+                rom.Command = command;
+            }
+            else
+            {
+                rom.EmulatorExe = string.Empty;
+                rom.Command = string.Empty;
+            }
+
+            rom.UseAlternateEmulator = useAlternate;
+
+            if (string.IsNullOrEmpty(rom.Id))
+            {
+                rom.DBName = string.Empty;
+            }
+
+            return rom;
+        }
+
+        public static void CopyDBName(string dbName, bool keepSuffix, out string romName, out string fileName)
+        {
+            romName = "";
+            fileName = "";
+
+            if (string.IsNullOrEmpty(dbName.Trim())) return;
+
+            int bracketindex = fileName.IndexOf('[');
+            int parindex = fileName.IndexOf('(');
+            int suffixIndex = 0;
+
+            if (bracketindex > -1 && parindex == -1)
+            {
+                suffixIndex = bracketindex;
+            }
+            else if (bracketindex == -1 && parindex > -1)
+            {
+                suffixIndex = parindex;
+            }
+            else if (bracketindex > -1 && parindex > -1)
+            {
+                suffixIndex = bracketindex > parindex ? parindex : bracketindex;
+            }
+
+            string suffix = suffixIndex == 0 ? string.Empty : RomFunctions.GetFileNameNoExtension(fileName).Substring(suffixIndex);
+
+            if (keepSuffix)
+            {
+                romName = dbName.Replace(":", " -") + " " + suffix;
+            }
+            else
+            {
+                romName = dbName.Replace(":", " -");
+            }
+
+            fileName = romName + RomFunctions.GetFileExtension(fileName);
+
+            romName = romName.Trim();
+            fileName = fileName.Trim();
+        }
+
         public static string TrimRomName(string name)
         {
             string trimmed = name.ToLower();
@@ -408,11 +599,21 @@ namespace EmuLoader.Core.Business
 
         public static bool AddRomsFromDirectory(Platform platform, string directory)
         {
+            if (platform == null) return false;
+
             List<Rom> romList = new List<Rom>();
             var files = Directory.GetFiles(directory);
+            var exts = platform.DefaultRomExtensions.Split(',').ToList();
+            bool addedAny = false;
 
             foreach (var item in files)
             {
+                var fileExt = GetFileExtension(item);
+                if (!exts.Contains(fileExt.Replace(".", "")))
+                {
+                    continue;
+                }
+
                 Rom r = new Rom(item);
                 Rom old = Rom.Get(r.Path);
 
@@ -420,16 +621,22 @@ namespace EmuLoader.Core.Business
                 {
                     r = old;
                 }
+                else
+                {
+                    addedAny = true;
+                }
 
                 r.Platform = platform;
                 Rom.Set(r);
             }
 
-            return true;
+            return addedAny;
         }
 
         public static bool AddRomPacksFromDirectory(Platform platform, string directory)
         {
+            if (platform == null) return false;
+
             List<Rom> romList = new List<Rom>();
             var directories = Directory.GetDirectories(directory);
             bool addedAny = false;
