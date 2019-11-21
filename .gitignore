@@ -12,3 +12,5 @@
 /EmuLoader.Core/obj/Debug/EmuLoader.Core.csproj.FileListAbsolute.txt
 /EmuLoader.Core/obj/Debug/EmuLoader.Core.csprojResolveAssemblyReference.cache
 /EmuLoader.Core/obj/Debug/EmuLoader.Core.dll
+/EmuLoader.Core/bin/Release
+/EmuLoader.Core/obj/Release
