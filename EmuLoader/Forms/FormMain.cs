@@ -142,7 +142,14 @@ namespace EmuLoader.Forms
 
         private void FormMain_Close(object sender, FormClosedEventArgs e)
         {
-            FilterFunctions.SaveFilter(textBoxFilter.Text, comboBoxPlatform.SelectedValue.ToString(), comboBoxLabels.SelectedValue.ToString(), comboBoxGenre.SelectedValue.ToString(), comboBoxPublisher.SelectedValue.ToString(), comboBoxDeveloper.SelectedValue.ToString(), comboBoxYearReleased.SelectedValue.ToString());
+            var platform = comboBoxPlatform.SelectedValue == null ? "" : comboBoxPlatform.SelectedValue.ToString();
+            var label = comboBoxLabels.SelectedValue == null ? "" : comboBoxLabels.SelectedValue.ToString();
+            var genre = comboBoxGenre.SelectedValue == null ? "" : comboBoxGenre.SelectedValue.ToString();
+            var publisher = comboBoxPublisher.SelectedValue == null ? "" : comboBoxPublisher.SelectedValue.ToString();
+            var developer = comboBoxDeveloper.SelectedValue == null ? "" : comboBoxDeveloper.SelectedValue.ToString();
+            var year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
+
+            FilterFunctions.SaveFilter(textBoxFilter.Text, platform,label, genre, publisher, developer, year);
             XML.SaveXml();
         }
 
