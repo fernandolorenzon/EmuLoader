@@ -11,7 +11,6 @@ namespace EmuLoader.Forms
         
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Updated = false;
             this.Close();
         }
 
