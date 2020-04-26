@@ -68,6 +68,11 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(open.FileName)) return;
 
+            if (textBoxDefaultRomExtensions.Text == string.Empty)
+            {
+                textBoxDefaultRomExtensions.Text = ".zip";
+            }
+
             if (string.IsNullOrEmpty(textBoxCommand.Text))
             {
                 textBoxCommand.Text = Values.DefaultCommand;
@@ -89,7 +94,12 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(open.FileName)) return;
 
-            if (string.IsNullOrEmpty(textBoxCommand.Text))
+            if (textBoxDefaultRomExtensions.Text == string.Empty)
+            {
+                textBoxDefaultRomExtensions.Text = ".zip";
+            }
+
+            if (string.IsNullOrEmpty(textBoxAlternateCommand.Text))
             {
                 textBoxAlternateCommand.Text = Values.DefaultCommand;
             }
@@ -117,20 +127,18 @@ namespace EmuLoader.Forms
 
                 platform = new Platform();
             }
-            else
-            {
-                DataGridViewRow row = dataGridView.SelectedRows[0];
-                index = row.Index;
-                platform = (Platform)row.Tag;
-                textBoxName.Enabled = true;
-                buttonAdd.Text = "Add";
-            }
 
             if (!string.IsNullOrEmpty(textBoxDefaultRomPath.Text) && string.IsNullOrEmpty(textBoxDefaultRomExtensions.Text))
             {
                 MessageBox.Show("Default rom extensions must also be filled");
                 return;
             }
+
+            DataGridViewRow row = dataGridView.SelectedRows[0];
+            index = row.Index;
+            platform = (Platform)row.Tag;
+            textBoxName.Enabled = true;
+            buttonAdd.Text = "Add";
 
             platform.Id = comboBoxPlatformsDB.SelectedValue.ToString();
             platform.Name = textBoxName.Text.Trim();
@@ -346,13 +354,15 @@ namespace EmuLoader.Forms
             base.Clean();
             textBoxName.Text = string.Empty;
             textBoxPath.Text = string.Empty;
-            textBoxCommand.Text = Values.DefaultCommand;
+            textBoxCommand.Text = string.Empty;
             buttonColor.BackColor = Color.White;
             textBoxPlatformIcon.Text = string.Empty;
+            textBoxAlternateCommand.Text = string.Empty;
+            textBoxAlternatePath.Text = string.Empty;
             dataGridView.ClearSelection();
             comboBoxPlatformsDB.SelectedValue = "0";
             textBoxDefaultRomPath.Text = string.Empty;
-            textBoxDefaultRomExtensions.Text = "zip";
+            textBoxDefaultRomExtensions.Text = string.Empty;
             textBoxName.Enabled = true;
         }
 

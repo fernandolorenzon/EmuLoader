@@ -387,7 +387,16 @@ namespace EmuLoader.Core.Business
         {
             if (string.IsNullOrEmpty(file)) return "";
             var fileName = file.Substring(file.LastIndexOf("\\") + 1);
-            return fileName.Substring(0, fileName.LastIndexOf("."));
+            var indexExtension = fileName.LastIndexOf(".");
+
+            if (indexExtension == -1)
+            {
+                return fileName;
+            }
+            else
+            {
+                return fileName.Substring(0, fileName.LastIndexOf("."));
+            }
         }
 
         public static void RemoveRomPics(Rom rom)
