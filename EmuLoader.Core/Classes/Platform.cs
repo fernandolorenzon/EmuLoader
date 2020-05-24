@@ -137,36 +137,63 @@ namespace EmuLoader.Core.Classes
 
         public bool RescanRoms()
         {
+            bool addedAny = false;
+
             if (string.IsNullOrEmpty(DefaultRomPath) || string.IsNullOrEmpty(DefaultRomExtensions))
             {
                 return false;
             }
 
-            var extensions = DefaultRomExtensions.Replace(" ", "").Replace(".", "").Split(',');
-
-            if (!Directory.Exists(DefaultRomPath) || extensions.Length == 0)
+            if (DefaultRomExtensions == "dir")
             {
-                return false;
-            }
 
-            bool addedAny = false;
-
-            foreach (var item in extensions)
-            {
-                var files = Directory.GetFiles(DefaultRomPath, "*." + item, SearchOption.TopDirectoryOnly);
-
-                foreach (var file in files)
+                if (!Directory.Exists(DefaultRomPath))
                 {
-                    var rom = Rom.Get(file);
+                    return false;
+                }
+
+                var dirs = Directory.GetDirectories(DefaultRomPath);
+
+                foreach (var dir in dirs)
+                {
+                    var rom = Rom.Get(dir);
 
                     if (rom == null)
                     {
-                        rom = new Rom(file);
+                        rom = new Rom(dir);
                         rom.Platform = this;
                     }
 
                     Rom.Set(rom);
                     addedAny = true;
+                }
+            }
+            else
+            {
+                var extensions = DefaultRomExtensions.Replace(" ", "").Replace(".", "").Split(',');
+
+                if (!Directory.Exists(DefaultRomPath) || extensions.Length == 0)
+                {
+                    return false;
+                }
+
+                foreach (var item in extensions)
+                {
+                    var files = Directory.GetFiles(DefaultRomPath, "*." + item, SearchOption.TopDirectoryOnly);
+
+                    foreach (var file in files)
+                    {
+                        var rom = Rom.Get(file);
+
+                        if (rom == null)
+                        {
+                            rom = new Rom(file);
+                            rom.Platform = this;
+                        }
+
+                        Rom.Set(rom);
+                        addedAny = true;
+                    }
                 }
             }
 

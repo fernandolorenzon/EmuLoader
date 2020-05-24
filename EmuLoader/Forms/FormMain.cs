@@ -1909,7 +1909,7 @@ namespace EmuLoader.Forms
 
         private void SelectRandomRom()
         {
-            if (Rom.Count() < 2) return;
+            if (dataGridView.Rows.Count < 2) return;
 
             int random = new Random().Next(0, dataGridView.Rows.Count - 1);
             dataGridView.CurrentCell = dataGridView.Rows[random].Cells[0];

@@ -10,26 +10,30 @@ namespace EmuLoader.Core.Business
         {
             string exe = rom.UseAlternateEmulator ? rom.Platform.EmulatorExeAlt : rom.Platform.EmulatorExe;
             string command = rom.UseAlternateEmulator ? rom.Platform.CommandAlt : rom.Platform.Command;
+            string workdir = rom.Platform.EmulatorExe.Substring(0, rom.Platform.EmulatorExe.LastIndexOf("\\"));
 
             if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
             {
                 exe = rom.EmulatorExe;
                 command = rom.Command;
+                workdir = rom.EmulatorExe.Substring(0, rom.EmulatorExe.LastIndexOf("\\"));
             }
+
+            string args = command.Replace("%EMUPATH%", "")
+                        .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                        .Replace("%ROMNAME%", RomFunctions.GetFileNameNoExtension(rom.Path))
+                        .Replace("%ROMFILE%", RomFunctions.GetFileName(rom.Path));
 
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = exe,
-                    Arguments = command.Replace("%EMUPATH%", "")
-                        .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
-                        .Replace("%ROMNAME%", RomFunctions.GetFileNameNoExtension(rom.Path))
-                        .Replace("%ROMFILE%", RomFunctions.GetFileName(rom.Path)),
+                    Arguments = args,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true,
-                    WorkingDirectory = rom.Platform.EmulatorExe.Substring(0, rom.Platform.EmulatorExe.LastIndexOf("\\"))
+                    WorkingDirectory = workdir
                 }
             };
 

@@ -24,6 +24,13 @@ namespace EmuLoader.Forms
             try
             {
                 textBox1.Text = Clipboard.GetText();
+
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Copy a valid url with the image");
+                    return;
+                }
+
                 Functions.SavePictureFromUrl(SelectedRom, textBox1.Text, PictureType, checkBoxSaveAsJpg.Checked);
                 Close();
             }
@@ -37,6 +44,12 @@ namespace EmuLoader.Forms
         {
             try
             {
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Paste a valid url with the image");
+                    return;
+                }
+
                 Functions.SavePictureFromUrl(SelectedRom, textBox1.Text, PictureType, checkBoxSaveAsJpg.Checked);
             }
             catch (Exception ex)
