@@ -1,4 +1,7 @@
-﻿using EmuLoader.Core.Classes;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +19,7 @@ namespace EmuLoader.Core.Business
                 string games = string.Empty;
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = Values.BaseAPIURL + "/Games/ByPlatformID?apikey=" + key + "&id=" + platformId;
+                var url = Values.BaseAPIURL + "/v1/Games/ByPlatformID?apikey=" + key + "&id=" + platformId;
 
                 while (true)
                 {
@@ -28,12 +31,10 @@ namespace EmuLoader.Core.Business
 
                     if (string.IsNullOrEmpty(json)) return null;
 
-                    //var jobject = (JObject)JsonConvert.DeserializeObject(json);
-                    //games += jobject.SelectToken("data.games").ToString();
-                    games += JsonFunctions.GetJsonValue(json, "data.games");
+                    var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                    games += jobject.SelectToken("data.games").ToString();
 
-                    //var next = jobject.SelectToken("pages.next").ToString();
-                    var next = JsonFunctions.GetJsonValue(json, "pages.next");
+                    var next = jobject.SelectToken("pages.next").ToString();
 
                     if (string.IsNullOrEmpty(next))
                     {
@@ -83,22 +84,21 @@ namespace EmuLoader.Core.Business
                     throw new APIException("Cound not get json");
                 }
 
-                //var jobject = (JArray)JsonConvert.DeserializeObject(json);
-                var jobject = JsonFunctions.ParseJson(json);
+                var jobject = (JArray)JsonConvert.DeserializeObject(json);
                 List<Rom> games = new List<Rom>();
 
-                foreach (var game in jobject.Children)
+                foreach (var game in jobject)
                 {
+                    var objGame = (JObject)game;
                     games.Add(new Rom()
                     {
-                        Id = game.Children.First(x => x.Key == "id").Value,
-                        DBName = game.Children.First(x => x.Key == "game_title").Value,
-                        YearReleased = RomFunctions.GetYear(game.Children.First(x => x.Key == "release_date").Value)
+                        Id = objGame.SelectToken("id").ToString(),
+                        DBName = objGame.SelectToken("game_title").ToString(),
+                        YearReleased = RomFunctions.GetYear(objGame.SelectToken("release_date").ToString())
                     });
                 }
 
                 return games.OrderBy(x => x.Name).ToList();
-
             }
             catch (APIException ex)
             {
@@ -116,7 +116,7 @@ namespace EmuLoader.Core.Business
             {
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = Values.BaseAPIURL + "/Games/ByGameName?apikey=" + key + "&name=" + name + "&platform=" + platformId;
+                var url = Values.BaseAPIURL + "/v1.1/Games/ByGameName?apikey=" + key + "&name=" + name + "&platform=" + platformId;
 
                 using (WebClient client = new WebClient())
                 {
@@ -133,18 +133,17 @@ namespace EmuLoader.Core.Business
 
                 var part = json.Substring(json.IndexOf("games\":") + 7);
                 part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
-                //var list = JsonConvert.DeserializeObject<List<API_Game>>(part);
-                var list = JsonFunctions.ParseJson(part);
+                var list = JsonConvert.DeserializeObject<List<API_Game>>(part);
 
                 List<Rom> games = new List<Rom>();
 
-                foreach (var game in list.Children)
+                foreach (var game in list)
                 {
                     games.Add(new Rom()
                     {
-                        Id = game.Children.First(x => x.Key == "id").Value,
-                        DBName = game.Children.First(x => x.Key == "game_title").Value,
-                        YearReleased = RomFunctions.GetYear(game.Children.First(x => x.Key == "release_date").Value)
+                        Id = game.id.ToString(),
+                        DBName = game.game_title,
+                        YearReleased = RomFunctions.GetYear(game.release_date)
                     });
 
                     return games[0];
@@ -171,7 +170,7 @@ namespace EmuLoader.Core.Business
 
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = Values.BaseAPIURL + "/Games/ByGameID?apikey=" + key + "&id=" + gameId;
+                var url = Values.BaseAPIURL + "/v1/Games/ByGameID?apikey=" + key + "&id=" + gameId;
 
                 using (WebClient client = new WebClient())
                 {
@@ -185,20 +184,16 @@ namespace EmuLoader.Core.Business
 
                 var result = new Rom();
 
-                //var jobject = (JObject)JsonConvert.DeserializeObject(json);
-                var jobject = JsonFunctions.ParseJson(json);
-                var jgame = jobject.Children.First();
+                var jobject = (JObject)JsonConvert.DeserializeObject(json);
+                var jgame = jobject.SelectToken("data.games").First();
                 result.Id = gameId;
-                //result.DBName = jgame.SelectToken("game_title").ToString();
-                result.DBName = jgame.Children.First(x => x.Key == "game_title").Value;
-                //result.YearReleased = RomFunctions.GetYear(jgame.SelectToken("release_date").ToString());
-                result.YearReleased = RomFunctions.GetYear(jgame.Children.First(x => x.Key == "release_date").Value);
+                result.DBName = jgame.SelectToken("game_title").ToString();
+                result.YearReleased = RomFunctions.GetYear(jgame.SelectToken("release_date").ToString());
                 //result.Description = jobject.SelectToken("data.games").First().SelectToken("description").ToString();
 
                 try
                 {
-                    //result.Publisher = publishers[Convert.ToInt32(jgame.SelectToken("publisher").ToString())];
-                    result.Publisher = publishers[Convert.ToInt32(jgame.Children.First(x => x.Key == "publisher").Value)];
+                    result.Publisher = publishers[Convert.ToInt32(jgame.SelectToken("publisher").ToString())];
                 }
                 catch
                 {
@@ -207,8 +202,7 @@ namespace EmuLoader.Core.Business
 
                 try
                 {
-                    //result.Developer = developers[Convert.ToInt32(jgame.SelectToken("developers").First().ToString())];
-                    result.Developer = developers[Convert.ToInt32(jgame.Children.First(x => x.Key == "developers").Value)];
+                    result.Developer = developers[Convert.ToInt32(jgame.SelectToken("developers").First().ToString())];
                 }
                 catch
                 {
@@ -239,7 +233,7 @@ namespace EmuLoader.Core.Business
             {
                 string key = Functions.LoadAPIKEY();
                 string json = string.Empty;
-                var url = Values.BaseAPIURL + "/Games/Images?apikey=" + key + "&games_id=" + gameId;
+                var url = Values.BaseAPIURL + "/v1/Games/Images?apikey=" + key + "&games_id=" + gameId;
 
                 using (WebClient client = new WebClient())
                 {
@@ -311,19 +305,18 @@ namespace EmuLoader.Core.Business
         private static Dictionary<int, string> readPublishers()
         {
             var text = File.ReadAllText(Values.JsonFolder + "\\" + Values.PublishersFile);
-            //var jobject = (JObject)JsonConvert.DeserializeObject(text);
-            var jobject = JsonFunctions.ParseJson(text);
+            var jobject = (JObject)JsonConvert.DeserializeObject(text);
 
-            var publishers = jobject.Children.First(x => x.Key == "data.publishers");
+            var publishers = jobject.SelectToken("data.publishers").ToList();
             Dictionary<int, string> result = new Dictionary<int, string>();
 
-            foreach (var item in publishers.Children)
+            foreach (var item in publishers)
             {
-                var key = Convert.ToInt32(item.Children.First(x => x.Key == "id").Value);
+                var key = Convert.ToInt32(item.First().SelectToken("id"));
 
                 if (result.ContainsKey(key)) continue;
 
-                result.Add(key, item.Children.First(x => x.Key == "name").Value);
+                result.Add(key, item.First().SelectToken("name").ToString());
             }
 
             return result;
@@ -369,23 +362,21 @@ namespace EmuLoader.Core.Business
         private static Dictionary<int, string> readDevelopers()
         {
             var text = File.ReadAllText(Values.JsonFolder + "\\" + Values.DevelopersFile);
-            //var jobject = (JObject)JsonConvert.DeserializeObject(text);
-            var jobject = JsonFunctions.ParseJson(text);
+            var jobject = (JObject)JsonConvert.DeserializeObject(text);
 
-            //var publishers = jobject.SelectToken("data.developers").ToList();
+            var publishers = jobject.SelectToken("data.developers").ToList();
             Dictionary<int, string> result = new Dictionary<int, string>();
 
-            foreach (var item in jobject.Children)
+            foreach (var item in publishers)
             {
-                var key = Convert.ToInt32(item.Key);
+                var key = Convert.ToInt32(item.First().SelectToken("id"));
 
                 if (result.ContainsKey(key)) continue;
 
-                result.Add(key, item.Value);
+                result.Add(key, item.First().SelectToken("name").ToString());
             }
 
             return result;
         }
-
     }
 }
