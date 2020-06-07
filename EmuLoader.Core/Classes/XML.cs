@@ -244,7 +244,7 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode item in GetPlatformNodes())
             {
-                if (item.Attributes["Name"].Value == name)
+                if (item.Attributes["Name"].Value.ToLower() == name.ToLower())
                 {
                     node = item;
                     break;
@@ -300,7 +300,7 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode item in GetLabelNodes())
             {
-                if (item.Attributes["Name"].Value == name)
+                if (item.Attributes["Name"].Value.ToLower() == name.ToLower())
                 {
                     node = item;
                 }
@@ -355,7 +355,7 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode item in GetGenreNodes())
             {
-                if (item.Attributes["Name"].Value == name)
+                if (item.Attributes["Name"].Value.ToLower() == name.ToLower())
                 {
                     node = item;
                 }

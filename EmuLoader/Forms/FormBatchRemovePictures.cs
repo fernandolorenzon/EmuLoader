@@ -73,7 +73,7 @@ namespace EmuLoader.Forms
                 }
             }
 
-            MessageBox.Show("Number of successful rom pictures removed: " + successfulFind);
+            FormCustomMessage.ShowSuccess("Number of successful rom pictures removed: " + successfulFind);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

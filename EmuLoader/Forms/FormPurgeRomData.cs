@@ -119,12 +119,12 @@ namespace EmuLoader.Forms
 
                 XML.SaveXml();
 
-                MessageBox.Show("Data purged successfully!");
+                FormCustomMessage.ShowSuccess("Data purged successfully!");
                 comboBoxPlatform_SelectedIndexChanged(sender, e);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                FormCustomMessage.ShowError(ex.Message);
             }
 
             Updated = true;

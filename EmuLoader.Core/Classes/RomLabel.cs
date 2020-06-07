@@ -26,7 +26,7 @@ namespace EmuLoader.Core.Classes
                 RomLabel label = new RomLabel();
                 label.Name = node.Attributes["Name"].Value;
                 label.Color = Color.FromArgb((Convert.ToInt32(node.Attributes["Color"].Value)));
-                labels.Add(label.Name, label);
+                labels.Add(label.Name.ToLower(), label);
             }
         }
 
@@ -34,9 +34,9 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                if (labels.ContainsKey(name))
+                if (labels.ContainsKey(name.ToLower()))
                 {
-                    return labels[name];
+                    return labels[name.ToLower()];
                 }
                 else
                 {
@@ -71,10 +71,10 @@ namespace EmuLoader.Core.Classes
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
                 XML.GetParentNode("Labels").AppendChild(node);
-                labels.Add(label.Name, label);
+                labels.Add(label.Name.ToLower(), label);
             }
 
-            labels[label.Name] = label;
+            labels[label.Name.ToLower()] = label;
             node.Attributes["Name"].Value = label.Name;
             node.Attributes["Color"].Value = label.Color.ToArgb().ToString();
             
@@ -83,7 +83,7 @@ namespace EmuLoader.Core.Classes
 
         public static bool Delete(string name)
         {
-            labels.Remove(name);
+            labels.Remove(name.ToLower());
             return XML.DelLabel(name);
         }
     }

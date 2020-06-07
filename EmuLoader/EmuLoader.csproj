@@ -89,6 +89,12 @@
     <Compile Include="Forms\FormAddPicFromUrl.Designer.cs">
       <DependentUpon>FormAddPicFromUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormCustomMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCustomMessage.Designer.cs">
+      <DependentUpon>FormCustomMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormAddPicFromUrl.resx">
       <DependentUpon>FormAddPicFromUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCustomMessage.resx">
+      <DependentUpon>FormCustomMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInfo.resx">
       <DependentUpon>FormInfo.cs</DependentUpon>

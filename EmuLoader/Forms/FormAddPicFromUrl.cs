@@ -27,7 +27,7 @@ namespace EmuLoader.Forms
 
                 if (textBox1.Text == "")
                 {
-                    MessageBox.Show("Copy a valid url with the image");
+                    FormCustomMessage.ShowError("Copy a valid url with the image");
                     return;
                 }
 
@@ -36,7 +36,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -46,7 +46,7 @@ namespace EmuLoader.Forms
             {
                 if (textBox1.Text == "")
                 {
-                    MessageBox.Show("Paste a valid url with the image");
+                    FormCustomMessage.ShowError("Paste a valid url with the image");
                     return;
                 }
 
@@ -54,7 +54,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 

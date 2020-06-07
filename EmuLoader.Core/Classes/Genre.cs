@@ -27,7 +27,7 @@ namespace EmuLoader.Core.Classes
                 Genre genre = new Genre();
                 genre.Name = node.Attributes["Name"].Value;
                 genre.Color = Color.FromArgb((Convert.ToInt32(node.Attributes["Color"].Value)));
-                genres.Add(genre.Name, genre);
+                genres.Add(genre.Name.ToLower(), genre);
             }
         }
 
@@ -35,9 +35,9 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                if (genres.ContainsKey(name))
+                if (genres.ContainsKey(name.ToLower()))
                 {
-                    return genres[name];
+                    return genres[name.ToLower()];
                 }
                 else
                 {
@@ -72,10 +72,10 @@ namespace EmuLoader.Core.Classes
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
                 XML.GetParentNode("Genres").AppendChild(node);
-                genres.Add(genre.Name, genre);
+                genres.Add(genre.Name.ToLower(), genre);
             }
 
-            genres[genre.Name] = genre;
+            genres[genre.Name.ToLower()] = genre;
             node.Attributes["Name"].Value = genre.Name;
             node.Attributes["Color"].Value = genre.Color.ToArgb().ToString();
             
@@ -95,7 +95,7 @@ namespace EmuLoader.Core.Classes
 
         public static bool Delete(string name)
         {
-            genres.Remove(name);
+            genres.Remove(name.ToLower());
             return XML.DelGenre(name);
         }
     }

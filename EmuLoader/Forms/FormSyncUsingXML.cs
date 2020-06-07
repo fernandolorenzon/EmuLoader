@@ -45,19 +45,19 @@ namespace EmuLoader.Forms
             {
                 if (string.IsNullOrEmpty(textBoxXMLPath.Text))
                 {
-                    MessageBox.Show("Load the XML file first");
+                    FormCustomMessage.ShowError("Load the XML file first");
                     return;
                 }
 
                 if (!File.Exists(textBoxXMLPath.Text))
                 {
-                    MessageBox.Show("Invalid file path");
+                    FormCustomMessage.ShowError("Invalid file path");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(comboBoxPlatform.Text))
                 {
-                    MessageBox.Show("Choose a platform");
+                    FormCustomMessage.ShowError("Choose a platform");
                     return;
                 }
 
@@ -177,11 +177,11 @@ namespace EmuLoader.Forms
                 }
 
                 XML.SaveXml();
-                MessageBox.Show(count + " roms updated");
+                FormCustomMessage.ShowSuccess(count + " roms updated");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 

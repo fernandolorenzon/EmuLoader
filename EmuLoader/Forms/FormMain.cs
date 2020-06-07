@@ -127,16 +127,16 @@ namespace EmuLoader.Forms
                 }
                 catch (Exception backupEx)
                 {
-                    MessageBox.Show(backupEx.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FormCustomMessage.ShowError(backupEx.Message);
                 }
 
                 //FormMessage.CloseMessage();
                 //DateTime end = DateTime.Now;
-                //MessageBox.Show((end - begin).ToString());
+                //FormCustomMessage.Show((end - begin).ToString());
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -153,11 +153,11 @@ namespace EmuLoader.Forms
             XML.SaveXml();
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.F))
             {
-                MessageBox.Show("What the Ctrl+F?");
+                FormCustomMessage.ShowError("What the Ctrl+F?");
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -177,7 +177,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -199,7 +199,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -222,7 +222,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -251,7 +251,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -301,7 +301,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -317,7 +317,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -333,7 +333,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -349,7 +349,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -393,7 +393,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -437,7 +437,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -470,7 +470,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -521,7 +521,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -557,7 +557,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -578,7 +578,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -599,7 +599,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -620,7 +620,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -641,7 +641,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -662,7 +662,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -683,7 +683,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -704,7 +704,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -725,7 +725,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -746,7 +746,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -767,7 +767,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -788,7 +788,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -815,7 +815,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -835,7 +835,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -863,7 +863,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -878,7 +878,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -893,7 +893,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -906,7 +906,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -919,7 +919,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -932,7 +932,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -945,7 +945,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -958,7 +958,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -991,7 +991,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1008,7 +1008,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1039,7 +1039,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1056,7 +1056,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1082,7 +1082,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1108,7 +1108,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1134,7 +1134,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1149,7 +1149,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1164,7 +1164,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1179,7 +1179,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1195,7 +1195,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1214,12 +1214,12 @@ namespace EmuLoader.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    FormCustomMessage.ShowError(ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1258,7 +1258,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1284,7 +1284,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1316,7 +1316,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1341,7 +1341,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1366,7 +1366,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1374,7 +1374,7 @@ namespace EmuLoader.Forms
         {
             if (comboBoxPlatform.SelectedItem == null || comboBoxPlatform.SelectedIndex == 1)
             {
-                MessageBox.Show("No platform selected.");
+                FormCustomMessage.ShowError("No platform selected.");
                 return;
             }
 
@@ -1400,7 +1400,7 @@ namespace EmuLoader.Forms
             {
                 if (dataGridView.SelectedRows.Count > 1)
                 {
-                    MessageBox.Show("Cannot initialize multiple roms", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FormCustomMessage.ShowError("Cannot initialize multiple roms");
                     return;
                 }
 
@@ -1409,7 +1409,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1450,7 +1450,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1462,7 +1462,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1484,7 +1484,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1496,7 +1496,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1506,7 +1506,7 @@ namespace EmuLoader.Forms
             {
                 if (dataGridViewPlatforms.SelectedRows.Count > 1)
                 {
-                    MessageBox.Show("Cannot initialize multiple emulators", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FormCustomMessage.ShowError("Cannot initialize multiple emulators");
                     return;
                 }
 
@@ -1525,7 +1525,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1544,7 +1544,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1561,7 +1561,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -1615,7 +1615,7 @@ namespace EmuLoader.Forms
             dataGridView.ResumeLayout();
             DateTime end = DateTime.Now;
             AddRomsToGrid(FilteredRoms);
-            //MessageBox.Show((end - begin).ToString());
+            //FormCustomMessage.Show((end - begin).ToString());
         }
 
         private void AddRomsToGrid(List<Rom> roms)
@@ -1875,7 +1875,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 

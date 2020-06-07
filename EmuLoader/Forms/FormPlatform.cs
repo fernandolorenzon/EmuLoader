@@ -113,7 +113,7 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
             {
-                MessageBox.Show("Can not save without a valid name.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                FormCustomMessage.ShowError("Can not save without a valid name.");
                 return;
             }
 
@@ -121,7 +121,7 @@ namespace EmuLoader.Forms
             {
                 if (Platform.Get(textBoxName.Text.Trim()) != null)
                 {
-                    MessageBox.Show("An platform with this name already exists.");
+                    FormCustomMessage.ShowError("An platform with this name already exists.");
                     return;
                 }
 
@@ -130,7 +130,7 @@ namespace EmuLoader.Forms
 
             if (!string.IsNullOrEmpty(textBoxDefaultRomPath.Text) && string.IsNullOrEmpty(textBoxDefaultRomExtensions.Text))
             {
-                MessageBox.Show("Default rom extensions must also be filled");
+                FormCustomMessage.ShowError("Default rom extensions must also be filled");
                 return;
             }
 
@@ -195,7 +195,7 @@ namespace EmuLoader.Forms
 
             if (romCount > 0)
             {
-                MessageBox.Show(string.Format("The platform {0} is associated with {1} roms. You cannot delete it.", platform.Name, romCount));
+                FormCustomMessage.ShowError(string.Format("The platform {0} is associated with {1} roms. You cannot delete it.", platform.Name, romCount));
                 return;
             }
 
@@ -249,7 +249,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 

@@ -56,7 +56,7 @@ namespace EmuLoader.Forms
 
                 if (comboBoxPlatform.SelectedValue == null || string.IsNullOrEmpty(comboBoxPlatform.SelectedValue.ToString()) || comboBoxPlatform.SelectedValue.ToString() == "0")
                 {
-                    MessageBox.Show(string.Format("The platform {0} doesn't have an associated TheGamesDB.net Id. Update the platform Id in the Platform screen first.", comboBoxPlatform.SelectedText));
+                    FormCustomMessage.ShowInfo(string.Format("The platform {0} doesn't have an associated TheGamesDB.net Id. Update the platform Id in the Platform screen first.", comboBoxPlatform.SelectedText));
                     comboBoxPlatform.Enabled = true;
                     buttonSync.Enabled = true;
                     return;
@@ -75,7 +75,7 @@ namespace EmuLoader.Forms
 
                 if (games == null)
                 {
-                    MessageBox.Show("An Error ocurred", "Error");
+                    FormCustomMessage.ShowError("An Error ocurred");
                     comboBoxPlatform.Enabled = true;
                     buttonSync.Enabled = true;
                     return;
@@ -119,9 +119,9 @@ namespace EmuLoader.Forms
                     LogMessage(count2.ToString() + " roms details updated successfully!");
                     LogMessage(count3.ToString() + " roms images updated successfully!");
 
-                    MessageBox.Show(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
-                                count2.ToString() + " roms details updated successfully!" + Environment.NewLine +
-                                count3.ToString() + " roms images updated successfully!"
+                FormCustomMessage.ShowSuccess(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
+                            count2.ToString() + " roms details updated successfully!" + Environment.NewLine +
+                            count3.ToString() + " roms images updated successfully!"
                         );
 
                     comboBoxPlatform_SelectedIndexChanged(sender, e);
@@ -140,7 +140,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                FormCustomMessage.ShowError(ex.Message);
                 buttonStopProcess_Click(null, e);
                 textBoxLog.Text = "";
             }
@@ -152,7 +152,7 @@ namespace EmuLoader.Forms
 
             if (roms == null || roms.Count == 0)
             {
-                MessageBox.Show("There are no roms with empty Ids", "Information");
+                FormCustomMessage.ShowInfo("There are no roms with empty Ids");
                 comboBoxPlatform.Enabled = true;
                 buttonSync.Enabled = true;
                 return;
@@ -170,7 +170,7 @@ namespace EmuLoader.Forms
             }
 
             XML.SaveXml();
-            MessageBox.Show(string.Format("{0} rom Ids locked successfully!", roms.Count));
+            FormCustomMessage.ShowSuccess(string.Format("{0} rom Ids locked successfully!", roms.Count));
         }
 
         private void buttonUnlockIds_Click(object sender, EventArgs e)
@@ -179,7 +179,7 @@ namespace EmuLoader.Forms
 
             if (roms == null || roms.Count == 0)
             {
-                MessageBox.Show("There are no roms with locked Ids", "Information");
+                FormCustomMessage.ShowInfo("There are no roms with locked Ids");
                 comboBoxPlatform.Enabled = true;
                 buttonSync.Enabled = true;
                 return;
@@ -196,7 +196,7 @@ namespace EmuLoader.Forms
             }
 
             XML.SaveXml();
-            MessageBox.Show(string.Format("{0} rom Ids unlocked successfully!", roms.Count));
+            FormCustomMessage.ShowSuccess(string.Format("{0} rom Ids unlocked successfully!", roms.Count));
         }
 
         private void SetIdAndYear()

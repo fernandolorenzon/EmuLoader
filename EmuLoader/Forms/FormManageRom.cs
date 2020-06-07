@@ -153,7 +153,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 
@@ -212,7 +212,7 @@ namespace EmuLoader.Forms
         {
             if (textBoxId.Text == string.Empty)
             {
-                MessageBox.Show("TheGameDB Id is empty.");
+                FormCustomMessage.ShowError("TheGameDB Id is empty.");
                 return;
             }
 
@@ -266,7 +266,7 @@ namespace EmuLoader.Forms
 
                     if (string.IsNullOrEmpty(textBoxId.Text))
                     {
-                        MessageBox.Show("Could not discover TheGamesDB Id");
+                        FormCustomMessage.ShowError("Could not discover TheGamesDB Id");
                         return;
                     }
                 }
@@ -275,7 +275,7 @@ namespace EmuLoader.Forms
 
                 if (game == null)
                 {
-                    MessageBox.Show("Could not get rom data", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FormCustomMessage.ShowError("Could not get rom data");
                     return;
                 }
 
@@ -374,7 +374,7 @@ namespace EmuLoader.Forms
             catch (Exception ex)
             {
                 //FormWait.CloseWait();
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FormCustomMessage.ShowError(ex.Message);
             }
             finally
             {
@@ -492,7 +492,7 @@ namespace EmuLoader.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                FormCustomMessage.ShowError(ex.Message);
             }
         }
 

@@ -20,7 +20,7 @@ namespace EmuLoader
             {
                 if (!mutex.WaitOne(0, false))
                 {
-                    MessageBox.Show("Instance already running");
+                    FormCustomMessage.ShowError("Instance already running");
                     return;
                 }
 

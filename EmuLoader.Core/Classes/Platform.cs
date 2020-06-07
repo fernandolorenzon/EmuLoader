@@ -53,7 +53,7 @@ namespace EmuLoader.Core.Classes
 
                 string icon = RomFunctions.GetPlatformPicture(platform.Name);
                 platform.Icon = Functions.CreateBitmap(icon);
-                platforms.Add(platform.Name, platform);
+                platforms.Add(platform.Name.ToLower(), platform);
             }
         }
 
@@ -64,9 +64,9 @@ namespace EmuLoader.Core.Classes
                 if (name == "")
                     return null;
 
-                if (platforms.ContainsKey(name))
+                if (platforms.ContainsKey(name.ToLower()))
                 {
-                    return platforms[name];
+                    return platforms[name.ToLower()];
                 }
                 else
                 {
@@ -111,10 +111,10 @@ namespace EmuLoader.Core.Classes
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomPath"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomExtensions"));
                 XML.GetParentNode("Platforms").AppendChild(node);
-                platforms.Add(platform.Name, platform);
+                platforms.Add(platform.Name.ToLower(), platform);
             }
 
-            platforms[platform.Name] = platform;
+            platforms[platform.Name.ToLower()] = platform;
             Functions.CreateOrSetXmlAttribute(node, "Id", platform.Id);
             Functions.CreateOrSetXmlAttribute(node, "Name", platform.Name);
             Functions.CreateOrSetXmlAttribute(node, "EmulatorExe", platform.EmulatorExe);
@@ -131,7 +131,7 @@ namespace EmuLoader.Core.Classes
 
         public static bool Delete(string name)
         {
-            platforms.Remove(name);
+            platforms.Remove(name.ToLower());
             return XML.DeletePlatform(name);
         }
 

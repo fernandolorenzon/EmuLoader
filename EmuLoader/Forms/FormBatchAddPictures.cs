@@ -47,7 +47,7 @@ namespace EmuLoader.Forms
 
             if (!Directory.Exists(textBoxDir.Text))
             {
-                MessageBox.Show("Directory doesn't exists");
+                FormCustomMessage.ShowError("Directory doesn't exists");
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace EmuLoader.Forms
             }
 
             progressBar1.Value = progressBar1.Maximum;
-            MessageBox.Show("Number of successful rom pictures saved: " + successfulFind);
+            FormCustomMessage.ShowSuccess("Number of successful rom pictures saved: " + successfulFind);
             progressBar1.Value = 0;
         }
 
