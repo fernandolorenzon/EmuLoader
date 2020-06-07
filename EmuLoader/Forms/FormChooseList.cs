@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using EmuLoader.Core.Classes;
 using EmuLoader.Core.Business;
+using System.Linq;
 
 namespace EmuLoader.Forms
 {
@@ -11,6 +12,7 @@ namespace EmuLoader.Forms
         private static FormChooseList instance;
         private static bool changed = false;
         private List<RomLabel> selectedLabels = null;
+        private List<RomLabel> unselectedLabels = null;
 
         private FormChooseList()
         {
@@ -60,15 +62,17 @@ namespace EmuLoader.Forms
             if (changed)
             {
                 selectedLabels = new List<RomLabel>();
+                unselectedLabels = new List<RomLabel>();
 
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    RomLabel label = (RomLabel)row.Tag;
-                    label.Checked = (CheckState)row.Cells[columnCheck.Index].Value == CheckState.Checked;
-
-                    if (label.Checked)
+                    if ((CheckState)row.Cells[columnCheck.Index].Value == CheckState.Checked)
                     {
                         selectedLabels.Add((RomLabel)row.Tag);
+                    }
+                    else if ((CheckState)row.Cells[columnCheck.Index].Value == CheckState.Unchecked)
+                    {
+                        unselectedLabels.Add((RomLabel)row.Tag);
                     }
                 }
             }
@@ -77,60 +81,58 @@ namespace EmuLoader.Forms
             instance.Close();
         }
 
-        public static bool ChooseLabel(out List<RomLabel> labels)
+        public static bool ChooseLabel(List<Rom> roms, out List<RomLabel> selectedLabels, out List<RomLabel> unselectedLabels)
         {
-            labels = new List<RomLabel>();
+            selectedLabels = new List<RomLabel>();
+            unselectedLabels = new List<RomLabel>();
             instance = new FormChooseList(typeof(RomLabel));
 
             foreach (DataGridViewRow row in instance.dataGridView.Rows)
             {
                 row.Cells[instance.columnCheck.Index].Value = CheckState.Unchecked;
                 bool found = false;
-                bool notfound = false;
+                bool all = false;
+                bool checkFound = false;
+                bool notFound = false;
+                string labelName = row.Cells[instance.columnName.Index].Value.ToString();
 
-                if (found && !notfound)
+                foreach (var rom in roms)
+                {
+                    checkFound = rom.Labels.Any(x => x.Name == labelName);
+                    
+                    if (checkFound)
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        notFound = true;
+                    }
+                }
+
+                all = found && !notFound;
+
+                
+                if (found && all)
                 {
                     row.Cells[instance.columnCheck.Index].Value = CheckState.Checked;
                 }
-                else if (!found && notfound)
+                else if (!found)
                 {
                     row.Cells[instance.columnCheck.Index].Value = CheckState.Unchecked;
                 }
-                else if (found && notfound)
+                else if (found && !all)
                 {
                     row.Cells[instance.columnCheck.Index].Value = CheckState.Indeterminate;
                 }
 
                 found = false;
-                notfound = false;
+                all = false;
             }
 
             var result = instance.ShowDialogUpdated();
-            labels = instance.selectedLabels;
-            return result;
-        }
-
-        public static bool ChooseLabel(List<RomLabel> selectedLabels, out List<RomLabel> labels)
-        {
-            labels = new List<RomLabel>();
-            instance = new FormChooseList(typeof(RomLabel));
-
-            foreach (DataGridViewRow row in instance.dataGridView.Rows)
-            {
-                bool found = selectedLabels == null ? false : selectedLabels.Exists(x => x.Name == row.Cells[instance.columnName.Index].Value);
-
-                if (found)
-                {
-                    row.Cells[instance.columnCheck.Index].Value = CheckState.Checked;
-                }
-                else
-                {
-                    row.Cells[instance.columnCheck.Index].Value = CheckState.Unchecked;
-                }
-            }
-
-            var result = instance.ShowDialogUpdated();
-            labels = instance.selectedLabels;
+            selectedLabels = instance.selectedLabels;
+            unselectedLabels = instance.unselectedLabels;
             return result;
         }
     }

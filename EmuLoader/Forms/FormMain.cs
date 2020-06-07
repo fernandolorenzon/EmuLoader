@@ -445,7 +445,8 @@ namespace EmuLoader.Forms
         {
             try
             {
-                List<RomLabel> labels = null;
+                List<RomLabel> selectedLabels = new List<RomLabel>();
+                List<RomLabel> unselectedLabels = new List<RomLabel>();
 
                 List<Rom> roms = new List<Rom>();
 
@@ -455,16 +456,9 @@ namespace EmuLoader.Forms
                     roms.Add((Rom)row.Tag);
                 }
 
-                if (roms.Count == 1)
-                {
-                    if (!FormChooseList.ChooseLabel(roms[0].Labels, out labels)) return;
-                }
-                else
-                {
-                    if (!FormChooseList.ChooseLabel(out labels)) return;
-                }
+                if (!FormChooseList.ChooseLabel(roms, out selectedLabels, out unselectedLabels)) return;
 
-                RomFunctions.ChangeRomLabels(roms, labels);
+                RomFunctions.ChangeRomLabels(roms, selectedLabels, unselectedLabels);
                 XML.SaveXml();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)

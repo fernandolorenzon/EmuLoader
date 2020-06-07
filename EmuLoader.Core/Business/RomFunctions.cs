@@ -703,5 +703,32 @@ namespace EmuLoader.Core.Business
 
             return true;
         }
+
+        public static bool ChangeRomLabels(List<Rom> roms, List<RomLabel> selectedLabels, List<RomLabel> unselectedLabels)
+        {
+            foreach (var rom in roms)
+            {
+                foreach (var label in selectedLabels)
+                {
+                    if (!rom.Labels.Any(x => x.Name == label.Name))
+                    {
+                        rom.Labels.Add(label);
+                    }
+                }
+
+                foreach (var label in unselectedLabels)
+                {
+                    if (rom.Labels.Any(x => x.Name == label.Name))
+                    {
+                        var selected = rom.Labels.First(x => x.Name == label.Name);
+                        rom.Labels.Remove(selected);
+                    }
+                }
+
+                Rom.Set(rom);
+            }
+
+            return true;
+        }
     }
 }
