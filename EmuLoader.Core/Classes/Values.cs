@@ -261,6 +261,46 @@ namespace EmuLoader.Core.Classes
                     <name>Neo Geo CD</name>
                     <alias>neo-geo-cd</alias>
                 </Platform>
+               <Platform>
+                    <id>4929</id>
+                    <name>MSX</name>
+                    <alias>msx</alias>
+                </Platform>
+               <Platform>
+                    <id>4924</id>
+                    <name>Atari Lynx</name>
+                    <alias>atari-lynx</alias>
+                </Platform>
+               <Platform>
+                    <id>4925</id>
+                    <name>WonderSwan</name>
+                    <alias>wonderswan</alias>
+                </Platform>
+               <Platform>
+                    <id>4926</id>
+                    <name>WonderSwan Color</name>
+                    <alias>wonderswan-color</alias>
+                </Platform>
+               <Platform>
+                    <id>4927</id>
+                    <name>Magnavox Odyssey 2</name>
+                    <alias>magnavox-odyssey-2</alias>
+                </Platform>
+               <Platform>
+                    <id>4928</id>
+                    <name>Fairchild Channel F</name>
+                    <alias>fairchild</alias>
+                </Platform>
+               <Platform>
+                    <id>4930</id>
+                    <name>PC-FX</name>
+                    <alias>pcfx</alias>
+                </Platform>
+               <Platform>
+                    <id>4931</id>
+                    <name>Sharp X68000</name>
+                    <alias>x68</alias>
+                </Platform>
             </Platforms>
         </Data>";
     }

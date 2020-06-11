@@ -121,11 +121,9 @@ namespace EmuLoader.Forms
             {
                 if (Platform.Get(textBoxName.Text.Trim()) != null)
                 {
-                    FormCustomMessage.ShowError("An platform with this name already exists.");
+                    FormCustomMessage.ShowError("A platform with this name already exists.");
                     return;
                 }
-
-                platform = new Platform();
             }
 
             if (!string.IsNullOrEmpty(textBoxDefaultRomPath.Text) && string.IsNullOrEmpty(textBoxDefaultRomExtensions.Text))
@@ -133,12 +131,18 @@ namespace EmuLoader.Forms
                 FormCustomMessage.ShowError("Default rom extensions must also be filled");
                 return;
             }
-
-            DataGridViewRow row = dataGridView.SelectedRows[0];
-            index = row.Index;
-            platform = (Platform)row.Tag;
-            textBoxName.Enabled = true;
-            buttonAdd.Text = "Add";
+            if (textBoxName.Enabled)
+            {
+                platform = new Platform();
+            }
+            else
+            {
+                DataGridViewRow row = dataGridView.SelectedRows[0];
+                index = row.Index;
+                platform = (Platform)row.Tag;
+                textBoxName.Enabled = true;
+                buttonAdd.Text = "Add";
+            }
 
             platform.Id = comboBoxPlatformsDB.SelectedValue.ToString();
             platform.Name = textBoxName.Text.Trim();

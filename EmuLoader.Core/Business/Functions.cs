@@ -5,6 +5,7 @@ using System.Xml;
 using EmuLoader.Core.Classes;
 using System.IO;
 using System.Text;
+using System.Linq;
 using System.Net;
 
 namespace EmuLoader.Core.Business
@@ -94,11 +95,20 @@ namespace EmuLoader.Core.Business
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(Values.PlatformsXML);
 
-            var result = new List<KeyValuePair<string, string>>();
+            var platforms = new List<Platform>();
 
             foreach (XmlNode item in doc.ChildNodes[0].ChildNodes[0].ChildNodes)
             {
-                var kvp = new KeyValuePair<string, string>(item.ChildNodes[0].InnerText, item.ChildNodes[1].InnerText);
+                var p = new Platform() { Id = item.ChildNodes[0].InnerText, Name = item.ChildNodes[1].InnerText};
+                platforms.Add(p);
+            }
+
+            var result = new List<KeyValuePair<string, string>>();
+            platforms = (from p in platforms orderby p.Name select p).ToList();
+
+            foreach (var item in platforms)
+            {
+                var kvp = new KeyValuePair<string, string>(item.Id, item.Name);
                 result.Add(kvp);
             }
 
