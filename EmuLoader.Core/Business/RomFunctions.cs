@@ -399,6 +399,34 @@ namespace EmuLoader.Core.Business
             }
         }
 
+        public static bool RemoveInvalidRomsEntries(Platform platform = null)
+        {
+            bool result = false;
+
+            List<Rom> roms = new List<Rom>();
+
+            if (platform == null)
+            {
+                roms = Rom.GetAll();
+            }
+            else
+            {
+                roms = Rom.GetAll(platform);
+            }
+
+            foreach (Rom rom in roms)
+            {
+                if (!File.Exists(rom.Path))
+                {
+                    Rom.Delete(rom);
+                    RemoveRomPics(rom);
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
         public static void RemoveRomPics(Rom rom)
         {
             var boxart = GetRomPicture(rom, Values.BoxartFolder);

@@ -75,6 +75,12 @@ namespace EmuLoader.Core.Classes
         {
             return (from r in RomList orderby r.Name select r).ToList();
         }
+
+        public static List<Rom> GetAll(Platform platform)
+        {
+            return (from r in RomList where r.Platform != null && r.Platform == platform orderby r.Name select r).ToList();
+        }
+
         public static int Count()
         {
             return RomList.Count;

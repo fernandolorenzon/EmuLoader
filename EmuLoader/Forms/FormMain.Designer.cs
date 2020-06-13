@@ -258,6 +258,7 @@
             this.romsToolStripMenuItem.Name = "romsToolStripMenuItem";
             this.romsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.romsToolStripMenuItem.Text = "&Roms";
+            this.romsToolStripMenuItem.Click += new System.EventHandler(this.romsToolStripMenuItem_Click);
             // 
             // addRomFileToolStripMenuItem
             // 

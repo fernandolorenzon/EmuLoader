@@ -843,15 +843,13 @@ namespace EmuLoader.Forms
         {
             try
             {
-                List<Rom> roms = Rom.GetAll();
-
-                foreach (Rom rom in roms)
+                if (comboBoxPlatform.SelectedValue != null)
                 {
-                    if (!File.Exists(rom.Path))
-                    {
-                        Rom.Delete(rom);
-                        RomFunctions.RemoveRomPics(rom);
-                    }
+                    RomFunctions.RemoveInvalidRomsEntries((Platform)comboBoxPlatform.SelectedValue);
+                }
+                else
+                {
+                    RomFunctions.RemoveInvalidRomsEntries();
                 }
 
                 XML.SaveXml();
@@ -1381,8 +1379,9 @@ namespace EmuLoader.Forms
             var platform = (Platform)comboBoxPlatform.SelectedItem;
 
             var result = platform.RescanRoms();
+            var resultClear = RomFunctions.RemoveInvalidRomsEntries(platform);
 
-            if (result)
+            if (result || resultClear)
             {
                 XML.SaveXml();
                 Rom.Fill();
@@ -1910,5 +1909,10 @@ namespace EmuLoader.Forms
         }
 
         #endregion
+
+        private void romsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
