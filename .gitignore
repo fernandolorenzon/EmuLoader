@@ -14,3 +14,5 @@
 /EmuLoader.Core/obj/Debug/EmuLoader.Core.dll
 /EmuLoader.Core/bin/Release
 /EmuLoader.Core/obj/Release
+/EmuLoader.Core/obj/Debug
+/.vs

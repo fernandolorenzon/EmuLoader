@@ -193,7 +193,12 @@ namespace EmuLoader.Core.Business
 
                 try
                 {
-                    result.Publisher = publishers[Convert.ToInt32(jgame.SelectToken("publisher").ToString())];
+                    var jpublisher = jgame.SelectToken("publisher");
+
+                    if (jpublisher != null)
+                    {
+                        result.Publisher = publishers[Convert.ToInt32(jpublisher.ToString())];
+                    }
                 }
                 catch
                 {
@@ -202,7 +207,12 @@ namespace EmuLoader.Core.Business
 
                 try
                 {
-                    result.Developer = developers[Convert.ToInt32(jgame.SelectToken("developers").First().ToString())];
+                    var jdevelopers = jgame.SelectToken("developers");
+
+                    if (jdevelopers != null)
+                    {
+                        result.Developer = developers[Convert.ToInt32(jdevelopers.First().ToString())];
+                    }
                 }
                 catch
                 {
@@ -248,9 +258,14 @@ namespace EmuLoader.Core.Business
                     boxArt = string.Format("https://cdn.thegamesdb.net/images/medium/boxart/front/{0}-1.jpg", gameId);
                 }
 
-                if (json.Contains(string.Format(@"screenshots\/{0}-1.jpg", gameId)))
+                if (json.Contains(string.Format(@"titlescreen\/{0}-1.jpg", gameId)))
                 {
-                    gameplay = string.Format("https://cdn.thegamesdb.net/images/medium/screenshots/{0}-1.jpg", gameId);
+                    title = string.Format("https://cdn.thegamesdb.net/images/medium/titlescreen/{0}-1.jpg", gameId);
+                }
+
+                if (json.Contains(string.Format(@"screenshot\/{0}-1.jpg", gameId)))
+                {
+                    gameplay = string.Format("https://cdn.thegamesdb.net/images/medium/screenshot/{0}-1.jpg", gameId);
                 }
 
                 return true;

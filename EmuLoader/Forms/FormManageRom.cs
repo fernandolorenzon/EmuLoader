@@ -355,19 +355,19 @@ namespace EmuLoader.Forms
 
                 if (missingBox)
                 {
-                    RomFunctions.SavePicture(SelectedRom, boxUrl, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
+                    Functions.SavePictureFromUrl(SelectedRom, boxUrl, Values.BoxartFolder, checkBoxSaveAsJpg.Checked);
                     boxToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.BoxartFolder);
                 }
 
                 if (missingTitle && !string.IsNullOrEmpty(titleUrl))
                 {
-                    RomFunctions.SavePicture(SelectedRom, titleUrl, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
+                    Functions.SavePictureFromUrl(SelectedRom, titleUrl, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
                     titleToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.TitleFolder);
                 }
 
                 if (missingGameplay && !string.IsNullOrEmpty(gameplayUrl))
                 {
-                    RomFunctions.SavePicture(SelectedRom, gameplayUrl, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
+                    Functions.SavePictureFromUrl(SelectedRom, gameplayUrl, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
                     gameplayToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder);
                 }
             }
