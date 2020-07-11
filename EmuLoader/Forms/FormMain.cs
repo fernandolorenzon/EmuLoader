@@ -1379,9 +1379,8 @@ namespace EmuLoader.Forms
             var platform = (Platform)comboBoxPlatform.SelectedItem;
 
             var result = platform.RescanRoms();
-            var resultClear = RomFunctions.RemoveInvalidRomsEntries(platform);
 
-            if (result || resultClear)
+            if (result)
             {
                 XML.SaveXml();
                 Rom.Fill();

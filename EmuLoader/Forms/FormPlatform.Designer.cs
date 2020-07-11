@@ -36,8 +36,7 @@
             this.columnShowInList = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.columnShowInFilter = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.columnColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.labelName = new System.Windows.Forms.Label();
+            this.textBoxPlatformName = new System.Windows.Forms.TextBox();
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.buttonPath = new System.Windows.Forms.Button();
@@ -47,29 +46,37 @@
             this.checkBoxShowInFilters = new System.Windows.Forms.CheckBox();
             this.labelCommand = new System.Windows.Forms.Label();
             this.textBoxCommand = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxPlatformIcon = new System.Windows.Forms.TextBox();
             this.buttonIconPath = new System.Windows.Forms.Button();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxDefaultRomExtensions = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.buttonDefaultRomPath = new System.Windows.Forms.Button();
-            this.textBoxDefaultRomPath = new System.Windows.Forms.TextBox();
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxPlatformsDB = new System.Windows.Forms.ComboBox();
-            this.textBoxAlternatePath = new System.Windows.Forms.TextBox();
             this.textBoxAlternateCommand = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonSwap = new System.Windows.Forms.Button();
+            this.textBoxAlternatePath = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonAlternatePath = new System.Windows.Forms.Button();
-            this.buttonSwap = new System.Windows.Forms.Button();
+            this.textBoxDefaultRomExtensions = new System.Windows.Forms.TextBox();
+            this.labelExtensions = new System.Windows.Forms.Label();
+            this.labelDefaultRomPath = new System.Windows.Forms.Label();
+            this.buttonDefaultRomPath = new System.Windows.Forms.Button();
+            this.buttonHelp = new System.Windows.Forms.Button();
+            this.labelTheGamesDB = new System.Windows.Forms.Label();
+            this.comboBoxPlatformsDB = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxPlatformIcon = new System.Windows.Forms.TextBox();
+            this.labelPlatformName = new System.Windows.Forms.Label();
+            this.labelPlatformIcon = new System.Windows.Forms.Label();
+            this.textBoxDefaultRomPath = new System.Windows.Forms.TextBox();
+            this.tabControlPlatform = new System.Windows.Forms.TabControl();
+            this.tabPageMain = new System.Windows.Forms.TabPage();
+            this.tabPageEmulators = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabControlPlatform.SuspendLayout();
+            this.tabPageMain.SuspendLayout();
+            this.tabPageEmulators.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -139,33 +146,24 @@
             this.columnColor.Name = "columnColor";
             this.columnColor.ReadOnly = true;
             // 
-            // textBoxName
+            // textBoxPlatformName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(15, 93);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(173, 20);
-            this.textBoxName.TabIndex = 2;
-            // 
-            // labelName
-            // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(13, 77);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(76, 13);
-            this.labelName.TabIndex = 4;
-            this.labelName.Text = "Platform Name";
+            this.textBoxPlatformName.Location = new System.Drawing.Point(10, 151);
+            this.textBoxPlatformName.Name = "textBoxPlatformName";
+            this.textBoxPlatformName.Size = new System.Drawing.Size(339, 20);
+            this.textBoxPlatformName.TabIndex = 2;
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(16, 144);
+            this.textBoxPath.Location = new System.Drawing.Point(19, 25);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(414, 20);
+            this.textBoxPath.Size = new System.Drawing.Size(378, 20);
             this.textBoxPath.TabIndex = 4;
             // 
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(12, 122);
+            this.labelPath.Location = new System.Drawing.Point(15, 3);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(69, 13);
             this.labelPath.TabIndex = 6;
@@ -173,7 +171,7 @@
             // 
             // buttonPath
             // 
-            this.buttonPath.Location = new System.Drawing.Point(436, 142);
+            this.buttonPath.Location = new System.Drawing.Point(403, 23);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(36, 23);
             this.buttonPath.TabIndex = 3;
@@ -185,7 +183,7 @@
             // 
             this.buttonColor.BackColor = System.Drawing.Color.White;
             this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColor.Location = new System.Drawing.Point(289, 6);
+            this.buttonColor.Location = new System.Drawing.Point(299, 6);
             this.buttonColor.Name = "buttonColor";
             this.buttonColor.Size = new System.Drawing.Size(50, 50);
             this.buttonColor.TabIndex = 6;
@@ -203,7 +201,7 @@
             this.checkBoxShowInLinksList.AutoSize = true;
             this.checkBoxShowInLinksList.Checked = true;
             this.checkBoxShowInLinksList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(16, 234);
+            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(11, 189);
             this.checkBoxShowInLinksList.Name = "checkBoxShowInLinksList";
             this.checkBoxShowInLinksList.Size = new System.Drawing.Size(112, 17);
             this.checkBoxShowInLinksList.TabIndex = 9;
@@ -215,7 +213,7 @@
             this.checkBoxShowInFilters.AutoSize = true;
             this.checkBoxShowInFilters.Checked = true;
             this.checkBoxShowInFilters.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInFilters.Location = new System.Drawing.Point(195, 234);
+            this.checkBoxShowInFilters.Location = new System.Drawing.Point(142, 189);
             this.checkBoxShowInFilters.Name = "checkBoxShowInFilters";
             this.checkBoxShowInFilters.Size = new System.Drawing.Size(95, 17);
             this.checkBoxShowInFilters.TabIndex = 10;
@@ -225,7 +223,7 @@
             // labelCommand
             // 
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(476, 122);
+            this.labelCommand.Location = new System.Drawing.Point(442, 3);
             this.labelCommand.Name = "labelCommand";
             this.labelCommand.Size = new System.Drawing.Size(54, 13);
             this.labelCommand.TabIndex = 11;
@@ -235,33 +233,16 @@
             // 
             this.textBoxCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCommand.Location = new System.Drawing.Point(478, 144);
+            this.textBoxCommand.Location = new System.Drawing.Point(445, 25);
             this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(306, 20);
+            this.textBoxCommand.Size = new System.Drawing.Size(319, 20);
             this.textBoxCommand.TabIndex = 12;
             this.textBoxCommand.Text = "%EMUPATH% %ROMPATH%";
             this.toolTip1.SetToolTip(this.textBoxCommand, resources.GetString("textBoxCommand.ToolTip"));
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Platform Icon";
-            // 
-            // textBoxPlatformIcon
-            // 
-            this.textBoxPlatformIcon.Location = new System.Drawing.Point(68, 34);
-            this.textBoxPlatformIcon.Name = "textBoxPlatformIcon";
-            this.textBoxPlatformIcon.Size = new System.Drawing.Size(173, 20);
-            this.textBoxPlatformIcon.TabIndex = 13;
-            this.textBoxPlatformIcon.TextChanged += new System.EventHandler(this.textBoxEmulatorIcon_TextChanged);
-            // 
             // buttonIconPath
             // 
-            this.buttonIconPath.Location = new System.Drawing.Point(247, 31);
+            this.buttonIconPath.Location = new System.Drawing.Point(257, 25);
             this.buttonIconPath.Name = "buttonIconPath";
             this.buttonIconPath.Size = new System.Drawing.Size(36, 23);
             this.buttonIconPath.TabIndex = 15;
@@ -272,144 +253,54 @@
             // pictureBoxIcon
             // 
             this.pictureBoxIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxIcon.Location = new System.Drawing.Point(12, 6);
+            this.pictureBoxIcon.Location = new System.Drawing.Point(10, 6);
             this.pictureBoxIcon.Name = "pictureBoxIcon";
             this.pictureBoxIcon.Size = new System.Drawing.Size(50, 50);
             this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxIcon.TabIndex = 16;
             this.pictureBoxIcon.TabStop = false;
             // 
+            // textBoxAlternateCommand
+            // 
+            this.textBoxAlternateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAlternateCommand.Location = new System.Drawing.Point(445, 78);
+            this.textBoxAlternateCommand.Name = "textBoxAlternateCommand";
+            this.textBoxAlternateCommand.Size = new System.Drawing.Size(319, 20);
+            this.textBoxAlternateCommand.TabIndex = 37;
+            this.textBoxAlternateCommand.Text = "%EMUPATH% %ROMPATH%";
+            this.toolTip1.SetToolTip(this.textBoxAlternateCommand, resources.GetString("textBoxAlternateCommand.ToolTip"));
+            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.buttonSwap);
-            this.panel1.Controls.Add(this.textBoxAlternatePath);
-            this.panel1.Controls.Add(this.textBoxAlternateCommand);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.buttonAlternatePath);
-            this.panel1.Controls.Add(this.textBoxDefaultRomExtensions);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.buttonDefaultRomPath);
-            this.panel1.Controls.Add(this.textBoxDefaultRomPath);
-            this.panel1.Controls.Add(this.buttonHelp);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.comboBoxPlatformsDB);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.pictureBoxIcon);
-            this.panel1.Controls.Add(this.textBoxName);
-            this.panel1.Controls.Add(this.buttonIconPath);
-            this.panel1.Controls.Add(this.labelName);
-            this.panel1.Controls.Add(this.textBoxPlatformIcon);
-            this.panel1.Controls.Add(this.textBoxPath);
-            this.panel1.Controls.Add(this.textBoxCommand);
-            this.panel1.Controls.Add(this.labelPath);
-            this.panel1.Controls.Add(this.labelCommand);
-            this.panel1.Controls.Add(this.buttonPath);
-            this.panel1.Controls.Add(this.checkBoxShowInFilters);
-            this.panel1.Controls.Add(this.checkBoxShowInLinksList);
-            this.panel1.Controls.Add(this.buttonColor);
+            this.panel1.Controls.Add(this.tabControlPlatform);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 329);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(830, 266);
             this.panel1.TabIndex = 17;
             // 
-            // textBoxDefaultRomExtensions
+            // buttonSwap
             // 
-            this.textBoxDefaultRomExtensions.Location = new System.Drawing.Point(586, 93);
-            this.textBoxDefaultRomExtensions.Name = "textBoxDefaultRomExtensions";
-            this.textBoxDefaultRomExtensions.Size = new System.Drawing.Size(227, 20);
-            this.textBoxDefaultRomExtensions.TabIndex = 31;
-            this.textBoxDefaultRomExtensions.Text = "zip";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(583, 64);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(205, 26);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Default Extensions \r\n(separate with comma \",\": zip,rom,smc,gb)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(191, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "Default Rom Path";
-            // 
-            // buttonDefaultRomPath
-            // 
-            this.buttonDefaultRomPath.Location = new System.Drawing.Point(544, 91);
-            this.buttonDefaultRomPath.Name = "buttonDefaultRomPath";
-            this.buttonDefaultRomPath.Size = new System.Drawing.Size(36, 23);
-            this.buttonDefaultRomPath.TabIndex = 30;
-            this.buttonDefaultRomPath.Text = "...";
-            this.buttonDefaultRomPath.UseVisualStyleBackColor = true;
-            this.buttonDefaultRomPath.Click += new System.EventHandler(this.buttonDefaultRomPath_Click);
-            // 
-            // textBoxDefaultRomPath
-            // 
-            this.textBoxDefaultRomPath.Location = new System.Drawing.Point(194, 93);
-            this.textBoxDefaultRomPath.Name = "textBoxDefaultRomPath";
-            this.textBoxDefaultRomPath.Size = new System.Drawing.Size(346, 20);
-            this.textBoxDefaultRomPath.TabIndex = 28;
-            // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.buttonHelp.ForeColor = System.Drawing.Color.Black;
-            this.buttonHelp.Location = new System.Drawing.Point(790, 142);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(24, 23);
-            this.buttonHelp.TabIndex = 27;
-            this.buttonHelp.Text = "?";
-            this.buttonHelp.UseVisualStyleBackColor = false;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(483, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Platform from TheGamesDB.net";
-            // 
-            // comboBoxPlatformsDB
-            // 
-            this.comboBoxPlatformsDB.FormattingEnabled = true;
-            this.comboBoxPlatformsDB.Location = new System.Drawing.Point(486, 34);
-            this.comboBoxPlatformsDB.Name = "comboBoxPlatformsDB";
-            this.comboBoxPlatformsDB.Size = new System.Drawing.Size(327, 21);
-            this.comboBoxPlatformsDB.TabIndex = 17;
+            this.buttonSwap.Location = new System.Drawing.Point(445, 114);
+            this.buttonSwap.Name = "buttonSwap";
+            this.buttonSwap.Size = new System.Drawing.Size(142, 23);
+            this.buttonSwap.TabIndex = 38;
+            this.buttonSwap.Text = "Swap Exe and Command";
+            this.buttonSwap.UseVisualStyleBackColor = true;
+            this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
             // 
             // textBoxAlternatePath
             // 
-            this.textBoxAlternatePath.Location = new System.Drawing.Point(15, 196);
+            this.textBoxAlternatePath.Location = new System.Drawing.Point(18, 77);
             this.textBoxAlternatePath.Name = "textBoxAlternatePath";
-            this.textBoxAlternatePath.Size = new System.Drawing.Size(415, 20);
+            this.textBoxAlternatePath.Size = new System.Drawing.Size(379, 20);
             this.textBoxAlternatePath.TabIndex = 34;
-            // 
-            // textBoxAlternateCommand
-            // 
-            this.textBoxAlternateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlternateCommand.Location = new System.Drawing.Point(479, 197);
-            this.textBoxAlternateCommand.Name = "textBoxAlternateCommand";
-            this.textBoxAlternateCommand.Size = new System.Drawing.Size(306, 20);
-            this.textBoxAlternateCommand.TabIndex = 37;
-            this.textBoxAlternateCommand.Text = "%EMUPATH% %ROMPATH%";
-            this.toolTip1.SetToolTip(this.textBoxAlternateCommand, resources.GetString("textBoxAlternateCommand.ToolTip"));
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 174);
+            this.label5.Location = new System.Drawing.Point(16, 55);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(114, 13);
             this.label5.TabIndex = 35;
@@ -418,7 +309,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(476, 174);
+            this.label6.Location = new System.Drawing.Point(442, 55);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 13);
             this.label6.TabIndex = 36;
@@ -426,7 +317,7 @@
             // 
             // buttonAlternatePath
             // 
-            this.buttonAlternatePath.Location = new System.Drawing.Point(436, 195);
+            this.buttonAlternatePath.Location = new System.Drawing.Point(403, 76);
             this.buttonAlternatePath.Name = "buttonAlternatePath";
             this.buttonAlternatePath.Size = new System.Drawing.Size(36, 23);
             this.buttonAlternatePath.TabIndex = 33;
@@ -434,15 +325,180 @@
             this.buttonAlternatePath.UseVisualStyleBackColor = true;
             this.buttonAlternatePath.Click += new System.EventHandler(this.buttonAlternatePath_Click);
             // 
-            // buttonSwap
+            // textBoxDefaultRomExtensions
             // 
-            this.buttonSwap.Location = new System.Drawing.Point(479, 230);
-            this.buttonSwap.Name = "buttonSwap";
-            this.buttonSwap.Size = new System.Drawing.Size(142, 23);
-            this.buttonSwap.TabIndex = 38;
-            this.buttonSwap.Text = "Swap Exe and Command";
-            this.buttonSwap.UseVisualStyleBackColor = true;
-            this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
+            this.textBoxDefaultRomExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDefaultRomExtensions.Location = new System.Drawing.Point(404, 99);
+            this.textBoxDefaultRomExtensions.Name = "textBoxDefaultRomExtensions";
+            this.textBoxDefaultRomExtensions.Size = new System.Drawing.Size(387, 20);
+            this.textBoxDefaultRomExtensions.TabIndex = 31;
+            this.textBoxDefaultRomExtensions.Text = "zip";
+            // 
+            // labelExtensions
+            // 
+            this.labelExtensions.AutoSize = true;
+            this.labelExtensions.Location = new System.Drawing.Point(401, 70);
+            this.labelExtensions.Name = "labelExtensions";
+            this.labelExtensions.Size = new System.Drawing.Size(205, 26);
+            this.labelExtensions.TabIndex = 32;
+            this.labelExtensions.Text = "Default Extensions \r\n(separate with comma \",\": zip,rom,smc,gb)";
+            // 
+            // labelDefaultRomPath
+            // 
+            this.labelDefaultRomPath.AutoSize = true;
+            this.labelDefaultRomPath.Location = new System.Drawing.Point(401, 135);
+            this.labelDefaultRomPath.Name = "labelDefaultRomPath";
+            this.labelDefaultRomPath.Size = new System.Drawing.Size(91, 13);
+            this.labelDefaultRomPath.TabIndex = 29;
+            this.labelDefaultRomPath.Text = "Default Rom Path";
+            // 
+            // buttonDefaultRomPath
+            // 
+            this.buttonDefaultRomPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDefaultRomPath.Location = new System.Drawing.Point(756, 151);
+            this.buttonDefaultRomPath.Name = "buttonDefaultRomPath";
+            this.buttonDefaultRomPath.Size = new System.Drawing.Size(36, 21);
+            this.buttonDefaultRomPath.TabIndex = 30;
+            this.buttonDefaultRomPath.Text = "...";
+            this.buttonDefaultRomPath.UseVisualStyleBackColor = true;
+            this.buttonDefaultRomPath.Click += new System.EventHandler(this.buttonDefaultRomPath_Click);
+            // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.buttonHelp.ForeColor = System.Drawing.Color.Black;
+            this.buttonHelp.Location = new System.Drawing.Point(770, 22);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(24, 23);
+            this.buttonHelp.TabIndex = 27;
+            this.buttonHelp.Text = "?";
+            this.buttonHelp.UseVisualStyleBackColor = false;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            // 
+            // labelTheGamesDB
+            // 
+            this.labelTheGamesDB.AutoSize = true;
+            this.labelTheGamesDB.Location = new System.Drawing.Point(401, 6);
+            this.labelTheGamesDB.Name = "labelTheGamesDB";
+            this.labelTheGamesDB.Size = new System.Drawing.Size(156, 13);
+            this.labelTheGamesDB.TabIndex = 18;
+            this.labelTheGamesDB.Text = "Platform from TheGamesDB.net";
+            // 
+            // comboBoxPlatformsDB
+            // 
+            this.comboBoxPlatformsDB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxPlatformsDB.FormattingEnabled = true;
+            this.comboBoxPlatformsDB.Location = new System.Drawing.Point(404, 28);
+            this.comboBoxPlatformsDB.Name = "comboBoxPlatformsDB";
+            this.comboBoxPlatformsDB.Size = new System.Drawing.Size(387, 21);
+            this.comboBoxPlatformsDB.TabIndex = 17;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(15, 3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Emulator Exe";
+            // 
+            // textBoxPlatformIcon
+            // 
+            this.textBoxPlatformIcon.Location = new System.Drawing.Point(78, 28);
+            this.textBoxPlatformIcon.Name = "textBoxPlatformIcon";
+            this.textBoxPlatformIcon.Size = new System.Drawing.Size(173, 20);
+            this.textBoxPlatformIcon.TabIndex = 13;
+            this.textBoxPlatformIcon.TextChanged += new System.EventHandler(this.textBoxEmulatorIcon_TextChanged);
+            // 
+            // labelPlatformName
+            // 
+            this.labelPlatformName.AutoSize = true;
+            this.labelPlatformName.Location = new System.Drawing.Point(8, 135);
+            this.labelPlatformName.Name = "labelPlatformName";
+            this.labelPlatformName.Size = new System.Drawing.Size(76, 13);
+            this.labelPlatformName.TabIndex = 4;
+            this.labelPlatformName.Text = "Platform Name";
+            // 
+            // labelPlatformIcon
+            // 
+            this.labelPlatformIcon.AutoSize = true;
+            this.labelPlatformIcon.Location = new System.Drawing.Point(75, 6);
+            this.labelPlatformIcon.Name = "labelPlatformIcon";
+            this.labelPlatformIcon.Size = new System.Drawing.Size(69, 13);
+            this.labelPlatformIcon.TabIndex = 14;
+            this.labelPlatformIcon.Text = "Platform Icon";
+            // 
+            // textBoxDefaultRomPath
+            // 
+            this.textBoxDefaultRomPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDefaultRomPath.Location = new System.Drawing.Point(404, 151);
+            this.textBoxDefaultRomPath.Name = "textBoxDefaultRomPath";
+            this.textBoxDefaultRomPath.Size = new System.Drawing.Size(346, 20);
+            this.textBoxDefaultRomPath.TabIndex = 28;
+            // 
+            // tabControlPlatform
+            // 
+            this.tabControlPlatform.Controls.Add(this.tabPageMain);
+            this.tabControlPlatform.Controls.Add(this.tabPageEmulators);
+            this.tabControlPlatform.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPlatform.Location = new System.Drawing.Point(0, 0);
+            this.tabControlPlatform.Name = "tabControlPlatform";
+            this.tabControlPlatform.SelectedIndex = 0;
+            this.tabControlPlatform.Size = new System.Drawing.Size(830, 266);
+            this.tabControlPlatform.TabIndex = 39;
+            // 
+            // tabPageMain
+            // 
+            this.tabPageMain.Controls.Add(this.checkBoxShowInFilters);
+            this.tabPageMain.Controls.Add(this.buttonColor);
+            this.tabPageMain.Controls.Add(this.checkBoxShowInLinksList);
+            this.tabPageMain.Controls.Add(this.textBoxPlatformIcon);
+            this.tabPageMain.Controls.Add(this.buttonIconPath);
+            this.tabPageMain.Controls.Add(this.labelPlatformName);
+            this.tabPageMain.Controls.Add(this.textBoxPlatformName);
+            this.tabPageMain.Controls.Add(this.textBoxDefaultRomExtensions);
+            this.tabPageMain.Controls.Add(this.labelExtensions);
+            this.tabPageMain.Controls.Add(this.pictureBoxIcon);
+            this.tabPageMain.Controls.Add(this.buttonDefaultRomPath);
+            this.tabPageMain.Controls.Add(this.labelPlatformIcon);
+            this.tabPageMain.Controls.Add(this.labelTheGamesDB);
+            this.tabPageMain.Controls.Add(this.labelDefaultRomPath);
+            this.tabPageMain.Controls.Add(this.comboBoxPlatformsDB);
+            this.tabPageMain.Controls.Add(this.textBoxDefaultRomPath);
+            this.tabPageMain.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMain.Name = "tabPageMain";
+            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMain.Size = new System.Drawing.Size(822, 240);
+            this.tabPageMain.TabIndex = 0;
+            this.tabPageMain.Text = "Main";
+            this.tabPageMain.UseVisualStyleBackColor = true;
+            // 
+            // tabPageEmulators
+            // 
+            this.tabPageEmulators.Controls.Add(this.textBoxPath);
+            this.tabPageEmulators.Controls.Add(this.buttonHelp);
+            this.tabPageEmulators.Controls.Add(this.buttonSwap);
+            this.tabPageEmulators.Controls.Add(this.buttonPath);
+            this.tabPageEmulators.Controls.Add(this.textBoxAlternatePath);
+            this.tabPageEmulators.Controls.Add(this.labelCommand);
+            this.tabPageEmulators.Controls.Add(this.textBoxAlternateCommand);
+            this.tabPageEmulators.Controls.Add(this.labelPath);
+            this.tabPageEmulators.Controls.Add(this.label5);
+            this.tabPageEmulators.Controls.Add(this.label6);
+            this.tabPageEmulators.Controls.Add(this.textBoxCommand);
+            this.tabPageEmulators.Controls.Add(this.buttonAlternatePath);
+            this.tabPageEmulators.Controls.Add(this.label8);
+            this.tabPageEmulators.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEmulators.Name = "tabPageEmulators";
+            this.tabPageEmulators.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEmulators.Size = new System.Drawing.Size(822, 240);
+            this.tabPageEmulators.TabIndex = 1;
+            this.tabPageEmulators.Text = "Emulators";
+            this.tabPageEmulators.UseVisualStyleBackColor = true;
             // 
             // FormPlatform
             // 
@@ -462,7 +518,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.tabControlPlatform.ResumeLayout(false);
+            this.tabPageMain.ResumeLayout(false);
+            this.tabPageMain.PerformLayout();
+            this.tabPageEmulators.ResumeLayout(false);
+            this.tabPageEmulators.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -470,8 +530,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.TextBox textBoxPlatformName;
         private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.Button buttonPath;
@@ -486,25 +545,30 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInList;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInFilter;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnColor;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxPlatformIcon;
         private System.Windows.Forms.Button buttonIconPath;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTheGamesDB;
         private System.Windows.Forms.ComboBox comboBoxPlatformsDB;
         private System.Windows.Forms.Button buttonHelp;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelDefaultRomPath;
         private System.Windows.Forms.Button buttonDefaultRomPath;
-        private System.Windows.Forms.TextBox textBoxDefaultRomPath;
         private System.Windows.Forms.TextBox textBoxDefaultRomExtensions;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelExtensions;
         private System.Windows.Forms.Button buttonSwap;
         private System.Windows.Forms.TextBox textBoxAlternatePath;
         private System.Windows.Forms.TextBox textBoxAlternateCommand;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonAlternatePath;
+        private System.Windows.Forms.TabControl tabControlPlatform;
+        private System.Windows.Forms.TabPage tabPageMain;
+        private System.Windows.Forms.TextBox textBoxPlatformIcon;
+        private System.Windows.Forms.Label labelPlatformName;
+        private System.Windows.Forms.Label labelPlatformIcon;
+        private System.Windows.Forms.TextBox textBoxDefaultRomPath;
+        private System.Windows.Forms.TabPage tabPageEmulators;
+        private System.Windows.Forms.Label label8;
     }
 }

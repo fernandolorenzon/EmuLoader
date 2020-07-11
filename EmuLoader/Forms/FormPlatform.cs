@@ -111,15 +111,15 @@ namespace EmuLoader.Forms
             int index = -1;
             updating = true;
 
-            if (string.IsNullOrEmpty(textBoxName.Text.Trim()))
+            if (string.IsNullOrEmpty(textBoxPlatformName.Text.Trim()))
             {
                 FormCustomMessage.ShowError("Can not save without a valid name.");
                 return;
             }
 
-            if (textBoxName.Enabled)
+            if (textBoxPlatformName.Enabled)
             {
-                if (Platform.Get(textBoxName.Text.Trim()) != null)
+                if (Platform.Get(textBoxPlatformName.Text.Trim()) != null)
                 {
                     FormCustomMessage.ShowError("A platform with this name already exists.");
                     return;
@@ -131,7 +131,7 @@ namespace EmuLoader.Forms
                 FormCustomMessage.ShowError("Default rom extensions must also be filled");
                 return;
             }
-            if (textBoxName.Enabled)
+            if (textBoxPlatformName.Enabled)
             {
                 platform = new Platform();
             }
@@ -140,12 +140,12 @@ namespace EmuLoader.Forms
                 DataGridViewRow row = dataGridView.SelectedRows[0];
                 index = row.Index;
                 platform = (Platform)row.Tag;
-                textBoxName.Enabled = true;
+                textBoxPlatformName.Enabled = true;
                 buttonAdd.Text = "Add";
             }
 
             platform.Id = comboBoxPlatformsDB.SelectedValue.ToString();
-            platform.Name = textBoxName.Text.Trim();
+            platform.Name = textBoxPlatformName.Text.Trim();
             platform.EmulatorExe = textBoxPath.Text.Trim();
             platform.Command = textBoxCommand.Text;
             platform.EmulatorExeAlt = textBoxAlternatePath.Text.Trim();
@@ -166,14 +166,14 @@ namespace EmuLoader.Forms
                 }
 
                 FileInfo pic = new FileInfo(textBoxPlatformIcon.Text);
-                File.Delete(platformPath + "\\" + textBoxName.Text + ".bmp");
-                File.Delete(platformPath + "\\" + textBoxName.Text + ".gif");
-                File.Delete(platformPath + "\\" + textBoxName.Text + ".ico");
-                File.Delete(platformPath + "\\" + textBoxName.Text + ".jpg");
-                File.Delete(platformPath + "\\" + textBoxName.Text + ".png");
+                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".bmp");
+                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".gif");
+                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".ico");
+                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".jpg");
+                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".png");
 
                 string filename = pic.FullName.Substring(pic.FullName.LastIndexOf("\\") + 1);
-                string destinationFile = platformPath + "\\" + textBoxName.Text + pic.Extension;
+                string destinationFile = platformPath + "\\" + textBoxPlatformName.Text + pic.Extension;
                 pic.CopyTo(destinationFile, true);
                 pic = null;
             }
@@ -356,7 +356,7 @@ namespace EmuLoader.Forms
         protected override void Clean()
         {
             base.Clean();
-            textBoxName.Text = string.Empty;
+            textBoxPlatformName.Text = string.Empty;
             textBoxPath.Text = string.Empty;
             textBoxCommand.Text = string.Empty;
             buttonColor.BackColor = Color.White;
@@ -367,7 +367,7 @@ namespace EmuLoader.Forms
             comboBoxPlatformsDB.SelectedValue = "0";
             textBoxDefaultRomPath.Text = string.Empty;
             textBoxDefaultRomExtensions.Text = string.Empty;
-            textBoxName.Enabled = true;
+            textBoxPlatformName.Enabled = true;
         }
 
         protected override void SetForm()
@@ -390,7 +390,7 @@ namespace EmuLoader.Forms
             }
 
             comboBoxPlatformsDB.SelectedValue = platform.Id == "" ? "0" : platform.Id;
-            textBoxName.Text = platform.Name;
+            textBoxPlatformName.Text = platform.Name;
             textBoxPath.Text = platform.EmulatorExe;
             textBoxCommand.Text = platform.Command;
             textBoxAlternatePath.Text = platform.EmulatorExeAlt;
@@ -400,7 +400,7 @@ namespace EmuLoader.Forms
             checkBoxShowInLinksList.Checked = platform.ShowInList;
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
-            textBoxName.Enabled = false;
+            textBoxPlatformName.Enabled = false;
         }
 
         #endregion

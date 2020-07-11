@@ -406,7 +406,7 @@
             // 
             this.radioButtonOverwrite.AutoSize = true;
             this.radioButtonOverwrite.Checked = true;
-            this.radioButtonOverwrite.Location = new System.Drawing.Point(268, 77);
+            this.radioButtonOverwrite.Location = new System.Drawing.Point(153, 74);
             this.radioButtonOverwrite.Name = "radioButtonOverwrite";
             this.radioButtonOverwrite.Size = new System.Drawing.Size(96, 17);
             this.radioButtonOverwrite.TabIndex = 100;
@@ -417,7 +417,7 @@
             // radioButtonOnlyMissing
             // 
             this.radioButtonOnlyMissing.AutoSize = true;
-            this.radioButtonOnlyMissing.Location = new System.Drawing.Point(268, 100);
+            this.radioButtonOnlyMissing.Location = new System.Drawing.Point(153, 97);
             this.radioButtonOnlyMissing.Name = "radioButtonOnlyMissing";
             this.radioButtonOnlyMissing.Size = new System.Drawing.Size(110, 17);
             this.radioButtonOnlyMissing.TabIndex = 99;
@@ -443,7 +443,7 @@
             // 
             // buttonOpenDB
             // 
-            this.buttonOpenDB.Location = new System.Drawing.Point(159, 6);
+            this.buttonOpenDB.Location = new System.Drawing.Point(272, 3);
             this.buttonOpenDB.Name = "buttonOpenDB";
             this.buttonOpenDB.Size = new System.Drawing.Size(103, 65);
             this.buttonOpenDB.TabIndex = 82;
@@ -453,7 +453,7 @@
             // 
             // buttonGetRomData
             // 
-            this.buttonGetRomData.Location = new System.Drawing.Point(268, 6);
+            this.buttonGetRomData.Location = new System.Drawing.Point(153, 3);
             this.buttonGetRomData.Name = "buttonGetRomData";
             this.buttonGetRomData.Size = new System.Drawing.Size(113, 65);
             this.buttonGetRomData.TabIndex = 98;
