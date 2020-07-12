@@ -74,6 +74,7 @@
             this.showTitleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGameplayArtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPlatformsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.romDataOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purgeRomDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -239,6 +240,7 @@
             this.addEditDeleteToolStripMenuItem,
             this.columnsToolStripMenuItem,
             this.romDataOptionsToolStripMenuItem,
+            this.toolStripMenuItemSettings,
             this.openAppFolderToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -501,6 +503,13 @@
             this.showPlatformsListToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showPlatformsListToolStripMenuItem.Text = "Show Platforms List";
             this.showPlatformsListToolStripMenuItem.Click += new System.EventHandler(this.showPlatformsListToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemSettings
+            // 
+            this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
+            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
+            this.toolStripMenuItemSettings.Text = "Settings";
+            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
             // 
             // romDataOptionsToolStripMenuItem
             // 
@@ -1150,5 +1159,6 @@
         private System.Windows.Forms.ToolStripMenuItem syncUsingRetropieXMLToolStripMenuItem;
         private System.Windows.Forms.Label labelSelectedRoms;
         private System.Windows.Forms.Label labelSelectedRomsCount;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
     }
 }

@@ -6,11 +6,11 @@ namespace EmuLoader.Core.Classes
 {
     public static class Config
     {
-        public static bool GetElementVisibility(string columName)
+        public static bool GetElementVisibility(Column column)
         {
             try
             {
-                string value = XML.GetConfig(columName);
+                string value = XML.GetConfig(column.ToString());
 
                 if (string.IsNullOrEmpty(value)) return true;
 
@@ -22,9 +22,30 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static void SetElementVisibility(string columnName, bool value)
+        public static void SetElementVisibility(Column column, bool value)
         {
-            XML.SetConfig(columnName, Convert.ToString(value));
+            XML.SetConfig(column.ToString(), Convert.ToString(value));
+        }
+
+        public static string GetFolder(Folder folder)
+        {
+            try
+            {
+                string value = XML.GetConfig(folder.ToString());
+
+                if (string.IsNullOrEmpty(value)) return "";
+
+                return value;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public static void SetFolder(Folder folder, string path)
+        {
+            XML.SetConfig(folder.ToString(), path);
         }
     }
 }

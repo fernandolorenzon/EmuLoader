@@ -47,20 +47,20 @@ namespace EmuLoader.Forms
                 FillPlatformGrid();
                 //FormMessage.ShowMessage("Loading Roms...");
                 Rom.Fill();
-                columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnPlatform");
-                columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnGenre");
-                columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnLabels");
-                columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnPath");
-                columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnRomDBName");
-                columnFilename.Visible = showFilenameToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnFileName");
-                columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnDeveloper");
-                columnPublisher.Visible = showPublisherColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnPublisher");
-                columnYearReleased.Visible = showYearReleasedColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnYearReleased");
-                columnRating.Visible = showRatingColumnToolStripMenuItem.Checked = Config.GetElementVisibility("ColumnRating");
-                pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked = Config.GetElementVisibility("BoxArt");
-                pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked = Config.GetElementVisibility("TitleArt");
-                pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked = Config.GetElementVisibility("GameplayArt");
-                dataGridViewPlatforms.Visible = showPlatformsListToolStripMenuItem.Checked = Config.GetElementVisibility("PlatformsList");
+                columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPlatform);
+                columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnGenre);
+                columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnLabels);
+                columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPath);
+                columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnRomDBName);
+                columnFilename.Visible = showFilenameToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnFileName);
+                columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnDeveloper);
+                columnPublisher.Visible = showPublisherColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPublisher);
+                columnYearReleased.Visible = showYearReleasedColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnYearReleased);
+                columnRating.Visible = showRatingColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnRating);
+                pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked = Config.GetElementVisibility(Column.BoxArt);
+                pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked = Config.GetElementVisibility(Column.TitleArt);
+                pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked = Config.GetElementVisibility(Column.GameplayArt);
+                dataGridViewPlatforms.Visible = showPlatformsListToolStripMenuItem.Checked = Config.GetElementVisibility(Column.PlatformsList);
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 //FormMessage.ShowMessage("Filling Grid...");
 
@@ -574,7 +574,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnPath", columnRomPath.Visible);
+                Config.SetElementVisibility(Column.ColumnPath, columnRomPath.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -595,7 +595,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnRomDBName", columnRomDBName.Visible);
+                Config.SetElementVisibility(Column.ColumnRomDBName, columnRomDBName.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -616,7 +616,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnFileName", columnFilename.Visible);
+                Config.SetElementVisibility(Column.ColumnFileName, columnFilename.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -637,7 +637,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnPlatform", columnPlatform.Visible);
+                Config.SetElementVisibility(Column.ColumnPlatform, columnPlatform.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -658,7 +658,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnLabels", columnLabels.Visible);
+                Config.SetElementVisibility(Column.ColumnLabels, columnLabels.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -679,7 +679,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnGenre", columnGenre.Visible);
+                Config.SetElementVisibility(Column.ColumnGenre, columnGenre.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -700,7 +700,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnDeveloper", columnDeveloper.Visible);
+                Config.SetElementVisibility(Column.ColumnDeveloper, columnDeveloper.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -721,7 +721,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnPublisher", columnPublisher.Visible);
+                Config.SetElementVisibility(Column.ColumnPublisher, columnPublisher.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -742,7 +742,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnYearReleased", columnYearReleased.Visible);
+                Config.SetElementVisibility(Column.ColumnYearReleased, columnYearReleased.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -763,7 +763,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("ColumnRating", columnRating.Visible);
+                Config.SetElementVisibility(Column.ColumnRating, columnRating.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -784,7 +784,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility("PlatformsList", dataGridViewPlatforms.Visible);
+                Config.SetElementVisibility(Column.PlatformsList, dataGridViewPlatforms.Visible);
                 XML.SaveXml();
             }
             catch (OperationCanceledException ioex)
@@ -813,6 +813,23 @@ namespace EmuLoader.Forms
                 FilterRoms();
                 SelectRandomRom();
                 LoadPictures();
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void toolStripMenuItemSettings_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormSettings form = new FormSettings();
+                form.ShowDialog();
             }
             catch (OperationCanceledException ioex)
             {
@@ -1073,7 +1090,7 @@ namespace EmuLoader.Forms
                 }
 
                 pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked;
-                Config.SetElementVisibility("BoxArt", pictureBoxBoxart.Visible);
+                Config.SetElementVisibility(Column.BoxArt, pictureBoxBoxart.Visible);
                 XML.SaveXml();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
@@ -1099,7 +1116,7 @@ namespace EmuLoader.Forms
                 }
 
                 pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked;
-                Config.SetElementVisibility("TitleArt", pictureBoxTitle.Visible);
+                Config.SetElementVisibility(Column.TitleArt, pictureBoxTitle.Visible);
                 XML.SaveXml();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
@@ -1125,7 +1142,7 @@ namespace EmuLoader.Forms
                 }
 
                 pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked;
-                Config.SetElementVisibility("GameplayArt", pictureBoxGameplay.Visible);
+                Config.SetElementVisibility(Column.GameplayArt, pictureBoxGameplay.Visible);
                 XML.SaveXml();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
