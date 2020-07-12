@@ -191,8 +191,8 @@ namespace EmuLoader.Forms
 
                 if (form.ShowDialogUpdated())
                 {
-                    Genre.Fill();
-                    Rom.Fill();
+                    //Genre.Fill();
+                    //Rom.Fill();
                     FilterRoms();
                     FillGenreFilter(genre);
                 }
@@ -213,8 +213,8 @@ namespace EmuLoader.Forms
 
                 if (form.ShowDialogUpdated())
                 {
-                    Platform.Fill();
-                    Rom.Fill();
+                    //Platform.Fill();
+                    //Rom.Fill();
                     FilterRoms();
                     FillPlatformFilter(platform);
                     FillPlatformGrid();
@@ -295,7 +295,6 @@ namespace EmuLoader.Forms
                 FormChoose.ChoosePlatform(out platform);
                 RomFunctions.AddRomsFiles(platform, open.FileNames);
                 XML.SaveXml();
-                FilterRoms();
 
                 FilterRoms();
             }
@@ -311,6 +310,8 @@ namespace EmuLoader.Forms
 
             try
             {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.BoxartFolder));
                 Process.Start(sInfo);
@@ -327,6 +328,8 @@ namespace EmuLoader.Forms
 
             try
             {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.TitleFolder));
                 Process.Start(sInfo);
@@ -343,6 +346,8 @@ namespace EmuLoader.Forms
 
             try
             {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.GameplayFolder));
                 Process.Start(sInfo);
@@ -1383,7 +1388,6 @@ namespace EmuLoader.Forms
             if (result)
             {
                 XML.SaveXml();
-                Rom.Fill();
                 FilterRoms();
             }
         }
@@ -1536,6 +1540,9 @@ namespace EmuLoader.Forms
                 if (e.Button == MouseButtons.Right)
                 {
                     var hti = dataGridView.HitTest(e.X, e.Y);
+
+                    if (hti.RowIndex == -1) return;
+
                     dataGridView.ClearSelection();
                     dataGridView.Rows[hti.RowIndex].Selected = true;
                 }
@@ -1856,19 +1863,23 @@ namespace EmuLoader.Forms
 
                 if (rom.Platform == null) return;
 
-                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(rom, Values.BoxartFolder)))
+                var box = RomFunctions.GetRomPicture(rom, Values.BoxartFolder);
+                var title = RomFunctions.GetRomPicture(rom, Values.TitleFolder);
+                var gameplay = RomFunctions.GetRomPicture(rom, Values.GameplayFolder);
+
+                if (!string.IsNullOrEmpty(box))
                 {
-                    pictureBoxBoxart.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(rom, Values.BoxartFolder));
+                    pictureBoxBoxart.Image = Functions.CreateBitmap(box);
                 }
 
-                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(rom, Values.TitleFolder)))
+                if (!string.IsNullOrEmpty(title))
                 {
-                    pictureBoxTitle.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(rom, Values.TitleFolder));
+                    pictureBoxTitle.Image = Functions.CreateBitmap(title);
                 }
 
-                if (!string.IsNullOrEmpty(RomFunctions.GetRomPicture(rom, Values.GameplayFolder)))
+                if (!string.IsNullOrEmpty(gameplay))
                 {
-                    pictureBoxGameplay.Image = Functions.CreateBitmap(RomFunctions.GetRomPicture(rom, Values.GameplayFolder));
+                    pictureBoxGameplay.Image = Functions.CreateBitmap(gameplay);
                 }
             }
             catch (Exception ex)

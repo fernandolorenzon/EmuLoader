@@ -315,15 +315,29 @@ namespace EmuLoader.Forms
                 }
                 else
                 {
-                    textBoxPublisher.Text = game.Publisher;
-                    textBoxDeveloper.Text = game.Developer;
-                    textBoxDescription.Text = game.Description;
-                    textBoxYearReleased.Text = game.YearReleased;
-                    textBoxRating.Text = game.Rating.ToString("#.#");
-
-                    if (string.IsNullOrEmpty(comboBoxGenre.Text))
+                    if (!string.IsNullOrEmpty(game.Publisher))
                     {
-                        comboBoxGenre.SelectedValue = game.Genre != null ? game.Genre.Name : string.Empty;
+                        textBoxPublisher.Text = game.Publisher;
+                    }
+
+                    if (!string.IsNullOrEmpty(game.Developer))
+                    {
+                        textBoxDeveloper.Text = game.Developer;
+                    }
+                    
+                    if (!string.IsNullOrEmpty(game.Description))
+                    {
+                        textBoxDescription.Text = game.Description;
+                    }
+
+                    if (!string.IsNullOrEmpty(game.YearReleased))
+                    {
+                        textBoxYearReleased.Text = game.YearReleased;
+                    }
+
+                    if (game.Rating != 0)
+                    {
+                        textBoxRating.Text = game.Rating.ToString("#.#");
                     }
                 }
 

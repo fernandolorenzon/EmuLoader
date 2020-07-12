@@ -155,6 +155,7 @@ namespace EmuLoader.Forms
             platform.ShowInList = checkBoxShowInLinksList.Checked;
             platform.DefaultRomPath = textBoxDefaultRomPath.Text;
             platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
+            platform.PictureNameByDisplay = radioButtonDisplayName.Checked;
 
             if (File.Exists(textBoxPlatformIcon.Text))
             {
@@ -368,6 +369,7 @@ namespace EmuLoader.Forms
             textBoxDefaultRomPath.Text = string.Empty;
             textBoxDefaultRomExtensions.Text = string.Empty;
             textBoxPlatformName.Enabled = true;
+            radioButtonDisplayName.Checked = true;
         }
 
         protected override void SetForm()
@@ -401,6 +403,8 @@ namespace EmuLoader.Forms
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
             textBoxPlatformName.Enabled = false;
+            radioButtonDisplayName.Checked = platform.PictureNameByDisplay;
+            radioButtonFileName.Checked = !platform.PictureNameByDisplay;
         }
 
         #endregion

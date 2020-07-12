@@ -180,8 +180,6 @@ namespace EmuLoader.Core.Business
 
                 if (string.IsNullOrEmpty(json)) return null;
 
-                var genres = Genre.GetAll();
-
                 var result = new Rom();
 
                 var jobject = (JObject)JsonConvert.DeserializeObject(json);

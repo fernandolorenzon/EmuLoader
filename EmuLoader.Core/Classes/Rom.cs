@@ -15,26 +15,7 @@ namespace EmuLoader.Core.Classes
         public string DBName { get; set; }
         public string Extension { get; private set; }
         public bool IdLocked { get; set; }
-
-        private string path;
-        public string Path
-        {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                path = value;
-
-                if (string.IsNullOrEmpty(Name))
-                {
-                    Name = path.Substring(path.LastIndexOf("\\") + 1);
-                    Extension = Name.Substring(Name.LastIndexOf(".") + 1);
-                    Name = Name.Replace("." + Extension, "");
-                }
-            }
-        }
+        public string Path { get; set; }
         public string EmulatorExe { get; set; }
         public string Command { get; set; }
         public string YearReleased { get; set; }
@@ -53,10 +34,27 @@ namespace EmuLoader.Core.Classes
             UseAlternateEmulator = false;
         }
 
-        public Rom(string path)
+        public static Rom NewRom(string path, Platform platform)
         {
-            Path = path;
-            Labels = new List<RomLabel>();
+            var rom = new Rom();
+            rom.Path = path;
+            rom.Platform = platform;
+
+            if (platform != null && platform.Id == "23")//arcade
+            {
+                rom.Name = RomFunctions.GetDisplayNameByFile(RomFunctions.GetFileNameNoExtension(path));
+
+                if (rom.Name == "")
+                {
+                    rom.Name = RomFunctions.GetFileNameNoExtension(path);
+                }
+            }
+            else
+            {
+                rom.Name = RomFunctions.GetFileNameNoExtension(path);
+            }
+            
+            return rom;
         }
 
         public static Rom Get(string path)
@@ -96,7 +94,8 @@ namespace EmuLoader.Core.Classes
             RomList = new List<Rom>();
             foreach (XmlNode node in XML.GetRomNodes())
             {
-                Rom rom = new Rom(Functions.GetXmlAttribute(node, "Path"));
+                Rom rom = new Rom();
+                rom.Path = Functions.GetXmlAttribute(node, "Path");
                 rom.Id = Functions.GetXmlAttribute(node, "Id");
                 rom.Name = Functions.GetXmlAttribute(node, "Name");
                 rom.DBName = Functions.GetXmlAttribute(node, "DBName");

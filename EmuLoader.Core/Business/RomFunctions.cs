@@ -11,7 +11,6 @@ namespace EmuLoader.Core.Business
 {
     public static class RomFunctions
     {
-
         public static void SaveRomPictures(Rom rom, string boxPath, string titlePath, string gameplayPath, bool saveAsJpg)
         {
             if (!string.IsNullOrEmpty(boxPath) && File.Exists(boxPath))
@@ -347,7 +346,16 @@ namespace EmuLoader.Core.Business
 
         public static string GetRomPicture(Rom rom, string type)
         {
-            string result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.Name;
+            string result = "";
+
+            if (rom.Platform != null && rom.Platform.PictureNameByDisplay)
+            {
+                result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.Name;
+            }
+            else if (rom.Platform != null && !rom.Platform.PictureNameByDisplay)
+            {
+                result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + RomFunctions.GetFileNameNoExtension(rom.Path);
+            }
 
             if (File.Exists(result + ".jpg"))
             {
@@ -362,10 +370,6 @@ namespace EmuLoader.Core.Business
             if (File.Exists(result + ".gif"))
             {
                 return result + ".gif";
-            }
-            if (File.Exists(result + ".bmp"))
-            {
-                return result + ".bmp";
             }
 
             return "";
@@ -615,23 +619,21 @@ namespace EmuLoader.Core.Business
 
         public static bool AddRomsFiles(Platform platform, string[] files)
         {
-            List<Rom> romList = new List<Rom>();
+            bool addedAny = false;
 
-            foreach (var item in files)
+            foreach (var path in files)
             {
-                Rom r = new Rom(item);
-                Rom old = Rom.Get(r.Path);
+                var rom = Rom.Get(path);
 
-                if (old != null)
+                if (rom == null)
                 {
-                    r = old;
+                    rom = Rom.NewRom(path, platform);
+                    addedAny = true;
+                    Rom.Set(rom);
                 }
-
-                r.Platform = platform;
-                Rom.Set(r);
             }
 
-            return true;
+            return addedAny;
         }
 
         public static bool AddRomsFromDirectory(Platform platform, string directory)
@@ -643,28 +645,22 @@ namespace EmuLoader.Core.Business
             var exts = platform.DefaultRomExtensions.Split(',').ToList();
             bool addedAny = false;
 
-            foreach (var item in files)
+            foreach (var path in files)
             {
-                var fileExt = GetFileExtension(item);
+                var fileExt = GetFileExtension(path);
                 if (!exts.Contains(fileExt.Replace(".", "")))
                 {
                     continue;
                 }
 
-                Rom r = new Rom(item);
-                Rom old = Rom.Get(r.Path);
+                var rom = Rom.Get(path);
 
-                if (old != null)
+                if (rom == null)
                 {
-                    r = old;
-                }
-                else
-                {
+                    rom = Rom.NewRom(path, platform);
                     addedAny = true;
+                    Rom.Set(rom);
                 }
-
-                r.Platform = platform;
-                Rom.Set(r);
             }
 
             return addedAny;
@@ -680,29 +676,47 @@ namespace EmuLoader.Core.Business
 
             foreach (var path in directories)
             {
-                var files = Directory.GetFiles(path);
-
-                foreach (var item in files)
+                if (platform.DefaultRomExtensions == "dir")
                 {
-                    var exts = platform.DefaultRomExtensions.Split(',').ToList();
-                    var fileExt = GetFileExtension(item);
 
-                    if (exts.Contains(fileExt.Replace(".", "")))
+                    if (!Directory.Exists(platform.DefaultRomPath))
                     {
-                        Rom r = new Rom(item);
-                        Rom old = Rom.Get(r.Path);
+                        return false;
+                    }
 
-                        if (old != null)
+                    var dirs = Directory.GetDirectories(platform.DefaultRomPath);
+
+                    foreach (var dir in dirs)
+                    {
+                        var rom = Rom.Get(dir);
+
+                        if (rom == null)
                         {
-                            r = old;
-                        }
-                        else
-                        {
+                            rom = Rom.NewRom(dir, platform);
                             addedAny = true;
+                            Rom.Set(rom);
                         }
+                    }
+                }
+                else
+                {
+                    var files = Directory.GetFiles(path);
+                    foreach (var file in files)
+                    {
+                        var exts = platform.DefaultRomExtensions.Split(',').ToList();
+                        var fileExt = GetFileExtension(file);
 
-                        r.Platform = platform;
-                        Rom.Set(r);
+                        if (exts.Contains(fileExt.Replace(".", "")))
+                        {
+                            var rom = Rom.Get(file);
+
+                            if (rom == null)
+                            {
+                                rom = Rom.NewRom(file, platform);
+                                addedAny = true;
+                                Rom.Set(rom);
+                            }
+                        }
                     }
                 }
             }
@@ -757,6 +771,33 @@ namespace EmuLoader.Core.Business
             }
 
             return true;
+        }
+
+        public static string GetDisplayNameByFile(string filename)
+        {
+            if (Values.MAMERomNames == null)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(Properties.ResourceCore.MAME);
+                Values.MAMERomNames = new Dictionary<string, string>();
+
+                foreach (XmlNode node in doc.ChildNodes[1].ChildNodes)
+                {
+                    if (node.Attributes.Count == 0) continue;
+
+                    if (!Values.MAMERomNames.ContainsKey(node.Attributes["name"].Value))
+                    {
+                        Values.MAMERomNames.Add(node.Attributes["name"].Value, node.ChildNodes[0].InnerText);
+                    }
+                }
+            }
+
+            if (Values.MAMERomNames.ContainsKey(filename))
+            {
+                return Values.MAMERomNames[filename];
+            }
+
+            return "";
         }
     }
 }

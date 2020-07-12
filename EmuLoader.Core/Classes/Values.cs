@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EmuLoader.Core.Classes
 {
@@ -18,6 +19,7 @@ namespace EmuLoader.Core.Classes
         public static string JsonFolder = "json";
         public static string BackupFolder = "backup";
         public static string BaseAPIURL = "https://api.thegamesdb.net";
+        public static Dictionary<string, string> MAMERomNames = null;
         public static string PlatformsXML =
             @"<Data>
             <Platforms>
