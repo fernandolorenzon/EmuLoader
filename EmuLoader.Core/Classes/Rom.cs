@@ -42,7 +42,7 @@ namespace EmuLoader.Core.Classes
 
             if (platform != null && platform.Id == "23")//arcade
             {
-                rom.Name = RomFunctions.GetDisplayNameByFile(RomFunctions.GetFileNameNoExtension(path));
+                rom.Name = RomFunctions.GetMAMEName(RomFunctions.GetFileNameNoExtension(path));
 
                 if (rom.Name == "")
                 {

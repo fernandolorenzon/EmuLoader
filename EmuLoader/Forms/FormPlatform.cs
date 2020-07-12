@@ -326,6 +326,45 @@ namespace EmuLoader.Forms
 
         }
 
+        private void buttonUpdateAllRomsNames_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                DataGridViewRow row = dataGridView.SelectedRows[0];
+                Platform platform = (Platform)row.Tag;
+                var roms = Rom.GetAll(platform);
+                int count = 0;
+
+                foreach (var rom in roms)
+                {
+                    var name = RomFunctions.GetMAMEName(RomFunctions.GetFileNameNoExtension(rom.Path));
+
+                    if (name == "") continue;
+
+                    if (rom.Name != name)
+                    {
+                        rom.Name = name;
+                        Rom.Set(rom);
+                        count++;
+                    }
+                }
+
+                XML.SaveXml();
+                FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
+                Updated = true;
+            }
+            catch (Exception ex)
+            {
+                //FormWait.CloseWait();
+                FormCustomMessage.ShowError(ex.Message);
+            }
+            finally
+            {
+                //FormWait.CloseWait();
+            }
+        }
         #endregion
 
         #region Methods
@@ -408,5 +447,6 @@ namespace EmuLoader.Forms
         }
 
         #endregion
+
     }
 }

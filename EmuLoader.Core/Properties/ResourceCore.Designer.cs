@@ -59,28 +59,5 @@ namespace EmuLoader.Core.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;menu&gt;
-        ///	&lt;header&gt;
-        ///		&lt;listname&gt;MAME&lt;/listname&gt;
-        ///		&lt;lastlistupdate&gt;02/08/2016&lt;/lastlistupdate&gt;
-        ///		&lt;listversion&gt;.160 Ongoing&lt;/listversion&gt;
-        ///		&lt;exporterversion&gt;HyperList XML Exporter Version 1.3 Copywrite (c) 2009-2011 William Strong&lt;/exporterversion&gt;
-        ///	&lt;/header&gt;
-        ///	&lt;game name=&quot;88games&quot; index=&quot;true&quot; image=&quot;&apos;&quot;&gt;
-        ///		&lt;description&gt;&amp;apos;88 Games&lt;/description&gt;
-        ///		&lt;cloneof&gt;&lt;/cloneof&gt;
-        ///		&lt;crc&gt;&lt;/crc&gt;
-        ///		&lt;manufacturer&gt;Konami&lt;/manufacturer&gt;
-        ///		&lt;year&gt;1988&lt;/year&gt;
-        ///		&lt;genre&gt;Sports / Track &amp;amp; Field&lt;/ [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string MAME {
-            get {
-                return ResourceManager.GetString("MAME", resourceCulture);
-            }
-        }
     }
 }

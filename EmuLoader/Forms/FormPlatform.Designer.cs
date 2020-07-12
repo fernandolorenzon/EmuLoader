@@ -53,6 +53,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControlPlatform = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
+            this.buttonUpdateAllRomsNames = new System.Windows.Forms.Button();
+            this.radioButtonFileName = new System.Windows.Forms.RadioButton();
+            this.radioButtonDisplayName = new System.Windows.Forms.RadioButton();
+            this.labelRomPicturesMode = new System.Windows.Forms.Label();
             this.textBoxPlatformIcon = new System.Windows.Forms.TextBox();
             this.labelPlatformName = new System.Windows.Forms.Label();
             this.textBoxDefaultRomExtensions = new System.Windows.Forms.TextBox();
@@ -71,9 +75,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.buttonAlternatePath = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.labelRomPicturesMode = new System.Windows.Forms.Label();
-            this.radioButtonDisplayName = new System.Windows.Forms.RadioButton();
-            this.radioButtonFileName = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -296,6 +297,7 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.buttonUpdateAllRomsNames);
             this.tabPageMain.Controls.Add(this.radioButtonFileName);
             this.tabPageMain.Controls.Add(this.radioButtonDisplayName);
             this.tabPageMain.Controls.Add(this.labelRomPicturesMode);
@@ -322,6 +324,47 @@
             this.tabPageMain.TabIndex = 0;
             this.tabPageMain.Text = "Main";
             this.tabPageMain.UseVisualStyleBackColor = true;
+            // 
+            // buttonUpdateAllRomsNames
+            // 
+            this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(404, 186);
+            this.buttonUpdateAllRomsNames.Name = "buttonUpdateAllRomsNames";
+            this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(287, 40);
+            this.buttonUpdateAllRomsNames.TabIndex = 36;
+            this.buttonUpdateAllRomsNames.Text = "Update All Roms MAME Names ";
+            this.buttonUpdateAllRomsNames.UseVisualStyleBackColor = true;
+            this.buttonUpdateAllRomsNames.Click += new System.EventHandler(this.buttonUpdateAllRomsNames_Click);
+            // 
+            // radioButtonFileName
+            // 
+            this.radioButtonFileName.AutoSize = true;
+            this.radioButtonFileName.Location = new System.Drawing.Point(14, 111);
+            this.radioButtonFileName.Name = "radioButtonFileName";
+            this.radioButtonFileName.Size = new System.Drawing.Size(178, 17);
+            this.radioButtonFileName.TabIndex = 35;
+            this.radioButtonFileName.Text = "File Name (Best for arcade roms)";
+            this.radioButtonFileName.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDisplayName
+            // 
+            this.radioButtonDisplayName.AutoSize = true;
+            this.radioButtonDisplayName.Checked = true;
+            this.radioButtonDisplayName.Location = new System.Drawing.Point(14, 88);
+            this.radioButtonDisplayName.Name = "radioButtonDisplayName";
+            this.radioButtonDisplayName.Size = new System.Drawing.Size(90, 17);
+            this.radioButtonDisplayName.TabIndex = 34;
+            this.radioButtonDisplayName.TabStop = true;
+            this.radioButtonDisplayName.Text = "Display Name";
+            this.radioButtonDisplayName.UseVisualStyleBackColor = true;
+            // 
+            // labelRomPicturesMode
+            // 
+            this.labelRomPicturesMode.AutoSize = true;
+            this.labelRomPicturesMode.Location = new System.Drawing.Point(11, 70);
+            this.labelRomPicturesMode.Name = "labelRomPicturesMode";
+            this.labelRomPicturesMode.Size = new System.Drawing.Size(126, 13);
+            this.labelRomPicturesMode.TabIndex = 33;
+            this.labelRomPicturesMode.Text = "Get/Set picture name by:";
             // 
             // textBoxPlatformIcon
             // 
@@ -506,37 +549,6 @@
             this.label8.TabIndex = 6;
             this.label8.Text = "Emulator Exe";
             // 
-            // labelRomPicturesMode
-            // 
-            this.labelRomPicturesMode.AutoSize = true;
-            this.labelRomPicturesMode.Location = new System.Drawing.Point(11, 70);
-            this.labelRomPicturesMode.Name = "labelRomPicturesMode";
-            this.labelRomPicturesMode.Size = new System.Drawing.Size(126, 13);
-            this.labelRomPicturesMode.TabIndex = 33;
-            this.labelRomPicturesMode.Text = "Get/Set picture name by:";
-            // 
-            // radioButtonDisplayName
-            // 
-            this.radioButtonDisplayName.AutoSize = true;
-            this.radioButtonDisplayName.Checked = true;
-            this.radioButtonDisplayName.Location = new System.Drawing.Point(14, 88);
-            this.radioButtonDisplayName.Name = "radioButtonDisplayName";
-            this.radioButtonDisplayName.Size = new System.Drawing.Size(90, 17);
-            this.radioButtonDisplayName.TabIndex = 34;
-            this.radioButtonDisplayName.TabStop = true;
-            this.radioButtonDisplayName.Text = "Display Name";
-            this.radioButtonDisplayName.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonFileName
-            // 
-            this.radioButtonFileName.AutoSize = true;
-            this.radioButtonFileName.Location = new System.Drawing.Point(14, 111);
-            this.radioButtonFileName.Name = "radioButtonFileName";
-            this.radioButtonFileName.Size = new System.Drawing.Size(178, 17);
-            this.radioButtonFileName.TabIndex = 35;
-            this.radioButtonFileName.Text = "File Name (Best for arcade roms)";
-            this.radioButtonFileName.UseVisualStyleBackColor = true;
-            // 
             // FormPlatform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -610,5 +622,6 @@
         private System.Windows.Forms.RadioButton radioButtonFileName;
         private System.Windows.Forms.RadioButton radioButtonDisplayName;
         private System.Windows.Forms.Label labelRomPicturesMode;
+        private System.Windows.Forms.Button buttonUpdateAllRomsNames;
     }
 }

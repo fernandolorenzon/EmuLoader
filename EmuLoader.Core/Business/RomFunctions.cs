@@ -773,21 +773,54 @@ namespace EmuLoader.Core.Business
             return true;
         }
 
-        public static string GetDisplayNameByFile(string filename)
+        public static string GetMAMEName(string filename)
         {
+            var mamepath = Config.GetFolder(Folder.MAME);
+
+            if (string.IsNullOrEmpty(mamepath)) return "";
+
             if (Values.MAMERomNames == null)
             {
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(Properties.ResourceCore.MAME);
                 Values.MAMERomNames = new Dictionary<string, string>();
+                var files = Directory.GetFiles(mamepath + "\\hash", "*.xml");
 
-                foreach (XmlNode node in doc.ChildNodes[1].ChildNodes)
+                foreach (var file in files)
                 {
-                    if (node.Attributes.Count == 0) continue;
+                    var xmlcontent = File.ReadAllText(file);
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(xmlcontent);
+                    if (doc.ChildNodes == null || doc.ChildNodes.Count == 0) continue;
 
-                    if (!Values.MAMERomNames.ContainsKey(node.Attributes["name"].Value))
+                    //XmlNodeList softwarelist = null;
+
+                    //foreach (XmlNode node in doc.ChildNodes)
+                    //{
+                    //    if (node.Name == "softwarelist")
+                    //    {
+                    //        softwarelist = node.ChildNodes;
+                    //        break;
+                    //    }
+                    //}
+
+                    //if (softwarelist == null) continue;
+                    //if (softwarelist.ChildNodes == null || softwarelist.ChildNodes.Count == 0) continue;
+
+                    foreach (XmlNode node in doc.ChildNodes[doc.ChildNodes.Count - 1].ChildNodes)
                     {
-                        Values.MAMERomNames.Add(node.Attributes["name"].Value, node.ChildNodes[0].InnerText);
+                        if (node.Attributes == null || node.Attributes.Count == 0) continue;
+
+                        if (!Values.MAMERomNames.ContainsKey(node.Attributes["name"].Value))
+                        {
+                            foreach (XmlNode child in node.ChildNodes)
+                            {
+                                if (child.Name == "description")
+                                {
+                                    Values.MAMERomNames.Add(node.Attributes["name"].Value, child.InnerText);
+                                    break;
+                                }
+                            }
+                            
+                        }
                     }
                 }
             }

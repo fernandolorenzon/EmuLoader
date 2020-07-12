@@ -33,8 +33,8 @@ namespace EmuLoader.Forms
         {
             labelRom.Text = rom.Name;
             SelectedRom = rom;
-            textBoxChangeFileName.Text = rom.Path.Substring(rom.Path.LastIndexOf("\\") + 1);
-            textBoxChangeRomName.Text = rom.Name;
+            textBoxFileName.Text = rom.Path.Substring(rom.Path.LastIndexOf("\\") + 1);
+            textBoxRomName.Text = rom.Name;
             textBoxDBName.Text = rom.DBName;
             textBoxPublisher.Text = rom.Publisher;
             textBoxDeveloper.Text = rom.Developer;
@@ -125,8 +125,8 @@ namespace EmuLoader.Forms
 
                 SelectedRom = RomFunctions.SetRom(SelectedRom,
                     textBoxId.Text,
-                    textBoxChangeFileName.Text,
-                    textBoxChangeRomName.Text,
+                    textBoxFileName.Text,
+                    textBoxRomName.Text,
                     comboBoxPlatform.Text,
                     comboBoxGenre.Text,
                     labels,
@@ -200,12 +200,12 @@ namespace EmuLoader.Forms
 
         private void buttonCopyToFile_Click(object sender, EventArgs e)
         {
-            textBoxChangeFileName.Text = textBoxChangeRomName.Text.Trim() + RomFunctions.GetFileExtension(textBoxChangeFileName.Text);
+            textBoxFileName.Text = textBoxRomName.Text.Trim() + RomFunctions.GetFileExtension(textBoxFileName.Text);
         }
 
         private void buttonCopyToRom_Click(object sender, EventArgs e)
         {
-            textBoxChangeRomName.Text = textBoxChangeFileName.Text.Trim().Replace(RomFunctions.GetFileExtension(textBoxChangeFileName.Text), string.Empty);
+            textBoxRomName.Text = textBoxFileName.Text.Trim().Replace(RomFunctions.GetFileExtension(textBoxFileName.Text), string.Empty);
         }
 
         private void buttonOpenDB_Click(object sender, EventArgs e)
@@ -399,7 +399,7 @@ namespace EmuLoader.Forms
         private void buttonSearchInDB_Click(object sender, EventArgs e)
         {
             string url = "https://thegamesdb.net/search.php?name={0}&platform_id%5B%5D={1}";
-            string name = textBoxChangeRomName.Text.Replace("[!]", string.Empty).Replace("!", string.Empty).Replace("&", " ").Replace(" ", "+");
+            string name = textBoxRomName.Text.Replace("[!]", string.Empty).Replace("!", string.Empty).Replace("&", " ").Replace(" ", "+");
 
             name = Functions.RemoveSubstring(name, '[', ']');
             name = Functions.RemoveSubstring(name, '(', ')');
@@ -422,13 +422,13 @@ namespace EmuLoader.Forms
         {
             if (string.IsNullOrEmpty(textBoxDBName.Text.Trim())) return;
 
-            string romName = textBoxChangeRomName.Text;
-            string fileName = textBoxChangeFileName.Text;
+            string romName = textBoxRomName.Text;
+            string fileName = textBoxFileName.Text;
 
             RomFunctions.CopyDBName(textBoxDBName.Text, checkBoxKeepSuffix.Checked, out romName, out fileName);
 
-            textBoxChangeRomName.Text = romName;
-            textBoxChangeFileName.Text = fileName;
+            textBoxRomName.Text = romName;
+            textBoxFileName.Text = fileName;
         }
 
         private void buttonCheckList_Click(object sender, EventArgs e)
@@ -474,6 +474,23 @@ namespace EmuLoader.Forms
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void buttonGetMAMEName_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                textBoxRomName.Text = RomFunctions.GetMAMEName(RomFunctions.GetFileNameNoExtension(textBoxFileName.Text));
+            }
+            catch (Exception ex)
+            {
+                //FormWait.CloseWait();
+                FormCustomMessage.ShowError(ex.Message);
+            }
+            finally
+            {
+                //FormWait.CloseWait();
             }
         }
 

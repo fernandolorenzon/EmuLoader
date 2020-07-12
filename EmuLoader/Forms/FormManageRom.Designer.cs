@@ -66,10 +66,10 @@
             this.textBoxPublisher = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxDBName = new System.Windows.Forms.TextBox();
-            this.textBoxChangeFileName = new System.Windows.Forms.TextBox();
+            this.textBoxFileName = new System.Windows.Forms.TextBox();
             this.labelChangeFileName = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBoxChangeRomName = new System.Windows.Forms.TextBox();
+            this.textBoxRomName = new System.Windows.Forms.TextBox();
             this.labelChangeRomName = new System.Windows.Forms.Label();
             this.textBoxYearReleased = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -108,6 +108,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonGetMAMEName = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -142,6 +143,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.buttonGetMAMEName);
             this.tabPageGeneral.Controls.Add(this.checkBoxIdLocked);
             this.tabPageGeneral.Controls.Add(this.textBoxRating);
             this.tabPageGeneral.Controls.Add(this.label16);
@@ -154,10 +156,10 @@
             this.tabPageGeneral.Controls.Add(this.textBoxPublisher);
             this.tabPageGeneral.Controls.Add(this.label8);
             this.tabPageGeneral.Controls.Add(this.textBoxDBName);
-            this.tabPageGeneral.Controls.Add(this.textBoxChangeFileName);
+            this.tabPageGeneral.Controls.Add(this.textBoxFileName);
             this.tabPageGeneral.Controls.Add(this.labelChangeFileName);
             this.tabPageGeneral.Controls.Add(this.label14);
-            this.tabPageGeneral.Controls.Add(this.textBoxChangeRomName);
+            this.tabPageGeneral.Controls.Add(this.textBoxRomName);
             this.tabPageGeneral.Controls.Add(this.labelChangeRomName);
             this.tabPageGeneral.Controls.Add(this.textBoxYearReleased);
             this.tabPageGeneral.Controls.Add(this.label12);
@@ -504,21 +506,21 @@
             this.textBoxDBName.Size = new System.Drawing.Size(396, 20);
             this.textBoxDBName.TabIndex = 95;
             // 
-            // textBoxChangeFileName
+            // textBoxFileName
             // 
-            this.textBoxChangeFileName.Location = new System.Drawing.Point(179, 180);
-            this.textBoxChangeFileName.Name = "textBoxChangeFileName";
-            this.textBoxChangeFileName.Size = new System.Drawing.Size(204, 20);
-            this.textBoxChangeFileName.TabIndex = 90;
+            this.textBoxFileName.Location = new System.Drawing.Point(179, 180);
+            this.textBoxFileName.Name = "textBoxFileName";
+            this.textBoxFileName.Size = new System.Drawing.Size(204, 20);
+            this.textBoxFileName.TabIndex = 90;
             // 
             // labelChangeFileName
             // 
             this.labelChangeFileName.AutoSize = true;
             this.labelChangeFileName.Location = new System.Drawing.Point(176, 164);
             this.labelChangeFileName.Name = "labelChangeFileName";
-            this.labelChangeFileName.Size = new System.Drawing.Size(94, 13);
+            this.labelChangeFileName.Size = new System.Drawing.Size(54, 13);
             this.labelChangeFileName.TabIndex = 89;
-            this.labelChangeFileName.Text = "Change File Name";
+            this.labelChangeFileName.Text = "File Name";
             // 
             // label14
             // 
@@ -529,21 +531,21 @@
             this.label14.TabIndex = 94;
             this.label14.Text = "TheGamesDB.net Name";
             // 
-            // textBoxChangeRomName
+            // textBoxRomName
             // 
-            this.textBoxChangeRomName.Location = new System.Drawing.Point(6, 180);
-            this.textBoxChangeRomName.Name = "textBoxChangeRomName";
-            this.textBoxChangeRomName.Size = new System.Drawing.Size(167, 20);
-            this.textBoxChangeRomName.TabIndex = 88;
+            this.textBoxRomName.Location = new System.Drawing.Point(6, 180);
+            this.textBoxRomName.Name = "textBoxRomName";
+            this.textBoxRomName.Size = new System.Drawing.Size(167, 20);
+            this.textBoxRomName.TabIndex = 88;
             // 
             // labelChangeRomName
             // 
             this.labelChangeRomName.AutoSize = true;
             this.labelChangeRomName.Location = new System.Drawing.Point(3, 164);
             this.labelChangeRomName.Name = "labelChangeRomName";
-            this.labelChangeRomName.Size = new System.Drawing.Size(137, 13);
+            this.labelChangeRomName.Size = new System.Drawing.Size(97, 13);
             this.labelChangeRomName.TabIndex = 87;
-            this.labelChangeRomName.Text = "Change Rom Display Name";
+            this.labelChangeRomName.Text = "Rom Display Name";
             // 
             // textBoxYearReleased
             // 
@@ -912,6 +914,16 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // buttonGetMAMEName
+            // 
+            this.buttonGetMAMEName.Location = new System.Drawing.Point(6, 238);
+            this.buttonGetMAMEName.Name = "buttonGetMAMEName";
+            this.buttonGetMAMEName.Size = new System.Drawing.Size(167, 23);
+            this.buttonGetMAMEName.TabIndex = 106;
+            this.buttonGetMAMEName.Text = "Get MAME Name";
+            this.buttonGetMAMEName.UseVisualStyleBackColor = true;
+            this.buttonGetMAMEName.Click += new System.EventHandler(this.buttonGetMAMEName_Click);
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -951,9 +963,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxPublisher;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBoxChangeFileName;
+        private System.Windows.Forms.TextBox textBoxFileName;
         private System.Windows.Forms.Label labelChangeFileName;
-        private System.Windows.Forms.TextBox textBoxChangeRomName;
+        private System.Windows.Forms.TextBox textBoxRomName;
         private System.Windows.Forms.Label labelChangeRomName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelRom;
@@ -1021,5 +1033,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox checkBoxUseAlternate;
         private System.Windows.Forms.CheckBox checkBoxIdLocked;
+        private System.Windows.Forms.Button buttonGetMAMEName;
     }
 }
