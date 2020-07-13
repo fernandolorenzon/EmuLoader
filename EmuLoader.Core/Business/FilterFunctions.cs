@@ -95,32 +95,6 @@ namespace EmuLoader.Core.Business
             return FilteredRoms;
         }
 
-        public static bool SaveFilter(string name, string platform, string label, string genre, string publisher, string developer, string year)
-        {
-            XML.SetFilter("Name", name);
-            XML.SetFilter("Platform", platform);
-            XML.SetFilter("Label", label);
-            XML.SetFilter("Genre", genre);
-            XML.SetFilter("Publisher", publisher);
-            XML.SetFilter("Developer", developer);
-            XML.SetFilter("Year", year);
-
-            return true;
-        }
-
-        public static bool GetFilter(out string name, out string platform, out string label, out string genre, out string publisher, out string developer, out string year)
-        {
-            name = XML.GetFilter("Name");
-            platform = XML.GetFilter("Platform");
-            label = XML.GetFilter("Label");
-            genre = XML.GetFilter("Genre");
-            publisher = XML.GetFilter("Publisher");
-            developer = XML.GetFilter("Developer");
-            year = XML.GetFilter("Year");
-
-            return true;
-        }
-
         private static List<string> GetPlatforms(string filter, out string romFilter)
         {
             romFilter = "";

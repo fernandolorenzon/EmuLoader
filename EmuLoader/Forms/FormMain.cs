@@ -8,6 +8,7 @@ using EmuLoader.Core.Classes;
 using System.Threading;
 using System.Diagnostics;
 using EmuLoader.Core.Business;
+using System.Data;
 
 namespace EmuLoader.Forms
 {
@@ -71,38 +72,38 @@ namespace EmuLoader.Forms
                 FillDeveloperFilter();
                 FillYearReleasedFilter();
 
-                string name, platform, label, genre, publisher, developer, year = "";
-                FilterFunctions.GetFilter(out name, out platform, out label, out genre, out publisher, out developer, out year);
-                textBoxFilter.Text = name;
+                Filter filter = Config.GetFilter();
 
-                if (!string.IsNullOrEmpty(platform))
+                textBoxFilter.Text = filter.text;
+
+                if (!string.IsNullOrEmpty(filter.platform))
                 {
-                    comboBoxPlatform.SelectedValue = platform;
+                    comboBoxPlatform.SelectedValue = filter.platform;
                 }
 
-                if (!string.IsNullOrEmpty(label))
+                if (!string.IsNullOrEmpty(filter.label))
                 {
-                    comboBoxLabels.SelectedValue = label;
+                    comboBoxLabels.SelectedValue = filter.label;
                 }
 
-                if (!string.IsNullOrEmpty(genre))
+                if (!string.IsNullOrEmpty(filter.genre))
                 {
-                    comboBoxGenre.SelectedValue = genre;
+                    comboBoxGenre.SelectedValue = filter.genre;
                 }
 
-                if (!string.IsNullOrEmpty(developer))
+                if (!string.IsNullOrEmpty(filter.developer))
                 {
-                    comboBoxDeveloper.SelectedText = developer;
+                    comboBoxDeveloper.SelectedText = filter.developer;
                 }
 
-                if (!string.IsNullOrEmpty(publisher))
+                if (!string.IsNullOrEmpty(filter.publisher))
                 {
-                    comboBoxPublisher.SelectedText = publisher;
+                    comboBoxPublisher.SelectedText = filter.publisher;
                 }
 
-                if (!string.IsNullOrEmpty(year))
+                if (!string.IsNullOrEmpty(filter.year))
                 {
-                    comboBoxYearReleased.SelectedText = year;
+                    comboBoxYearReleased.SelectedText = filter.year;
                 }
 
                 FilterRoms();
@@ -119,7 +120,23 @@ namespace EmuLoader.Forms
                     this.Width = Convert.ToInt32(width);
                 }
 
-                SelectRandomRom();
+                if (string.IsNullOrEmpty(filter.rom))
+                {
+                    SelectRandomRom();
+                }
+                else
+                {
+                    for (int i = 0; i < dataGridView.Rows.Count; i++)
+                    {
+                        if (dataGridView.Rows[i].Cells[columnRomPath.Index].Value.ToString() == filter.rom)
+                        {
+                            dataGridView.CurrentCell = dataGridView.Rows[i].Cells[0];
+                            break;
+                        }
+                    }
+                }
+
+                this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
 
                 try
                 {
@@ -142,14 +159,17 @@ namespace EmuLoader.Forms
 
         private void FormMain_Close(object sender, FormClosedEventArgs e)
         {
-            var platform = comboBoxPlatform.SelectedValue == null ? "" : comboBoxPlatform.SelectedValue.ToString();
-            var label = comboBoxLabels.SelectedValue == null ? "" : comboBoxLabels.SelectedValue.ToString();
-            var genre = comboBoxGenre.SelectedValue == null ? "" : comboBoxGenre.SelectedValue.ToString();
-            var publisher = comboBoxPublisher.SelectedValue == null ? "" : comboBoxPublisher.SelectedValue.ToString();
-            var developer = comboBoxDeveloper.SelectedValue == null ? "" : comboBoxDeveloper.SelectedValue.ToString();
-            var year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
+            Filter filter = new Filter();
+            filter.platform = comboBoxPlatform.SelectedValue == null ? "" : comboBoxPlatform.SelectedValue.ToString();
+            filter.label = comboBoxLabels.SelectedValue == null ? "" : comboBoxLabels.SelectedValue.ToString();
+            filter.genre = comboBoxGenre.SelectedValue == null ? "" : comboBoxGenre.SelectedValue.ToString();
+            filter.publisher = comboBoxPublisher.SelectedValue == null ? "" : comboBoxPublisher.SelectedValue.ToString();
+            filter.developer = comboBoxDeveloper.SelectedValue == null ? "" : comboBoxDeveloper.SelectedValue.ToString();
+            filter.year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
+            filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Path;
+            filter.text = textBoxFilter.Text;
 
-            FilterFunctions.SaveFilter(textBoxFilter.Text, platform,label, genre, publisher, developer, year);
+            Config.SaveFilter(filter);
             XML.SaveXml();
         }
 
@@ -985,6 +1005,7 @@ namespace EmuLoader.Forms
         private void timerFilter_Tick(object sender, EventArgs e)
         {
             timerFilter.Stop();
+            if (updating) return;
             FilterRoms();
         }
 
