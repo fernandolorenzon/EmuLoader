@@ -51,12 +51,12 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            Platform emu = (Platform)comboBoxChoosePlatform.SelectedItem;
+            Platform platform = (Platform)comboBoxChoosePlatform.SelectedItem;
             var images = Directory.GetFiles(textBoxDir.Text);
             var roms = Rom.GetAll().Where
                 (x =>
                         x.Platform != null &&
-                        x.Platform.Name == emu.Name &&
+                        x.Platform.Name == platform.Name &&
                         (
                             (radioButtonBoxart.Checked && string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.BoxartFolder))) ||
                             (radioButtonTitle.Checked && string.IsNullOrEmpty(RomFunctions.GetRomPicture(x, Values.TitleFolder))) ||
@@ -77,19 +77,39 @@ namespace EmuLoader.Forms
 
             foreach (var rom in roms)
             {
-                string imageFoundPath;
-                var found = RomFunctions.MatchImages(images, imageRegion, rom.Name, out imageFoundPath);
-
-                if (found)
+                if (!platform.PictureNameByDisplay)
                 {
-                    successfulFind++;
+                    string imageFoundPath;
+                    var found = RomFunctions.MatchImagesExact(images, RomFunctions.GetFileNameNoExtension(rom.Path), out imageFoundPath);
 
-                    if (progressBar1.Value < progressBar1.Maximum)
+                    if (found)
                     {
-                        progressBar1.Value++;
-                    }
+                        successfulFind++;
 
-                    RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
+                        if (progressBar1.Value < progressBar1.Maximum)
+                        {
+                            progressBar1.Value++;
+                        }
+
+                        RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
+                    }
+                }
+                else
+                {
+                    string imageFoundPath;
+                    var found = RomFunctions.MatchImages(images, imageRegion, rom.Name, out imageFoundPath);
+
+                    if (found)
+                    {
+                        successfulFind++;
+
+                        if (progressBar1.Value < progressBar1.Maximum)
+                        {
+                            progressBar1.Value++;
+                        }
+
+                        RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
+                    }
                 }
             }
 

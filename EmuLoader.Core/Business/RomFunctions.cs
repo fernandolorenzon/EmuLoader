@@ -78,7 +78,7 @@ namespace EmuLoader.Core.Business
 
         public static void RenameRomPictures(Rom rom, string changeRomName)
         {
-            if (changeRomName != rom.Name)
+            if (changeRomName != rom.Name && rom.Platform.PictureNameByDisplay)
             {
                 string boxpic = RomFunctions.GetRomPicture(rom, Values.BoxartFolder);
                 string titlepic = RomFunctions.GetRomPicture(rom, Values.TitleFolder);
@@ -225,6 +225,26 @@ namespace EmuLoader.Core.Business
             trimmed = trimmed.Replace("[!]", "").Replace("!", "").Replace("?", "").Replace("&", "").Replace("  ", "").Replace(" ", "").Replace(" ", "");
 
             return trimmed;
+        }
+
+        public static bool MatchImagesExact(string[] images, string romName, out string imageFoundPath)
+        {
+            imageFoundPath = string.Empty;
+            bool found = false;
+
+            foreach (var image in images)
+            {
+                string imageTrimmed = RomFunctions.TrimRomName(image);
+
+                if (imageTrimmed == romName)
+                {
+                    found = true;
+                    imageFoundPath = image;
+                    break;
+                }
+            }
+
+            return found;
         }
 
         public static bool MatchImages(string[] images, Dictionary<string, Classes.Region> imageRegion, string romName, out string imageFoundPath)
@@ -585,7 +605,17 @@ namespace EmuLoader.Core.Business
             }
 
             FileInfo pic = new FileInfo(picturePath);
-            string destinationFile = categoryPath + "\\" + rom.Name + pic.Extension;
+            string destinationFile = "";
+
+            if (rom.Platform.PictureNameByDisplay)
+            {
+                destinationFile = categoryPath + "\\" + rom.Name + pic.Extension;
+            }
+            else
+            {
+                destinationFile = categoryPath + "\\" + RomFunctions.GetFileNameNoExtension(rom.Path) + pic.Extension;
+            }
+
             pic.CopyTo(destinationFile, true);
             pic = null;
 
