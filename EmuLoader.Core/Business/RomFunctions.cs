@@ -206,6 +206,12 @@ namespace EmuLoader.Core.Business
         {
             string trimmed = name.ToLower();
 
+            if (trimmed.IndexOf("/") > -1)
+            {
+                trimmed = trimmed.Substring(0, trimmed.IndexOf("/") - 1);
+                trimmed = trimmed.Trim();
+            }
+
             if (trimmed.LastIndexOf("\\") > -1)
             {
                 trimmed = trimmed.Substring(trimmed.LastIndexOf("\\") + 1);
