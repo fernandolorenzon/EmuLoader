@@ -1688,7 +1688,7 @@ namespace EmuLoader.Forms
             row.Cells["columnRomName"].Value = rom.Name;
             row.Cells["columnRomPath"].Value = rom.Path;
             row.Cells["columnRomDBName"].Value = rom.DBName;
-            row.Cells["columnFilename"].Value = rom.GetFileName();
+            row.Cells["columnFilename"].Value = rom.FileName;
             row.Cells["columnDeveloper"].Value = rom.Developer;
             row.Cells["columnPublisher"].Value = rom.Publisher;
             row.Cells["columnYearReleased"].Value = rom.YearReleased;

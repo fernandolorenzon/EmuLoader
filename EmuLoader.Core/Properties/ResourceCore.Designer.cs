@@ -59,5 +59,29 @@ namespace EmuLoader.Core.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5;5
+        ///10yard;10-Yard Fight (World, set 1)
+        ///10yard85;10-Yard Fight &apos;85 (US, Taito license)
+        ///10yardj;10-Yard Fight (Japan)
+        ///11beat;Eleven Beat
+        ///1292apvs;1292 Advanced Programmable Video System
+        ///1392apvs;1392 Advanced Programmable Video System
+        ///18w;18 Wheeler (set 1)
+        ///18w2;18 Wheeler (set 2)
+        ///18wheelr;18 Wheeler (deluxe) (Rev A)
+        ///18wheels;18 Wheeler (standard)
+        ///18wheelu;18 Wheeler (upright)
+        ///1941;1941: Counter Attack (World 900227)
+        ///1941j;1941: Counter Attack (Japan)
+        ///1941r1;1941: Counter Attack (World)
+        ///1941u; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string mame {
+            get {
+                return ResourceManager.GetString("mame", resourceCulture);
+            }
+        }
     }
 }

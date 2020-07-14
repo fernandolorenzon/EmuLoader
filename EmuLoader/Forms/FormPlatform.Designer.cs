@@ -75,6 +75,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.buttonAlternatePath = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.buttonUpdateNameFromDBName = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -297,6 +298,7 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.buttonUpdateNameFromDBName);
             this.tabPageMain.Controls.Add(this.buttonUpdateAllRomsNames);
             this.tabPageMain.Controls.Add(this.radioButtonFileName);
             this.tabPageMain.Controls.Add(this.radioButtonDisplayName);
@@ -327,9 +329,9 @@
             // 
             // buttonUpdateAllRomsNames
             // 
-            this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(404, 186);
+            this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(404, 160);
             this.buttonUpdateAllRomsNames.Name = "buttonUpdateAllRomsNames";
-            this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(287, 40);
+            this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(287, 31);
             this.buttonUpdateAllRomsNames.TabIndex = 36;
             this.buttonUpdateAllRomsNames.Text = "Update All Roms MAME Names ";
             this.buttonUpdateAllRomsNames.UseVisualStyleBackColor = true;
@@ -387,7 +389,7 @@
             // 
             this.textBoxDefaultRomExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDefaultRomExtensions.Location = new System.Drawing.Point(404, 99);
+            this.textBoxDefaultRomExtensions.Location = new System.Drawing.Point(404, 86);
             this.textBoxDefaultRomExtensions.Name = "textBoxDefaultRomExtensions";
             this.textBoxDefaultRomExtensions.Size = new System.Drawing.Size(387, 20);
             this.textBoxDefaultRomExtensions.TabIndex = 31;
@@ -396,7 +398,7 @@
             // labelExtensions
             // 
             this.labelExtensions.AutoSize = true;
-            this.labelExtensions.Location = new System.Drawing.Point(401, 70);
+            this.labelExtensions.Location = new System.Drawing.Point(401, 57);
             this.labelExtensions.Name = "labelExtensions";
             this.labelExtensions.Size = new System.Drawing.Size(205, 26);
             this.labelExtensions.TabIndex = 32;
@@ -405,7 +407,7 @@
             // buttonDefaultRomPath
             // 
             this.buttonDefaultRomPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDefaultRomPath.Location = new System.Drawing.Point(756, 151);
+            this.buttonDefaultRomPath.Location = new System.Drawing.Point(756, 130);
             this.buttonDefaultRomPath.Name = "buttonDefaultRomPath";
             this.buttonDefaultRomPath.Size = new System.Drawing.Size(36, 21);
             this.buttonDefaultRomPath.TabIndex = 30;
@@ -434,7 +436,7 @@
             // labelDefaultRomPath
             // 
             this.labelDefaultRomPath.AutoSize = true;
-            this.labelDefaultRomPath.Location = new System.Drawing.Point(401, 135);
+            this.labelDefaultRomPath.Location = new System.Drawing.Point(401, 114);
             this.labelDefaultRomPath.Name = "labelDefaultRomPath";
             this.labelDefaultRomPath.Size = new System.Drawing.Size(91, 13);
             this.labelDefaultRomPath.TabIndex = 29;
@@ -454,7 +456,7 @@
             // 
             this.textBoxDefaultRomPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDefaultRomPath.Location = new System.Drawing.Point(404, 151);
+            this.textBoxDefaultRomPath.Location = new System.Drawing.Point(404, 130);
             this.textBoxDefaultRomPath.Name = "textBoxDefaultRomPath";
             this.textBoxDefaultRomPath.Size = new System.Drawing.Size(346, 20);
             this.textBoxDefaultRomPath.TabIndex = 28;
@@ -549,6 +551,16 @@
             this.label8.TabIndex = 6;
             this.label8.Text = "Emulator Exe";
             // 
+            // buttonUpdateNameFromDBName
+            // 
+            this.buttonUpdateNameFromDBName.Location = new System.Drawing.Point(404, 197);
+            this.buttonUpdateNameFromDBName.Name = "buttonUpdateNameFromDBName";
+            this.buttonUpdateNameFromDBName.Size = new System.Drawing.Size(287, 31);
+            this.buttonUpdateNameFromDBName.TabIndex = 37;
+            this.buttonUpdateNameFromDBName.Text = " Update All Rom Names From DBName";
+            this.buttonUpdateNameFromDBName.UseVisualStyleBackColor = true;
+            this.buttonUpdateNameFromDBName.Click += new System.EventHandler(this.buttonUpdateNameFromDBName_Click);
+            // 
             // FormPlatform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,5 +635,6 @@
         private System.Windows.Forms.RadioButton radioButtonDisplayName;
         private System.Windows.Forms.Label labelRomPicturesMode;
         private System.Windows.Forms.Button buttonUpdateAllRomsNames;
+        private System.Windows.Forms.Button buttonUpdateNameFromDBName;
     }
 }

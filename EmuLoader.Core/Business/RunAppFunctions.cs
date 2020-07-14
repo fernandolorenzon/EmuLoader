@@ -21,8 +21,8 @@ namespace EmuLoader.Core.Business
 
             string args = command.Replace("%EMUPATH%", "")
                         .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
-                        .Replace("%ROMNAME%", RomFunctions.GetFileNameNoExtension(rom.Path))
-                        .Replace("%ROMFILE%", RomFunctions.GetFileName(rom.Path));
+                        .Replace("%ROMNAME%", rom.FileNameNoExt)
+                        .Replace("%ROMFILE%", rom.FileName);
 
             var proc = new Process
             {
@@ -48,8 +48,8 @@ namespace EmuLoader.Core.Business
 
             string arguments = rom.Platform.Command.Replace("%EMUPATH%", "\"" + rom.Platform.EmulatorExe + "\"")
                 .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
-                .Replace("%ROMNAME%", RomFunctions.GetFileNameNoExtension(rom.Path))
-                .Replace("%ROMFILE%", RomFunctions.GetFileName(rom.Path));
+                .Replace("%ROMNAME%", rom.FileNameNoExt)
+                .Replace("%ROMFILE%", rom.FileName);
 
             startInfo.Arguments = arguments;
             p = Process.Start(startInfo);
@@ -64,8 +64,8 @@ namespace EmuLoader.Core.Business
 
             string path = rom.Platform.Command.Replace("%EMUPATH%", "\"" + rom.Platform.EmulatorExe + "\"")
                 .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
-                .Replace("%ROMNAME%", RomFunctions.GetFileNameNoExtension(rom.Path))
-                .Replace("%ROMFILE%", RomFunctions.GetFileName(rom.Path));
+                .Replace("%ROMNAME%", rom.FileNameNoExt)
+                .Replace("%ROMFILE%", rom.FileName);
 
             p.StandardInput.WriteLine(path);
             p.StandardInput.WriteLine("exit");
@@ -87,8 +87,8 @@ namespace EmuLoader.Core.Business
             string exe = rom.Platform.EmulatorExe.Remove(0, rom.Platform.EmulatorExe.LastIndexOf("\\") + 1);
             string path = rom.Platform.Command.Replace("%EMUPATH%", "\"" + exe + "\"")
                 .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
-                .Replace("%ROMNAME%", RomFunctions.GetFileNameNoExtension(rom.Path))
-                .Replace("%ROMFILE%", RomFunctions.GetFileName(rom.Path));
+                .Replace("%ROMNAME%", rom.FileNameNoExt)
+                .Replace("%ROMFILE%", rom.FileName);
 
             p.StandardInput.WriteLine(changeDir);
             p.StandardInput.WriteLine(path);

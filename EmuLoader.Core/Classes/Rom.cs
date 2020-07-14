@@ -15,7 +15,22 @@ namespace EmuLoader.Core.Classes
         public string DBName { get; set; }
         public string Extension { get; private set; }
         public bool IdLocked { get; set; }
-        public string Path { get; set; }
+        private string path;
+        public string Path
+        {
+            get
+            {
+                return path;
+            }
+            set
+            {
+                path = value;
+                FileName = RomFunctions.GetFileName(path);
+                FileNameNoExt = RomFunctions.GetFileNameNoExtension(path);
+            }
+        }
+        public string FileName { get; private set; }
+        public string FileNameNoExt { get; private set; }
         public string EmulatorExe { get; set; }
         public string Command { get; set; }
         public string YearReleased { get; set; }
@@ -42,7 +57,7 @@ namespace EmuLoader.Core.Classes
 
             if (platform != null && platform.Id == "23")//arcade
             {
-                rom.Name = RomFunctions.GetMAMEName(RomFunctions.GetFileNameNoExtension(path));
+                rom.Name = RomFunctions.GetMAMENameFromCSV(RomFunctions.GetFileNameNoExtension(path));
 
                 if (rom.Name == "")
                 {
@@ -82,11 +97,6 @@ namespace EmuLoader.Core.Classes
         public static int Count()
         {
             return RomList.Count;
-        }
-
-        public string GetFileName()
-        {
-            return this.Path.Substring(this.Path.LastIndexOf("\\") + 1);
         }
 
         public static void Fill()

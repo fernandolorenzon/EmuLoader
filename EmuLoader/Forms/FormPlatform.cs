@@ -339,7 +339,7 @@ namespace EmuLoader.Forms
 
                 foreach (var rom in roms)
                 {
-                    var name = RomFunctions.GetMAMEName(RomFunctions.GetFileNameNoExtension(rom.Path));
+                    var name = RomFunctions.GetMAMENameFromCSV(rom.FileNameNoExt);
 
                     if (name == "") continue;
 
@@ -365,6 +365,49 @@ namespace EmuLoader.Forms
                 //FormWait.CloseWait();
             }
         }
+
+
+        private void buttonUpdateNameFromDBName_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                DataGridViewRow row = dataGridView.SelectedRows[0];
+                Platform platform = (Platform)row.Tag;
+                var roms = Rom.GetAll(platform);
+                int count = 0;
+
+                foreach (var rom in roms)
+                {
+                    if (!string.IsNullOrEmpty(rom.DBName))
+                    {
+                        var newname = rom.DBName.Replace(":", " -");
+
+                        if (rom.Name != newname)
+                        {
+                            rom.Name = newname;
+                            Rom.Set(rom);
+                            count++;
+                        }
+                    }
+                }
+
+                XML.SaveXml();
+                FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
+                Updated = true;
+            }
+            catch (Exception ex)
+            {
+                //FormWait.CloseWait();
+                FormCustomMessage.ShowError(ex.Message);
+            }
+            finally
+            {
+                //FormWait.CloseWait();
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -447,6 +490,5 @@ namespace EmuLoader.Forms
         }
 
         #endregion
-
     }
 }

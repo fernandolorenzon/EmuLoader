@@ -481,7 +481,7 @@ namespace EmuLoader.Forms
         {
             try
             {
-                textBoxRomName.Text = RomFunctions.GetMAMEName(RomFunctions.GetFileNameNoExtension(textBoxFileName.Text));
+                textBoxRomName.Text = RomFunctions.GetMAMENameFromCSV(RomFunctions.GetFileNameNoExtension(textBoxFileName.Text));
             }
             catch (Exception ex)
             {

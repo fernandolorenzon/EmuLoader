@@ -31,7 +31,7 @@ namespace EmuLoader.Core.Business
 
         public static bool RenameRomFile(Rom rom, string changeFileName, bool changeZipFileName)
         {
-            if (changeFileName != rom.GetFileName())
+            if (changeFileName != rom.FileName)
             {
                 string oldPath = rom.Path;
                 string newPath = string.Empty;
@@ -57,7 +57,7 @@ namespace EmuLoader.Core.Business
                 {
                     DirectoryInfo oldPathDir = new FileInfo(oldPath).Directory;
                     oldPathDir.MoveTo(newDir);
-                    File.Move(newDir + "\\" + rom.GetFileName(), newPath);
+                    File.Move(newDir + "\\" + rom.FileName, newPath);
                 }
                 else
                 {
@@ -374,7 +374,7 @@ namespace EmuLoader.Core.Business
             }
             else if (rom.Platform != null && !rom.Platform.PictureNameByDisplay)
             {
-                result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + RomFunctions.GetFileNameNoExtension(rom.Path);
+                result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.FileNameNoExt;
             }
 
             if (File.Exists(result + ".jpg"))
@@ -613,7 +613,7 @@ namespace EmuLoader.Core.Business
             }
             else
             {
-                destinationFile = categoryPath + "\\" + RomFunctions.GetFileNameNoExtension(rom.Path) + pic.Extension;
+                destinationFile = categoryPath + "\\" + rom.FileNameNoExt + pic.Extension;
             }
 
             pic.CopyTo(destinationFile, true);
@@ -803,7 +803,7 @@ namespace EmuLoader.Core.Business
             return true;
         }
 
-        public static string GetMAMEName(string filename)
+        public static string GetMAMENameFromMameFolder(string filename)
         {
             var mamepath = Config.GetFolder(Folder.MAME);
 
@@ -821,20 +821,6 @@ namespace EmuLoader.Core.Business
                     doc.LoadXml(xmlcontent);
                     if (doc.ChildNodes == null || doc.ChildNodes.Count == 0) continue;
 
-                    //XmlNodeList softwarelist = null;
-
-                    //foreach (XmlNode node in doc.ChildNodes)
-                    //{
-                    //    if (node.Name == "softwarelist")
-                    //    {
-                    //        softwarelist = node.ChildNodes;
-                    //        break;
-                    //    }
-                    //}
-
-                    //if (softwarelist == null) continue;
-                    //if (softwarelist.ChildNodes == null || softwarelist.ChildNodes.Count == 0) continue;
-
                     foreach (XmlNode node in doc.ChildNodes[doc.ChildNodes.Count - 1].ChildNodes)
                     {
                         if (node.Attributes == null || node.Attributes.Count == 0) continue;
@@ -849,8 +835,38 @@ namespace EmuLoader.Core.Business
                                     break;
                                 }
                             }
-                            
+
                         }
+                    }
+                }
+            }
+
+            if (Values.MAMERomNames.ContainsKey(filename))
+            {
+                return Values.MAMERomNames[filename];
+            }
+
+            return "";
+        }
+
+        public static string GetMAMENameFromCSV(string filename)
+        {
+            var mame = EmuLoader.Core.Properties.ResourceCore.mame;
+
+            if (Values.MAMERomNames == null)
+            {
+                Values.MAMERomNames = new Dictionary<string, string>();
+                var lines = mame.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var line in lines)
+                {
+                    var names = line.Split(';');
+
+                    if (names.Length != 2) continue;
+
+                    if (!Values.MAMERomNames.ContainsKey(names[0]))
+                    {
+                        Values.MAMERomNames.Add(names[0], names[1]);
                     }
                 }
             }
