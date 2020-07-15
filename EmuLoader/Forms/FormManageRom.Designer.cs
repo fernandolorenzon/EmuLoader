@@ -34,6 +34,7 @@
             this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.buttonGetMAMEName = new System.Windows.Forms.Button();
             this.checkBoxIdLocked = new System.Windows.Forms.CheckBox();
             this.textBoxRating = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -41,8 +42,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.labelPlatform = new System.Windows.Forms.Label();
-            this.buttonSearchInDB = new System.Windows.Forms.Button();
-            this.buttonCheckList = new System.Windows.Forms.Button();
+            this.buttonOpenInDB = new System.Windows.Forms.Button();
+            this.buttonPlatformJson = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelRom = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -55,11 +56,12 @@
             this.labelPath = new System.Windows.Forms.Label();
             this.textBoxEmulatorExe = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonClean = new System.Windows.Forms.Button();
             this.radioButtonOverwrite = new System.Windows.Forms.RadioButton();
             this.radioButtonOnlyMissing = new System.Windows.Forms.RadioButton();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
-            this.buttonOpenDB = new System.Windows.Forms.Button();
+            this.buttonShowDBInfo = new System.Windows.Forms.Button();
             this.buttonGetRomData = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.buttonCopyDBName = new System.Windows.Forms.Button();
@@ -105,10 +107,6 @@
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonGetMAMEName = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -119,7 +117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxCommand
@@ -138,7 +135,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(813, 645);
+            this.tabControl.Size = new System.Drawing.Size(813, 700);
             this.tabControl.TabIndex = 47;
             // 
             // tabPageGeneral
@@ -178,10 +175,20 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(805, 619);
+            this.tabPageGeneral.Size = new System.Drawing.Size(805, 674);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // buttonGetMAMEName
+            // 
+            this.buttonGetMAMEName.Location = new System.Drawing.Point(6, 238);
+            this.buttonGetMAMEName.Name = "buttonGetMAMEName";
+            this.buttonGetMAMEName.Size = new System.Drawing.Size(167, 23);
+            this.buttonGetMAMEName.TabIndex = 106;
+            this.buttonGetMAMEName.Text = "Get MAME Name";
+            this.buttonGetMAMEName.UseVisualStyleBackColor = true;
+            this.buttonGetMAMEName.Click += new System.EventHandler(this.buttonGetMAMEName_Click);
             // 
             // checkBoxIdLocked
             // 
@@ -227,8 +234,8 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.labelPlatform);
-            this.panel2.Controls.Add(this.buttonSearchInDB);
-            this.panel2.Controls.Add(this.buttonCheckList);
+            this.panel2.Controls.Add(this.buttonOpenInDB);
+            this.panel2.Controls.Add(this.buttonPlatformJson);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.labelRom);
             this.panel2.Location = new System.Drawing.Point(6, 6);
@@ -255,25 +262,25 @@
             this.labelPlatform.TabIndex = 100;
             this.labelPlatform.Text = "label1";
             // 
-            // buttonSearchInDB
+            // buttonOpenInDB
             // 
-            this.buttonSearchInDB.Location = new System.Drawing.Point(7, 80);
-            this.buttonSearchInDB.Name = "buttonSearchInDB";
-            this.buttonSearchInDB.Size = new System.Drawing.Size(83, 61);
-            this.buttonSearchInDB.TabIndex = 83;
-            this.buttonSearchInDB.Text = "Check in TheGamesDB";
-            this.buttonSearchInDB.UseVisualStyleBackColor = true;
-            this.buttonSearchInDB.Click += new System.EventHandler(this.buttonSearchInDB_Click);
+            this.buttonOpenInDB.Location = new System.Drawing.Point(7, 80);
+            this.buttonOpenInDB.Name = "buttonOpenInDB";
+            this.buttonOpenInDB.Size = new System.Drawing.Size(83, 61);
+            this.buttonOpenInDB.TabIndex = 83;
+            this.buttonOpenInDB.Text = "Open TheGamesDB";
+            this.buttonOpenInDB.UseVisualStyleBackColor = true;
+            this.buttonOpenInDB.Click += new System.EventHandler(this.buttonSearchInDB_Click);
             // 
-            // buttonCheckList
+            // buttonPlatformJson
             // 
-            this.buttonCheckList.Location = new System.Drawing.Point(99, 80);
-            this.buttonCheckList.Name = "buttonCheckList";
-            this.buttonCheckList.Size = new System.Drawing.Size(83, 61);
-            this.buttonCheckList.TabIndex = 99;
-            this.buttonCheckList.Text = "Check Platform Games List";
-            this.buttonCheckList.UseVisualStyleBackColor = true;
-            this.buttonCheckList.Click += new System.EventHandler(this.buttonCheckList_Click);
+            this.buttonPlatformJson.Location = new System.Drawing.Point(99, 80);
+            this.buttonPlatformJson.Name = "buttonPlatformJson";
+            this.buttonPlatformJson.Size = new System.Drawing.Size(83, 61);
+            this.buttonPlatformJson.TabIndex = 99;
+            this.buttonPlatformJson.Text = "Open Platform json";
+            this.buttonPlatformJson.UseVisualStyleBackColor = true;
+            this.buttonPlatformJson.Click += new System.EventHandler(this.buttonCheckList_Click);
             // 
             // label1
             // 
@@ -306,7 +313,7 @@
             this.groupBox1.Controls.Add(this.labelPath);
             this.groupBox1.Controls.Add(this.textBoxEmulatorExe);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(3, 512);
+            this.groupBox1.Location = new System.Drawing.Point(3, 567);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(799, 104);
             this.groupBox1.TabIndex = 72;
@@ -393,16 +400,27 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.buttonClean);
             this.panel1.Controls.Add(this.radioButtonOverwrite);
             this.panel1.Controls.Add(this.radioButtonOnlyMissing);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.textBoxId);
-            this.panel1.Controls.Add(this.buttonOpenDB);
+            this.panel1.Controls.Add(this.buttonShowDBInfo);
             this.panel1.Controls.Add(this.buttonGetRomData);
             this.panel1.Location = new System.Drawing.Point(401, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(396, 150);
             this.panel1.TabIndex = 100;
+            // 
+            // buttonClean
+            // 
+            this.buttonClean.Location = new System.Drawing.Point(272, 80);
+            this.buttonClean.Name = "buttonClean";
+            this.buttonClean.Size = new System.Drawing.Size(103, 61);
+            this.buttonClean.TabIndex = 101;
+            this.buttonClean.Text = "Clean Data";
+            this.buttonClean.UseVisualStyleBackColor = true;
+            this.buttonClean.Click += new System.EventHandler(this.buttonClean_Click);
             // 
             // radioButtonOverwrite
             // 
@@ -443,15 +461,15 @@
             this.textBoxId.Size = new System.Drawing.Size(141, 20);
             this.textBoxId.TabIndex = 81;
             // 
-            // buttonOpenDB
+            // buttonShowDBInfo
             // 
-            this.buttonOpenDB.Location = new System.Drawing.Point(272, 3);
-            this.buttonOpenDB.Name = "buttonOpenDB";
-            this.buttonOpenDB.Size = new System.Drawing.Size(103, 65);
-            this.buttonOpenDB.TabIndex = 82;
-            this.buttonOpenDB.Text = "Show TheGamesDB Info";
-            this.buttonOpenDB.UseVisualStyleBackColor = true;
-            this.buttonOpenDB.Click += new System.EventHandler(this.buttonOpenDB_Click);
+            this.buttonShowDBInfo.Location = new System.Drawing.Point(272, 3);
+            this.buttonShowDBInfo.Name = "buttonShowDBInfo";
+            this.buttonShowDBInfo.Size = new System.Drawing.Size(103, 65);
+            this.buttonShowDBInfo.TabIndex = 82;
+            this.buttonShowDBInfo.Text = "Show TheGamesDB Info";
+            this.buttonShowDBInfo.UseVisualStyleBackColor = true;
+            this.buttonShowDBInfo.Click += new System.EventHandler(this.buttonOpenDB_Click);
             // 
             // buttonGetRomData
             // 
@@ -459,7 +477,7 @@
             this.buttonGetRomData.Name = "buttonGetRomData";
             this.buttonGetRomData.Size = new System.Drawing.Size(113, 65);
             this.buttonGetRomData.TabIndex = 98;
-            this.buttonGetRomData.Text = "Get  Rom Data Online";
+            this.buttonGetRomData.Text = "Get Rom Data Online";
             this.buttonGetRomData.UseVisualStyleBackColor = true;
             this.buttonGetRomData.Click += new System.EventHandler(this.buttonGetRomData_Click);
             // 
@@ -884,53 +902,12 @@
             this.pictureBoxBoxart.TabIndex = 92;
             this.pictureBoxBoxart.TabStop = false;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.buttonSave);
-            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 645);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(813, 55);
-            this.flowLayoutPanel1.TabIndex = 48;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(3, 3);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(100, 48);
-            this.buttonSave.TabIndex = 58;
-            this.buttonSave.Text = "Save and Close";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(109, 3);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 48);
-            this.buttonCancel.TabIndex = 59;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // buttonGetMAMEName
-            // 
-            this.buttonGetMAMEName.Location = new System.Drawing.Point(6, 238);
-            this.buttonGetMAMEName.Name = "buttonGetMAMEName";
-            this.buttonGetMAMEName.Size = new System.Drawing.Size(167, 23);
-            this.buttonGetMAMEName.TabIndex = 106;
-            this.buttonGetMAMEName.Text = "Get MAME Name";
-            this.buttonGetMAMEName.UseVisualStyleBackColor = true;
-            this.buttonGetMAMEName.Click += new System.EventHandler(this.buttonGetMAMEName_Click);
-            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 700);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "FormManageRom";
             this.ShowInTaskbar = false;
             this.Text = "Manage Rom";
@@ -949,7 +926,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -969,8 +945,8 @@
         private System.Windows.Forms.Label labelChangeRomName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelRom;
-        private System.Windows.Forms.Button buttonSearchInDB;
-        private System.Windows.Forms.Button buttonOpenDB;
+        private System.Windows.Forms.Button buttonOpenInDB;
+        private System.Windows.Forms.Button buttonShowDBInfo;
         private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBoxYearReleased;
@@ -1015,12 +991,9 @@
         private System.Windows.Forms.PictureBox pictureBoxGameplay;
         private System.Windows.Forms.PictureBox pictureBoxTitle;
         private System.Windows.Forms.PictureBox pictureBoxBoxart;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonGetRomData;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button buttonCheckList;
+        private System.Windows.Forms.Button buttonPlatformJson;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label labelPlatform;
@@ -1034,5 +1007,6 @@
         private System.Windows.Forms.CheckBox checkBoxUseAlternate;
         private System.Windows.Forms.CheckBox checkBoxIdLocked;
         private System.Windows.Forms.Button buttonGetMAMEName;
+        private System.Windows.Forms.Button buttonClean;
     }
 }

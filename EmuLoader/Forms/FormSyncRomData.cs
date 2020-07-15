@@ -62,14 +62,7 @@ namespace EmuLoader.Forms
                     return;
                 }
 
-
-                var file = Values.JsonFolder + "\\" + comboBoxPlatform.Text + ".json";
-                var json = string.Empty;
-
-                if (File.Exists(file))
-                {
-                    json = File.ReadAllText(file);
-                }
+                var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
 
                 games = APIFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString(), json);
 

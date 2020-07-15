@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormChoose : FormRegister
+    public partial class FormChoose : FormRegisterBase
     {
         private static FormChoose instance;
         private static Type selectedType;

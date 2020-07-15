@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormSettings : FormBase
+    public partial class FormSettings : FormSettingsBase
     {
         public FormSettings()
         {
@@ -13,6 +13,7 @@ namespace EmuLoader.Forms
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
+            buttonSave.Click += buttonSave_Click;
             textBoxMameFolder.Text = Config.GetFolder(Folder.MAME);
             textBoxRetroarchFolder.Text = Config.GetFolder(Folder.Retroarch);
         }
@@ -44,12 +45,5 @@ namespace EmuLoader.Forms
             XML.SaveXml();
             Close();
         }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Updated = false;
-            Close();
-        }
-
     }
 }

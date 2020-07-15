@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormManageRom : FormBase
+    public partial class FormManageRom : FormSettingsBase
     {
         #region Members
 
@@ -25,6 +25,8 @@ namespace EmuLoader.Forms
 
         public FormManageRom()
         {
+            buttonSave.Click += buttonSave_Click;
+            buttonCancel.Click += buttonCancel_Click;
             InitializeComponent();
         }
 
@@ -174,6 +176,7 @@ namespace EmuLoader.Forms
                 File.Delete(gameplayToDeleteIfCanceled);
             }
 
+            Updated = false;
             Close();
         }
 
@@ -225,6 +228,9 @@ namespace EmuLoader.Forms
 
             text.Append("NAME" + Environment.NewLine);
             text.Append(game.DBName + Environment.NewLine + Environment.NewLine);
+
+            text.Append("PLATFORM" + Environment.NewLine);
+            text.Append(game.Platform.Id + " - " + game.Platform.Name + Environment.NewLine + Environment.NewLine);
 
             text.Append("PUBLISHER" + Environment.NewLine);
             text.Append(game.Publisher + Environment.NewLine + Environment.NewLine);
@@ -492,6 +498,19 @@ namespace EmuLoader.Forms
             {
                 //FormWait.CloseWait();
             }
+        }
+
+        private void buttonClean_Click(object sender, EventArgs e)
+        {
+            textBoxId.Text = "";
+            textBoxDBName.Text = "";
+            textBoxDescription.Text = "";
+            textBoxPublisher.Text = "";
+            textBoxDeveloper.Text = "";
+            textBoxYearReleased.Text = "";
+            textBoxRating.Text = "";
+
+            textBoxRomName.Text = textBoxFileName.Text.Trim().Replace(RomFunctions.GetFileExtension(textBoxFileName.Text), string.Empty);
         }
 
         #endregion

@@ -91,7 +91,7 @@ namespace EmuLoader.Core.Business
             return null;
         }
 
-        public static List<KeyValuePair<string, string>> GetPlatformsXML()
+        public static Dictionary<string, string> GetPlatformsXML()
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(Values.PlatformsXML);
@@ -104,13 +104,14 @@ namespace EmuLoader.Core.Business
                 platforms.Add(p);
             }
 
-            var result = new List<KeyValuePair<string, string>>();
+            var result = new Dictionary<string, string>();
             platforms = (from p in platforms orderby p.Name select p).ToList();
+
+            result.Add("0", "none");
 
             foreach (var item in platforms)
             {
-                var kvp = new KeyValuePair<string, string>(item.Id, item.Name);
-                result.Add(kvp);
+                result.Add(item.Id, item.Name);
             }
 
             return result;

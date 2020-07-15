@@ -816,6 +816,105 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void showFileExistsAuditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!showFileExistsAuditToolStripMenuItem.Checked)
+                {
+                    ColumnFileExists.Visible = false;
+                    return;
+                }
+
+                dataGridView.SuspendLayout();
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    Rom rom = (Rom)row.Tag;
+                    
+                    if (File.Exists(rom.Path))
+                    {
+                        row.Cells[ColumnFileExists.Name].Style.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        row.Cells[ColumnFileExists.Name].Style.BackColor = Color.Red;
+                    }
+                }
+
+                dataGridView.ResumeLayout();
+
+                ColumnFileExists.Visible = showFileExistsAuditToolStripMenuItem.Checked;
+
+                if (updating) return;
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void showIncorrectPlatformAuditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!showIncorrectPlatformAuditToolStripMenuItem.Checked)
+                {
+                    ColumnIncorrectPlatform.Visible = false;
+                    return;
+                }
+
+                if (comboBoxPlatform.Text == "" || comboBoxPlatform.Text == "none")
+                {
+                    FormCustomMessage.ShowError("Select a platform");
+                }
+
+                var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
+
+                if (json == "") return;
+
+                dataGridView.SuspendLayout();
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    Rom rom = (Rom)row.Tag;
+
+                    if (string.IsNullOrEmpty(rom.Id)) 
+                    {
+                        row.Cells[ColumnIncorrectPlatform.Name].Style.BackColor = Color.Yellow;
+                        continue; 
+                    }
+
+                    if (json.Contains("\"id\": " + rom.Id + ","))
+                    {
+                        row.Cells[ColumnIncorrectPlatform.Name].Style.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        row.Cells[ColumnIncorrectPlatform.Name].Style.BackColor = Color.Red;
+                    }
+                }
+
+                dataGridView.ResumeLayout();
+
+                ColumnIncorrectPlatform.Visible = showIncorrectPlatformAuditToolStripMenuItem.Checked;
+
+                if (updating) return;
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         private void buttonClear_Click(object sender, EventArgs e)
         {
             try
@@ -1957,9 +2056,10 @@ namespace EmuLoader.Forms
 
         #endregion
 
-        private void romsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void auditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormAudit form = new FormAudit();
+            form.ShowDialog();
         }
     }
 }

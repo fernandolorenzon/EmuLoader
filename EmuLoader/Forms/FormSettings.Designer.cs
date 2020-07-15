@@ -29,15 +29,11 @@
         private void InitializeComponent()
         {
             this.labelMameFolder = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.textBoxMameFolder = new System.Windows.Forms.TextBox();
             this.buttonMameFolder = new System.Windows.Forms.Button();
             this.buttonRetroarchFolder = new System.Windows.Forms.Button();
             this.textBoxRetroarchFolder = new System.Windows.Forms.TextBox();
             this.labelRetroarchFolder = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelMameFolder
@@ -48,36 +44,6 @@
             this.labelMameFolder.Size = new System.Drawing.Size(68, 13);
             this.labelMameFolder.TabIndex = 0;
             this.labelMameFolder.Text = "Mame Folder";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.buttonSave);
-            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 429);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(594, 55);
-            this.flowLayoutPanel1.TabIndex = 49;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(3, 3);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(100, 48);
-            this.buttonSave.TabIndex = 58;
-            this.buttonSave.Text = "Save and Close";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(109, 3);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 48);
-            this.buttonCancel.TabIndex = 59;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // textBoxMameFolder
             // 
@@ -132,12 +98,16 @@
             this.Controls.Add(this.labelRetroarchFolder);
             this.Controls.Add(this.buttonMameFolder);
             this.Controls.Add(this.textBoxMameFolder);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.labelMameFolder);
             this.Name = "FormSettings";
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.FormSettings_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.Controls.SetChildIndex(this.labelMameFolder, 0);
+            this.Controls.SetChildIndex(this.textBoxMameFolder, 0);
+            this.Controls.SetChildIndex(this.buttonMameFolder, 0);
+            this.Controls.SetChildIndex(this.labelRetroarchFolder, 0);
+            this.Controls.SetChildIndex(this.textBoxRetroarchFolder, 0);
+            this.Controls.SetChildIndex(this.buttonRetroarchFolder, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,9 +116,6 @@
         #endregion
 
         private System.Windows.Forms.Label labelMameFolder;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TextBox textBoxMameFolder;
         private System.Windows.Forms.Button buttonMameFolder;
         private System.Windows.Forms.Button buttonRetroarchFolder;

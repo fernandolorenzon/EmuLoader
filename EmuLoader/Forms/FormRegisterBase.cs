@@ -2,9 +2,9 @@
 
 namespace EmuLoader.Forms
 {
-    public partial class FormRegister : FormBase
+    public partial class FormRegisterBase : FormBase
     {
-        public FormRegister()
+        public FormRegisterBase()
         {
             InitializeComponent();
         }

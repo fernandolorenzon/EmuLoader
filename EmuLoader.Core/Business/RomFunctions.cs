@@ -873,5 +873,19 @@ namespace EmuLoader.Core.Business
 
             return "";
         }
+
+        public static string GetPlatformJson(string platformName)
+        {
+
+            var file = Values.JsonFolder + "\\" + platformName + ".json";
+            var json = string.Empty;
+
+            if (File.Exists(file))
+            {
+                json = File.ReadAllText(file);
+            }
+
+            return json;
+        }
     }
 }

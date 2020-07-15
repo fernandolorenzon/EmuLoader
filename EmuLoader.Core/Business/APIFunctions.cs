@@ -125,11 +125,6 @@ namespace EmuLoader.Core.Business
 
                 if (string.IsNullOrEmpty(json)) return null;
 
-                var genres = Genre.GetAll();
-
-                //var jobject = (JObject)JsonConvert.DeserializeObject(json);
-                //var result = jobject.SelectToken("data.games").ToList();
-
                 var part = json.Substring(json.IndexOf("games\":") + 7);
                 part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
                 var list = JsonConvert.DeserializeObject<List<API_Game>>(part);
@@ -138,6 +133,7 @@ namespace EmuLoader.Core.Business
 
                 foreach (var game in list)
                 {
+                    if (game.platform.ToString() != platformId) continue;
                     games.Add(new Rom()
                     {
                         Id = game.id.ToString(),
@@ -187,6 +183,24 @@ namespace EmuLoader.Core.Business
                 result.DBName = jgame.SelectToken("game_title").ToString();
                 result.YearReleased = RomFunctions.GetYear(jgame.SelectToken("release_date").ToString());
                 //result.Description = jobject.SelectToken("data.games").First().SelectToken("description").ToString();
+                
+                result.Platform = new Platform();
+
+                try
+                {
+                    var jplatform = jgame.SelectToken("platform");
+
+                    if (jplatform != null)
+                    {
+                        result.Platform.Id = jplatform.ToString();
+                        var list = Functions.GetPlatformsXML();
+                        result.Platform.Name = list[result.Platform.Id];
+                    }
+                }
+                catch
+                {
+
+                }
 
                 try
                 {

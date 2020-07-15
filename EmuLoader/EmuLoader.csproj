@@ -89,6 +89,12 @@
     <Compile Include="Forms\FormAddPicFromUrl.Designer.cs">
       <DependentUpon>FormAddPicFromUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormAudit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAudit.Designer.cs">
+      <DependentUpon>FormAudit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormCustomMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,11 +113,17 @@
     <Compile Include="Forms\FormPurgeRomData.Designer.cs">
       <DependentUpon>FormPurgeRomData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormRegister.cs">
+    <Compile Include="Forms\FormSettingsBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormRegister.Designer.cs">
-      <DependentUpon>FormRegister.cs</DependentUpon>
+    <Compile Include="Forms\FormSettingsBase.Designer.cs">
+      <DependentUpon>FormSettingsBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormRegisterBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRegisterBase.Designer.cs">
+      <DependentUpon>FormRegisterBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormBatchRemovePictures.cs">
       <SubType>Form</SubType>
@@ -214,6 +226,9 @@
     <EmbeddedResource Include="Forms\FormAddPicFromUrl.resx">
       <DependentUpon>FormAddPicFromUrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAudit.resx">
+      <DependentUpon>FormAudit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCustomMessage.resx">
       <DependentUpon>FormCustomMessage.cs</DependentUpon>
     </EmbeddedResource>
@@ -223,8 +238,11 @@
     <EmbeddedResource Include="Forms\FormPurgeRomData.resx">
       <DependentUpon>FormPurgeRomData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRegister.resx">
-      <DependentUpon>FormRegister.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSettingsBase.resx">
+      <DependentUpon>FormSettingsBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRegisterBase.resx">
+      <DependentUpon>FormRegisterBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBatchRemovePictures.resx">
       <DependentUpon>FormBatchRemovePictures.cs</DependentUpon>

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormLabel : FormRegister
+    public partial class FormLabel : FormRegisterBase
     {
         #region Members
 

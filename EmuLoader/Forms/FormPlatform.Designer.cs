@@ -53,8 +53,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControlPlatform = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
-            this.buttonUpdateNameFromDBName = new System.Windows.Forms.Button();
-            this.buttonUpdateAllRomsNames = new System.Windows.Forms.Button();
             this.textBoxPlatformIcon = new System.Windows.Forms.TextBox();
             this.labelPlatformName = new System.Windows.Forms.Label();
             this.textBoxDefaultRomExtensions = new System.Windows.Forms.TextBox();
@@ -150,7 +148,7 @@
             // 
             // textBoxPlatformName
             // 
-            this.textBoxPlatformName.Location = new System.Drawing.Point(10, 86);
+            this.textBoxPlatformName.Location = new System.Drawing.Point(10, 130);
             this.textBoxPlatformName.Name = "textBoxPlatformName";
             this.textBoxPlatformName.Size = new System.Drawing.Size(339, 20);
             this.textBoxPlatformName.TabIndex = 2;
@@ -185,7 +183,7 @@
             // 
             this.buttonColor.BackColor = System.Drawing.Color.White;
             this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColor.Location = new System.Drawing.Point(299, 6);
+            this.buttonColor.Location = new System.Drawing.Point(11, 61);
             this.buttonColor.Name = "buttonColor";
             this.buttonColor.Size = new System.Drawing.Size(50, 50);
             this.buttonColor.TabIndex = 6;
@@ -203,7 +201,7 @@
             this.checkBoxShowInLinksList.AutoSize = true;
             this.checkBoxShowInLinksList.Checked = true;
             this.checkBoxShowInLinksList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(11, 124);
+            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(11, 168);
             this.checkBoxShowInLinksList.Name = "checkBoxShowInLinksList";
             this.checkBoxShowInLinksList.Size = new System.Drawing.Size(112, 17);
             this.checkBoxShowInLinksList.TabIndex = 9;
@@ -215,7 +213,7 @@
             this.checkBoxShowInFilters.AutoSize = true;
             this.checkBoxShowInFilters.Checked = true;
             this.checkBoxShowInFilters.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInFilters.Location = new System.Drawing.Point(142, 124);
+            this.checkBoxShowInFilters.Location = new System.Drawing.Point(142, 168);
             this.checkBoxShowInFilters.Name = "checkBoxShowInFilters";
             this.checkBoxShowInFilters.Size = new System.Drawing.Size(95, 17);
             this.checkBoxShowInFilters.TabIndex = 10;
@@ -244,7 +242,7 @@
             // 
             // buttonIconPath
             // 
-            this.buttonIconPath.Location = new System.Drawing.Point(257, 25);
+            this.buttonIconPath.Location = new System.Drawing.Point(257, 26);
             this.buttonIconPath.Name = "buttonIconPath";
             this.buttonIconPath.Size = new System.Drawing.Size(36, 23);
             this.buttonIconPath.TabIndex = 15;
@@ -295,8 +293,6 @@
             // 
             // tabPageMain
             // 
-            this.tabPageMain.Controls.Add(this.buttonUpdateNameFromDBName);
-            this.tabPageMain.Controls.Add(this.buttonUpdateAllRomsNames);
             this.tabPageMain.Controls.Add(this.checkBoxShowInFilters);
             this.tabPageMain.Controls.Add(this.buttonColor);
             this.tabPageMain.Controls.Add(this.checkBoxShowInLinksList);
@@ -321,26 +317,6 @@
             this.tabPageMain.Text = "Main";
             this.tabPageMain.UseVisualStyleBackColor = true;
             // 
-            // buttonUpdateNameFromDBName
-            // 
-            this.buttonUpdateNameFromDBName.Location = new System.Drawing.Point(404, 197);
-            this.buttonUpdateNameFromDBName.Name = "buttonUpdateNameFromDBName";
-            this.buttonUpdateNameFromDBName.Size = new System.Drawing.Size(287, 31);
-            this.buttonUpdateNameFromDBName.TabIndex = 37;
-            this.buttonUpdateNameFromDBName.Text = " Update All Rom Names From DBName";
-            this.buttonUpdateNameFromDBName.UseVisualStyleBackColor = true;
-            this.buttonUpdateNameFromDBName.Click += new System.EventHandler(this.buttonUpdateNameFromDBName_Click);
-            // 
-            // buttonUpdateAllRomsNames
-            // 
-            this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(6, 197);
-            this.buttonUpdateAllRomsNames.Name = "buttonUpdateAllRomsNames";
-            this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(287, 31);
-            this.buttonUpdateAllRomsNames.TabIndex = 36;
-            this.buttonUpdateAllRomsNames.Text = "Update All Roms MAME Names ";
-            this.buttonUpdateAllRomsNames.UseVisualStyleBackColor = true;
-            this.buttonUpdateAllRomsNames.Click += new System.EventHandler(this.buttonUpdateAllRomsNames_Click);
-            // 
             // textBoxPlatformIcon
             // 
             this.textBoxPlatformIcon.Location = new System.Drawing.Point(78, 28);
@@ -352,7 +328,7 @@
             // labelPlatformName
             // 
             this.labelPlatformName.AutoSize = true;
-            this.labelPlatformName.Location = new System.Drawing.Point(8, 70);
+            this.labelPlatformName.Location = new System.Drawing.Point(8, 114);
             this.labelPlatformName.Name = "labelPlatformName";
             this.labelPlatformName.Size = new System.Drawing.Size(76, 13);
             this.labelPlatformName.TabIndex = 4;
@@ -594,7 +570,5 @@
         private System.Windows.Forms.TextBox textBoxDefaultRomPath;
         private System.Windows.Forms.TabPage tabPageEmulators;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button buttonUpdateAllRomsNames;
-        private System.Windows.Forms.Button buttonUpdateNameFromDBName;
     }
 }

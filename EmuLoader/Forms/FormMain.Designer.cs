@@ -54,6 +54,7 @@
             this.removeInvalidEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchAddPicturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.batchRemovePicturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.auditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEditDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.platformsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,11 +75,13 @@
             this.showTitleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGameplayArtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPlatformsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.showFileExistsAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showIncorrectPlatformAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.romDataOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purgeRomDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncUsingRetropieXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.openAppFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewPlatforms = new System.Windows.Forms.DataGridView();
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -102,6 +105,8 @@
             this.comboBoxLabels = new System.Windows.Forms.ComboBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.columnIconMain = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnFileExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnIncorrectPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomDBName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -256,11 +261,11 @@
             this.addRomPackInDirectoryStructureToolStripMenuItem,
             this.removeInvalidEntriesToolStripMenuItem,
             this.batchAddPicturesToolStripMenuItem,
-            this.batchRemovePicturesToolStripMenuItem});
+            this.batchRemovePicturesToolStripMenuItem,
+            this.auditToolStripMenuItem});
             this.romsToolStripMenuItem.Name = "romsToolStripMenuItem";
             this.romsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.romsToolStripMenuItem.Text = "&Roms";
-            this.romsToolStripMenuItem.Click += new System.EventHandler(this.romsToolStripMenuItem_Click);
             // 
             // addRomFileToolStripMenuItem
             // 
@@ -303,6 +308,13 @@
             this.batchRemovePicturesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.batchRemovePicturesToolStripMenuItem.Text = "Batch Remove Pictures";
             this.batchRemovePicturesToolStripMenuItem.Click += new System.EventHandler(this.batchRemovePicturesToolStripMenuItem_Click);
+            // 
+            // auditToolStripMenuItem
+            // 
+            this.auditToolStripMenuItem.Name = "auditToolStripMenuItem";
+            this.auditToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.auditToolStripMenuItem.Text = "Audit";
+            this.auditToolStripMenuItem.Click += new System.EventHandler(this.auditToolStripMenuItem_Click);
             // 
             // manageRomToolStripMenuItem
             // 
@@ -359,7 +371,9 @@
             this.showBoxArtToolStripMenuItem,
             this.showTitleToolStripMenuItem,
             this.showGameplayArtToolStripMenuItem,
-            this.showPlatformsListToolStripMenuItem});
+            this.showPlatformsListToolStripMenuItem,
+            this.showFileExistsAuditToolStripMenuItem,
+            this.showIncorrectPlatformAuditToolStripMenuItem});
             this.columnsToolStripMenuItem.Name = "columnsToolStripMenuItem";
             this.columnsToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.columnsToolStripMenuItem.Text = "&Visibility";
@@ -370,7 +384,7 @@
             this.showPathColumnToolStripMenuItem.CheckOnClick = true;
             this.showPathColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPathColumnToolStripMenuItem.Name = "showPathColumnToolStripMenuItem";
-            this.showPathColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showPathColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showPathColumnToolStripMenuItem.Text = "Show Path Column";
             this.showPathColumnToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItemShowPathColumn_CheckedChanged);
             // 
@@ -380,7 +394,7 @@
             this.showFilenameToolStripMenuItem.CheckOnClick = true;
             this.showFilenameToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showFilenameToolStripMenuItem.Name = "showFilenameToolStripMenuItem";
-            this.showFilenameToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showFilenameToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showFilenameToolStripMenuItem.Text = "Show Filename Column";
             this.showFilenameToolStripMenuItem.Click += new System.EventHandler(this.showFilenameToolStripMenuItem_Click);
             // 
@@ -390,7 +404,7 @@
             this.showRomDBNameColumnToolStripMenuItem.CheckOnClick = true;
             this.showRomDBNameColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showRomDBNameColumnToolStripMenuItem.Name = "showRomDBNameColumnToolStripMenuItem";
-            this.showRomDBNameColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showRomDBNameColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showRomDBNameColumnToolStripMenuItem.Text = "Show DB Rom Name Column";
             this.showRomDBNameColumnToolStripMenuItem.Click += new System.EventHandler(this.showRomDBNameColumnToolStripMenuItem_Click);
             // 
@@ -400,7 +414,7 @@
             this.showPlatformColumnToolStripMenuItem.CheckOnClick = true;
             this.showPlatformColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPlatformColumnToolStripMenuItem.Name = "showPlatformColumnToolStripMenuItem";
-            this.showPlatformColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showPlatformColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showPlatformColumnToolStripMenuItem.Text = "Show Emulator Column";
             this.showPlatformColumnToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItemShowPlatformColumn_CheckedChanged);
             // 
@@ -410,7 +424,7 @@
             this.showGenreColumnToolStripMenuItem.CheckOnClick = true;
             this.showGenreColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showGenreColumnToolStripMenuItem.Name = "showGenreColumnToolStripMenuItem";
-            this.showGenreColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showGenreColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showGenreColumnToolStripMenuItem.Text = "Show Genre Column";
             this.showGenreColumnToolStripMenuItem.Click += new System.EventHandler(this.showGenreColumnToolStripMenuItem_Click);
             // 
@@ -420,7 +434,7 @@
             this.showLabelsColumnToolStripMenuItem.CheckOnClick = true;
             this.showLabelsColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showLabelsColumnToolStripMenuItem.Name = "showLabelsColumnToolStripMenuItem";
-            this.showLabelsColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showLabelsColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showLabelsColumnToolStripMenuItem.Text = "Show Labels Column";
             this.showLabelsColumnToolStripMenuItem.Click += new System.EventHandler(this.showLabelsColumnToolStripMenuItem_Click);
             // 
@@ -430,7 +444,7 @@
             this.showDeveloperColumnToolStripMenuItem.CheckOnClick = true;
             this.showDeveloperColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showDeveloperColumnToolStripMenuItem.Name = "showDeveloperColumnToolStripMenuItem";
-            this.showDeveloperColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showDeveloperColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showDeveloperColumnToolStripMenuItem.Text = "Show Developer Column";
             this.showDeveloperColumnToolStripMenuItem.Click += new System.EventHandler(this.showDeveloperColumnToolStripMenuItem_Click);
             // 
@@ -440,7 +454,7 @@
             this.showPublisherColumnToolStripMenuItem.CheckOnClick = true;
             this.showPublisherColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPublisherColumnToolStripMenuItem.Name = "showPublisherColumnToolStripMenuItem";
-            this.showPublisherColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showPublisherColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showPublisherColumnToolStripMenuItem.Text = "Show Publisher Column";
             this.showPublisherColumnToolStripMenuItem.Click += new System.EventHandler(this.showPublisherColumnToolStripMenuItem_Click);
             // 
@@ -450,7 +464,7 @@
             this.showYearReleasedColumnToolStripMenuItem.CheckOnClick = true;
             this.showYearReleasedColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showYearReleasedColumnToolStripMenuItem.Name = "showYearReleasedColumnToolStripMenuItem";
-            this.showYearReleasedColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showYearReleasedColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showYearReleasedColumnToolStripMenuItem.Text = "Show Year Column";
             this.showYearReleasedColumnToolStripMenuItem.Click += new System.EventHandler(this.showYearReleasedColumnToolStripMenuItem_Click);
             // 
@@ -460,7 +474,7 @@
             this.showRatingColumnToolStripMenuItem.CheckOnClick = true;
             this.showRatingColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showRatingColumnToolStripMenuItem.Name = "showRatingColumnToolStripMenuItem";
-            this.showRatingColumnToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showRatingColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showRatingColumnToolStripMenuItem.Text = "Show Rating Column";
             this.showRatingColumnToolStripMenuItem.Click += new System.EventHandler(this.showRatingColumnToolStripMenuItem_Click);
             // 
@@ -470,7 +484,7 @@
             this.showBoxArtToolStripMenuItem.CheckOnClick = true;
             this.showBoxArtToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showBoxArtToolStripMenuItem.Name = "showBoxArtToolStripMenuItem";
-            this.showBoxArtToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showBoxArtToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showBoxArtToolStripMenuItem.Text = "Show Box Art";
             this.showBoxArtToolStripMenuItem.Click += new System.EventHandler(this.showBoxArtToolStripMenuItem_Click);
             // 
@@ -480,7 +494,7 @@
             this.showTitleToolStripMenuItem.CheckOnClick = true;
             this.showTitleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showTitleToolStripMenuItem.Name = "showTitleToolStripMenuItem";
-            this.showTitleToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showTitleToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showTitleToolStripMenuItem.Text = "Show Title Art";
             this.showTitleToolStripMenuItem.Click += new System.EventHandler(this.showTitleToolStripMenuItem_Click);
             // 
@@ -490,7 +504,7 @@
             this.showGameplayArtToolStripMenuItem.CheckOnClick = true;
             this.showGameplayArtToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showGameplayArtToolStripMenuItem.Name = "showGameplayArtToolStripMenuItem";
-            this.showGameplayArtToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showGameplayArtToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showGameplayArtToolStripMenuItem.Text = "Show Gameplay Art";
             this.showGameplayArtToolStripMenuItem.Click += new System.EventHandler(this.showGameplayArtToolStripMenuItem_Click);
             // 
@@ -500,16 +514,25 @@
             this.showPlatformsListToolStripMenuItem.CheckOnClick = true;
             this.showPlatformsListToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPlatformsListToolStripMenuItem.Name = "showPlatformsListToolStripMenuItem";
-            this.showPlatformsListToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.showPlatformsListToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showPlatformsListToolStripMenuItem.Text = "Show Platforms List";
             this.showPlatformsListToolStripMenuItem.Click += new System.EventHandler(this.showPlatformsListToolStripMenuItem_Click);
             // 
-            // toolStripMenuItemSettings
+            // showFileExistsAuditToolStripMenuItem
             // 
-            this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
-            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
-            this.toolStripMenuItemSettings.Text = "Settings";
-            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
+            this.showFileExistsAuditToolStripMenuItem.CheckOnClick = true;
+            this.showFileExistsAuditToolStripMenuItem.Name = "showFileExistsAuditToolStripMenuItem";
+            this.showFileExistsAuditToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.showFileExistsAuditToolStripMenuItem.Text = "Show File Exists (Audit)";
+            this.showFileExistsAuditToolStripMenuItem.Click += new System.EventHandler(this.showFileExistsAuditToolStripMenuItem_Click);
+            // 
+            // showIncorrectPlatformAuditToolStripMenuItem
+            // 
+            this.showIncorrectPlatformAuditToolStripMenuItem.CheckOnClick = true;
+            this.showIncorrectPlatformAuditToolStripMenuItem.Name = "showIncorrectPlatformAuditToolStripMenuItem";
+            this.showIncorrectPlatformAuditToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.showIncorrectPlatformAuditToolStripMenuItem.Text = "Show Incorrect Platform (Audit)";
+            this.showIncorrectPlatformAuditToolStripMenuItem.Click += new System.EventHandler(this.showIncorrectPlatformAuditToolStripMenuItem_Click);
             // 
             // romDataOptionsToolStripMenuItem
             // 
@@ -541,6 +564,13 @@
             this.syncUsingRetropieXMLToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.syncUsingRetropieXMLToolStripMenuItem.Text = "Sync Using Retropie XML";
             this.syncUsingRetropieXMLToolStripMenuItem.Click += new System.EventHandler(this.syncUsingRetropieXMLToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemSettings
+            // 
+            this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
+            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
+            this.toolStripMenuItemSettings.Text = "Settings";
+            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
             // 
             // openAppFolderToolStripMenuItem
             // 
@@ -810,6 +840,8 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnIconMain,
+            this.ColumnFileExists,
+            this.ColumnIncorrectPlatform,
             this.columnRomName,
             this.columnRomDBName,
             this.columnRomPath,
@@ -856,6 +888,7 @@
             // 
             this.columnIconMain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.columnIconMain.FillWeight = 73.09644F;
+            this.columnIconMain.Frozen = true;
             this.columnIconMain.HeaderText = "Icon";
             this.columnIconMain.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.columnIconMain.Name = "columnIconMain";
@@ -864,79 +897,98 @@
             this.columnIconMain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.columnIconMain.Width = 40;
             // 
+            // ColumnFileExists
+            // 
+            this.ColumnFileExists.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnFileExists.Frozen = true;
+            this.ColumnFileExists.HeaderText = "Exists";
+            this.ColumnFileExists.Name = "ColumnFileExists";
+            this.ColumnFileExists.ReadOnly = true;
+            this.ColumnFileExists.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnFileExists.Visible = false;
+            this.ColumnFileExists.Width = 60;
+            // 
+            // ColumnIncorrectPlatform
+            // 
+            this.ColumnIncorrectPlatform.FillWeight = 10F;
+            this.ColumnIncorrectPlatform.HeaderText = "Incorrect Platform";
+            this.ColumnIncorrectPlatform.Name = "ColumnIncorrectPlatform";
+            this.ColumnIncorrectPlatform.ReadOnly = true;
+            this.ColumnIncorrectPlatform.Visible = false;
+            // 
             // columnRomName
             // 
-            this.columnRomName.FillWeight = 75.34115F;
+            this.columnRomName.FillWeight = 17.78983F;
             this.columnRomName.HeaderText = "Rom Name";
             this.columnRomName.Name = "columnRomName";
             this.columnRomName.ReadOnly = true;
             // 
             // columnRomDBName
             // 
-            this.columnRomDBName.FillWeight = 75.34115F;
+            this.columnRomDBName.FillWeight = 17.78983F;
             this.columnRomDBName.HeaderText = "DB Name";
             this.columnRomDBName.Name = "columnRomDBName";
             this.columnRomDBName.ReadOnly = true;
             // 
             // columnRomPath
             // 
-            this.columnRomPath.FillWeight = 46.18727F;
+            this.columnRomPath.FillWeight = 10.90591F;
             this.columnRomPath.HeaderText = "Rom Path";
             this.columnRomPath.Name = "columnRomPath";
             this.columnRomPath.ReadOnly = true;
             // 
             // columnFilename
             // 
-            this.columnFilename.FillWeight = 25.11372F;
+            this.columnFilename.FillWeight = 5.929944F;
             this.columnFilename.HeaderText = "Filename";
             this.columnFilename.Name = "columnFilename";
             this.columnFilename.ReadOnly = true;
             // 
             // columnPlatform
             // 
-            this.columnPlatform.FillWeight = 20.9281F;
+            this.columnPlatform.FillWeight = 4.94162F;
             this.columnPlatform.HeaderText = "Platform";
             this.columnPlatform.Name = "columnPlatform";
             this.columnPlatform.ReadOnly = true;
             // 
             // columnGenre
             // 
-            this.columnGenre.FillWeight = 16.74248F;
+            this.columnGenre.FillWeight = 3.953296F;
             this.columnGenre.HeaderText = "Genre";
             this.columnGenre.Name = "columnGenre";
             this.columnGenre.ReadOnly = true;
             // 
             // columnLabels
             // 
-            this.columnLabels.FillWeight = 33.48495F;
+            this.columnLabels.FillWeight = 7.90659F;
             this.columnLabels.HeaderText = "Labels";
             this.columnLabels.Name = "columnLabels";
             this.columnLabels.ReadOnly = true;
             // 
             // columnPublisher
             // 
-            this.columnPublisher.FillWeight = 25.11372F;
+            this.columnPublisher.FillWeight = 5.929944F;
             this.columnPublisher.HeaderText = "Publisher";
             this.columnPublisher.Name = "columnPublisher";
             this.columnPublisher.ReadOnly = true;
             // 
             // columnDeveloper
             // 
-            this.columnDeveloper.FillWeight = 25.11372F;
+            this.columnDeveloper.FillWeight = 5.929944F;
             this.columnDeveloper.HeaderText = "Developer";
             this.columnDeveloper.Name = "columnDeveloper";
             this.columnDeveloper.ReadOnly = true;
             // 
             // columnYearReleased
             // 
-            this.columnYearReleased.FillWeight = 20F;
+            this.columnYearReleased.FillWeight = 4.722474F;
             this.columnYearReleased.HeaderText = "Year";
             this.columnYearReleased.Name = "columnYearReleased";
             this.columnYearReleased.ReadOnly = true;
             // 
             // columnRating
             // 
-            this.columnRating.FillWeight = 20F;
+            this.columnRating.FillWeight = 4.722474F;
             this.columnRating.HeaderText = "Rating";
             this.columnRating.Name = "columnRating";
             this.columnRating.ReadOnly = true;
@@ -1143,7 +1195,16 @@
         private System.Windows.Forms.ToolStripMenuItem purgeRomDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showRatingColumnToolStripMenuItem;
         private System.Windows.Forms.Button buttonRescan;
+        private System.Windows.Forms.ToolStripMenuItem syncUsingRetropieXMLToolStripMenuItem;
+        private System.Windows.Forms.Label labelSelectedRoms;
+        private System.Windows.Forms.Label labelSelectedRomsCount;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
+        private System.Windows.Forms.ToolStripMenuItem auditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showFileExistsAuditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showIncorrectPlatformAuditToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn columnIconMain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFileExists;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIncorrectPlatform;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomDBName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomPath;
@@ -1155,9 +1216,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDeveloper;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
-        private System.Windows.Forms.ToolStripMenuItem syncUsingRetropieXMLToolStripMenuItem;
-        private System.Windows.Forms.Label labelSelectedRoms;
-        private System.Windows.Forms.Label labelSelectedRomsCount;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
     }
 }

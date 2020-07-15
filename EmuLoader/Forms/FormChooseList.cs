@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormChooseList : FormRegister
+    public partial class FormChooseList : FormRegisterBase
     {
         private static FormChooseList instance;
         private static bool changed = false;

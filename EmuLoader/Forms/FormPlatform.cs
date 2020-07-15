@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
-    public partial class FormPlatform : FormRegister
+    public partial class FormPlatform : FormRegisterBase
     {
         #region Members
 
@@ -47,8 +47,15 @@ namespace EmuLoader.Forms
             comboBoxPlatformsDB.ValueMember = "Key";
             comboBoxPlatformsDB.DisplayMember = "Value";
             var list = Functions.GetPlatformsXML();
-            list.Insert(0, new KeyValuePair<string, string>("0", "none"));
-            comboBoxPlatformsDB.DataSource = list;
+
+            var keyvalue = new List<KeyValuePair<string, string>>();
+
+            foreach (var item in list)
+            {
+                keyvalue.Add(new KeyValuePair<string, string>(item.Key, item.Value));
+            }
+
+            comboBoxPlatformsDB.DataSource = keyvalue;
 
             updating = false;
             Clean();
@@ -321,88 +328,6 @@ namespace EmuLoader.Forms
             textBoxCommand.Text = textBoxAlternateCommand.Text;
             textBoxAlternateCommand.Text = aux;
 
-        }
-
-        private void buttonUpdateAllRomsNames_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dataGridView.SelectedRows.Count == 0) return;
-
-                DataGridViewRow row = dataGridView.SelectedRows[0];
-                Platform platform = (Platform)row.Tag;
-                var roms = Rom.GetAll(platform);
-                int count = 0;
-
-                foreach (var rom in roms)
-                {
-                    var name = RomFunctions.GetMAMENameFromCSV(rom.FileNameNoExt);
-
-                    if (name == "") continue;
-
-                    if (rom.Name != name)
-                    {
-                        rom.Name = name;
-                        Rom.Set(rom);
-                        count++;
-                    }
-                }
-
-                XML.SaveXml();
-                FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
-                Updated = true;
-            }
-            catch (Exception ex)
-            {
-                //FormWait.CloseWait();
-                FormCustomMessage.ShowError(ex.Message);
-            }
-            finally
-            {
-                //FormWait.CloseWait();
-            }
-        }
-
-
-        private void buttonUpdateNameFromDBName_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dataGridView.SelectedRows.Count == 0) return;
-
-                DataGridViewRow row = dataGridView.SelectedRows[0];
-                Platform platform = (Platform)row.Tag;
-                var roms = Rom.GetAll(platform);
-                int count = 0;
-
-                foreach (var rom in roms)
-                {
-                    if (!string.IsNullOrEmpty(rom.DBName))
-                    {
-                        var newname = rom.DBName.Replace(":", " -");
-
-                        if (rom.Name != newname)
-                        {
-                            rom.Name = newname;
-                            Rom.Set(rom);
-                            count++;
-                        }
-                    }
-                }
-
-                XML.SaveXml();
-                FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
-                Updated = true;
-            }
-            catch (Exception ex)
-            {
-                //FormWait.CloseWait();
-                FormCustomMessage.ShowError(ex.Message);
-            }
-            finally
-            {
-                //FormWait.CloseWait();
-            }
         }
 
         #endregion
