@@ -886,7 +886,7 @@ namespace EmuLoader.Forms
             {
                 if (comboBoxPlatform.SelectedValue != null)
                 {
-                    RomFunctions.RemoveInvalidRomsEntries((Platform)comboBoxPlatform.SelectedValue);
+                    RomFunctions.RemoveInvalidRomsEntries(Platform.Get(comboBoxPlatform.SelectedValue.ToString()));
                 }
                 else
                 {
