@@ -6,7 +6,7 @@ namespace EmuLoader.Core.Classes
     public static class YearReleased
     {
         private static List<string> YearsReleased { get; set; }
-        
+
         public static List<string> GetAll()
         {
             return YearsReleased.OrderBy(x => x).ToList();

@@ -1,8 +1,5 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using EmuLoader.Core.Business;
-using EmuLoader.Core.Classes;
 
 namespace Tests
 {
@@ -10,7 +7,7 @@ namespace Tests
     public class JsonFunctionsTest
     {
         string json = "{" +
-                        "\"game\":\"contra\"," + 
+                        "\"game\":\"contra\"," +
                         "\"id\":\"9975\"" +
                        "}";
 

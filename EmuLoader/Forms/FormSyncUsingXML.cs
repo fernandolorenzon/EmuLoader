@@ -1,12 +1,12 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.IO;
 using System.Xml;
-using EmuLoader.Core.Classes;
-using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {

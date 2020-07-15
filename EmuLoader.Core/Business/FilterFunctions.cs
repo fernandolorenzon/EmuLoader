@@ -148,7 +148,7 @@ namespace EmuLoader.Core.Business
                 }
             }
 
-            if(getWord && word != "")
+            if (getWord && word != "")
             {
                 result.Add(word.ToLower());
             }

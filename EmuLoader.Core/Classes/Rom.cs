@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Xml;
-using System.Linq;
-using System.IO;
+﻿using EmuLoader.Core.Business;
 using System;
-using System.Net;
-using EmuLoader.Core.Business;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
 
 namespace EmuLoader.Core.Classes
 {
@@ -68,7 +67,7 @@ namespace EmuLoader.Core.Classes
             {
                 rom.Name = RomFunctions.GetFileNameNoExtension(path);
             }
-            
+
             return rom;
         }
 
@@ -113,7 +112,7 @@ namespace EmuLoader.Core.Classes
                 rom.Genre = Genre.Get(Functions.GetXmlAttribute(node, "Genre"));
                 rom.Publisher = Functions.GetXmlAttribute(node, "Publisher");
                 rom.Developer = Functions.GetXmlAttribute(node, "Developer");
-                rom.YearReleased = Functions.GetXmlAttribute(node,"YearReleased");
+                rom.YearReleased = Functions.GetXmlAttribute(node, "YearReleased");
                 rom.Description = Functions.GetXmlAttribute(node, "Description");
                 var idLocked = Functions.GetXmlAttribute(node, "IdLocked");
                 rom.IdLocked = string.IsNullOrEmpty(idLocked) ? false : Convert.ToBoolean(idLocked);

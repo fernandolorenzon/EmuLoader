@@ -1,5 +1,4 @@
-﻿using EmuLoader.Core.Business;
-using EmuLoader.Core.Classes;
+﻿using EmuLoader.Core.Classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

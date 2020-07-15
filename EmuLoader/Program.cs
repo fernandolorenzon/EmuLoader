@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using EmuLoader.Forms;
+﻿using EmuLoader.Forms;
+using System;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace EmuLoader
 {

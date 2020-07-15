@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using EmuLoader.Core.Business;
+using System.Linq;
 
 namespace EmuLoader.Forms
 {
@@ -44,7 +43,8 @@ namespace EmuLoader.Forms
 
             foreach (var rom in roms)
             {
-                if (type == Values.BoxartFolder) {
+                if (type == Values.BoxartFolder)
+                {
 
                     if (File.Exists(RomFunctions.GetRomPicture(rom, Values.BoxartFolder)))
                     {

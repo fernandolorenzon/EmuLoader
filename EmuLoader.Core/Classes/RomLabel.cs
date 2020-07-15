@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Xml;
 namespace EmuLoader.Core.Classes
@@ -8,7 +7,7 @@ namespace EmuLoader.Core.Classes
     public class RomLabel : Base
     {
         private static Dictionary<string, RomLabel> labels { get; set; }
-        public Color Color {get; set;}
+        public Color Color { get; set; }
         public bool Checked { get; set; }
 
         public RomLabel()
@@ -77,7 +76,7 @@ namespace EmuLoader.Core.Classes
             labels[label.Name.ToLower()] = label;
             node.Attributes["Name"].Value = label.Name;
             node.Attributes["Color"].Value = label.Color.ToArgb().ToString();
-            
+
             return true;
         }
 

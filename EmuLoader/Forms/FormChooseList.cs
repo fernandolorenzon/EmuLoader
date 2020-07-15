@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
-using EmuLoader.Core.Business;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
@@ -99,7 +99,7 @@ namespace EmuLoader.Forms
                 foreach (var rom in roms)
                 {
                     checkFound = rom.Labels.Any(x => x.Name == labelName);
-                    
+
                     if (checkFound)
                     {
                         found = true;
@@ -112,7 +112,7 @@ namespace EmuLoader.Forms
 
                 all = found && !notFound;
 
-                
+
                 if (found && all)
                 {
                     row.Cells[instance.columnCheck.Index].Value = CheckState.Checked;

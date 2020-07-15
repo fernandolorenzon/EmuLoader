@@ -1,14 +1,13 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
-using System.Windows.Forms;
 using System.IO;
 using System.Linq;
-using EmuLoader.Core.Classes;
 using System.Threading;
-using System.Diagnostics;
-using EmuLoader.Core.Business;
-using System.Data;
+using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
@@ -262,7 +261,7 @@ namespace EmuLoader.Forms
                 {
                     return;
                 }
-                
+
                 Platform platform = null;
                 FormChoose.ChoosePlatform(out platform);
                 RomFunctions.AddRomsFromDirectory(platform, open.SelectedPath);

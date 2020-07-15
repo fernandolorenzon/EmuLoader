@@ -30,7 +30,7 @@ namespace EmuLoader.Core.Business
             foreach (var game in games)
             {
                 var gameName = RomFunctions.TrimRomName(game.DBName);
-                
+
                 if (gameName == romName)
                 {
                     return game.Id;

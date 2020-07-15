@@ -53,10 +53,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControlPlatform = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
+            this.buttonUpdateNameFromDBName = new System.Windows.Forms.Button();
             this.buttonUpdateAllRomsNames = new System.Windows.Forms.Button();
-            this.radioButtonFileName = new System.Windows.Forms.RadioButton();
-            this.radioButtonDisplayName = new System.Windows.Forms.RadioButton();
-            this.labelRomPicturesMode = new System.Windows.Forms.Label();
             this.textBoxPlatformIcon = new System.Windows.Forms.TextBox();
             this.labelPlatformName = new System.Windows.Forms.Label();
             this.textBoxDefaultRomExtensions = new System.Windows.Forms.TextBox();
@@ -75,7 +73,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.buttonAlternatePath = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.buttonUpdateNameFromDBName = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -153,7 +150,7 @@
             // 
             // textBoxPlatformName
             // 
-            this.textBoxPlatformName.Location = new System.Drawing.Point(9, 171);
+            this.textBoxPlatformName.Location = new System.Drawing.Point(10, 86);
             this.textBoxPlatformName.Name = "textBoxPlatformName";
             this.textBoxPlatformName.Size = new System.Drawing.Size(339, 20);
             this.textBoxPlatformName.TabIndex = 2;
@@ -206,7 +203,7 @@
             this.checkBoxShowInLinksList.AutoSize = true;
             this.checkBoxShowInLinksList.Checked = true;
             this.checkBoxShowInLinksList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(10, 209);
+            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(11, 124);
             this.checkBoxShowInLinksList.Name = "checkBoxShowInLinksList";
             this.checkBoxShowInLinksList.Size = new System.Drawing.Size(112, 17);
             this.checkBoxShowInLinksList.TabIndex = 9;
@@ -218,7 +215,7 @@
             this.checkBoxShowInFilters.AutoSize = true;
             this.checkBoxShowInFilters.Checked = true;
             this.checkBoxShowInFilters.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInFilters.Location = new System.Drawing.Point(141, 209);
+            this.checkBoxShowInFilters.Location = new System.Drawing.Point(142, 124);
             this.checkBoxShowInFilters.Name = "checkBoxShowInFilters";
             this.checkBoxShowInFilters.Size = new System.Drawing.Size(95, 17);
             this.checkBoxShowInFilters.TabIndex = 10;
@@ -300,9 +297,6 @@
             // 
             this.tabPageMain.Controls.Add(this.buttonUpdateNameFromDBName);
             this.tabPageMain.Controls.Add(this.buttonUpdateAllRomsNames);
-            this.tabPageMain.Controls.Add(this.radioButtonFileName);
-            this.tabPageMain.Controls.Add(this.radioButtonDisplayName);
-            this.tabPageMain.Controls.Add(this.labelRomPicturesMode);
             this.tabPageMain.Controls.Add(this.checkBoxShowInFilters);
             this.tabPageMain.Controls.Add(this.buttonColor);
             this.tabPageMain.Controls.Add(this.checkBoxShowInLinksList);
@@ -327,46 +321,25 @@
             this.tabPageMain.Text = "Main";
             this.tabPageMain.UseVisualStyleBackColor = true;
             // 
+            // buttonUpdateNameFromDBName
+            // 
+            this.buttonUpdateNameFromDBName.Location = new System.Drawing.Point(404, 197);
+            this.buttonUpdateNameFromDBName.Name = "buttonUpdateNameFromDBName";
+            this.buttonUpdateNameFromDBName.Size = new System.Drawing.Size(287, 31);
+            this.buttonUpdateNameFromDBName.TabIndex = 37;
+            this.buttonUpdateNameFromDBName.Text = " Update All Rom Names From DBName";
+            this.buttonUpdateNameFromDBName.UseVisualStyleBackColor = true;
+            this.buttonUpdateNameFromDBName.Click += new System.EventHandler(this.buttonUpdateNameFromDBName_Click);
+            // 
             // buttonUpdateAllRomsNames
             // 
-            this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(404, 160);
+            this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(6, 197);
             this.buttonUpdateAllRomsNames.Name = "buttonUpdateAllRomsNames";
             this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(287, 31);
             this.buttonUpdateAllRomsNames.TabIndex = 36;
             this.buttonUpdateAllRomsNames.Text = "Update All Roms MAME Names ";
             this.buttonUpdateAllRomsNames.UseVisualStyleBackColor = true;
             this.buttonUpdateAllRomsNames.Click += new System.EventHandler(this.buttonUpdateAllRomsNames_Click);
-            // 
-            // radioButtonFileName
-            // 
-            this.radioButtonFileName.AutoSize = true;
-            this.radioButtonFileName.Location = new System.Drawing.Point(14, 111);
-            this.radioButtonFileName.Name = "radioButtonFileName";
-            this.radioButtonFileName.Size = new System.Drawing.Size(178, 17);
-            this.radioButtonFileName.TabIndex = 35;
-            this.radioButtonFileName.Text = "File Name (Best for arcade roms)";
-            this.radioButtonFileName.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonDisplayName
-            // 
-            this.radioButtonDisplayName.AutoSize = true;
-            this.radioButtonDisplayName.Checked = true;
-            this.radioButtonDisplayName.Location = new System.Drawing.Point(14, 88);
-            this.radioButtonDisplayName.Name = "radioButtonDisplayName";
-            this.radioButtonDisplayName.Size = new System.Drawing.Size(90, 17);
-            this.radioButtonDisplayName.TabIndex = 34;
-            this.radioButtonDisplayName.TabStop = true;
-            this.radioButtonDisplayName.Text = "Display Name";
-            this.radioButtonDisplayName.UseVisualStyleBackColor = true;
-            // 
-            // labelRomPicturesMode
-            // 
-            this.labelRomPicturesMode.AutoSize = true;
-            this.labelRomPicturesMode.Location = new System.Drawing.Point(11, 70);
-            this.labelRomPicturesMode.Name = "labelRomPicturesMode";
-            this.labelRomPicturesMode.Size = new System.Drawing.Size(126, 13);
-            this.labelRomPicturesMode.TabIndex = 33;
-            this.labelRomPicturesMode.Text = "Get/Set picture name by:";
             // 
             // textBoxPlatformIcon
             // 
@@ -379,7 +352,7 @@
             // labelPlatformName
             // 
             this.labelPlatformName.AutoSize = true;
-            this.labelPlatformName.Location = new System.Drawing.Point(7, 155);
+            this.labelPlatformName.Location = new System.Drawing.Point(8, 70);
             this.labelPlatformName.Name = "labelPlatformName";
             this.labelPlatformName.Size = new System.Drawing.Size(76, 13);
             this.labelPlatformName.TabIndex = 4;
@@ -551,16 +524,6 @@
             this.label8.TabIndex = 6;
             this.label8.Text = "Emulator Exe";
             // 
-            // buttonUpdateNameFromDBName
-            // 
-            this.buttonUpdateNameFromDBName.Location = new System.Drawing.Point(404, 197);
-            this.buttonUpdateNameFromDBName.Name = "buttonUpdateNameFromDBName";
-            this.buttonUpdateNameFromDBName.Size = new System.Drawing.Size(287, 31);
-            this.buttonUpdateNameFromDBName.TabIndex = 37;
-            this.buttonUpdateNameFromDBName.Text = " Update All Rom Names From DBName";
-            this.buttonUpdateNameFromDBName.UseVisualStyleBackColor = true;
-            this.buttonUpdateNameFromDBName.Click += new System.EventHandler(this.buttonUpdateNameFromDBName_Click);
-            // 
             // FormPlatform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,9 +594,6 @@
         private System.Windows.Forms.TextBox textBoxDefaultRomPath;
         private System.Windows.Forms.TabPage tabPageEmulators;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RadioButton radioButtonFileName;
-        private System.Windows.Forms.RadioButton radioButtonDisplayName;
-        private System.Windows.Forms.Label labelRomPicturesMode;
         private System.Windows.Forms.Button buttonUpdateAllRomsNames;
         private System.Windows.Forms.Button buttonUpdateNameFromDBName;
     }

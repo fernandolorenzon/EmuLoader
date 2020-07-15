@@ -9,7 +9,7 @@ namespace EmuLoader.Forms
         private static FormMessage instance;
         private static Thread t;
         private static string messageGlobal;
-        
+
         public FormMessage()
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace EmuLoader.Forms
         public static void ShowMessage(string message)
         {
             messageGlobal = message;
-           
+
             if (t != null)
             {
                 t.Abort();

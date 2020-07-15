@@ -6,7 +6,7 @@ namespace EmuLoader.Core.Classes
     public static class Developer
     {
         private static List<string> Developers { get; set; }
-        
+
         public static List<string> GetAll()
         {
             return Developers.OrderBy(x => x).ToList();

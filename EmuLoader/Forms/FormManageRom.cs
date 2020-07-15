@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
-using System.IO;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
-using EmuLoader.Core.Business;
+using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
@@ -138,9 +138,9 @@ namespace EmuLoader.Forms
                     textBoxRating.Text,
                     checkBoxIdLocked.Checked,
                     checkBoxChangeZippedName.Checked,
-                    textBoxBoxartPicture.Text, 
-                    textBoxTitlePicture.Text, 
-                    textBoxGameplayPicture.Text, 
+                    textBoxBoxartPicture.Text,
+                    textBoxTitlePicture.Text,
+                    textBoxGameplayPicture.Text,
                     checkBoxSaveAsJpg.Checked,
                     textBoxEmulatorExe.Text,
                     textBoxCommand.Text,
@@ -324,7 +324,7 @@ namespace EmuLoader.Forms
                     {
                         textBoxDeveloper.Text = game.Developer;
                     }
-                    
+
                     if (!string.IsNullOrEmpty(game.Description))
                     {
                         textBoxDescription.Text = game.Description;
@@ -448,7 +448,7 @@ namespace EmuLoader.Forms
             {
                 json = APIFunctions.GetGamesListJSONByPlatform(SelectedRom.Platform.Id);
             }
-            
+
             ProcessStartInfo sInfo = new ProcessStartInfo(file);
             Process.Start(sInfo);
         }

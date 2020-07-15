@@ -1,10 +1,9 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Xml;
-using System.Drawing;
-using System.IO;
-using EmuLoader.Core.Business;
 
 namespace EmuLoader.Core.Classes
 {
@@ -21,7 +20,6 @@ namespace EmuLoader.Core.Classes
         public string DefaultRomPath { get; set; }
         public string DefaultRomExtensions { get; set; }
         public string Id { get; set; }
-        public bool PictureNameByDisplay { get; set; }
 
         public Bitmap Icon { get; set; }
 
@@ -51,10 +49,6 @@ namespace EmuLoader.Core.Classes
                 platform.DefaultRomPath = Functions.GetXmlAttribute(node, "DefaultRomPath");
                 platform.DefaultRomExtensions = Functions.GetXmlAttribute(node, "DefaultRomExtensions");
                 platform.Color = Color.FromArgb(Convert.ToInt32(Functions.GetXmlAttribute(node, "Color")));
-
-                var pictureByDisplay = Functions.GetXmlAttribute(node, "PictureNameByDisplay");
-                platform.PictureNameByDisplay = pictureByDisplay == "" ? true : Convert.ToBoolean(pictureByDisplay);
-
                 string icon = RomFunctions.GetPlatformPicture(platform.Name);
                 platform.Icon = Functions.CreateBitmap(icon);
                 platforms.Add(platform.Name.ToLower(), platform);
@@ -131,7 +125,6 @@ namespace EmuLoader.Core.Classes
             Functions.CreateOrSetXmlAttribute(node, "ShowInFilter", platform.ShowInFilter.ToString());
             Functions.CreateOrSetXmlAttribute(node, "DefaultRomPath", platform.DefaultRomPath);
             Functions.CreateOrSetXmlAttribute(node, "DefaultRomExtensions", platform.DefaultRomExtensions);
-            Functions.CreateOrSetXmlAttribute(node, "PictureNameByDisplay", platform.PictureNameByDisplay.ToString());
             return true;
         }
 

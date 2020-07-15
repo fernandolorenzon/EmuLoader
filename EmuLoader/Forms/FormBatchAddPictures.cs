@@ -1,10 +1,10 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using EmuLoader.Core.Classes;
-using System.IO;
-using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -77,43 +77,23 @@ namespace EmuLoader.Forms
 
             foreach (var rom in roms)
             {
-                if (!platform.PictureNameByDisplay)
+                string imageFoundPath;
+                var found = RomFunctions.MatchImagesExact(images, rom.FileNameNoExt, out imageFoundPath);
+
+                if (found)
                 {
-                    string imageFoundPath;
-                    var found = RomFunctions.MatchImagesExact(images, rom.FileNameNoExt, out imageFoundPath);
+                    successfulFind++;
 
-                    if (found)
+                    if (progressBar1.Value < progressBar1.Maximum)
                     {
-                        successfulFind++;
-
-                        if (progressBar1.Value < progressBar1.Maximum)
-                        {
-                            progressBar1.Value++;
-                        }
-
-                        RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
+                        progressBar1.Value++;
                     }
-                    else
-                    {
-                        found = RomFunctions.MatchImages(images, imageRegion, rom.Name, out imageFoundPath);
 
-                        if (found)
-                        {
-                            successfulFind++;
-
-                            if (progressBar1.Value < progressBar1.Maximum)
-                            {
-                                progressBar1.Value++;
-                            }
-
-                            RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
-                        }
-                    }
+                    RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
                 }
                 else
                 {
-                    string imageFoundPath;
-                    var found = RomFunctions.MatchImages(images, imageRegion, rom.Name, out imageFoundPath);
+                    found = RomFunctions.MatchImages(images, imageRegion, rom.Name, out imageFoundPath);
 
                     if (found)
                     {

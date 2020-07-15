@@ -6,7 +6,7 @@ namespace EmuLoader.Core.Classes
     public static class Publisher
     {
         private static List<string> Publishers { get; set; }
-        
+
         public static List<string> GetAll()
         {
             return Publishers.OrderBy(x => x).ToList();

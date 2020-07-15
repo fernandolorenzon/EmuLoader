@@ -1,8 +1,7 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using EmuLoader.Core.Business;
-using EmuLoader.Core.Classes;
 
 namespace Tests
 {

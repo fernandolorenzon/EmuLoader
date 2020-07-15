@@ -6,7 +6,7 @@ namespace EmuLoader.Forms
     {
         private static FormRename instance;
         private static string newName;
-        
+
         private FormRename()
         {
             InitializeComponent();
@@ -19,9 +19,9 @@ namespace EmuLoader.Forms
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-           
-           if (textBox1.Text.Trim() != "")
-               FormRename.newName = textBox1.Text;
+
+            if (textBox1.Text.Trim() != "")
+                FormRename.newName = textBox1.Text;
 
             instance.Close();
         }

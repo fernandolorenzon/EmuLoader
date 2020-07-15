@@ -1,12 +1,12 @@
-﻿using System;
+﻿using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Xml;
-using EmuLoader.Core.Classes;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Xml;
 
 namespace EmuLoader.Core.Business
 {
@@ -14,6 +14,7 @@ namespace EmuLoader.Core.Business
     {
         public static void SavePictureFromUrl(Rom rom, string url, string pictureType, bool saveAsJpg)
         {
+            if (url == "") return;
             string extension = url.Substring(url.LastIndexOf("."));
             string imagePath = "image" + extension;
 
@@ -99,7 +100,7 @@ namespace EmuLoader.Core.Business
 
             foreach (XmlNode item in doc.ChildNodes[0].ChildNodes[0].ChildNodes)
             {
-                var p = new Platform() { Id = item.ChildNodes[0].InnerText, Name = item.ChildNodes[1].InnerText};
+                var p = new Platform() { Id = item.ChildNodes[0].InnerText, Name = item.ChildNodes[1].InnerText };
                 platforms.Add(p);
             }
 
@@ -188,7 +189,7 @@ namespace EmuLoader.Core.Business
             var date = DateTime.Now.ToString("yyyyMMdd");
             string backupname = date + "-backup.zip";
 
-            if(File.Exists(Values.BackupFolder + "\\" + backupname))
+            if (File.Exists(Values.BackupFolder + "\\" + backupname))
             {
                 return true;
             }

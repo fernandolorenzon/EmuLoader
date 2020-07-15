@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Xml;
-using EmuLoader.Core.Classes;
-using System.IO;
 
 namespace EmuLoader.Core.Business
 {
@@ -76,9 +76,9 @@ namespace EmuLoader.Core.Business
             return true;
         }
 
-        public static void RenameRomPictures(Rom rom, string changeRomName)
+        public static void RenameRomPictures(Rom rom, string newFileName)
         {
-            if (changeRomName != rom.Name && rom.Platform.PictureNameByDisplay)
+            if (RomFunctions.GetFileNameNoExtension(newFileName) != rom.FileNameNoExt)
             {
                 string boxpic = RomFunctions.GetRomPicture(rom, Values.BoxartFolder);
                 string titlepic = RomFunctions.GetRomPicture(rom, Values.TitleFolder);
@@ -86,17 +86,17 @@ namespace EmuLoader.Core.Business
 
                 if (!string.IsNullOrEmpty(boxpic))
                 {
-                    File.Move(boxpic, boxpic.Substring(0, boxpic.LastIndexOf("\\")) + "\\" + changeRomName + boxpic.Substring(boxpic.LastIndexOf(".")));
+                    File.Move(boxpic, boxpic.Substring(0, boxpic.LastIndexOf("\\")) + "\\" + newFileName + boxpic.Substring(boxpic.LastIndexOf(".")));
                 }
 
                 if (!string.IsNullOrEmpty(titlepic))
                 {
-                    File.Move(titlepic, titlepic.Substring(0, titlepic.LastIndexOf("\\")) + "\\" + changeRomName + titlepic.Substring(titlepic.LastIndexOf(".")));
+                    File.Move(titlepic, titlepic.Substring(0, titlepic.LastIndexOf("\\")) + "\\" + newFileName + titlepic.Substring(titlepic.LastIndexOf(".")));
                 }
 
                 if (!string.IsNullOrEmpty(gameplaypic))
                 {
-                    File.Move(gameplaypic, gameplaypic.Substring(0, gameplaypic.LastIndexOf("\\")) + "\\" + changeRomName + gameplaypic.Substring(gameplaypic.LastIndexOf(".")));
+                    File.Move(gameplaypic, gameplaypic.Substring(0, gameplaypic.LastIndexOf("\\")) + "\\" + newFileName + gameplaypic.Substring(gameplaypic.LastIndexOf(".")));
                 }
             }
         }
@@ -133,7 +133,7 @@ namespace EmuLoader.Core.Business
             rom.Id = id;
 
             RomFunctions.RenameRomFile(rom, fileName, changeZipName);
-            RomFunctions.RenameRomPictures(rom, romName);
+            RomFunctions.RenameRomPictures(rom, fileName);
 
             rom.Name = romName;
             rom.Labels.AddRange(labels);
@@ -374,11 +374,7 @@ namespace EmuLoader.Core.Business
         {
             string result = "";
 
-            if (rom.Platform != null && rom.Platform.PictureNameByDisplay)
-            {
-                result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.Name;
-            }
-            else if (rom.Platform != null && !rom.Platform.PictureNameByDisplay)
+            if (rom.Platform != null)
             {
                 result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.FileNameNoExt;
             }
@@ -613,14 +609,7 @@ namespace EmuLoader.Core.Business
             FileInfo pic = new FileInfo(picturePath);
             string destinationFile = "";
 
-            if (rom.Platform.PictureNameByDisplay)
-            {
-                destinationFile = categoryPath + "\\" + rom.Name + pic.Extension;
-            }
-            else
-            {
-                destinationFile = categoryPath + "\\" + rom.FileNameNoExt + pic.Extension;
-            }
+            destinationFile = categoryPath + "\\" + rom.FileNameNoExt + pic.Extension;
 
             pic.CopyTo(destinationFile, true);
             pic = null;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Drawing;
+using System.Linq;
 using System.Xml;
 
 namespace EmuLoader.Core.Classes
@@ -9,7 +9,7 @@ namespace EmuLoader.Core.Classes
     public class Genre : Base
     {
         private static Dictionary<string, Genre> genres { get; set; }
-        public Color Color {get; set;}
+        public Color Color { get; set; }
         public bool Checked { get; set; }
 
         public Genre()
@@ -65,7 +65,7 @@ namespace EmuLoader.Core.Classes
         public static bool Set(Genre genre)
         {
             XmlNode node = XML.GetGenreNode(genre.Name);
-            
+
             if (node == null)
             {
                 node = XML.xmlDoc.CreateNode(XmlNodeType.Element, "Genre", "");
@@ -78,7 +78,7 @@ namespace EmuLoader.Core.Classes
             genres[genre.Name.ToLower()] = genre;
             node.Attributes["Name"].Value = genre.Name;
             node.Attributes["Color"].Value = genre.Color.ToArgb().ToString();
-            
+
             return true;
         }
 

@@ -1,8 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
 using System;
-using System.IO;
-using System.Net;
 using System.Windows.Forms;
 
 namespace EmuLoader.Forms

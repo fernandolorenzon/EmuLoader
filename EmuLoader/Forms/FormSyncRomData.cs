@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.IO;
-using EmuLoader.Core.Classes;
-using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -119,10 +119,10 @@ namespace EmuLoader.Forms
                     LogMessage(count2.ToString() + " roms details updated successfully!");
                     LogMessage(count3.ToString() + " roms images updated successfully!");
 
-                FormCustomMessage.ShowSuccess(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
-                            count2.ToString() + " roms details updated successfully!" + Environment.NewLine +
-                            count3.ToString() + " roms images updated successfully!"
-                        );
+                    FormCustomMessage.ShowSuccess(count.ToString() + " roms Id/Year updated successfully!" + Environment.NewLine +
+                                count2.ToString() + " roms details updated successfully!" + Environment.NewLine +
+                                count3.ToString() + " roms images updated successfully!"
+                            );
 
                     comboBoxPlatform_SelectedIndexChanged(sender, e);
 

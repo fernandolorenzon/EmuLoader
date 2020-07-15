@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
+﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
-using EmuLoader.Core.Business;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace EmuLoader.Forms
 {
@@ -155,7 +155,6 @@ namespace EmuLoader.Forms
             platform.ShowInList = checkBoxShowInLinksList.Checked;
             platform.DefaultRomPath = textBoxDefaultRomPath.Text;
             platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
-            platform.PictureNameByDisplay = radioButtonDisplayName.Checked;
 
             if (File.Exists(textBoxPlatformIcon.Text))
             {
@@ -167,9 +166,7 @@ namespace EmuLoader.Forms
                 }
 
                 FileInfo pic = new FileInfo(textBoxPlatformIcon.Text);
-                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".bmp");
                 File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".gif");
-                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".ico");
                 File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".jpg");
                 File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".png");
 
@@ -451,7 +448,6 @@ namespace EmuLoader.Forms
             textBoxDefaultRomPath.Text = string.Empty;
             textBoxDefaultRomExtensions.Text = string.Empty;
             textBoxPlatformName.Enabled = true;
-            radioButtonDisplayName.Checked = true;
         }
 
         protected override void SetForm()
@@ -485,8 +481,6 @@ namespace EmuLoader.Forms
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
             textBoxPlatformName.Enabled = false;
-            radioButtonDisplayName.Checked = platform.PictureNameByDisplay;
-            radioButtonFileName.Checked = !platform.PictureNameByDisplay;
         }
 
         #endregion
