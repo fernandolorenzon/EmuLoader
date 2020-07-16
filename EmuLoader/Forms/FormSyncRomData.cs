@@ -344,7 +344,7 @@ namespace EmuLoader.Forms
                 }
 
                 LogMessage("UPDATING - " + rom.Name);
-                var game = APIFunctions.GetGameDetails(rom.Id);
+                var game = APIFunctions.GetGameDetails(rom.Id, rom.Platform);
 
                 if (game == null) continue;
 

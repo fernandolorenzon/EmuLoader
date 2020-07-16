@@ -156,7 +156,7 @@ namespace EmuLoader.Core.Business
             return null;
         }
 
-        public static Rom GetGameDetails(string gameId)
+        public static Rom GetGameDetails(string gameId, Platform platform)
         {
             try
             {
@@ -170,7 +170,25 @@ namespace EmuLoader.Core.Business
                 using (WebClient client = new WebClient())
                 {
                     client.Encoding = System.Text.Encoding.UTF8;
-                    json = client.DownloadString(new Uri(url));
+                    try
+                    {
+                        json = client.DownloadString(new Uri(url));
+
+                        if (string.IsNullOrEmpty(json))
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    catch
+                    {
+                        if (platform != null)
+                        {
+                            var pjson = RomFunctions.GetPlatformJson(platform.Name);
+                            var list = GetGamesListByPlatform(platform.Id, pjson);
+
+                            return list.FirstOrDefault(x => x.Id == gameId);
+                        }
+                    }
                 }
 
                 if (string.IsNullOrEmpty(json)) return null;

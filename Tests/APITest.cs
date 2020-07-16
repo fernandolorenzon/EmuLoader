@@ -42,7 +42,7 @@ namespace Tests
         {
             XML.LoadXml();
             Genre.Fill();
-            var games = APIFunctions.GetGameDetails("136");
+            var games = APIFunctions.GetGameDetails("136", new Platform());
 
             Assert.IsNotNull(games);
         }

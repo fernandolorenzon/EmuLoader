@@ -219,7 +219,7 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var game = APIFunctions.GetGameDetails(textBoxId.Text);
+            var game = APIFunctions.GetGameDetails(textBoxId.Text, SelectedRom.Platform);
             game.Id = textBoxId.Text;
             StringBuilder text = new StringBuilder("");
 
@@ -277,7 +277,7 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                var game = APIFunctions.GetGameDetails(textBoxId.Text);
+                var game = APIFunctions.GetGameDetails(textBoxId.Text, SelectedRom.Platform);
 
                 if (game == null)
                 {
@@ -445,14 +445,10 @@ namespace EmuLoader.Forms
             var file = Values.JsonFolder + "\\" + SelectedRom.Platform.Name + ".json";
             string json = string.Empty;
 
-            if (File.Exists(file))
+            if (!File.Exists(file))
             {
-                json = File.ReadAllText(file);
-            }
-
-            if (json == string.Empty)
-            {
-                json = APIFunctions.GetGamesListJSONByPlatform(SelectedRom.Platform.Id);
+                FormCustomMessage.ShowError("Json not found. Sync platform first");
+                return;
             }
 
             ProcessStartInfo sInfo = new ProcessStartInfo(file);

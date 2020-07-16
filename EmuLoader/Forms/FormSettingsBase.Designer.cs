@@ -41,7 +41,7 @@
             this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonSave.Location = new System.Drawing.Point(3, 3);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 48);
+            this.buttonSave.Size = new System.Drawing.Size(99, 48);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save and Close";
             this.buttonSave.UseVisualStyleBackColor = false;
@@ -62,9 +62,9 @@
             // 
             this.buttonCancel.BackColor = System.Drawing.SystemColors.Control;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonCancel.Location = new System.Drawing.Point(84, 3);
+            this.buttonCancel.Location = new System.Drawing.Point(108, 3);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 48);
+            this.buttonCancel.Size = new System.Drawing.Size(99, 48);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel and Close";
             this.buttonCancel.UseVisualStyleBackColor = false;
