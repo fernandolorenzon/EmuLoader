@@ -835,10 +835,12 @@ namespace EmuLoader.Forms
                     if (File.Exists(rom.Path))
                     {
                         row.Cells[ColumnFileExists.Name].Style.BackColor = Color.Green;
+                        row.Cells[ColumnFileExists.Name].Value = "OK";
                     }
                     else
                     {
                         row.Cells[ColumnFileExists.Name].Style.BackColor = Color.Red;
+                        row.Cells[ColumnFileExists.Name].Value = "NOT OK";
                     }
                 }
 
@@ -875,7 +877,14 @@ namespace EmuLoader.Forms
 
                 var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
 
-                if (json == "") return;
+                if (json == "") 
+                {
+                    FormCustomMessage.ShowError("Json not found. Sync platform first");
+                    showIncorrectPlatformAuditToolStripMenuItem.Checked = false;
+                    ColumnIncorrectPlatform.Visible = false;
+                    return; 
+                }
+
 
                 dataGridView.SuspendLayout();
 
@@ -892,16 +901,103 @@ namespace EmuLoader.Forms
                     if (json.Contains("\"id\": " + rom.Id + ","))
                     {
                         row.Cells[ColumnIncorrectPlatform.Name].Style.BackColor = Color.Green;
+                        row.Cells[ColumnIncorrectPlatform.Name].Value = "OK";
                     }
                     else
                     {
                         row.Cells[ColumnIncorrectPlatform.Name].Style.BackColor = Color.Red;
+                        row.Cells[ColumnIncorrectPlatform.Name].Value = "NOT OK";
                     }
                 }
 
                 dataGridView.ResumeLayout();
 
                 ColumnIncorrectPlatform.Visible = showIncorrectPlatformAuditToolStripMenuItem.Checked;
+
+                if (updating) return;
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void showMissingPicsAuditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!showMissingPicsAuditToolStripMenuItem.Checked)
+                {
+                    ColumnMissingPics.Visible = false;
+                    return;
+                }
+
+                if (comboBoxPlatform.Text == "" || comboBoxPlatform.Text == "none")
+                {
+                    FormCustomMessage.ShowError("Select a platform first");
+                    return;
+                }
+
+                var boxpics = RomFunctions.GetPics(comboBoxPlatform.Text, PicType.BoxArt, false, true);
+                var titlepics = RomFunctions.GetPics(comboBoxPlatform.Text, PicType.Title, false, true);
+                var gameplaypics = RomFunctions.GetPics(comboBoxPlatform.Text, PicType.Gameplay, false, true);
+
+                dataGridView.SuspendLayout();
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    Rom rom = (Rom)row.Tag;
+
+                    bool boxExists = boxpics.Any(x => x.ToLower() == rom.FileNameNoExt.ToLower());
+                    bool titleExists = titlepics.Any(x => x.ToLower() == rom.FileNameNoExt.ToLower());
+                    bool gameplayExists = gameplaypics.Any(x => x.ToLower() == rom.FileNameNoExt.ToLower());
+
+                    int missing = 0;
+
+                    if (!boxExists)
+                    {
+                        missing++;
+                    }
+
+                    if (!titleExists)
+                    {
+                        missing++;
+                    }
+
+                    if (!gameplayExists)
+                    {
+                        missing++;
+                    }
+
+                    if (missing == 0)
+                    {
+                        row.Cells[ColumnMissingPics.Name].Style.BackColor = Color.Green;
+                        row.Cells[ColumnMissingPics.Name].Value = "ALL";
+                    }
+                    else if (missing == 1)
+                    {
+                        row.Cells[ColumnMissingPics.Name].Style.BackColor = Color.Yellow;
+                        row.Cells[ColumnMissingPics.Name].Value = "Missing 1";
+                    }
+                    else if (missing == 2)
+                    {
+                        row.Cells[ColumnMissingPics.Name].Style.BackColor = Color.Orange;
+                        row.Cells[ColumnMissingPics.Name].Value = "Missing 2";
+                    }
+                    else if (missing == 3)
+                    {
+                        row.Cells[ColumnMissingPics.Name].Style.BackColor = Color.Red;
+                        row.Cells[ColumnMissingPics.Name].Value = "Missing 3";
+                    }
+                }
+
+                dataGridView.ResumeLayout();
+
+                ColumnMissingPics.Visible = showMissingPicsAuditToolStripMenuItem.Checked;
 
                 if (updating) return;
             }
@@ -1025,6 +1121,14 @@ namespace EmuLoader.Forms
             try
             {
                 if (updating) return;
+
+                showFileExistsAuditToolStripMenuItem.Checked = false;
+                showIncorrectPlatformAuditToolStripMenuItem.Checked = false;
+                showMissingPicsAuditToolStripMenuItem.Checked = false;
+                ColumnFileExists.Visible = false;
+                ColumnIncorrectPlatform.Visible = false;
+                ColumnMissingPics.Visible = false;
+
                 FilterRoms();
 
                 buttonRescan.Enabled = comboBoxPlatform.Text != string.Empty;
@@ -2061,5 +2165,6 @@ namespace EmuLoader.Forms
             FormAudit form = new FormAudit();
             form.ShowDialog();
         }
+
     }
 }

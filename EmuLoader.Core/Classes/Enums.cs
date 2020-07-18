@@ -33,4 +33,12 @@
         Retroarch,
         MAME
     }
+
+
+    public enum PicType
+    {
+        BoxArt,
+        Title,
+        Gameplay
+    }
 }

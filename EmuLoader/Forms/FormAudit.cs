@@ -2,6 +2,8 @@
 using EmuLoader.Core.Classes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace EmuLoader.Forms
 {
@@ -148,5 +150,50 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void buttonShowMissingRoms_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxPlatform.Text == "" || comboBoxPlatform.Text == "none")
+                {
+                    FormCustomMessage.ShowError("Select a platform");
+                }
+
+                Platform platform = Platform.Get(comboBoxPlatform.Text);
+                var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
+
+                if (string.IsNullOrEmpty(json))
+                {
+                    FormCustomMessage.ShowError("Json not found. Sync platform first");
+                }
+
+                var games = APIFunctions.GetGamesListByPlatform(platform.Id, json);
+                var roms = Rom.GetAll(platform);
+
+                StringBuilder builder = new StringBuilder("");
+
+                foreach (var game in games)
+                {
+                    if (!roms.Any(x => x.Id == game.Id))
+                    {
+                        builder.Append(game.Id + "-" + game.DBName + Environment.NewLine);
+                    }
+                }
+
+                FormInfo info = new FormInfo(builder.ToString());
+                info.Show();
+
+                Updated = true;
+            }
+            catch (Exception ex)
+            {
+                //FormWait.CloseWait();
+                FormCustomMessage.ShowError(ex.Message);
+            }
+            finally
+            {
+                //FormWait.CloseWait();
+            }
+        }
     }
 }

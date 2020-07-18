@@ -33,13 +33,14 @@
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.buttonUpdateNameFromDBName = new System.Windows.Forms.Button();
             this.buttonUpdateAllRomsNames = new System.Windows.Forms.Button();
+            this.buttonShowMissingRoms = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCleanIncorrectRomPlatform
             // 
             this.buttonCleanIncorrectRomPlatform.Location = new System.Drawing.Point(12, 74);
             this.buttonCleanIncorrectRomPlatform.Name = "buttonCleanIncorrectRomPlatform";
-            this.buttonCleanIncorrectRomPlatform.Size = new System.Drawing.Size(127, 80);
+            this.buttonCleanIncorrectRomPlatform.Size = new System.Drawing.Size(128, 80);
             this.buttonCleanIncorrectRomPlatform.TabIndex = 0;
             this.buttonCleanIncorrectRomPlatform.Text = "Clean Rom Data WIth Incorrect Platform";
             this.buttonCleanIncorrectRomPlatform.UseVisualStyleBackColor = true;
@@ -78,17 +79,28 @@
             // 
             this.buttonUpdateAllRomsNames.Location = new System.Drawing.Point(12, 160);
             this.buttonUpdateAllRomsNames.Name = "buttonUpdateAllRomsNames";
-            this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(127, 80);
+            this.buttonUpdateAllRomsNames.Size = new System.Drawing.Size(128, 80);
             this.buttonUpdateAllRomsNames.TabIndex = 38;
             this.buttonUpdateAllRomsNames.Text = "Update All Roms MAME Names ";
             this.buttonUpdateAllRomsNames.UseVisualStyleBackColor = true;
             this.buttonUpdateAllRomsNames.Click += new System.EventHandler(this.buttonUpdateAllRomsNames_Click);
+            // 
+            // buttonShowMissingRoms
+            // 
+            this.buttonShowMissingRoms.Location = new System.Drawing.Point(13, 332);
+            this.buttonShowMissingRoms.Name = "buttonShowMissingRoms";
+            this.buttonShowMissingRoms.Size = new System.Drawing.Size(127, 80);
+            this.buttonShowMissingRoms.TabIndex = 40;
+            this.buttonShowMissingRoms.Text = "Show Missing Roms";
+            this.buttonShowMissingRoms.UseVisualStyleBackColor = true;
+            this.buttonShowMissingRoms.Click += new System.EventHandler(this.buttonShowMissingRoms_Click);
             // 
             // FormAudit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonShowMissingRoms);
             this.Controls.Add(this.buttonUpdateNameFromDBName);
             this.Controls.Add(this.buttonUpdateAllRomsNames);
             this.Controls.Add(this.labelEmulatorFilter);
@@ -108,5 +120,6 @@
         private System.Windows.Forms.ComboBox comboBoxPlatform;
         private System.Windows.Forms.Button buttonUpdateNameFromDBName;
         private System.Windows.Forms.Button buttonUpdateAllRomsNames;
+        private System.Windows.Forms.Button buttonShowMissingRoms;
     }
 }
