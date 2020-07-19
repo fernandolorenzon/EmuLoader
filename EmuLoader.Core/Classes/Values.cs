@@ -5,9 +5,12 @@ namespace EmuLoader.Core.Classes
 {
     public static class Values
     {
-        public static string xmlPath = "EmuLoader.xml";
+        public static string xmlPath = "data";
+        public static string xmlFile = "data.xml";
+        public static string xmlFileFull = Values.xmlPath + "\\" + Values.xmlFile;
+        
         public static string apikeyfile = "apikey.txt";
-        public static string PicturesPath = "Pictures";
+        public static string PicturesPath = "pictures";
         public static int max = 255 * 3;
         public static int Threshold = Convert.ToInt32(max / 2);
         public static string BoxartFolder = "boxart";

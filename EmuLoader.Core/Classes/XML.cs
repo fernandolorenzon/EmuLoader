@@ -53,6 +53,10 @@ namespace EmuLoader.Core.Classes
             attrYearReleased.Value = "true";
             config.Attributes.Append(attrYearReleased);
 
+            XmlAttribute attrRating = xmlDoc.CreateAttribute("ColumnRating");
+            attrRating.Value = "false";
+            config.Attributes.Append(attrRating);
+
             XmlAttribute attrBoxArt = xmlDoc.CreateAttribute("BoxArt");
             attrBoxArt.Value = "true";
             config.Attributes.Append(attrBoxArt);
@@ -104,12 +108,18 @@ namespace EmuLoader.Core.Classes
             attrFilterDeveloper.Value = "";
             config.Attributes.Append(attrFilterDeveloper);
 
-            XmlAttribute attrFilterName = xmlDoc.CreateAttribute("Name");
+            XmlAttribute attrFilterName = xmlDoc.CreateAttribute("Text");
             attrFilterName.Value = "";
             config.Attributes.Append(attrFilterName);
 
             xmlDoc.ChildNodes[1].AppendChild(filter);
-            xmlDoc.Save(Values.xmlPath);
+
+            if (!Directory.Exists(Values.xmlPath))
+            {
+                Directory.CreateDirectory(Values.xmlPath);
+            }
+
+            xmlDoc.Save(Values.xmlFileFull);
         }
 
         public static XmlDocument LoadXml()
@@ -118,9 +128,9 @@ namespace EmuLoader.Core.Classes
 
             try
             {
-                if (File.Exists(Values.xmlPath))
+                if (File.Exists(Values.xmlFileFull))
                 {
-                    xmlDoc.Load(Values.xmlPath);
+                    xmlDoc.Load(Values.xmlFileFull);
                 }
                 else
                 {
@@ -129,9 +139,9 @@ namespace EmuLoader.Core.Classes
             }
             catch
             {
-                if (File.Exists(Values.xmlPath))
+                if (File.Exists(Values.xmlFileFull))
                 {
-                    File.Delete(Values.xmlPath);
+                    File.Delete(Values.xmlFileFull);
                     LoadXml();
                 }
             }
@@ -141,7 +151,7 @@ namespace EmuLoader.Core.Classes
 
         public static void SaveXml()
         {
-            xmlDoc.Save(Values.xmlPath);
+            xmlDoc.Save(Values.xmlFileFull);
         }
 
         public static XmlNode GetParentNode(string elementName)
@@ -169,6 +179,8 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
+                if (GetParentNode("Config").Attributes.Count == 0) return "";
+
                 return GetParentNode("Config").Attributes[key].Value;
             }
             catch
@@ -426,6 +438,8 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
+                if (GetParentNode("Filter").Attributes.Count == 0) return "";
+
                 return GetParentNode("Filter").Attributes[key].Value;
             }
             catch

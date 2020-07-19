@@ -195,16 +195,17 @@ namespace EmuLoader.Core.Business
                 return true;
             }
 
-            if (!Directory.Exists(date))
+            if (Directory.Exists(date))
             {
-                Directory.CreateDirectory(date);
+                Directory.Delete(date, true);
             }
 
-            File.Copy(Values.xmlPath, date + "\\" + Values.xmlPath);
+            Directory.CreateDirectory(date);
+
+            File.Copy(Values.xmlFileFull, date + "\\" + Values.xmlFile);
             System.IO.Compression.ZipFile.CreateFromDirectory(date, backupname);
             File.Move(backupname, Values.BackupFolder + "\\" + backupname);
-            File.Delete(date + "\\" + Values.xmlPath);
-            Directory.Delete(date);
+            Directory.Delete(date, true);
             return true;
         }
     }
