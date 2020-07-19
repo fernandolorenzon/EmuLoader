@@ -428,10 +428,10 @@ namespace EmuLoader.Forms
         {
             if (string.IsNullOrEmpty(textBoxDBName.Text.Trim())) return;
 
-            string romName = textBoxRomName.Text;
-            string fileName = textBoxFileName.Text;
+            string romName = "";
+            string fileName = "";
 
-            RomFunctions.CopyDBName(textBoxDBName.Text, checkBoxKeepSuffix.Checked, out romName, out fileName);
+            RomFunctions.CopyDBName(textBoxDBName.Text, checkBoxKeepSuffix.Checked, textBoxRomName.Text, textBoxFileName.Text, out romName, out fileName);
 
             textBoxRomName.Text = romName;
             textBoxFileName.Text = fileName;

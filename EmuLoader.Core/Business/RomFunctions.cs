@@ -161,15 +161,15 @@ namespace EmuLoader.Core.Business
             return rom;
         }
 
-        public static void CopyDBName(string dbName, bool keepSuffix, out string romName, out string fileName)
+        public static void CopyDBName(string dbName, bool keepSuffix, string oldRomName, string oldFileName, out string newRomName, out string newFileName)
         {
-            romName = "";
-            fileName = "";
+            newRomName = "";
+            newFileName = "";
 
             if (string.IsNullOrEmpty(dbName.Trim())) return;
 
-            int bracketindex = fileName.IndexOf('[');
-            int parindex = fileName.IndexOf('(');
+            int bracketindex = oldFileName.IndexOf('[');
+            int parindex = oldFileName.IndexOf('(');
             int suffixIndex = 0;
 
             if (bracketindex > -1 && parindex == -1)
@@ -185,21 +185,23 @@ namespace EmuLoader.Core.Business
                 suffixIndex = bracketindex > parindex ? parindex : bracketindex;
             }
 
-            string suffix = suffixIndex == 0 ? string.Empty : RomFunctions.GetFileNameNoExtension(fileName).Substring(suffixIndex);
+            string suffix = suffixIndex == 0 ? string.Empty : RomFunctions.GetFileNameNoExtension(oldFileName).Substring(suffixIndex);
 
             if (keepSuffix)
             {
-                romName = dbName.Replace(":", " -") + " " + suffix;
+                newRomName = dbName + " " + suffix;
+                newFileName = dbName.Replace(":", " -") + " " + suffix;
             }
             else
             {
-                romName = dbName.Replace(":", " -");
+                newRomName = dbName;
+                newFileName = dbName.Replace(":", " -");
             }
 
-            fileName = romName + RomFunctions.GetFileExtension(fileName);
+            newFileName = newFileName + RomFunctions.GetFileExtension(oldFileName);
 
-            romName = romName.Trim();
-            fileName = fileName.Trim();
+            newRomName = newRomName.Trim();
+            newFileName = newFileName.Trim();
         }
 
         public static string TrimRomName(string name)
