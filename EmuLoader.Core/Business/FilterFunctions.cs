@@ -7,26 +7,29 @@ namespace EmuLoader.Core.Business
 {
     public static class FilterFunctions
     {
-        public static List<Rom> FilterRoms(string filter, string platform, string label, string genre, string publisher, string developer, string year)
+        public static List<Rom> FilterRoms(Filter filter)
         {
             List<Rom> FilteredRoms = new List<Rom>();
             //List<Platform> platforms = new List<Platform>();
             List<string> platforms = new List<string>();
 
-            if (filter.StartsWith("p:"))
+            var text = "";
+            if (filter.text.StartsWith("p:"))
             {
-                platforms = GetPlatforms(filter, out filter);
+                platforms = GetPlatforms(filter.text, out text);
             }
 
+            filter.text = text;
             FilteredRoms = Rom.GetAll();
 
-            if (string.IsNullOrEmpty(filter) &&
-                string.IsNullOrEmpty(platform) &&
-                string.IsNullOrEmpty(label) &&
-                string.IsNullOrEmpty(genre) &&
-                string.IsNullOrEmpty(publisher) &&
-                string.IsNullOrEmpty(developer) &&
-                string.IsNullOrEmpty(year) &&
+            if (string.IsNullOrEmpty(filter.text) &&
+                string.IsNullOrEmpty(filter.platform) &&
+                string.IsNullOrEmpty(filter.label) &&
+                string.IsNullOrEmpty(filter.genre) &&
+                string.IsNullOrEmpty(filter.publisher) &&
+                string.IsNullOrEmpty(filter.developer) &&
+                string.IsNullOrEmpty(filter.year) &&
+                !filter.favorite &&
                 platforms.Count == 0)
             {
                 return FilteredRoms;
@@ -39,51 +42,57 @@ namespace EmuLoader.Core.Business
                     var filterRoms = FilteredRoms.Where(x => x.Platform != null && platforms.Contains(x.Platform.Name.ToLower())).ToList();
                     FilteredRoms = filterRoms;
                 }
-                else if (!string.IsNullOrEmpty(platform))
+                else if (!string.IsNullOrEmpty(filter.platform))
                 {
-                    var filterRoms = platform == "<none>" ? FilteredRoms.Where(x => x.Platform == null).ToList() : FilteredRoms.Where(x => x.Platform != null && x.Platform.Name == platform).ToList();
+                    var filterRoms = filter.platform == "<none>" ? FilteredRoms.Where(x => x.Platform == null).ToList() : FilteredRoms.Where(x => x.Platform != null && x.Platform.Name == filter.platform).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(genre))
+                if (!string.IsNullOrEmpty(filter.genre))
                 {
-                    var filterRoms = genre == "<none>" ? FilteredRoms.Where(x => x.Genre == null).ToList() : FilteredRoms.Where(x => x.Genre != null && x.Genre.Name == genre).ToList();
+                    var filterRoms = filter.genre == "<none>" ? FilteredRoms.Where(x => x.Genre == null).ToList() : FilteredRoms.Where(x => x.Genre != null && x.Genre.Name == filter.genre).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(label))
+                if (!string.IsNullOrEmpty(filter.label))
                 {
-                    var filterRoms = label == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == label)).ToList();
+                    var filterRoms = filter.label == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == filter.label)).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(label))
+                if (!string.IsNullOrEmpty(filter.label))
                 {
-                    var filterRoms = label == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == label)).ToList();
+                    var filterRoms = filter.label == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == filter.label)).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(publisher))
+                if (!string.IsNullOrEmpty(filter.publisher))
                 {
-                    var filterRoms = publisher == "<none>" ? FilteredRoms.Where(x => x.Publisher == string.Empty).ToList() : FilteredRoms.Where(x => x.Publisher == publisher).ToList();
+                    var filterRoms = filter.publisher == "<none>" ? FilteredRoms.Where(x => x.Publisher == string.Empty).ToList() : FilteredRoms.Where(x => x.Publisher == filter.publisher).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(developer))
+                if (!string.IsNullOrEmpty(filter.developer))
                 {
-                    var filterRoms = developer == "<none>" ? FilteredRoms.Where(x => x.Developer == string.Empty).ToList() : FilteredRoms.Where(x => x.Developer == developer).ToList();
+                    var filterRoms = filter.developer == "<none>" ? FilteredRoms.Where(x => x.Developer == string.Empty).ToList() : FilteredRoms.Where(x => x.Developer == filter.developer).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(year))
+                if (!string.IsNullOrEmpty(filter.year))
                 {
-                    var filterRoms = year == "<none>" ? FilteredRoms.Where(x => x.YearReleased == string.Empty).ToList() : FilteredRoms.Where(x => x.YearReleased == year).ToList();
+                    var filterRoms = filter.year == "<none>" ? FilteredRoms.Where(x => x.YearReleased == string.Empty).ToList() : FilteredRoms.Where(x => x.YearReleased == filter.year).ToList();
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(filter))
+                if (!string.IsNullOrEmpty(filter.filter))
                 {
-                    var filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.ToLower())).ToList();
+                    var filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.text.ToLower())).ToList();
+                    FilteredRoms = filterRoms;
+                }
+
+                if (filter.favorite)
+                {
+                    var filterRoms = FilteredRoms.Where(x => x.Favorite).ToList();
                     FilteredRoms = filterRoms;
                 }
             }

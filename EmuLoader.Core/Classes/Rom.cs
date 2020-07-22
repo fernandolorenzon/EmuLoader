@@ -41,11 +41,13 @@ namespace EmuLoader.Core.Classes
         public List<RomLabel> Labels;
         public Platform Platform { get; set; }
         public Genre Genre { get; set; }
+        public bool Favorite { get; set; }
 
         public Rom()
         {
             Labels = new List<RomLabel>();
             UseAlternateEmulator = false;
+            Favorite = false;
         }
 
         public static Rom NewRom(string path, Platform platform)
@@ -118,6 +120,8 @@ namespace EmuLoader.Core.Classes
                 rom.IdLocked = string.IsNullOrEmpty(idLocked) ? false : Convert.ToBoolean(idLocked);
                 var useAlternate = Functions.GetXmlAttribute(node, "UseAlternateEmulator");
                 rom.UseAlternateEmulator = string.IsNullOrEmpty(useAlternate) ? false : Convert.ToBoolean(useAlternate);
+                var favorite = Functions.GetXmlAttribute(node, "Favorite");
+                rom.Favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
 
                 float result = 0;
 
@@ -163,7 +167,7 @@ namespace EmuLoader.Core.Classes
             Functions.CreateOrSetXmlAttribute(node, "UseAlternateEmulator", rom.UseAlternateEmulator.ToString());
             Functions.CreateOrSetXmlAttribute(node, "IdLocked", rom.IdLocked.ToString());
             Functions.CreateOrSetXmlAttribute(node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
-
+            Functions.CreateOrSetXmlAttribute(node, "Favorite", rom.Favorite.ToString());
             RomFunctions.SetRomLabels(rom, node);
 
             return true;

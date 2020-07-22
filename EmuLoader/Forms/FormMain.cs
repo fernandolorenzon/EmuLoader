@@ -1632,6 +1632,25 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void favoriteUnfavoriteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+                rom.Favorite = !rom.Favorite;
+                Rom.Set(rom);
+                XML.SaveXml();
+                LoadGridRow(rom, dataGridView.SelectedRows[0]);
+
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Grid Events
@@ -1810,6 +1829,24 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void auditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAudit form = new FormAudit();
+            form.ShowDialog();
+        }
+
+        private void checkBoxFavorite_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                FilterRoms();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -1834,31 +1871,29 @@ namespace EmuLoader.Forms
         private void FilterRoms()
         {
             FilteredRoms.Clear();
-            DateTime begin = DateTime.Now;
-            string text;
-            Platform platform;
-            RomLabel label;
-            Genre genre;
+            //DateTime begin = DateTime.Now;
+            
+            Filter filter = new Filter();
+            filter.text = textBoxFilter.Text;
+            filter.platform = comboBoxPlatform.Text;
+            filter.label = comboBoxLabels.Text;
+            filter.genre = comboBoxGenre.Text;
+            filter.publisher = comboBoxPublisher.Text;
+            filter.developer = comboBoxDeveloper.Text;
+            filter.year = comboBoxYearReleased.Text;
+            filter.favorite = checkBoxFavorite.Checked;
+            filter.text = filter.text.ToLower();
 
-            text = textBoxFilter.Text;
-            platform = comboBoxPlatform.SelectedItem == null ? (Platform)comboBoxPlatform.Items[0] : (Platform)comboBoxPlatform.SelectedItem;
-            label = comboBoxLabels.SelectedItem == null ? (RomLabel)comboBoxLabels.Items[0] : (RomLabel)comboBoxLabels.SelectedItem;
-            genre = comboBoxGenre.SelectedItem == null ? (Genre)comboBoxGenre.Items[0] : (Genre)comboBoxGenre.SelectedItem;
-            string publisher = comboBoxPublisher.Text;
-            string developer = comboBoxDeveloper.Text;
-            string year = comboBoxYearReleased.Text;
-
-            string filter = text.ToLower();
             if (updating) return;
 
             dataGridView.SuspendLayout();
             Thread.BeginCriticalRegion();
 
-            FilteredRoms = FilterFunctions.FilterRoms(filter, platform.Name, label.Name, genre.Name, publisher, developer, year);
+            FilteredRoms = FilterFunctions.FilterRoms(filter);
 
             Thread.EndCriticalRegion();
             dataGridView.ResumeLayout();
-            DateTime end = DateTime.Now;
+            //DateTime end = DateTime.Now;
             AddRomsToGrid(FilteredRoms);
             //FormCustomMessage.Show((end - begin).ToString());
         }
@@ -1873,9 +1908,7 @@ namespace EmuLoader.Forms
             {
                 int rowId = dataGridView.Rows.Add();
                 DataGridViewRow row = dataGridView.Rows[rowId];
-
                 LoadGridRow(rom, row);
-
                 FillLabelCell(rom, row);
                 row.Tag = rom;
             }
@@ -1885,50 +1918,61 @@ namespace EmuLoader.Forms
             dataGridView.ResumeLayout();
         }
 
-        private static void LoadGridRow(Rom rom, DataGridViewRow row)
+        private void LoadGridRow(Rom rom, DataGridViewRow row)
         {
-            row.Cells["columnRomName"].Value = rom.Name;
-            row.Cells["columnRomPath"].Value = rom.Path;
-            row.Cells["columnRomDBName"].Value = rom.DBName;
-            row.Cells["columnFilename"].Value = rom.FileName;
-            row.Cells["columnDeveloper"].Value = rom.Developer;
-            row.Cells["columnPublisher"].Value = rom.Publisher;
-            row.Cells["columnYearReleased"].Value = rom.YearReleased;
-            row.Cells["columnRating"].Value = rom.Rating != 0 ? rom.Rating.ToString("0#.#") : string.Empty;
+            row.Cells[columnRomName.Index].Value = rom.Name;
+            row.Cells[columnRomPath.Index].Value = rom.Path;
+            row.Cells[columnRomDBName.Index].Value = rom.DBName;
+            row.Cells[columnFilename.Index].Value = rom.FileName;
+            row.Cells[columnDeveloper.Index].Value = rom.Developer;
+            row.Cells[columnPublisher.Index].Value = rom.Publisher;
+            row.Cells[columnYearReleased.Index].Value = rom.YearReleased;
+            row.Cells[columnRating.Index].Value = rom.Rating != 0 ? rom.Rating.ToString("0#.#") : string.Empty;
+
+            if (rom.Favorite)
+            {
+                row.Cells[columnRomName.Index].Style.ForeColor = Color.DarkRed;
+                row.Cells[columnRomName.Index].Style.BackColor = Color.Gold;
+            }
+            else
+            {
+                row.Cells[columnRomName.Index].Style.ForeColor = dataGridView.RowTemplate.DefaultCellStyle.ForeColor;
+                row.Cells[columnRomName.Index].Style.BackColor = dataGridView.RowTemplate.DefaultCellStyle.BackColor;
+            }
 
             if (rom.Rating >= 7)
             {
-                row.Cells["columnRating"].Style.BackColor = Color.LightGreen;
+                row.Cells[columnRating.Index].Style.BackColor = Color.LightGreen;
             }
             else if (rom.Rating >= 4)
             {
-                row.Cells["columnRating"].Style.BackColor = Color.LightYellow;
+                row.Cells[columnRating.Index].Style.BackColor = Color.LightYellow;
             }
             else if (rom.Rating > 0)
             {
-                row.Cells["columnRating"].Style.BackColor = Color.IndianRed;
+                row.Cells[columnRating.Index].Style.BackColor = Color.IndianRed;
             }
 
             if (rom.Platform != null)
             {
                 if (rom.Platform.Icon != null)
                 {
-                    row.Cells["ColumnIconMain"].Value = rom.Platform.Icon;
+                    row.Cells[columnIconMain.Index].Value = rom.Platform.Icon;
                 }
 
-                row.Cells["columnPlatform"].Value = rom.Platform.Name;
-                row.Cells["columnPlatform"].Style.BackColor = rom.Platform.Color;
-                row.Cells["columnPlatform"].Style.ForeColor = Functions.SetFontContrast(rom.Platform.Color);
+                row.Cells[columnPlatform.Index].Value = rom.Platform.Name;
+                row.Cells[columnPlatform.Index].Style.BackColor = rom.Platform.Color;
+                row.Cells[columnPlatform.Index].Style.ForeColor = Functions.SetFontContrast(rom.Platform.Color);
             }
 
             if (rom.Genre != null)
             {
-                row.Cells["columnGenre"].Value = rom.Genre.Name;
-                row.Cells["columnGenre"].Style.BackColor = rom.Genre.Color;
-                row.Cells["columnGenre"].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
+                row.Cells[columnGenre.Index].Value = rom.Genre.Name;
+                row.Cells[columnGenre.Index].Style.BackColor = rom.Genre.Color;
+                row.Cells[columnGenre.Index].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
             }
 
-            row.Cells["columnRating"].Style.ForeColor = Color.Black;
+            row.Cells[columnRating.Index].Style.ForeColor = Color.Black;
 
             row.Cells[1].ToolTipText = rom.Description;
         }
@@ -2038,12 +2082,12 @@ namespace EmuLoader.Forms
                 row.Cells[columnLabels.Index].Style.BackColor = rom.Labels[0].Color;
                 row.Cells[columnLabels.Index].Style.ForeColor = Functions.SetFontContrast(rom.Labels[0].Color);
 
-                row.Cells[columnLabels.Index].Value = row.Cells["columnLabels"].Value.ToString().Substring(3);
+                row.Cells[columnLabels.Index].Value = row.Cells[columnLabels.Index].Value.ToString().Substring(3);
             }
             else
             {
-                row.Cells[columnLabels.Index].Style.BackColor = row.Cells[columnRomName.Index].Style.BackColor;
-                row.Cells[columnLabels.Index].Style.ForeColor = row.Cells[columnRomName.Index].Style.ForeColor;
+                row.Cells[columnLabels.Index].Style.BackColor = dataGridView.RowTemplate.DefaultCellStyle.BackColor;
+                row.Cells[columnLabels.Index].Style.ForeColor = dataGridView.RowTemplate.DefaultCellStyle.ForeColor;
             }
         }
 
@@ -2140,12 +2184,12 @@ namespace EmuLoader.Forms
 
                 if (platform.Icon != null)
                 {
-                    row.Cells["ColumnIcon"].Value = platform.Icon;
+                    row.Cells[ColumnIcon.Index].Value = platform.Icon;
                 }
 
-                row.Cells["columnPlatforms"].Value = platform.Name;
-                row.Cells["columnPlatforms"].Style.BackColor = platform.Color;
-                row.Cells["columnPlatforms"].Style.ForeColor = Functions.SetFontContrast(platform.Color);
+                row.Cells[columnPlatforms.Index].Value = platform.Name;
+                row.Cells[columnPlatforms.Index].Style.BackColor = platform.Color;
+                row.Cells[columnPlatforms.Index].Style.ForeColor = Functions.SetFontContrast(platform.Color);
                 row.Tag = platform;
             }
         }
@@ -2159,12 +2203,6 @@ namespace EmuLoader.Forms
         }
 
         #endregion
-
-        private void auditToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormAudit form = new FormAudit();
-            form.ShowDialog();
-        }
 
     }
 }

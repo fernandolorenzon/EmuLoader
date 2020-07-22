@@ -10,6 +10,7 @@
         public string publisher { get; set; }
         public string developer { get; set; }
         public string year { get; set; }
+        public bool favorite { get; set; }
         public string rom { get; set; }
     }
 }
