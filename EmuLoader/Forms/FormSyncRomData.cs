@@ -272,7 +272,7 @@ namespace EmuLoader.Forms
 
                     if (!checkBoxBasicSync.Checked)
                     {
-                        LogMessage("TRYING THE HARD WAY - " + rom.Name);
+                        LogMessage("TRYING BY NAME - " + rom.Name);
                         var gameName = Functions.RemoveSubstring(rom.Name, '(', ')');
                         gameName = Functions.RemoveSubstring(gameName, '[', ']').Trim();
 
@@ -320,7 +320,7 @@ namespace EmuLoader.Forms
 
         private void SetOtherProperties()
         {
-            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.DBName) || string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer) || string.IsNullOrEmpty(x.Description) || x.Genre == null || (x.Rating == null || x.Rating == 0))).ToList();
+            var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) && (string.IsNullOrEmpty(x.DBName) || string.IsNullOrEmpty(x.Publisher) || string.IsNullOrEmpty(x.Developer))).ToList();
 
             bool updated = false;
             syncRomsCount = 0;
