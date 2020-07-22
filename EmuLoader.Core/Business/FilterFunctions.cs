@@ -12,14 +12,14 @@ namespace EmuLoader.Core.Business
             List<Rom> FilteredRoms = new List<Rom>();
             //List<Platform> platforms = new List<Platform>();
             List<string> platforms = new List<string>();
-
-            var text = "";
+            
             if (filter.text.StartsWith("p:"))
             {
+                var text = "";
                 platforms = GetPlatforms(filter.text, out text);
+                filter.text = text;
             }
-
-            filter.text = text;
+            
             FilteredRoms = Rom.GetAll();
 
             if (string.IsNullOrEmpty(filter.text) &&
@@ -60,12 +60,6 @@ namespace EmuLoader.Core.Business
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(filter.label))
-                {
-                    var filterRoms = filter.label == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels.Any(l => l.Name == filter.label)).ToList();
-                    FilteredRoms = filterRoms;
-                }
-
                 if (!string.IsNullOrEmpty(filter.publisher))
                 {
                     var filterRoms = filter.publisher == "<none>" ? FilteredRoms.Where(x => x.Publisher == string.Empty).ToList() : FilteredRoms.Where(x => x.Publisher == filter.publisher).ToList();
@@ -84,7 +78,7 @@ namespace EmuLoader.Core.Business
                     FilteredRoms = filterRoms;
                 }
 
-                if (!string.IsNullOrEmpty(filter.filter))
+                if (!string.IsNullOrEmpty(filter.text))
                 {
                     var filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.text.ToLower())).ToList();
                     FilteredRoms = filterRoms;
