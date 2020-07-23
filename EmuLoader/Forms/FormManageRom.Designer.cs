@@ -135,7 +135,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(813, 644);
+            this.tabControl.Size = new System.Drawing.Size(813, 648);
             this.tabControl.TabIndex = 47;
             // 
             // tabPageGeneral
@@ -175,7 +175,7 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(805, 618);
+            this.tabPageGeneral.Size = new System.Drawing.Size(805, 622);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -264,21 +264,29 @@
             // 
             // buttonOpenInDB
             // 
+            this.buttonOpenInDB.Image = ((System.Drawing.Image)(resources.GetObject("buttonOpenInDB.Image")));
+            this.buttonOpenInDB.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOpenInDB.Location = new System.Drawing.Point(7, 80);
             this.buttonOpenInDB.Name = "buttonOpenInDB";
-            this.buttonOpenInDB.Size = new System.Drawing.Size(83, 61);
+            this.buttonOpenInDB.Size = new System.Drawing.Size(138, 61);
             this.buttonOpenInDB.TabIndex = 83;
             this.buttonOpenInDB.Text = "Open TheGamesDB";
+            this.buttonOpenInDB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOpenInDB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOpenInDB.UseVisualStyleBackColor = true;
             this.buttonOpenInDB.Click += new System.EventHandler(this.buttonSearchInDB_Click);
             // 
             // buttonPlatformJson
             // 
-            this.buttonPlatformJson.Location = new System.Drawing.Point(99, 80);
+            this.buttonPlatformJson.Image = ((System.Drawing.Image)(resources.GetObject("buttonPlatformJson.Image")));
+            this.buttonPlatformJson.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPlatformJson.Location = new System.Drawing.Point(151, 80);
             this.buttonPlatformJson.Name = "buttonPlatformJson";
-            this.buttonPlatformJson.Size = new System.Drawing.Size(83, 61);
+            this.buttonPlatformJson.Size = new System.Drawing.Size(128, 61);
             this.buttonPlatformJson.TabIndex = 99;
             this.buttonPlatformJson.Text = "Open Platform json";
+            this.buttonPlatformJson.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPlatformJson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonPlatformJson.UseVisualStyleBackColor = true;
             this.buttonPlatformJson.Click += new System.EventHandler(this.buttonCheckList_Click);
             // 
@@ -318,11 +326,15 @@
             // 
             // buttonClean
             // 
-            this.buttonClean.Location = new System.Drawing.Point(272, 80);
+            this.buttonClean.Image = ((System.Drawing.Image)(resources.GetObject("buttonClean.Image")));
+            this.buttonClean.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonClean.Location = new System.Drawing.Point(255, 80);
             this.buttonClean.Name = "buttonClean";
-            this.buttonClean.Size = new System.Drawing.Size(103, 61);
+            this.buttonClean.Size = new System.Drawing.Size(136, 61);
             this.buttonClean.TabIndex = 101;
             this.buttonClean.Text = "Clean Data";
+            this.buttonClean.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonClean.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonClean.UseVisualStyleBackColor = true;
             this.buttonClean.Click += new System.EventHandler(this.buttonClean_Click);
             // 
@@ -330,7 +342,7 @@
             // 
             this.radioButtonOverwrite.AutoSize = true;
             this.radioButtonOverwrite.Checked = true;
-            this.radioButtonOverwrite.Location = new System.Drawing.Point(153, 74);
+            this.radioButtonOverwrite.Location = new System.Drawing.Point(126, 74);
             this.radioButtonOverwrite.Name = "radioButtonOverwrite";
             this.radioButtonOverwrite.Size = new System.Drawing.Size(96, 17);
             this.radioButtonOverwrite.TabIndex = 100;
@@ -341,7 +353,7 @@
             // radioButtonOnlyMissing
             // 
             this.radioButtonOnlyMissing.AutoSize = true;
-            this.radioButtonOnlyMissing.Location = new System.Drawing.Point(153, 97);
+            this.radioButtonOnlyMissing.Location = new System.Drawing.Point(126, 97);
             this.radioButtonOnlyMissing.Name = "radioButtonOnlyMissing";
             this.radioButtonOnlyMissing.Size = new System.Drawing.Size(110, 17);
             this.radioButtonOnlyMissing.TabIndex = 99;
@@ -362,26 +374,34 @@
             this.textBoxId.Location = new System.Drawing.Point(6, 35);
             this.textBoxId.MaxLength = 10;
             this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(141, 20);
+            this.textBoxId.Size = new System.Drawing.Size(113, 20);
             this.textBoxId.TabIndex = 81;
             // 
             // buttonShowDBInfo
             // 
-            this.buttonShowDBInfo.Location = new System.Drawing.Point(272, 3);
+            this.buttonShowDBInfo.Image = ((System.Drawing.Image)(resources.GetObject("buttonShowDBInfo.Image")));
+            this.buttonShowDBInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonShowDBInfo.Location = new System.Drawing.Point(255, 3);
             this.buttonShowDBInfo.Name = "buttonShowDBInfo";
-            this.buttonShowDBInfo.Size = new System.Drawing.Size(103, 65);
+            this.buttonShowDBInfo.Size = new System.Drawing.Size(136, 65);
             this.buttonShowDBInfo.TabIndex = 82;
             this.buttonShowDBInfo.Text = "Show TheGamesDB Info";
+            this.buttonShowDBInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonShowDBInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonShowDBInfo.UseVisualStyleBackColor = true;
             this.buttonShowDBInfo.Click += new System.EventHandler(this.buttonOpenDB_Click);
             // 
             // buttonGetRomData
             // 
-            this.buttonGetRomData.Location = new System.Drawing.Point(153, 3);
+            this.buttonGetRomData.Image = ((System.Drawing.Image)(resources.GetObject("buttonGetRomData.Image")));
+            this.buttonGetRomData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonGetRomData.Location = new System.Drawing.Point(126, 3);
             this.buttonGetRomData.Name = "buttonGetRomData";
-            this.buttonGetRomData.Size = new System.Drawing.Size(113, 65);
+            this.buttonGetRomData.Size = new System.Drawing.Size(123, 65);
             this.buttonGetRomData.TabIndex = 98;
             this.buttonGetRomData.Text = "Get Rom Data Online";
+            this.buttonGetRomData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonGetRomData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonGetRomData.UseVisualStyleBackColor = true;
             this.buttonGetRomData.Click += new System.EventHandler(this.buttonGetRomData_Click);
             // 
@@ -746,7 +766,7 @@
             this.tabPagePictures.Location = new System.Drawing.Point(4, 22);
             this.tabPagePictures.Name = "tabPagePictures";
             this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePictures.Size = new System.Drawing.Size(805, 674);
+            this.tabPagePictures.Size = new System.Drawing.Size(805, 622);
             this.tabPagePictures.TabIndex = 1;
             this.tabPagePictures.Text = "Pictures";
             this.tabPagePictures.UseVisualStyleBackColor = true;

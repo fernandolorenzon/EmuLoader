@@ -37,13 +37,18 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.BackColor = System.Drawing.Color.SpringGreen;
-            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonSave.BackColor = System.Drawing.Color.DarkGray;
+            this.buttonSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonSave.Image")));
+            this.buttonSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSave.Location = new System.Drawing.Point(3, 3);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(99, 48);
+            this.buttonSave.Size = new System.Drawing.Size(118, 45);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save and Close";
+            this.buttonSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSave.UseVisualStyleBackColor = false;
             // 
             // flowLayoutPanel1
@@ -53,20 +58,24 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonSave);
             this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 368);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 372);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(598, 56);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(598, 52);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonCancel.Location = new System.Drawing.Point(108, 3);
+            this.buttonCancel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCancel.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancel.Image")));
+            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancel.Location = new System.Drawing.Point(127, 3);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(99, 48);
+            this.buttonCancel.Size = new System.Drawing.Size(123, 45);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel and Close";
+            this.buttonCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 

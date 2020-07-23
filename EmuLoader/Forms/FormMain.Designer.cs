@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonRomOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonRomRemoveRom = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonRomDeleteRomFromDisk = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,6 +143,7 @@
             // 
             // buttonRomOpenFolder
             // 
+            this.buttonRomOpenFolder.Image = ((System.Drawing.Image)(resources.GetObject("buttonRomOpenFolder.Image")));
             this.buttonRomOpenFolder.Name = "buttonRomOpenFolder";
             this.buttonRomOpenFolder.Size = new System.Drawing.Size(225, 22);
             this.buttonRomOpenFolder.Text = "Open Folder";
@@ -150,6 +151,7 @@
             // 
             // buttonRomRemoveRom
             // 
+            this.buttonRomRemoveRom.Image = ((System.Drawing.Image)(resources.GetObject("buttonRomRemoveRom.Image")));
             this.buttonRomRemoveRom.Name = "buttonRomRemoveRom";
             this.buttonRomRemoveRom.Size = new System.Drawing.Size(225, 22);
             this.buttonRomRemoveRom.Text = "Remove Rom Entry";
@@ -157,6 +159,7 @@
             // 
             // buttonRomDeleteRomFromDisk
             // 
+            this.buttonRomDeleteRomFromDisk.Image = ((System.Drawing.Image)(resources.GetObject("buttonRomDeleteRomFromDisk.Image")));
             this.buttonRomDeleteRomFromDisk.Name = "buttonRomDeleteRomFromDisk";
             this.buttonRomDeleteRomFromDisk.Size = new System.Drawing.Size(225, 22);
             this.buttonRomDeleteRomFromDisk.Text = "Delete Rom to Recycle bin";
@@ -180,6 +183,7 @@
             // 
             // favoriteUnfavoriteToolStripMenuItem
             // 
+            this.favoriteUnfavoriteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("favoriteUnfavoriteToolStripMenuItem.Image")));
             this.favoriteUnfavoriteToolStripMenuItem.Name = "favoriteUnfavoriteToolStripMenuItem";
             this.favoriteUnfavoriteToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.favoriteUnfavoriteToolStripMenuItem.Text = "Favorite/Unfavorite";
@@ -187,6 +191,7 @@
             // 
             // changePlatformToolStripMenuItem
             // 
+            this.changePlatformToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changePlatformToolStripMenuItem.Image")));
             this.changePlatformToolStripMenuItem.Name = "changePlatformToolStripMenuItem";
             this.changePlatformToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.changePlatformToolStripMenuItem.Text = "Change Platform";
@@ -194,6 +199,7 @@
             // 
             // changeGenreToolStripMenuItem
             // 
+            this.changeGenreToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeGenreToolStripMenuItem.Image")));
             this.changeGenreToolStripMenuItem.Name = "changeGenreToolStripMenuItem";
             this.changeGenreToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.changeGenreToolStripMenuItem.Text = "Change Genre";
@@ -201,6 +207,7 @@
             // 
             // changeLabelsToolStripMenuItem
             // 
+            this.changeLabelsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeLabelsToolStripMenuItem.Image")));
             this.changeLabelsToolStripMenuItem.Name = "changeLabelsToolStripMenuItem";
             this.changeLabelsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.changeLabelsToolStripMenuItem.Text = "Change Labels";
@@ -208,6 +215,7 @@
             // 
             // openFileToolStripMenuItem
             // 
+            this.openFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openFileToolStripMenuItem.Image")));
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
             this.openFileToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.openFileToolStripMenuItem.Text = "Open Rom File";
@@ -217,8 +225,9 @@
             // 
             this.selectedRomsOptionsToolStripMenuItem.DropDown = this.contextMenuStripEditRom;
             this.selectedRomsOptionsToolStripMenuItem.Enabled = false;
+            this.selectedRomsOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("selectedRomsOptionsToolStripMenuItem.Image")));
             this.selectedRomsOptionsToolStripMenuItem.Name = "selectedRomsOptionsToolStripMenuItem";
-            this.selectedRomsOptionsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.selectedRomsOptionsToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
             this.selectedRomsOptionsToolStripMenuItem.Text = "&Quick Actions";
             // 
             // timerFilter
@@ -261,7 +270,7 @@
             this.openAppFolderToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(638, 24);
+            this.menuStrip.Size = new System.Drawing.Size(880, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -275,12 +284,14 @@
             this.batchAddPicturesToolStripMenuItem,
             this.batchRemovePicturesToolStripMenuItem,
             this.auditToolStripMenuItem});
+            this.romsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("romsToolStripMenuItem.Image")));
             this.romsToolStripMenuItem.Name = "romsToolStripMenuItem";
-            this.romsToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.romsToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.romsToolStripMenuItem.Text = "&Roms";
             // 
             // addRomFileToolStripMenuItem
             // 
+            this.addRomFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addRomFileToolStripMenuItem.Image")));
             this.addRomFileToolStripMenuItem.Name = "addRomFileToolStripMenuItem";
             this.addRomFileToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.addRomFileToolStripMenuItem.Text = "Add Rom Files";
@@ -288,6 +299,7 @@
             // 
             // addRomDirectoryToolStripMenuItem
             // 
+            this.addRomDirectoryToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addRomDirectoryToolStripMenuItem.Image")));
             this.addRomDirectoryToolStripMenuItem.Name = "addRomDirectoryToolStripMenuItem";
             this.addRomDirectoryToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.addRomDirectoryToolStripMenuItem.Text = "Add Rom Directory";
@@ -295,6 +307,7 @@
             // 
             // addRomPackInDirectoryStructureToolStripMenuItem
             // 
+            this.addRomPackInDirectoryStructureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addRomPackInDirectoryStructureToolStripMenuItem.Image")));
             this.addRomPackInDirectoryStructureToolStripMenuItem.Name = "addRomPackInDirectoryStructureToolStripMenuItem";
             this.addRomPackInDirectoryStructureToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.addRomPackInDirectoryStructureToolStripMenuItem.Text = "Add RomPack in Directory Structure";
@@ -302,6 +315,7 @@
             // 
             // removeInvalidEntriesToolStripMenuItem
             // 
+            this.removeInvalidEntriesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("removeInvalidEntriesToolStripMenuItem.Image")));
             this.removeInvalidEntriesToolStripMenuItem.Name = "removeInvalidEntriesToolStripMenuItem";
             this.removeInvalidEntriesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.removeInvalidEntriesToolStripMenuItem.Text = "Remove Invalid Rom Entries";
@@ -309,6 +323,7 @@
             // 
             // batchAddPicturesToolStripMenuItem
             // 
+            this.batchAddPicturesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("batchAddPicturesToolStripMenuItem.Image")));
             this.batchAddPicturesToolStripMenuItem.Name = "batchAddPicturesToolStripMenuItem";
             this.batchAddPicturesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.batchAddPicturesToolStripMenuItem.Text = "Batch Add Pictures";
@@ -316,6 +331,7 @@
             // 
             // batchRemovePicturesToolStripMenuItem
             // 
+            this.batchRemovePicturesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("batchRemovePicturesToolStripMenuItem.Image")));
             this.batchRemovePicturesToolStripMenuItem.Name = "batchRemovePicturesToolStripMenuItem";
             this.batchRemovePicturesToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.batchRemovePicturesToolStripMenuItem.Text = "Batch Remove Pictures";
@@ -323,6 +339,7 @@
             // 
             // auditToolStripMenuItem
             // 
+            this.auditToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("auditToolStripMenuItem.Image")));
             this.auditToolStripMenuItem.Name = "auditToolStripMenuItem";
             this.auditToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.auditToolStripMenuItem.Text = "Audit";
@@ -331,8 +348,9 @@
             // manageRomToolStripMenuItem
             // 
             this.manageRomToolStripMenuItem.Enabled = false;
+            this.manageRomToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageRomToolStripMenuItem.Image")));
             this.manageRomToolStripMenuItem.Name = "manageRomToolStripMenuItem";
-            this.manageRomToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.manageRomToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.manageRomToolStripMenuItem.Text = "&Edit Rom";
             this.manageRomToolStripMenuItem.Click += new System.EventHandler(this.manageRomToolStripMenuItem_Click);
             // 
@@ -342,8 +360,9 @@
             this.platformsToolStripMenuItem,
             this.genresToolStripMenuItem,
             this.labelsToolStripMenuItem});
+            this.addEditDeleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addEditDeleteToolStripMenuItem.Image")));
             this.addEditDeleteToolStripMenuItem.Name = "addEditDeleteToolStripMenuItem";
-            this.addEditDeleteToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
+            this.addEditDeleteToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
             this.addEditDeleteToolStripMenuItem.Text = "&Add/Edit/Delete";
             // 
             // platformsToolStripMenuItem
@@ -387,8 +406,9 @@
             this.showFileExistsAuditToolStripMenuItem,
             this.showIncorrectPlatformAuditToolStripMenuItem,
             this.showMissingPicsAuditToolStripMenuItem});
+            this.columnsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("columnsToolStripMenuItem.Image")));
             this.columnsToolStripMenuItem.Name = "columnsToolStripMenuItem";
-            this.columnsToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.columnsToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.columnsToolStripMenuItem.Text = "&Visibility";
             // 
             // showPathColumnToolStripMenuItem
@@ -561,8 +581,9 @@
             this.syncRomsToolStripMenuItem,
             this.purgeRomDataToolStripMenuItem,
             this.syncUsingRetropieXMLToolStripMenuItem});
+            this.romDataOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("romDataOptionsToolStripMenuItem.Image")));
             this.romDataOptionsToolStripMenuItem.Name = "romDataOptionsToolStripMenuItem";
-            this.romDataOptionsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.romDataOptionsToolStripMenuItem.Size = new System.Drawing.Size(132, 20);
             this.romDataOptionsToolStripMenuItem.Text = "Rom &Data Options";
             // 
             // syncRomsToolStripMenuItem
@@ -588,15 +609,17 @@
             // 
             // toolStripMenuItemSettings
             // 
+            this.toolStripMenuItemSettings.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemSettings.Image")));
             this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
-            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(61, 20);
+            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(77, 20);
             this.toolStripMenuItemSettings.Text = "Settings";
             this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
             // 
             // openAppFolderToolStripMenuItem
             // 
+            this.openAppFolderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openAppFolderToolStripMenuItem.Image")));
             this.openAppFolderToolStripMenuItem.Name = "openAppFolderToolStripMenuItem";
-            this.openAppFolderToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.openAppFolderToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
             this.openAppFolderToolStripMenuItem.Text = "&Open App Folder";
             this.openAppFolderToolStripMenuItem.Click += new System.EventHandler(this.openAppFolderToolStripMenuItem_Click);
             // 
@@ -613,7 +636,7 @@
             this.columnPlatforms});
             this.dataGridViewPlatforms.Cursor = System.Windows.Forms.Cursors.Default;
             this.dataGridViewPlatforms.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridViewPlatforms.Location = new System.Drawing.Point(868, 0);
+            this.dataGridViewPlatforms.Location = new System.Drawing.Point(1110, 0);
             this.dataGridViewPlatforms.Name = "dataGridViewPlatforms";
             this.dataGridViewPlatforms.ReadOnly = true;
             this.dataGridViewPlatforms.RowHeadersVisible = false;
@@ -671,21 +694,25 @@
             this.groupBoxFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.groupBoxFilter.Location = new System.Drawing.Point(0, 24);
             this.groupBoxFilter.Name = "groupBoxFilter";
-            this.groupBoxFilter.Size = new System.Drawing.Size(638, 98);
+            this.groupBoxFilter.Size = new System.Drawing.Size(880, 98);
             this.groupBoxFilter.TabIndex = 8;
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
             // 
             // buttonClear
             // 
-            this.buttonClear.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClear.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonClear.Location = new System.Drawing.Point(537, 17);
+            this.buttonClear.Image = ((System.Drawing.Image)(resources.GetObject("buttonClear.Image")));
+            this.buttonClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonClear.Location = new System.Drawing.Point(767, 14);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(98, 78);
+            this.buttonClear.Size = new System.Drawing.Size(98, 52);
             this.buttonClear.TabIndex = 2;
             this.buttonClear.Text = "Clear Filter";
+            this.buttonClear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
@@ -693,7 +720,7 @@
             // 
             this.checkBoxFavorite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxFavorite.AutoSize = true;
-            this.checkBoxFavorite.Location = new System.Drawing.Point(453, 71);
+            this.checkBoxFavorite.Location = new System.Drawing.Point(767, 72);
             this.checkBoxFavorite.Name = "checkBoxFavorite";
             this.checkBoxFavorite.Size = new System.Drawing.Size(78, 18);
             this.checkBoxFavorite.TabIndex = 18;
@@ -706,11 +733,14 @@
             this.buttonRescan.Enabled = false;
             this.buttonRescan.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRescan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonRescan.Image = ((System.Drawing.Image)(resources.GetObject("buttonRescan.Image")));
+            this.buttonRescan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonRescan.Location = new System.Drawing.Point(134, 67);
             this.buttonRescan.Name = "buttonRescan";
             this.buttonRescan.Size = new System.Drawing.Size(120, 23);
             this.buttonRescan.TabIndex = 17;
             this.buttonRescan.Text = "Rescan Roms";
+            this.buttonRescan.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonRescan.UseVisualStyleBackColor = true;
             this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
@@ -780,7 +810,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(260, 68);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(187, 21);
+            this.textBoxFilter.Size = new System.Drawing.Size(429, 21);
             this.textBoxFilter.TabIndex = 10;
             this.textBoxFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxFilter_KeyPress);
             // 
@@ -909,7 +939,7 @@
             this.dataGridView.RowTemplate.Height = 30;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(638, 536);
+            this.dataGridView.Size = new System.Drawing.Size(880, 536);
             this.dataGridView.TabIndex = 3;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
@@ -1047,7 +1077,7 @@
             this.panelBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panelBottom.Location = new System.Drawing.Point(0, 658);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(638, 29);
+            this.panelBottom.Size = new System.Drawing.Size(880, 29);
             this.panelBottom.TabIndex = 17;
             // 
             // labelSelectedRoms
@@ -1079,7 +1109,7 @@
             this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxTitle);
             this.flowLayoutPanelPictures.Controls.Add(this.pictureBoxGameplay);
             this.flowLayoutPanelPictures.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(638, 0);
+            this.flowLayoutPanelPictures.Location = new System.Drawing.Point(880, 0);
             this.flowLayoutPanelPictures.Name = "flowLayoutPanelPictures";
             this.flowLayoutPanelPictures.Size = new System.Drawing.Size(230, 687);
             this.flowLayoutPanelPictures.TabIndex = 16;
@@ -1130,7 +1160,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1001, 687);
+            this.ClientSize = new System.Drawing.Size(1243, 687);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.menuStrip);
