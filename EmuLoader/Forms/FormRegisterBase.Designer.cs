@@ -43,9 +43,9 @@
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDelete.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelete.Image")));
             this.buttonDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDelete.Location = new System.Drawing.Point(91, 3);
+            this.buttonDelete.Location = new System.Drawing.Point(115, 3);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(82, 45);
+            this.buttonDelete.Size = new System.Drawing.Size(106, 45);
             this.buttonDelete.TabIndex = 1;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -60,7 +60,7 @@
             this.buttonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonAdd.Location = new System.Drawing.Point(3, 3);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(82, 45);
+            this.buttonAdd.Size = new System.Drawing.Size(106, 45);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -87,9 +87,9 @@
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Image = ((System.Drawing.Image)(resources.GetObject("buttonCancel.Image")));
             this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancel.Location = new System.Drawing.Point(179, 3);
+            this.buttonCancel.Location = new System.Drawing.Point(227, 3);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(82, 45);
+            this.buttonCancel.Size = new System.Drawing.Size(106, 45);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -102,9 +102,9 @@
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.Image = ((System.Drawing.Image)(resources.GetObject("buttonClose.Image")));
             this.buttonClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonClose.Location = new System.Drawing.Point(267, 3);
+            this.buttonClose.Location = new System.Drawing.Point(339, 3);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(82, 45);
+            this.buttonClose.Size = new System.Drawing.Size(106, 45);
             this.buttonClose.TabIndex = 3;
             this.buttonClose.Text = "Close";
             this.buttonClose.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

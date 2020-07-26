@@ -740,7 +740,8 @@
             this.buttonRescan.Size = new System.Drawing.Size(120, 23);
             this.buttonRescan.TabIndex = 17;
             this.buttonRescan.Text = "Rescan Roms";
-            this.buttonRescan.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonRescan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonRescan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonRescan.UseVisualStyleBackColor = true;
             this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
@@ -838,7 +839,7 @@
             // 
             this.labelFilterRom.AutoSize = true;
             this.labelFilterRom.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFilterRom.Location = new System.Drawing.Point(263, 52);
+            this.labelFilterRom.Location = new System.Drawing.Point(258, 51);
             this.labelFilterRom.Name = "labelFilterRom";
             this.labelFilterRom.Size = new System.Drawing.Size(65, 14);
             this.labelFilterRom.TabIndex = 5;

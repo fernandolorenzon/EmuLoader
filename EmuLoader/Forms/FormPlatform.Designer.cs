@@ -64,6 +64,8 @@
             this.comboBoxPlatformsDB = new System.Windows.Forms.ComboBox();
             this.textBoxDefaultRomPath = new System.Windows.Forms.TextBox();
             this.tabPageEmulators = new System.Windows.Forms.TabPage();
+            this.buttonSelectCore = new System.Windows.Forms.Button();
+            this.checkBoxUseRetroarch = new System.Windows.Forms.CheckBox();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.buttonSwap = new System.Windows.Forms.Button();
             this.textBoxAlternatePath = new System.Windows.Forms.TextBox();
@@ -98,7 +100,7 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(830, 329);
+            this.dataGridView.Size = new System.Drawing.Size(830, 333);
             this.dataGridView.TabIndex = 1;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
@@ -157,7 +159,7 @@
             // 
             this.textBoxPath.Location = new System.Drawing.Point(19, 25);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(378, 20);
+            this.textBoxPath.Size = new System.Drawing.Size(269, 20);
             this.textBoxPath.TabIndex = 4;
             // 
             // labelPath
@@ -171,7 +173,7 @@
             // 
             // buttonPath
             // 
-            this.buttonPath.Location = new System.Drawing.Point(403, 23);
+            this.buttonPath.Location = new System.Drawing.Point(294, 23);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(36, 23);
             this.buttonPath.TabIndex = 3;
@@ -223,7 +225,7 @@
             // labelCommand
             // 
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(442, 3);
+            this.labelCommand.Location = new System.Drawing.Point(333, 3);
             this.labelCommand.Name = "labelCommand";
             this.labelCommand.Size = new System.Drawing.Size(54, 13);
             this.labelCommand.TabIndex = 11;
@@ -233,9 +235,9 @@
             // 
             this.textBoxCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCommand.Location = new System.Drawing.Point(445, 25);
+            this.textBoxCommand.Location = new System.Drawing.Point(336, 25);
             this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(319, 20);
+            this.textBoxCommand.Size = new System.Drawing.Size(266, 20);
             this.textBoxCommand.TabIndex = 12;
             this.textBoxCommand.Text = "%EMUPATH% %ROMPATH%";
             this.toolTip1.SetToolTip(this.textBoxCommand, resources.GetString("textBoxCommand.ToolTip"));
@@ -264,9 +266,9 @@
             // 
             this.textBoxAlternateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlternateCommand.Location = new System.Drawing.Point(445, 78);
+            this.textBoxAlternateCommand.Location = new System.Drawing.Point(336, 78);
             this.textBoxAlternateCommand.Name = "textBoxAlternateCommand";
-            this.textBoxAlternateCommand.Size = new System.Drawing.Size(319, 20);
+            this.textBoxAlternateCommand.Size = new System.Drawing.Size(266, 20);
             this.textBoxAlternateCommand.TabIndex = 37;
             this.textBoxAlternateCommand.Text = "%EMUPATH% %ROMPATH%";
             this.toolTip1.SetToolTip(this.textBoxAlternateCommand, resources.GetString("textBoxAlternateCommand.ToolTip"));
@@ -275,7 +277,7 @@
             // 
             this.panel1.Controls.Add(this.tabControlPlatform);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 329);
+            this.panel1.Location = new System.Drawing.Point(0, 333);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(830, 266);
             this.panel1.TabIndex = 17;
@@ -412,6 +414,8 @@
             // 
             // tabPageEmulators
             // 
+            this.tabPageEmulators.Controls.Add(this.buttonSelectCore);
+            this.tabPageEmulators.Controls.Add(this.checkBoxUseRetroarch);
             this.tabPageEmulators.Controls.Add(this.textBoxPath);
             this.tabPageEmulators.Controls.Add(this.buttonHelp);
             this.tabPageEmulators.Controls.Add(this.buttonSwap);
@@ -433,12 +437,37 @@
             this.tabPageEmulators.Text = "Emulators";
             this.tabPageEmulators.UseVisualStyleBackColor = true;
             // 
+            // buttonSelectCore
+            // 
+            this.buttonSelectCore.Enabled = false;
+            this.buttonSelectCore.Image = ((System.Drawing.Image)(resources.GetObject("buttonSelectCore.Image")));
+            this.buttonSelectCore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSelectCore.Location = new System.Drawing.Point(709, 23);
+            this.buttonSelectCore.Name = "buttonSelectCore";
+            this.buttonSelectCore.Size = new System.Drawing.Size(94, 23);
+            this.buttonSelectCore.TabIndex = 40;
+            this.buttonSelectCore.Text = "Select Core";
+            this.buttonSelectCore.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSelectCore.UseVisualStyleBackColor = true;
+            this.buttonSelectCore.Click += new System.EventHandler(this.buttonSelectCore_Click);
+            // 
+            // checkBoxUseRetroarch
+            // 
+            this.checkBoxUseRetroarch.AutoSize = true;
+            this.checkBoxUseRetroarch.Location = new System.Drawing.Point(608, 26);
+            this.checkBoxUseRetroarch.Name = "checkBoxUseRetroarch";
+            this.checkBoxUseRetroarch.Size = new System.Drawing.Size(95, 17);
+            this.checkBoxUseRetroarch.TabIndex = 39;
+            this.checkBoxUseRetroarch.Text = "Use Retroarch";
+            this.checkBoxUseRetroarch.UseVisualStyleBackColor = true;
+            this.checkBoxUseRetroarch.Click += new System.EventHandler(this.checkBoxUseRetroarch_Click);
+            // 
             // buttonHelp
             // 
             this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.buttonHelp.ForeColor = System.Drawing.Color.Black;
-            this.buttonHelp.Location = new System.Drawing.Point(770, 22);
+            this.buttonHelp.Location = new System.Drawing.Point(484, 104);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(24, 23);
             this.buttonHelp.TabIndex = 27;
@@ -448,7 +477,7 @@
             // 
             // buttonSwap
             // 
-            this.buttonSwap.Location = new System.Drawing.Point(445, 114);
+            this.buttonSwap.Location = new System.Drawing.Point(336, 104);
             this.buttonSwap.Name = "buttonSwap";
             this.buttonSwap.Size = new System.Drawing.Size(142, 23);
             this.buttonSwap.TabIndex = 38;
@@ -460,7 +489,7 @@
             // 
             this.textBoxAlternatePath.Location = new System.Drawing.Point(18, 77);
             this.textBoxAlternatePath.Name = "textBoxAlternatePath";
-            this.textBoxAlternatePath.Size = new System.Drawing.Size(379, 20);
+            this.textBoxAlternatePath.Size = new System.Drawing.Size(270, 20);
             this.textBoxAlternatePath.TabIndex = 34;
             // 
             // label5
@@ -475,7 +504,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(442, 55);
+            this.label6.Location = new System.Drawing.Point(333, 55);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 13);
             this.label6.TabIndex = 36;
@@ -483,7 +512,7 @@
             // 
             // buttonAlternatePath
             // 
-            this.buttonAlternatePath.Location = new System.Drawing.Point(403, 76);
+            this.buttonAlternatePath.Location = new System.Drawing.Point(294, 76);
             this.buttonAlternatePath.Name = "buttonAlternatePath";
             this.buttonAlternatePath.Size = new System.Drawing.Size(36, 23);
             this.buttonAlternatePath.TabIndex = 33;
@@ -570,5 +599,7 @@
         private System.Windows.Forms.TextBox textBoxDefaultRomPath;
         private System.Windows.Forms.TabPage tabPageEmulators;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBoxUseRetroarch;
+        private System.Windows.Forms.Button buttonSelectCore;
     }
 }

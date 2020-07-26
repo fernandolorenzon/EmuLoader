@@ -19,6 +19,8 @@ namespace EmuLoader.Core.Classes
         public bool ShowInFilter { get; set; }
         public string DefaultRomPath { get; set; }
         public string DefaultRomExtensions { get; set; }
+        public bool UseRetroarch { get; set; }
+        
         public string Id { get; set; }
 
         public Bitmap Icon { get; set; }
@@ -51,6 +53,8 @@ namespace EmuLoader.Core.Classes
                 platform.Color = Color.FromArgb(Convert.ToInt32(Functions.GetXmlAttribute(node, "Color")));
                 string icon = RomFunctions.GetPlatformPicture(platform.Name);
                 platform.Icon = Functions.CreateBitmap(icon);
+                string useRetroarch = Functions.GetXmlAttribute(node, "UseRetroarch");
+                platform.UseRetroarch = string.IsNullOrEmpty(useRetroarch) ? false : Convert.ToBoolean(useRetroarch);
                 platforms.Add(platform.Name.ToLower(), platform);
             }
         }
@@ -109,6 +113,7 @@ namespace EmuLoader.Core.Classes
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomPath"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomExtensions"));
                 node.Attributes.Append(XML.xmlDoc.CreateAttribute("PictureNameByDisplay"));
+                node.Attributes.Append(XML.xmlDoc.CreateAttribute("UseRetroarch"));
                 XML.GetParentNode("Platforms").AppendChild(node);
                 platforms.Add(platform.Name.ToLower(), platform);
             }
@@ -125,6 +130,7 @@ namespace EmuLoader.Core.Classes
             Functions.CreateOrSetXmlAttribute(node, "ShowInFilter", platform.ShowInFilter.ToString());
             Functions.CreateOrSetXmlAttribute(node, "DefaultRomPath", platform.DefaultRomPath);
             Functions.CreateOrSetXmlAttribute(node, "DefaultRomExtensions", platform.DefaultRomExtensions);
+            Functions.CreateOrSetXmlAttribute(node, "UseRetroarch", platform.UseRetroarch.ToString());
             return true;
         }
 

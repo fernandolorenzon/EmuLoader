@@ -54,7 +54,7 @@
             this.dataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ShowEditingIcon = false;
-            this.dataGridView.Size = new System.Drawing.Size(334, 233);
+            this.dataGridView.Size = new System.Drawing.Size(436, 294);
             this.dataGridView.TabIndex = 4;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 289);
+            this.ClientSize = new System.Drawing.Size(436, 346);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormChooseList";
             this.ShowInTaskbar = false;

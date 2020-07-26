@@ -123,6 +123,12 @@
   <metadata name="columnColor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="columnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="columnColor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -150,6 +156,23 @@ Arcade emulators use this: %EMUPATH% %ROMFILE%</value>
 
 Most console emulators use the standard: %EMUPATH% %ROMPATH%
 Arcade emulators use this: %EMUPATH% %ROMFILE%</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonSelectCore.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        bwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJISURBVDhPZZNN
+        T1NREIbvhth/YNK0ZaHo3gQiQaQfcqHQ0ktBUmmR3iqJwYAfLSk0CAnGL1ATBS0SKWBBE/+GC3e6cqML
+        f4ARti5IxvOc9NQ2Npne3jkzc955ZmqJSN3Up8UXCBQ7znd9On3m7GPj9/r97rn2js/qWVAxJ5pyml4s
+        KzA2PvH77cFHiQ45P70+X/Gk1zvbeeHiN3xT07N/PB5PqCmn8QXr7gl/IXjr3Qd5uvFGVl+W5fXOvuCz
+        B+Pf/1OAg6o8/a2t92/NLRy+qlQlk5tChQwmkvLo+boqUpV86d4RMbXEgLIW+isgjeoELD9ck2DElitX
+        XUmMXJbYcFJyN24qX6+srW8KF6CSVuFlAQd52ObugYTtfp00czcv5cqubO+/l0JpUSlxpDsUqbeDAVsT
+        BhIH6ew1SU1k5U5xXjLZ3HGot68UsfsX+E3B4bGUTN/Oaz5AZlIaBKSBFXOSMjCUkK29qgTD9qIBRSHU
+        0BJcgMuENAu+eMHJIUHlyo6QZApQjKIU5xIu41JdABnIQRbkgYfc9KR7TCKFaIG2UupsfDKnOdA27VuA
+        MFAYHxMAIgnIxiiID8BlBdrEMwCLUTCSrp7g1wfPXvxijOpWDTMaT6iWRvWtwUu2cMaoGTmjr622Wga1
+        FPQTd0ajxaWVI27JuNdVAUdzSavfG9t7egdYJBVfXz4NyRgOOxr7gTz6BBZw4YOPBWqM1zmNL1RFGsFA
+        gjQTAjI+WjVqjTUVQAF91f66rvGfamt7Amy9uqrlfzli/QUIsw1CkRdevwAAAABJRU5ErkJggg==
+</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>54</value>

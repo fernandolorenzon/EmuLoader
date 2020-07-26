@@ -162,6 +162,7 @@ namespace EmuLoader.Forms
             platform.ShowInList = checkBoxShowInLinksList.Checked;
             platform.DefaultRomPath = textBoxDefaultRomPath.Text;
             platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
+            platform.UseRetroarch = checkBoxUseRetroarch.Checked;
 
             if (File.Exists(textBoxPlatformIcon.Text))
             {
@@ -330,6 +331,63 @@ namespace EmuLoader.Forms
 
         }
 
+        private void checkBoxUseRetroarch_Click(object sender, EventArgs e)
+        {
+            buttonSelectCore.Enabled = checkBoxUseRetroarch.Checked;
+            textBoxPath.Enabled = !checkBoxUseRetroarch.Checked;
+            textBoxCommand.Enabled = !checkBoxUseRetroarch.Checked;
+
+            if (!checkBoxUseRetroarch.Checked)
+            {
+                textBoxPath.Text = "";
+                textBoxCommand.Text = "";
+                return;
+            }
+
+            var config = Config.GetFolder(Folder.Retroarch);
+
+            if (string.IsNullOrEmpty(config))
+            {
+                FormCustomMessage.ShowError("Retroarch folder not added. Please add on Settings menu.");
+                return;
+            }
+
+            textBoxPath.Text = config + "\\" + "retroarch.exe";
+
+            if (!File.Exists(textBoxPath.Text))
+            {
+                FormCustomMessage.ShowError("Retroarch exe not found");
+                return;
+            }
+
+            textBoxCommand.Text = Values.RetroarchCommand;
+
+            if (textBoxCommand.Text.Contains("[CORE]"))
+            {
+                buttonSelectCore_Click(sender, e);
+            }
+        }
+
+        private void buttonSelectCore_Click(object sender, EventArgs e)
+        {
+            var config = Config.GetFolder(Folder.Retroarch);
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            if (!string.IsNullOrEmpty(config))
+            {
+                config = config + "\\" + "cores";
+
+                if (Directory.Exists(config))
+                {
+                    dialog.InitialDirectory = config;
+                }
+            }
+
+            dialog.Filter = "Libreto Core | *.dll";
+            dialog.ShowDialog();
+            textBoxCommand.Text = Values.RetroarchCommand.Replace("[CORE]", RomFunctions.GetFileName(dialog.FileName));
+        }
+
         #endregion
 
         #region Methods
@@ -373,6 +431,7 @@ namespace EmuLoader.Forms
             textBoxDefaultRomPath.Text = string.Empty;
             textBoxDefaultRomExtensions.Text = string.Empty;
             textBoxPlatformName.Enabled = true;
+            checkBoxUseRetroarch.Checked = false;
         }
 
         protected override void SetForm()
@@ -393,7 +452,9 @@ namespace EmuLoader.Forms
             {
                 pictureBoxIcon.Load(iconPath);
             }
-
+            
+            checkBoxUseRetroarch.Checked = platform.UseRetroarch;
+            buttonSelectCore.Enabled = platform.UseRetroarch;
             comboBoxPlatformsDB.SelectedValue = platform.Id == "" ? "0" : platform.Id;
             textBoxPlatformName.Text = platform.Name;
             textBoxPath.Text = platform.EmulatorExe;
@@ -405,9 +466,11 @@ namespace EmuLoader.Forms
             checkBoxShowInLinksList.Checked = platform.ShowInList;
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
+            
             textBoxPlatformName.Enabled = false;
         }
 
         #endregion
+
     }
 }
