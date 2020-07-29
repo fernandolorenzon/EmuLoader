@@ -10,7 +10,7 @@ namespace EmuLoader.Core.Business
         {
             string exe = rom.UseAlternateEmulator ? rom.Platform.EmulatorExeAlt : rom.Platform.EmulatorExe;
             string command = rom.UseAlternateEmulator ? rom.Platform.CommandAlt : rom.Platform.Command;
-            string workdir = rom.Platform.EmulatorExe.Substring(0, rom.Platform.EmulatorExe.LastIndexOf("\\"));
+            string workdir = rom.UseAlternateEmulator ? rom.Platform.EmulatorExeAlt.Substring(0, rom.Platform.EmulatorExeAlt.LastIndexOf("\\")) : rom.Platform.EmulatorExe.Substring(0, rom.Platform.EmulatorExe.LastIndexOf("\\"));
 
             if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
             {
