@@ -150,7 +150,7 @@
             // 
             // textBoxPlatformName
             // 
-            this.textBoxPlatformName.Location = new System.Drawing.Point(10, 130);
+            this.textBoxPlatformName.Location = new System.Drawing.Point(13, 28);
             this.textBoxPlatformName.Name = "textBoxPlatformName";
             this.textBoxPlatformName.Size = new System.Drawing.Size(339, 20);
             this.textBoxPlatformName.TabIndex = 2;
@@ -185,7 +185,7 @@
             // 
             this.buttonColor.BackColor = System.Drawing.Color.White;
             this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColor.Location = new System.Drawing.Point(11, 61);
+            this.buttonColor.Location = new System.Drawing.Point(13, 115);
             this.buttonColor.Name = "buttonColor";
             this.buttonColor.Size = new System.Drawing.Size(50, 50);
             this.buttonColor.TabIndex = 6;
@@ -203,7 +203,7 @@
             this.checkBoxShowInLinksList.AutoSize = true;
             this.checkBoxShowInLinksList.Checked = true;
             this.checkBoxShowInLinksList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(11, 168);
+            this.checkBoxShowInLinksList.Location = new System.Drawing.Point(13, 183);
             this.checkBoxShowInLinksList.Name = "checkBoxShowInLinksList";
             this.checkBoxShowInLinksList.Size = new System.Drawing.Size(112, 17);
             this.checkBoxShowInLinksList.TabIndex = 9;
@@ -215,7 +215,7 @@
             this.checkBoxShowInFilters.AutoSize = true;
             this.checkBoxShowInFilters.Checked = true;
             this.checkBoxShowInFilters.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowInFilters.Location = new System.Drawing.Point(142, 168);
+            this.checkBoxShowInFilters.Location = new System.Drawing.Point(144, 183);
             this.checkBoxShowInFilters.Name = "checkBoxShowInFilters";
             this.checkBoxShowInFilters.Size = new System.Drawing.Size(95, 17);
             this.checkBoxShowInFilters.TabIndex = 10;
@@ -244,7 +244,7 @@
             // 
             // buttonIconPath
             // 
-            this.buttonIconPath.Location = new System.Drawing.Point(257, 26);
+            this.buttonIconPath.Location = new System.Drawing.Point(248, 84);
             this.buttonIconPath.Name = "buttonIconPath";
             this.buttonIconPath.Size = new System.Drawing.Size(36, 23);
             this.buttonIconPath.TabIndex = 15;
@@ -255,7 +255,7 @@
             // pictureBoxIcon
             // 
             this.pictureBoxIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxIcon.Location = new System.Drawing.Point(10, 6);
+            this.pictureBoxIcon.Location = new System.Drawing.Point(13, 56);
             this.pictureBoxIcon.Name = "pictureBoxIcon";
             this.pictureBoxIcon.Size = new System.Drawing.Size(50, 50);
             this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -321,7 +321,7 @@
             // 
             // textBoxPlatformIcon
             // 
-            this.textBoxPlatformIcon.Location = new System.Drawing.Point(78, 28);
+            this.textBoxPlatformIcon.Location = new System.Drawing.Point(69, 86);
             this.textBoxPlatformIcon.Name = "textBoxPlatformIcon";
             this.textBoxPlatformIcon.Size = new System.Drawing.Size(173, 20);
             this.textBoxPlatformIcon.TabIndex = 13;
@@ -330,7 +330,7 @@
             // labelPlatformName
             // 
             this.labelPlatformName.AutoSize = true;
-            this.labelPlatformName.Location = new System.Drawing.Point(8, 114);
+            this.labelPlatformName.Location = new System.Drawing.Point(10, 6);
             this.labelPlatformName.Name = "labelPlatformName";
             this.labelPlatformName.Size = new System.Drawing.Size(76, 13);
             this.labelPlatformName.TabIndex = 4;
@@ -369,7 +369,7 @@
             // labelPlatformIcon
             // 
             this.labelPlatformIcon.AutoSize = true;
-            this.labelPlatformIcon.Location = new System.Drawing.Point(75, 6);
+            this.labelPlatformIcon.Location = new System.Drawing.Point(69, 70);
             this.labelPlatformIcon.Name = "labelPlatformIcon";
             this.labelPlatformIcon.Size = new System.Drawing.Size(69, 13);
             this.labelPlatformIcon.TabIndex = 14;
