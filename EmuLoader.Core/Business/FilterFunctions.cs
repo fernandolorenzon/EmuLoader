@@ -7,6 +7,38 @@ namespace EmuLoader.Core.Business
 {
     public static class FilterFunctions
     {
+        public static bool SaveFilter(Filter filter)
+        {
+            XML.SetFilter("Text", filter.text);
+            XML.SetFilter("Platform", filter.platform);
+            XML.SetFilter("Label", filter.label);
+            XML.SetFilter("Genre", filter.genre);
+            XML.SetFilter("Publisher", filter.publisher);
+            XML.SetFilter("Developer", filter.developer);
+            XML.SetFilter("Year", filter.year);
+            XML.SetFilter("Favorite", filter.favorite.ToString());
+            XML.SetFilter("Rom", filter.rom);
+
+            return true;
+        }
+
+        public static Filter GetFilter()
+        {
+            Filter filter = new Filter();
+            filter.text = XML.GetFilter("Text");
+            filter.platform = XML.GetFilter("Platform");
+            filter.label = XML.GetFilter("Label");
+            filter.genre = XML.GetFilter("Genre");
+            filter.publisher = XML.GetFilter("Publisher");
+            filter.developer = XML.GetFilter("Developer");
+            filter.year = XML.GetFilter("Year");
+            var favorite = XML.GetFilter("Favorite");
+            filter.favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
+            filter.rom = XML.GetFilter("Rom");
+
+            return filter;
+        }
+
         public static List<Rom> FilterRoms(Filter filter)
         {
             List<Rom> FilteredRoms = new List<Rom>();

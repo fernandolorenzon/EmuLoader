@@ -71,7 +71,7 @@ namespace EmuLoader.Forms
                 FillDeveloperFilter();
                 FillYearReleasedFilter();
 
-                Filter filter = Config.GetFilter();
+                Filter filter = FilterFunctions.GetFilter();
 
                 textBoxFilter.Text = filter.text;
 
@@ -104,6 +104,8 @@ namespace EmuLoader.Forms
                 {
                     comboBoxYearReleased.SelectedText = filter.year;
                 }
+               
+                checkBoxFavorite.Checked = filter.favorite;
 
                 FilterRoms();
 
@@ -167,8 +169,9 @@ namespace EmuLoader.Forms
             filter.year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
             filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Path;
             filter.text = textBoxFilter.Text;
+            filter.favorite = checkBoxFavorite.Checked;
 
-            Config.SaveFilter(filter);
+            FilterFunctions.SaveFilter(filter);
             XML.SaveXml();
         }
 
@@ -1839,6 +1842,7 @@ namespace EmuLoader.Forms
         {
             try
             {
+                if (updating) return;
                 FilterRoms();
             }
             catch (Exception ex)
