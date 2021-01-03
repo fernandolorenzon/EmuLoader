@@ -89,6 +89,7 @@
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnPlatforms = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
+            this.comboBoxFilter = new System.Windows.Forms.ComboBox();
             this.buttonClear = new System.Windows.Forms.Button();
             this.checkBoxFavorite = new System.Windows.Forms.CheckBox();
             this.buttonRescan = new System.Windows.Forms.Button();
@@ -671,6 +672,7 @@
             // groupBoxFilter
             // 
             this.groupBoxFilter.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.groupBoxFilter.Controls.Add(this.comboBoxFilter);
             this.groupBoxFilter.Controls.Add(this.buttonClear);
             this.groupBoxFilter.Controls.Add(this.checkBoxFavorite);
             this.groupBoxFilter.Controls.Add(this.buttonRescan);
@@ -698,6 +700,21 @@
             this.groupBoxFilter.TabIndex = 8;
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
+            // 
+            // comboBoxFilter
+            // 
+            this.comboBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxFilter.FormattingEnabled = true;
+            this.comboBoxFilter.Items.AddRange(new object[] {
+            "Contains",
+            "Starts with",
+            "Ends with"});
+            this.comboBoxFilter.Location = new System.Drawing.Point(580, 68);
+            this.comboBoxFilter.Name = "comboBoxFilter";
+            this.comboBoxFilter.Size = new System.Drawing.Size(109, 22);
+            this.comboBoxFilter.TabIndex = 19;
+            this.comboBoxFilter.Text = "Contains";
+            this.comboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.comboBoxFilter_SelectedIndexChanged);
             // 
             // buttonClear
             // 
@@ -811,7 +828,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(260, 68);
             this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(429, 21);
+            this.textBoxFilter.Size = new System.Drawing.Size(314, 21);
             this.textBoxFilter.TabIndex = 10;
             this.textBoxFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxFilter_KeyPress);
             // 
@@ -1294,5 +1311,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
         private System.Windows.Forms.ToolStripMenuItem favoriteUnfavoriteToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxFavorite;
+        private System.Windows.Forms.ComboBox comboBoxFilter;
     }
 }

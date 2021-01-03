@@ -10,6 +10,7 @@ namespace EmuLoader.Core.Business
         public static bool SaveFilter(Filter filter)
         {
             XML.SetFilter("Text", filter.text);
+            XML.SetFilter("TextType", filter.textType);
             XML.SetFilter("Platform", filter.platform);
             XML.SetFilter("Label", filter.label);
             XML.SetFilter("Genre", filter.genre);
@@ -26,6 +27,7 @@ namespace EmuLoader.Core.Business
         {
             Filter filter = new Filter();
             filter.text = XML.GetFilter("Text");
+            filter.textType = XML.GetFilter("TextType");
             filter.platform = XML.GetFilter("Platform");
             filter.label = XML.GetFilter("Label");
             filter.genre = XML.GetFilter("Genre");
@@ -112,7 +114,21 @@ namespace EmuLoader.Core.Business
 
                 if (!string.IsNullOrEmpty(filter.text))
                 {
-                    var filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.text.ToLower())).ToList();
+                    var filterRoms = new List<Rom>();
+
+                    if (filter.textType == "Starts with")
+                    {
+                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().StartsWith(filter.text.ToLower())).ToList();
+                    }
+                    else if (filter.textType == "Ends with")
+                    {
+                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().EndsWith(filter.text.ToLower())).ToList();
+                    }
+                    else
+                    {
+                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.text.ToLower())).ToList();
+                    }
+
                     FilteredRoms = filterRoms;
                 }
 

@@ -3,6 +3,7 @@
     public class Filter
     {
         public string text { get; set; }
+        public string textType { get; set; }
         public string platform { get; set; }
         public string label { get; set; }
         public string genre { get; set; }

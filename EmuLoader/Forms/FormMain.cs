@@ -1228,6 +1228,12 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            FilterRoms();
+        }
+
         private void batchAddPicturesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -1887,6 +1893,7 @@ namespace EmuLoader.Forms
             filter.year = comboBoxYearReleased.Text;
             filter.favorite = checkBoxFavorite.Checked;
             filter.text = filter.text.ToLower();
+            filter.textType = comboBoxFilter.Text;
 
             if (updating) return;
 
