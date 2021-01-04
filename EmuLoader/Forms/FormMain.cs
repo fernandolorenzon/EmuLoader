@@ -74,6 +74,7 @@ namespace EmuLoader.Forms
                 Filter filter = FilterFunctions.GetFilter();
 
                 textBoxFilter.Text = filter.text;
+                comboBoxFilter.Text = filter.textType;
 
                 if (!string.IsNullOrEmpty(filter.platform))
                 {
@@ -169,6 +170,7 @@ namespace EmuLoader.Forms
             filter.year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
             filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Path;
             filter.text = textBoxFilter.Text;
+            filter.textType = comboBoxFilter.Text;
             filter.favorite = checkBoxFavorite.Checked;
 
             FilterFunctions.SaveFilter(filter);
