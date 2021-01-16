@@ -109,8 +109,9 @@ namespace EmuLoader.Core.Business
             }
         }
 
-        public static Rom GetGameByName(string platformId, string name)
+        public static Rom GetGameByName(string platformId, string name, out string access)
         {
+            access = "";
             try
             {
                 string key = Functions.LoadAPIKEY();
@@ -125,6 +126,7 @@ namespace EmuLoader.Core.Business
 
                 if (string.IsNullOrEmpty(json)) return null;
 
+                access = json.Substring(json.IndexOf("remaining_monthly_allowance") + "remaining_monthly_allowance:".Length + 1, 5).Replace(":", "").Replace(",", "").Trim();
                 var part = json.Substring(json.IndexOf("games\":") + 7);
                 part = part.Substring(0, part.IndexOf("]},\"pages") + 1);
                 var list = JsonConvert.DeserializeObject<List<API_Game>>(part);
@@ -156,8 +158,9 @@ namespace EmuLoader.Core.Business
             return null;
         }
 
-        public static Rom GetGameDetails(string gameId, Platform platform)
+        public static Rom GetGameDetails(string gameId, Platform platform, out string access)
         {
+            access = "";
             try
             {
                 var publishers = GetPublishers();
@@ -194,7 +197,7 @@ namespace EmuLoader.Core.Business
                 if (string.IsNullOrEmpty(json)) return null;
 
                 var result = new Rom();
-
+                access = json.Substring(json.IndexOf("remaining_monthly_allowance") + "remaining_monthly_allowance:".Length + 1, 5).Replace(":", "").Replace(",", "").Trim();
                 var jobject = (JObject)JsonConvert.DeserializeObject(json);
                 var jgame = jobject.SelectToken("data.games").First();
                 result.Id = gameId;
@@ -262,11 +265,12 @@ namespace EmuLoader.Core.Business
             return null;
         }
 
-        public static bool GetGameArtUrls(string gameId, out string boxArt, out string title, out string gameplay)
+        public static bool GetGameArtUrls(string gameId, out string boxArt, out string title, out string gameplay, out string access)
         {
             boxArt = string.Empty;
             title = string.Empty;
             gameplay = string.Empty;
+            access = "";
 
             try
             {
@@ -281,6 +285,8 @@ namespace EmuLoader.Core.Business
                 }
 
                 if (string.IsNullOrEmpty(json)) return false;
+                
+                access = json.Substring(json.IndexOf("remaining_monthly_allowance") + "remaining_monthly_allowance:".Length + 1, 5).Replace(":", "").Replace(",", "").Trim();
 
                 if (json.Contains(string.Format(@"boxart\/front\/{0}-1.jpg", gameId)))
                 {

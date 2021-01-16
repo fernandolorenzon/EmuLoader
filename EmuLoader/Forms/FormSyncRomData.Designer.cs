@@ -62,6 +62,11 @@
             this.labelRating = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.checkBoxBasicSync = new System.Windows.Forms.CheckBox();
+            this.checkBoxOnlyUndiscovered = new System.Windows.Forms.CheckBox();
+            this.radioButtonSyncAll = new System.Windows.Forms.RadioButton();
+            this.radioButtonImages = new System.Windows.Forms.RadioButton();
+            this.labelAccess = new System.Windows.Forms.Label();
+            this.labelAccessLeftCount = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,7 +187,7 @@
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(414, 388);
+            this.textBoxLog.Size = new System.Drawing.Size(414, 453);
             this.textBoxLog.TabIndex = 12;
             // 
             // buttonSync
@@ -204,7 +209,7 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonStopProcess);
             this.flowLayoutPanel1.Controls.Add(this.buttonClose);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 446);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 511);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(802, 54);
             this.flowLayoutPanel1.TabIndex = 14;
@@ -260,7 +265,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(4, 417);
+            this.progressBar.Location = new System.Drawing.Point(4, 482);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(366, 23);
             this.progressBar.TabIndex = 16;
@@ -269,7 +274,7 @@
             // 
             this.labelProgress.AutoSize = true;
             this.labelProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProgress.Location = new System.Drawing.Point(1, 401);
+            this.labelProgress.Location = new System.Drawing.Point(1, 466);
             this.labelProgress.Name = "labelProgress";
             this.labelProgress.Size = new System.Drawing.Size(11, 13);
             this.labelProgress.TabIndex = 17;
@@ -388,12 +393,70 @@
             this.checkBoxBasicSync.TabIndex = 29;
             this.checkBoxBasicSync.Text = "Only sync Id, Name and Year";
             this.checkBoxBasicSync.UseVisualStyleBackColor = true;
+            this.checkBoxBasicSync.CheckedChanged += new System.EventHandler(this.checkBoxBasicSync_CheckedChanged);
+            // 
+            // checkBoxOnlyUndiscovered
+            // 
+            this.checkBoxOnlyUndiscovered.AutoSize = true;
+            this.checkBoxOnlyUndiscovered.Checked = true;
+            this.checkBoxOnlyUndiscovered.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxOnlyUndiscovered.Location = new System.Drawing.Point(13, 389);
+            this.checkBoxOnlyUndiscovered.Name = "checkBoxOnlyUndiscovered";
+            this.checkBoxOnlyUndiscovered.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxOnlyUndiscovered.TabIndex = 30;
+            this.checkBoxOnlyUndiscovered.Text = "Only undiscovered";
+            this.checkBoxOnlyUndiscovered.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonSyncAll
+            // 
+            this.radioButtonSyncAll.AutoSize = true;
+            this.radioButtonSyncAll.Checked = true;
+            this.radioButtonSyncAll.Location = new System.Drawing.Point(12, 411);
+            this.radioButtonSyncAll.Name = "radioButtonSyncAll";
+            this.radioButtonSyncAll.Size = new System.Drawing.Size(155, 17);
+            this.radioButtonSyncAll.TabIndex = 31;
+            this.radioButtonSyncAll.TabStop = true;
+            this.radioButtonSyncAll.Text = "Sync and download images";
+            this.radioButtonSyncAll.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonImages
+            // 
+            this.radioButtonImages.AutoSize = true;
+            this.radioButtonImages.Location = new System.Drawing.Point(173, 411);
+            this.radioButtonImages.Name = "radioButtonImages";
+            this.radioButtonImages.Size = new System.Drawing.Size(109, 17);
+            this.radioButtonImages.TabIndex = 32;
+            this.radioButtonImages.Text = "Download images";
+            this.radioButtonImages.UseVisualStyleBackColor = true;
+            // 
+            // labelAccess
+            // 
+            this.labelAccess.AutoSize = true;
+            this.labelAccess.Location = new System.Drawing.Point(9, 431);
+            this.labelAccess.Name = "labelAccess";
+            this.labelAccess.Size = new System.Drawing.Size(62, 13);
+            this.labelAccess.TabIndex = 33;
+            this.labelAccess.Text = "Access left:";
+            // 
+            // labelAccessLeftCount
+            // 
+            this.labelAccessLeftCount.AutoSize = true;
+            this.labelAccessLeftCount.Location = new System.Drawing.Point(80, 431);
+            this.labelAccessLeftCount.Name = "labelAccessLeftCount";
+            this.labelAccessLeftCount.Size = new System.Drawing.Size(10, 13);
+            this.labelAccessLeftCount.TabIndex = 34;
+            this.labelAccessLeftCount.Text = "-";
             // 
             // FormSyncRomData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 500);
+            this.ClientSize = new System.Drawing.Size(802, 565);
+            this.Controls.Add(this.labelAccessLeftCount);
+            this.Controls.Add(this.labelAccess);
+            this.Controls.Add(this.radioButtonImages);
+            this.Controls.Add(this.radioButtonSyncAll);
+            this.Controls.Add(this.checkBoxOnlyUndiscovered);
             this.Controls.Add(this.checkBoxBasicSync);
             this.Controls.Add(this.labelRating);
             this.Controls.Add(this.label11);
@@ -468,5 +531,10 @@
         private System.Windows.Forms.Button buttonLockIds;
         private System.Windows.Forms.Button buttonUnlockIds;
         private System.Windows.Forms.CheckBox checkBoxBasicSync;
+        private System.Windows.Forms.CheckBox checkBoxOnlyUndiscovered;
+        private System.Windows.Forms.RadioButton radioButtonSyncAll;
+        private System.Windows.Forms.RadioButton radioButtonImages;
+        private System.Windows.Forms.Label labelAccess;
+        private System.Windows.Forms.Label labelAccessLeftCount;
     }
 }

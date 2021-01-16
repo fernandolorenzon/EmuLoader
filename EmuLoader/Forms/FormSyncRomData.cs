@@ -38,6 +38,7 @@ namespace EmuLoader.Forms
             comboBoxPlatform.DataSource = platforms;
             threadSetIdAndYear = new Thread(SetIdAndYear);
             threadSetOtherProperties = new Thread(SetOtherProperties);
+            checkBoxBasicSync_CheckedChanged(sender, e);
         }
 
         private void buttonSync_Click(object sender, EventArgs e)
@@ -49,7 +50,16 @@ namespace EmuLoader.Forms
                 platformId = comboBoxPlatform.SelectedValue.ToString();
                 textBoxLog.Text = "";
                 progressBar.Value = 0;
-                notSyncedRoms = Roms.Where(x => !x.IdLocked && (string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased) || string.IsNullOrEmpty(x.DBName))).ToList();
+
+                if (checkBoxBasicSync.Checked)
+                {
+                    notSyncedRoms = Roms.Where(x => !x.IdLocked && (string.IsNullOrEmpty(x.Id))).ToList();
+                }
+                else
+                {
+                    notSyncedRoms = Roms.Where(x => !x.IdLocked && (string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.YearReleased) || string.IsNullOrEmpty(x.DBName))).ToList();
+                }
+                
                 LogMessage("GETTING GAMES LIST...");
 
                 Updated = true;
@@ -80,8 +90,12 @@ namespace EmuLoader.Forms
 
                 new Thread(() =>
                 {
-                    //threadSetIdAndYear.Start();
-                    SetIdAndYear();
+                    if (radioButtonSyncAll.Checked)
+                    {
+                        //threadSetIdAndYear.Start();
+                        SetIdAndYear();
+                    }
+
                     int count = 0;
                     int count2 = 0;
                     int count3 = 0;
@@ -91,9 +105,12 @@ namespace EmuLoader.Forms
 
                     if (!checkBoxBasicSync.Checked)
                     {
-                        //threadSetOtherProperties.Start();
-                        SetOtherProperties();
-                        count2 = syncRomsCount;
+                        if (radioButtonSyncAll.Checked)
+                        {
+                            //threadSetOtherProperties.Start();
+                            SetOtherProperties();
+                            count2 = syncRomsCount;
+                        }
 
                         XML.SaveXml();
 
@@ -275,8 +292,8 @@ namespace EmuLoader.Forms
                         LogMessage("TRYING BY NAME - " + rom.Name);
                         var gameName = Functions.RemoveSubstring(rom.Name, '(', ')');
                         gameName = Functions.RemoveSubstring(gameName, '[', ']').Trim();
-
-                        var game = APIFunctions.GetGameByName(platformId, gameName);
+                        string acessos = "";
+                        var game = APIFunctions.GetGameByName(platformId, gameName, out acessos);
 
                         if (game == null)
                         {
@@ -343,8 +360,10 @@ namespace EmuLoader.Forms
                     });
                 }
 
+                var access = "";
                 LogMessage("UPDATING - " + rom.Name);
-                var game = APIFunctions.GetGameDetails(rom.Id, rom.Platform);
+                var game = APIFunctions.GetGameDetails(rom.Id, rom.Platform, out access);
+                labelAccessLeftCount.Text = access;
 
                 if (game == null) continue;
 
@@ -451,7 +470,9 @@ namespace EmuLoader.Forms
                     string titleUrl = string.Empty;
                     string gameplayUrl = string.Empty;
 
-                    var found = APIFunctions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl);
+                    var access = "";
+                    var found = APIFunctions.GetGameArtUrls(rom.Id, out boxUrl, out titleUrl, out gameplayUrl, out access);
+                    labelAccessLeftCount.Text = access;
 
                     var updateBoxart = boxArtMissing && !string.IsNullOrEmpty(boxUrl);
                     var updateTitle = titleMissing && !string.IsNullOrEmpty(titleUrl);
@@ -652,5 +673,18 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void checkBoxBasicSync_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxBasicSync.Checked)
+            {
+                radioButtonSyncAll.Enabled = false;
+                radioButtonImages.Enabled = false;
+            }
+            else
+            {
+                radioButtonSyncAll.Enabled = true;
+                radioButtonImages.Enabled = true;
+            }
+        }
     }
 }

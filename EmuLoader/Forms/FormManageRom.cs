@@ -219,7 +219,8 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var game = APIFunctions.GetGameDetails(textBoxId.Text, SelectedRom.Platform);
+            var access = "";
+            var game = APIFunctions.GetGameDetails(textBoxId.Text, SelectedRom.Platform, out access);
             game.Id = textBoxId.Text;
             StringBuilder text = new StringBuilder("");
 
@@ -250,6 +251,10 @@ namespace EmuLoader.Forms
             text.Append("RATING" + Environment.NewLine);
             text.Append(game.Rating != 0 ? game.Rating.ToString("#.#") : "" + Environment.NewLine + Environment.NewLine);
 
+            text.Append("remaining access to api" + Environment.NewLine);
+            text.Append(access);
+
+
 
             FormInfo info = new FormInfo(text.ToString());
             info.Show();
@@ -277,7 +282,8 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                var game = APIFunctions.GetGameDetails(textBoxId.Text, SelectedRom.Platform);
+                var access = "";
+                var game = APIFunctions.GetGameDetails(textBoxId.Text, SelectedRom.Platform, out access);
 
                 if (game == null)
                 {
@@ -365,7 +371,7 @@ namespace EmuLoader.Forms
                 string titleUrl = string.Empty;
                 string gameplayUrl = string.Empty;
 
-                var found = APIFunctions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl);
+                var found = APIFunctions.GetGameArtUrls(textBoxId.Text, out boxUrl, out titleUrl, out gameplayUrl, out access);
 
                 if (!found)
                 {
@@ -390,6 +396,8 @@ namespace EmuLoader.Forms
                     Functions.SavePictureFromUrl(SelectedRom, gameplayUrl, Values.GameplayFolder, checkBoxSaveAsJpg.Checked);
                     gameplayToDeleteIfCanceled = RomFunctions.GetRomPicture(SelectedRom, Values.GameplayFolder);
                 }
+
+                MessageBox.Show("Remaining access: " + access);
             }
             catch (Exception ex)
             {
