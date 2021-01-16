@@ -106,6 +106,22 @@ namespace EmuLoader.Forms
 
                         RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
                     }
+                    else
+                    {
+                        found = RomFunctions.MatchImages(images, imageRegion, rom.FileNameNoExt, out imageFoundPath);
+
+                        if (found)
+                        {
+                            successfulFind++;
+
+                            if (progressBar1.Value < progressBar1.Maximum)
+                            {
+                                progressBar1.Value++;
+                            }
+
+                            RomFunctions.SavePicture(rom, imageFoundPath, type, checkBoxSaveAsJpg.Checked);
+                        }
+                    }
                 }
             }
 
