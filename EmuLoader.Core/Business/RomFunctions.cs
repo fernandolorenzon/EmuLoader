@@ -573,6 +573,24 @@ namespace EmuLoader.Core.Business
             return result;
         }
 
+        public static List<string> GetRomPicturesByPlatformWithExt(string platform, string folder)
+        {
+            var rootDir = Environment.CurrentDirectory;
+            var imagesDir = rootDir + "\\Pictures\\" + platform + "\\" + folder;
+            var result = new List<string>();
+
+            if (!Directory.Exists(imagesDir)) return result;
+
+            var images = Directory.GetFiles(imagesDir);
+
+            foreach (var item in images)
+            {
+                result.Add(GetFileName(item));
+            }
+
+            return result;
+        }
+
         public static void SavePicture(Rom rom, string picturePath, string folder, bool saveAsJpg)
         {
             if (rom == null || string.IsNullOrEmpty(picturePath) || string.IsNullOrEmpty(folder)) return;

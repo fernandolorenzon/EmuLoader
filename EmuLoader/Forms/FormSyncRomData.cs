@@ -603,7 +603,7 @@ namespace EmuLoader.Forms
                 var titlePictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.TitleFolder);
                 var gameplayPictures = RomFunctions.GetRomPicturesByPlatform(comboBoxPlatform.Text, Values.GameplayFolder);
 
-                var romsList = Roms.Select(x => x.Name).ToList();
+                var romsList = Roms.Select(x => x.FileNameNoExt).ToList();
 
                 missingBoxartPictures = romsList.Except(boxartPictures).ToList();
                 missingTitlePictures = romsList.Except(titlePictures).ToList();

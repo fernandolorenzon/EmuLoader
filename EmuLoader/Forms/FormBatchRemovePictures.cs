@@ -76,9 +76,47 @@ namespace EmuLoader.Forms
             FormCustomMessage.ShowSuccess("Number of successful rom pictures removed: " + successfulFind);
         }
 
+        private void buttonRemoveUnused_Click(object sender, EventArgs e)
+        {
+            Platform emu = (Platform)comboBoxChoosePlatform.SelectedItem;
+            var roms = Rom.GetAll().Where(x => x.Platform != null && x.Platform.Name == emu.Name).ToList();
+            var path = Environment.CurrentDirectory + "\\" + Values.PicturesPath + "\\" + emu.Name + "\\";
+            int successfulFind = 0;
+
+            var images = new List<string>();
+
+            if (radioButtonBoxart.Checked)
+            {
+                images = RomFunctions.GetRomPicturesByPlatformWithExt(comboBoxChoosePlatform.Text, Values.BoxartFolder);
+                path += Values.BoxartFolder + "\\";
+            }
+            else if(radioButtonTitle.Checked)
+            {
+                images = RomFunctions.GetRomPicturesByPlatformWithExt(comboBoxChoosePlatform.Text, Values.TitleFolder);
+                path += Values.TitleFolder + "\\";
+            }
+            else if (radioButtonGameplay.Checked)
+            {
+                images = RomFunctions.GetRomPicturesByPlatformWithExt(comboBoxChoosePlatform.Text, Values.GameplayFolder);
+                path += Values.GameplayFolder + "\\";
+            }
+
+            foreach (var image in images)
+            {
+                if (!roms.Any(x => x.FileNameNoExt.ToLower() == RomFunctions.GetFileNameNoExtension(image).ToLower()))
+                {
+                    File.Delete(path + image);
+                    successfulFind++;
+                }
+            }
+
+            FormCustomMessage.ShowSuccess("Number of successful unused rom pictures removed: " + successfulFind);
+        }
+
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
+
     }
 }

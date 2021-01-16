@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonRemoveUnused = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -48,11 +49,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Choose Emulator/Platform";
             // 
-            // comboBoxChooseEmulator
+            // comboBoxChoosePlatform
             // 
             this.comboBoxChoosePlatform.FormattingEnabled = true;
             this.comboBoxChoosePlatform.Location = new System.Drawing.Point(15, 44);
-            this.comboBoxChoosePlatform.Name = "comboBoxChooseEmulator";
+            this.comboBoxChoosePlatform.Name = "comboBoxChoosePlatform";
             this.comboBoxChoosePlatform.Size = new System.Drawing.Size(247, 21);
             this.comboBoxChoosePlatform.TabIndex = 1;
             // 
@@ -109,7 +110,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(96, 158);
+            this.buttonCancel.Location = new System.Drawing.Point(210, 158);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 10;
@@ -117,11 +118,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // buttonRemoveUnused
+            // 
+            this.buttonRemoveUnused.Location = new System.Drawing.Point(93, 158);
+            this.buttonRemoveUnused.Name = "buttonRemoveUnused";
+            this.buttonRemoveUnused.Size = new System.Drawing.Size(111, 23);
+            this.buttonRemoveUnused.TabIndex = 11;
+            this.buttonRemoveUnused.Text = "Remove Unused";
+            this.buttonRemoveUnused.UseVisualStyleBackColor = true;
+            this.buttonRemoveUnused.Click += new System.EventHandler(this.buttonRemoveUnused_Click);
+            // 
             // FormBatchRemovePictures
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 273);
+            this.ClientSize = new System.Drawing.Size(373, 289);
+            this.Controls.Add(this.buttonRemoveUnused);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.label3);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonRemoveUnused;
     }
 }

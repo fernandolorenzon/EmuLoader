@@ -32,7 +32,8 @@ namespace Tests
         {
             XML.LoadXml();
             Genre.Fill();
-            var games = APIFunctions.GetGameByName("136", "Super Mario World");
+            var access = "";
+            var games = APIFunctions.GetGameByName("136", "Super Mario World", out access);
 
             Assert.IsNotNull(games);
         }
@@ -42,7 +43,8 @@ namespace Tests
         {
             XML.LoadXml();
             Genre.Fill();
-            var games = APIFunctions.GetGameDetails("136", new Platform());
+            var access = "";
+            var games = APIFunctions.GetGameDetails("136", new Platform(), out access);
 
             Assert.IsNotNull(games);
         }
@@ -53,7 +55,8 @@ namespace Tests
             XML.LoadXml();
             Genre.Fill();
             string box, title, gameplay = "";
-            var result = APIFunctions.GetGameArtUrls("136", out box, out title, out gameplay);
+            var access = "";
+            var result = APIFunctions.GetGameArtUrls("136", out box, out title, out gameplay, out access);
 
             Assert.IsTrue(result);
             Assert.IsNotNull(box);
