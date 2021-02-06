@@ -116,7 +116,7 @@ namespace EmuLoader.Forms
                     Rom.Set(item);
                 }
 
-                XML.SaveXml();
+                XML.SaveXmlRoms();
 
                 FormCustomMessage.ShowSuccess("Data purged successfully!");
                 comboBoxPlatform_SelectedIndexChanged(sender, e);

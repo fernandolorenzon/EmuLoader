@@ -6,8 +6,13 @@ namespace EmuLoader.Core.Classes
     public static class Values
     {
         public static string xmlPath = "data";
-        public static string xmlFile = "data.xml";
-        public static string xmlFileFull = Values.xmlPath + "\\" + Values.xmlFile;
+        //public static string xmlFile = "data.xml";
+        public static string xmlFilePlatforms = "platforms.xml";
+        public static string xmlFileLabels = "labels.xml";
+        public static string xmlFileGenres = "genres.xml";
+        public static string xmlFileRoms = "roms.xml";
+        public static string xmlFileConfig = "config.xml";
+        //public static string xmlFileFull = Values.xmlPath + "\\" + Values.xmlFile;
         
         public static string apikeyfile = "apikey.txt";
         public static string PicturesPath = "pictures";

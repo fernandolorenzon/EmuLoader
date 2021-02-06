@@ -101,7 +101,7 @@ namespace EmuLoader.Forms
                     int count3 = 0;
 
                     count = syncRomsCount;
-                    XML.SaveXml();
+                    XML.SaveXmlRoms();
 
                     if (!checkBoxBasicSync.Checked)
                     {
@@ -112,12 +112,12 @@ namespace EmuLoader.Forms
                             count2 = syncRomsCount;
                         }
 
-                        XML.SaveXml();
+                        XML.SaveXmlRoms();
 
                         SetPictures();
                         count3 = syncRomsCount;
 
-                        XML.SaveXml();
+                        XML.SaveXmlRoms();
                     }
 
                     progressBar.Invoke((MethodInvoker)delegate
@@ -179,7 +179,7 @@ namespace EmuLoader.Forms
                 progressBar.Value++;
             }
 
-            XML.SaveXml();
+            XML.SaveXmlRoms();
             FormCustomMessage.ShowSuccess(string.Format("{0} rom Ids locked successfully!", roms.Count));
         }
 
@@ -205,7 +205,7 @@ namespace EmuLoader.Forms
                 progressBar.Value++;
             }
 
-            XML.SaveXml();
+            XML.SaveXmlRoms();
             FormCustomMessage.ShowSuccess(string.Format("{0} rom Ids unlocked successfully!", roms.Count));
         }
 
@@ -626,7 +626,7 @@ namespace EmuLoader.Forms
             }
             catch
             {
-                XML.SaveXml();
+                XML.SaveXmlRoms();
             }
         }
 
@@ -655,7 +655,7 @@ namespace EmuLoader.Forms
             }
             finally
             {
-                XML.SaveXml();
+                XML.SaveXmlRoms();
             }
         }
 
@@ -669,7 +669,7 @@ namespace EmuLoader.Forms
             }
             finally
             {
-                XML.SaveXml();
+                XML.SaveXmlRoms();
             }
         }
 

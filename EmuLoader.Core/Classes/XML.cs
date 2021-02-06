@@ -5,160 +5,366 @@ namespace EmuLoader.Core.Classes
 {
     public static class XML
     {
-        public static XmlDocument xmlDoc;
+        //public static XmlDocument xmlDoc;
+        public static XmlDocument xmlConfig;
+        public static XmlDocument xmlPlatforms;
+        public static XmlDocument xmlRoms;
+        public static XmlDocument xmlGenres;
+        public static XmlDocument xmlLabels;
 
         #region -- General --
 
-        private static void CreateXml()
+        private static void CreateXmlConfig()
         {
-            xmlDoc = new XmlDocument();
-            XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "utf-8", null);
-            xmlDoc.InsertBefore(xmlDeclaration, xmlDoc.DocumentElement);
-            xmlDoc.AppendChild(xmlDoc.CreateElement("Root"));
+            xmlConfig = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlConfig.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlConfig.InsertBefore(xmlDeclaration, xmlConfig.DocumentElement);
+            xmlConfig.AppendChild(xmlConfig.CreateElement("Root"));
 
-            XmlElement config = xmlDoc.CreateElement("Config");
-            XmlAttribute attrPath = xmlDoc.CreateAttribute("ColumnPath");
+            XmlElement config = xmlConfig.CreateElement("Config");
+            XmlAttribute attrPath = xmlConfig.CreateAttribute("ColumnPath");
             attrPath.Value = "true";
             config.Attributes.Append(attrPath);
 
-            XmlAttribute attrDBName = xmlDoc.CreateAttribute("ColumnRomDBName");
+            XmlAttribute attrDBName = xmlConfig.CreateAttribute("ColumnRomDBName");
             attrPath.Value = "false";
             config.Attributes.Append(attrDBName);
 
-            XmlAttribute attrFileName = xmlDoc.CreateAttribute("ColumnFileName");
+            XmlAttribute attrFileName = xmlConfig.CreateAttribute("ColumnFileName");
             attrFileName.Value = "false";
             config.Attributes.Append(attrFileName);
 
-            XmlAttribute attrPlatform = xmlDoc.CreateAttribute("ColumnPlatform");
+            XmlAttribute attrPlatform = xmlConfig.CreateAttribute("ColumnPlatform");
             attrPlatform.Value = "true";
             config.Attributes.Append(attrPlatform);
 
-            XmlAttribute attrGenre = xmlDoc.CreateAttribute("ColumnGenre");
+            XmlAttribute attrGenre = xmlConfig.CreateAttribute("ColumnGenre");
             attrGenre.Value = "true";
             config.Attributes.Append(attrGenre);
 
-            XmlAttribute attrLabels = xmlDoc.CreateAttribute("ColumnLabels");
+            XmlAttribute attrLabels = xmlConfig.CreateAttribute("ColumnLabels");
             attrLabels.Value = "true";
             config.Attributes.Append(attrLabels);
 
-            XmlAttribute attrDeveloper = xmlDoc.CreateAttribute("ColumnDeveloper");
+            XmlAttribute attrDeveloper = xmlConfig.CreateAttribute("ColumnDeveloper");
             attrLabels.Value = "true";
             config.Attributes.Append(attrDeveloper);
 
-            XmlAttribute attrPublisher = xmlDoc.CreateAttribute("ColumnPublisher");
+            XmlAttribute attrPublisher = xmlConfig.CreateAttribute("ColumnPublisher");
             attrLabels.Value = "true";
             config.Attributes.Append(attrPublisher);
 
-            XmlAttribute attrYearReleased = xmlDoc.CreateAttribute("ColumnYearReleased");
+            XmlAttribute attrYearReleased = xmlConfig.CreateAttribute("ColumnYearReleased");
             attrYearReleased.Value = "true";
             config.Attributes.Append(attrYearReleased);
 
-            XmlAttribute attrRating = xmlDoc.CreateAttribute("ColumnRating");
+            XmlAttribute attrRating = xmlConfig.CreateAttribute("ColumnRating");
             attrRating.Value = "false";
             config.Attributes.Append(attrRating);
 
-            XmlAttribute attrBoxArt = xmlDoc.CreateAttribute("BoxArt");
+            XmlAttribute attrBoxArt = xmlConfig.CreateAttribute("BoxArt");
             attrBoxArt.Value = "true";
             config.Attributes.Append(attrBoxArt);
 
-            XmlAttribute attrTitle = xmlDoc.CreateAttribute("TitleArt");
+            XmlAttribute attrTitle = xmlConfig.CreateAttribute("TitleArt");
             attrTitle.Value = "true";
             config.Attributes.Append(attrTitle);
 
-            XmlAttribute attrGameplay = xmlDoc.CreateAttribute("GameplayArt");
+            XmlAttribute attrGameplay = xmlConfig.CreateAttribute("GameplayArt");
             attrGameplay.Value = "true";
             config.Attributes.Append(attrGameplay);
 
-            XmlAttribute attrPlatformsList = xmlDoc.CreateAttribute("PlatformsList");
+            XmlAttribute attrPlatformsList = xmlConfig.CreateAttribute("PlatformsList");
             attrPlatformsList.Value = "true";
             config.Attributes.Append(attrPlatformsList);
 
-            XmlAttribute attrExtension = xmlDoc.CreateAttribute("Extension");
+            XmlAttribute attrExtension = xmlConfig.CreateAttribute("Extension");
             attrExtension.Value = "true";
             config.Attributes.Append(attrExtension);
-            xmlDoc.ChildNodes[1].AppendChild(config);
+            xmlConfig.ChildNodes[1].AppendChild(config);
 
-            xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Platforms"));
-            xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Labels"));
-            xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Genres"));
-            xmlDoc.ChildNodes[1].AppendChild(xmlDoc.CreateElement("Roms"));
-
-            XmlElement filter = xmlDoc.CreateElement("Filter");
-            XmlAttribute attrFilterPlatform = xmlDoc.CreateAttribute("Platform");
+            XmlElement filter = xmlConfig.CreateElement("Filter");
+            XmlAttribute attrFilterPlatform = xmlConfig.CreateAttribute("Platform");
             attrFilterPlatform.Value = "";
             config.Attributes.Append(attrFilterPlatform);
 
-            XmlAttribute attrFilterGenre = xmlDoc.CreateAttribute("Genre");
+            XmlAttribute attrFilterGenre = xmlConfig.CreateAttribute("Genre");
             attrFilterGenre.Value = "";
             config.Attributes.Append(attrFilterGenre);
 
-            XmlAttribute attrFilterLabel = xmlDoc.CreateAttribute("Label");
+            XmlAttribute attrFilterLabel = xmlConfig.CreateAttribute("Label");
             attrFilterLabel.Value = "";
             config.Attributes.Append(attrFilterLabel);
 
-            XmlAttribute attrFilterYear = xmlDoc.CreateAttribute("Year");
+            XmlAttribute attrFilterYear = xmlConfig.CreateAttribute("Year");
             attrFilterYear.Value = "";
             config.Attributes.Append(attrFilterYear);
 
-            XmlAttribute attrFilterPublisher = xmlDoc.CreateAttribute("Publisher");
+            XmlAttribute attrFilterPublisher = xmlConfig.CreateAttribute("Publisher");
             attrFilterPublisher.Value = "";
             config.Attributes.Append(attrFilterPublisher);
 
-            XmlAttribute attrFilterDeveloper = xmlDoc.CreateAttribute("Developer");
+            XmlAttribute attrFilterDeveloper = xmlConfig.CreateAttribute("Developer");
             attrFilterDeveloper.Value = "";
             config.Attributes.Append(attrFilterDeveloper);
 
-            XmlAttribute attrFilterName = xmlDoc.CreateAttribute("Text");
+            XmlAttribute attrFilterName = xmlConfig.CreateAttribute("Text");
             attrFilterName.Value = "";
             config.Attributes.Append(attrFilterName);
 
-            xmlDoc.ChildNodes[1].AppendChild(filter);
+            xmlConfig.ChildNodes[1].AppendChild(filter);
 
             if (!Directory.Exists(Values.xmlPath))
             {
                 Directory.CreateDirectory(Values.xmlPath);
             }
 
-            xmlDoc.Save(Values.xmlFileFull);
+            xmlConfig.Save(Values.xmlPath + "\\" + Values.xmlFileConfig);
         }
 
-        public static XmlDocument LoadXml()
+        private static void CreateXmlPlatforms()
         {
-            xmlDoc = new XmlDocument();
+            xmlPlatforms = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlPlatforms.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlPlatforms.InsertBefore(xmlDeclaration, xmlPlatforms.DocumentElement);
+            xmlPlatforms.AppendChild(xmlPlatforms.CreateElement("Root"));
+
+            xmlPlatforms.ChildNodes[1].AppendChild(xmlPlatforms.CreateElement("Platforms"));
+
+            if (!Directory.Exists(Values.xmlPath))
+            {
+                Directory.CreateDirectory(Values.xmlPath);
+            }
+
+            xmlPlatforms.Save(Values.xmlPath + "\\" + Values.xmlFilePlatforms);
+        }
+
+        private static void CreateXmlRoms()
+        {
+            xmlRoms = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlRoms.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlRoms.InsertBefore(xmlDeclaration, xmlRoms.DocumentElement);
+            xmlRoms.AppendChild(xmlRoms.CreateElement("Root"));
+
+            xmlRoms.ChildNodes[1].AppendChild(xmlRoms.CreateElement("Roms"));
+
+            if (!Directory.Exists(Values.xmlPath))
+            {
+                Directory.CreateDirectory(Values.xmlPath);
+            }
+
+            xmlRoms.Save(Values.xmlPath + "\\" + Values.xmlFileRoms);
+        }
+
+        private static void CreateXmlGenres()
+        {
+            xmlGenres = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlGenres.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlGenres.InsertBefore(xmlDeclaration, xmlGenres.DocumentElement);
+            xmlGenres.AppendChild(xmlGenres.CreateElement("Root"));
+
+            xmlGenres.ChildNodes[1].AppendChild(xmlGenres.CreateElement("Genres"));
+
+            if (!Directory.Exists(Values.xmlPath))
+            {
+                Directory.CreateDirectory(Values.xmlPath);
+            }
+
+            xmlGenres.Save(Values.xmlPath + "\\" + Values.xmlFileGenres);
+        }
+
+        private static void CreateXmlLabels()
+        {
+            xmlLabels = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlLabels.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlLabels.InsertBefore(xmlDeclaration, xmlLabels.DocumentElement);
+            xmlLabels.AppendChild(xmlLabels.CreateElement("Root"));
+
+            xmlLabels.ChildNodes[1].AppendChild(xmlLabels.CreateElement("Labels"));
+
+            if (!Directory.Exists(Values.xmlPath))
+            {
+                Directory.CreateDirectory(Values.xmlPath);
+            }
+
+            xmlLabels.Save(Values.xmlPath + "\\" + Values.xmlFileLabels);
+        }
+
+        public static XmlDocument LoadXmlConfig()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileConfig;
+            xmlConfig = new XmlDocument();
 
             try
             {
-                if (File.Exists(Values.xmlFileFull))
+                if (File.Exists(path))
                 {
-                    xmlDoc.Load(Values.xmlFileFull);
+                    xmlConfig.Load(path);
                 }
                 else
                 {
-                    CreateXml();
+                    CreateXmlConfig();
                 }
             }
             catch
             {
-                if (File.Exists(Values.xmlFileFull))
+                if (File.Exists(path))
                 {
-                    File.Delete(Values.xmlFileFull);
-                    LoadXml();
+                    File.Delete(path);
+                    LoadXmlConfig();
                 }
             }
 
-            return xmlDoc;
+            return xmlConfig;
         }
 
-        public static void SaveXml()
+        public static XmlDocument LoadXmlPlatforms()
         {
-            xmlDoc.Save(Values.xmlFileFull);
+            string path = Values.xmlPath + "\\" + Values.xmlFilePlatforms;
+            xmlPlatforms = new XmlDocument();
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    xmlPlatforms.Load(path);
+                }
+                else
+                {
+                    CreateXmlPlatforms();
+                }
+            }
+            catch
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    LoadXmlPlatforms();
+                }
+            }
+
+            return xmlPlatforms;
         }
 
-        public static XmlNode GetParentNode(string elementName)
+        public static XmlDocument LoadXmlRoms()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileRoms;
+            xmlRoms = new XmlDocument();
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    xmlRoms.Load(path);
+                }
+                else
+                {
+                    CreateXmlRoms();
+                }
+            }
+            catch
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    LoadXmlRoms();
+                }
+            }
+
+            return xmlRoms;
+        }
+
+        public static XmlDocument LoadXmlLabels()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileLabels;
+            xmlLabels = new XmlDocument();
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    xmlLabels.Load(path);
+                }
+                else
+                {
+                    CreateXmlLabels();
+                }
+            }
+            catch
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    LoadXmlLabels();
+                }
+            }
+
+            return xmlLabels;
+        }
+
+        public static XmlDocument LoadXmlGenres()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileGenres;
+            xmlGenres = new XmlDocument();
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    xmlGenres.Load(path);
+                }
+                else
+                {
+                    CreateXmlGenres();
+                }
+            }
+            catch
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    LoadXmlGenres();
+                }
+            }
+
+            return xmlGenres;
+        }
+
+        public static void SaveXmlConfig()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileConfig;
+            xmlConfig.Save(path);
+        }
+
+        public static void SaveXmlPlatforms()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFilePlatforms;
+            xmlPlatforms.Save(path);
+        }
+
+        public static void SaveXmlRoms()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileRoms;
+            xmlRoms.Save(path);
+        }
+
+        public static void SaveXmlGenres()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileGenres;
+            xmlGenres.Save(path);
+        }
+
+        public static void SaveXmlLabels()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileLabels;
+            xmlLabels.Save(path);
+        }
+
+        public static XmlNode GetParentNode(XmlDocument xml, string elementName)
         {
             try
             {
-                foreach (var item in xmlDoc.ChildNodes[1].ChildNodes)
+                foreach (var item in xml.ChildNodes[1].ChildNodes)
                 {
                     if (((System.Xml.XmlElement)item).LocalName == elementName) return (XmlNode)item;
                 }
@@ -179,9 +385,9 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                if (GetParentNode("Config").Attributes.Count == 0) return "";
+                if (GetParentNode(xmlConfig, "Config").Attributes.Count == 0) return "";
 
-                return GetParentNode("Config").Attributes[key].Value;
+                return GetParentNode(xmlConfig, "Config").Attributes[key].Value;
             }
             catch
             {
@@ -193,7 +399,7 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                XmlNode config = GetParentNode("Config");
+                XmlNode config = GetParentNode(xmlConfig, "Config");
                 bool ok = false;
 
                 foreach (XmlAttribute item in config.Attributes)
@@ -207,7 +413,7 @@ namespace EmuLoader.Core.Classes
 
                 if (ok) return true;
 
-                XmlAttribute attr = xmlDoc.CreateAttribute(key);
+                XmlAttribute attr = xmlConfig.CreateAttribute(key);
                 attr.Value = value;
                 config.Attributes.Append(attr);
                 return true;
@@ -226,7 +432,7 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                return GetParentNode("Platforms").ChildNodes;
+                return GetParentNode(xmlPlatforms, "Platforms").ChildNodes;
             }
             catch
             {
@@ -262,7 +468,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode("Platforms").RemoveChild(node);
+                GetParentNode(xmlPlatforms, "Platforms").RemoveChild(node);
                 return true;
             }
 
@@ -277,7 +483,7 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                return GetParentNode("Labels").ChildNodes;
+                return GetParentNode(xmlLabels, "Labels").ChildNodes;
             }
             catch
             {
@@ -317,7 +523,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode("Labels").RemoveChild(node);
+                GetParentNode(xmlLabels, "Labels").RemoveChild(node);
                 return true;
             }
 
@@ -332,7 +538,7 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                return GetParentNode("Genres").ChildNodes;
+                return GetParentNode(xmlGenres, "Genres").ChildNodes;
             }
             catch
             {
@@ -372,7 +578,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode("Genres").RemoveChild(node);
+                GetParentNode(xmlGenres,"Genres").RemoveChild(node);
                 return true;
             }
 
@@ -387,7 +593,7 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                return GetParentNode("Roms").ChildNodes;
+                return GetParentNode(xmlRoms, "Roms").ChildNodes;
             }
             catch
             {
@@ -423,7 +629,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode("Roms").RemoveChild(node);
+                GetParentNode(xmlRoms, "Roms").RemoveChild(node);
                 return true;
             }
 
@@ -438,9 +644,9 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                if (GetParentNode("Filter").Attributes.Count == 0) return "";
+                if (GetParentNode(xmlConfig, "Filter").Attributes.Count == 0) return "";
 
-                return GetParentNode("Filter").Attributes[key].Value;
+                return GetParentNode(xmlConfig, "Filter").Attributes[key].Value;
             }
             catch
             {
@@ -452,7 +658,7 @@ namespace EmuLoader.Core.Classes
         {
             try
             {
-                XmlNode config = GetParentNode("Filter");
+                XmlNode config = GetParentNode(xmlConfig, "Filter");
                 bool ok = false;
 
                 foreach (XmlAttribute item in config.Attributes)
@@ -466,7 +672,7 @@ namespace EmuLoader.Core.Classes
 
                 if (ok) return true;
 
-                XmlAttribute attr = xmlDoc.CreateAttribute(key);
+                XmlAttribute attr = xmlConfig.CreateAttribute(key);
                 attr.Value = value;
                 config.Attributes.Append(attr);
                 return true;

@@ -176,7 +176,7 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                XML.SaveXml();
+                XML.SaveXmlRoms();
                 FormCustomMessage.ShowSuccess(count + " roms updated");
             }
             catch (Exception ex)
@@ -195,7 +195,7 @@ namespace EmuLoader.Forms
             }
             finally
             {
-                XML.SaveXml();
+                XML.SaveXmlRoms();
             }
         }
 

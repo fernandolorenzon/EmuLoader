@@ -42,7 +42,7 @@ namespace EmuLoader.Forms
         {
             Config.SetFolder(Folder.Retroarch, textBoxRetroarchFolder.Text);
             Config.SetFolder(Folder.MAME, textBoxMameFolder.Text);
-            XML.SaveXml();
+            XML.SaveXmlConfig();
             Close();
         }
     }

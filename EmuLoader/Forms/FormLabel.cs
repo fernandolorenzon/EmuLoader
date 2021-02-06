@@ -122,7 +122,7 @@ namespace EmuLoader.Forms
 
         private void FormLabel_FormClosed(object sender, FormClosedEventArgs e)
         {
-            XML.SaveXml();
+            XML.SaveXmlLabels();
         }
 
         private void dataGridView_SelectionChanged(object sender, EventArgs e)

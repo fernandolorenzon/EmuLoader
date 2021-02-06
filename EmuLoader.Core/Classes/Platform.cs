@@ -100,37 +100,37 @@ namespace EmuLoader.Core.Classes
 
             if (node == null)
             {
-                node = XML.xmlDoc.CreateNode(XmlNodeType.Element, "Platform", "");
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Id"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("EmulatorExe"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Command"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("EmulatorExeAlt"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("CommandAlt"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("ShowInList"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("ShowInFilter"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomPath"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("DefaultRomExtensions"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("PictureNameByDisplay"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("UseRetroarch"));
-                XML.GetParentNode("Platforms").AppendChild(node);
+                node = XML.xmlPlatforms.CreateNode(XmlNodeType.Element, "Platform", "");
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Id"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Name"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("EmulatorExe"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Command"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("EmulatorExeAlt"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("CommandAlt"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Color"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("ShowInList"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("ShowInFilter"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("DefaultRomPath"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("DefaultRomExtensions"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("PictureNameByDisplay"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("UseRetroarch"));
+                XML.GetParentNode(XML.xmlPlatforms, "Platforms").AppendChild(node);
                 platforms.Add(platform.Name.ToLower(), platform);
             }
 
             platforms[platform.Name.ToLower()] = platform;
-            Functions.CreateOrSetXmlAttribute(node, "Id", platform.Id);
-            Functions.CreateOrSetXmlAttribute(node, "Name", platform.Name);
-            Functions.CreateOrSetXmlAttribute(node, "EmulatorExe", platform.EmulatorExe);
-            Functions.CreateOrSetXmlAttribute(node, "Command", platform.Command);
-            Functions.CreateOrSetXmlAttribute(node, "EmulatorExeAlt", platform.EmulatorExeAlt);
-            Functions.CreateOrSetXmlAttribute(node, "CommandAlt", platform.CommandAlt);
-            Functions.CreateOrSetXmlAttribute(node, "Color", platform.Color.ToArgb().ToString());
-            Functions.CreateOrSetXmlAttribute(node, "ShowInList", platform.ShowInList.ToString());
-            Functions.CreateOrSetXmlAttribute(node, "ShowInFilter", platform.ShowInFilter.ToString());
-            Functions.CreateOrSetXmlAttribute(node, "DefaultRomPath", platform.DefaultRomPath);
-            Functions.CreateOrSetXmlAttribute(node, "DefaultRomExtensions", platform.DefaultRomExtensions);
-            Functions.CreateOrSetXmlAttribute(node, "UseRetroarch", platform.UseRetroarch.ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Id", platform.Id);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Name", platform.Name);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "EmulatorExe", platform.EmulatorExe);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Command", platform.Command);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "EmulatorExeAlt", platform.EmulatorExeAlt);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "CommandAlt", platform.CommandAlt);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Color", platform.Color.ToArgb().ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "ShowInList", platform.ShowInList.ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "ShowInFilter", platform.ShowInFilter.ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "DefaultRomPath", platform.DefaultRomPath);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "DefaultRomExtensions", platform.DefaultRomExtensions);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "UseRetroarch", platform.UseRetroarch.ToString());
             return true;
         }
 

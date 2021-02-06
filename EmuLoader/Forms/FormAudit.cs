@@ -60,7 +60,7 @@ namespace EmuLoader.Forms
                 }
             }
 
-            XML.SaveXml();
+            XML.SaveXmlRoms();
 
             FormCustomMessage.ShowSuccess("Roms updated successfully! " + count.ToString() + " roms cleaned");
         }
@@ -92,7 +92,7 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                XML.SaveXml();
+                XML.SaveXmlRoms();
                 FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
                 Updated = true;
             }
@@ -135,7 +135,7 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                XML.SaveXml();
+                XML.SaveXmlRoms();
                 FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
                 Updated = true;
             }

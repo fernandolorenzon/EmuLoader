@@ -654,7 +654,7 @@ namespace EmuLoader.Core.Business
             {
                 foreach (RomLabel label in rom.Labels)
                 {
-                    XmlNode labelNode = XML.xmlDoc.CreateNode(XmlNodeType.Element, "Label", "");
+                    XmlNode labelNode = XML.xmlRoms.CreateNode(XmlNodeType.Element, "Label", "");
                     labelNode.InnerText = label.Name;
                     node.ChildNodes[0].AppendChild(labelNode);
                 }

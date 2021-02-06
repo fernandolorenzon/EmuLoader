@@ -68,10 +68,10 @@ namespace EmuLoader.Core.Classes
 
             if (node == null)
             {
-                node = XML.xmlDoc.CreateNode(XmlNodeType.Element, "Genre", "");
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
-                XML.GetParentNode("Genres").AppendChild(node);
+                node = XML.xmlGenres.CreateNode(XmlNodeType.Element, "Genre", "");
+                node.Attributes.Append(XML.xmlGenres.CreateAttribute("Name"));
+                node.Attributes.Append(XML.xmlGenres.CreateAttribute("Color"));
+                XML.GetParentNode(XML.xmlGenres, "Genres").AppendChild(node);
                 genres.Add(genre.Name.ToLower(), genre);
             }
 

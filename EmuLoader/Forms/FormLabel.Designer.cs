@@ -53,7 +53,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(394, 323);
+            this.dataGridView.Size = new System.Drawing.Size(466, 327);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
@@ -85,7 +85,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Location = new System.Drawing.Point(6, 31);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(303, 20);
+            this.textBoxName.Size = new System.Drawing.Size(375, 20);
             this.textBoxName.TabIndex = 2;
             // 
             // buttonColor
@@ -93,7 +93,7 @@
             this.buttonColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonColor.BackColor = System.Drawing.Color.White;
             this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColor.Location = new System.Drawing.Point(315, 4);
+            this.buttonColor.Location = new System.Drawing.Point(387, 4);
             this.buttonColor.Name = "buttonColor";
             this.buttonColor.Size = new System.Drawing.Size(67, 52);
             this.buttonColor.TabIndex = 3;
@@ -116,16 +116,16 @@
             this.panel1.Controls.Add(this.textBoxName);
             this.panel1.Controls.Add(this.buttonColor);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 323);
+            this.panel1.Location = new System.Drawing.Point(0, 327);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(394, 64);
+            this.panel1.Size = new System.Drawing.Size(466, 64);
             this.panel1.TabIndex = 6;
             // 
             // FormLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 443);
+            this.ClientSize = new System.Drawing.Size(466, 443);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
             this.Name = "FormLabel";

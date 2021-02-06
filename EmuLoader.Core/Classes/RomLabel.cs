@@ -66,10 +66,10 @@ namespace EmuLoader.Core.Classes
 
             if (node == null)
             {
-                node = XML.xmlDoc.CreateNode(XmlNodeType.Element, "Label", "");
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Name"));
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute("Color"));
-                XML.GetParentNode("Labels").AppendChild(node);
+                node = XML.xmlLabels.CreateNode(XmlNodeType.Element, "Label", "");
+                node.Attributes.Append(XML.xmlLabels.CreateAttribute("Name"));
+                node.Attributes.Append(XML.xmlLabels.CreateAttribute("Color"));
+                XML.GetParentNode(XML.xmlLabels, "Labels").AppendChild(node);
                 labels.Add(label.Name.ToLower(), label);
             }
 

@@ -228,7 +228,7 @@ namespace EmuLoader.Forms
         {
             if (Updated)
             {
-                XML.SaveXml();
+                XML.SaveXmlPlatforms();
             }
         }
 

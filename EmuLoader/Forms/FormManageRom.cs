@@ -149,7 +149,7 @@ namespace EmuLoader.Forms
                     checkBoxUseAlternate.Checked);
 
                 Rom.Set(SelectedRom);
-                XML.SaveXml();
+                XML.SaveXmlRoms();
                 Updated = true;
                 Close();
             }

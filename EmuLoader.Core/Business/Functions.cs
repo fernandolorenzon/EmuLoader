@@ -127,11 +127,11 @@ namespace EmuLoader.Core.Business
             return node.Attributes[attributeName].Value;
         }
 
-        public static void CreateOrSetXmlAttribute(XmlNode node, string attributeName, string value)
+        public static void CreateOrSetXmlAttribute(XmlDocument xml, XmlNode node, string attributeName, string value)
         {
             if (node.Attributes[attributeName] == null)
             {
-                node.Attributes.Append(XML.xmlDoc.CreateAttribute(attributeName));
+                node.Attributes.Append(xml.CreateAttribute(attributeName));
             }
 
             node.Attributes[attributeName].Value = value;
@@ -202,7 +202,11 @@ namespace EmuLoader.Core.Business
 
             Directory.CreateDirectory(date);
 
-            File.Copy(Values.xmlFileFull, date + "\\" + Values.xmlFile);
+            File.Copy(Values.xmlPath + "\\" + Values.xmlFileConfig, date + "\\" + Values.xmlFileConfig);
+            File.Copy(Values.xmlPath + "\\" + Values.xmlFilePlatforms, date + "\\" + Values.xmlFilePlatforms);
+            File.Copy(Values.xmlPath + "\\" + Values.xmlFileRoms, date + "\\" + Values.xmlFileRoms);
+            File.Copy(Values.xmlPath + "\\" + Values.xmlFileGenres, date + "\\" + Values.xmlFileGenres);
+            File.Copy(Values.xmlPath + "\\" + Values.xmlFileLabels, date + "\\" + Values.xmlFileLabels);
             System.IO.Compression.ZipFile.CreateFromDirectory(date, backupname);
             File.Move(backupname, Values.BackupFolder + "\\" + backupname);
             Directory.Delete(date, true);
