@@ -19,6 +19,7 @@
         ColumnPublisher,
         ColumnDeveloper,
         ColumnGenre,
+        ColumnStatus,
         ColumnLabels,
         ColumnPlatform,
         ColumnFileName,

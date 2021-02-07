@@ -46,6 +46,7 @@ namespace EmuLoader.Forms
                 Rom.Fill();
                 columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPlatform);
                 columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnGenre);
+                columnStatus.Visible = showStatusColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnStatus);
                 columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnLabels);
                 columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPath);
                 columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnRomDBName);
@@ -745,6 +746,27 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 Config.SetElementVisibility(Column.ColumnGenre, columnGenre.Visible);
+                XML.SaveXmlConfig();
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void showStatusColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                columnStatus.Visible = showStatusColumnToolStripMenuItem.Checked;
+
+                if (updating) return;
+
+                Config.SetElementVisibility(Column.ColumnStatus, columnStatus.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -2296,5 +2318,6 @@ namespace EmuLoader.Forms
         }
 
         #endregion
+
     }
 }
