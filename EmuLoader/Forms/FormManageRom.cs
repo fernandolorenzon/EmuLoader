@@ -72,16 +72,13 @@ namespace EmuLoader.Forms
                 dataGridView.Rows.Add(row);
             }
 
-            List<Platform> platforms = Platform.GetAll();
-            platforms.Insert(0, new Platform());
-            comboBoxPlatform.DataSource = platforms;
-            comboBoxPlatform.DisplayMember = "Name";
-            comboBoxPlatform.ValueMember = "Name";
-
+            LoadComboBoxPlatform();
             LoadComboBoxGenres();
+            LoadComboBoxStatus();
 
             comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? string.Empty : SelectedRom.Platform.Name;
             comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? string.Empty : SelectedRom.Genre.Name;
+            comboBoxChooseStatus.SelectedItem = SelectedRom.Status;
 
             if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
             {
@@ -97,6 +94,15 @@ namespace EmuLoader.Forms
             LoadPictures();
         }
 
+        private void LoadComboBoxPlatform()
+        {
+            List<Platform> platforms = Platform.GetAll();
+            platforms.Insert(0, new Platform());
+            comboBoxPlatform.DataSource = platforms;
+            comboBoxPlatform.DisplayMember = "Name";
+            comboBoxPlatform.ValueMember = "Name";
+        }
+
         private void LoadComboBoxGenres()
         {
             List<Genre> genres = Genre.GetAll();
@@ -104,6 +110,13 @@ namespace EmuLoader.Forms
             comboBoxGenre.DataSource = genres;
             comboBoxGenre.DisplayMember = "Name";
             comboBoxGenre.ValueMember = "Name";
+        }
+
+        private void LoadComboBoxStatus()
+        {
+            var status = Values.Status.ToArray().ToList();
+            status.Insert(0, "");
+            comboBoxChooseStatus.DataSource = status;
         }
 
         #endregion
@@ -146,7 +159,8 @@ namespace EmuLoader.Forms
                     checkBoxSaveAsJpg.Checked,
                     textBoxEmulatorExe.Text,
                     textBoxCommand.Text,
-                    checkBoxUseAlternate.Checked);
+                    checkBoxUseAlternate.Checked,
+                    comboBoxChooseStatus.Text);
 
                 Rom.Set(SelectedRom);
                 XML.SaveXmlRoms();

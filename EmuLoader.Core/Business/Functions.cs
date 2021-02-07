@@ -12,6 +12,18 @@ namespace EmuLoader.Core.Business
 {
     public static class Functions
     {
+        public static void InitXml()
+        {
+            XML.LoadXmlConfig();
+            XML.LoadXmlGenres();
+            XML.LoadXmlLabels();
+            XML.LoadXmlPlatforms();
+            XML.LoadXmlRoms();
+            RomLabel.Fill();
+            Genre.Fill();
+            Platform.Fill();
+        }
+
         public static void SavePictureFromUrl(Rom rom, string url, string pictureType, bool saveAsJpg)
         {
             if (url == "") return;

@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Classes;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace EmuLoader.Forms
@@ -10,6 +11,7 @@ namespace EmuLoader.Forms
         private static Type selectedType;
         public Platform SelectedPlatform { get; set; }
         public Genre SelectedGenre { get; set; }
+        public string SelectedStatus { get; set; }
 
         private FormChoose()
         {
@@ -60,6 +62,17 @@ namespace EmuLoader.Forms
                 buttonClose.Text = "Cancel and close";
                 buttonAdd.Text = "Save and close";
             }
+            else if (type == typeof(string))
+            {
+                var status = Values.Status.ToArray().ToList();
+                status.Insert(0, "");
+                comboBox.DataSource = status;
+                labelChoose.Text = "Choose Status";
+                this.Text = "Choose Status";
+                buttonCancel.Visible = false;
+                buttonClose.Text = "Cancel and close";
+                buttonAdd.Text = "Save and close";
+            }
         }
 
         private void FormChoose_Load(object sender, EventArgs e)
@@ -97,6 +110,11 @@ namespace EmuLoader.Forms
                     SelectedGenre = selected;
                 }
             }
+            else if (selectedType == typeof(string))
+            {
+                string selected = comboBox.Text;
+                SelectedStatus = selected;
+            }
 
             Updated = true;
             instance.Close();
@@ -122,6 +140,14 @@ namespace EmuLoader.Forms
             instance = new FormChoose(typeof(Genre));
             var result = instance.ShowDialogUpdated();
             selectedGenre = instance.SelectedGenre;
+            return result;
+        }
+
+        public static bool ChooseStatus(out string selectedStatus)
+        {
+            instance = new FormChoose(typeof(string));
+            var result = instance.ShowDialogUpdated();
+            selectedStatus = instance.SelectedStatus;
             return result;
         }
     }

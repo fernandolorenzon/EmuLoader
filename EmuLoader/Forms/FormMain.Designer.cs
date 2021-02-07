@@ -41,6 +41,7 @@
             this.favoriteUnfavoriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePlatformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeGenreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedRomsOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +90,8 @@
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnPlatforms = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             this.comboBoxFilter = new System.Windows.Forms.ComboBox();
             this.buttonClear = new System.Windows.Forms.Button();
             this.checkBoxFavorite = new System.Windows.Forms.CheckBox();
@@ -108,6 +111,13 @@
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.comboBoxLabels = new System.Windows.Forms.ComboBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.labelSelectedRoms = new System.Windows.Forms.Label();
+            this.labelSelectedRomsCount = new System.Windows.Forms.Label();
+            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
+            this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
+            this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.columnIconMain = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnFileExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnIncorrectPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,18 +128,12 @@
             this.columnFilename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnLabels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPublisher = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDeveloper = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.labelSelectedRoms = new System.Windows.Forms.Label();
-            this.labelSelectedRomsCount = new System.Windows.Forms.Label();
-            this.flowLayoutPanelPictures = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
-            this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
-            this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.contextMenuStripEditRom.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlatforms)).BeginInit();
@@ -176,11 +180,11 @@
             this.buttonRomDeleteRomFromDisk,
             this.changePlatformToolStripMenuItem,
             this.changeGenreToolStripMenuItem,
+            this.changeStatusToolStripMenuItem,
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
-            this.contextMenuStripEditRom.OwnerItem = this.selectedRomsOptionsToolStripMenuItem;
-            this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 180);
+            this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 224);
             // 
             // favoriteUnfavoriteToolStripMenuItem
             // 
@@ -205,6 +209,14 @@
             this.changeGenreToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.changeGenreToolStripMenuItem.Text = "Change Genre";
             this.changeGenreToolStripMenuItem.Click += new System.EventHandler(this.changeGenreToolStripMenuItem_Click);
+            // 
+            // changeStatusToolStripMenuItem
+            // 
+            this.changeStatusToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeStatusToolStripMenuItem.Image")));
+            this.changeStatusToolStripMenuItem.Name = "changeStatusToolStripMenuItem";
+            this.changeStatusToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.changeStatusToolStripMenuItem.Text = "Change Status";
+            this.changeStatusToolStripMenuItem.Click += new System.EventHandler(this.changeStatusToolStripMenuItem_Click);
             // 
             // changeLabelsToolStripMenuItem
             // 
@@ -672,6 +684,8 @@
             // groupBoxFilter
             // 
             this.groupBoxFilter.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.groupBoxFilter.Controls.Add(this.labelStatus);
+            this.groupBoxFilter.Controls.Add(this.comboBoxStatus);
             this.groupBoxFilter.Controls.Add(this.comboBoxFilter);
             this.groupBoxFilter.Controls.Add(this.buttonClear);
             this.groupBoxFilter.Controls.Add(this.checkBoxFavorite);
@@ -700,6 +714,26 @@
             this.groupBoxFilter.TabIndex = 8;
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatus.Location = new System.Drawing.Point(131, 14);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(42, 14);
+            this.labelStatus.TabIndex = 21;
+            this.labelStatus.Text = "Status";
+            // 
+            // comboBoxStatus
+            // 
+            this.comboBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(134, 30);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(120, 20);
+            this.comboBoxStatus.TabIndex = 20;
+            this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
             // 
             // comboBoxFilter
             // 
@@ -766,7 +800,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(384, 14);
+            this.label1.Location = new System.Drawing.Point(510, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 16;
@@ -776,7 +810,7 @@
             // 
             this.comboBoxDeveloper.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxDeveloper.FormattingEnabled = true;
-            this.comboBoxDeveloper.Location = new System.Drawing.Point(386, 30);
+            this.comboBoxDeveloper.Location = new System.Drawing.Point(512, 30);
             this.comboBoxDeveloper.Name = "comboBoxDeveloper";
             this.comboBoxDeveloper.Size = new System.Drawing.Size(120, 20);
             this.comboBoxDeveloper.TabIndex = 15;
@@ -786,7 +820,7 @@
             // 
             this.labelYearReleased.AutoSize = true;
             this.labelYearReleased.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelYearReleased.Location = new System.Drawing.Point(511, 14);
+            this.labelYearReleased.Location = new System.Drawing.Point(637, 14);
             this.labelYearReleased.Name = "labelYearReleased";
             this.labelYearReleased.Size = new System.Drawing.Size(84, 14);
             this.labelYearReleased.TabIndex = 14;
@@ -796,7 +830,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(258, 14);
+            this.label3.Location = new System.Drawing.Point(384, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 14);
             this.label3.TabIndex = 13;
@@ -806,7 +840,7 @@
             // 
             this.comboBoxPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPublisher.FormattingEnabled = true;
-            this.comboBoxPublisher.Location = new System.Drawing.Point(260, 30);
+            this.comboBoxPublisher.Location = new System.Drawing.Point(386, 30);
             this.comboBoxPublisher.Name = "comboBoxPublisher";
             this.comboBoxPublisher.Size = new System.Drawing.Size(120, 20);
             this.comboBoxPublisher.TabIndex = 11;
@@ -816,7 +850,7 @@
             // 
             this.comboBoxYearReleased.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxYearReleased.FormattingEnabled = true;
-            this.comboBoxYearReleased.Location = new System.Drawing.Point(513, 30);
+            this.comboBoxYearReleased.Location = new System.Drawing.Point(639, 30);
             this.comboBoxYearReleased.Name = "comboBoxYearReleased";
             this.comboBoxYearReleased.Size = new System.Drawing.Size(93, 20);
             this.comboBoxYearReleased.TabIndex = 12;
@@ -856,7 +890,7 @@
             // 
             this.labelFilterRom.AutoSize = true;
             this.labelFilterRom.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFilterRom.Location = new System.Drawing.Point(258, 51);
+            this.labelFilterRom.Location = new System.Drawing.Point(257, 51);
             this.labelFilterRom.Name = "labelFilterRom";
             this.labelFilterRom.Size = new System.Drawing.Size(65, 14);
             this.labelFilterRom.TabIndex = 5;
@@ -866,7 +900,7 @@
             // 
             this.labelLabels.AutoSize = true;
             this.labelLabels.Font = new System.Drawing.Font("Lucida Sans Unicode", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLabels.Location = new System.Drawing.Point(134, 14);
+            this.labelLabels.Location = new System.Drawing.Point(260, 14);
             this.labelLabels.Name = "labelLabels";
             this.labelLabels.Size = new System.Drawing.Size(36, 14);
             this.labelLabels.TabIndex = 7;
@@ -896,7 +930,7 @@
             // 
             this.comboBoxLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxLabels.FormattingEnabled = true;
-            this.comboBoxLabels.Location = new System.Drawing.Point(134, 30);
+            this.comboBoxLabels.Location = new System.Drawing.Point(260, 30);
             this.comboBoxLabels.Name = "comboBoxLabels";
             this.comboBoxLabels.Size = new System.Drawing.Size(120, 20);
             this.comboBoxLabels.TabIndex = 4;
@@ -931,6 +965,7 @@
             this.columnFilename,
             this.columnPlatform,
             this.columnGenre,
+            this.columnStatus,
             this.columnLabels,
             this.columnPublisher,
             this.columnDeveloper,
@@ -966,123 +1001,6 @@
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             this.dataGridView.Leave += new System.EventHandler(this.dataGridView_Leave);
             this.dataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_MouseDown);
-            // 
-            // columnIconMain
-            // 
-            this.columnIconMain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.columnIconMain.FillWeight = 73.09644F;
-            this.columnIconMain.Frozen = true;
-            this.columnIconMain.HeaderText = "Icon";
-            this.columnIconMain.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.columnIconMain.Name = "columnIconMain";
-            this.columnIconMain.ReadOnly = true;
-            this.columnIconMain.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnIconMain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.columnIconMain.Width = 40;
-            // 
-            // ColumnFileExists
-            // 
-            this.ColumnFileExists.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ColumnFileExists.Frozen = true;
-            this.ColumnFileExists.HeaderText = "Exists";
-            this.ColumnFileExists.Name = "ColumnFileExists";
-            this.ColumnFileExists.ReadOnly = true;
-            this.ColumnFileExists.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnFileExists.Visible = false;
-            this.ColumnFileExists.Width = 60;
-            // 
-            // ColumnIncorrectPlatform
-            // 
-            this.ColumnIncorrectPlatform.FillWeight = 10F;
-            this.ColumnIncorrectPlatform.HeaderText = "Incorrect Platform";
-            this.ColumnIncorrectPlatform.Name = "ColumnIncorrectPlatform";
-            this.ColumnIncorrectPlatform.ReadOnly = true;
-            this.ColumnIncorrectPlatform.Visible = false;
-            // 
-            // ColumnMissingPics
-            // 
-            this.ColumnMissingPics.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnMissingPics.HeaderText = "Missing Pics";
-            this.ColumnMissingPics.Name = "ColumnMissingPics";
-            this.ColumnMissingPics.ReadOnly = true;
-            this.ColumnMissingPics.Visible = false;
-            // 
-            // columnRomName
-            // 
-            this.columnRomName.FillWeight = 17.78983F;
-            this.columnRomName.HeaderText = "Rom Name";
-            this.columnRomName.Name = "columnRomName";
-            this.columnRomName.ReadOnly = true;
-            // 
-            // columnRomDBName
-            // 
-            this.columnRomDBName.FillWeight = 17.78983F;
-            this.columnRomDBName.HeaderText = "DB Name";
-            this.columnRomDBName.Name = "columnRomDBName";
-            this.columnRomDBName.ReadOnly = true;
-            // 
-            // columnRomPath
-            // 
-            this.columnRomPath.FillWeight = 10.90591F;
-            this.columnRomPath.HeaderText = "Rom Path";
-            this.columnRomPath.Name = "columnRomPath";
-            this.columnRomPath.ReadOnly = true;
-            // 
-            // columnFilename
-            // 
-            this.columnFilename.FillWeight = 5.929944F;
-            this.columnFilename.HeaderText = "Filename";
-            this.columnFilename.Name = "columnFilename";
-            this.columnFilename.ReadOnly = true;
-            // 
-            // columnPlatform
-            // 
-            this.columnPlatform.FillWeight = 4.94162F;
-            this.columnPlatform.HeaderText = "Platform";
-            this.columnPlatform.Name = "columnPlatform";
-            this.columnPlatform.ReadOnly = true;
-            // 
-            // columnGenre
-            // 
-            this.columnGenre.FillWeight = 3.953296F;
-            this.columnGenre.HeaderText = "Genre";
-            this.columnGenre.Name = "columnGenre";
-            this.columnGenre.ReadOnly = true;
-            // 
-            // columnLabels
-            // 
-            this.columnLabels.FillWeight = 7.90659F;
-            this.columnLabels.HeaderText = "Labels";
-            this.columnLabels.Name = "columnLabels";
-            this.columnLabels.ReadOnly = true;
-            // 
-            // columnPublisher
-            // 
-            this.columnPublisher.FillWeight = 5.929944F;
-            this.columnPublisher.HeaderText = "Publisher";
-            this.columnPublisher.Name = "columnPublisher";
-            this.columnPublisher.ReadOnly = true;
-            // 
-            // columnDeveloper
-            // 
-            this.columnDeveloper.FillWeight = 5.929944F;
-            this.columnDeveloper.HeaderText = "Developer";
-            this.columnDeveloper.Name = "columnDeveloper";
-            this.columnDeveloper.ReadOnly = true;
-            // 
-            // columnYearReleased
-            // 
-            this.columnYearReleased.FillWeight = 4.722474F;
-            this.columnYearReleased.HeaderText = "Year";
-            this.columnYearReleased.Name = "columnYearReleased";
-            this.columnYearReleased.ReadOnly = true;
-            // 
-            // columnRating
-            // 
-            this.columnRating.FillWeight = 4.722474F;
-            this.columnRating.HeaderText = "Rating";
-            this.columnRating.Name = "columnRating";
-            this.columnRating.ReadOnly = true;
             // 
             // panelBottom
             // 
@@ -1172,6 +1090,131 @@
             this.pictureBoxGameplay.TabStop = false;
             this.pictureBoxGameplay.DoubleClick += new System.EventHandler(this.pictureBoxGameplay_DoubleClick);
             this.pictureBoxGameplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameplay_MouseClick);
+            // 
+            // columnIconMain
+            // 
+            this.columnIconMain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.columnIconMain.FillWeight = 73.09644F;
+            this.columnIconMain.Frozen = true;
+            this.columnIconMain.HeaderText = "Icon";
+            this.columnIconMain.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.columnIconMain.Name = "columnIconMain";
+            this.columnIconMain.ReadOnly = true;
+            this.columnIconMain.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnIconMain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.columnIconMain.Width = 40;
+            // 
+            // ColumnFileExists
+            // 
+            this.ColumnFileExists.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnFileExists.Frozen = true;
+            this.ColumnFileExists.HeaderText = "Exists";
+            this.ColumnFileExists.Name = "ColumnFileExists";
+            this.ColumnFileExists.ReadOnly = true;
+            this.ColumnFileExists.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnFileExists.Visible = false;
+            this.ColumnFileExists.Width = 60;
+            // 
+            // ColumnIncorrectPlatform
+            // 
+            this.ColumnIncorrectPlatform.FillWeight = 10F;
+            this.ColumnIncorrectPlatform.HeaderText = "Incorrect Platform";
+            this.ColumnIncorrectPlatform.Name = "ColumnIncorrectPlatform";
+            this.ColumnIncorrectPlatform.ReadOnly = true;
+            this.ColumnIncorrectPlatform.Visible = false;
+            // 
+            // ColumnMissingPics
+            // 
+            this.ColumnMissingPics.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnMissingPics.HeaderText = "Missing Pics";
+            this.ColumnMissingPics.Name = "ColumnMissingPics";
+            this.ColumnMissingPics.ReadOnly = true;
+            this.ColumnMissingPics.Visible = false;
+            this.ColumnMissingPics.Width = 109;
+            // 
+            // columnRomName
+            // 
+            this.columnRomName.FillWeight = 17.78983F;
+            this.columnRomName.HeaderText = "Rom Name";
+            this.columnRomName.Name = "columnRomName";
+            this.columnRomName.ReadOnly = true;
+            // 
+            // columnRomDBName
+            // 
+            this.columnRomDBName.FillWeight = 17.78983F;
+            this.columnRomDBName.HeaderText = "DB Name";
+            this.columnRomDBName.Name = "columnRomDBName";
+            this.columnRomDBName.ReadOnly = true;
+            // 
+            // columnRomPath
+            // 
+            this.columnRomPath.FillWeight = 10.90591F;
+            this.columnRomPath.HeaderText = "Rom Path";
+            this.columnRomPath.Name = "columnRomPath";
+            this.columnRomPath.ReadOnly = true;
+            // 
+            // columnFilename
+            // 
+            this.columnFilename.FillWeight = 5.929944F;
+            this.columnFilename.HeaderText = "Filename";
+            this.columnFilename.Name = "columnFilename";
+            this.columnFilename.ReadOnly = true;
+            // 
+            // columnPlatform
+            // 
+            this.columnPlatform.FillWeight = 4.94162F;
+            this.columnPlatform.HeaderText = "Platform";
+            this.columnPlatform.Name = "columnPlatform";
+            this.columnPlatform.ReadOnly = true;
+            // 
+            // columnGenre
+            // 
+            this.columnGenre.FillWeight = 3.953296F;
+            this.columnGenre.HeaderText = "Genre";
+            this.columnGenre.Name = "columnGenre";
+            this.columnGenre.ReadOnly = true;
+            // 
+            // columnStatus
+            // 
+            this.columnStatus.FillWeight = 4F;
+            this.columnStatus.HeaderText = "Status";
+            this.columnStatus.Name = "columnStatus";
+            this.columnStatus.ReadOnly = true;
+            // 
+            // columnLabels
+            // 
+            this.columnLabels.FillWeight = 7.90659F;
+            this.columnLabels.HeaderText = "Labels";
+            this.columnLabels.Name = "columnLabels";
+            this.columnLabels.ReadOnly = true;
+            // 
+            // columnPublisher
+            // 
+            this.columnPublisher.FillWeight = 5.929944F;
+            this.columnPublisher.HeaderText = "Publisher";
+            this.columnPublisher.Name = "columnPublisher";
+            this.columnPublisher.ReadOnly = true;
+            // 
+            // columnDeveloper
+            // 
+            this.columnDeveloper.FillWeight = 5.929944F;
+            this.columnDeveloper.HeaderText = "Developer";
+            this.columnDeveloper.Name = "columnDeveloper";
+            this.columnDeveloper.ReadOnly = true;
+            // 
+            // columnYearReleased
+            // 
+            this.columnYearReleased.FillWeight = 4.722474F;
+            this.columnYearReleased.HeaderText = "Year";
+            this.columnYearReleased.Name = "columnYearReleased";
+            this.columnYearReleased.ReadOnly = true;
+            // 
+            // columnRating
+            // 
+            this.columnRating.FillWeight = 4.722474F;
+            this.columnRating.HeaderText = "Rating";
+            this.columnRating.Name = "columnRating";
+            this.columnRating.ReadOnly = true;
             // 
             // FormMain
             // 
@@ -1294,6 +1337,12 @@
         private System.Windows.Forms.ToolStripMenuItem showFileExistsAuditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showIncorrectPlatformAuditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showMissingPicsAuditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem favoriteUnfavoriteToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxFavorite;
+        private System.Windows.Forms.ComboBox comboBoxFilter;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.ComboBox comboBoxStatus;
+        private System.Windows.Forms.ToolStripMenuItem changeStatusToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn columnIconMain;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFileExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIncorrectPlatform;
@@ -1304,13 +1353,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFilename;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPlatform;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGenre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnLabels;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPublisher;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDeveloper;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
-        private System.Windows.Forms.ToolStripMenuItem favoriteUnfavoriteToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBoxFavorite;
-        private System.Windows.Forms.ComboBox comboBoxFilter;
     }
 }

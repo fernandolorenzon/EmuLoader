@@ -63,6 +63,7 @@ namespace EmuLoader.Core.Business
                 string.IsNullOrEmpty(filter.publisher) &&
                 string.IsNullOrEmpty(filter.developer) &&
                 string.IsNullOrEmpty(filter.year) &&
+                string.IsNullOrEmpty(filter.status) &&
                 !filter.favorite &&
                 platforms.Count == 0)
             {
@@ -85,6 +86,12 @@ namespace EmuLoader.Core.Business
                 if (!string.IsNullOrEmpty(filter.genre))
                 {
                     var filterRoms = filter.genre == "<none>" ? FilteredRoms.Where(x => x.Genre == null).ToList() : FilteredRoms.Where(x => x.Genre != null && x.Genre.Name == filter.genre).ToList();
+                    FilteredRoms = filterRoms;
+                }
+
+                if (!string.IsNullOrEmpty(filter.status))
+                {
+                    var filterRoms = filter.status == "<none>" ? FilteredRoms.Where(x => x.Status == string.Empty).ToList() : FilteredRoms.Where(x => x.Status == filter.status).ToList();
                     FilteredRoms = filterRoms;
                 }
 

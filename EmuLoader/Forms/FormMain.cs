@@ -40,14 +40,7 @@ namespace EmuLoader.Forms
                 //DateTime begin = DateTime.Now;
                 updating = true;
                 //FormMessage.ShowMessage("Loading XML...");
-                XML.LoadXmlConfig();
-                XML.LoadXmlGenres();
-                XML.LoadXmlLabels();
-                XML.LoadXmlPlatforms();
-                XML.LoadXmlRoms();
-                RomLabel.Fill();
-                Genre.Fill();
-                Platform.Fill();
+                Functions.InitXml();
                 FillPlatformGrid();
                 //FormMessage.ShowMessage("Loading Roms...");
                 Rom.Fill();
@@ -74,6 +67,7 @@ namespace EmuLoader.Forms
                 FillPublisherFilter();
                 FillDeveloperFilter();
                 FillYearReleasedFilter();
+                FillStatusFilter();
 
                 Filter filter = FilterFunctions.GetFilter();
 
@@ -109,7 +103,7 @@ namespace EmuLoader.Forms
                 {
                     comboBoxYearReleased.SelectedText = filter.year;
                 }
-               
+
                 checkBoxFavorite.Checked = filter.favorite;
 
                 FilterRoms();
@@ -463,6 +457,49 @@ namespace EmuLoader.Forms
                         row.Cells[columnGenre.Index].Value = "";
                         row.Cells[columnGenre.Index].Style.BackColor = Color.White;
                         row.Cells[columnGenre.Index].Style.ForeColor = Color.Black;
+                    }
+                }
+
+                dataGridView.Refresh();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void changeStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string selected = "";
+
+                if (!FormChoose.ChooseStatus(out selected)) return;
+
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    var rom = (Rom)row.Tag;
+                    rom.Status = selected;
+                    Rom.Set(rom);
+                }
+
+                XML.SaveXmlRoms();
+
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    Rom rom = (Rom)row.Tag;
+
+                    if (!string.IsNullOrEmpty(rom.Status))
+                    {
+                        row.Cells[columnStatus.Index].Value = rom.Status;
+                        row.Cells[columnStatus.Index].Style.BackColor = Color.Navy;
+                        row.Cells[columnStatus.Index].Style.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        row.Cells[columnStatus.Index].Value = "";
+                        row.Cells[columnStatus.Index].Style.BackColor = Color.White;
+                        row.Cells[columnStatus.Index].Style.ForeColor = Color.Black;
                     }
                 }
 
@@ -840,7 +877,7 @@ namespace EmuLoader.Forms
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
                     Rom rom = (Rom)row.Tag;
-                    
+
                     if (File.Exists(rom.Path))
                     {
                         row.Cells[ColumnFileExists.Name].Style.BackColor = Color.Green;
@@ -886,12 +923,12 @@ namespace EmuLoader.Forms
 
                 var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
 
-                if (json == "") 
+                if (json == "")
                 {
                     FormCustomMessage.ShowError("Json not found. Sync platform first");
                     showIncorrectPlatformAuditToolStripMenuItem.Checked = false;
                     ColumnIncorrectPlatform.Visible = false;
-                    return; 
+                    return;
                 }
 
 
@@ -901,10 +938,10 @@ namespace EmuLoader.Forms
                 {
                     Rom rom = (Rom)row.Tag;
 
-                    if (string.IsNullOrEmpty(rom.Id)) 
+                    if (string.IsNullOrEmpty(rom.Id))
                     {
                         row.Cells[ColumnIncorrectPlatform.Name].Style.BackColor = Color.Yellow;
-                        continue; 
+                        continue;
                     }
 
                     if (json.Contains("\"id\": " + rom.Id + ","))
@@ -1188,6 +1225,19 @@ namespace EmuLoader.Forms
         }
 
         private void comboBoxLabels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (updating) return;
+                FilterRoms();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -1589,6 +1639,7 @@ namespace EmuLoader.Forms
                 {
                     Rom.Fill();
                     FillGenreFilter();
+
                     FilterRoms();
                     FillPlatformGrid();
                     FillPublisherFilter();
@@ -1888,7 +1939,7 @@ namespace EmuLoader.Forms
         {
             FilteredRoms.Clear();
             //DateTime begin = DateTime.Now;
-            
+
             Filter filter = new Filter();
             filter.text = textBoxFilter.Text;
             filter.platform = comboBoxPlatform.Text;
@@ -1897,6 +1948,7 @@ namespace EmuLoader.Forms
             filter.publisher = comboBoxPublisher.Text;
             filter.developer = comboBoxDeveloper.Text;
             filter.year = comboBoxYearReleased.Text;
+            filter.status = comboBoxStatus.Text;
             filter.favorite = checkBoxFavorite.Checked;
             filter.text = filter.text.ToLower();
             filter.textType = comboBoxFilter.Text;
@@ -1987,6 +2039,19 @@ namespace EmuLoader.Forms
                 row.Cells[columnGenre.Index].Value = rom.Genre.Name;
                 row.Cells[columnGenre.Index].Style.BackColor = rom.Genre.Color;
                 row.Cells[columnGenre.Index].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
+            }
+
+            if (!string.IsNullOrEmpty(rom.Status))
+            {
+                row.Cells[columnStatus.Index].Value = rom.Status;
+                row.Cells[columnStatus.Index].Style.BackColor = Color.Navy;
+                row.Cells[columnStatus.Index].Style.ForeColor = Color.White;
+            }
+            else
+            {
+                row.Cells[columnStatus.Index].Value = "";
+                row.Cells[columnStatus.Index].Style.ForeColor = dataGridView.RowTemplate.DefaultCellStyle.ForeColor;
+                row.Cells[columnStatus.Index].Style.BackColor = dataGridView.RowTemplate.DefaultCellStyle.BackColor;
             }
 
             row.Cells[columnRating.Index].Style.ForeColor = Color.Black;
@@ -2082,6 +2147,17 @@ namespace EmuLoader.Forms
             yearReleased.Insert(0, "");
             comboBoxYearReleased.DataSource = yearReleased;
             comboBoxYearReleased.SelectedIndex = 0;
+            updating = false;
+        }
+
+        private void FillStatusFilter()
+        {
+            updating = true;
+            var status = Values.Status.ToArray().ToList();
+            status.Insert(0, "");
+            status.Insert(1, "<none>");
+            comboBoxStatus.DataSource = status;
+            comboBoxStatus.SelectedIndex = 0;
             updating = false;
         }
 
@@ -2220,6 +2296,5 @@ namespace EmuLoader.Forms
         }
 
         #endregion
-
     }
 }

@@ -80,7 +80,7 @@
             this.comboBoxGenre = new System.Windows.Forms.ComboBox();
             this.labelGenre = new System.Windows.Forms.Label();
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
-            this.labelEmulator = new System.Windows.Forms.Label();
+            this.labelChoosePlatform = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxUseAlternate = new System.Windows.Forms.CheckBox();
             this.buttonHelp = new System.Windows.Forms.Button();
@@ -107,6 +107,8 @@
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
+            this.comboBoxChooseStatus = new System.Windows.Forms.ComboBox();
+            this.labelChooseStatus = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -140,6 +142,8 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.comboBoxChooseStatus);
+            this.tabPageGeneral.Controls.Add(this.labelChooseStatus);
             this.tabPageGeneral.Controls.Add(this.buttonGetMAMEName);
             this.tabPageGeneral.Controls.Add(this.checkBoxIdLocked);
             this.tabPageGeneral.Controls.Add(this.textBoxRating);
@@ -170,7 +174,7 @@
             this.tabPageGeneral.Controls.Add(this.comboBoxGenre);
             this.tabPageGeneral.Controls.Add(this.labelGenre);
             this.tabPageGeneral.Controls.Add(this.comboBoxPlatform);
-            this.tabPageGeneral.Controls.Add(this.labelEmulator);
+            this.tabPageGeneral.Controls.Add(this.labelChoosePlatform);
             this.tabPageGeneral.Controls.Add(this.groupBox1);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
@@ -619,15 +623,15 @@
             // comboBoxGenre
             // 
             this.comboBoxGenre.FormattingEnabled = true;
-            this.comboBoxGenre.Location = new System.Drawing.Point(179, 304);
+            this.comboBoxGenre.Location = new System.Drawing.Point(124, 304);
             this.comboBoxGenre.Name = "comboBoxGenre";
-            this.comboBoxGenre.Size = new System.Drawing.Size(204, 21);
+            this.comboBoxGenre.Size = new System.Drawing.Size(129, 21);
             this.comboBoxGenre.TabIndex = 51;
             // 
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
-            this.labelGenre.Location = new System.Drawing.Point(176, 288);
+            this.labelGenre.Location = new System.Drawing.Point(121, 285);
             this.labelGenre.Name = "labelGenre";
             this.labelGenre.Size = new System.Drawing.Size(75, 13);
             this.labelGenre.TabIndex = 50;
@@ -636,19 +640,19 @@
             // comboBoxPlatform
             // 
             this.comboBoxPlatform.FormattingEnabled = true;
-            this.comboBoxPlatform.Location = new System.Drawing.Point(6, 304);
+            this.comboBoxPlatform.Location = new System.Drawing.Point(8, 304);
             this.comboBoxPlatform.Name = "comboBoxPlatform";
-            this.comboBoxPlatform.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxPlatform.Size = new System.Drawing.Size(110, 21);
             this.comboBoxPlatform.TabIndex = 49;
             // 
-            // labelEmulator
+            // labelChoosePlatform
             // 
-            this.labelEmulator.AutoSize = true;
-            this.labelEmulator.Location = new System.Drawing.Point(3, 288);
-            this.labelEmulator.Name = "labelEmulator";
-            this.labelEmulator.Size = new System.Drawing.Size(87, 13);
-            this.labelEmulator.TabIndex = 48;
-            this.labelEmulator.Text = "Choose Emulator";
+            this.labelChoosePlatform.AutoSize = true;
+            this.labelChoosePlatform.Location = new System.Drawing.Point(3, 288);
+            this.labelChoosePlatform.Name = "labelChoosePlatform";
+            this.labelChoosePlatform.Size = new System.Drawing.Size(84, 13);
+            this.labelChoosePlatform.TabIndex = 48;
+            this.labelChoosePlatform.Text = "Choose Platform";
             // 
             // groupBox1
             // 
@@ -921,6 +925,23 @@
             this.pictureBoxBoxart.TabIndex = 92;
             this.pictureBoxBoxart.TabStop = false;
             // 
+            // comboBoxChooseStatus
+            // 
+            this.comboBoxChooseStatus.FormattingEnabled = true;
+            this.comboBoxChooseStatus.Location = new System.Drawing.Point(259, 304);
+            this.comboBoxChooseStatus.Name = "comboBoxChooseStatus";
+            this.comboBoxChooseStatus.Size = new System.Drawing.Size(124, 21);
+            this.comboBoxChooseStatus.TabIndex = 108;
+            // 
+            // labelChooseStatus
+            // 
+            this.labelChooseStatus.AutoSize = true;
+            this.labelChooseStatus.Location = new System.Drawing.Point(256, 288);
+            this.labelChooseStatus.Name = "labelChooseStatus";
+            this.labelChooseStatus.Size = new System.Drawing.Size(76, 13);
+            this.labelChooseStatus.TabIndex = 107;
+            this.labelChooseStatus.Text = "Choose Status";
+            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -993,7 +1014,7 @@
         private System.Windows.Forms.ComboBox comboBoxGenre;
         private System.Windows.Forms.Label labelGenre;
         private System.Windows.Forms.ComboBox comboBoxPlatform;
-        private System.Windows.Forms.Label labelEmulator;
+        private System.Windows.Forms.Label labelChoosePlatform;
         private System.Windows.Forms.TabPage tabPagePictures;
         private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
         private System.Windows.Forms.Button buttonFindGameplayPicture;
@@ -1028,5 +1049,7 @@
         private System.Windows.Forms.CheckBox checkBoxIdLocked;
         private System.Windows.Forms.Button buttonGetMAMEName;
         private System.Windows.Forms.Button buttonClean;
+        private System.Windows.Forms.ComboBox comboBoxChooseStatus;
+        private System.Windows.Forms.Label labelChooseStatus;
     }
 }
