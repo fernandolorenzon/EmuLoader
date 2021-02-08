@@ -475,7 +475,12 @@ namespace EmuLoader.Forms
             {
                 string selected = "";
 
-                if (!FormChoose.ChooseStatus(out selected)) return;
+                if (dataGridView.SelectedRows.Count == 1)
+                {
+                    selected = ((Rom)dataGridView.SelectedRows[0].Tag).Status;
+                }
+
+                if (!FormChoose.ChooseStatus(selected, out selected)) return;
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -499,8 +504,8 @@ namespace EmuLoader.Forms
                     else
                     {
                         row.Cells[columnStatus.Index].Value = "";
-                        row.Cells[columnStatus.Index].Style.BackColor = Color.White;
-                        row.Cells[columnStatus.Index].Style.ForeColor = Color.Black;
+                        row.Cells[columnStatus.Index].Style.ForeColor = dataGridView.RowTemplate.DefaultCellStyle.ForeColor;
+                        row.Cells[columnStatus.Index].Style.BackColor = dataGridView.RowTemplate.DefaultCellStyle.BackColor;
                     }
                 }
 

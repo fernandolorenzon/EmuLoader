@@ -143,9 +143,10 @@ namespace EmuLoader.Forms
             return result;
         }
 
-        public static bool ChooseStatus(out string selectedStatus)
+        public static bool ChooseStatus(string oldStatus, out string selectedStatus)
         {
             instance = new FormChoose(typeof(string));
+            instance.comboBox.SelectedItem = oldStatus;
             var result = instance.ShowDialogUpdated();
             selectedStatus = instance.SelectedStatus;
             return result;
