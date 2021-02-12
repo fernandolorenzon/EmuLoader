@@ -646,23 +646,6 @@ namespace EmuLoader.Core.Business
             return path.Remove(path.LastIndexOf("\\"));
         }
 
-
-        public static void SetRomLabels(Rom rom, XmlNode node)
-        {
-            node.ChildNodes[0].RemoveAll();
-
-            if (rom.Labels != null)
-            {
-                foreach (RomLabel label in rom.Labels)
-                {
-                    XmlNode labelNode = XML.xmlRoms.CreateNode(XmlNodeType.Element, "Label", "");
-                    labelNode.InnerText = label.Name;
-                    node.ChildNodes[0].AppendChild(labelNode);
-                }
-            }
-        }
-
-
         public static bool AddRomsFiles(Platform platform, string[] files)
         {
             bool addedAny = false;

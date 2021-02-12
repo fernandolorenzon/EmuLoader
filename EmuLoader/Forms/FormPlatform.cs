@@ -14,6 +14,8 @@ namespace EmuLoader.Forms
         #region Members
 
         private bool updating = false;
+        private List<Emulator> emulators;
+        private string defaultEmulator;
         #endregion
 
         #region Constructors
@@ -21,6 +23,7 @@ namespace EmuLoader.Forms
         public FormPlatform()
         {
             InitializeComponent();
+            emulators = new List<Emulator>();
         }
 
         #endregion
@@ -97,18 +100,11 @@ namespace EmuLoader.Forms
 
             if (string.IsNullOrEmpty(open.FileName)) return;
 
-            textBoxAlternatePath.Text = open.FileName;
-
             if (string.IsNullOrEmpty(open.FileName)) return;
 
             if (textBoxDefaultRomExtensions.Text == string.Empty)
             {
                 textBoxDefaultRomExtensions.Text = ".zip";
-            }
-
-            if (string.IsNullOrEmpty(textBoxAlternateCommand.Text))
-            {
-                textBoxAlternateCommand.Text = Values.DefaultCommand;
             }
         }
 
@@ -153,16 +149,14 @@ namespace EmuLoader.Forms
 
             platform.Id = comboBoxPlatformsDB.SelectedValue.ToString();
             platform.Name = textBoxPlatformName.Text.Trim();
-            platform.EmulatorExe = textBoxPath.Text.Trim();
-            platform.Command = textBoxCommand.Text;
-            platform.EmulatorExeAlt = textBoxAlternatePath.Text.Trim();
-            platform.CommandAlt = textBoxAlternateCommand.Text;
             platform.Color = buttonColor.BackColor;
             platform.ShowInFilter = checkBoxShowInFilters.Checked;
             platform.ShowInList = checkBoxShowInLinksList.Checked;
             platform.DefaultRomPath = textBoxDefaultRomPath.Text;
             platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
             platform.UseRetroarch = checkBoxUseRetroarch.Checked;
+            platform.DefaultEmulator = defaultEmulator;
+            platform.Emulators = emulators;
 
             if (File.Exists(textBoxPlatformIcon.Text))
             {
@@ -319,18 +313,6 @@ namespace EmuLoader.Forms
             info.Show();
         }
 
-        private void buttonSwap_Click(object sender, EventArgs e)
-        {
-            var aux = textBoxPath.Text;
-            textBoxPath.Text = textBoxAlternatePath.Text;
-            textBoxAlternatePath.Text = aux;
-
-            aux = textBoxCommand.Text;
-            textBoxCommand.Text = textBoxAlternateCommand.Text;
-            textBoxAlternateCommand.Text = aux;
-
-        }
-
         private void checkBoxUseRetroarch_Click(object sender, EventArgs e)
         {
             buttonSelectCore.Enabled = checkBoxUseRetroarch.Checked;
@@ -407,7 +389,6 @@ namespace EmuLoader.Forms
             }
 
             row.Cells["columnName"].Value = platform.Name;
-            row.Cells["columnExe"].Value = platform.EmulatorExe;
             row.Cells["columnColor"].Value = platform.Color.Name;
             row.Cells["columnColor"].Style.BackColor = platform.Color;
             row.Cells["columnColor"].Style.ForeColor = Functions.SetFontContrast(platform.Color);
@@ -424,14 +405,15 @@ namespace EmuLoader.Forms
             textBoxCommand.Text = string.Empty;
             buttonColor.BackColor = Color.White;
             textBoxPlatformIcon.Text = string.Empty;
-            textBoxAlternateCommand.Text = string.Empty;
-            textBoxAlternatePath.Text = string.Empty;
             dataGridView.ClearSelection();
+            dataGridViewEmulators.Rows.Clear();
+            emulators = new List<Emulator>();
             comboBoxPlatformsDB.SelectedValue = "0";
             textBoxDefaultRomPath.Text = string.Empty;
             textBoxDefaultRomExtensions.Text = string.Empty;
             textBoxPlatformName.Enabled = true;
             checkBoxUseRetroarch.Checked = false;
+            defaultEmulator = "";
         }
 
         protected override void SetForm()
@@ -457,20 +439,107 @@ namespace EmuLoader.Forms
             buttonSelectCore.Enabled = platform.UseRetroarch;
             comboBoxPlatformsDB.SelectedValue = platform.Id == "" ? "0" : platform.Id;
             textBoxPlatformName.Text = platform.Name;
-            textBoxPath.Text = platform.EmulatorExe;
-            textBoxCommand.Text = platform.Command;
-            textBoxAlternatePath.Text = platform.EmulatorExeAlt;
-            textBoxAlternateCommand.Text = platform.CommandAlt;
             buttonColor.BackColor = platform.Color;
             checkBoxShowInFilters.Checked = platform.ShowInFilter;
             checkBoxShowInLinksList.Checked = platform.ShowInList;
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
-            
+            defaultEmulator = platform.DefaultEmulator;
+            emulators = platform.Emulators;
+            dataGridViewEmulators.Rows.Clear();
             textBoxPlatformName.Enabled = false;
+            FillGridEmulators();
         }
 
         #endregion
 
+        private void buttonAddEmulator_Click(object sender, EventArgs e)
+        {
+            if (textBoxName.Text == "" || textBoxPath.Text == "" || textBoxCommand.Text == "")
+            {
+                FormCustomMessage.ShowError("Fill the name, path and command first.");
+                return;
+            }
+
+            if (emulators.Any(x => x.Name.ToLower() == textBoxName.Text.ToLower()))
+            {
+                FormCustomMessage.ShowError("There is an emulator using the name " + textBoxName.Text);
+                return;
+            }
+
+            emulators.Add(new Emulator() { Name = textBoxName.Text, Path = textBoxPath.Text, Command = textBoxCommand.Text });
+            FillGridEmulators();
+            textBoxName.Text = "";
+            textBoxPath.Text = "";
+            textBoxCommand.Text = "";
+        }
+
+        private void FillGridEmulators()
+        {
+            Platform platform = null;
+
+            if (dataGridView.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dataGridView.SelectedRows[0];
+                platform = (Platform)row.Tag;
+            }
+
+            dataGridViewEmulators.Rows.Clear();
+
+            foreach (var item in emulators)
+            {
+                int rowId = dataGridViewEmulators.Rows.Add();
+                DataGridViewRow row = dataGridViewEmulators.Rows[rowId];
+                
+                if (platform != null && !string.IsNullOrEmpty(platform.DefaultEmulator) && platform.DefaultEmulator == item.Name)
+                {
+                    row.Cells["ColumnEmuDefault"].Value = "*";
+                }
+
+                row.Cells["ColumnEmuName"].Value = item.Name;
+                row.Cells["ColumnEmuPath"].Value = item.Path;
+                row.Cells["ColumnEmuCommand"].Value = item.Command;
+            }
+        }
+
+        private void buttonMakeDefault_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewEmulators.SelectedRows.Count == 0)
+            {
+                FormCustomMessage.ShowError("Select an emulator first");
+                return;
+            }
+
+            foreach (DataGridViewRow item in dataGridViewEmulators.Rows)
+            {
+                item.Cells["ColumnEmuDefault"].Value = "";
+            }
+
+            var row = dataGridViewEmulators.SelectedRows[0];
+            row.Cells["ColumnEmuDefault"].Value = "*";
+            defaultEmulator = row.Cells["ColumnEmuName"].Value.ToString();
+        }
+
+        private void buttonDeleteEmulator_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewEmulators.SelectedRows.Count == 0)
+            {
+                FormCustomMessage.ShowError("Select an emulator first");
+                return;
+            }
+
+            var selected = dataGridViewEmulators.SelectedRows[0].Cells[0].Value.ToString();
+            var emu = emulators.First(x => x.Name == selected);
+            emulators.Remove(emu);
+            FillGridEmulators();
+        }
+
+        private void textBoxPath_Leave(object sender, EventArgs e)
+        {
+            if (textBoxPath.Text != "")
+            {
+                textBoxCommand.Text = Values.DefaultCommand;
+            }
+        }
     }
 }

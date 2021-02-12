@@ -171,9 +171,24 @@ namespace EmuLoader.Core.Classes
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Favorite", rom.Favorite.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Status", rom.Status);
-            RomFunctions.SetRomLabels(rom, node);
+            SetRomLabels(rom, node);
 
             return true;
+        }
+
+        public static void SetRomLabels(Rom rom, XmlNode node)
+        {
+            node.ChildNodes[0].RemoveAll();
+
+            if (rom.Labels != null)
+            {
+                foreach (RomLabel label in rom.Labels)
+                {
+                    XmlNode labelNode = XML.xmlRoms.CreateNode(XmlNodeType.Element, "Label", "");
+                    labelNode.InnerText = label.Name;
+                    node.ChildNodes[0].AppendChild(labelNode);
+                }
+            }
         }
 
         public static bool Reset(string oldPath, Rom newRom)
@@ -204,7 +219,7 @@ namespace EmuLoader.Core.Classes
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "UseAlternateEmulator", newRom.UseAlternateEmulator.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "IdLocked", newRom.IdLocked.ToString());
 
-            RomFunctions.SetRomLabels(newRom, node);
+            SetRomLabels(newRom, node);
 
             return true;
         }

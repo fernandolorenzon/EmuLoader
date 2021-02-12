@@ -49,7 +49,6 @@
             this.buttonIconPath = new System.Windows.Forms.Button();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.textBoxAlternateCommand = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControlPlatform = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
@@ -64,21 +63,25 @@
             this.comboBoxPlatformsDB = new System.Windows.Forms.ComboBox();
             this.textBoxDefaultRomPath = new System.Windows.Forms.TextBox();
             this.tabPageEmulators = new System.Windows.Forms.TabPage();
+            this.buttonDeleteEmulator = new System.Windows.Forms.Button();
+            this.buttonMakeDefault = new System.Windows.Forms.Button();
+            this.buttonAddEmulator = new System.Windows.Forms.Button();
+            this.dataGridViewEmulators = new System.Windows.Forms.DataGridView();
+            this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonSelectCore = new System.Windows.Forms.Button();
             this.checkBoxUseRetroarch = new System.Windows.Forms.CheckBox();
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.buttonSwap = new System.Windows.Forms.Button();
-            this.textBoxAlternatePath = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.buttonAlternatePath = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.ColumnEmuDefault = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEmuName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEmuPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEmuCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControlPlatform.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.tabPageEmulators.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmulators)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -108,7 +111,7 @@
             // columnName
             // 
             this.columnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.columnName.DataPropertyName = "Namw";
+            this.columnName.DataPropertyName = "Name";
             this.columnName.HeaderText = "Name";
             this.columnName.Name = "columnName";
             this.columnName.ReadOnly = true;
@@ -157,15 +160,16 @@
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(19, 25);
+            this.textBoxPath.Location = new System.Drawing.Point(143, 25);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(269, 20);
+            this.textBoxPath.Size = new System.Drawing.Size(208, 20);
             this.textBoxPath.TabIndex = 4;
+            this.textBoxPath.Leave += new System.EventHandler(this.textBoxPath_Leave);
             // 
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(15, 3);
+            this.labelPath.Location = new System.Drawing.Point(140, 3);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(69, 13);
             this.labelPath.TabIndex = 6;
@@ -173,7 +177,7 @@
             // 
             // buttonPath
             // 
-            this.buttonPath.Location = new System.Drawing.Point(294, 23);
+            this.buttonPath.Location = new System.Drawing.Point(357, 23);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(36, 23);
             this.buttonPath.TabIndex = 3;
@@ -225,7 +229,7 @@
             // labelCommand
             // 
             this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(333, 3);
+            this.labelCommand.Location = new System.Drawing.Point(396, 3);
             this.labelCommand.Name = "labelCommand";
             this.labelCommand.Size = new System.Drawing.Size(54, 13);
             this.labelCommand.TabIndex = 11;
@@ -235,9 +239,9 @@
             // 
             this.textBoxCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCommand.Location = new System.Drawing.Point(336, 25);
+            this.textBoxCommand.Location = new System.Drawing.Point(399, 25);
             this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(266, 20);
+            this.textBoxCommand.Size = new System.Drawing.Size(203, 20);
             this.textBoxCommand.TabIndex = 12;
             this.textBoxCommand.Text = "%EMUPATH% %ROMPATH%";
             this.toolTip1.SetToolTip(this.textBoxCommand, resources.GetString("textBoxCommand.ToolTip"));
@@ -261,17 +265,6 @@
             this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxIcon.TabIndex = 16;
             this.pictureBoxIcon.TabStop = false;
-            // 
-            // textBoxAlternateCommand
-            // 
-            this.textBoxAlternateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAlternateCommand.Location = new System.Drawing.Point(336, 78);
-            this.textBoxAlternateCommand.Name = "textBoxAlternateCommand";
-            this.textBoxAlternateCommand.Size = new System.Drawing.Size(266, 20);
-            this.textBoxAlternateCommand.TabIndex = 37;
-            this.textBoxAlternateCommand.Text = "%EMUPATH% %ROMPATH%";
-            this.toolTip1.SetToolTip(this.textBoxAlternateCommand, resources.GetString("textBoxAlternateCommand.ToolTip"));
             // 
             // panel1
             // 
@@ -414,21 +407,19 @@
             // 
             // tabPageEmulators
             // 
+            this.tabPageEmulators.Controls.Add(this.buttonDeleteEmulator);
+            this.tabPageEmulators.Controls.Add(this.buttonMakeDefault);
+            this.tabPageEmulators.Controls.Add(this.buttonAddEmulator);
+            this.tabPageEmulators.Controls.Add(this.dataGridViewEmulators);
+            this.tabPageEmulators.Controls.Add(this.textBoxName);
             this.tabPageEmulators.Controls.Add(this.buttonSelectCore);
             this.tabPageEmulators.Controls.Add(this.checkBoxUseRetroarch);
             this.tabPageEmulators.Controls.Add(this.textBoxPath);
-            this.tabPageEmulators.Controls.Add(this.buttonHelp);
-            this.tabPageEmulators.Controls.Add(this.buttonSwap);
             this.tabPageEmulators.Controls.Add(this.buttonPath);
-            this.tabPageEmulators.Controls.Add(this.textBoxAlternatePath);
             this.tabPageEmulators.Controls.Add(this.labelCommand);
-            this.tabPageEmulators.Controls.Add(this.textBoxAlternateCommand);
             this.tabPageEmulators.Controls.Add(this.labelPath);
-            this.tabPageEmulators.Controls.Add(this.label5);
-            this.tabPageEmulators.Controls.Add(this.label6);
             this.tabPageEmulators.Controls.Add(this.textBoxCommand);
-            this.tabPageEmulators.Controls.Add(this.buttonAlternatePath);
-            this.tabPageEmulators.Controls.Add(this.label8);
+            this.tabPageEmulators.Controls.Add(this.labelName);
             this.tabPageEmulators.Location = new System.Drawing.Point(4, 22);
             this.tabPageEmulators.Name = "tabPageEmulators";
             this.tabPageEmulators.Padding = new System.Windows.Forms.Padding(3);
@@ -436,6 +427,63 @@
             this.tabPageEmulators.TabIndex = 1;
             this.tabPageEmulators.Text = "Emulators";
             this.tabPageEmulators.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteEmulator
+            // 
+            this.buttonDeleteEmulator.Location = new System.Drawing.Point(608, 119);
+            this.buttonDeleteEmulator.Name = "buttonDeleteEmulator";
+            this.buttonDeleteEmulator.Size = new System.Drawing.Size(110, 23);
+            this.buttonDeleteEmulator.TabIndex = 45;
+            this.buttonDeleteEmulator.Text = "Delete";
+            this.buttonDeleteEmulator.UseVisualStyleBackColor = true;
+            this.buttonDeleteEmulator.Click += new System.EventHandler(this.buttonDeleteEmulator_Click);
+            // 
+            // buttonMakeDefault
+            // 
+            this.buttonMakeDefault.Location = new System.Drawing.Point(608, 90);
+            this.buttonMakeDefault.Name = "buttonMakeDefault";
+            this.buttonMakeDefault.Size = new System.Drawing.Size(110, 23);
+            this.buttonMakeDefault.TabIndex = 44;
+            this.buttonMakeDefault.Text = "Make Default";
+            this.buttonMakeDefault.UseVisualStyleBackColor = true;
+            this.buttonMakeDefault.Click += new System.EventHandler(this.buttonMakeDefault_Click);
+            // 
+            // buttonAddEmulator
+            // 
+            this.buttonAddEmulator.Location = new System.Drawing.Point(608, 61);
+            this.buttonAddEmulator.Name = "buttonAddEmulator";
+            this.buttonAddEmulator.Size = new System.Drawing.Size(110, 23);
+            this.buttonAddEmulator.TabIndex = 43;
+            this.buttonAddEmulator.Text = "Add";
+            this.buttonAddEmulator.UseVisualStyleBackColor = true;
+            this.buttonAddEmulator.Click += new System.EventHandler(this.buttonAddEmulator_Click);
+            // 
+            // dataGridViewEmulators
+            // 
+            this.dataGridViewEmulators.AllowUserToAddRows = false;
+            this.dataGridViewEmulators.AllowUserToDeleteRows = false;
+            this.dataGridViewEmulators.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewEmulators.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewEmulators.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnEmuDefault,
+            this.ColumnEmuName,
+            this.ColumnEmuPath,
+            this.ColumnEmuCommand});
+            this.dataGridViewEmulators.Location = new System.Drawing.Point(6, 61);
+            this.dataGridViewEmulators.MultiSelect = false;
+            this.dataGridViewEmulators.Name = "dataGridViewEmulators";
+            this.dataGridViewEmulators.ReadOnly = true;
+            this.dataGridViewEmulators.Size = new System.Drawing.Size(596, 173);
+            this.dataGridViewEmulators.TabIndex = 42;
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(6, 25);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(131, 20);
+            this.textBoxName.TabIndex = 41;
             // 
             // buttonSelectCore
             // 
@@ -462,72 +510,55 @@
             this.checkBoxUseRetroarch.UseVisualStyleBackColor = true;
             this.checkBoxUseRetroarch.Click += new System.EventHandler(this.checkBoxUseRetroarch_Click);
             // 
-            // buttonHelp
+            // labelName
             // 
-            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.buttonHelp.ForeColor = System.Drawing.Color.Black;
-            this.buttonHelp.Location = new System.Drawing.Point(484, 104);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(24, 23);
-            this.buttonHelp.TabIndex = 27;
-            this.buttonHelp.Text = "?";
-            this.buttonHelp.UseVisualStyleBackColor = false;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(6, 3);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(79, 13);
+            this.labelName.TabIndex = 6;
+            this.labelName.Text = "Emulator Name";
             // 
-            // buttonSwap
+            // ColumnEmuDefault
             // 
-            this.buttonSwap.Location = new System.Drawing.Point(336, 104);
-            this.buttonSwap.Name = "buttonSwap";
-            this.buttonSwap.Size = new System.Drawing.Size(142, 23);
-            this.buttonSwap.TabIndex = 38;
-            this.buttonSwap.Text = "Swap Exe and Command";
-            this.buttonSwap.UseVisualStyleBackColor = true;
-            this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
+            this.ColumnEmuDefault.DataPropertyName = "Default";
+            this.ColumnEmuDefault.Frozen = true;
+            this.ColumnEmuDefault.HeaderText = "*";
+            this.ColumnEmuDefault.Name = "ColumnEmuDefault";
+            this.ColumnEmuDefault.ReadOnly = true;
+            this.ColumnEmuDefault.Width = 20;
             // 
-            // textBoxAlternatePath
+            // ColumnEmuName
             // 
-            this.textBoxAlternatePath.Location = new System.Drawing.Point(18, 77);
-            this.textBoxAlternatePath.Name = "textBoxAlternatePath";
-            this.textBoxAlternatePath.Size = new System.Drawing.Size(270, 20);
-            this.textBoxAlternatePath.TabIndex = 34;
+            this.ColumnEmuName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnEmuName.DataPropertyName = "Name";
+            this.ColumnEmuName.FillWeight = 50F;
+            this.ColumnEmuName.Frozen = true;
+            this.ColumnEmuName.HeaderText = "Name";
+            this.ColumnEmuName.MinimumWidth = 50;
+            this.ColumnEmuName.Name = "ColumnEmuName";
+            this.ColumnEmuName.ReadOnly = true;
+            this.ColumnEmuName.Width = 132;
             // 
-            // label5
+            // ColumnEmuPath
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 55);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Alternate Emulator Exe";
+            this.ColumnEmuPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnEmuPath.DataPropertyName = "Path";
+            this.ColumnEmuPath.FillWeight = 80F;
+            this.ColumnEmuPath.HeaderText = "Path";
+            this.ColumnEmuPath.MinimumWidth = 50;
+            this.ColumnEmuPath.Name = "ColumnEmuPath";
+            this.ColumnEmuPath.ReadOnly = true;
             // 
-            // label6
+            // ColumnEmuCommand
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(333, 55);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 13);
-            this.label6.TabIndex = 36;
-            this.label6.Text = "Alternate Command";
-            // 
-            // buttonAlternatePath
-            // 
-            this.buttonAlternatePath.Location = new System.Drawing.Point(294, 76);
-            this.buttonAlternatePath.Name = "buttonAlternatePath";
-            this.buttonAlternatePath.Size = new System.Drawing.Size(36, 23);
-            this.buttonAlternatePath.TabIndex = 33;
-            this.buttonAlternatePath.Text = "...";
-            this.buttonAlternatePath.UseVisualStyleBackColor = true;
-            this.buttonAlternatePath.Click += new System.EventHandler(this.buttonAlternatePath_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Emulator Exe";
+            this.ColumnEmuCommand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnEmuCommand.DataPropertyName = "Command";
+            this.ColumnEmuCommand.FillWeight = 80F;
+            this.ColumnEmuCommand.HeaderText = "Command";
+            this.ColumnEmuCommand.MinimumWidth = 50;
+            this.ColumnEmuCommand.Name = "ColumnEmuCommand";
+            this.ColumnEmuCommand.ReadOnly = true;
             // 
             // FormPlatform
             // 
@@ -552,6 +583,7 @@
             this.tabPageMain.PerformLayout();
             this.tabPageEmulators.ResumeLayout(false);
             this.tabPageEmulators.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmulators)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -569,28 +601,16 @@
         private System.Windows.Forms.CheckBox checkBoxShowInFilters;
         private System.Windows.Forms.Label labelCommand;
         private System.Windows.Forms.TextBox textBoxCommand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnExe;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInList;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInFilter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnColor;
         private System.Windows.Forms.Button buttonIconPath;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelTheGamesDB;
         private System.Windows.Forms.ComboBox comboBoxPlatformsDB;
-        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Label labelDefaultRomPath;
         private System.Windows.Forms.Button buttonDefaultRomPath;
         private System.Windows.Forms.TextBox textBoxDefaultRomExtensions;
         private System.Windows.Forms.Label labelExtensions;
-        private System.Windows.Forms.Button buttonSwap;
-        private System.Windows.Forms.TextBox textBoxAlternatePath;
-        private System.Windows.Forms.TextBox textBoxAlternateCommand;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button buttonAlternatePath;
         private System.Windows.Forms.TabControl tabControlPlatform;
         private System.Windows.Forms.TabPage tabPageMain;
         private System.Windows.Forms.TextBox textBoxPlatformIcon;
@@ -598,8 +618,22 @@
         private System.Windows.Forms.Label labelPlatformIcon;
         private System.Windows.Forms.TextBox textBoxDefaultRomPath;
         private System.Windows.Forms.TabPage tabPageEmulators;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.CheckBox checkBoxUseRetroarch;
         private System.Windows.Forms.Button buttonSelectCore;
+        private System.Windows.Forms.Button buttonDeleteEmulator;
+        private System.Windows.Forms.Button buttonMakeDefault;
+        private System.Windows.Forms.Button buttonAddEmulator;
+        private System.Windows.Forms.DataGridView dataGridViewEmulators;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnExe;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInList;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInFilter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnColor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuDefault;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuPath;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuCommand;
     }
 }

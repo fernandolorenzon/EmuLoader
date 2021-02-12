@@ -1,6 +1,7 @@
 ﻿using EmuLoader.Core.Classes;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace EmuLoader.Core.Business
 {
@@ -8,9 +9,26 @@ namespace EmuLoader.Core.Business
     {
         public static void OpenApplication(Rom rom)
         {
-            string exe = rom.UseAlternateEmulator ? rom.Platform.EmulatorExeAlt : rom.Platform.EmulatorExe;
-            string command = rom.UseAlternateEmulator ? rom.Platform.CommandAlt : rom.Platform.Command;
-            string workdir = rom.UseAlternateEmulator ? rom.Platform.EmulatorExeAlt.Substring(0, rom.Platform.EmulatorExeAlt.LastIndexOf("\\")) : rom.Platform.EmulatorExe.Substring(0, rom.Platform.EmulatorExe.LastIndexOf("\\"));
+            if (rom.Platform.Emulators == null || rom.Platform.Emulators.Count == 0)
+            {
+                return;
+            }
+
+            var emu = rom.Platform.Emulators[0];
+
+            if (!string.IsNullOrEmpty(rom.Platform.DefaultEmulator))
+            {
+                var defaultEmu = rom.Platform.Emulators.FirstOrDefault(x => x.Name == rom.Platform.DefaultEmulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
+            }
+
+            string exe = emu.Path;
+            string command = emu.Command;
+            string workdir = emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
 
             if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
             {
@@ -42,11 +60,28 @@ namespace EmuLoader.Core.Business
 
         public static void OpenApplicationByCMD(Rom rom)
         {
+            if (rom.Platform.Emulators == null || rom.Platform.Emulators.Count == 0)
+            {
+                return;
+            }
+
+            var emu = rom.Platform.Emulators[0];
+
+            if (!string.IsNullOrEmpty(rom.Platform.DefaultEmulator))
+            {
+                var defaultEmu = rom.Platform.Emulators.FirstOrDefault(x => x.Name == rom.Platform.DefaultEmulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo(@"cmd.exe");
             Process p = new Process();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 
-            string arguments = rom.Platform.Command.Replace("%EMUPATH%", "\"" + rom.Platform.EmulatorExe + "\"")
+            string arguments = emu.Command.Replace("%EMUPATH%", "\"" + emu.Path + "\"")
                 .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
                 .Replace("%ROMNAME%", rom.FileNameNoExt)
                 .Replace("%ROMFILE%", rom.FileName);
@@ -57,12 +92,29 @@ namespace EmuLoader.Core.Business
 
         public static void OpenApplicationByCMDWriteLine(Rom rom)
         {
+            if (rom.Platform.Emulators == null || rom.Platform.Emulators.Count == 0)
+            {
+                return;
+            }
+
+            var emu = rom.Platform.Emulators[0];
+
+            if (!string.IsNullOrEmpty(rom.Platform.DefaultEmulator))
+            {
+                var defaultEmu = rom.Platform.Emulators.FirstOrDefault(x => x.Name == rom.Platform.DefaultEmulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo(@"cmd.exe");
             Process p = new Process();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             p = Process.Start(startInfo);
 
-            string path = rom.Platform.Command.Replace("%EMUPATH%", "\"" + rom.Platform.EmulatorExe + "\"")
+            string path = emu.Command.Replace("%EMUPATH%", "\"" + emu.Path + "\"")
                 .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
                 .Replace("%ROMNAME%", rom.FileNameNoExt)
                 .Replace("%ROMFILE%", rom.FileName);
@@ -73,6 +125,23 @@ namespace EmuLoader.Core.Business
 
         public static void OpenApplicationByCMDWriteLineCD(Rom rom)
         {
+            if (rom.Platform.Emulators == null || rom.Platform.Emulators.Count == 0)
+            {
+                return;
+            }
+
+            var emu = rom.Platform.Emulators[0];
+
+            if (!string.IsNullOrEmpty(rom.Platform.DefaultEmulator))
+            {
+                var defaultEmu = rom.Platform.Emulators.FirstOrDefault(x => x.Name == rom.Platform.DefaultEmulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo("CMD.exe");
             Process p = new Process();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -83,9 +152,9 @@ namespace EmuLoader.Core.Business
             startInfo.RedirectStandardError = true;
             p = Process.Start(startInfo);
 
-            string changeDir = "cd " + RomFunctions.GetRomDirectory(rom.Platform.EmulatorExe);
-            string exe = rom.Platform.EmulatorExe.Remove(0, rom.Platform.EmulatorExe.LastIndexOf("\\") + 1);
-            string path = rom.Platform.Command.Replace("%EMUPATH%", "\"" + exe + "\"")
+            string changeDir = "cd " + RomFunctions.GetRomDirectory(emu.Path);
+            string exe = emu.Path.Remove(0, emu.Path.LastIndexOf("\\") + 1);
+            string path = emu.Command.Replace("%EMUPATH%", "\"" + exe + "\"")
                 .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
                 .Replace("%ROMNAME%", rom.FileNameNoExt)
                 .Replace("%ROMFILE%", rom.FileName);
@@ -97,7 +166,24 @@ namespace EmuLoader.Core.Business
 
         public static void OpenApplication(Platform platform)
         {
-            string exe = platform.EmulatorExe;
+            if (platform.Emulators == null || platform.Emulators.Count == 0)
+            {
+                return;
+            }
+
+            var emu = platform.Emulators[0];
+
+            if (!string.IsNullOrEmpty(platform.DefaultEmulator))
+            {
+                var defaultEmu = platform.Emulators.FirstOrDefault(x => x.Name == platform.DefaultEmulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
+            }
+
+            string exe = emu.Path;
 
             ProcessStartInfo startInfo = new ProcessStartInfo(exe);
             Process p = new Process();
@@ -107,6 +193,23 @@ namespace EmuLoader.Core.Business
 
         public static void OpenApplicationByCMDWriteLine(Platform platform)
         {
+            if (platform.Emulators == null || platform.Emulators.Count == 0)
+            {
+                return;
+            }
+
+            var emu = platform.Emulators[0];
+
+            if (!string.IsNullOrEmpty(platform.DefaultEmulator))
+            {
+                var defaultEmu = platform.Emulators.FirstOrDefault(x => x.Name == platform.DefaultEmulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
+            }
+
             ProcessStartInfo startInfo = new ProcessStartInfo("CMD.exe");
             Process p = new Process();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -117,8 +220,8 @@ namespace EmuLoader.Core.Business
             startInfo.RedirectStandardError = true;
             p = Process.Start(startInfo);
 
-            string changeDir = "cd " + RomFunctions.GetRomDirectory(platform.EmulatorExe);
-            string exe = platform.EmulatorExe.Remove(0, platform.EmulatorExe.LastIndexOf("\\") + 1);
+            string changeDir = "cd " + RomFunctions.GetRomDirectory(emu.Path);
+            string exe = emu.Path.Remove(0, emu.Path.LastIndexOf("\\") + 1);
             string path = "\"" + exe + "\"";
 
             p.StandardInput.WriteLine(changeDir);

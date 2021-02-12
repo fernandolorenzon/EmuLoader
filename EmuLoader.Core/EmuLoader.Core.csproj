@@ -61,6 +61,7 @@
     <Compile Include="Classes\Base.cs" />
     <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\Developer.cs" />
+    <Compile Include="Classes\Emulator.cs" />
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Classes\Filter.cs" />
     <Compile Include="Classes\Genre.cs" />

@@ -236,8 +236,6 @@ namespace EmuLoader.Forms
 
                 if (form.ShowDialogUpdated())
                 {
-                    //Platform.Fill();
-                    //Rom.Fill();
                     FilterRoms();
                     FillPlatformFilter(platform);
                     FillPlatformGrid();
