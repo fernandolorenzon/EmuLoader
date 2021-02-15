@@ -2270,12 +2270,11 @@ namespace EmuLoader.Forms
 
             if (rom == null) return;
 
-            if (rom.Platform.Emulators != null)
+            if (rom.Platform.Emulators == null || rom.Platform.Emulators.Count == 0) return;
+
+            foreach (var item in rom.Platform.Emulators)
             {
-                foreach (var item in rom.Platform.Emulators)
-                {
-                    comboBoxEmulators.Items.Add(item);
-                }
+                comboBoxEmulators.Items.Add(item);
             }
 
             comboBoxEmulators.ValueMember = "Name";
