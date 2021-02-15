@@ -149,8 +149,8 @@ namespace EmuLoader.Core.Classes
             {
                 node = SetRomNode();
 
-                node.AppendChild(XML.xmlLabels.CreateNode(XmlNodeType.Element, "Labels", ""));
-                XML.GetParentNode(XML.xmlLabels, "Roms").AppendChild(node);
+                node.AppendChild(XML.xmlRoms.CreateNode(XmlNodeType.Element, "Labels", ""));
+                XML.GetParentNode(XML.xmlRoms, "Roms").AppendChild(node);
                 RomList.Add(rom);
             }
 
