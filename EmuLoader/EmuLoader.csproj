@@ -324,10 +324,12 @@
     <Content Include="icons\cartridge16.png" />
     <Content Include="icons\checked.png" />
     <Content Include="icons\clean16.png" />
+    <Content Include="icons\clean32.png" />
     <Content Include="icons\close16.png" />
     <Content Include="icons\close32.png" />
     <Content Include="icons\cloud-computing.png" />
     <Content Include="icons\cloud-computing16.png" />
+    <Content Include="icons\cloud-computing32.png" />
     <Content Include="icons\copy.png" />
     <Content Include="icons\delete %281%29.png" />
     <Content Include="icons\delete %282%29.png" />
@@ -364,8 +366,10 @@
     <Content Include="icons\game-controller16.png" />
     <Content Include="icons\games.png" />
     <Content Include="icons\games16.png" />
+    <Content Include="icons\gear.png" />
     <Content Include="icons\gear16.png" />
     <Content Include="icons\heart.png" />
+    <Content Include="icons\info32.png" />
     <Content Include="icons\internet.png" />
     <Content Include="icons\internet32.png" />
     <Content Include="icons\joystick.png" />
@@ -378,6 +382,9 @@
     <Content Include="icons\music-mixer.png" />
     <Content Include="icons\music-mixer16.png" />
     <Content Include="icons\note16.png" />
+    <Content Include="icons\ok.png" />
+    <Content Include="icons\play-button %281%29.png" />
+    <Content Include="icons\play-button.png" />
     <Content Include="icons\plus32.png" />
     <Content Include="icons\poll16.png" />
     <Content Include="icons\save-file32.png" />
@@ -385,6 +392,7 @@
     <Content Include="icons\save32.png" />
     <Content Include="icons\settings.png" />
     <Content Include="icons\settings16.png" />
+    <Content Include="icons\sword.png" />
     <Content Include="icons\tag32.png" />
     <Content Include="icons\transfer16.png" />
     <Content Include="icons\trash.png" />

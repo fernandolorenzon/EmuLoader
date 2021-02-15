@@ -67,14 +67,14 @@
             this.buttonMakeDefault = new System.Windows.Forms.Button();
             this.buttonAddEmulator = new System.Windows.Forms.Button();
             this.dataGridViewEmulators = new System.Windows.Forms.DataGridView();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.buttonSelectCore = new System.Windows.Forms.Button();
-            this.checkBoxUseRetroarch = new System.Windows.Forms.CheckBox();
-            this.labelName = new System.Windows.Forms.Label();
             this.ColumnEmuDefault = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEmuName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEmuPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEmuCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxEmuName = new System.Windows.Forms.TextBox();
+            this.buttonSelectCore = new System.Windows.Forms.Button();
+            this.checkBoxUseRetroarch = new System.Windows.Forms.CheckBox();
+            this.labelName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -411,7 +411,7 @@
             this.tabPageEmulators.Controls.Add(this.buttonMakeDefault);
             this.tabPageEmulators.Controls.Add(this.buttonAddEmulator);
             this.tabPageEmulators.Controls.Add(this.dataGridViewEmulators);
-            this.tabPageEmulators.Controls.Add(this.textBoxName);
+            this.tabPageEmulators.Controls.Add(this.textBoxEmuName);
             this.tabPageEmulators.Controls.Add(this.buttonSelectCore);
             this.tabPageEmulators.Controls.Add(this.checkBoxUseRetroarch);
             this.tabPageEmulators.Controls.Add(this.textBoxPath);
@@ -478,47 +478,6 @@
             this.dataGridViewEmulators.Size = new System.Drawing.Size(596, 173);
             this.dataGridViewEmulators.TabIndex = 42;
             // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(6, 25);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(131, 20);
-            this.textBoxName.TabIndex = 41;
-            // 
-            // buttonSelectCore
-            // 
-            this.buttonSelectCore.Enabled = false;
-            this.buttonSelectCore.Image = ((System.Drawing.Image)(resources.GetObject("buttonSelectCore.Image")));
-            this.buttonSelectCore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSelectCore.Location = new System.Drawing.Point(709, 23);
-            this.buttonSelectCore.Name = "buttonSelectCore";
-            this.buttonSelectCore.Size = new System.Drawing.Size(94, 23);
-            this.buttonSelectCore.TabIndex = 40;
-            this.buttonSelectCore.Text = "Select Core";
-            this.buttonSelectCore.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonSelectCore.UseVisualStyleBackColor = true;
-            this.buttonSelectCore.Click += new System.EventHandler(this.buttonSelectCore_Click);
-            // 
-            // checkBoxUseRetroarch
-            // 
-            this.checkBoxUseRetroarch.AutoSize = true;
-            this.checkBoxUseRetroarch.Location = new System.Drawing.Point(608, 26);
-            this.checkBoxUseRetroarch.Name = "checkBoxUseRetroarch";
-            this.checkBoxUseRetroarch.Size = new System.Drawing.Size(95, 17);
-            this.checkBoxUseRetroarch.TabIndex = 39;
-            this.checkBoxUseRetroarch.Text = "Use Retroarch";
-            this.checkBoxUseRetroarch.UseVisualStyleBackColor = true;
-            this.checkBoxUseRetroarch.Click += new System.EventHandler(this.checkBoxUseRetroarch_Click);
-            // 
-            // labelName
-            // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(6, 3);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(79, 13);
-            this.labelName.TabIndex = 6;
-            this.labelName.Text = "Emulator Name";
-            // 
             // ColumnEmuDefault
             // 
             this.ColumnEmuDefault.DataPropertyName = "Default";
@@ -559,6 +518,47 @@
             this.ColumnEmuCommand.MinimumWidth = 50;
             this.ColumnEmuCommand.Name = "ColumnEmuCommand";
             this.ColumnEmuCommand.ReadOnly = true;
+            // 
+            // textBoxEmuName
+            // 
+            this.textBoxEmuName.Location = new System.Drawing.Point(6, 25);
+            this.textBoxEmuName.Name = "textBoxEmuName";
+            this.textBoxEmuName.Size = new System.Drawing.Size(131, 20);
+            this.textBoxEmuName.TabIndex = 41;
+            // 
+            // buttonSelectCore
+            // 
+            this.buttonSelectCore.Enabled = false;
+            this.buttonSelectCore.Image = ((System.Drawing.Image)(resources.GetObject("buttonSelectCore.Image")));
+            this.buttonSelectCore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSelectCore.Location = new System.Drawing.Point(709, 23);
+            this.buttonSelectCore.Name = "buttonSelectCore";
+            this.buttonSelectCore.Size = new System.Drawing.Size(94, 23);
+            this.buttonSelectCore.TabIndex = 40;
+            this.buttonSelectCore.Text = "Select Core";
+            this.buttonSelectCore.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSelectCore.UseVisualStyleBackColor = true;
+            this.buttonSelectCore.Click += new System.EventHandler(this.buttonSelectCore_Click);
+            // 
+            // checkBoxUseRetroarch
+            // 
+            this.checkBoxUseRetroarch.AutoSize = true;
+            this.checkBoxUseRetroarch.Location = new System.Drawing.Point(608, 26);
+            this.checkBoxUseRetroarch.Name = "checkBoxUseRetroarch";
+            this.checkBoxUseRetroarch.Size = new System.Drawing.Size(95, 17);
+            this.checkBoxUseRetroarch.TabIndex = 39;
+            this.checkBoxUseRetroarch.Text = "Use Retroarch";
+            this.checkBoxUseRetroarch.UseVisualStyleBackColor = true;
+            this.checkBoxUseRetroarch.Click += new System.EventHandler(this.checkBoxUseRetroarch_Click);
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(6, 3);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(79, 13);
+            this.labelName.TabIndex = 6;
+            this.labelName.Text = "Emulator Name";
             // 
             // FormPlatform
             // 
@@ -625,7 +625,7 @@
         private System.Windows.Forms.Button buttonMakeDefault;
         private System.Windows.Forms.Button buttonAddEmulator;
         private System.Windows.Forms.DataGridView dataGridViewEmulators;
-        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox textBoxEmuName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnExe;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnShowInList;

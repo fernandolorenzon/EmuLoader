@@ -1742,6 +1742,15 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void pictureBoxRun_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 0) return;
+            if (comboBoxEmulators.SelectedItem == null) return;
+            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+            Emulator emu = (Emulator)comboBoxEmulators.SelectedItem;
+            RunAppFunctions.OpenApplication(rom, emu);
+        }
+
         #endregion
 
         #region Grid Events
@@ -1825,6 +1834,7 @@ namespace EmuLoader.Forms
             labelSelectedRomsCount.Text = dataGridView.SelectedRows.Count.ToString();
 
             EnableDisableButtonsBySelection();
+            LoadComboBoxEmulators();
             LoadPictures();
         }
 
@@ -2246,6 +2256,45 @@ namespace EmuLoader.Forms
                 changeGenreToolStripMenuItem.Enabled = true;
                 changeLabelsToolStripMenuItem.Enabled = true;
                 openFileToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void LoadComboBoxEmulators()
+        {
+            comboBoxEmulators.Items.Clear();
+            comboBoxEmulators.Text = "";
+
+            if (dataGridView.SelectedRows.Count == 0) return;
+
+            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+
+            if (rom == null) return;
+
+            if (rom.Platform.Emulators != null)
+            {
+                foreach (var item in rom.Platform.Emulators)
+                {
+                    comboBoxEmulators.Items.Add(item);
+                }
+            }
+
+            comboBoxEmulators.ValueMember = "Name";
+            comboBoxEmulators.DisplayMember = "Name";
+
+            if (rom.Emulator != "")
+            {
+                if (rom.Platform.Emulators.Any(x => x.Name.ToLower() == rom.Emulator.ToLower()))
+                {
+                    comboBoxEmulators.Text = rom.Emulator;
+                }
+                else
+                {
+                    comboBoxEmulators.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                comboBoxEmulators.SelectedIndex = 0;
             }
         }
 

@@ -384,6 +384,7 @@ namespace EmuLoader.Forms
         {
             base.Clean();
             textBoxPlatformName.Text = string.Empty;
+            textBoxEmuName.Text = string.Empty;
             textBoxPath.Text = string.Empty;
             textBoxCommand.Text = string.Empty;
             buttonColor.BackColor = Color.White;
@@ -440,35 +441,35 @@ namespace EmuLoader.Forms
         {
             FillEmuName();
 
-            if (textBoxName.Text == "" || textBoxPath.Text == "" || textBoxCommand.Text == "")
+            if (textBoxEmuName.Text == "" || textBoxPath.Text == "" || textBoxCommand.Text == "")
             {
                 FormCustomMessage.ShowError("Fill the name, path and command first.");
                 return;
             }
 
-            if (emulators.Any(x => x.Name.ToLower() == textBoxName.Text.ToLower()))
+            if (emulators.Any(x => x.Name.ToLower() == textBoxEmuName.Text.ToLower()))
             {
-                FormCustomMessage.ShowError("There is an emulator using the name " + textBoxName.Text);
+                FormCustomMessage.ShowError("There is an emulator using the name " + textBoxEmuName.Text);
                 return;
             }
 
-            emulators.Add(new Emulator() { Name = textBoxName.Text, Path = textBoxPath.Text, Command = textBoxCommand.Text });
+            emulators.Add(new Emulator() { Name = textBoxEmuName.Text, Path = textBoxPath.Text, Command = textBoxCommand.Text });
             FillGridEmulators();
-            textBoxName.Text = "";
+            textBoxEmuName.Text = "";
             textBoxPath.Text = "";
             textBoxCommand.Text = "";
         }
 
         private void FillEmuName()
         {
-            if (textBoxName.Text == "" && textBoxPath.Text != "")
+            if (textBoxEmuName.Text == "" && textBoxPath.Text != "")
             {
                 if (textBoxPath.Text.EndsWith(".exe"))
                 {
                     if (File.Exists(textBoxPath.Text))
                     {
                         FileInfo file = new FileInfo(textBoxPath.Text);
-                        textBoxName.Text = file.Name.Replace(".exe", "");
+                        textBoxEmuName.Text = file.Name.Replace(".exe", "");
                     }
                 }
             }

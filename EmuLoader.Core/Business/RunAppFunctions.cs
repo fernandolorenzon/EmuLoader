@@ -46,7 +46,36 @@ namespace EmuLoader.Core.Business
 
             string exe = emu.Path;
             string command = emu.Command;
-            string workdir = emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
+            var index = emu.Path.LastIndexOf("\\");
+            string workdir = index == -1 ? "" : emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
+
+            string args = command.Replace("%EMUPATH%", "")
+                        .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                        .Replace("%ROMNAME%", rom.FileNameNoExt)
+                        .Replace("%ROMFILE%", rom.FileName);
+
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = exe,
+                    Arguments = args,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    WorkingDirectory = workdir
+                }
+            };
+
+            proc.Start();
+        }
+        
+        public static void OpenApplication(Rom rom, Emulator emu)
+        {
+            string exe = emu.Path;
+            string command = emu.Command;
+            var index = emu.Path.LastIndexOf("\\");
+            string workdir = index == -1 ? "" : emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
 
             string args = command.Replace("%EMUPATH%", "")
                         .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
