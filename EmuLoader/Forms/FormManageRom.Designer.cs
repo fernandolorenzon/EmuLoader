@@ -31,9 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormManageRom));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.comboBoxChooseStatus = new System.Windows.Forms.ComboBox();
+            this.labelChooseStatus = new System.Windows.Forms.Label();
             this.buttonGetMAMEName = new System.Windows.Forms.Button();
             this.checkBoxIdLocked = new System.Windows.Forms.CheckBox();
             this.textBoxRating = new System.Windows.Forms.TextBox();
@@ -81,15 +82,6 @@
             this.labelGenre = new System.Windows.Forms.Label();
             this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
             this.labelChoosePlatform = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxUseAlternate = new System.Windows.Forms.CheckBox();
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.labelCommand = new System.Windows.Forms.Label();
-            this.buttonPath = new System.Windows.Forms.Button();
-            this.labelPath = new System.Windows.Forms.Label();
-            this.textBoxEmulatorExe = new System.Windows.Forms.TextBox();
             this.tabPagePictures = new System.Windows.Forms.TabPage();
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.buttonFindGameplayPicture = new System.Windows.Forms.Button();
@@ -107,27 +99,18 @@
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
-            this.comboBoxChooseStatus = new System.Windows.Forms.ComboBox();
-            this.labelChooseStatus = new System.Windows.Forms.Label();
+            this.labelChooseEmulator = new System.Windows.Forms.Label();
+            this.comboBoxChooseEmulator = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.tabPagePictures.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoxart)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textBoxCommand
-            // 
-            this.textBoxCommand.Location = new System.Drawing.Point(355, 37);
-            this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(377, 20);
-            this.textBoxCommand.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.textBoxCommand, resources.GetString("textBoxCommand.ToolTip"));
             // 
             // tabControl
             // 
@@ -142,6 +125,8 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.comboBoxChooseEmulator);
+            this.tabPageGeneral.Controls.Add(this.labelChooseEmulator);
             this.tabPageGeneral.Controls.Add(this.comboBoxChooseStatus);
             this.tabPageGeneral.Controls.Add(this.labelChooseStatus);
             this.tabPageGeneral.Controls.Add(this.buttonGetMAMEName);
@@ -175,7 +160,6 @@
             this.tabPageGeneral.Controls.Add(this.labelGenre);
             this.tabPageGeneral.Controls.Add(this.comboBoxPlatform);
             this.tabPageGeneral.Controls.Add(this.labelChoosePlatform);
-            this.tabPageGeneral.Controls.Add(this.groupBox1);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -183,6 +167,23 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxChooseStatus
+            // 
+            this.comboBoxChooseStatus.FormattingEnabled = true;
+            this.comboBoxChooseStatus.Location = new System.Drawing.Point(259, 304);
+            this.comboBoxChooseStatus.Name = "comboBoxChooseStatus";
+            this.comboBoxChooseStatus.Size = new System.Drawing.Size(124, 21);
+            this.comboBoxChooseStatus.TabIndex = 108;
+            // 
+            // labelChooseStatus
+            // 
+            this.labelChooseStatus.AutoSize = true;
+            this.labelChooseStatus.Location = new System.Drawing.Point(256, 288);
+            this.labelChooseStatus.Name = "labelChooseStatus";
+            this.labelChooseStatus.Size = new System.Drawing.Size(76, 13);
+            this.labelChooseStatus.TabIndex = 107;
+            this.labelChooseStatus.Text = "Choose Status";
             // 
             // buttonGetMAMEName
             // 
@@ -654,101 +655,6 @@
             this.labelChoosePlatform.TabIndex = 48;
             this.labelChoosePlatform.Text = "Choose Platform";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBoxUseAlternate);
-            this.groupBox1.Controls.Add(this.buttonHelp);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.textBoxCommand);
-            this.groupBox1.Controls.Add(this.labelCommand);
-            this.groupBox1.Controls.Add(this.buttonPath);
-            this.groupBox1.Controls.Add(this.labelPath);
-            this.groupBox1.Controls.Add(this.textBoxEmulatorExe);
-            this.groupBox1.Location = new System.Drawing.Point(6, 512);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(791, 104);
-            this.groupBox1.TabIndex = 72;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Override emulator config";
-            // 
-            // checkBoxUseAlternate
-            // 
-            this.checkBoxUseAlternate.AutoSize = true;
-            this.checkBoxUseAlternate.Location = new System.Drawing.Point(355, 70);
-            this.checkBoxUseAlternate.Name = "checkBoxUseAlternate";
-            this.checkBoxUseAlternate.Size = new System.Drawing.Size(198, 17);
-            this.checkBoxUseAlternate.TabIndex = 27;
-            this.checkBoxUseAlternate.Text = "Use Alternate Emulator from Platform";
-            this.checkBoxUseAlternate.UseVisualStyleBackColor = true;
-            // 
-            // buttonHelp
-            // 
-            this.buttonHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.buttonHelp.ForeColor = System.Drawing.Color.Black;
-            this.buttonHelp.Location = new System.Drawing.Point(738, 35);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(24, 23);
-            this.buttonHelp.TabIndex = 26;
-            this.buttonHelp.Text = "?";
-            this.buttonHelp.UseVisualStyleBackColor = false;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(7, 74);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(187, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Both fields need to be filled to override";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(7, 61);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(219, 13);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "If empty, will use the platform emulator setting";
-            // 
-            // labelCommand
-            // 
-            this.labelCommand.AutoSize = true;
-            this.labelCommand.Location = new System.Drawing.Point(352, 15);
-            this.labelCommand.Name = "labelCommand";
-            this.labelCommand.Size = new System.Drawing.Size(54, 13);
-            this.labelCommand.TabIndex = 21;
-            this.labelCommand.Text = "Command";
-            // 
-            // buttonPath
-            // 
-            this.buttonPath.Location = new System.Drawing.Point(313, 35);
-            this.buttonPath.Name = "buttonPath";
-            this.buttonPath.Size = new System.Drawing.Size(36, 23);
-            this.buttonPath.TabIndex = 18;
-            this.buttonPath.Text = "...";
-            this.buttonPath.UseVisualStyleBackColor = true;
-            this.buttonPath.Click += new System.EventHandler(this.buttonPath_Click);
-            // 
-            // labelPath
-            // 
-            this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(6, 15);
-            this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(69, 13);
-            this.labelPath.TabIndex = 20;
-            this.labelPath.Text = "Emulator Exe";
-            // 
-            // textBoxEmulatorExe
-            // 
-            this.textBoxEmulatorExe.Location = new System.Drawing.Point(10, 37);
-            this.textBoxEmulatorExe.Name = "textBoxEmulatorExe";
-            this.textBoxEmulatorExe.Size = new System.Drawing.Size(297, 20);
-            this.textBoxEmulatorExe.TabIndex = 19;
-            // 
             // tabPagePictures
             // 
             this.tabPagePictures.Controls.Add(this.checkBoxSaveAsJpg);
@@ -925,22 +831,22 @@
             this.pictureBoxBoxart.TabIndex = 92;
             this.pictureBoxBoxart.TabStop = false;
             // 
-            // comboBoxChooseStatus
+            // labelChooseEmulator
             // 
-            this.comboBoxChooseStatus.FormattingEnabled = true;
-            this.comboBoxChooseStatus.Location = new System.Drawing.Point(259, 304);
-            this.comboBoxChooseStatus.Name = "comboBoxChooseStatus";
-            this.comboBoxChooseStatus.Size = new System.Drawing.Size(124, 21);
-            this.comboBoxChooseStatus.TabIndex = 108;
+            this.labelChooseEmulator.AutoSize = true;
+            this.labelChooseEmulator.Location = new System.Drawing.Point(8, 522);
+            this.labelChooseEmulator.Name = "labelChooseEmulator";
+            this.labelChooseEmulator.Size = new System.Drawing.Size(87, 13);
+            this.labelChooseEmulator.TabIndex = 109;
+            this.labelChooseEmulator.Text = "Choose Emulator";
             // 
-            // labelChooseStatus
+            // comboBoxChooseEmulator
             // 
-            this.labelChooseStatus.AutoSize = true;
-            this.labelChooseStatus.Location = new System.Drawing.Point(256, 288);
-            this.labelChooseStatus.Name = "labelChooseStatus";
-            this.labelChooseStatus.Size = new System.Drawing.Size(76, 13);
-            this.labelChooseStatus.TabIndex = 107;
-            this.labelChooseStatus.Text = "Choose Status";
+            this.comboBoxChooseEmulator.FormattingEnabled = true;
+            this.comboBoxChooseEmulator.Location = new System.Drawing.Point(11, 538);
+            this.comboBoxChooseEmulator.Name = "comboBoxChooseEmulator";
+            this.comboBoxChooseEmulator.Size = new System.Drawing.Size(372, 21);
+            this.comboBoxChooseEmulator.TabIndex = 110;
             // 
             // FormManageRom
             // 
@@ -960,8 +866,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabPagePictures.ResumeLayout(false);
             this.tabPagePictures.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameplay)).EndInit();
@@ -996,14 +900,6 @@
         private System.Windows.Forms.Label Description;
         private System.Windows.Forms.TextBox textBoxDeveloper;
         private System.Windows.Forms.CheckBox checkBoxChangeZippedName;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBoxCommand;
-        private System.Windows.Forms.Label labelCommand;
-        private System.Windows.Forms.Button buttonPath;
-        private System.Windows.Forms.Label labelPath;
-        private System.Windows.Forms.TextBox textBoxEmulatorExe;
         private System.Windows.Forms.Button buttonCopyToRom;
         private System.Windows.Forms.Button buttonCopyToFile;
         private System.Windows.Forms.Label labelChooseLabel;
@@ -1041,15 +937,15 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radioButtonOverwrite;
         private System.Windows.Forms.RadioButton radioButtonOnlyMissing;
-        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.CheckBox checkBoxKeepSuffix;
         private System.Windows.Forms.TextBox textBoxRating;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckBox checkBoxUseAlternate;
         private System.Windows.Forms.CheckBox checkBoxIdLocked;
         private System.Windows.Forms.Button buttonGetMAMEName;
         private System.Windows.Forms.Button buttonClean;
         private System.Windows.Forms.ComboBox comboBoxChooseStatus;
         private System.Windows.Forms.Label labelChooseStatus;
+        private System.Windows.Forms.ComboBox comboBoxChooseEmulator;
+        private System.Windows.Forms.Label labelChooseEmulator;
     }
 }

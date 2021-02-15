@@ -87,25 +87,8 @@ namespace EmuLoader.Forms
             {
                 textBoxCommand.Text = Values.DefaultCommand;
             }
-        }
 
-
-        private void buttonAlternatePath_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog open = new OpenFileDialog();
-            open.InitialDirectory = Environment.CurrentDirectory;
-
-            open.Filter = "EXE | *.exe";
-            open.ShowDialog();
-
-            if (string.IsNullOrEmpty(open.FileName)) return;
-
-            if (string.IsNullOrEmpty(open.FileName)) return;
-
-            if (textBoxDefaultRomExtensions.Text == string.Empty)
-            {
-                textBoxDefaultRomExtensions.Text = ".zip";
-            }
+            FillEmuName();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -455,6 +438,8 @@ namespace EmuLoader.Forms
 
         private void buttonAddEmulator_Click(object sender, EventArgs e)
         {
+            FillEmuName();
+
             if (textBoxName.Text == "" || textBoxPath.Text == "" || textBoxCommand.Text == "")
             {
                 FormCustomMessage.ShowError("Fill the name, path and command first.");
@@ -474,6 +459,21 @@ namespace EmuLoader.Forms
             textBoxCommand.Text = "";
         }
 
+        private void FillEmuName()
+        {
+            if (textBoxName.Text == "" && textBoxPath.Text != "")
+            {
+                if (textBoxPath.Text.EndsWith(".exe"))
+                {
+                    if (File.Exists(textBoxPath.Text))
+                    {
+                        FileInfo file = new FileInfo(textBoxPath.Text);
+                        textBoxName.Text = file.Name.Replace(".exe", "");
+                    }
+                }
+            }
+        }
+
         private void FillGridEmulators()
         {
             Platform platform = null;
@@ -490,7 +490,7 @@ namespace EmuLoader.Forms
             {
                 int rowId = dataGridViewEmulators.Rows.Add();
                 DataGridViewRow row = dataGridViewEmulators.Rows[rowId];
-                
+ 
                 if (platform != null && !string.IsNullOrEmpty(platform.DefaultEmulator) && platform.DefaultEmulator == item.Name)
                 {
                     row.Cells["ColumnEmuDefault"].Value = "*";
@@ -528,9 +528,19 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var selected = dataGridViewEmulators.SelectedRows[0].Cells[0].Value.ToString();
+            DataGridViewRow platformrow = dataGridView.SelectedRows[0];
+            Platform platform = (Platform)platformrow.Tag;
+
+            var row = dataGridViewEmulators.SelectedRows[0];
+            var selected = row.Cells["ColumnEmuName"].Value.ToString();
             var emu = emulators.First(x => x.Name == selected);
             emulators.Remove(emu);
+
+            if (emu.Name.ToLower() == platform.DefaultEmulator.ToLower())
+            {
+                platform.DefaultEmulator = "";
+            }
+
             FillGridEmulators();
         }
 

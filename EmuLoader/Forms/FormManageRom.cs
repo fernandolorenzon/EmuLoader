@@ -45,8 +45,35 @@ namespace EmuLoader.Forms
             textBoxId.Text = rom.Id;
             labelPlatform.Text = rom.Platform == null ? "-" : rom.Platform.Name;
             textBoxRating.Text = rom.Rating != 0 ? rom.Rating.ToString("#.#") : string.Empty;
-            checkBoxUseAlternate.Checked = rom.UseAlternateEmulator;
             checkBoxIdLocked.Checked = rom.IdLocked;
+
+            if (rom.Platform.Emulators != null)
+            {
+                foreach (var item in rom.Platform.Emulators)
+                {
+                    comboBoxChooseEmulator.Items.Add(item);
+                }
+            }
+
+            comboBoxChooseEmulator.ValueMember = "Name";
+            comboBoxChooseEmulator.DisplayMember = "Name";
+            comboBoxChooseEmulator.Items.Insert(0, new Emulator() { Name = "<default>"});
+
+            if (rom.Emulator != "")
+            {
+                if (rom.Platform.Emulators.Any(x => x.Name.ToLower() == rom.Emulator.ToLower()))
+                {
+                    comboBoxChooseEmulator.Text = rom.Emulator;
+                }
+                else
+                {
+                    comboBoxChooseEmulator.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                comboBoxChooseEmulator.SelectedIndex = 0;
+            }
 
             List<RomLabel> labels = RomLabel.GetAll();
 
@@ -79,17 +106,6 @@ namespace EmuLoader.Forms
             comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? string.Empty : SelectedRom.Platform.Name;
             comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? string.Empty : SelectedRom.Genre.Name;
             comboBoxChooseStatus.SelectedItem = SelectedRom.Status;
-
-            if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
-            {
-                textBoxEmulatorExe.Text = SelectedRom.EmulatorExe;
-                textBoxCommand.Text = SelectedRom.Command;
-            }
-            else
-            {
-                SelectedRom.EmulatorExe = string.Empty;
-                SelectedRom.Command = string.Empty;
-            }
 
             LoadPictures();
         }
@@ -138,6 +154,13 @@ namespace EmuLoader.Forms
                     }
                 }
 
+                var emulator = comboBoxChooseEmulator.Text;
+
+                if (comboBoxChooseEmulator.SelectedIndex == 0)
+                {
+                    emulator = "";
+                }
+
                 SelectedRom = RomFunctions.SetRom(SelectedRom,
                     textBoxId.Text,
                     textBoxFileName.Text,
@@ -157,10 +180,8 @@ namespace EmuLoader.Forms
                     textBoxTitlePicture.Text,
                     textBoxGameplayPicture.Text,
                     checkBoxSaveAsJpg.Checked,
-                    textBoxEmulatorExe.Text,
-                    textBoxCommand.Text,
-                    checkBoxUseAlternate.Checked,
-                    comboBoxChooseStatus.Text);
+                    comboBoxChooseStatus.Text,
+                    emulator);
 
                 Rom.Set(SelectedRom);
                 XML.SaveXmlRoms();
@@ -475,22 +496,6 @@ namespace EmuLoader.Forms
 
             ProcessStartInfo sInfo = new ProcessStartInfo(file);
             Process.Start(sInfo);
-        }
-
-        private void buttonPath_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "EXE | *.exe";
-            open.ShowDialog();
-
-            if (string.IsNullOrEmpty(open.FileName)) return;
-
-            textBoxEmulatorExe.Text = open.FileName;
-
-            if (string.IsNullOrEmpty(textBoxCommand.Text))
-            {
-                textBoxCommand.Text = Values.DefaultCommand;
-            }
         }
 
         private void textBoxYearReleased_KeyPress(object sender, KeyPressEventArgs e)

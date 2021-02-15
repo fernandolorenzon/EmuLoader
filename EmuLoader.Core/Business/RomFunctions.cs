@@ -106,8 +106,7 @@ namespace EmuLoader.Core.Business
             string romName, string platform, string genre, List<RomLabel> labels, string publisher,
             string developer, string description, string year, string dbName,
             string rating, bool idLocked, bool changeZipName,
-            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg,
-            string emulatorExe, string command, bool useAlternate, string status)
+            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string status, string emulator)
         {
             rom.Labels.Clear();
 
@@ -121,6 +120,7 @@ namespace EmuLoader.Core.Business
             rom.DBName = dbName;
             rom.IdLocked = idLocked;
             rom.Status = status;
+            rom.Emulator = emulator;
 
             float ratingParse = 0;
 
@@ -140,19 +140,6 @@ namespace EmuLoader.Core.Business
             rom.Labels.AddRange(labels);
 
             RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
-
-            if (!string.IsNullOrEmpty(emulatorExe) && !string.IsNullOrEmpty(command))
-            {
-                rom.EmulatorExe = emulatorExe;
-                rom.Command = command;
-            }
-            else
-            {
-                rom.EmulatorExe = string.Empty;
-                rom.Command = string.Empty;
-            }
-
-            rom.UseAlternateEmulator = useAlternate;
 
             if (string.IsNullOrEmpty(rom.Id))
             {

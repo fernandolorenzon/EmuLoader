@@ -24,18 +24,29 @@ namespace EmuLoader.Core.Business
                 {
                     emu = defaultEmu;
                 }
+                else
+                {
+                    emu = rom.Platform.Emulators[0];
+                }
+            }
+            else
+            {
+                emu = rom.Platform.Emulators[0];
+            }
+
+            if (!string.IsNullOrEmpty(rom.Emulator))
+            {
+                var defaultEmu = rom.Platform.Emulators.FirstOrDefault(x => x.Name == rom.Emulator);
+
+                if (defaultEmu != null)
+                {
+                    emu = defaultEmu;
+                }
             }
 
             string exe = emu.Path;
             string command = emu.Command;
             string workdir = emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
-
-            if (!string.IsNullOrEmpty(rom.EmulatorExe) && !string.IsNullOrEmpty(rom.Command))
-            {
-                exe = rom.EmulatorExe;
-                command = rom.Command;
-                workdir = rom.EmulatorExe.Substring(0, rom.EmulatorExe.LastIndexOf("\\"));
-            }
 
             string args = command.Replace("%EMUPATH%", "")
                         .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
