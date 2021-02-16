@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using EmuLoader.Core.Models;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Business
 {
     public static class Publisher
     {

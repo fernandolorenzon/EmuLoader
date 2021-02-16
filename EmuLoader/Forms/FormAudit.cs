@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace EmuLoader.Forms
         {
             InitializeComponent();
 
-            List<Platform> platforms = Platform.GetAll();
+            List<Platform> platforms = PlatformBusiness.GetAll();
             platforms.Insert(0, new Platform());
             comboBoxPlatform.DataSource = platforms;
             comboBoxPlatform.DisplayMember = "Name";
@@ -31,7 +32,7 @@ namespace EmuLoader.Forms
 
             if (json == "") return;
 
-            var roms = Rom.GetAll(Platform.Get(comboBoxPlatform.Text));
+            var roms = RomBusiness.GetAll(PlatformBusiness.Get(comboBoxPlatform.Text));
             int count = 0;
 
             foreach (var rom in roms)
@@ -52,8 +53,8 @@ namespace EmuLoader.Forms
                     rom.YearReleased = "";
                     rom.Developer = "";
                     rom.Rating = 0;
-                    
-                    Rom.Set(rom);
+
+                    RomBusiness.Set(rom);
 
                     count++;
                     Updated = true;
@@ -74,8 +75,8 @@ namespace EmuLoader.Forms
                     FormCustomMessage.ShowError("Select a platform");
                 }
 
-                Platform platform = Platform.Get(comboBoxPlatform.Text);
-                var roms = Rom.GetAll(platform);
+                Platform platform = PlatformBusiness.Get(comboBoxPlatform.Text);
+                var roms = RomBusiness.GetAll(platform);
                 int count = 0;
 
                 foreach (var rom in roms)
@@ -87,7 +88,7 @@ namespace EmuLoader.Forms
                     if (rom.Name != name)
                     {
                         rom.Name = name;
-                        Rom.Set(rom);
+                        RomBusiness.Set(rom);
                         count++;
                     }
                 }
@@ -116,8 +117,8 @@ namespace EmuLoader.Forms
                     FormCustomMessage.ShowError("Select a platform");
                 }
 
-                Platform platform = Platform.Get(comboBoxPlatform.Text);
-                var roms = Rom.GetAll(platform);
+                Platform platform = PlatformBusiness.Get(comboBoxPlatform.Text);
+                var roms = RomBusiness.GetAll(platform);
                 int count = 0;
 
                 foreach (var rom in roms)
@@ -129,7 +130,7 @@ namespace EmuLoader.Forms
                         if (rom.Name != newname)
                         {
                             rom.Name = newname;
-                            Rom.Set(rom);
+                            RomBusiness.Set(rom);
                             count++;
                         }
                     }
@@ -159,7 +160,7 @@ namespace EmuLoader.Forms
                     FormCustomMessage.ShowError("Select a platform");
                 }
 
-                Platform platform = Platform.Get(comboBoxPlatform.Text);
+                Platform platform = PlatformBusiness.Get(comboBoxPlatform.Text);
                 var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
 
                 if (string.IsNullOrEmpty(json))
@@ -168,7 +169,7 @@ namespace EmuLoader.Forms
                 }
 
                 var games = APIFunctions.GetGamesListByPlatform(platform.Id, json);
-                var roms = Rom.GetAll(platform);
+                var roms = RomBusiness.GetAll(platform);
 
                 StringBuilder builder = new StringBuilder("");
 

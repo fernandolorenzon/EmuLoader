@@ -1,10 +1,10 @@
-﻿using System;
+﻿using EmuLoader.Core.Classes;
+using System;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Business
 {
-    public static class Config
+    public static class ConfigBusiness
     {
-
         public static bool GetElementVisibility(Column column)
         {
             try

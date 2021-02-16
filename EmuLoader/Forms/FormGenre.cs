@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,7 +38,7 @@ namespace EmuLoader.Forms
             dataGridView.ClearSelection();
             dataGridView.Rows.Clear();
 
-            List<Genre> genres = Genre.GetAll();
+            List<Genre> genres = GenreBusiness.GetAll();
 
             foreach (Genre genre in genres)
             {
@@ -74,7 +75,7 @@ namespace EmuLoader.Forms
 
             if (textBoxName.Enabled)
             {
-                if (Genre.Get(textBoxName.Text.Trim()) != null)
+                if (GenreBusiness.Get(textBoxName.Text.Trim()) != null)
                 {
                     FormCustomMessage.ShowError("This genre already exists.");
                     return;
@@ -95,7 +96,7 @@ namespace EmuLoader.Forms
             genre.Name = textBoxName.Text.Trim();
             genre.Color = buttonColor.BackColor;
             AddToGrid(genre, index);
-            Genre.Set(genre);
+            GenreBusiness.Set(genre);
             updating = false;
             Updated = true;
             Clean();
@@ -110,7 +111,7 @@ namespace EmuLoader.Forms
 
             if (MessageBox.Show(string.Format("Do you want do delete the genre {0} ?", genre.Name), "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-            int romCount = Rom.GetAll().Where(x => x.Genre == genre).Count();
+            int romCount = RomBusiness.GetAll().Where(x => x.Genre == genre).Count();
 
             if (romCount > 0)
             {
@@ -120,7 +121,7 @@ namespace EmuLoader.Forms
 
             foreach (DataGridViewRow item in dataGridView.SelectedRows)
             {
-                Genre.Delete(item.Cells[0].Value.ToString());
+                GenreBusiness.Delete(item.Cells[0].Value.ToString());
                 dataGridView.Rows.Remove(item);
             }
 

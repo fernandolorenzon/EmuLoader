@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Windows.Forms;
 

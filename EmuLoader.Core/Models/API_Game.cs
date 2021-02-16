@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Models
 {
     public class API_Game
     {

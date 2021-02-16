@@ -1,20 +1,13 @@
-﻿using System;
+﻿using EmuLoader.Core.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Models
 {
-    public class RomLabel : Base
+    public static class RomLabelBusiness
     {
         private static Dictionary<string, RomLabel> labels { get; set; }
-        public Color Color { get; set; }
-        public bool Checked { get; set; }
-
-        public RomLabel()
-        {
-            Name = "";
-            Color = Color.White;
-        }
 
         public static void Fill()
         {

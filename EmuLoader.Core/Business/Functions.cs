@@ -1,4 +1,5 @@
 ﻿using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,11 +21,11 @@ namespace EmuLoader.Core.Business
             XML.LoadXmlPlatforms();
             XML.LoadXmlRoms();
             XML.LoadXmlRomStatus();
-            RomLabel.Fill();
-            Genre.Fill();
-            Platform.Fill();
-            RomStatus.Fill();
-            Rom.Fill();
+            RomLabelBusiness.Fill();
+            GenreBusiness.Fill();
+            PlatformBusiness.Fill();
+            RomStatusBusiness.Fill();
+            RomBusiness.Fill();
         }
 
         public static void SavePictureFromUrl(Rom rom, string url, string pictureType, bool saveAsJpg)

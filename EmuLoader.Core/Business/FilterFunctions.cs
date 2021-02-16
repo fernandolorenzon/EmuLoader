@@ -1,4 +1,5 @@
 ﻿using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace EmuLoader.Core.Business
                 filter.text = text;
             }
             
-            FilteredRoms = Rom.GetAll();
+            FilteredRoms = RomBusiness.GetAll();
 
             if (string.IsNullOrEmpty(filter.text) &&
                 string.IsNullOrEmpty(filter.platform) &&

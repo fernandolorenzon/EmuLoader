@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace EmuLoader.Forms
         private void FormSyncRomData_Load(object sender, EventArgs e)
         {
             Updated = false;
-            var platforms = Platform.GetAll();
+            var platforms = PlatformBusiness.GetAll();
             comboBoxPlatform.DisplayMember = "Name";
             comboBoxPlatform.ValueMember = "Id";
             comboBoxPlatform.DataSource = platforms;
@@ -64,7 +65,7 @@ namespace EmuLoader.Forms
                 XmlDocument doc = new XmlDocument();
                 doc.Load(textBoxXMLPath.Text);
 
-                var roms = Rom.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text);
+                var roms = RomBusiness.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text);
                 XmlNode list = doc.ChildNodes[1];
 
                 int count = 0;
@@ -152,7 +153,7 @@ namespace EmuLoader.Forms
                                 if (rom.Genre == null && !string.IsNullOrEmpty(genrename))
                                 {
                                     updated = true;
-                                    var genre = Genre.Get(genrename);
+                                    var genre = GenreBusiness.Get(genrename);
 
                                     if (genre == null)
                                     {
@@ -166,7 +167,7 @@ namespace EmuLoader.Forms
                             }
                         }
 
-                        Rom.Set(rom);
+                        RomBusiness.Set(rom);
 
                         if (updated)
                         {

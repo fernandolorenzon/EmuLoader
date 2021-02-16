@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,7 +41,7 @@ namespace EmuLoader.Forms
             dataGridView.ClearSelection();
             dataGridView.Rows.Clear();
 
-            List<Platform> emus = Platform.GetAll();
+            List<Platform> emus = PlatformBusiness.GetAll();
 
             foreach (Platform emu in emus)
             {
@@ -105,7 +106,7 @@ namespace EmuLoader.Forms
 
             if (textBoxPlatformName.Enabled)
             {
-                if (Platform.Get(textBoxPlatformName.Text.Trim()) != null)
+                if (PlatformBusiness.Get(textBoxPlatformName.Text.Trim()) != null)
                 {
                     FormCustomMessage.ShowError("A platform with this name already exists.");
                     return;
@@ -161,7 +162,7 @@ namespace EmuLoader.Forms
                 pic = null;
             }
 
-            Platform.Set(platform);
+            PlatformBusiness.Set(platform);
             AddToGrid(platform, index);
             Updated = true;
             updating = false;
@@ -178,7 +179,7 @@ namespace EmuLoader.Forms
 
             if (MessageBox.Show(string.Format("Do you want do delete the platform {0} ?", platform.Name), "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-            int romCount = Rom.GetAll().Where(x => x.Platform == platform).Count();
+            int romCount = RomBusiness.GetAll().Where(x => x.Platform == platform).Count();
 
             if (romCount > 0)
             {
@@ -188,7 +189,7 @@ namespace EmuLoader.Forms
 
             foreach (DataGridViewRow item in dataGridView.SelectedRows)
             {
-                Platform.Delete(item.Cells[0].Value.ToString());
+                PlatformBusiness.Delete(item.Cells[0].Value.ToString());
                 dataGridView.Rows.Remove(item);
             }
 
@@ -310,7 +311,7 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var config = Config.GetFolder(Folder.Retroarch);
+            var config = ConfigBusiness.GetFolder(Folder.Retroarch);
 
             if (string.IsNullOrEmpty(config))
             {
@@ -336,7 +337,7 @@ namespace EmuLoader.Forms
 
         private void buttonSelectCore_Click(object sender, EventArgs e)
         {
-            var config = Config.GetFolder(Folder.Retroarch);
+            var config = ConfigBusiness.GetFolder(Folder.Retroarch);
             OpenFileDialog dialog = new OpenFileDialog();
 
             if (!string.IsNullOrEmpty(config))

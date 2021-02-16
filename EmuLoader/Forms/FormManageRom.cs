@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -75,7 +76,7 @@ namespace EmuLoader.Forms
                 comboBoxChooseEmulator.SelectedIndex = 0;
             }
 
-            List<RomLabel> labels = RomLabel.GetAll();
+            List<RomLabel> labels = RomLabelBusiness.GetAll();
 
             foreach (RomLabel label in labels)
             {
@@ -112,7 +113,7 @@ namespace EmuLoader.Forms
 
         private void LoadComboBoxPlatform()
         {
-            List<Platform> platforms = Platform.GetAll();
+            List<Platform> platforms = PlatformBusiness.GetAll();
             platforms.Insert(0, new Platform());
             comboBoxPlatform.DataSource = platforms;
             comboBoxPlatform.DisplayMember = "Name";
@@ -121,7 +122,7 @@ namespace EmuLoader.Forms
 
         private void LoadComboBoxGenres()
         {
-            List<Genre> genres = Genre.GetAll();
+            List<Genre> genres = GenreBusiness.GetAll();
             genres.Insert(0, new Genre());
             comboBoxGenre.DataSource = genres;
             comboBoxGenre.DisplayMember = "Name";
@@ -182,7 +183,7 @@ namespace EmuLoader.Forms
                     checkBoxSaveAsJpg.Checked,
                     emulator);
 
-                Rom.Set(SelectedRom);
+                RomBusiness.Set(SelectedRom);
                 XML.SaveXmlRoms();
                 Updated = true;
                 Close();
@@ -451,7 +452,7 @@ namespace EmuLoader.Forms
 
             name = Functions.RemoveSubstring(name, '[', ']');
             name = Functions.RemoveSubstring(name, '(', ')');
-            var platform = Platform.GetAll().Where(x => x.Name == comboBoxPlatform.SelectedValue.ToString()).FirstOrDefault();
+            var platform = PlatformBusiness.GetAll().Where(x => x.Name == comboBoxPlatform.SelectedValue.ToString()).FirstOrDefault();
 
             if (platform != null)
             {

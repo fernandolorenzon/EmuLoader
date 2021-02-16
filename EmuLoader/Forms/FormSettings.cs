@@ -1,4 +1,6 @@
-﻿using EmuLoader.Core.Classes;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Windows.Forms;
 
@@ -14,8 +16,8 @@ namespace EmuLoader.Forms
         private void FormSettings_Load(object sender, EventArgs e)
         {
             buttonSave.Click += buttonSave_Click;
-            textBoxMameFolder.Text = Config.GetFolder(Folder.MAME);
-            textBoxRetroarchFolder.Text = Config.GetFolder(Folder.Retroarch);
+            textBoxMameFolder.Text = ConfigBusiness.GetFolder(Folder.MAME);
+            textBoxRetroarchFolder.Text = ConfigBusiness.GetFolder(Folder.Retroarch);
         }
 
         private void buttonMameFolder_Click(object sender, EventArgs e)
@@ -40,8 +42,8 @@ namespace EmuLoader.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Config.SetFolder(Folder.Retroarch, textBoxRetroarchFolder.Text);
-            Config.SetFolder(Folder.MAME, textBoxMameFolder.Text);
+            ConfigBusiness.SetFolder(Folder.Retroarch, textBoxRetroarchFolder.Text);
+            ConfigBusiness.SetFolder(Folder.MAME, textBoxMameFolder.Text);
             XML.SaveXmlConfig();
             Close();
         }

@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,21 +45,21 @@ namespace EmuLoader.Forms
                 FillPlatformGrid();
                 //FormMessage.ShowMessage("Loading Roms...");
                 
-                columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPlatform);
-                columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnGenre);
-                columnStatus.Visible = showStatusColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnStatus);
-                columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnLabels);
-                columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPath);
-                columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnRomDBName);
-                columnFilename.Visible = showFilenameToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnFileName);
-                columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnDeveloper);
-                columnPublisher.Visible = showPublisherColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPublisher);
-                columnYearReleased.Visible = showYearReleasedColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnYearReleased);
-                columnRating.Visible = showRatingColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnRating);
-                pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked = Config.GetElementVisibility(Column.BoxArt);
-                pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked = Config.GetElementVisibility(Column.TitleArt);
-                pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked = Config.GetElementVisibility(Column.GameplayArt);
-                dataGridViewPlatforms.Visible = showPlatformsListToolStripMenuItem.Checked = Config.GetElementVisibility(Column.PlatformsList);
+                columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnPlatform);
+                columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnGenre);
+                columnStatus.Visible = showStatusColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnStatus);
+                columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnLabels);
+                columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnPath);
+                columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnRomDBName);
+                columnFilename.Visible = showFilenameToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnFileName);
+                columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnDeveloper);
+                columnPublisher.Visible = showPublisherColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnPublisher);
+                columnYearReleased.Visible = showYearReleasedColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnYearReleased);
+                columnRating.Visible = showRatingColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnRating);
+                pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.BoxArt);
+                pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.TitleArt);
+                pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.GameplayArt);
+                dataGridViewPlatforms.Visible = showPlatformsListToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.PlatformsList);
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 //FormMessage.ShowMessage("Filling Grid...");
 
@@ -438,7 +439,7 @@ namespace EmuLoader.Forms
                     romList.Add((Rom)row.Tag);
                 }
 
-                Genre.ChangeRomsGenre(romList, selected);
+                GenreBusiness.ChangeRomsGenre(romList, selected);
                 XML.SaveXmlRoms();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -482,7 +483,7 @@ namespace EmuLoader.Forms
                 {
                     var rom = (Rom)row.Tag;
                     status.Status = newstatus;
-                    RomStatus.Set(status);
+                    RomStatusBusiness.Set(status);
                 }
 
                 XML.SaveXmlRomStatus();
@@ -578,7 +579,7 @@ namespace EmuLoader.Forms
 
                 foreach (var rom in roms)
                 {
-                    Rom.Delete(rom);
+                    RomBusiness.Delete(rom);
                     RomFunctions.RemoveRomPics(rom);
                     FilteredRoms.Remove(rom);
                 }
@@ -617,7 +618,7 @@ namespace EmuLoader.Forms
                     Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
 
                 dataGridView.Rows.Remove(row);
-                Rom.Delete(rom);
+                RomBusiness.Delete(rom);
                 RomFunctions.RemoveRomPics(rom);
                 FilteredRoms.Remove(rom);
                 labelTotalRomsCount.Text = FilteredRoms.Count.ToString();
@@ -641,7 +642,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnPath, columnRomPath.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnPath, columnRomPath.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -662,7 +663,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnRomDBName, columnRomDBName.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnRomDBName, columnRomDBName.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -683,7 +684,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnFileName, columnFilename.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnFileName, columnFilename.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -704,7 +705,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnPlatform, columnPlatform.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnPlatform, columnPlatform.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -725,7 +726,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnLabels, columnLabels.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnLabels, columnLabels.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -746,7 +747,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnGenre, columnGenre.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnGenre, columnGenre.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -767,7 +768,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnStatus, columnStatus.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnStatus, columnStatus.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -788,7 +789,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnDeveloper, columnDeveloper.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnDeveloper, columnDeveloper.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -809,7 +810,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnPublisher, columnPublisher.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnPublisher, columnPublisher.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -830,7 +831,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnYearReleased, columnYearReleased.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnYearReleased, columnYearReleased.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -851,7 +852,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.ColumnRating, columnRating.Visible);
+                ConfigBusiness.SetElementVisibility(Column.ColumnRating, columnRating.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -872,7 +873,7 @@ namespace EmuLoader.Forms
 
                 if (updating) return;
 
-                Config.SetElementVisibility(Column.PlatformsList, dataGridViewPlatforms.Visible);
+                ConfigBusiness.SetElementVisibility(Column.PlatformsList, dataGridViewPlatforms.Visible);
                 XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
@@ -1150,7 +1151,7 @@ namespace EmuLoader.Forms
             {
                 if (comboBoxPlatform.SelectedValue != null)
                 {
-                    RomFunctions.RemoveInvalidRomsEntries(Platform.Get(comboBoxPlatform.SelectedValue.ToString()));
+                    RomFunctions.RemoveInvalidRomsEntries(PlatformBusiness.Get(comboBoxPlatform.SelectedValue.ToString()));
                 }
                 else
                 {
@@ -1401,7 +1402,7 @@ namespace EmuLoader.Forms
                 }
 
                 pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked;
-                Config.SetElementVisibility(Column.BoxArt, pictureBoxBoxart.Visible);
+                ConfigBusiness.SetElementVisibility(Column.BoxArt, pictureBoxBoxart.Visible);
                 XML.SaveXmlConfig();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
@@ -1427,7 +1428,7 @@ namespace EmuLoader.Forms
                 }
 
                 pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked;
-                Config.SetElementVisibility(Column.TitleArt, pictureBoxTitle.Visible);
+                ConfigBusiness.SetElementVisibility(Column.TitleArt, pictureBoxTitle.Visible);
                 XML.SaveXmlConfig();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
@@ -1453,7 +1454,7 @@ namespace EmuLoader.Forms
                 }
 
                 pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked;
-                Config.SetElementVisibility(Column.GameplayArt, pictureBoxGameplay.Visible);
+                ConfigBusiness.SetElementVisibility(Column.GameplayArt, pictureBoxGameplay.Visible);
                 XML.SaveXmlConfig();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
@@ -1660,7 +1661,7 @@ namespace EmuLoader.Forms
 
                 if (form.ShowDialogUpdated())
                 {
-                    Rom.Fill();
+                    RomBusiness.Fill();
                     FillGenreFilter();
 
                     FilterRoms();
@@ -1686,7 +1687,7 @@ namespace EmuLoader.Forms
 
                 if (form.Updated)
                 {
-                    Rom.Fill();
+                    RomBusiness.Fill();
                     FillGenreFilter();
                     FilterRoms();
                     FillPlatformFilter();
@@ -1712,7 +1713,7 @@ namespace EmuLoader.Forms
 
             var platform = (Platform)comboBoxPlatform.SelectedItem;
 
-            var result = platform.RescanRoms();
+            var result = PlatformBusiness.RescanRoms(platform);
 
             if (result)
             {
@@ -1729,7 +1730,7 @@ namespace EmuLoader.Forms
 
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 rom.Favorite = !rom.Favorite;
-                Rom.Set(rom);
+                RomBusiness.Set(rom);
                 XML.SaveXmlRoms();
                 LoadGridRow(rom, dataGridView.SelectedRows[0]);
 
@@ -1787,7 +1788,7 @@ namespace EmuLoader.Forms
                 else if (e.KeyData == Keys.F5)
                 {
                     FilteredRoms.Clear();
-                    FilteredRoms.AddRange(Rom.GetAll());
+                    FilteredRoms.AddRange(RomBusiness.GetAll());
                     AddRomsToGrid(FilteredRoms);
                 }
                 else if (e.KeyData == Keys.G)
@@ -2096,7 +2097,7 @@ namespace EmuLoader.Forms
         {
             updating = true;
 
-            List<Platform> platforms = Platform.GetAll().Where(x => x.ShowInFilter).ToList();
+            List<Platform> platforms = PlatformBusiness.GetAll().Where(x => x.ShowInFilter).ToList();
             platforms.Insert(0, new Platform());
             platforms.Insert(1, new Platform() { Name = "<none>" });
             comboBoxPlatform.DataSource = platforms;
@@ -2118,7 +2119,7 @@ namespace EmuLoader.Forms
         private void FillLabelFilter()
         {
             updating = true;
-            List<RomLabel> labels = RomLabel.GetAll();
+            List<RomLabel> labels = RomLabelBusiness.GetAll();
             labels.Insert(0, new RomLabel());
             labels.Insert(1, new RomLabel() { Name = "<none>" });
             comboBoxLabels.DataSource = labels;
@@ -2131,7 +2132,7 @@ namespace EmuLoader.Forms
         private void FillGenreFilter(string genre = "")
         {
             updating = true;
-            List<Genre> genres = Genre.GetAll();
+            List<Genre> genres = GenreBusiness.GetAll();
             genres.Insert(0, new Genre());
             genres.Insert(1, new Genre() { Name = "<none>" });
             comboBoxGenre.DataSource = genres;
@@ -2153,7 +2154,7 @@ namespace EmuLoader.Forms
         private void FillPublisherFilter()
         {
             updating = true;
-            Publisher.Fill(Rom.GetAll());
+            Publisher.Fill(RomBusiness.GetAll());
             List<string> publishers = Publisher.GetAll();
             publishers.Insert(0, "");
             comboBoxPublisher.DataSource = publishers;
@@ -2164,7 +2165,7 @@ namespace EmuLoader.Forms
         private void FillDeveloperFilter()
         {
             updating = true;
-            Developer.Fill(Rom.GetAll());
+            Developer.Fill(RomBusiness.GetAll());
             List<string> developers = Developer.GetAll();
             developers.Insert(0, "");
             comboBoxDeveloper.DataSource = developers;
@@ -2175,7 +2176,7 @@ namespace EmuLoader.Forms
         private void FillYearReleasedFilter()
         {
             updating = true;
-            YearReleased.Fill(Rom.GetAll());
+            YearReleased.Fill(RomBusiness.GetAll());
             List<string> yearReleased = YearReleased.GetAll();
             yearReleased.Insert(0, "");
             comboBoxYearReleased.DataSource = yearReleased;
@@ -2338,7 +2339,7 @@ namespace EmuLoader.Forms
 
         private void FillPlatformGrid()
         {
-            var emus = Platform.GetAll().Where(x => x.ShowInList).ToList();
+            var emus = PlatformBusiness.GetAll().Where(x => x.ShowInList).ToList();
             dataGridViewPlatforms.Rows.Clear();
 
             foreach (var platform in emus)

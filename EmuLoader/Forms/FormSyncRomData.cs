@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,7 +33,7 @@ namespace EmuLoader.Forms
         private void FormSyncRomData_Load(object sender, EventArgs e)
         {
             Updated = false;
-            var platforms = Platform.GetAll();
+            var platforms = PlatformBusiness.GetAll();
             comboBoxPlatform.DisplayMember = "Name";
             comboBoxPlatform.ValueMember = "Id";
             comboBoxPlatform.DataSource = platforms;
@@ -158,7 +159,7 @@ namespace EmuLoader.Forms
 
         private void buttonLockIds_Click(object sender, EventArgs e)
         {
-            var roms = Rom.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text && !x.IdLocked && (string.IsNullOrEmpty(x.Id) || x.Id.Length == 10)).ToList();
+            var roms = RomBusiness.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text && !x.IdLocked && (string.IsNullOrEmpty(x.Id) || x.Id.Length == 10)).ToList();
 
             if (roms == null || roms.Count == 0)
             {
@@ -175,7 +176,7 @@ namespace EmuLoader.Forms
             {
                 item.IdLocked = true;
                 item.Id = string.Empty;
-                Rom.Set(item);
+                RomBusiness.Set(item);
                 progressBar.Value++;
             }
 
@@ -185,7 +186,7 @@ namespace EmuLoader.Forms
 
         private void buttonUnlockIds_Click(object sender, EventArgs e)
         {
-            var roms = Rom.GetAll().Where(x => x.Platform.Name == comboBoxPlatform.Text && x.IdLocked).ToList();
+            var roms = RomBusiness.GetAll().Where(x => x.Platform.Name == comboBoxPlatform.Text && x.IdLocked).ToList();
 
             if (roms == null || roms.Count == 0)
             {
@@ -201,7 +202,7 @@ namespace EmuLoader.Forms
             foreach (var item in roms)
             {
                 item.IdLocked = false;
-                Rom.Set(item);
+                RomBusiness.Set(item);
                 progressBar.Value++;
             }
 
@@ -275,7 +276,7 @@ namespace EmuLoader.Forms
                         {
                             syncRomsCount++;
                             LogMessage("ID AND YEAR SET - " + rom.Name);
-                            Rom.Set(rom);
+                            RomBusiness.Set(rom);
                             updated = false;
                         }
 
@@ -325,7 +326,7 @@ namespace EmuLoader.Forms
                         {
                             syncRomsCount++;
                             LogMessage("ID AND YEAR SET - " + rom.Name);
-                            Rom.Set(rom);
+                            RomBusiness.Set(rom);
                             updated = false;
                         }
                     }
@@ -406,7 +407,7 @@ namespace EmuLoader.Forms
                 if (updated)
                 {
                     syncRomsCount++;
-                    Rom.Set(rom);
+                    RomBusiness.Set(rom);
                     updated = false;
                 }
 
@@ -562,7 +563,7 @@ namespace EmuLoader.Forms
                 });
 
                 Roms.Clear();
-                Roms.AddRange(Rom.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
+                Roms.AddRange(RomBusiness.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
 
                 labelId.Invoke((MethodInvoker)delegate
                 {

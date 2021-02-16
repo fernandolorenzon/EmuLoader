@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using EmuLoader.Core.Models;
+using EmuLoader.Core.Business;
 
 namespace EmuLoader.Forms
 {
@@ -25,7 +27,7 @@ namespace EmuLoader.Forms
 
             if (type == typeof(Platform))
             {
-                List<Platform> emus = Platform.GetAll();
+                List<Platform> emus = PlatformBusiness.GetAll();
                 emus.Insert(0, new Platform());
                 comboBox.DataSource = emus;
                 comboBox.DisplayMember = "Name";
@@ -38,7 +40,7 @@ namespace EmuLoader.Forms
             }
             else if (type == typeof(RomLabel))
             {
-                List<RomLabel> labels = RomLabel.GetAll();
+                List<RomLabel> labels = RomLabelBusiness.GetAll();
                 labels.Insert(0, new RomLabel());
                 comboBox.DataSource = labels;
                 comboBox.DisplayMember = "Name";
@@ -51,7 +53,7 @@ namespace EmuLoader.Forms
             }
             else if (type == typeof(Genre))
             {
-                List<Genre> genres = Genre.GetAll();
+                List<Genre> genres = GenreBusiness.GetAll();
                 genres.Insert(0, new Genre());
                 comboBox.DataSource = genres;
                 comboBox.DisplayMember = "Name";

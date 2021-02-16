@@ -1,52 +1,17 @@
 ﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Business
 {
-    public class Rom : Base
+    public static class RomBusiness
     {
         private static List<Rom> RomList { get; set; }
-        public string Id { get; set; }
-        public string DBName { get; set; }
-        public string Extension { get; private set; }
-        public bool IdLocked { get; set; }
-        private string path;
-        public string Path
-        {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                path = value;
-                FileName = RomFunctions.GetFileName(path);
-                FileNameNoExt = RomFunctions.GetFileNameNoExtension(path);
-            }
-        }
-        public string FileName { get; private set; }
-        public string FileNameNoExt { get; private set; }
-        public string YearReleased { get; set; }
-        public string Developer { get; set; }
-        public string Publisher { get; set; }
-        public string Description { get; set; }
-        public float Rating { get; set; }
-        public List<RomLabel> Labels;
-        public Platform Platform { get; set; }
-        public Genre Genre { get; set; }
-        public bool Favorite { get; set; }
-        public RomStatus Status { get; set; }
-        public string Emulator { get; set; }
-
-        public Rom()
-        {
-            Labels = new List<RomLabel>();
-            Favorite = false;
-        }
 
         public static Rom NewRom(string path, Platform platform)
         {
@@ -109,8 +74,8 @@ namespace EmuLoader.Core.Classes
                 rom.Id = Functions.GetXmlAttribute(node, "Id");
                 rom.Name = Functions.GetXmlAttribute(node, "Name");
                 rom.DBName = Functions.GetXmlAttribute(node, "DBName");
-                rom.Platform = Platform.Get(Functions.GetXmlAttribute(node, "Platform"));
-                rom.Genre = Genre.Get(Functions.GetXmlAttribute(node, "Genre"));
+                rom.Platform = PlatformBusiness.Get(Functions.GetXmlAttribute(node, "Platform"));
+                rom.Genre = GenreBusiness.Get(Functions.GetXmlAttribute(node, "Genre"));
                 rom.Publisher = Functions.GetXmlAttribute(node, "Publisher");
                 rom.Developer = Functions.GetXmlAttribute(node, "Developer");
                 rom.YearReleased = Functions.GetXmlAttribute(node, "YearReleased");
@@ -129,10 +94,10 @@ namespace EmuLoader.Core.Classes
 
                 foreach (XmlNode labelNode in node.ChildNodes[0].ChildNodes)
                 {
-                    rom.Labels.Add(RomLabel.Get(labelNode.InnerText));
+                    rom.Labels.Add(RomLabelBusiness.Get(labelNode.InnerText));
                 }
 
-                rom.Status = RomStatus.Get(rom.Platform.Name, rom.FileName);
+                rom.Status = RomStatusBusiness.Get(rom.Platform.Name, rom.FileName);
 
                 RomList.Add(rom);
             }
@@ -222,14 +187,14 @@ namespace EmuLoader.Core.Classes
             return XML.DelRom(rom.Path);
         }
 
-        public bool IsRomPack()
+        public static bool IsRomPack(Rom rom)
         {
-            var ext = RomFunctions.GetFileExtension(this.Path).ToLower();
+            var ext = RomFunctions.GetFileExtension(rom.Path).ToLower();
 
             if (ext == ".gdi" || ext == ".ccd" || ext == ".cue" || ext == ".rom")
             {
-                FileInfo file = new FileInfo(this.Path);
-                if (file.Directory.Name.ToLower() == this.Name.ToLower())
+                FileInfo file = new FileInfo(rom.Path);
+                if (file.Directory.Name.ToLower() == rom.Name.ToLower())
                 {
                     return true;
                 }

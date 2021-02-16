@@ -1,4 +1,5 @@
 ﻿using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,7 +38,7 @@ namespace EmuLoader.Core.Business
                 string newPath = string.Empty;
                 string newDir = string.Empty;
 
-                if (rom.IsRomPack())
+                if (RomBusiness.IsRomPack(rom))
                 {
                     FileInfo file = new FileInfo(rom.Path);
                     newDir = file.Directory.Parent.FullName + "\\" + RomFunctions.GetFileNameNoExtension(changeFileName);
@@ -64,7 +65,7 @@ namespace EmuLoader.Core.Business
                     File.Move(oldPath, newPath);
                 }
 
-                Rom.Delete(rom);
+                RomBusiness.Delete(rom);
                 rom.Path = newPath;
 
                 if (changeZipFileName && RomFunctions.GetFileExtension(newPath) == ".zip")
@@ -110,8 +111,8 @@ namespace EmuLoader.Core.Business
         {
             rom.Labels.Clear();
 
-            rom.Platform = string.IsNullOrEmpty(platform) ? null : Platform.Get(platform);
-            rom.Genre = string.IsNullOrEmpty(genre) ? null : Genre.Get(genre);
+            rom.Platform = string.IsNullOrEmpty(platform) ? null : PlatformBusiness.Get(platform);
+            rom.Genre = string.IsNullOrEmpty(genre) ? null : GenreBusiness.Get(genre);
 
             rom.Publisher = publisher;
             rom.Developer = developer;
@@ -422,18 +423,18 @@ namespace EmuLoader.Core.Business
 
             if (platform == null)
             {
-                roms = Rom.GetAll();
+                roms = RomBusiness.GetAll();
             }
             else
             {
-                roms = Rom.GetAll(platform);
+                roms = RomBusiness.GetAll(platform);
             }
 
             foreach (Rom rom in roms)
             {
                 if (!File.Exists(rom.Path))
                 {
-                    Rom.Delete(rom);
+                    RomBusiness.Delete(rom);
                     RemoveRomPics(rom);
                     result = true;
                 }
@@ -537,7 +538,7 @@ namespace EmuLoader.Core.Business
             Random r = new Random();
             genre.Color = Color.FromArgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255));
 
-            Genre.Set(genre);
+            GenreBusiness.Set(genre);
 
             return genre;
         }
@@ -638,13 +639,13 @@ namespace EmuLoader.Core.Business
 
             foreach (var path in files)
             {
-                var rom = Rom.Get(path);
+                var rom = RomBusiness.Get(path);
 
                 if (rom == null)
                 {
-                    rom = Rom.NewRom(path, platform);
+                    rom = RomBusiness.NewRom(path, platform);
                     addedAny = true;
-                    Rom.Set(rom);
+                    RomBusiness.Set(rom);
                 }
             }
 
@@ -668,13 +669,13 @@ namespace EmuLoader.Core.Business
                     continue;
                 }
 
-                var rom = Rom.Get(path);
+                var rom = RomBusiness.Get(path);
 
                 if (rom == null)
                 {
-                    rom = Rom.NewRom(path, platform);
+                    rom = RomBusiness.NewRom(path, platform);
                     addedAny = true;
-                    Rom.Set(rom);
+                    RomBusiness.Set(rom);
                 }
             }
 
@@ -703,13 +704,13 @@ namespace EmuLoader.Core.Business
 
                     foreach (var dir in dirs)
                     {
-                        var rom = Rom.Get(dir);
+                        var rom = RomBusiness.Get(dir);
 
                         if (rom == null)
                         {
-                            rom = Rom.NewRom(dir, platform);
+                            rom = RomBusiness.NewRom(dir, platform);
                             addedAny = true;
-                            Rom.Set(rom);
+                            RomBusiness.Set(rom);
                         }
                     }
                 }
@@ -723,13 +724,13 @@ namespace EmuLoader.Core.Business
 
                         if (exts.Contains(fileExt.Replace(".", "")))
                         {
-                            var rom = Rom.Get(file);
+                            var rom = RomBusiness.Get(file);
 
                             if (rom == null)
                             {
-                                rom = Rom.NewRom(file, platform);
+                                rom = RomBusiness.NewRom(file, platform);
                                 addedAny = true;
-                                Rom.Set(rom);
+                                RomBusiness.Set(rom);
                             }
                         }
                     }
@@ -744,7 +745,7 @@ namespace EmuLoader.Core.Business
             foreach (var item in roms)
             {
                 item.Platform = platform;
-                Rom.Set(item);
+                RomBusiness.Set(item);
             }
 
             return true;
@@ -755,7 +756,7 @@ namespace EmuLoader.Core.Business
             foreach (var item in roms)
             {
                 item.Labels = labels;
-                Rom.Set(item);
+                RomBusiness.Set(item);
             }
 
             return true;
@@ -782,7 +783,7 @@ namespace EmuLoader.Core.Business
                     }
                 }
 
-                Rom.Set(rom);
+                RomBusiness.Set(rom);
             }
 
             return true;
@@ -790,7 +791,7 @@ namespace EmuLoader.Core.Business
 
         public static string GetMAMENameFromMameFolder(string filename)
         {
-            var mamepath = Config.GetFolder(Folder.MAME);
+            var mamepath = ConfigBusiness.GetFolder(Folder.MAME);
 
             if (string.IsNullOrEmpty(mamepath)) return "";
 
@@ -820,7 +821,6 @@ namespace EmuLoader.Core.Business
                                     break;
                                 }
                             }
-
                         }
                     }
                 }

@@ -1,35 +1,16 @@
 ﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Models
 {
-    public class Platform : Base
+    public static class PlatformBusiness
     {
         private static Dictionary<string, Platform> platforms { get; set; }
-        public Color Color { get; set; }
-        public bool ShowInList { get; set; }
-        public bool ShowInFilter { get; set; }
-        public string DefaultRomPath { get; set; }
-        public string DefaultRomExtensions { get; set; }
-        public bool UseRetroarch { get; set; }
-        
-        public string Id { get; set; }
-
-        public Bitmap Icon { get; set; }
-
-        public List<Emulator> Emulators { get; set; }
-
-        public string DefaultEmulator { get; set; }
-        public Platform()
-        {
-            Name = "";
-            Emulators = new List<Emulator>();
-            Color = Color.White;
-        }
 
         public static void Fill()
         {
@@ -170,17 +151,17 @@ namespace EmuLoader.Core.Classes
             return XML.DeletePlatform(name);
         }
 
-        public bool RescanRoms()
+        public static bool RescanRoms(Platform platform)
         {
             bool addedAny = false;
 
-            if (string.IsNullOrEmpty(DefaultRomPath) || string.IsNullOrEmpty(DefaultRomExtensions))
+            if (string.IsNullOrEmpty(platform.DefaultRomPath) || string.IsNullOrEmpty(platform.DefaultRomExtensions))
             {
                 return false;
             }
 
-            var added = RomFunctions.AddRomsFromDirectory(this, DefaultRomPath);
-            var addedAnyRomPack = RomFunctions.AddRomPacksFromDirectory(this, DefaultRomPath);
+            var added = RomFunctions.AddRomsFromDirectory(platform, platform.DefaultRomPath);
+            var addedAnyRomPack = RomFunctions.AddRomPacksFromDirectory(platform, platform.DefaultRomPath);
 
             return added || addedAnyRomPack;
         }

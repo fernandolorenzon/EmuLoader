@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Models
 {
     public class Emulator
     {

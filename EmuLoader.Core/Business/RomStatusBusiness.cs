@@ -1,4 +1,5 @@
 ﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,20 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Models
 {
-    public class RomStatus
+    public static class RomStatusBusiness
     {
         private static Dictionary<string, RomStatus> romStatuses { get; set; }
-        public string Platform { get; set; }
-        public string Rom { get; set; }
-        public string Status { get; set; }
-
-        public RomStatus(string platform, string rom)
-        {
-            Platform = platform;
-            Rom = rom;
-        }
 
         public static RomStatus Get(string platform, string rom)
         {

@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ namespace EmuLoader.Forms
 
         private void FormBase_Load(object sender, EventArgs e)
         {
-            List<Platform> emus = Platform.GetAll();
+            List<Platform> emus = PlatformBusiness.GetAll();
             comboBoxChoosePlatform.DataSource = emus;
             comboBoxChoosePlatform.DisplayMember = "Name";
             comboBoxChoosePlatform.ValueMember = "Name";
@@ -26,7 +27,7 @@ namespace EmuLoader.Forms
         private void buttonRemove_Click(object sender, EventArgs e)
         {
             Platform emu = (Platform)comboBoxChoosePlatform.SelectedItem;
-            var roms = Rom.GetAll().Where
+            var roms = RomBusiness.GetAll().Where
                 (x =>
                         x.Platform != null &&
                         x.Platform.Name == emu.Name &&
@@ -79,7 +80,7 @@ namespace EmuLoader.Forms
         private void buttonRemoveUnused_Click(object sender, EventArgs e)
         {
             Platform emu = (Platform)comboBoxChoosePlatform.SelectedItem;
-            var roms = Rom.GetAll().Where(x => x.Platform != null && x.Platform.Name == emu.Name).ToList();
+            var roms = RomBusiness.GetAll().Where(x => x.Platform != null && x.Platform.Name == emu.Name).ToList();
             var path = Environment.CurrentDirectory + "\\" + Values.PicturesPath + "\\" + emu.Name + "\\";
             int successfulFind = 0;
 

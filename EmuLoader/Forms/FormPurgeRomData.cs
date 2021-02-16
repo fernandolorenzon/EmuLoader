@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace EmuLoader.Forms
         private void FormPurgeRomData_Load(object sender, EventArgs e)
         {
             Updated = false;
-            var platforms = Platform.GetAll();
+            var platforms = PlatformBusiness.GetAll();
             comboBoxPlatform.DisplayMember = "Name";
             comboBoxPlatform.ValueMember = "Id";
             comboBoxPlatform.DataSource = platforms;
@@ -42,7 +43,7 @@ namespace EmuLoader.Forms
             labelGameplay.Text = "-";
 
             Roms.Clear();
-            Roms.AddRange(Rom.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
+            Roms.AddRange(RomBusiness.GetAll().Where(r => r.Platform != null && r.Platform.Name == comboBoxPlatform.Text).ToList());
 
             labelId.Text = Roms.Where(x => string.IsNullOrEmpty(x.Id)).Count().ToString();
             labelGenre.Text = Roms.Where(x => x.Genre == null).Count().ToString();
@@ -113,7 +114,7 @@ namespace EmuLoader.Forms
                         item.Rating = 0;
                     }
 
-                    Rom.Set(item);
+                    RomBusiness.Set(item);
                 }
 
                 XML.SaveXmlRoms();

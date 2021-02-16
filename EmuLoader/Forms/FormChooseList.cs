@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace EmuLoader.Forms
         {
             if (type == typeof(RomLabel))
             {
-                List<RomLabel> labels = RomLabel.GetAll();
+                List<RomLabel> labels = RomLabelBusiness.GetAll();
 
                 foreach (RomLabel label in labels)
                 {

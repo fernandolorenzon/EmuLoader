@@ -1,4 +1,5 @@
 ﻿using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;

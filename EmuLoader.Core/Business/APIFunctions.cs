@@ -1,4 +1,5 @@
 ﻿using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -45,7 +46,7 @@ namespace EmuLoader.Core.Business
 
                 games = games.Replace("][", ",");
 
-                var platform = Platform.GetAll().FirstOrDefault(x => x.Id == platformId);
+                var platform = PlatformBusiness.GetAll().FirstOrDefault(x => x.Id == platformId);
 
                 if (platform != null)
                 {

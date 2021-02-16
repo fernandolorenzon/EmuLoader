@@ -1,4 +1,4 @@
-﻿namespace EmuLoader.Core.Classes
+﻿namespace EmuLoader.Core.Models
 {
     public class Filter
     {

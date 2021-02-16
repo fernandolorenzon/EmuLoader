@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,7 +38,7 @@ namespace EmuLoader.Forms
             dataGridView.ClearSelection();
             dataGridView.Rows.Clear();
 
-            List<RomLabel> labels = RomLabel.GetAll();
+            List<RomLabel> labels = RomLabelBusiness.GetAll();
 
             foreach (RomLabel label in labels)
             {
@@ -63,7 +64,7 @@ namespace EmuLoader.Forms
 
             if (textBoxName.Enabled)
             {
-                if (RomLabel.Get(textBoxName.Text.Trim()) != null)
+                if (RomLabelBusiness.Get(textBoxName.Text.Trim()) != null)
                 {
                     FormCustomMessage.ShowError("This label already exists.");
                     return;
@@ -82,7 +83,7 @@ namespace EmuLoader.Forms
 
             label.Name = textBoxName.Text.Trim();
             label.Color = buttonColor.BackColor;
-            RomLabel.Set(label);
+            RomLabelBusiness.Set(label);
             AddToGrid(label, index);
             updating = false;
             Updated = true;
@@ -97,7 +98,7 @@ namespace EmuLoader.Forms
 
             if (MessageBox.Show(string.Format("Do you want do delete the label {0} ?", label.Name), "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-            int romCount = Rom.GetAll().Where(x => x.Labels.Contains(label)).Count();
+            int romCount = RomBusiness.GetAll().Where(x => x.Labels.Contains(label)).Count();
 
             if (romCount > 0)
             {
@@ -107,7 +108,7 @@ namespace EmuLoader.Forms
 
             foreach (DataGridViewRow item in dataGridView.SelectedRows)
             {
-                EmuLoader.Core.Classes.RomLabel.Delete(item.Cells[0].Value.ToString());
+                RomLabelBusiness.Delete(item.Cells[0].Value.ToString());
                 dataGridView.Rows.Remove(item);
             }
 
@@ -199,7 +200,7 @@ namespace EmuLoader.Forms
         {
             base.SetForm();
             DataGridViewRow row = dataGridView.SelectedRows[0];
-            EmuLoader.Core.Classes.RomLabel label = (EmuLoader.Core.Classes.RomLabel)row.Tag;
+            RomLabel label = (RomLabel)row.Tag;
             textBoxName.Text = label.Name;
             buttonColor.BackColor = label.Color;
             textBoxName.Enabled = false;

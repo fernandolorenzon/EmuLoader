@@ -1,22 +1,17 @@
-﻿using System;
+﻿using EmuLoader.Core.Business;
+using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml;
 
-namespace EmuLoader.Core.Classes
+namespace EmuLoader.Core.Business
 {
-    public class Genre : Base
+    public static class GenreBusiness
     {
         private static Dictionary<string, Genre> genres { get; set; }
-        public Color Color { get; set; }
-        public bool Checked { get; set; }
-
-        public Genre()
-        {
-            Name = "";
-            Color = Color.White;
-        }
 
         public static void Fill()
         {
@@ -87,7 +82,7 @@ namespace EmuLoader.Core.Classes
             foreach (var item in roms)
             {
                 item.Genre = genre;
-                Rom.Set(item);
+                RomBusiness.Set(item);
             }
 
             return true;

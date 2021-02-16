@@ -1,5 +1,6 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
+using EmuLoader.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
@@ -11,8 +12,8 @@ namespace Tests
         public void GetGamesListJSONByPlatform_Test()
         {
             XML.LoadXmlRoms();
-            Genre.Fill();
-            Platform.Fill();
+            GenreBusiness.Fill();
+            PlatformBusiness.Fill();
             var games = APIFunctions.GetGamesListJSONByPlatform("6");
 
             Assert.IsNotNull(games);
@@ -21,7 +22,7 @@ namespace Tests
         public void GetGamesListByPlatform_Test()
         {
             XML.LoadXmlRoms();
-            Genre.Fill();
+            GenreBusiness.Fill();
             var games = APIFunctions.GetGamesListByPlatform("6", "");
 
             Assert.IsNotNull(games);
@@ -31,7 +32,7 @@ namespace Tests
         public void GetGameByName_Test()
         {
             XML.LoadXmlRoms();
-            Genre.Fill();
+            GenreBusiness.Fill();
             var access = "";
             var games = APIFunctions.GetGameByName("136", "Super Mario World", out access);
 
@@ -42,7 +43,7 @@ namespace Tests
         public void GetGameDetails_Test()
         {
             XML.LoadXmlRoms();
-            Genre.Fill();
+            GenreBusiness.Fill();
             var access = "";
             var games = APIFunctions.GetGameDetails("136", new Platform(), out access);
 
@@ -53,7 +54,7 @@ namespace Tests
         public void GetGameArtUrls_Test()
         {
             XML.LoadXmlRoms();
-            Genre.Fill();
+            GenreBusiness.Fill();
             string box, title, gameplay = "";
             var access = "";
             var result = APIFunctions.GetGameArtUrls("136", out box, out title, out gameplay, out access);
