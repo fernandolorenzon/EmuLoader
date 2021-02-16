@@ -221,6 +221,7 @@ namespace EmuLoader.Forms
             }
             else
             {
+                Clean();
                 SetForm();
             }
         }
@@ -349,8 +350,12 @@ namespace EmuLoader.Forms
             }
 
             dialog.Filter = "Libreto Core | *.dll";
-            dialog.ShowDialog();
-            textBoxCommand.Text = Values.RetroarchCommand.Replace("[CORE]", RomFunctions.GetFileName(dialog.FileName));
+            
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxCommand.Text = Values.RetroarchCommand.Replace("[CORE]", RomFunctions.GetFileName(dialog.FileName));
+                FillEmuName();
+            }
         }
 
         #endregion
@@ -383,13 +388,15 @@ namespace EmuLoader.Forms
         protected override void Clean()
         {
             base.Clean();
+            textBoxPath.Enabled = true;
+            textBoxCommand.Enabled = true;
             textBoxPlatformName.Text = string.Empty;
             textBoxEmuName.Text = string.Empty;
             textBoxPath.Text = string.Empty;
             textBoxCommand.Text = string.Empty;
             buttonColor.BackColor = Color.White;
             textBoxPlatformIcon.Text = string.Empty;
-            dataGridView.ClearSelection();
+            //dataGridView.ClearSelection();
             dataGridViewEmulators.Rows.Clear();
             emulators = new List<Emulator>();
             comboBoxPlatformsDB.SelectedValue = "0";
@@ -398,6 +405,7 @@ namespace EmuLoader.Forms
             textBoxPlatformName.Enabled = true;
             checkBoxUseRetroarch.Checked = false;
             defaultEmulator = "";
+            checkBoxUseRetroarch.CheckState = CheckState.Unchecked;
         }
 
         protected override void SetForm()
@@ -458,6 +466,7 @@ namespace EmuLoader.Forms
             textBoxEmuName.Text = "";
             textBoxPath.Text = "";
             textBoxCommand.Text = "";
+            checkBoxUseRetroarch.CheckState = CheckState.Unchecked;
         }
 
         private void FillEmuName()
