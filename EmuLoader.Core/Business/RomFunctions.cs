@@ -106,7 +106,7 @@ namespace EmuLoader.Core.Business
             string romName, string platform, string genre, List<RomLabel> labels, string publisher,
             string developer, string description, string year, string dbName,
             string rating, bool idLocked, bool changeZipName,
-            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string status, string emulator)
+            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
         {
             rom.Labels.Clear();
 
@@ -119,7 +119,6 @@ namespace EmuLoader.Core.Business
             rom.YearReleased = year;
             rom.DBName = dbName;
             rom.IdLocked = idLocked;
-            rom.Status = status;
             rom.Emulator = emulator;
 
             float ratingParse = 0;

@@ -91,7 +91,7 @@ namespace EmuLoader.Core.Business
 
                 if (!string.IsNullOrEmpty(filter.status))
                 {
-                    var filterRoms = filter.status == "<none>" ? FilteredRoms.Where(x => x.Status == string.Empty).ToList() : FilteredRoms.Where(x => x.Status == filter.status).ToList();
+                    var filterRoms = filter.status == "<none>" ? FilteredRoms.Where(x => x.Status.Status == string.Empty).ToList() : FilteredRoms.Where(x => x.Status != null && x.Status.Status == filter.status).ToList();
                     FilteredRoms = filterRoms;
                 }
 

@@ -69,6 +69,7 @@
     <Compile Include="Classes\Publisher.cs" />
     <Compile Include="Classes\Rom.cs" />
     <Compile Include="Classes\RomLabel.cs" />
+    <Compile Include="Classes\RomStatus.cs" />
     <Compile Include="Classes\Values.cs" />
     <Compile Include="Classes\XML.cs" />
     <Compile Include="Classes\YearReleased.cs" />

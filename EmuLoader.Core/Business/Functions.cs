@@ -19,9 +19,12 @@ namespace EmuLoader.Core.Business
             XML.LoadXmlLabels();
             XML.LoadXmlPlatforms();
             XML.LoadXmlRoms();
+            XML.LoadXmlRomStatus();
             RomLabel.Fill();
             Genre.Fill();
             Platform.Fill();
+            RomStatus.Fill();
+            Rom.Fill();
         }
 
         public static void SavePictureFromUrl(Rom rom, string url, string pictureType, bool saveAsJpg)

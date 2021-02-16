@@ -180,7 +180,6 @@ namespace EmuLoader.Forms
                     textBoxTitlePicture.Text,
                     textBoxGameplayPicture.Text,
                     checkBoxSaveAsJpg.Checked,
-                    comboBoxChooseStatus.Text,
                     emulator);
 
                 Rom.Set(SelectedRom);

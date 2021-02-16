@@ -43,7 +43,7 @@ namespace EmuLoader.Forms
                 Functions.InitXml();
                 FillPlatformGrid();
                 //FormMessage.ShowMessage("Loading Roms...");
-                Rom.Fill();
+                
                 columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnPlatform);
                 columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnGenre);
                 columnStatus.Visible = showStatusColumnToolStripMenuItem.Checked = Config.GetElementVisibility(Column.ColumnStatus);
@@ -471,31 +471,29 @@ namespace EmuLoader.Forms
         {
             try
             {
-                string selected = "";
+                if (dataGridView.SelectedRows.Count == 0) return;
 
-                if (dataGridView.SelectedRows.Count == 1)
-                {
-                    selected = ((Rom)dataGridView.SelectedRows[0].Tag).Status;
-                }
+                RomStatus status = ((Rom)dataGridView.SelectedRows[0].Tag).Status;
+                string newstatus = "";
 
-                if (!FormChoose.ChooseStatus(selected, out selected)) return;
+                if (!FormChoose.ChooseStatus(status.Status, out newstatus)) return;
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     var rom = (Rom)row.Tag;
-                    rom.Status = selected;
-                    Rom.Set(rom);
+                    status.Status = newstatus;
+                    RomStatus.Set(status);
                 }
 
-                XML.SaveXmlRoms();
+                XML.SaveXmlRomStatus();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     Rom rom = (Rom)row.Tag;
 
-                    if (!string.IsNullOrEmpty(rom.Status))
+                    if (rom.Status != null && !string.IsNullOrEmpty(rom.Status.Status))
                     {
-                        row.Cells[columnStatus.Index].Value = rom.Status;
+                        row.Cells[columnStatus.Index].Value = rom.Status.Status;
                         row.Cells[columnStatus.Index].Style.BackColor = Color.Navy;
                         row.Cells[columnStatus.Index].Style.ForeColor = Color.White;
                     }
@@ -2076,9 +2074,9 @@ namespace EmuLoader.Forms
                 row.Cells[columnGenre.Index].Style.ForeColor = Functions.SetFontContrast(rom.Genre.Color);
             }
 
-            if (!string.IsNullOrEmpty(rom.Status))
+            if (rom.Status != null && !string.IsNullOrEmpty(rom.Status.Status))
             {
-                row.Cells[columnStatus.Index].Value = rom.Status;
+                row.Cells[columnStatus.Index].Value = rom.Status.Status;
                 row.Cells[columnStatus.Index].Style.BackColor = Color.Navy;
                 row.Cells[columnStatus.Index].Style.ForeColor = Color.White;
             }

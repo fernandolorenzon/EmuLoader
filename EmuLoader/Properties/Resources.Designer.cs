@@ -59,15 +59,5 @@ namespace EmuLoader.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap CircularProgressAnimation {
-            get {
-                object obj = ResourceManager.GetObject("CircularProgressAnimation", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

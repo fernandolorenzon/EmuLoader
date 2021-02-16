@@ -316,7 +316,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmuLoader.ico" />
-    <Content Include="Forms\CircularProgressAnimation.gif" />
+    <Content Include="icons\CircularProgressAnimation.gif" />
     <Content Include="icons\add.png" />
     <Content Include="icons\add16.png" />
     <Content Include="icons\block32.png" />

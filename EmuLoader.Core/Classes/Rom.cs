@@ -39,7 +39,7 @@ namespace EmuLoader.Core.Classes
         public Platform Platform { get; set; }
         public Genre Genre { get; set; }
         public bool Favorite { get; set; }
-        public string Status { get; set; }
+        public RomStatus Status { get; set; }
         public string Emulator { get; set; }
 
         public Rom()
@@ -119,7 +119,6 @@ namespace EmuLoader.Core.Classes
                 rom.IdLocked = string.IsNullOrEmpty(idLocked) ? false : Convert.ToBoolean(idLocked);
                 var favorite = Functions.GetXmlAttribute(node, "Favorite");
                 rom.Favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
-                rom.Status = Functions.GetXmlAttribute(node, "Status");
                 rom.Emulator = Functions.GetXmlAttribute(node, "Emulator");
                 float result = 0;
 
@@ -132,6 +131,8 @@ namespace EmuLoader.Core.Classes
                 {
                     rom.Labels.Add(RomLabel.Get(labelNode.InnerText));
                 }
+
+                rom.Status = RomStatus.Get(rom.Platform.Name, rom.FileName);
 
                 RomList.Add(rom);
             }
@@ -163,7 +164,6 @@ namespace EmuLoader.Core.Classes
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "IdLocked", rom.IdLocked.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Favorite", rom.Favorite.ToString());
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Status", rom.Status);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", rom.Emulator);
             SetRomLabels(rom, node);
 

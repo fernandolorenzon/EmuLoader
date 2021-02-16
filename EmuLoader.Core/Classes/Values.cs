@@ -12,7 +12,8 @@ namespace EmuLoader.Core.Classes
         public static string xmlFileGenres = "genres.xml";
         public static string xmlFileRoms = "roms.xml";
         public static string xmlFileConfig = "config.xml";
-
+        public static string xmlFileRomStatus = "romstatus.xml";
+        
         public static List<string> Status = new List<string>() { "Queue", "Playing", "Played", "Finished"};
         
         public static string apikeyfile = "apikey.txt";
