@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace EmuLoader.Core.Classes
@@ -11,6 +12,7 @@ namespace EmuLoader.Core.Classes
         public static XmlDocument xmlGenres;
         public static XmlDocument xmlLabels;
         public static XmlDocument xmlRomStatus;
+        public static XmlDocument xmlRomLabels;
 
         #region -- General --
 
@@ -207,6 +209,23 @@ namespace EmuLoader.Core.Classes
             xmlRomStatus.Save(Values.xmlPath + "\\" + Values.xmlFileRomStatus);
         }
 
+        private static void CreateXmlRomLabels()
+        {
+            xmlRomLabels = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xmlRomLabels.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmlRomLabels.InsertBefore(xmlDeclaration, xmlRomLabels.DocumentElement);
+            xmlRomLabels.AppendChild(xmlRomLabels.CreateElement("Root"));
+
+            xmlRomLabels.ChildNodes[1].AppendChild(xmlRomLabels.CreateElement("RomLabelList"));
+
+            if (!Directory.Exists(Values.xmlPath))
+            {
+                Directory.CreateDirectory(Values.xmlPath);
+            }
+
+            xmlRomLabels.Save(Values.xmlPath + "\\" + Values.xmlFileRomLabels);
+        }
+
         public static XmlDocument LoadXmlConfig()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileConfig;
@@ -375,6 +394,34 @@ namespace EmuLoader.Core.Classes
             return xmlRomStatus;
         }
 
+        public static XmlDocument LoadXmlRomLabels()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileRomLabels;
+            xmlRomLabels = new XmlDocument();
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    xmlRomLabels.Load(path);
+                }
+                else
+                {
+                    CreateXmlRomLabels();
+                }
+            }
+            catch
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    LoadXmlRomLabels();
+                }
+            }
+
+            return xmlRomLabels;
+        }
+
         public static void SaveXmlConfig()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileConfig;
@@ -409,6 +456,12 @@ namespace EmuLoader.Core.Classes
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRomStatus;
             xmlRomStatus.Save(path);
+        }
+
+        public static void SaveXmlRomLabels()
+        {
+            string path = Values.xmlPath + "\\" + Values.xmlFileRomLabels;
+            xmlRomLabels.Save(path);
         }
 
         public static XmlNode GetParentNode(XmlDocument xml, string elementName)
@@ -774,15 +827,93 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode item in GetRomStatusNodes())
             {
-                if (node.Attributes["Platform"].Value == platform && node.Attributes["Rom"].Value == rom)
+                if (item.Attributes["Platform"].Value == platform && item.Attributes["Rom"].Value == rom)
                 {
                     node = item;
+                    break;
                 }
             }
 
             if (node != null)
             {
                 GetParentNode(xmlRomStatus, "RomStatuses").RemoveChild(node);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region -- RomLabels --
+
+        public static XmlNodeList GetRomLabelsNodes()
+        {
+            try
+            {
+                return GetParentNode(xmlRomLabels, "RomLabelList").ChildNodes;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static XmlNode GetRomLabelsNode(string platform, string rom)
+        {
+            if (GetRomLabelsNodes() == null)
+            {
+                return null;
+            }
+
+            foreach (XmlNode node in GetRomLabelsNodes())
+            {
+                if (node.Attributes["Platform"].Value == platform && node.Attributes["Rom"].Value == rom)
+                {
+                    return node;
+                }
+            }
+
+            return null;
+        }
+
+        public static bool DelRomLabels(string platform, string rom)
+        {
+            List<XmlNode> nodes = new List<XmlNode>();
+
+            foreach (XmlNode item in GetRomLabelsNodes())
+            {
+                if (item.Attributes["Platform"].Value == platform && item.Attributes["Rom"].Value == rom)
+                {
+                    nodes.Add(item);
+                }
+            }
+
+            foreach (XmlNode item in nodes)
+            {
+                GetParentNode(xmlRomLabels, "RomLabelList").RemoveChild(item);
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool DelRomLabels(string platform, string rom, string label)
+        {
+            XmlNode node = null;
+
+            foreach (XmlNode item in GetRomLabelsNodes())
+            {
+                if (item.Attributes["Platform"].Value == platform && item.Attributes["Rom"].Value == rom && item.InnerText.ToLower() == label.ToLower())
+                {
+                    node = item;
+                    break;
+                }
+            }
+
+            if (node != null)
+            {
+                GetParentNode(xmlRomLabels, "RomLabelList").RemoveChild(node);
                 return true;
             }
 

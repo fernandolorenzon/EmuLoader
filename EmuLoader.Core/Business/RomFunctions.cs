@@ -137,7 +137,6 @@ namespace EmuLoader.Core.Business
             RomFunctions.RenameRomPictures(rom, fileName);
             RomFunctions.RenameRomFile(rom, fileName, changeZipName);
             rom.Name = romName;
-            rom.Labels.AddRange(labels);
 
             RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
 
@@ -746,44 +745,6 @@ namespace EmuLoader.Core.Business
             {
                 item.Platform = platform;
                 RomBusiness.Set(item);
-            }
-
-            return true;
-        }
-
-        public static bool ChangeRomLabels(List<Rom> roms, List<RomLabel> labels)
-        {
-            foreach (var item in roms)
-            {
-                item.Labels = labels;
-                RomBusiness.Set(item);
-            }
-
-            return true;
-        }
-
-        public static bool ChangeRomLabels(List<Rom> roms, List<RomLabel> selectedLabels, List<RomLabel> unselectedLabels)
-        {
-            foreach (var rom in roms)
-            {
-                foreach (var label in selectedLabels)
-                {
-                    if (!rom.Labels.Any(x => x.Name == label.Name))
-                    {
-                        rom.Labels.Add(label);
-                    }
-                }
-
-                foreach (var label in unselectedLabels)
-                {
-                    if (rom.Labels.Any(x => x.Name == label.Name))
-                    {
-                        var selected = rom.Labels.First(x => x.Name == label.Name);
-                        rom.Labels.Remove(selected);
-                    }
-                }
-
-                RomBusiness.Set(rom);
             }
 
             return true;

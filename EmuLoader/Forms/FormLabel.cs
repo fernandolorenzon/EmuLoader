@@ -98,7 +98,7 @@ namespace EmuLoader.Forms
 
             if (MessageBox.Show(string.Format("Do you want do delete the label {0} ?", label.Name), "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
 
-            int romCount = RomBusiness.GetAll().Where(x => x.Labels.Contains(label)).Count();
+            int romCount = RomLabelsBusiness.GetAll().Where(x => x.Label == label.Name).Count();
 
             if (romCount > 0)
             {

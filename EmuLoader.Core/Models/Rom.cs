@@ -34,7 +34,7 @@ namespace EmuLoader.Core.Models
         public string Publisher { get; set; }
         public string Description { get; set; }
         public float Rating { get; set; }
-        public List<RomLabel> Labels;
+        public List<RomLabels> Labels;
         public Platform Platform { get; set; }
         public Genre Genre { get; set; }
         public bool Favorite { get; set; }
@@ -43,7 +43,7 @@ namespace EmuLoader.Core.Models
 
         public Rom()
         {
-            Labels = new List<RomLabel>();
+            Labels = new List<RomLabels>();
             Favorite = false;
         }
     }

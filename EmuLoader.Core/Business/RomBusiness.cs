@@ -94,10 +94,11 @@ namespace EmuLoader.Core.Business
 
                 foreach (XmlNode labelNode in node.ChildNodes[0].ChildNodes)
                 {
-                    rom.Labels.Add(RomLabelBusiness.Get(labelNode.InnerText));
+                    rom.Labels.Add(RomLabelsBusiness.Get(rom.Platform.Name, rom.FileName));
                 }
 
                 rom.Status = RomStatusBusiness.Get(rom.Platform.Name, rom.FileName);
+                rom.Labels = new List<RomLabels>();
 
                 RomList.Add(rom);
             }
@@ -130,24 +131,8 @@ namespace EmuLoader.Core.Business
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Favorite", rom.Favorite.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", rom.Emulator);
-            SetRomLabels(rom, node);
 
             return true;
-        }
-
-        public static void SetRomLabels(Rom rom, XmlNode node)
-        {
-            node.ChildNodes[0].RemoveAll();
-
-            if (rom.Labels != null)
-            {
-                foreach (RomLabel label in rom.Labels)
-                {
-                    XmlNode labelNode = XML.xmlRoms.CreateNode(XmlNodeType.Element, "Label", "");
-                    labelNode.InnerText = label.Name;
-                    node.ChildNodes[0].AppendChild(labelNode);
-                }
-            }
         }
 
         public static bool Reset(string oldPath, Rom newRom)
@@ -175,8 +160,6 @@ namespace EmuLoader.Core.Business
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Description", newRom.Description);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", newRom.Emulator);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "IdLocked", newRom.IdLocked.ToString());
-
-            SetRomLabels(newRom, node);
 
             return true;
         }

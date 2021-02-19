@@ -57,6 +57,7 @@
     <Compile Include="Business\RomBusiness.cs" />
     <Compile Include="Business\RomFunctions.cs" />
     <Compile Include="Business\RomLabelBusiness.cs" />
+    <Compile Include="Business\RomLabelsBusiness.cs" />
     <Compile Include="Business\RomStatusBusiness.cs" />
     <Compile Include="Business\RunAppFunctions.cs" />
     <Compile Include="Business\SyncDataFunctions.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Business\PublisherBusiness.cs" />
     <Compile Include="Models\Rom.cs" />
     <Compile Include="Models\RomLabel.cs" />
+    <Compile Include="Models\RomLabels.cs" />
     <Compile Include="Models\RomStatus.cs" />
     <Compile Include="Classes\Values.cs" />
     <Compile Include="Classes\XML.cs" />

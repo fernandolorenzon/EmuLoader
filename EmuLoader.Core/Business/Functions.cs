@@ -21,10 +21,12 @@ namespace EmuLoader.Core.Business
             XML.LoadXmlPlatforms();
             XML.LoadXmlRoms();
             XML.LoadXmlRomStatus();
+            XML.LoadXmlRomLabels();
             RomLabelBusiness.Fill();
             GenreBusiness.Fill();
             PlatformBusiness.Fill();
             RomStatusBusiness.Fill();
+            RomLabelsBusiness.Fill();
             RomBusiness.Fill();
         }
 

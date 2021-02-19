@@ -44,6 +44,32 @@ namespace EmuLoader.Core.Models
             return (from r in result select r).ToList();
         }
 
+        public static bool Set(Rom rom, string status)
+        {
+            XmlNode node = XML.GetRomStatusNode(rom.Platform.Name, status);
+
+            if (node == null)
+            {
+                node = SetNode();
+                XML.GetParentNode(XML.xmlRomStatus, "RomStatuses").AppendChild(node);
+            }
+
+            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Platform", rom.Platform.Name);
+            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Rom", rom.FileName);
+            node.InnerText = status;
+
+            var romstatus = new RomStatus(rom.Platform.Name, rom.Name, status);
+            
+            if (!romStatuses.ContainsKey(romstatus.Platform + romstatus.Rom))
+            {
+                romStatuses.Add(romstatus.Platform + romstatus.Rom, romstatus);
+            }
+
+            rom.Status = romstatus;
+
+            return true;
+        }
+
         public static bool Set(RomStatus romstatus)
         {
             XmlNode node = XML.GetRomStatusNode(romstatus.Platform, romstatus.Rom);
@@ -57,6 +83,12 @@ namespace EmuLoader.Core.Models
             Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Platform", romstatus.Platform);
             Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Rom", romstatus.Rom);
             node.InnerText = romstatus.Status;
+
+            if (!romStatuses.ContainsKey(romstatus.Platform + romstatus.Rom))
+            {
+                romStatuses.Add(romstatus.Platform + romstatus.Rom, romstatus);
+            }
+            
             return true;
         }
 
@@ -74,8 +106,7 @@ namespace EmuLoader.Core.Models
 
             foreach (XmlNode node in XML.GetRomStatusNodes())
             {
-                RomStatus romstatus = new RomStatus(node.Attributes["Platform"].Value, node.Attributes["Rom"].Value);
-                romstatus.Status = node.InnerText;
+                RomStatus romstatus = new RomStatus(node.Attributes["Platform"].Value, node.Attributes["Rom"].Value, node.InnerText);
                 romStatuses.Add(romstatus.Platform.ToLower() + romstatus.Rom.ToLower(), romstatus);
             }
         }
