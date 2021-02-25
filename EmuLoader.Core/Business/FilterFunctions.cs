@@ -98,7 +98,7 @@ namespace EmuLoader.Core.Business
 
                 if (!string.IsNullOrEmpty(filter.label))
                 {
-                    var filterRoms = filter.label == "<none>" ? FilteredRoms.Where(x => x.Labels == null || x.Labels.Count == 0).ToList() : FilteredRoms.Where(x => x.Labels != null && x.Labels.Any(l => l.Label == filter.label)).ToList();
+                    var filterRoms = filter.label == "<none>" ? FilteredRoms.Where(x => x.RomLabels == null || x.RomLabels == null).ToList() : FilteredRoms.Where(x => x.RomLabels != null && x.RomLabels.Labels.Any(l => l == filter.label)).ToList();
                     FilteredRoms = filterRoms;
                 }
 

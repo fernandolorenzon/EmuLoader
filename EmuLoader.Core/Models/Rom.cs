@@ -13,6 +13,15 @@ namespace EmuLoader.Core.Models
         public string DBName { get; set; }
         public string Extension { get; private set; }
         public bool IdLocked { get; set; }
+        public string Key
+        {
+            get
+            {
+                if (Platform == null) return "";
+                return Platform.Name.ToLower() + FileName.ToLower();
+            }
+        }
+
         private string path;
         public string Path
         {
@@ -34,7 +43,7 @@ namespace EmuLoader.Core.Models
         public string Publisher { get; set; }
         public string Description { get; set; }
         public float Rating { get; set; }
-        public List<RomLabels> Labels;
+        public RomLabels RomLabels { get; set; }
         public Platform Platform { get; set; }
         public Genre Genre { get; set; }
         public bool Favorite { get; set; }
@@ -43,7 +52,6 @@ namespace EmuLoader.Core.Models
 
         public Rom()
         {
-            Labels = new List<RomLabels>();
             Favorite = false;
         }
     }

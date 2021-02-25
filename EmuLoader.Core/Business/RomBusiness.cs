@@ -92,13 +92,7 @@ namespace EmuLoader.Core.Business
                     rom.Rating = result;
                 }
 
-                foreach (XmlNode labelNode in node.ChildNodes[0].ChildNodes)
-                {
-                    rom.Labels.Add(RomLabelsBusiness.Get(rom.Platform.Name, rom.FileName));
-                }
-
                 rom.Status = RomStatusBusiness.Get(rom.Platform.Name, rom.FileName);
-                rom.Labels = new List<RomLabels>();
 
                 RomList.Add(rom);
             }

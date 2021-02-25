@@ -109,7 +109,7 @@ namespace EmuLoader.Core.Business
             string rating, bool idLocked, bool changeZipName,
             string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
         {
-            rom.Labels.Clear();
+            rom.RomLabels = null;
 
             rom.Platform = string.IsNullOrEmpty(platform) ? null : PlatformBusiness.Get(platform);
             rom.Genre = string.IsNullOrEmpty(genre) ? null : GenreBusiness.Get(genre);

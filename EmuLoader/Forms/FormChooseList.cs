@@ -99,7 +99,7 @@ namespace EmuLoader.Forms
 
                 foreach (var rom in roms)
                 {
-                    checkFound = rom.Labels.Any(x => x.Label == labelName);
+                    checkFound = rom.RomLabels.Labels.Any(x => x == labelName);
 
                     if (checkFound)
                     {

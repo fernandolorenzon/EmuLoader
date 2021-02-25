@@ -10,13 +10,20 @@ namespace EmuLoader.Core.Models
     {
         public string Platform { get; set; }
         public string Rom { get; set; }
-        public string Label { get; set; }
+        public List<string> Labels { get; set; }
+        public string Key
+        {
+            get
+            {
+                return Platform.ToLower() + Rom.ToLower();
+            }
+        }
 
-        public RomLabels(string platform, string rom, string label)
+        public RomLabels(string platform, string rom, List<string> labels)
         {
             Platform = platform;
             Rom = rom;
-            Label = label;
+            Labels = labels;
         }
     }
 }

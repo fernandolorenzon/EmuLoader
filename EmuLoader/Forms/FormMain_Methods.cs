@@ -264,14 +264,14 @@ namespace EmuLoader.Forms
         {
             row.Cells[columnLabels.Index].Value = "";
 
-            if (rom.Labels.Count > 0)
+            if (rom.RomLabels != null)
             {
-                foreach (RomLabels label in rom.Labels)
+                foreach (string label in rom.RomLabels.Labels)
                 {
-                    row.Cells[columnLabels.Index].Value += " | " + label.Label;
+                    row.Cells[columnLabels.Index].Value += " | " + label;
                 }
 
-                var romlabel = RomLabelBusiness.Get(rom.Labels[0].Label);
+                var romlabel = RomLabelBusiness.Get(rom.RomLabels.Labels[0]);
 
                 row.Cells[columnLabels.Index].Style.BackColor = romlabel.Color;
                 row.Cells[columnLabels.Index].Style.ForeColor = Functions.SetFontContrast(romlabel.Color);
@@ -346,7 +346,7 @@ namespace EmuLoader.Forms
             comboBoxEmulators.ValueMember = "Name";
             comboBoxEmulators.DisplayMember = "Name";
 
-            if (rom.Emulator != "")
+            if (!string.IsNullOrEmpty(rom.Emulator))
             {
                 if (rom.Platform.Emulators.Any(x => x.Name.ToLower() == rom.Emulator.ToLower()))
                 {
@@ -359,7 +359,14 @@ namespace EmuLoader.Forms
             }
             else
             {
-                comboBoxEmulators.SelectedIndex = 0;
+                if (!string.IsNullOrEmpty(rom.Platform.DefaultEmulator) && rom.Platform.Emulators.Any(x => x.Name.ToLower() == rom.Platform.DefaultEmulator.ToLower()))
+                {
+                    comboBoxEmulators.Text = rom.Platform.DefaultEmulator;
+                }
+                else
+                {
+                    comboBoxEmulators.SelectedIndex = 0;
+                }
             }
         }
 

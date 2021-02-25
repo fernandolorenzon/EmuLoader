@@ -87,7 +87,7 @@ namespace EmuLoader.Forms
                 row.Cells[columnColor.Index].Style.BackColor = label.Color;
                 row.Cells[columnColor.Index].Style.ForeColor = Functions.SetFontContrast(label.Color);
 
-                if (SelectedRom.Labels.Any(x => x.Label == label.Name))
+                if (SelectedRom.RomLabels != null && SelectedRom.RomLabels.Labels.Any(x => x == label.Name))
                 {
                     row.Cells[columnCheck.Index].Value = CheckState.Checked;
                 }
