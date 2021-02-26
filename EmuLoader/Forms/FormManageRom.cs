@@ -60,7 +60,7 @@ namespace EmuLoader.Forms
             comboBoxChooseEmulator.DisplayMember = "Name";
             comboBoxChooseEmulator.Items.Insert(0, new Emulator() { Name = "<default>"});
 
-            if (rom.Emulator != "")
+            if (!string.IsNullOrEmpty(rom.Emulator))
             {
                 if (rom.Platform.Emulators.Any(x => x.Name.ToLower() == rom.Emulator.ToLower()))
                 {
