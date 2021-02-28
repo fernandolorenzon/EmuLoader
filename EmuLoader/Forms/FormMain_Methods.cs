@@ -264,7 +264,7 @@ namespace EmuLoader.Forms
         {
             row.Cells[columnLabels.Index].Value = "";
 
-            if (rom.RomLabels != null)
+            if (rom.RomLabels != null && rom.RomLabels.Labels != null && rom.RomLabels.Labels.Count > 0)
             {
                 foreach (string label in rom.RomLabels.Labels)
                 {

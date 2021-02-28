@@ -45,16 +45,56 @@ namespace EmuLoader.Core.Models
 
         public static bool Set(Rom rom, List<RomLabel> list)
         {
-            XmlNode node = XML.GetRomLabelsNode(rom.Platform.Name, rom.FileName);
+            if (list == null || list.Count == 0)
+            {
+                XML.DelRomLabels(rom.Platform.Name, rom.FileName);
+                if (romLabelsList.ContainsKey(rom.Platform.Name.ToLower() + rom.FileName.ToLower()))
+                {
+                    romLabelsList.Remove(rom.Platform.Name.ToLower() + rom.FileName.ToLower());
+                }
+
+                rom.RomLabels = null;
+            }
+            else
+            {
+                SetNode(rom.Platform.Name, rom.FileName, list);
+                var labels = new List<string>();
+
+                foreach (var item in list)
+                {
+                    labels.Add(item.Name);
+                }
+
+                var romlabels = new RomLabels(rom.Platform.Name, rom.FileName, labels);
+
+                romLabelsList.Remove(romlabels.Key);
+                romLabelsList.Add(romlabels.Key, romlabels);
+
+                rom.RomLabels = romlabels;
+            }
+            return true;
+        }
+
+        private static XmlNode CreateNode()
+        {
+            XmlNode node = XML.xmlRomLabels.CreateNode(XmlNodeType.Element, "Romlabels", "");
+            node.Attributes.Append(XML.xmlRomLabels.CreateAttribute("Platform"));
+            node.Attributes.Append(XML.xmlRomLabels.CreateAttribute("Rom"));
+            return node;
+        }
+
+        private static void SetNode(string platform, string rom, List<RomLabel> list)
+        {
+            XmlNode node = XML.GetRomLabelsNode(platform.ToLower(), rom.ToLower());
 
             if (node == null)
             {
-                node = SetNode();
+                node = CreateNode();
                 XML.GetParentNode(XML.xmlRomLabels, "RomLabelList").AppendChild(node);
             }
 
-            Functions.CreateOrSetXmlAttribute(XML.xmlRomLabels, node, "Platform", rom.Platform.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRomLabels, node, "Rom", rom.FileName);
+            Functions.CreateOrSetXmlAttribute(XML.xmlRomLabels, node, "Platform", platform.ToLower());
+            Functions.CreateOrSetXmlAttribute(XML.xmlRomLabels, node, "Rom", rom.ToLower());
 
             if (node.ChildNodes.Count == 0)
             {
@@ -69,28 +109,6 @@ namespace EmuLoader.Core.Models
                 child.InnerText = item.Name;
             }
 
-            var labels = new List<string>();
-
-            foreach (var item in list)
-            {
-                labels.Add(item.Name);
-            }
-
-            var romlabels = new RomLabels(rom.Platform.Name, rom.FileName, labels);
-
-            romLabelsList.Remove(romlabels.Key);
-            romLabelsList.Add(romlabels.Key, romlabels);
-
-            rom.RomLabels = romlabels;
-            return true;
-        }
-
-        private static XmlNode SetNode()
-        {
-            XmlNode node = XML.xmlRomLabels.CreateNode(XmlNodeType.Element, "Romlabels", "");
-            node.Attributes.Append(XML.xmlRomLabels.CreateAttribute("Platform"));
-            node.Attributes.Append(XML.xmlRomLabels.CreateAttribute("Rom"));
-            return node;
         }
 
         public static void Fill()

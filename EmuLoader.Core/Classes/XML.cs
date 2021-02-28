@@ -827,7 +827,7 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode item in GetRomStatusNodes())
             {
-                if (item.Attributes["Platform"].Value == platform && item.Attributes["Rom"].Value == rom)
+                if (item.Attributes["Platform"].Value == platform.ToLower() && item.Attributes["Rom"].Value == rom.ToLower())
                 {
                     node = item;
                     break;
@@ -883,7 +883,7 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode item in GetRomLabelsNodes())
             {
-                if (item.Attributes["Platform"].Value == platform && item.Attributes["Rom"].Value == rom)
+                if (item.Attributes["Platform"].Value == platform.ToLower() && item.Attributes["Rom"].Value == rom.ToLower())
                 {
                     nodes.Add(item);
                 }
@@ -892,28 +892,6 @@ namespace EmuLoader.Core.Classes
             foreach (XmlNode item in nodes)
             {
                 GetParentNode(xmlRomLabels, "RomLabelList").RemoveChild(item);
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool DelRomLabels(string platform, string rom, string label)
-        {
-            XmlNode node = null;
-
-            foreach (XmlNode item in GetRomLabelsNodes())
-            {
-                if (item.Attributes["Platform"].Value == platform && item.Attributes["Rom"].Value == rom && item.InnerText.ToLower() == label.ToLower())
-                {
-                    node = item;
-                    break;
-                }
-            }
-
-            if (node != null)
-            {
-                GetParentNode(xmlRomLabels, "RomLabelList").RemoveChild(node);
                 return true;
             }
 

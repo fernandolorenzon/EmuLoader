@@ -1,0 +1,3 @@
+DELETE RomLabels and RomStatus when deleting rom
+Change RomLabels and Status when renaming rom
+Change RomLabels and Status when renaming platform

@@ -46,53 +46,55 @@ namespace EmuLoader.Core.Models
 
         public static bool Set(Rom rom, string status)
         {
-            XmlNode node = XML.GetRomStatusNode(rom.Platform.Name, status);
-
-            if (node == null)
-            {
-                node = SetNode();
-                XML.GetParentNode(XML.xmlRomStatus, "RomStatuses").AppendChild(node);
-            }
-
-            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Platform", rom.Platform.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Rom", rom.FileName);
-            node.InnerText = status;
-
-            var romstatus = new RomStatus(rom.Platform.Name, rom.Name, status);
-            
-            if (!romStatuses.ContainsKey(romstatus.Platform + romstatus.Rom))
-            {
-                romStatuses.Add(romstatus.Platform + romstatus.Rom, romstatus);
-            }
-
+            RomStatus romstatus = new RomStatus(rom.Platform.Name, rom.FileName, status);
             rom.Status = romstatus;
-
+            Set(romstatus);
             return true;
         }
 
         public static bool Set(RomStatus romstatus)
         {
-            XmlNode node = XML.GetRomStatusNode(romstatus.Platform, romstatus.Rom);
-
-            if (node == null)
+            if (string.IsNullOrEmpty(romstatus.Status))
             {
-                node = SetNode();
-                XML.GetParentNode(XML.xmlRomStatus, "RomStatuses").AppendChild(node);
+                XML.DelRomStatus(romstatus.Platform, romstatus.Rom);
+                if (romStatuses.ContainsKey(romstatus.Key))
+                {
+                    romStatuses.Remove(romstatus.Key);
+                }
             }
-
-            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Platform", romstatus.Platform);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Rom", romstatus.Rom);
-            node.InnerText = romstatus.Status;
-
-            if (!romStatuses.ContainsKey(romstatus.Platform + romstatus.Rom))
+            else
             {
-                romStatuses.Add(romstatus.Platform + romstatus.Rom, romstatus);
+                SetNode(romstatus.Platform, romstatus.Rom, romstatus.Status);
+
+                if (!romStatuses.ContainsKey(romstatus.Key))
+                {
+                    romStatuses.Add(romstatus.Key, romstatus);
+                }
+                else
+                {
+                    romStatuses[romstatus.Key] = romstatus;
+                }
             }
             
             return true;
         }
 
-        private static XmlNode SetNode()
+        private static void SetNode(string platform, string rom, string status)
+        {
+            XmlNode node = XML.GetRomStatusNode(platform.ToLower(), rom.ToLower());
+
+            if (node == null)
+            {
+                node = CreateNode();
+                XML.GetParentNode(XML.xmlRomStatus, "RomStatuses").AppendChild(node);
+            }
+
+            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Platform", platform.ToLower());
+            Functions.CreateOrSetXmlAttribute(XML.xmlRomStatus, node, "Rom", rom.ToLower());
+            node.InnerText = status;
+        }
+
+        private static XmlNode CreateNode()
         {
             XmlNode node = XML.xmlRomStatus.CreateNode(XmlNodeType.Element, "RomStatus", "");
             node.Attributes.Append(XML.xmlRomStatus.CreateAttribute("Platform"));
