@@ -56,12 +56,12 @@ namespace EmuLoader.Core.Models
             Functions.CreateOrSetXmlAttribute(XML.xmlRomLabels, node, "Platform", rom.Platform.Name);
             Functions.CreateOrSetXmlAttribute(XML.xmlRomLabels, node, "Rom", rom.FileName);
 
-            if (node.ChildNodes.Count > 0)
+            if (node.ChildNodes.Count == 0)
             {
-                node.ChildNodes[0].RemoveAll();
+                node.AppendChild(XML.xmlRomLabels.CreateNode(XmlNodeType.Element, "Labels", ""));
             }
 
-            node.AppendChild(XML.xmlRomLabels.CreateNode(XmlNodeType.Element, "Labels", ""));
+            node.ChildNodes[0].RemoveAll();
 
             foreach (var item in list)
             {
@@ -76,12 +76,10 @@ namespace EmuLoader.Core.Models
                 labels.Add(item.Name);
             }
 
-            var romlabels = new RomLabels(rom.Platform.Name, rom.Name, labels);
+            var romlabels = new RomLabels(rom.Platform.Name, rom.FileName, labels);
 
-            if (!romLabelsList.ContainsKey(romlabels.Platform + romlabels.Rom))
-            {
-                romLabelsList.Add(romlabels.Key, romlabels);
-            }
+            romLabelsList.Remove(romlabels.Key);
+            romLabelsList.Add(romlabels.Key, romlabels);
 
             rom.RomLabels = romlabels;
             return true;

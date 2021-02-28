@@ -93,6 +93,7 @@ namespace EmuLoader.Core.Business
                 }
 
                 rom.Status = RomStatusBusiness.Get(rom.Platform.Name, rom.FileName);
+                rom.RomLabels = RomLabelsBusiness.Get(rom.Platform.Name, rom.FileName);
 
                 RomList.Add(rom);
             }

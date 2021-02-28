@@ -165,7 +165,6 @@ namespace EmuLoader.Forms
                 if (dataGridView.SelectedRows.Count == 0) return;
 
                 List<RomLabel> selectedLabels = new List<RomLabel>();
-                List<RomLabel> unselectedLabels = new List<RomLabel>();
                 RomLabels labels = ((Rom)dataGridView.SelectedRows[0].Tag).RomLabels;
 
                 List<Rom> roms = new List<Rom>();
@@ -175,7 +174,7 @@ namespace EmuLoader.Forms
                     roms.Add((Rom)row.Tag);
                 }
 
-                if (!FormChooseList.ChooseLabel(roms, out selectedLabels, out unselectedLabels)) return;
+                if (!FormChooseList.ChooseLabel(roms, out selectedLabels)) return;
 
                 foreach (var rom in roms)
                 {
@@ -187,6 +186,7 @@ namespace EmuLoader.Forms
                     FillLabelCell((Rom)row.Tag, row);
                 }
 
+                XML.SaveXmlRomLabels();
                 dataGridView.Refresh();
             }
             catch (Exception ex)
