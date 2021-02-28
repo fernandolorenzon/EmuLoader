@@ -106,7 +106,7 @@ namespace EmuLoader.Forms
 
             comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? string.Empty : SelectedRom.Platform.Name;
             comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? string.Empty : SelectedRom.Genre.Name;
-            comboBoxChooseStatus.SelectedItem = SelectedRom.Status;
+            comboBoxChooseStatus.Text = SelectedRom.Status != null ? SelectedRom.Status.Status : "";
 
             LoadPictures();
         }
@@ -168,6 +168,7 @@ namespace EmuLoader.Forms
                     textBoxRomName.Text,
                     comboBoxPlatform.Text,
                     comboBoxGenre.Text,
+                    comboBoxChooseStatus.Text,
                     labels,
                     textBoxPublisher.Text,
                     textBoxDeveloper.Text,
@@ -181,10 +182,12 @@ namespace EmuLoader.Forms
                     textBoxTitlePicture.Text,
                     textBoxGameplayPicture.Text,
                     checkBoxSaveAsJpg.Checked,
-                    emulator);
+                    emulator) ;
 
                 RomBusiness.Set(SelectedRom);
                 XML.SaveXmlRoms();
+                XML.SaveXmlRomStatus();
+                XML.SaveXmlRomLabels();
                 Updated = true;
                 Close();
             }

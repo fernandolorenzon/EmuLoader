@@ -104,7 +104,7 @@ namespace EmuLoader.Core.Business
         }
 
         public static Rom SetRom(Rom rom, string id, string fileName,
-            string romName, string platform, string genre, List<RomLabel> labels, string publisher,
+            string romName, string platform, string genre, string status, List<RomLabel> labels, string publisher,
             string developer, string description, string year, string dbName,
             string rating, bool idLocked, bool changeZipName,
             string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
@@ -139,6 +139,8 @@ namespace EmuLoader.Core.Business
             rom.Name = romName;
 
             RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
+            RomLabelsBusiness.Set(rom, labels);
+            RomStatusBusiness.Set(rom, status);
 
             if (string.IsNullOrEmpty(rom.Id))
             {
