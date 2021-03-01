@@ -354,8 +354,9 @@ namespace EmuLoader.Forms
             
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                textBoxCommand.Text = Values.RetroarchCommand.Replace("[CORE]", RomFunctions.GetFileName(dialog.FileName));
-                FillEmuName();
+                var corename = RomFunctions.GetFileName(dialog.FileName);
+                textBoxCommand.Text = Values.RetroarchCommand.Replace("[CORE]", corename);
+                FillEmuName(corename);
             }
         }
 
@@ -470,7 +471,7 @@ namespace EmuLoader.Forms
             checkBoxUseRetroarch.CheckState = CheckState.Unchecked;
         }
 
-        private void FillEmuName()
+        private void FillEmuName(string corename = null)
         {
             if (textBoxEmuName.Text == "" && textBoxPath.Text != "")
             {
@@ -480,6 +481,11 @@ namespace EmuLoader.Forms
                     {
                         FileInfo file = new FileInfo(textBoxPath.Text);
                         textBoxEmuName.Text = file.Name.Replace(".exe", "");
+                        
+                        if (checkBoxUseRetroarch.Checked && textBoxEmuName.Text == "retroarch" && !string.IsNullOrEmpty(corename))
+                        {
+                            textBoxEmuName.Text += " (" + RomFunctions.GetFileNameNoExtension(corename).Replace("_libretro", "") + ")";
+                        }
                     }
                 }
             }
