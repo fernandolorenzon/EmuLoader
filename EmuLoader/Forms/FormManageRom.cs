@@ -39,6 +39,7 @@ namespace EmuLoader.Forms
             textBoxFileName.Text = rom.Path.Substring(rom.Path.LastIndexOf("\\") + 1);
             textBoxRomName.Text = rom.Name;
             textBoxDBName.Text = rom.DBName;
+            textBoxSeries.Text = rom.Series;
             textBoxPublisher.Text = rom.Publisher;
             textBoxDeveloper.Text = rom.Developer;
             textBoxDescription.Text = rom.Description;
@@ -162,10 +163,11 @@ namespace EmuLoader.Forms
                     emulator = "";
                 }
 
-                SelectedRom = RomFunctions.SetRom(SelectedRom,
+                SelectedRom = RomBusiness.SetRom(SelectedRom,
                     textBoxId.Text,
                     textBoxFileName.Text,
                     textBoxRomName.Text,
+                    textBoxSeries.Text,
                     comboBoxPlatform.Text,
                     comboBoxGenre.Text,
                     comboBoxChooseStatus.Text,
@@ -182,9 +184,9 @@ namespace EmuLoader.Forms
                     textBoxTitlePicture.Text,
                     textBoxGameplayPicture.Text,
                     checkBoxSaveAsJpg.Checked,
-                    emulator) ;
+                    emulator);
 
-                RomBusiness.Set(SelectedRom);
+                
                 XML.SaveXmlRoms();
                 XML.SaveXmlRomStatus();
                 XML.SaveXmlRomLabels();

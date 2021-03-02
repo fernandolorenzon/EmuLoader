@@ -24,6 +24,7 @@
         ColumnPlatform,
         ColumnFileName,
         ColumnRomDBName,
+        ColumnRomSeries,
         BoxArt,
         TitleArt,
         GameplayArt

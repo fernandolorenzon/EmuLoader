@@ -283,6 +283,27 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void showSeriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                columnSeries.Visible = showSeriesToolStripMenuItem.Checked;
+
+                if (updating) return;
+
+                ConfigBusiness.SetElementVisibility(Column.ColumnRomSeries, columnSeries.Visible);
+                XML.SaveXmlConfig();
+            }
+            catch (OperationCanceledException ioex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         private void showFilenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

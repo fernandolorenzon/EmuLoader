@@ -1,5 +1,4 @@
-﻿using EmuLoader.Core.Business;
-using EmuLoader.Core.Classes;
+﻿using EmuLoader.Core.Classes;
 using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,56 @@ namespace EmuLoader.Core.Business
     public static class RomBusiness
     {
         private static List<Rom> RomList { get; set; }
+
+        public static Rom SetRom(Rom rom, string id, string fileName,
+            string romName, string series, string platform, string genre, string status, List<RomLabel> labels, string publisher,
+            string developer, string description, string year, string dbName,
+            string rating, bool idLocked, bool changeZipName,
+            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
+        {
+            rom.RomLabels = null;
+
+            rom.Platform = string.IsNullOrEmpty(platform) ? null : PlatformBusiness.Get(platform);
+            rom.Genre = string.IsNullOrEmpty(genre) ? null : GenreBusiness.Get(genre);
+
+            rom.Publisher = publisher;
+            rom.Developer = developer;
+            rom.Description = description;
+            rom.YearReleased = year;
+            rom.DBName = dbName;
+            rom.Series = series;
+            rom.IdLocked = idLocked;
+            rom.Emulator = emulator;
+
+            float ratingParse = 0;
+
+            if (float.TryParse(rating, out ratingParse))
+            {
+                if (ratingParse > 0 && ratingParse <= 10)
+                {
+                    rom.Rating = ratingParse;
+                }
+            }
+
+            rom.Id = id;
+
+            RomFunctions.RenameRomPictures(rom, fileName);
+            RomFunctions.RenameRomFile(rom, fileName, changeZipName);
+            rom.Name = romName;
+
+            RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
+            RomLabelsBusiness.Set(rom, labels);
+            RomStatusBusiness.Set(rom, status);
+
+            if (string.IsNullOrEmpty(rom.Id))
+            {
+                rom.DBName = string.Empty;
+            }
+
+            Set(rom);
+
+            return rom;
+        }
 
         public static Rom NewRom(string path, Platform platform)
         {
@@ -85,6 +134,7 @@ namespace EmuLoader.Core.Business
                 var favorite = Functions.GetXmlAttribute(node, "Favorite");
                 rom.Favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
                 rom.Emulator = Functions.GetXmlAttribute(node, "Emulator");
+                rom.Series = Functions.GetXmlAttribute(node, "Series");
                 float result = 0;
 
                 if (float.TryParse(Functions.GetXmlAttribute(node, "Rating"), out result))
@@ -126,6 +176,7 @@ namespace EmuLoader.Core.Business
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Favorite", rom.Favorite.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", rom.Emulator);
+            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Series", rom.Series);
 
             return true;
         }
@@ -154,6 +205,7 @@ namespace EmuLoader.Core.Business
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Developer", newRom.Developer);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Description", newRom.Description);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", newRom.Emulator);
+            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Series", newRom.Series);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "IdLocked", newRom.IdLocked.ToString());
 
             return true;
@@ -194,6 +246,7 @@ namespace EmuLoader.Core.Business
             node.Attributes.Append(XML.xmlRoms.CreateAttribute("Developer"));
             node.Attributes.Append(XML.xmlRoms.CreateAttribute("Description"));
             node.Attributes.Append(XML.xmlRoms.CreateAttribute("Emulator"));
+            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Series"));
             return node;
         }
     }

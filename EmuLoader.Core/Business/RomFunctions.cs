@@ -103,53 +103,6 @@ namespace EmuLoader.Core.Business
             }
         }
 
-        public static Rom SetRom(Rom rom, string id, string fileName,
-            string romName, string platform, string genre, string status, List<RomLabel> labels, string publisher,
-            string developer, string description, string year, string dbName,
-            string rating, bool idLocked, bool changeZipName,
-            string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
-        {
-            rom.RomLabels = null;
-
-            rom.Platform = string.IsNullOrEmpty(platform) ? null : PlatformBusiness.Get(platform);
-            rom.Genre = string.IsNullOrEmpty(genre) ? null : GenreBusiness.Get(genre);
-
-            rom.Publisher = publisher;
-            rom.Developer = developer;
-            rom.Description = description;
-            rom.YearReleased = year;
-            rom.DBName = dbName;
-            rom.IdLocked = idLocked;
-            rom.Emulator = emulator;
-
-            float ratingParse = 0;
-
-            if (float.TryParse(rating, out ratingParse))
-            {
-                if (ratingParse > 0 && ratingParse <= 10)
-                {
-                    rom.Rating = ratingParse;
-                }
-            }
-
-            rom.Id = id;
-
-            RomFunctions.RenameRomPictures(rom, fileName);
-            RomFunctions.RenameRomFile(rom, fileName, changeZipName);
-            rom.Name = romName;
-
-            RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
-            RomLabelsBusiness.Set(rom, labels);
-            RomStatusBusiness.Set(rom, status);
-
-            if (string.IsNullOrEmpty(rom.Id))
-            {
-                rom.DBName = string.Empty;
-            }
-
-            return rom;
-        }
-
         public static void CopyDBName(string dbName, bool keepSuffix, string oldRomName, string oldFileName, out string newRomName, out string newFileName)
         {
             newRomName = "";
@@ -887,6 +840,30 @@ namespace EmuLoader.Core.Business
             }
 
             return result;
+        }
+
+
+        public static string FillEmuName(string name, string path, bool userRetroarch, string corename = null)
+        {
+            if (name == "" && path != "")
+            {
+                if (path.EndsWith(".exe"))
+                {
+                    if (File.Exists(path))
+                    {
+                        FileInfo file = new FileInfo(path);
+                        name = file.Name.Replace(".exe", "");
+
+                        if (userRetroarch && name == "retroarch" && !string.IsNullOrEmpty(corename))
+                        {
+                            name += " (" + RomFunctions.GetFileNameNoExtension(corename).Replace("_libretro", "") + ")";
+                            return name;
+                        }
+                    }
+                }
+            }
+
+            return name;
         }
     }
 }

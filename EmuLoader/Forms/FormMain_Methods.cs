@@ -91,6 +91,7 @@ namespace EmuLoader.Forms
             row.Cells[columnRomName.Index].Value = rom.Name;
             row.Cells[columnRomPath.Index].Value = rom.Path;
             row.Cells[columnRomDBName.Index].Value = rom.DBName;
+            row.Cells[columnSeries.Index].Value = rom.Series;
             row.Cells[columnFilename.Index].Value = rom.FileName;
             row.Cells[columnDeveloper.Index].Value = rom.Developer;
             row.Cells[columnPublisher.Index].Value = rom.Publisher;

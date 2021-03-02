@@ -89,7 +89,7 @@ namespace EmuLoader.Forms
                 textBoxCommand.Text = Values.DefaultCommand;
             }
 
-            FillEmuName();
+            textBoxEmuName.Text = RomFunctions.FillEmuName(textBoxEmuName.Text, textBoxPath.Text, checkBoxUseRetroarch.Checked);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -300,9 +300,9 @@ namespace EmuLoader.Forms
 
         private void checkBoxUseRetroarch_Click(object sender, EventArgs e)
         {
-            buttonSelectCore.Enabled = checkBoxUseRetroarch.Checked;
-            textBoxPath.Enabled = !checkBoxUseRetroarch.Checked;
-            textBoxCommand.Enabled = !checkBoxUseRetroarch.Checked;
+            //buttonSelectCore.Enabled = checkBoxUseRetroarch.Checked;
+            //textBoxPath.Enabled = !checkBoxUseRetroarch.Checked;
+            //textBoxCommand.Enabled = !checkBoxUseRetroarch.Checked;
 
             if (!checkBoxUseRetroarch.Checked)
             {
@@ -356,7 +356,7 @@ namespace EmuLoader.Forms
             {
                 var corename = RomFunctions.GetFileName(dialog.FileName);
                 textBoxCommand.Text = Values.RetroarchCommand.Replace("[CORE]", corename);
-                FillEmuName(corename);
+                textBoxEmuName.Text = RomFunctions.FillEmuName(textBoxEmuName.Text, textBoxPath.Text, checkBoxUseRetroarch.Checked, corename);
             }
         }
 
@@ -449,7 +449,7 @@ namespace EmuLoader.Forms
 
         private void buttonAddEmulator_Click(object sender, EventArgs e)
         {
-            FillEmuName();
+            textBoxEmuName.Text = RomFunctions.FillEmuName(textBoxEmuName.Text, textBoxPath.Text, checkBoxUseRetroarch.Checked);
 
             if (textBoxEmuName.Text == "" || textBoxPath.Text == "" || textBoxCommand.Text == "")
             {
@@ -469,26 +469,6 @@ namespace EmuLoader.Forms
             textBoxPath.Text = "";
             textBoxCommand.Text = "";
             checkBoxUseRetroarch.CheckState = CheckState.Unchecked;
-        }
-
-        private void FillEmuName(string corename = null)
-        {
-            if (textBoxEmuName.Text == "" && textBoxPath.Text != "")
-            {
-                if (textBoxPath.Text.EndsWith(".exe"))
-                {
-                    if (File.Exists(textBoxPath.Text))
-                    {
-                        FileInfo file = new FileInfo(textBoxPath.Text);
-                        textBoxEmuName.Text = file.Name.Replace(".exe", "");
-                        
-                        if (checkBoxUseRetroarch.Checked && textBoxEmuName.Text == "retroarch" && !string.IsNullOrEmpty(corename))
-                        {
-                            textBoxEmuName.Text += " (" + RomFunctions.GetFileNameNoExtension(corename).Replace("_libretro", "") + ")";
-                        }
-                    }
-                }
-            }
         }
 
         private void FillGridEmulators()

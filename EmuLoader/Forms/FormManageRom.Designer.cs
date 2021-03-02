@@ -33,6 +33,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.comboBoxChooseEmulator = new System.Windows.Forms.ComboBox();
+            this.labelChooseEmulator = new System.Windows.Forms.Label();
             this.comboBoxChooseStatus = new System.Windows.Forms.ComboBox();
             this.labelChooseStatus = new System.Windows.Forms.Label();
             this.buttonGetMAMEName = new System.Windows.Forms.Button();
@@ -99,8 +101,8 @@
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
-            this.labelChooseEmulator = new System.Windows.Forms.Label();
-            this.comboBoxChooseEmulator = new System.Windows.Forms.ComboBox();
+            this.textBoxSeries = new System.Windows.Forms.TextBox();
+            this.labelSeries = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -125,6 +127,8 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.textBoxSeries);
+            this.tabPageGeneral.Controls.Add(this.labelSeries);
             this.tabPageGeneral.Controls.Add(this.comboBoxChooseEmulator);
             this.tabPageGeneral.Controls.Add(this.labelChooseEmulator);
             this.tabPageGeneral.Controls.Add(this.comboBoxChooseStatus);
@@ -167,6 +171,23 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxChooseEmulator
+            // 
+            this.comboBoxChooseEmulator.FormattingEnabled = true;
+            this.comboBoxChooseEmulator.Location = new System.Drawing.Point(11, 538);
+            this.comboBoxChooseEmulator.Name = "comboBoxChooseEmulator";
+            this.comboBoxChooseEmulator.Size = new System.Drawing.Size(372, 21);
+            this.comboBoxChooseEmulator.TabIndex = 110;
+            // 
+            // labelChooseEmulator
+            // 
+            this.labelChooseEmulator.AutoSize = true;
+            this.labelChooseEmulator.Location = new System.Drawing.Point(8, 522);
+            this.labelChooseEmulator.Name = "labelChooseEmulator";
+            this.labelChooseEmulator.Size = new System.Drawing.Size(87, 13);
+            this.labelChooseEmulator.TabIndex = 109;
+            this.labelChooseEmulator.Text = "Choose Emulator";
             // 
             // comboBoxChooseStatus
             // 
@@ -455,15 +476,15 @@
             // 
             // textBoxFileName
             // 
-            this.textBoxFileName.Location = new System.Drawing.Point(179, 180);
+            this.textBoxFileName.Location = new System.Drawing.Point(124, 180);
             this.textBoxFileName.Name = "textBoxFileName";
-            this.textBoxFileName.Size = new System.Drawing.Size(204, 20);
+            this.textBoxFileName.Size = new System.Drawing.Size(130, 20);
             this.textBoxFileName.TabIndex = 90;
             // 
             // labelChangeFileName
             // 
             this.labelChangeFileName.AutoSize = true;
-            this.labelChangeFileName.Location = new System.Drawing.Point(176, 164);
+            this.labelChangeFileName.Location = new System.Drawing.Point(121, 164);
             this.labelChangeFileName.Name = "labelChangeFileName";
             this.labelChangeFileName.Size = new System.Drawing.Size(54, 13);
             this.labelChangeFileName.TabIndex = 89;
@@ -482,7 +503,7 @@
             // 
             this.textBoxRomName.Location = new System.Drawing.Point(6, 180);
             this.textBoxRomName.Name = "textBoxRomName";
-            this.textBoxRomName.Size = new System.Drawing.Size(167, 20);
+            this.textBoxRomName.Size = new System.Drawing.Size(112, 20);
             this.textBoxRomName.TabIndex = 88;
             // 
             // labelChangeRomName
@@ -541,7 +562,7 @@
             this.checkBoxChangeZippedName.AutoSize = true;
             this.checkBoxChangeZippedName.Checked = true;
             this.checkBoxChangeZippedName.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxChangeZippedName.Location = new System.Drawing.Point(179, 235);
+            this.checkBoxChangeZippedName.Location = new System.Drawing.Point(225, 212);
             this.checkBoxChangeZippedName.Name = "checkBoxChangeZippedName";
             this.checkBoxChangeZippedName.Size = new System.Drawing.Size(158, 17);
             this.checkBoxChangeZippedName.TabIndex = 73;
@@ -550,7 +571,7 @@
             // 
             // buttonCopyToRom
             // 
-            this.buttonCopyToRom.Location = new System.Drawing.Point(179, 206);
+            this.buttonCopyToRom.Location = new System.Drawing.Point(124, 206);
             this.buttonCopyToRom.Name = "buttonCopyToRom";
             this.buttonCopyToRom.Size = new System.Drawing.Size(75, 23);
             this.buttonCopyToRom.TabIndex = 71;
@@ -560,7 +581,7 @@
             // 
             // buttonCopyToFile
             // 
-            this.buttonCopyToFile.Location = new System.Drawing.Point(98, 206);
+            this.buttonCopyToFile.Location = new System.Drawing.Point(43, 206);
             this.buttonCopyToFile.Name = "buttonCopyToFile";
             this.buttonCopyToFile.Size = new System.Drawing.Size(75, 23);
             this.buttonCopyToFile.TabIndex = 70;
@@ -831,22 +852,21 @@
             this.pictureBoxBoxart.TabIndex = 92;
             this.pictureBoxBoxart.TabStop = false;
             // 
-            // labelChooseEmulator
+            // textBoxSeries
             // 
-            this.labelChooseEmulator.AutoSize = true;
-            this.labelChooseEmulator.Location = new System.Drawing.Point(8, 522);
-            this.labelChooseEmulator.Name = "labelChooseEmulator";
-            this.labelChooseEmulator.Size = new System.Drawing.Size(87, 13);
-            this.labelChooseEmulator.TabIndex = 109;
-            this.labelChooseEmulator.Text = "Choose Emulator";
+            this.textBoxSeries.Location = new System.Drawing.Point(260, 180);
+            this.textBoxSeries.Name = "textBoxSeries";
+            this.textBoxSeries.Size = new System.Drawing.Size(123, 20);
+            this.textBoxSeries.TabIndex = 112;
             // 
-            // comboBoxChooseEmulator
+            // labelSeries
             // 
-            this.comboBoxChooseEmulator.FormattingEnabled = true;
-            this.comboBoxChooseEmulator.Location = new System.Drawing.Point(11, 538);
-            this.comboBoxChooseEmulator.Name = "comboBoxChooseEmulator";
-            this.comboBoxChooseEmulator.Size = new System.Drawing.Size(372, 21);
-            this.comboBoxChooseEmulator.TabIndex = 110;
+            this.labelSeries.AutoSize = true;
+            this.labelSeries.Location = new System.Drawing.Point(257, 164);
+            this.labelSeries.Name = "labelSeries";
+            this.labelSeries.Size = new System.Drawing.Size(36, 13);
+            this.labelSeries.TabIndex = 111;
+            this.labelSeries.Text = "Series";
             // 
             // FormManageRom
             // 
@@ -947,5 +967,7 @@
         private System.Windows.Forms.Label labelChooseStatus;
         private System.Windows.Forms.ComboBox comboBoxChooseEmulator;
         private System.Windows.Forms.Label labelChooseEmulator;
+        private System.Windows.Forms.TextBox textBoxSeries;
+        private System.Windows.Forms.Label labelSeries;
     }
 }

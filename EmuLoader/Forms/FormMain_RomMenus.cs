@@ -15,6 +15,61 @@ namespace EmuLoader.Forms
     public partial class FormMain
     {
 
+        private void changeSeriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string selected = "";
+
+                List<Rom> romList = new List<Rom>();
+
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    romList.Add((Rom)row.Tag);
+                }
+
+                if (romList.Count == 1)
+                {
+                    selected = romList[0].Series;
+                }
+                else if (romList.Count > 1)
+                {
+                    selected = romList[0].Series;
+
+                    foreach (var rom in romList)
+                    {
+                        if (rom.Series != selected)
+                        {
+                            selected = "";
+                            break;
+                        }
+                    }
+                }
+
+                if (!FormSeries.ChooseSeries(selected, out selected)) return;
+
+                foreach (var rom in romList)
+                {
+                    rom.Series = selected;
+                    RomBusiness.Set(rom);
+                }
+
+                XML.SaveXmlRoms();
+
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    Rom rom = (Rom)row.Tag;
+                    row.Cells[columnSeries.Index].Value = rom.Series;
+                }
+
+                dataGridView.Refresh();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         private void changePlatformToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

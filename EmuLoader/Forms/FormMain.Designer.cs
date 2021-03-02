@@ -39,6 +39,7 @@
             this.buttonRomDeleteRomFromDisk = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripEditRom = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.favoriteUnfavoriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeSeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePlatformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeGenreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +67,7 @@
             this.showPathColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFilenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showRomDBNameColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPlatformColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGenreColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showStatusColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,6 +120,7 @@
             this.ColumnMissingPics = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomDBName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFilename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -182,14 +185,14 @@
             this.favoriteUnfavoriteToolStripMenuItem,
             this.buttonRomRemoveRom,
             this.buttonRomDeleteRomFromDisk,
+            this.changeSeriesToolStripMenuItem,
             this.changePlatformToolStripMenuItem,
             this.changeGenreToolStripMenuItem,
             this.changeStatusToolStripMenuItem,
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
-            this.contextMenuStripEditRom.OwnerItem = this.selectedRomsOptionsToolStripMenuItem;
-            this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 202);
+            this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 224);
             // 
             // favoriteUnfavoriteToolStripMenuItem
             // 
@@ -198,6 +201,14 @@
             this.favoriteUnfavoriteToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.favoriteUnfavoriteToolStripMenuItem.Text = "Favorite/Unfavorite";
             this.favoriteUnfavoriteToolStripMenuItem.Click += new System.EventHandler(this.favoriteUnfavoriteToolStripMenuItem_Click);
+            // 
+            // changeSeriesToolStripMenuItem
+            // 
+            this.changeSeriesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeSeriesToolStripMenuItem.Image")));
+            this.changeSeriesToolStripMenuItem.Name = "changeSeriesToolStripMenuItem";
+            this.changeSeriesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.changeSeriesToolStripMenuItem.Text = "Change Series";
+            this.changeSeriesToolStripMenuItem.Click += new System.EventHandler(this.changeSeriesToolStripMenuItem_Click);
             // 
             // changePlatformToolStripMenuItem
             // 
@@ -410,6 +421,7 @@
             this.showPathColumnToolStripMenuItem,
             this.showFilenameToolStripMenuItem,
             this.showRomDBNameColumnToolStripMenuItem,
+            this.showSeriesToolStripMenuItem,
             this.showPlatformColumnToolStripMenuItem,
             this.showGenreColumnToolStripMenuItem,
             this.showStatusColumnToolStripMenuItem,
@@ -459,6 +471,16 @@
             this.showRomDBNameColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showRomDBNameColumnToolStripMenuItem.Text = "Show DB Rom Name Column";
             this.showRomDBNameColumnToolStripMenuItem.Click += new System.EventHandler(this.showRomDBNameColumnToolStripMenuItem_Click);
+            // 
+            // showSeriesToolStripMenuItem
+            // 
+            this.showSeriesToolStripMenuItem.Checked = true;
+            this.showSeriesToolStripMenuItem.CheckOnClick = true;
+            this.showSeriesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showSeriesToolStripMenuItem.Name = "showSeriesToolStripMenuItem";
+            this.showSeriesToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.showSeriesToolStripMenuItem.Text = "Show Series";
+            this.showSeriesToolStripMenuItem.Click += new System.EventHandler(this.showSeriesToolStripMenuItem_Click);
             // 
             // showPlatformColumnToolStripMenuItem
             // 
@@ -977,6 +999,7 @@
             this.ColumnMissingPics,
             this.columnRomName,
             this.columnRomDBName,
+            this.columnSeries,
             this.columnRomPath,
             this.columnFilename,
             this.columnPlatform,
@@ -1071,6 +1094,13 @@
             this.columnRomDBName.HeaderText = "DB Name";
             this.columnRomDBName.Name = "columnRomDBName";
             this.columnRomDBName.ReadOnly = true;
+            // 
+            // columnSeries
+            // 
+            this.columnSeries.FillWeight = 10F;
+            this.columnSeries.HeaderText = "Series";
+            this.columnSeries.Name = "columnSeries";
+            this.columnSeries.ReadOnly = true;
             // 
             // columnRomPath
             // 
@@ -1379,12 +1409,17 @@
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.ComboBox comboBoxStatus;
         private System.Windows.Forms.ToolStripMenuItem changeStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showStatusColumnToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBoxEmulators;
+        private System.Windows.Forms.PictureBox pictureBoxRun;
+        private System.Windows.Forms.ToolStripMenuItem showSeriesToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn columnIconMain;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFileExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIncorrectPlatform;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMissingPics;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomDBName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnSeries;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFilename;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPlatform;
@@ -1395,8 +1430,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDeveloper;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnYearReleased;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRating;
-        private System.Windows.Forms.ToolStripMenuItem showStatusColumnToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBoxEmulators;
-        private System.Windows.Forms.PictureBox pictureBoxRun;
+        private System.Windows.Forms.ToolStripMenuItem changeSeriesToolStripMenuItem;
     }
 }

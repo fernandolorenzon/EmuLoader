@@ -49,6 +49,7 @@ namespace EmuLoader.Core.Models
         public bool Favorite { get; set; }
         public RomStatus Status { get; set; }
         public string Emulator { get; set; }
+        public string Series { get; set; }
 
         public Rom()
         {
