@@ -69,7 +69,7 @@ namespace EmuLoader.Core.Models
             labels[label.Name.ToLower()] = label;
             node.Attributes["Name"].Value = label.Name;
             node.Attributes["Color"].Value = label.Color.ToArgb().ToString();
-
+            XML.SaveXmlLabels();
             return true;
         }
 

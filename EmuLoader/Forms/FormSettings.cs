@@ -44,7 +44,6 @@ namespace EmuLoader.Forms
         {
             ConfigBusiness.SetFolder(Folder.Retroarch, textBoxRetroarchFolder.Text);
             ConfigBusiness.SetFolder(Folder.MAME, textBoxMameFolder.Text);
-            XML.SaveXmlConfig();
             Close();
         }
     }

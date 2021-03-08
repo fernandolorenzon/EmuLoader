@@ -25,20 +25,7 @@ namespace EmuLoader.Forms
         {
             selectedType = type;
 
-            if (type == typeof(Platform))
-            {
-                List<Platform> emus = PlatformBusiness.GetAll();
-                emus.Insert(0, new Platform());
-                comboBox.DataSource = emus;
-                comboBox.DisplayMember = "Name";
-                comboBox.ValueMember = "Name";
-                labelChoose.Text = "Choose Platform";
-                this.Text = "Choose Platform";
-                buttonCancel.Visible = false;
-                buttonClose.Text = "Cancel and close";
-                buttonAdd.Text = "Save and close";
-            }
-            else if (type == typeof(RomLabel))
+            if (type == typeof(RomLabel))
             {
                 List<RomLabel> labels = RomLabelBusiness.GetAll();
                 labels.Insert(0, new RomLabel());

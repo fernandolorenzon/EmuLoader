@@ -113,8 +113,8 @@ namespace EmuLoader.Forms
                 updating = false;
                 dataGridView.ClearSelection();
 
-                var height = XML.GetConfig("Height");
-                var width = XML.GetConfig("Width");
+                var height = ConfigBusiness.GetHeight();
+                var width = ConfigBusiness.GetWidth();
 
                 if (!string.IsNullOrEmpty(height) && !string.IsNullOrEmpty(width))
                 {
@@ -174,7 +174,6 @@ namespace EmuLoader.Forms
             filter.favorite = checkBoxFavorite.Checked;
 
             FilterFunctions.SaveFilter(filter);
-            XML.SaveXmlConfig();
         }
 
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
@@ -250,7 +249,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnPath, columnRomPath.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -271,7 +269,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnRomDBName, columnRomDBName.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -292,7 +289,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnRomSeries, columnSeries.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -313,7 +309,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnFileName, columnFilename.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -334,7 +329,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnPlatform, columnPlatform.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -355,7 +349,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnLabels, columnLabels.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -376,7 +369,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnGenre, columnGenre.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -397,7 +389,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnStatus, columnStatus.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -418,7 +409,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnDeveloper, columnDeveloper.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -439,7 +429,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnPublisher, columnPublisher.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -460,7 +449,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnYearReleased, columnYearReleased.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -481,7 +469,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.ColumnRating, columnRating.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -502,7 +489,6 @@ namespace EmuLoader.Forms
                 if (updating) return;
 
                 ConfigBusiness.SetElementVisibility(Column.PlatformsList, dataGridViewPlatforms.Visible);
-                XML.SaveXmlConfig();
             }
             catch (OperationCanceledException ioex)
             {
@@ -786,7 +772,6 @@ namespace EmuLoader.Forms
                     RomFunctions.RemoveInvalidRomsEntries();
                 }
 
-                XML.SaveXmlRoms();
                 FilterRoms();
             }
             catch (OperationCanceledException ioex)
@@ -1031,7 +1016,6 @@ namespace EmuLoader.Forms
 
                 pictureBoxBoxart.Visible = showBoxArtToolStripMenuItem.Checked;
                 ConfigBusiness.SetElementVisibility(Column.BoxArt, pictureBoxBoxart.Visible);
-                XML.SaveXmlConfig();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 FormMain_ResizeEnd(sender, e);
@@ -1057,7 +1041,6 @@ namespace EmuLoader.Forms
 
                 pictureBoxTitle.Visible = showTitleToolStripMenuItem.Checked;
                 ConfigBusiness.SetElementVisibility(Column.TitleArt, pictureBoxTitle.Visible);
-                XML.SaveXmlConfig();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 FormMain_ResizeEnd(sender, e);
@@ -1083,7 +1066,6 @@ namespace EmuLoader.Forms
 
                 pictureBoxGameplay.Visible = showGameplayArtToolStripMenuItem.Checked;
                 ConfigBusiness.SetElementVisibility(Column.GameplayArt, pictureBoxGameplay.Visible);
-                XML.SaveXmlConfig();
 
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 FormMain_ResizeEnd(sender, e);
@@ -1188,9 +1170,8 @@ namespace EmuLoader.Forms
 
             try
             {
-                XML.SetConfig("Height", this.Height.ToString());
-                XML.SetConfig("Width", this.Width.ToString());
-                XML.SaveXmlConfig();
+                ConfigBusiness.SetHeight(Height.ToString());
+                ConfigBusiness.SetWidth(Width.ToString());
 
                 int imagesHeightTotal = pictureBoxBoxart.Size.Height * 3;
                 int heightLeft = flowLayoutPanelPictures.Size.Height - imagesHeightTotal;
@@ -1270,7 +1251,6 @@ namespace EmuLoader.Forms
                 if (FormChoose.ChoosePlatform(out selected))
                 {
                     RomFunctions.AddRomPacksFromDirectory(selected, open.SelectedPath);
-                    XML.SaveXmlRoms();
                     FilterRoms();
                 }
             }
@@ -1345,7 +1325,6 @@ namespace EmuLoader.Forms
 
             if (result)
             {
-                XML.SaveXmlRoms();
                 FilterRoms();
             }
         }
@@ -1358,8 +1337,7 @@ namespace EmuLoader.Forms
 
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 rom.Favorite = !rom.Favorite;
-                RomBusiness.Set(rom);
-                XML.SaveXmlRoms();
+                RomBusiness.SetRom(rom);
                 LoadGridRow(rom, dataGridView.SelectedRows[0]);
 
             }

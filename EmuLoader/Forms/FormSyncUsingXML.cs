@@ -65,7 +65,7 @@ namespace EmuLoader.Forms
                 XmlDocument doc = new XmlDocument();
                 doc.Load(textBoxXMLPath.Text);
 
-                var roms = RomBusiness.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text);
+                var roms = RomBusiness.GetAll().Where(x => x.Platform != null && x.Platform.Name == comboBoxPlatform.Text).ToList();
                 XmlNode list = doc.ChildNodes[1];
 
                 int count = 0;
@@ -167,8 +167,6 @@ namespace EmuLoader.Forms
                             }
                         }
 
-                        RomBusiness.Set(rom);
-
                         if (updated)
                         {
                             count++;
@@ -177,7 +175,7 @@ namespace EmuLoader.Forms
                     }
                 }
 
-                XML.SaveXmlRoms();
+                RomBusiness.SetRom(roms);
                 FormCustomMessage.ShowSuccess(count + " roms updated");
             }
             catch (Exception ex)
@@ -196,7 +194,6 @@ namespace EmuLoader.Forms
             }
             finally
             {
-                XML.SaveXmlRoms();
             }
         }
 

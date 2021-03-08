@@ -34,6 +34,7 @@ namespace EmuLoader.Forms
 
             var roms = RomBusiness.GetAll(PlatformBusiness.Get(comboBoxPlatform.Text));
             int count = 0;
+            List<Rom> romsUpdate = new List<Rom>();
 
             foreach (var rom in roms)
             {
@@ -54,14 +55,14 @@ namespace EmuLoader.Forms
                     rom.Developer = "";
                     rom.Rating = 0;
 
-                    RomBusiness.Set(rom);
+                    romsUpdate.Add(rom);
 
                     count++;
                     Updated = true;
                 }
             }
 
-            XML.SaveXmlRoms();
+            RomBusiness.SetRom(romsUpdate);
 
             FormCustomMessage.ShowSuccess("Roms updated successfully! " + count.ToString() + " roms cleaned");
         }
@@ -78,6 +79,7 @@ namespace EmuLoader.Forms
                 Platform platform = PlatformBusiness.Get(comboBoxPlatform.Text);
                 var roms = RomBusiness.GetAll(platform);
                 int count = 0;
+                List<Rom> romsUpdate = new List<Rom>();
 
                 foreach (var rom in roms)
                 {
@@ -88,12 +90,12 @@ namespace EmuLoader.Forms
                     if (rom.Name != name)
                     {
                         rom.Name = name;
-                        RomBusiness.Set(rom);
+                        romsUpdate.Add(rom);
                         count++;
                     }
                 }
 
-                XML.SaveXmlRoms();
+                RomBusiness.SetRom(romsUpdate);
                 FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
                 Updated = true;
             }
@@ -120,6 +122,7 @@ namespace EmuLoader.Forms
                 Platform platform = PlatformBusiness.Get(comboBoxPlatform.Text);
                 var roms = RomBusiness.GetAll(platform);
                 int count = 0;
+                List<Rom> romsUpdate = new List<Rom>();
 
                 foreach (var rom in roms)
                 {
@@ -130,13 +133,13 @@ namespace EmuLoader.Forms
                         if (rom.Name != newname)
                         {
                             rom.Name = newname;
-                            RomBusiness.Set(rom);
+                            romsUpdate.Add(rom);
                             count++;
                         }
                     }
                 }
 
-                XML.SaveXmlRoms();
+                RomBusiness.SetRom(romsUpdate);
                 FormCustomMessage.ShowSuccess("Rom names updated successfully! Total:" + count.ToString());
                 Updated = true;
             }

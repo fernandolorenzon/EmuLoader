@@ -571,7 +571,6 @@
             this.Name = "FormPlatform";
             this.ShowInTaskbar = false;
             this.Text = "Platform Manager";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormEmulator_FormClosed);
             this.Load += new System.EventHandler(this.FormEmulator_Load);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.dataGridView, 0);

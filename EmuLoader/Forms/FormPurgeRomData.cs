@@ -113,11 +113,9 @@ namespace EmuLoader.Forms
                     {
                         item.Rating = 0;
                     }
-
-                    RomBusiness.Set(item);
                 }
 
-                XML.SaveXmlRoms();
+                RomBusiness.SetRom(Roms);
 
                 FormCustomMessage.ShowSuccess("Data purged successfully!");
                 comboBoxPlatform_SelectedIndexChanged(sender, e);

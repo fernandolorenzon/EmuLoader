@@ -33,6 +33,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.textBoxSeries = new System.Windows.Forms.TextBox();
+            this.labelSeries = new System.Windows.Forms.Label();
             this.comboBoxChooseEmulator = new System.Windows.Forms.ComboBox();
             this.labelChooseEmulator = new System.Windows.Forms.Label();
             this.comboBoxChooseStatus = new System.Windows.Forms.ComboBox();
@@ -82,8 +84,6 @@
             this.columnColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxGenre = new System.Windows.Forms.ComboBox();
             this.labelGenre = new System.Windows.Forms.Label();
-            this.comboBoxPlatform = new System.Windows.Forms.ComboBox();
-            this.labelChoosePlatform = new System.Windows.Forms.Label();
             this.tabPagePictures = new System.Windows.Forms.TabPage();
             this.checkBoxSaveAsJpg = new System.Windows.Forms.CheckBox();
             this.buttonFindGameplayPicture = new System.Windows.Forms.Button();
@@ -101,8 +101,6 @@
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
-            this.textBoxSeries = new System.Windows.Forms.TextBox();
-            this.labelSeries = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -162,8 +160,6 @@
             this.tabPageGeneral.Controls.Add(this.dataGridView);
             this.tabPageGeneral.Controls.Add(this.comboBoxGenre);
             this.tabPageGeneral.Controls.Add(this.labelGenre);
-            this.tabPageGeneral.Controls.Add(this.comboBoxPlatform);
-            this.tabPageGeneral.Controls.Add(this.labelChoosePlatform);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -171,6 +167,22 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // textBoxSeries
+            // 
+            this.textBoxSeries.Location = new System.Drawing.Point(260, 180);
+            this.textBoxSeries.Name = "textBoxSeries";
+            this.textBoxSeries.Size = new System.Drawing.Size(123, 20);
+            this.textBoxSeries.TabIndex = 112;
+            // 
+            // labelSeries
+            // 
+            this.labelSeries.AutoSize = true;
+            this.labelSeries.Location = new System.Drawing.Point(257, 164);
+            this.labelSeries.Name = "labelSeries";
+            this.labelSeries.Size = new System.Drawing.Size(36, 13);
+            this.labelSeries.TabIndex = 111;
+            this.labelSeries.Text = "Series";
             // 
             // comboBoxChooseEmulator
             // 
@@ -192,15 +204,15 @@
             // comboBoxChooseStatus
             // 
             this.comboBoxChooseStatus.FormattingEnabled = true;
-            this.comboBoxChooseStatus.Location = new System.Drawing.Point(259, 304);
+            this.comboBoxChooseStatus.Location = new System.Drawing.Point(205, 307);
             this.comboBoxChooseStatus.Name = "comboBoxChooseStatus";
-            this.comboBoxChooseStatus.Size = new System.Drawing.Size(124, 21);
+            this.comboBoxChooseStatus.Size = new System.Drawing.Size(178, 21);
             this.comboBoxChooseStatus.TabIndex = 108;
             // 
             // labelChooseStatus
             // 
             this.labelChooseStatus.AutoSize = true;
-            this.labelChooseStatus.Location = new System.Drawing.Point(256, 288);
+            this.labelChooseStatus.Location = new System.Drawing.Point(202, 291);
             this.labelChooseStatus.Name = "labelChooseStatus";
             this.labelChooseStatus.Size = new System.Drawing.Size(76, 13);
             this.labelChooseStatus.TabIndex = 107;
@@ -645,36 +657,19 @@
             // comboBoxGenre
             // 
             this.comboBoxGenre.FormattingEnabled = true;
-            this.comboBoxGenre.Location = new System.Drawing.Point(124, 304);
+            this.comboBoxGenre.Location = new System.Drawing.Point(6, 307);
             this.comboBoxGenre.Name = "comboBoxGenre";
-            this.comboBoxGenre.Size = new System.Drawing.Size(129, 21);
+            this.comboBoxGenre.Size = new System.Drawing.Size(193, 21);
             this.comboBoxGenre.TabIndex = 51;
             // 
             // labelGenre
             // 
             this.labelGenre.AutoSize = true;
-            this.labelGenre.Location = new System.Drawing.Point(121, 285);
+            this.labelGenre.Location = new System.Drawing.Point(3, 288);
             this.labelGenre.Name = "labelGenre";
             this.labelGenre.Size = new System.Drawing.Size(75, 13);
             this.labelGenre.TabIndex = 50;
             this.labelGenre.Text = "Choose Genre";
-            // 
-            // comboBoxPlatform
-            // 
-            this.comboBoxPlatform.FormattingEnabled = true;
-            this.comboBoxPlatform.Location = new System.Drawing.Point(8, 304);
-            this.comboBoxPlatform.Name = "comboBoxPlatform";
-            this.comboBoxPlatform.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxPlatform.TabIndex = 49;
-            // 
-            // labelChoosePlatform
-            // 
-            this.labelChoosePlatform.AutoSize = true;
-            this.labelChoosePlatform.Location = new System.Drawing.Point(3, 288);
-            this.labelChoosePlatform.Name = "labelChoosePlatform";
-            this.labelChoosePlatform.Size = new System.Drawing.Size(84, 13);
-            this.labelChoosePlatform.TabIndex = 48;
-            this.labelChoosePlatform.Text = "Choose Platform";
             // 
             // tabPagePictures
             // 
@@ -852,22 +847,6 @@
             this.pictureBoxBoxart.TabIndex = 92;
             this.pictureBoxBoxart.TabStop = false;
             // 
-            // textBoxSeries
-            // 
-            this.textBoxSeries.Location = new System.Drawing.Point(260, 180);
-            this.textBoxSeries.Name = "textBoxSeries";
-            this.textBoxSeries.Size = new System.Drawing.Size(123, 20);
-            this.textBoxSeries.TabIndex = 112;
-            // 
-            // labelSeries
-            // 
-            this.labelSeries.AutoSize = true;
-            this.labelSeries.Location = new System.Drawing.Point(257, 164);
-            this.labelSeries.Name = "labelSeries";
-            this.labelSeries.Size = new System.Drawing.Size(36, 13);
-            this.labelSeries.TabIndex = 111;
-            this.labelSeries.Text = "Series";
-            // 
             // FormManageRom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -929,8 +908,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnColor;
         private System.Windows.Forms.ComboBox comboBoxGenre;
         private System.Windows.Forms.Label labelGenre;
-        private System.Windows.Forms.ComboBox comboBoxPlatform;
-        private System.Windows.Forms.Label labelChoosePlatform;
         private System.Windows.Forms.TabPage tabPagePictures;
         private System.Windows.Forms.CheckBox checkBoxSaveAsJpg;
         private System.Windows.Forms.Button buttonFindGameplayPicture;

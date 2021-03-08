@@ -101,24 +101,13 @@ namespace EmuLoader.Forms
                 dataGridView.Rows.Add(row);
             }
 
-            LoadComboBoxPlatform();
             LoadComboBoxGenres();
             LoadComboBoxStatus();
 
-            comboBoxPlatform.SelectedValue = SelectedRom.Platform == null ? string.Empty : SelectedRom.Platform.Name;
             comboBoxGenre.SelectedValue = SelectedRom.Genre == null ? string.Empty : SelectedRom.Genre.Name;
             comboBoxChooseStatus.Text = SelectedRom.Status != null ? SelectedRom.Status.Status : "";
 
             LoadPictures();
-        }
-
-        private void LoadComboBoxPlatform()
-        {
-            List<Platform> platforms = PlatformBusiness.GetAll();
-            platforms.Insert(0, new Platform());
-            comboBoxPlatform.DataSource = platforms;
-            comboBoxPlatform.DisplayMember = "Name";
-            comboBoxPlatform.ValueMember = "Name";
         }
 
         private void LoadComboBoxGenres()
@@ -168,7 +157,6 @@ namespace EmuLoader.Forms
                     textBoxFileName.Text,
                     textBoxRomName.Text,
                     textBoxSeries.Text,
-                    comboBoxPlatform.Text,
                     comboBoxGenre.Text,
                     comboBoxChooseStatus.Text,
                     labels,
@@ -186,10 +174,6 @@ namespace EmuLoader.Forms
                     checkBoxSaveAsJpg.Checked,
                     emulator);
 
-                
-                XML.SaveXmlRoms();
-                XML.SaveXmlRomStatus();
-                XML.SaveXmlRomLabels();
                 Updated = true;
                 Close();
             }
@@ -457,7 +441,7 @@ namespace EmuLoader.Forms
 
             name = Functions.RemoveSubstring(name, '[', ']');
             name = Functions.RemoveSubstring(name, '(', ')');
-            var platform = PlatformBusiness.GetAll().Where(x => x.Name == comboBoxPlatform.SelectedValue.ToString()).FirstOrDefault();
+            var platform = PlatformBusiness.GetAll().Where(x => x.Name == labelPlatform.Text).FirstOrDefault();
 
             if (platform != null)
             {
@@ -465,7 +449,7 @@ namespace EmuLoader.Forms
             }
             else
             {
-                url = string.Format(url, name, comboBoxPlatform.SelectedValue);
+                url = string.Format(url, name, labelPlatform.Text);
             }
 
             ProcessStartInfo sInfo = new ProcessStartInfo(url);

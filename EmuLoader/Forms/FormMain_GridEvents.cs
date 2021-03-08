@@ -62,10 +62,6 @@ namespace EmuLoader.Forms
                 {
                     changeLabelsToolStripMenuItem_Click(sender, null);
                 }
-                else if (e.KeyData == Keys.P)
-                {
-                    changePlatformToolStripMenuItem_Click(sender, null);
-                }
             }
             catch (OperationCanceledException ioex)
             {

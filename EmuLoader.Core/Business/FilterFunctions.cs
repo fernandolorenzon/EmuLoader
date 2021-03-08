@@ -20,7 +20,7 @@ namespace EmuLoader.Core.Business
             XML.SetFilter("Year", filter.year);
             XML.SetFilter("Favorite", filter.favorite.ToString());
             XML.SetFilter("Rom", filter.rom);
-
+            XML.SaveXmlConfig();
             return true;
         }
 

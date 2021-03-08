@@ -73,7 +73,7 @@ namespace EmuLoader.Core.Business
             genres[genre.Name.ToLower()] = genre;
             node.Attributes["Name"].Value = genre.Name;
             node.Attributes["Color"].Value = genre.Color.ToArgb().ToString();
-
+            XML.SaveXmlGenres();
             return true;
         }
 
@@ -82,8 +82,9 @@ namespace EmuLoader.Core.Business
             foreach (var item in roms)
             {
                 item.Genre = genre;
-                RomBusiness.Set(item);
             }
+
+            RomBusiness.SetRom(roms);
 
             return true;
         }

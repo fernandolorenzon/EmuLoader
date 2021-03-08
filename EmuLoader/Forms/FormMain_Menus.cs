@@ -96,7 +96,6 @@ namespace EmuLoader.Forms
                 Platform platform = null;
                 FormChoose.ChoosePlatform(out platform);
                 RomFunctions.AddRomsFromDirectory(platform, open.SelectedPath);
-                XML.SaveXmlRoms();
                 FilterRoms();
             }
             catch (Exception ex)
@@ -144,7 +143,6 @@ namespace EmuLoader.Forms
                 Platform platform = null;
                 FormChoose.ChoosePlatform(out platform);
                 RomFunctions.AddRomsFiles(platform, open.FileNames);
-                XML.SaveXmlRoms();
 
                 FilterRoms();
             }

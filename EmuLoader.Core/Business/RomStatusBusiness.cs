@@ -44,7 +44,25 @@ namespace EmuLoader.Core.Models
             return (from r in result select r).ToList();
         }
 
-        public static bool Set(Rom rom, string status)
+        public static bool SetRomStatus(List<Rom> roms, string status)
+        {
+            foreach (var item in roms)
+            {
+                Set(item, status);
+            }
+            
+            XML.SaveXmlRomStatus();
+            return true;
+        }
+
+        public static bool SetRomStatus(Rom rom, string status)
+        {
+            var ret = Set(rom, status);
+            XML.SaveXmlRomStatus();
+            return ret;
+        }
+
+        private static bool Set(Rom rom, string status)
         {
             RomStatus romstatus = new RomStatus(rom.Platform.Name, rom.FileName, status);
             rom.Status = romstatus;
@@ -52,7 +70,25 @@ namespace EmuLoader.Core.Models
             return true;
         }
 
-        public static bool Set(RomStatus romstatus)
+        //public static bool SetRomStatus(List<RomStatus> romstatuses)
+        //{
+        //    foreach (var item in romstatuses)
+        //    {
+        //        Set(item);
+        //    }
+            
+        //    XML.SaveXmlRomStatus();
+        //    return true;
+        //}
+
+        public static bool SetRomStatus(RomStatus romstatus)
+        {
+            var ret = Set(romstatus);
+            XML.SaveXmlRomStatus();
+            return ret;
+        }
+
+        private static bool Set(RomStatus romstatus)
         {
             if (string.IsNullOrEmpty(romstatus.Status))
             {
@@ -75,6 +111,7 @@ namespace EmuLoader.Core.Models
                     romStatuses[romstatus.Key] = romstatus;
                 }
             }
+
             
             return true;
         }

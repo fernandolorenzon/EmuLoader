@@ -4,15 +4,15 @@ using System.Xml;
 
 namespace EmuLoader.Core.Classes
 {
-    public static class XML
+    internal static class XML
     {
-        public static XmlDocument xmlConfig;
-        public static XmlDocument xmlPlatforms;
-        public static XmlDocument xmlRoms;
-        public static XmlDocument xmlGenres;
-        public static XmlDocument xmlLabels;
-        public static XmlDocument xmlRomStatus;
-        public static XmlDocument xmlRomLabels;
+        internal static XmlDocument xmlConfig;
+        internal static XmlDocument xmlPlatforms;
+        internal static XmlDocument xmlRoms;
+        internal static XmlDocument xmlGenres;
+        internal static XmlDocument xmlLabels;
+        internal static XmlDocument xmlRomStatus;
+        internal static XmlDocument xmlRomLabels;
 
         #region -- General --
 
@@ -226,7 +226,7 @@ namespace EmuLoader.Core.Classes
             xmlRomLabels.Save(Values.xmlPath + "\\" + Values.xmlFileRomLabels);
         }
 
-        public static XmlDocument LoadXmlConfig()
+        internal static XmlDocument LoadXmlConfig()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileConfig;
             xmlConfig = new XmlDocument();
@@ -254,7 +254,7 @@ namespace EmuLoader.Core.Classes
             return xmlConfig;
         }
 
-        public static XmlDocument LoadXmlPlatforms()
+        internal static XmlDocument LoadXmlPlatforms()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFilePlatforms;
             xmlPlatforms = new XmlDocument();
@@ -282,7 +282,7 @@ namespace EmuLoader.Core.Classes
             return xmlPlatforms;
         }
 
-        public static XmlDocument LoadXmlRoms()
+        internal static XmlDocument LoadXmlRoms()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRoms;
             xmlRoms = new XmlDocument();
@@ -310,7 +310,7 @@ namespace EmuLoader.Core.Classes
             return xmlRoms;
         }
 
-        public static XmlDocument LoadXmlLabels()
+        internal static XmlDocument LoadXmlLabels()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileLabels;
             xmlLabels = new XmlDocument();
@@ -338,7 +338,7 @@ namespace EmuLoader.Core.Classes
             return xmlLabels;
         }
 
-        public static XmlDocument LoadXmlGenres()
+        internal static XmlDocument LoadXmlGenres()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileGenres;
             xmlGenres = new XmlDocument();
@@ -366,7 +366,7 @@ namespace EmuLoader.Core.Classes
             return xmlGenres;
         }
 
-        public static XmlDocument LoadXmlRomStatus()
+        internal static XmlDocument LoadXmlRomStatus()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRomStatus;
             xmlRomStatus = new XmlDocument();
@@ -394,7 +394,7 @@ namespace EmuLoader.Core.Classes
             return xmlRomStatus;
         }
 
-        public static XmlDocument LoadXmlRomLabels()
+        internal static XmlDocument LoadXmlRomLabels()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRomLabels;
             xmlRomLabels = new XmlDocument();
@@ -422,49 +422,49 @@ namespace EmuLoader.Core.Classes
             return xmlRomLabels;
         }
 
-        public static void SaveXmlConfig()
+        internal static void SaveXmlConfig()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileConfig;
             xmlConfig.Save(path);
         }
 
-        public static void SaveXmlPlatforms()
+        internal static void SaveXmlPlatforms()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFilePlatforms;
             xmlPlatforms.Save(path);
         }
 
-        public static void SaveXmlRoms()
+        internal static void SaveXmlRoms()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRoms;
             xmlRoms.Save(path);
         }
 
-        public static void SaveXmlGenres()
+        internal static void SaveXmlGenres()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileGenres;
             xmlGenres.Save(path);
         }
 
-        public static void SaveXmlLabels()
+        internal static void SaveXmlLabels()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileLabels;
             xmlLabels.Save(path);
         }
 
-        public static void SaveXmlRomStatus()
+        internal static void SaveXmlRomStatus()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRomStatus;
             xmlRomStatus.Save(path);
         }
 
-        public static void SaveXmlRomLabels()
+        internal static void SaveXmlRomLabels()
         {
             string path = Values.xmlPath + "\\" + Values.xmlFileRomLabels;
             xmlRomLabels.Save(path);
         }
 
-        public static XmlNode GetParentNode(XmlDocument xml, string elementName)
+        internal static XmlNode GetParentNode(XmlDocument xml, string elementName)
         {
             try
             {
@@ -485,7 +485,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- Config --
 
-        public static string GetConfig(string key)
+        internal static string GetConfig(string key)
         {
             try
             {
@@ -499,7 +499,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static bool SetConfig(string key, string value)
+        internal static bool SetConfig(string key, string value)
         {
             try
             {
@@ -520,6 +520,7 @@ namespace EmuLoader.Core.Classes
                 XmlAttribute attr = xmlConfig.CreateAttribute(key);
                 attr.Value = value;
                 config.Attributes.Append(attr);
+                XML.SaveXmlConfig();
                 return true;
             }
             catch
@@ -532,7 +533,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- Platform --
 
-        public static XmlNodeList GetPlatformNodes()
+        internal static XmlNodeList GetPlatformNodes()
         {
             try
             {
@@ -544,7 +545,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static XmlNode GetPlatformNode(string name)
+        internal static XmlNode GetPlatformNode(string name)
         {
             foreach (XmlNode node in GetPlatformNodes())
             {
@@ -557,7 +558,7 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        public static bool DeletePlatform(string name)
+        internal static bool DeletePlatform(string name)
         {
             XmlNode node = null;
 
@@ -583,7 +584,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- Label --
 
-        public static XmlNodeList GetLabelNodes()
+        internal static XmlNodeList GetLabelNodes()
         {
             try
             {
@@ -595,7 +596,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static XmlNode GetLabelNode(string name)
+        internal static XmlNode GetLabelNode(string name)
         {
             if (GetLabelNodes() == null)
             {
@@ -613,7 +614,7 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        public static bool DelLabel(string name)
+        internal static bool DelLabel(string name)
         {
             XmlNode node = null;
 
@@ -638,7 +639,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- Genre --
 
-        public static XmlNodeList GetGenreNodes()
+        internal static XmlNodeList GetGenreNodes()
         {
             try
             {
@@ -650,7 +651,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static XmlNode GetGenreNode(string name)
+        internal static XmlNode GetGenreNode(string name)
         {
             if (GetGenreNodes() == null)
             {
@@ -668,7 +669,7 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        public static bool DelGenre(string name)
+        internal static bool DelGenre(string name)
         {
             XmlNode node = null;
 
@@ -693,7 +694,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- Rom --
 
-        public static XmlNodeList GetRomNodes()
+        internal static XmlNodeList GetRomNodes()
         {
             try
             {
@@ -705,7 +706,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static XmlNode GetRomNode(string path)
+        internal static XmlNode GetRomNode(string path)
         {
             foreach (XmlNode node in GetRomNodes())
             {
@@ -718,7 +719,7 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        public static bool DelRom(string path)
+        internal static bool DelRom(string path)
         {
             XmlNode node = null;
 
@@ -744,7 +745,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- Filter --
 
-        public static string GetFilter(string key)
+        internal static string GetFilter(string key)
         {
             try
             {
@@ -758,7 +759,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static bool SetFilter(string key, string value)
+        internal static bool SetFilter(string key, string value)
         {
             try
             {
@@ -791,7 +792,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- RomStatus --
 
-        public static XmlNodeList GetRomStatusNodes()
+        internal static XmlNodeList GetRomStatusNodes()
         {
             try
             {
@@ -803,7 +804,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static XmlNode GetRomStatusNode(string platform, string rom)
+        internal static XmlNode GetRomStatusNode(string platform, string rom)
         {
             if (GetRomStatusNodes() == null)
             {
@@ -821,7 +822,7 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        public static bool DelRomStatus(string platform, string rom)
+        internal static bool DelRomStatus(string platform, string rom)
         {
             XmlNode node = null;
 
@@ -847,7 +848,7 @@ namespace EmuLoader.Core.Classes
 
         #region -- RomLabels --
 
-        public static XmlNodeList GetRomLabelsNodes()
+        internal static XmlNodeList GetRomLabelsNodes()
         {
             try
             {
@@ -859,7 +860,7 @@ namespace EmuLoader.Core.Classes
             }
         }
 
-        public static XmlNode GetRomLabelsNode(string platform, string rom)
+        internal static XmlNode GetRomLabelsNode(string platform, string rom)
         {
             if (GetRomLabelsNodes() == null)
             {
@@ -877,7 +878,7 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        public static bool DelRomLabels(string platform, string rom)
+        internal static bool DelRomLabels(string platform, string rom)
         {
             List<XmlNode> nodes = new List<XmlNode>();
 

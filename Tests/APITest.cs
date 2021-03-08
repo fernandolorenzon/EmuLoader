@@ -11,7 +11,6 @@ namespace Tests
         [TestMethod]
         public void GetGamesListJSONByPlatform_Test()
         {
-            XML.LoadXmlRoms();
             GenreBusiness.Fill();
             PlatformBusiness.Fill();
             var games = APIFunctions.GetGamesListJSONByPlatform("6");
@@ -21,7 +20,6 @@ namespace Tests
         [TestMethod]
         public void GetGamesListByPlatform_Test()
         {
-            XML.LoadXmlRoms();
             GenreBusiness.Fill();
             var games = APIFunctions.GetGamesListByPlatform("6", "");
 
@@ -31,7 +29,6 @@ namespace Tests
         [TestMethod]
         public void GetGameByName_Test()
         {
-            XML.LoadXmlRoms();
             GenreBusiness.Fill();
             var access = "";
             var games = APIFunctions.GetGameByName("136", "Super Mario World", out access);
@@ -42,7 +39,6 @@ namespace Tests
         [TestMethod]
         public void GetGameDetails_Test()
         {
-            XML.LoadXmlRoms();
             GenreBusiness.Fill();
             var access = "";
             var games = APIFunctions.GetGameDetails("136", new Platform(), out access);
@@ -53,7 +49,6 @@ namespace Tests
         [TestMethod]
         public void GetGameArtUrls_Test()
         {
-            XML.LoadXmlRoms();
             GenreBusiness.Fill();
             string box, title, gameplay = "";
             var access = "";

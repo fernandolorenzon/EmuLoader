@@ -102,7 +102,6 @@ namespace EmuLoader.Forms
                     int count3 = 0;
 
                     count = syncRomsCount;
-                    XML.SaveXmlRoms();
 
                     if (!checkBoxBasicSync.Checked)
                     {
@@ -113,12 +112,8 @@ namespace EmuLoader.Forms
                             count2 = syncRomsCount;
                         }
 
-                        XML.SaveXmlRoms();
-
                         SetPictures();
                         count3 = syncRomsCount;
-
-                        XML.SaveXmlRoms();
                     }
 
                     progressBar.Invoke((MethodInvoker)delegate
@@ -176,11 +171,10 @@ namespace EmuLoader.Forms
             {
                 item.IdLocked = true;
                 item.Id = string.Empty;
-                RomBusiness.Set(item);
                 progressBar.Value++;
             }
 
-            XML.SaveXmlRoms();
+            RomBusiness.SetRom(roms);
             FormCustomMessage.ShowSuccess(string.Format("{0} rom Ids locked successfully!", roms.Count));
         }
 
@@ -202,11 +196,10 @@ namespace EmuLoader.Forms
             foreach (var item in roms)
             {
                 item.IdLocked = false;
-                RomBusiness.Set(item);
                 progressBar.Value++;
             }
 
-            XML.SaveXmlRoms();
+            RomBusiness.SetRom(roms);
             FormCustomMessage.ShowSuccess(string.Format("{0} rom Ids unlocked successfully!", roms.Count));
         }
 
@@ -218,6 +211,7 @@ namespace EmuLoader.Forms
             ThreadStopped = false;
             bool found = false;
             string gameNameToDelete = string.Empty;
+            List<Rom> romList = new List<Rom>();
 
             foreach (var rom in notSyncedRoms)
             {
@@ -238,6 +232,7 @@ namespace EmuLoader.Forms
                 if (StopThread)
                 {
                     StopThread = false;
+                    RomBusiness.SetRom(romList);
                     Thread.CurrentThread.Abort();
                     comboBoxPlatform_SelectedIndexChanged(null, new EventArgs());
                 }
@@ -276,7 +271,7 @@ namespace EmuLoader.Forms
                         {
                             syncRomsCount++;
                             LogMessage("ID AND YEAR SET - " + rom.Name);
-                            RomBusiness.Set(rom);
+                            romList.Add(rom);
                             updated = false;
                         }
 
@@ -326,13 +321,14 @@ namespace EmuLoader.Forms
                         {
                             syncRomsCount++;
                             LogMessage("ID AND YEAR SET - " + rom.Name);
-                            RomBusiness.Set(rom);
+                            romList.Add(rom);
                             updated = false;
                         }
                     }
                 }
             }
 
+            RomBusiness.SetRom(romList);
             ThreadStopped = true;
         }
 
@@ -343,12 +339,14 @@ namespace EmuLoader.Forms
             bool updated = false;
             syncRomsCount = 0;
             ThreadStopped = false;
+            List<Rom> romList = new List<Rom>();
 
             foreach (var rom in notSyncedRoms)
             {
                 if (StopThread)
                 {
                     StopThread = false;
+                    RomBusiness.SetRom(romList);
                     Thread.CurrentThread.Abort();
                     comboBoxPlatform_SelectedIndexChanged(null, new EventArgs());
                 }
@@ -407,12 +405,13 @@ namespace EmuLoader.Forms
                 if (updated)
                 {
                     syncRomsCount++;
-                    RomBusiness.Set(rom);
+                    romList.Add(rom);
                     updated = false;
                 }
-
-                ThreadStopped = true;
             }
+
+            RomBusiness.SetRom(romList);
+            ThreadStopped = true;
         }
 
 
@@ -427,8 +426,6 @@ namespace EmuLoader.Forms
             }
 
             syncRomsCount = 0;
-
-            var romsList = Roms.Select(x => x.Name).ToList();
 
             var notSyncedRoms = Roms.Where(x => !string.IsNullOrEmpty(x.Id) &&
                                     (missingBoxartPictures.Contains(x.Name) ||
@@ -627,7 +624,6 @@ namespace EmuLoader.Forms
             }
             catch
             {
-                XML.SaveXmlRoms();
             }
         }
 
@@ -656,7 +652,6 @@ namespace EmuLoader.Forms
             }
             finally
             {
-                XML.SaveXmlRoms();
             }
         }
 
@@ -670,7 +665,6 @@ namespace EmuLoader.Forms
             }
             finally
             {
-                XML.SaveXmlRoms();
             }
         }
 

@@ -112,6 +112,8 @@ namespace EmuLoader.Core.Models
             Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "UseRetroarch", platform.UseRetroarch.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "DefaultEmulator", platform.DefaultEmulator);
             SetPlatformEmulators(platform, node);
+
+            XML.SaveXmlPlatforms();
             return true;
         }
 
@@ -162,6 +164,11 @@ namespace EmuLoader.Core.Models
 
             var added = RomFunctions.AddRomsFromDirectory(platform, platform.DefaultRomPath);
             var addedAnyRomPack = RomFunctions.AddRomPacksFromDirectory(platform, platform.DefaultRomPath);
+
+            if (added || addedAnyRomPack)
+            {
+                XML.SaveXmlRoms();
+            }
 
             return added || addedAnyRomPack;
         }

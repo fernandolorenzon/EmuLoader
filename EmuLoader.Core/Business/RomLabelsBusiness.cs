@@ -43,7 +43,25 @@ namespace EmuLoader.Core.Models
             return (from r in result select r).ToList();
         }
 
-        public static bool Set(Rom rom, List<RomLabel> list)
+        public static bool SetRomLabel(Rom rom, List<RomLabel> list)
+        {
+            Set(rom, list);
+            XML.SaveXmlRomLabels();
+            return true;
+        }
+
+        public static bool SetRomLabel(List<Rom> roms, List<RomLabel> list)
+        {
+            foreach (var item in roms)
+            {
+                Set(item, list);
+            }
+            
+            XML.SaveXmlRomLabels();
+            return true;
+        }
+
+        private static bool Set(Rom rom, List<RomLabel> list)
         {
             if (list == null || list.Count == 0)
             {
@@ -72,6 +90,7 @@ namespace EmuLoader.Core.Models
 
                 rom.RomLabels = romlabels;
             }
+
             return true;
         }
 
@@ -108,7 +127,6 @@ namespace EmuLoader.Core.Models
                 var child = node.ChildNodes[0].AppendChild(XML.xmlRomLabels.CreateNode(XmlNodeType.Element, "Label", ""));
                 child.InnerText = item.Name;
             }
-
         }
 
         public static void Fill()

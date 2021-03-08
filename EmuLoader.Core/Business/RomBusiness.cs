@@ -13,14 +13,13 @@ namespace EmuLoader.Core.Business
         private static List<Rom> RomList { get; set; }
 
         public static Rom SetRom(Rom rom, string id, string fileName,
-            string romName, string series, string platform, string genre, string status, List<RomLabel> labels, string publisher,
+            string romName, string series, string genre, string status, List<RomLabel> labels, string publisher,
             string developer, string description, string year, string dbName,
             string rating, bool idLocked, bool changeZipName,
             string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
         {
             rom.RomLabels = null;
 
-            rom.Platform = string.IsNullOrEmpty(platform) ? null : PlatformBusiness.Get(platform);
             rom.Genre = string.IsNullOrEmpty(genre) ? null : GenreBusiness.Get(genre);
 
             rom.Publisher = publisher;
@@ -49,8 +48,8 @@ namespace EmuLoader.Core.Business
             rom.Name = romName;
 
             RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
-            RomLabelsBusiness.Set(rom, labels);
-            RomStatusBusiness.Set(rom, status);
+            RomLabelsBusiness.SetRomLabel(rom, labels);
+            RomStatusBusiness.SetRomStatus(rom, status);
 
             if (string.IsNullOrEmpty(rom.Id))
             {
@@ -149,7 +148,30 @@ namespace EmuLoader.Core.Business
             }
         }
 
-        public static bool Set(Rom rom)
+        public static bool SetRom(Rom rom)
+        {
+            var ret = Set(rom);
+
+            if (ret)
+            {
+                XML.SaveXmlRoms();
+            }
+
+            return ret;
+        }
+
+        public static bool SetRom(List<Rom> roms)
+        {
+            foreach (var item in roms)
+            {
+                Set(item);
+            }
+
+            XML.SaveXmlRoms();
+            return true;
+        }
+
+        private static bool Set(Rom rom)
         {
             XmlNode node = XML.GetRomNode(rom.Path);
 
@@ -177,41 +199,29 @@ namespace EmuLoader.Core.Business
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Favorite", rom.Favorite.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", rom.Emulator);
             Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Series", rom.Series);
-
+            
             return true;
         }
 
-        public static bool Reset(string oldPath, Rom newRom)
+        public static bool DeleteRom(List<Rom> roms)
         {
-            XmlNode node = XML.GetRomNode(oldPath);
-
-            if (node == null)
+            foreach (var item in roms)
             {
-                node = SetRomNode();
-
-                node.AppendChild(XML.xmlRoms.CreateNode(XmlNodeType.Element, "Labels", ""));
-                XML.GetParentNode(XML.xmlRoms, "Roms").AppendChild(node);
-                RomList.Add(newRom);
+                Delete(item);
             }
-
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Id", newRom.Id);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Name", newRom.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "DBName", newRom.DBName);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Path", newRom.Path);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Platform", newRom.Platform == null ? "" : newRom.Platform.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Genre", newRom.Genre == null ? "" : newRom.Genre.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "YearReleased", newRom.YearReleased);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Publisher", newRom.Publisher);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Developer", newRom.Developer);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Description", newRom.Description);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", newRom.Emulator);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Series", newRom.Series);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "IdLocked", newRom.IdLocked.ToString());
-
+            
+            XML.SaveXmlRoms();
             return true;
         }
 
-        public static bool Delete(Rom rom)
+        public static bool DeleteRom(Rom rom)
+        {
+            var ret = Delete(rom);
+            XML.SaveXmlRoms();
+            return ret;
+        }
+
+        private static bool Delete(Rom rom)
         {
             RomList.Remove(rom);
             return XML.DelRom(rom.Path);

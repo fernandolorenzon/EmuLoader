@@ -202,14 +202,6 @@ namespace EmuLoader.Forms
             Clean();
         }
 
-        private void FormEmulator_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (Updated)
-            {
-                XML.SaveXmlPlatforms();
-            }
-        }
-
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
             pictureBoxIcon.Image = null;

@@ -40,7 +40,6 @@
             this.contextMenuStripEditRom = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.favoriteUnfavoriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeSeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changePlatformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeGenreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -186,13 +185,12 @@
             this.buttonRomRemoveRom,
             this.buttonRomDeleteRomFromDisk,
             this.changeSeriesToolStripMenuItem,
-            this.changePlatformToolStripMenuItem,
             this.changeGenreToolStripMenuItem,
             this.changeStatusToolStripMenuItem,
             this.changeLabelsToolStripMenuItem,
             this.openFileToolStripMenuItem});
             this.contextMenuStripEditRom.Name = "contextMenuStripEditRom";
-            this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 224);
+            this.contextMenuStripEditRom.Size = new System.Drawing.Size(226, 202);
             // 
             // favoriteUnfavoriteToolStripMenuItem
             // 
@@ -209,14 +207,6 @@
             this.changeSeriesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.changeSeriesToolStripMenuItem.Text = "Change Series";
             this.changeSeriesToolStripMenuItem.Click += new System.EventHandler(this.changeSeriesToolStripMenuItem_Click);
-            // 
-            // changePlatformToolStripMenuItem
-            // 
-            this.changePlatformToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changePlatformToolStripMenuItem.Image")));
-            this.changePlatformToolStripMenuItem.Name = "changePlatformToolStripMenuItem";
-            this.changePlatformToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.changePlatformToolStripMenuItem.Text = "Change Platform";
-            this.changePlatformToolStripMenuItem.Click += new System.EventHandler(this.changePlatformToolStripMenuItem_Click);
             // 
             // changeGenreToolStripMenuItem
             // 
@@ -397,21 +387,21 @@
             // platformsToolStripMenuItem
             // 
             this.platformsToolStripMenuItem.Name = "platformsToolStripMenuItem";
-            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.platformsToolStripMenuItem.Text = "Platforms";
             this.platformsToolStripMenuItem.Click += new System.EventHandler(this.managePlatformToolStripButton_Click);
             // 
             // genresToolStripMenuItem
             // 
             this.genresToolStripMenuItem.Name = "genresToolStripMenuItem";
-            this.genresToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.genresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.genresToolStripMenuItem.Text = "Genres";
             this.genresToolStripMenuItem.Click += new System.EventHandler(this.manageGenreToolStripMenuItem_Click);
             // 
             // labelsToolStripMenuItem
             // 
             this.labelsToolStripMenuItem.Name = "labelsToolStripMenuItem";
-            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.labelsToolStripMenuItem.Text = "Labels";
             this.labelsToolStripMenuItem.Click += new System.EventHandler(this.manageLabelToolStripButton_Click);
             // 
@@ -1364,7 +1354,6 @@
         private System.Windows.Forms.Label labelTotalRomsCount;
         private System.Windows.Forms.ToolStripMenuItem batchAddPicturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageRomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changePlatformToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeGenreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeLabelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showBoxArtToolStripMenuItem;

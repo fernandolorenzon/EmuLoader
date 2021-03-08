@@ -51,59 +51,14 @@ namespace EmuLoader.Forms
                 foreach (var rom in romList)
                 {
                     rom.Series = selected;
-                    RomBusiness.Set(rom);
                 }
 
-                XML.SaveXmlRoms();
+                RomBusiness.SetRom(romList);
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     Rom rom = (Rom)row.Tag;
                     row.Cells[columnSeries.Index].Value = rom.Series;
-                }
-
-                dataGridView.Refresh();
-            }
-            catch (Exception ex)
-            {
-                FormCustomMessage.ShowError(ex.Message);
-            }
-        }
-
-        private void changePlatformToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Platform selected = null;
-
-                if (!FormChoose.ChoosePlatform(out selected)) return;
-
-                List<Rom> romList = new List<Rom>();
-
-                foreach (DataGridViewRow row in dataGridView.SelectedRows)
-                {
-                    romList.Add((Rom)row.Tag);
-                }
-
-                RomFunctions.ChangeRomsPlatform(romList, selected);
-                XML.SaveXmlRoms();
-
-                foreach (DataGridViewRow row in dataGridView.SelectedRows)
-                {
-                    Rom rom = (Rom)row.Tag;
-
-                    if (rom.Platform != null)
-                    {
-                        row.Cells[columnPlatform.Index].Value = rom.Platform.Name;
-                        row.Cells[columnPlatform.Index].Style.BackColor = rom.Platform.Color;
-                        row.Cells[columnPlatform.Index].Style.ForeColor = Functions.SetFontContrast(rom.Platform.Color);
-                    }
-                    else
-                    {
-                        row.Cells[columnPlatform.Index].Value = "";
-                        row.Cells[columnPlatform.Index].Style.BackColor = Color.White;
-                        row.Cells[columnPlatform.Index].Style.ForeColor = Color.Black;
-                    }
                 }
 
                 dataGridView.Refresh();
@@ -130,7 +85,6 @@ namespace EmuLoader.Forms
                 }
 
                 GenreBusiness.ChangeRomsGenre(romList, selected);
-                XML.SaveXmlRoms();
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -170,22 +124,15 @@ namespace EmuLoader.Forms
 
                 if (!FormChoose.ChooseStatus(statusvalue, out newstatus)) return;
 
+                List<Rom> romList = new List<Rom>();
+
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     var rom = (Rom)row.Tag;
-
-                    if (status == null)
-                    {
-                        RomStatusBusiness.Set(rom, newstatus);
-                    }
-                    else
-                    {
-                        status.Status = newstatus;
-                        RomStatusBusiness.Set(status);
-                    }
+                    romList.Add(rom);
                 }
-
-                XML.SaveXmlRomStatus();
+                
+                RomStatusBusiness.SetRomStatus(romList, newstatus);
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -231,17 +178,13 @@ namespace EmuLoader.Forms
 
                 if (!FormChooseList.ChooseLabel(roms, out selectedLabels)) return;
 
-                foreach (var rom in roms)
-                {
-                    RomLabelsBusiness.Set(rom, selectedLabels);
-                }
+                RomLabelsBusiness.SetRomLabel(roms, selectedLabels);
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
                     FillLabelCell((Rom)row.Tag, row);
                 }
 
-                XML.SaveXmlRomLabels();
                 dataGridView.Refresh();
             }
             catch (Exception ex)
@@ -282,10 +225,11 @@ namespace EmuLoader.Forms
 
                 foreach (var rom in roms)
                 {
-                    RomBusiness.Delete(rom);
                     RomFunctions.RemoveRomPics(rom);
                     FilteredRoms.Remove(rom);
                 }
+
+                RomBusiness.DeleteRom(roms);
 
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -293,7 +237,6 @@ namespace EmuLoader.Forms
                 }
 
                 labelTotalRomsCount.Text = FilteredRoms.Count.ToString();
-                XML.SaveXmlRoms();
             }
             catch (Exception ex)
             {
@@ -321,11 +264,10 @@ namespace EmuLoader.Forms
                     Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
 
                 dataGridView.Rows.Remove(row);
-                RomBusiness.Delete(rom);
+                RomBusiness.DeleteRom(rom);
                 RomFunctions.RemoveRomPics(rom);
                 FilteredRoms.Remove(rom);
                 labelTotalRomsCount.Text = FilteredRoms.Count.ToString();
-                XML.SaveXmlRoms();
             }
             catch (OperationCanceledException ioex)
             {

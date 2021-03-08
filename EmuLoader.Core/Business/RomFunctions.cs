@@ -65,7 +65,7 @@ namespace EmuLoader.Core.Business
                     File.Move(oldPath, newPath);
                 }
 
-                RomBusiness.Delete(rom);
+                RomBusiness.DeleteRom(rom);
                 rom.Path = newPath;
 
                 if (changeZipFileName && RomFunctions.GetFileExtension(newPath) == ".zip")
@@ -384,15 +384,19 @@ namespace EmuLoader.Core.Business
                 roms = RomBusiness.GetAll(platform);
             }
 
+            List<Rom> romList = new List<Rom>();
+
             foreach (Rom rom in roms)
             {
                 if (!File.Exists(rom.Path))
                 {
-                    RomBusiness.Delete(rom);
+                    romList.Add(rom);
                     RemoveRomPics(rom);
                     result = true;
                 }
             }
+
+            RomBusiness.DeleteRom(romList);
 
             return result;
         }
@@ -599,7 +603,7 @@ namespace EmuLoader.Core.Business
                 {
                     rom = RomBusiness.NewRom(path, platform);
                     addedAny = true;
-                    RomBusiness.Set(rom);
+                    RomBusiness.SetRom(rom);
                 }
             }
 
@@ -627,11 +631,12 @@ namespace EmuLoader.Core.Business
 
                 if (rom == null)
                 {
-                    rom = RomBusiness.NewRom(path, platform);
+                    romList.Add(RomBusiness.NewRom(path, platform));
                     addedAny = true;
-                    RomBusiness.Set(rom);
                 }
             }
+
+            RomBusiness.SetRom(romList);
 
             return addedAny;
         }
@@ -662,9 +667,8 @@ namespace EmuLoader.Core.Business
 
                         if (rom == null)
                         {
-                            rom = RomBusiness.NewRom(dir, platform);
+                            romList.Add(RomBusiness.NewRom(dir, platform));
                             addedAny = true;
-                            RomBusiness.Set(rom);
                         }
                     }
                 }
@@ -682,27 +686,16 @@ namespace EmuLoader.Core.Business
 
                             if (rom == null)
                             {
-                                rom = RomBusiness.NewRom(file, platform);
+                                romList.Add(RomBusiness.NewRom(file, platform));
                                 addedAny = true;
-                                RomBusiness.Set(rom);
                             }
                         }
                     }
                 }
             }
 
+            RomBusiness.SetRom(romList);
             return addedAny;
-        }
-
-        public static bool ChangeRomsPlatform(List<Rom> roms, Platform platform)
-        {
-            foreach (var item in roms)
-            {
-                item.Platform = platform;
-                RomBusiness.Set(item);
-            }
-
-            return true;
         }
 
         public static string GetMAMENameFromMameFolder(string filename)

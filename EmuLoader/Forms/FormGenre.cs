@@ -158,7 +158,7 @@ namespace EmuLoader.Forms
 
         private void FormGenre_FormClosed(object sender, FormClosedEventArgs e)
         {
-            XML.SaveXmlGenres();
+            
         }
 
         private void dataGridView_SelectionChanged(object sender, EventArgs e)

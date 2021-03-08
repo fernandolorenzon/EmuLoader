@@ -295,7 +295,6 @@ namespace EmuLoader.Forms
                 buttonRomRemoveRom.Enabled = false;
                 buttonRomDeleteRomFromDisk.Enabled = false;
                 manageRomToolStripMenuItem.Enabled = false;
-                changePlatformToolStripMenuItem.Enabled = false;
                 changeGenreToolStripMenuItem.Enabled = false;
                 changeLabelsToolStripMenuItem.Enabled = false;
                 openFileToolStripMenuItem.Enabled = false;
@@ -307,7 +306,6 @@ namespace EmuLoader.Forms
                 buttonRomRemoveRom.Enabled = true;
                 buttonRomDeleteRomFromDisk.Enabled = true;
                 manageRomToolStripMenuItem.Enabled = true;
-                changePlatformToolStripMenuItem.Enabled = true;
                 changeGenreToolStripMenuItem.Enabled = true;
                 changeLabelsToolStripMenuItem.Enabled = true;
                 openFileToolStripMenuItem.Enabled = true;
@@ -319,7 +317,6 @@ namespace EmuLoader.Forms
                 buttonRomRemoveRom.Enabled = true;
                 buttonRomDeleteRomFromDisk.Enabled = false;
                 manageRomToolStripMenuItem.Enabled = false;
-                changePlatformToolStripMenuItem.Enabled = true;
                 changeGenreToolStripMenuItem.Enabled = true;
                 changeLabelsToolStripMenuItem.Enabled = true;
                 openFileToolStripMenuItem.Enabled = false;
