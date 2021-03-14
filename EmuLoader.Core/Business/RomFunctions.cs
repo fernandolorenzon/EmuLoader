@@ -65,7 +65,7 @@ namespace EmuLoader.Core.Business
                     File.Move(oldPath, newPath);
                 }
 
-                RomBusiness.DeleteRom(rom);
+                //RomBusiness.DeleteRom(rom);
                 rom.Path = newPath;
 
                 if (changeZipFileName && RomFunctions.GetFileExtension(newPath) == ".zip")

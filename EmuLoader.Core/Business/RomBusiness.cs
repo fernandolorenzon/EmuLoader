@@ -18,10 +18,13 @@ namespace EmuLoader.Core.Business
             string rating, bool idLocked, bool changeZipName,
             string boxPath, string titlePath, string gameplayPath, bool saveAsJpg, string emulator)
         {
-            rom.RomLabels = null;
-
             rom.Genre = string.IsNullOrEmpty(genre) ? null : GenreBusiness.Get(genre);
 
+            string oldpath = rom.Path;
+            string oldfile = rom.FileName;
+
+            rom.Id = id;
+            rom.Name = romName;
             rom.Publisher = publisher;
             rom.Developer = developer;
             rom.Description = description;
@@ -41,23 +44,39 @@ namespace EmuLoader.Core.Business
                 }
             }
 
-            rom.Id = id;
-
             RomFunctions.RenameRomPictures(rom, fileName);
             RomFunctions.RenameRomFile(rom, fileName, changeZipName);
-            rom.Name = romName;
-
-            RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
-            RomLabelsBusiness.SetRomLabel(rom, labels);
-            RomStatusBusiness.SetRomStatus(rom, status);
 
             if (string.IsNullOrEmpty(rom.Id))
             {
                 rom.DBName = string.Empty;
             }
 
-            Set(rom);
+            if (oldpath != rom.Path)
+            {
+                Set(rom, oldpath);
 
+                if (rom.Status != null)
+                {
+                    RomStatusBusiness.DeleteRomStatus(rom.Status);
+                    rom.Status = null;
+                }
+
+                if (rom.RomLabels != null)
+                {
+                    RomLabelsBusiness.DeleteRomLabels(rom.Platform.Name, oldfile);
+                    rom.RomLabels = null;
+                }
+            }
+            else
+            {
+                Set(rom);
+            }
+
+            RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
+            RomLabelsBusiness.SetRomLabel(rom, labels);
+            RomStatusBusiness.SetRomStatus(rom, status);
+            XML.SaveXmlRoms();
             return rom;
         }
 
@@ -171,9 +190,18 @@ namespace EmuLoader.Core.Business
             return true;
         }
 
-        private static bool Set(Rom rom)
+        private static bool Set(Rom rom, string oldpath = null)
         {
-            XmlNode node = XML.GetRomNode(rom.Path);
+            XmlNode node = null;
+
+            if (oldpath == null)
+            {
+                node = XML.GetRomNode(rom.Path);
+            }
+            else
+            {
+                node = XML.GetRomNode(oldpath);
+            }
 
             if (node == null)
             {
@@ -224,6 +252,19 @@ namespace EmuLoader.Core.Business
         private static bool Delete(Rom rom)
         {
             RomList.Remove(rom);
+
+            if (rom.Status != null)
+            {
+                RomStatusBusiness.DeleteRomStatus(rom.Status);
+                XML.SaveXmlRomStatus();
+            }
+
+            if (rom.RomLabels != null)
+            {
+                RomLabelsBusiness.DeleteRomLabels(rom.Platform.Name, rom.FileName);
+                XML.SaveXmlRomLabels();
+            }
+
             return XML.DelRom(rom.Path);
         }
 

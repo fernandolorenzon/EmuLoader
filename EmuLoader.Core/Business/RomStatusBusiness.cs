@@ -70,17 +70,6 @@ namespace EmuLoader.Core.Models
             return true;
         }
 
-        //public static bool SetRomStatus(List<RomStatus> romstatuses)
-        //{
-        //    foreach (var item in romstatuses)
-        //    {
-        //        Set(item);
-        //    }
-            
-        //    XML.SaveXmlRomStatus();
-        //    return true;
-        //}
-
         public static bool SetRomStatus(RomStatus romstatus)
         {
             var ret = Set(romstatus);
@@ -88,15 +77,22 @@ namespace EmuLoader.Core.Models
             return ret;
         }
 
+        public static bool DeleteRomStatus(RomStatus romstatus)
+        {
+            XML.DelRomStatus(romstatus.Platform, romstatus.Rom);
+            if (romStatuses.ContainsKey(romstatus.Key))
+            {
+                romStatuses.Remove(romstatus.Key);
+            }
+
+            return true;
+        }
+
         private static bool Set(RomStatus romstatus)
         {
             if (string.IsNullOrEmpty(romstatus.Status))
             {
-                XML.DelRomStatus(romstatus.Platform, romstatus.Rom);
-                if (romStatuses.ContainsKey(romstatus.Key))
-                {
-                    romStatuses.Remove(romstatus.Key);
-                }
+                DeleteRomStatus(romstatus);
             }
             else
             {
@@ -111,7 +107,6 @@ namespace EmuLoader.Core.Models
                     romStatuses[romstatus.Key] = romstatus;
                 }
             }
-
             
             return true;
         }

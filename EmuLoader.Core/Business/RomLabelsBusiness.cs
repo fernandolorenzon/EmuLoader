@@ -61,15 +61,23 @@ namespace EmuLoader.Core.Models
             return true;
         }
 
+        public static bool DeleteRomLabels(string platform, string rom)
+        {
+            XML.DelRomLabels(platform, rom);
+            
+            if (romLabelsList.ContainsKey(platform.ToLower() + rom.ToLower()))
+            {
+                romLabelsList.Remove(platform.ToLower() + rom.ToLower());
+            }
+
+            return true;
+        }
+
         private static bool Set(Rom rom, List<RomLabel> list)
         {
             if (list == null || list.Count == 0)
             {
-                XML.DelRomLabels(rom.Platform.Name, rom.FileName);
-                if (romLabelsList.ContainsKey(rom.Platform.Name.ToLower() + rom.FileName.ToLower()))
-                {
-                    romLabelsList.Remove(rom.Platform.Name.ToLower() + rom.FileName.ToLower());
-                }
+                DeleteRomLabels(rom.Platform.Name, rom.FileName);
 
                 rom.RomLabels = null;
             }
