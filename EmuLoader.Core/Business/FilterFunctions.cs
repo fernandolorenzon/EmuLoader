@@ -126,15 +126,15 @@ namespace EmuLoader.Core.Business
 
                     if (filter.textType == "Starts with")
                     {
-                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().StartsWith(filter.text.ToLower()) || x.Series.ToLower().StartsWith(filter.text.ToLower())).ToList();
+                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().StartsWith(filter.text.ToLower()) || (x.Series != null && x.Series.ToLower().StartsWith(filter.text.ToLower()))).ToList();
                     }
                     else if (filter.textType == "Ends with")
                     {
-                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().EndsWith(filter.text.ToLower()) || x.Series.ToLower().EndsWith(filter.text.ToLower())).ToList();
+                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().EndsWith(filter.text.ToLower()) || (x.Series != null && x.Series.ToLower().EndsWith(filter.text.ToLower()))).ToList();
                     }
                     else
                     {
-                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.text.ToLower()) || x.Series.ToLower().Contains(filter.text.ToLower())).ToList();
+                        filterRoms = FilteredRoms.Where(x => x.Name.ToLower().Contains(filter.text.ToLower()) || (x.Series != null && x.Series.ToLower().Contains(filter.text.ToLower()))).ToList();
                     }
 
                     FilteredRoms = filterRoms;
