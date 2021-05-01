@@ -81,7 +81,7 @@ namespace EmuLoader.Forms
 
             if (textBoxDefaultRomExtensions.Text == string.Empty)
             {
-                textBoxDefaultRomExtensions.Text = ".zip";
+                textBoxDefaultRomExtensions.Text = "zip";
             }
 
             if (string.IsNullOrEmpty(textBoxCommand.Text))
@@ -137,7 +137,7 @@ namespace EmuLoader.Forms
             platform.ShowInFilter = checkBoxShowInFilters.Checked;
             platform.ShowInList = checkBoxShowInLinksList.Checked;
             platform.DefaultRomPath = textBoxDefaultRomPath.Text;
-            platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text;
+            platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text.Replace(".", "");
             platform.UseRetroarch = checkBoxUseRetroarch.Checked;
             platform.DefaultEmulator = defaultEmulator;
             platform.Emulators = emulators;
