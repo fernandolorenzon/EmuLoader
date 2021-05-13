@@ -107,6 +107,10 @@ namespace EmuLoader.Forms
                 }
 
                 checkBoxFavorite.Checked = filter.favorite;
+                checkBoxArcade.Checked = filter.arcade;
+                checkBoxConsole.Checked = filter.console;
+                checkBoxHandheld.Checked = filter.handheld;
+                checkBoxCD.Checked = filter.cd;
 
                 FilterRoms();
 
@@ -172,6 +176,10 @@ namespace EmuLoader.Forms
             filter.text = textBoxFilter.Text;
             filter.textType = comboBoxFilter.Text;
             filter.favorite = checkBoxFavorite.Checked;
+            filter.arcade = checkBoxArcade.Checked;
+            filter.console = checkBoxConsole.Checked;
+            filter.handheld = checkBoxHandheld.Checked;
+            filter.cd = checkBoxCD.Checked;
 
             FilterFunctions.SaveFilter(filter);
         }

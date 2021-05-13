@@ -140,6 +140,10 @@ namespace EmuLoader.Forms
             platform.DefaultRomExtensions = textBoxDefaultRomExtensions.Text.Replace(".", "");
             platform.UseRetroarch = checkBoxUseRetroarch.Checked;
             platform.DefaultEmulator = defaultEmulator;
+            platform.Arcade = checkBoxArcade.Checked;
+            platform.Console = checkBoxConsole.Checked;
+            platform.Handheld = checkBoxHandheld.Checked;
+            platform.CD = checkBoxCD.Checked;
             platform.Emulators = emulators;
 
             if (File.Exists(textBoxPlatformIcon.Text))
@@ -398,6 +402,10 @@ namespace EmuLoader.Forms
             textBoxDefaultRomExtensions.Text = string.Empty;
             textBoxPlatformName.Enabled = true;
             checkBoxUseRetroarch.Checked = false;
+            checkBoxArcade.Checked = false;
+            checkBoxConsole.Checked = false;
+            checkBoxHandheld.Checked = false;
+            checkBoxCD.Checked = false;
             defaultEmulator = "";
             checkBoxUseRetroarch.CheckState = CheckState.Unchecked;
         }
@@ -431,6 +439,10 @@ namespace EmuLoader.Forms
             textBoxDefaultRomPath.Text = platform.DefaultRomPath;
             textBoxDefaultRomExtensions.Text = platform.DefaultRomExtensions;
             defaultEmulator = platform.DefaultEmulator;
+            checkBoxArcade.Checked = platform.Arcade;
+            checkBoxConsole.Checked = platform.Console;
+            checkBoxHandheld.Checked = platform.Handheld;
+            checkBoxCD.Checked = platform.CD;
             emulators = platform.Emulators;
             dataGridViewEmulators.Rows.Clear();
             textBoxPlatformName.Enabled = false;

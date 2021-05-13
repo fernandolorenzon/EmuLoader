@@ -75,6 +75,10 @@
             this.buttonSelectCore = new System.Windows.Forms.Button();
             this.checkBoxUseRetroarch = new System.Windows.Forms.CheckBox();
             this.labelName = new System.Windows.Forms.Label();
+            this.checkBoxArcade = new System.Windows.Forms.CheckBox();
+            this.checkBoxConsole = new System.Windows.Forms.CheckBox();
+            this.checkBoxHandheld = new System.Windows.Forms.CheckBox();
+            this.checkBoxCD = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel1.SuspendLayout();
@@ -288,6 +292,10 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.checkBoxCD);
+            this.tabPageMain.Controls.Add(this.checkBoxHandheld);
+            this.tabPageMain.Controls.Add(this.checkBoxConsole);
+            this.tabPageMain.Controls.Add(this.checkBoxArcade);
             this.tabPageMain.Controls.Add(this.checkBoxShowInFilters);
             this.tabPageMain.Controls.Add(this.buttonColor);
             this.tabPageMain.Controls.Add(this.checkBoxShowInLinksList);
@@ -560,6 +568,46 @@
             this.labelName.TabIndex = 6;
             this.labelName.Text = "Emulator Name";
             // 
+            // checkBoxArcade
+            // 
+            this.checkBoxArcade.AutoSize = true;
+            this.checkBoxArcade.Location = new System.Drawing.Point(404, 156);
+            this.checkBoxArcade.Name = "checkBoxArcade";
+            this.checkBoxArcade.Size = new System.Drawing.Size(60, 17);
+            this.checkBoxArcade.TabIndex = 33;
+            this.checkBoxArcade.Text = "Arcade";
+            this.checkBoxArcade.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxConsole
+            // 
+            this.checkBoxConsole.AutoSize = true;
+            this.checkBoxConsole.Location = new System.Drawing.Point(470, 156);
+            this.checkBoxConsole.Name = "checkBoxConsole";
+            this.checkBoxConsole.Size = new System.Drawing.Size(64, 17);
+            this.checkBoxConsole.TabIndex = 34;
+            this.checkBoxConsole.Text = "Console";
+            this.checkBoxConsole.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHandheld
+            // 
+            this.checkBoxHandheld.AutoSize = true;
+            this.checkBoxHandheld.Location = new System.Drawing.Point(540, 156);
+            this.checkBoxHandheld.Name = "checkBoxHandheld";
+            this.checkBoxHandheld.Size = new System.Drawing.Size(72, 17);
+            this.checkBoxHandheld.TabIndex = 35;
+            this.checkBoxHandheld.Text = "Handheld";
+            this.checkBoxHandheld.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCD
+            // 
+            this.checkBoxCD.AutoSize = true;
+            this.checkBoxCD.Location = new System.Drawing.Point(618, 156);
+            this.checkBoxCD.Name = "checkBoxCD";
+            this.checkBoxCD.Size = new System.Drawing.Size(41, 17);
+            this.checkBoxCD.TabIndex = 36;
+            this.checkBoxCD.Text = "CD";
+            this.checkBoxCD.UseVisualStyleBackColor = true;
+            // 
             // FormPlatform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,5 +682,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEmuCommand;
+        private System.Windows.Forms.CheckBox checkBoxHandheld;
+        private System.Windows.Forms.CheckBox checkBoxConsole;
+        private System.Windows.Forms.CheckBox checkBoxArcade;
+        private System.Windows.Forms.CheckBox checkBoxCD;
     }
 }

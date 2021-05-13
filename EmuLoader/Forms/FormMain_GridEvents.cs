@@ -207,6 +207,62 @@ namespace EmuLoader.Forms
             }
         }
 
+        private void checkBoxArcade_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (updating) return;
+                FilterRoms();
+                FillPlatformFilter();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void checkBoxConsole_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (updating) return;
+                FilterRoms();
+                FillPlatformFilter();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void checkBoxHandheld_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (updating) return;
+                FilterRoms();
+                FillPlatformFilter();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
+        private void checkBoxCD_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (updating) return;
+                FilterRoms();
+                FillPlatformFilter();
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         #endregion
 
     }

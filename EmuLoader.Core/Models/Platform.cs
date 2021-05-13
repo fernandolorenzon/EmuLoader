@@ -25,6 +25,11 @@ namespace EmuLoader.Core.Models
         public List<Emulator> Emulators { get; set; }
 
         public string DefaultEmulator { get; set; }
+        public bool Arcade { get; set; }
+        public bool Console { get; set; }
+        public bool Handheld { get; set; }
+        public bool CD { get; set; }
+
         public Platform()
         {
             Name = "";

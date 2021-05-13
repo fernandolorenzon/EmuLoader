@@ -20,6 +20,10 @@ namespace EmuLoader.Core.Business
             XML.SetFilter("Year", filter.year);
             XML.SetFilter("Favorite", filter.favorite.ToString());
             XML.SetFilter("Rom", filter.rom);
+            XML.SetFilter("Arcade", filter.arcade.ToString());
+            XML.SetFilter("Console", filter.console.ToString());
+            XML.SetFilter("Handheld", filter.handheld.ToString());
+            XML.SetFilter("CD", filter.cd.ToString());
             XML.SaveXmlConfig();
             return true;
         }
@@ -37,6 +41,19 @@ namespace EmuLoader.Core.Business
             filter.year = XML.GetFilter("Year");
             var favorite = XML.GetFilter("Favorite");
             filter.favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
+
+            var arcade = XML.GetFilter("Arcade");
+            filter.arcade = string.IsNullOrEmpty(arcade) ? false : Convert.ToBoolean(arcade);
+
+            var console = XML.GetFilter("Console");
+            filter.console = string.IsNullOrEmpty(console) ? false : Convert.ToBoolean(console);
+
+            var handheld = XML.GetFilter("Handheld");
+            filter.handheld = string.IsNullOrEmpty(handheld) ? false : Convert.ToBoolean(handheld);
+
+            var cd = XML.GetFilter("CD");
+            filter.cd = string.IsNullOrEmpty(cd) ? false : Convert.ToBoolean(cd);
+
             filter.rom = XML.GetFilter("Rom");
 
             return filter;
@@ -66,6 +83,10 @@ namespace EmuLoader.Core.Business
                 string.IsNullOrEmpty(filter.year) &&
                 string.IsNullOrEmpty(filter.status) &&
                 !filter.favorite &&
+                filter.arcade &&
+                filter.console &&
+                filter.handheld &&
+                filter.cd &&
                 platforms.Count == 0)
             {
                 return FilteredRoms;
@@ -144,6 +165,61 @@ namespace EmuLoader.Core.Business
                 {
                     var filterRoms = FilteredRoms.Where(x => x.Favorite).ToList();
                     FilteredRoms = filterRoms;
+                }
+
+                if (filter.arcade || filter.console || filter.handheld || filter.cd)
+                {
+                    var filtered = new List<Rom>();
+
+                    if (filter.arcade)
+                    {
+                        var arcade = FilteredRoms.Where(x => x.Platform.Arcade).ToList();
+                        foreach (var item in arcade)
+                        {
+                            if (!filtered.Any(x => x.FileName == item.FileName))
+                            {
+                                filtered.Add(item);
+                            }
+                        }
+                    }
+
+                    if (filter.console)
+                    {
+                        var console = FilteredRoms.Where(x => x.Platform.Console).ToList();
+                        foreach (var item in console)
+                        {
+                            if (!filtered.Any(x => x.FileName == item.FileName))
+                            {
+                                filtered.Add(item);
+                            }
+                        }
+                    }
+                    
+                    if (filter.handheld)
+                    {
+                        var handheld = FilteredRoms.Where(x => x.Platform.Handheld).ToList();
+                        foreach (var item in handheld)
+                        {
+                            if (!filtered.Any(x => x.FileName == item.FileName))
+                            {
+                                filtered.Add(item);
+                            }
+                        }
+                    }
+                    
+                    if (filter.cd)
+                    {
+                        var cd = FilteredRoms.Where(x => x.Platform.CD).ToList();
+                        foreach (var item in cd)
+                        {
+                            if (!filtered.Any(x => x.FileName == item.FileName))
+                            {
+                                filtered.Add(item);
+                            }
+                        }
+                    }
+
+                    FilteredRoms = filtered;
                 }
             }
             catch (Exception ex)

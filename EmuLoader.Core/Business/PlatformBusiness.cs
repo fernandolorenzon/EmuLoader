@@ -32,6 +32,19 @@ namespace EmuLoader.Core.Models
                 platform.Icon = Functions.CreateBitmap(icon);
                 string useRetroarch = Functions.GetXmlAttribute(node, "UseRetroarch");
                 platform.UseRetroarch = string.IsNullOrEmpty(useRetroarch) ? false : Convert.ToBoolean(useRetroarch);
+                
+                string arcade = Functions.GetXmlAttribute(node, "Arcade");
+                platform.Arcade = string.IsNullOrEmpty(arcade) ? false : Convert.ToBoolean(arcade);
+
+                string console = Functions.GetXmlAttribute(node, "Console");
+                platform.Console = string.IsNullOrEmpty(console) ? false : Convert.ToBoolean(console);
+
+                string handheld = Functions.GetXmlAttribute(node, "Handheld");
+                platform.Handheld = string.IsNullOrEmpty(handheld) ? false : Convert.ToBoolean(handheld);
+
+                string cd = Functions.GetXmlAttribute(node, "CD");
+                platform.CD = string.IsNullOrEmpty(cd) ? false : Convert.ToBoolean(cd);
+
                 platforms.Add(platform.Name.ToLower(), platform);
 
                 if (node.ChildNodes[0] != null)
@@ -77,7 +90,32 @@ namespace EmuLoader.Core.Models
             }
 
             return (from r in result orderby r.Name select r).ToList();
+        }
 
+        public static List<Platform> GetAllFiltered(bool arcade, bool console, bool handheld, bool cd)
+        {
+            List<Platform> result = new List<Platform>();
+
+            if ((arcade && console && handheld && cd)
+                || (!arcade && !console && !handheld && !cd))
+            {
+                foreach (var item in platforms.Values)
+                {
+                    result.Add(item);
+                }
+            }
+            else
+            {
+                foreach (var item in platforms.Values)
+                {
+                    if ((arcade && item.Arcade) || (console && item.Console) || (handheld && item.Handheld) || (cd && item.CD))
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+
+            return (from r in result orderby r.Name select r).ToList();
         }
 
         public static bool Set(Platform platform)
@@ -97,6 +135,11 @@ namespace EmuLoader.Core.Models
                 node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("PictureNameByDisplay"));
                 node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("UseRetroarch"));
                 node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("DefaultEmulator"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Arcade"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Console"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("Handheld"));
+                node.Attributes.Append(XML.xmlPlatforms.CreateAttribute("CD"));
+
                 XML.GetParentNode(XML.xmlPlatforms, "Platforms").AppendChild(node);
                 platforms.Add(platform.Name.ToLower(), platform);
             }
@@ -111,6 +154,10 @@ namespace EmuLoader.Core.Models
             Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "DefaultRomExtensions", platform.DefaultRomExtensions);
             Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "UseRetroarch", platform.UseRetroarch.ToString());
             Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "DefaultEmulator", platform.DefaultEmulator);
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Arcade", platform.Arcade.ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Console", platform.Console.ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "Handheld", platform.Handheld.ToString());
+            Functions.CreateOrSetXmlAttribute(XML.xmlPlatforms, node, "CD", platform.CD.ToString());
             SetPlatformEmulators(platform, node);
 
             XML.SaveXmlPlatforms();

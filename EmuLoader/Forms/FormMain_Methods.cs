@@ -51,6 +51,10 @@ namespace EmuLoader.Forms
             filter.favorite = checkBoxFavorite.Checked;
             filter.text = filter.text.ToLower();
             filter.textType = comboBoxFilter.Text;
+            filter.arcade = checkBoxArcade.Checked;
+            filter.console = checkBoxConsole.Checked;
+            filter.handheld = checkBoxHandheld.Checked;
+            filter.cd = checkBoxCD.Checked;
 
             if (updating) return;
 
@@ -163,7 +167,7 @@ namespace EmuLoader.Forms
         {
             updating = true;
 
-            List<Platform> platforms = PlatformBusiness.GetAll().Where(x => x.ShowInFilter).ToList();
+            List<Platform> platforms = PlatformBusiness.GetAllFiltered(checkBoxArcade.Checked, checkBoxConsole.Checked, checkBoxHandheld.Checked, checkBoxCD.Checked).Where(x => x.ShowInFilter).ToList();
             platforms.Insert(0, new Platform());
             platforms.Insert(1, new Platform() { Name = "<none>" });
             comboBoxPlatform.DataSource = platforms;
