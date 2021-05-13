@@ -12,7 +12,7 @@ namespace EmuLoader.Core.Business
 {
     public static class APIFunctions
     {
-        public static string GetGamesListJSONByPlatform(string platformId)
+        public static string GetGamesListJSONByPlatform(string platformId, string platformName)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace EmuLoader.Core.Business
 
                 games = games.Replace("][", ",");
 
-                var platform = PlatformBusiness.GetAll().FirstOrDefault(x => x.Id == platformId);
+                var platform = PlatformBusiness.GetAll().FirstOrDefault(x => x.Name == platformName);
 
                 if (platform != null)
                 {
@@ -70,13 +70,13 @@ namespace EmuLoader.Core.Business
             }
         }
 
-        public static List<Rom> GetGamesListByPlatform(string platformId, string json)
+        public static List<Rom> GetGamesListByPlatform(string platformId, string json, string platformName)
         {
             try
             {
                 if (string.IsNullOrEmpty(json))
                 {
-                    json = GetGamesListJSONByPlatform(platformId);
+                    json = GetGamesListJSONByPlatform(platformId, platformName);
                 }
 
                 if (json == null)
@@ -188,7 +188,7 @@ namespace EmuLoader.Core.Business
                         if (platform != null)
                         {
                             var pjson = RomFunctions.GetPlatformJson(platform.Name);
-                            var list = GetGamesListByPlatform(platform.Id, pjson);
+                            var list = GetGamesListByPlatform(platform.Id, pjson, platform.Name);
 
                             return list.FirstOrDefault(x => x.Id == gameId);
                         }

@@ -13,7 +13,7 @@ namespace Tests
         {
             GenreBusiness.Fill();
             PlatformBusiness.Fill();
-            var games = APIFunctions.GetGamesListJSONByPlatform("6");
+            var games = APIFunctions.GetGamesListJSONByPlatform("6", "Snes");
 
             Assert.IsNotNull(games);
         }
@@ -21,7 +21,7 @@ namespace Tests
         public void GetGamesListByPlatform_Test()
         {
             GenreBusiness.Fill();
-            var games = APIFunctions.GetGamesListByPlatform("6", "");
+            var games = APIFunctions.GetGamesListByPlatform("6", "", "");
 
             Assert.IsNotNull(games);
         }

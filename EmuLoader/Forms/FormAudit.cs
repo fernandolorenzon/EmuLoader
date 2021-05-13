@@ -171,7 +171,7 @@ namespace EmuLoader.Forms
                     FormCustomMessage.ShowError("Json not found. Sync platform first");
                 }
 
-                var games = APIFunctions.GetGamesListByPlatform(platform.Id, json);
+                var games = APIFunctions.GetGamesListByPlatform(platform.Id, json, platform.Name);
                 var roms = RomBusiness.GetAll(platform);
 
                 StringBuilder builder = new StringBuilder("");

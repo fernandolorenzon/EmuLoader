@@ -75,7 +75,7 @@ namespace EmuLoader.Forms
 
                 var json = RomFunctions.GetPlatformJson(comboBoxPlatform.Text);
 
-                games = APIFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString(), json);
+                games = APIFunctions.GetGamesListByPlatform(comboBoxPlatform.SelectedValue.ToString(), json, comboBoxPlatform.Text);
 
                 if (games == null)
                 {

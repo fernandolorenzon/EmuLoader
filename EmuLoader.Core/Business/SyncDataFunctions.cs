@@ -22,7 +22,7 @@ namespace EmuLoader.Core.Business
                 json = File.ReadAllText(file);
             }
 
-            var games = APIFunctions.GetGamesListByPlatform(rom.Platform.Id, json);
+            var games = APIFunctions.GetGamesListByPlatform(rom.Platform.Id, json, rom.Platform.Name);
 
             if (games == null) return string.Empty;
 
