@@ -169,57 +169,11 @@ namespace EmuLoader.Core.Business
 
                 if (filter.arcade || filter.console || filter.handheld || filter.cd)
                 {
-                    var filtered = new List<Rom>();
-
-                    if (filter.arcade)
-                    {
-                        var arcade = FilteredRoms.Where(x => x.Platform.Arcade).ToList();
-                        foreach (var item in arcade)
-                        {
-                            if (!filtered.Any(x => x.FileName == item.FileName))
-                            {
-                                filtered.Add(item);
-                            }
-                        }
-                    }
-
-                    if (filter.console)
-                    {
-                        var console = FilteredRoms.Where(x => x.Platform.Console).ToList();
-                        foreach (var item in console)
-                        {
-                            if (!filtered.Any(x => x.FileName == item.FileName))
-                            {
-                                filtered.Add(item);
-                            }
-                        }
-                    }
-                    
-                    if (filter.handheld)
-                    {
-                        var handheld = FilteredRoms.Where(x => x.Platform.Handheld).ToList();
-                        foreach (var item in handheld)
-                        {
-                            if (!filtered.Any(x => x.FileName == item.FileName))
-                            {
-                                filtered.Add(item);
-                            }
-                        }
-                    }
-                    
-                    if (filter.cd)
-                    {
-                        var cd = FilteredRoms.Where(x => x.Platform.CD).ToList();
-                        foreach (var item in cd)
-                        {
-                            if (!filtered.Any(x => x.FileName == item.FileName))
-                            {
-                                filtered.Add(item);
-                            }
-                        }
-                    }
-
-                    FilteredRoms = filtered;
+                    FilteredRoms = FilteredRoms.Where(x => (filter.arcade && x.Platform.Arcade) 
+                        || (filter.console && x.Platform.Console)
+                        || (filter.handheld && x.Platform.Handheld)
+                        || (filter.cd && x.Platform.CD)
+                        ).ToList();
                 }
             }
             catch (Exception ex)

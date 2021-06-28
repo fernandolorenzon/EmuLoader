@@ -76,7 +76,7 @@ namespace EmuLoader.Core.Business
             RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
             RomLabelsBusiness.SetRomLabel(rom, labels);
             RomStatusBusiness.SetRomStatus(rom, status);
-            XML.SaveXmlRoms();
+            XML.SaveXmlRoms(rom.Platform.Name);
             return rom;
         }
 
@@ -133,37 +133,52 @@ namespace EmuLoader.Core.Business
         public static void Fill()
         {
             RomList = new List<Rom>();
-            var romNodes = XML.GetRomNodes();
-            foreach (XmlNode node in romNodes)
+            var platformnames = Directory.GetDirectories(Values.PlatformsPath);
+
+            if (!Directory.Exists(Values.PlatformsPath))
             {
-                Rom rom = new Rom();
-                rom.Path = Functions.GetXmlAttribute(node, "Path");
-                rom.Id = Functions.GetXmlAttribute(node, "Id");
-                rom.Name = Functions.GetXmlAttribute(node, "Name");
-                rom.DBName = Functions.GetXmlAttribute(node, "DBName");
-                rom.Platform = PlatformBusiness.Get(Functions.GetXmlAttribute(node, "Platform"));
-                rom.Genre = GenreBusiness.Get(Functions.GetXmlAttribute(node, "Genre"));
-                rom.Publisher = Functions.GetXmlAttribute(node, "Publisher");
-                rom.Developer = Functions.GetXmlAttribute(node, "Developer");
-                rom.YearReleased = Functions.GetXmlAttribute(node, "YearReleased");
-                rom.Description = Functions.GetXmlAttribute(node, "Description");
-                var idLocked = Functions.GetXmlAttribute(node, "IdLocked");
-                rom.IdLocked = string.IsNullOrEmpty(idLocked) ? false : Convert.ToBoolean(idLocked);
-                var favorite = Functions.GetXmlAttribute(node, "Favorite");
-                rom.Favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
-                rom.Emulator = Functions.GetXmlAttribute(node, "Emulator");
-                rom.Series = Functions.GetXmlAttribute(node, "Series");
-                float result = 0;
+                Directory.CreateDirectory(Values.PlatformsPath);
+            }
 
-                if (float.TryParse(Functions.GetXmlAttribute(node, "Rating"), out result))
+            foreach (var platformname in platformnames)
+            {
+                var name = platformname.Replace(Values.PlatformsPath + "\\", "");
+
+                var romNodes = XML.GetRomNodes(name);
+
+                if (romNodes == null) continue;
+
+                foreach (XmlNode node in romNodes)
                 {
-                    rom.Rating = result;
+                    Rom rom = new Rom();
+                    rom.Path = Functions.GetXmlAttribute(node, "Path");
+                    rom.Id = Functions.GetXmlAttribute(node, "Id");
+                    rom.Name = Functions.GetXmlAttribute(node, "Name");
+                    rom.DBName = Functions.GetXmlAttribute(node, "DBName");
+                    rom.Platform = PlatformBusiness.Get(Functions.GetXmlAttribute(node, "Platform"));
+                    rom.Genre = GenreBusiness.Get(Functions.GetXmlAttribute(node, "Genre"));
+                    rom.Publisher = Functions.GetXmlAttribute(node, "Publisher");
+                    rom.Developer = Functions.GetXmlAttribute(node, "Developer");
+                    rom.YearReleased = Functions.GetXmlAttribute(node, "YearReleased");
+                    rom.Description = Functions.GetXmlAttribute(node, "Description");
+                    var idLocked = Functions.GetXmlAttribute(node, "IdLocked");
+                    rom.IdLocked = string.IsNullOrEmpty(idLocked) ? false : Convert.ToBoolean(idLocked);
+                    var favorite = Functions.GetXmlAttribute(node, "Favorite");
+                    rom.Favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
+                    rom.Emulator = Functions.GetXmlAttribute(node, "Emulator");
+                    rom.Series = Functions.GetXmlAttribute(node, "Series");
+                    float result = 0;
+
+                    if (float.TryParse(Functions.GetXmlAttribute(node, "Rating"), out result))
+                    {
+                        rom.Rating = result;
+                    }
+
+                    rom.Status = RomStatusBusiness.Get(rom.Platform.Name, rom.FileName);
+                    rom.RomLabels = RomLabelsBusiness.Get(rom.Platform.Name, rom.FileName);
+
+                    RomList.Add(rom);
                 }
-
-                rom.Status = RomStatusBusiness.Get(rom.Platform.Name, rom.FileName);
-                rom.RomLabels = RomLabelsBusiness.Get(rom.Platform.Name, rom.FileName);
-
-                RomList.Add(rom);
             }
         }
 
@@ -173,7 +188,7 @@ namespace EmuLoader.Core.Business
 
             if (ret)
             {
-                XML.SaveXmlRoms();
+                XML.SaveXmlRoms(rom.Platform.Name);
             }
 
             return ret;
@@ -186,47 +201,81 @@ namespace EmuLoader.Core.Business
                 Set(item);
             }
 
-            XML.SaveXmlRoms();
+            var platforms = GetPlatforms(roms);
+
+            foreach (var item in platforms)
+            {
+                XML.SaveXmlRoms(item);
+            }
+            
             return true;
+        }
+
+        public static List<string> GetPlatforms(List<Rom> roms)
+        {
+            List<string> result = new List<string>();
+
+            foreach (var item in roms)
+            {
+                if (!result.Contains(item.Platform.Name))
+                {
+                    result.Add(item.Platform.Name);
+                }
+            }
+
+            return result;
+        }
+
+        private static void CreateRomXML(string platform)
+        {
+            XML.CreateXmlRoms(platform);
         }
 
         private static bool Set(Rom rom, string oldpath = null)
         {
+            if (!XML.xmlRoms.ContainsKey(rom.Platform.Name))
+            {
+                if (!File.Exists(Values.PlatformsPath + "\\" + rom.Platform.Name + "\\roms.xml"))
+                {
+                    CreateRomXML(rom.Platform.Name);
+                }
+            }
+
             XmlNode node = null;
+            var xmlRoms = XML.xmlRoms[rom.Platform.Name];
 
             if (oldpath == null)
             {
-                node = XML.GetRomNode(rom.Path);
+                node = XML.GetRomNode(rom.Platform.Name, rom.Path);
             }
             else
             {
-                node = XML.GetRomNode(oldpath);
+                node = XML.GetRomNode(rom.Platform.Name, oldpath);
             }
 
             if (node == null)
             {
-                node = SetRomNode();
-
-                node.AppendChild(XML.xmlRoms.CreateNode(XmlNodeType.Element, "Labels", ""));
-                XML.GetParentNode(XML.xmlRoms, "Roms").AppendChild(node);
+                node = SetRomNode(rom.Platform.Name);
+                var parent = XML.GetParentNode(xmlRoms, "Roms");
+                xmlRoms.ChildNodes[1].AppendChild(node);
                 RomList.Add(rom);
             }
 
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Id", rom.Id);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Name", rom.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "DBName", rom.DBName);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Path", rom.Path);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Platform", rom.Platform == null ? "" : rom.Platform.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Genre", rom.Genre == null ? "" : rom.Genre.Name);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "YearReleased", rom.YearReleased);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Publisher", rom.Publisher);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Developer", rom.Developer);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Description", rom.Description);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "IdLocked", rom.IdLocked.ToString());
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Favorite", rom.Favorite.ToString());
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Emulator", rom.Emulator);
-            Functions.CreateOrSetXmlAttribute(XML.xmlRoms, node, "Series", rom.Series);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Id", rom.Id);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Name", rom.Name);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "DBName", rom.DBName);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Path", rom.Path);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Platform", rom.Platform == null ? "" : rom.Platform.Name);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Genre", rom.Genre == null ? "" : rom.Genre.Name);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "YearReleased", rom.YearReleased);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Publisher", rom.Publisher);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Developer", rom.Developer);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Description", rom.Description);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "IdLocked", rom.IdLocked.ToString());
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Rating", rom.Rating == 0 ? string.Empty : rom.Rating.ToString("#.#"));
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Favorite", rom.Favorite.ToString());
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Emulator", rom.Emulator);
+            Functions.CreateOrSetXmlAttribute(xmlRoms, node, "Series", rom.Series);
             
             return true;
         }
@@ -237,15 +286,21 @@ namespace EmuLoader.Core.Business
             {
                 Delete(item);
             }
-            
-            XML.SaveXmlRoms();
+
+            var platforms = GetPlatforms(roms);
+
+            foreach (var item in platforms)
+            {
+                XML.SaveXmlRoms(item);
+            }
+
             return true;
         }
 
         public static bool DeleteRom(Rom rom)
         {
             var ret = Delete(rom);
-            XML.SaveXmlRoms();
+            XML.SaveXmlRoms(rom.Platform.Name);
             return ret;
         }
 
@@ -265,7 +320,7 @@ namespace EmuLoader.Core.Business
                 XML.SaveXmlRomLabels();
             }
 
-            return XML.DelRom(rom.Path);
+            return XML.DelRom(rom.Platform.Name, rom.Path); ;
         }
 
         public static bool IsRomPack(Rom rom)
@@ -284,20 +339,21 @@ namespace EmuLoader.Core.Business
             return false;
         }
 
-        private static XmlNode SetRomNode()
+        private static XmlNode SetRomNode(string platform)
         {
-            XmlNode node = XML.xmlRoms.CreateNode(XmlNodeType.Element, "Rom", "");
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Name"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("DBName"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Path"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Platform"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Genre"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("YearReleased"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Publisher"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Developer"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Description"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Emulator"));
-            node.Attributes.Append(XML.xmlRoms.CreateAttribute("Series"));
+            var xmlRoms = XML.xmlRoms[platform];
+            XmlNode node = xmlRoms.CreateNode(XmlNodeType.Element, "Rom", "");
+            node.Attributes.Append(xmlRoms.CreateAttribute("Name"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("DBName"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Path"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Platform"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Genre"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("YearReleased"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Publisher"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Developer"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Description"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Emulator"));
+            node.Attributes.Append(xmlRoms.CreateAttribute("Series"));
             return node;
         }
     }

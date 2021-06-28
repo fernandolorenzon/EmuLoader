@@ -221,8 +221,8 @@ namespace EmuLoader.Core.Business
             Directory.CreateDirectory(date);
 
             File.Copy(Values.xmlPath + "\\" + Values.xmlFileConfig, date + "\\" + Values.xmlFileConfig);
-            File.Copy(Values.xmlPath + "\\" + Values.xmlFilePlatforms, date + "\\" + Values.xmlFilePlatforms);
-            File.Copy(Values.xmlPath + "\\" + Values.xmlFileRoms, date + "\\" + Values.xmlFileRoms);
+            Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(Values.PlatformsPath, date);
+            //File.Copy(Values.xmlPath + "\\" + Values.xmlFileRoms, date + "\\" + Values.xmlFileRoms);
             File.Copy(Values.xmlPath + "\\" + Values.xmlFileGenres, date + "\\" + Values.xmlFileGenres);
             File.Copy(Values.xmlPath + "\\" + Values.xmlFileLabels, date + "\\" + Values.xmlFileLabels);
             System.IO.Compression.ZipFile.CreateFromDirectory(date, backupname);

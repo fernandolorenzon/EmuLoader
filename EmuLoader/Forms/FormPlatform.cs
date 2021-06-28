@@ -145,26 +145,7 @@ namespace EmuLoader.Forms
             platform.Handheld = checkBoxHandheld.Checked;
             platform.CD = checkBoxCD.Checked;
             platform.Emulators = emulators;
-
-            if (File.Exists(textBoxPlatformIcon.Text))
-            {
-                string platformPath = Values.PicturesPath + "\\Platforms";
-
-                if (!Directory.Exists(platformPath))
-                {
-                    Directory.CreateDirectory(platformPath);
-                }
-
-                FileInfo pic = new FileInfo(textBoxPlatformIcon.Text);
-                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".gif");
-                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".jpg");
-                File.Delete(platformPath + "\\" + textBoxPlatformName.Text + ".png");
-
-                string filename = pic.FullName.Substring(pic.FullName.LastIndexOf("\\") + 1);
-                string destinationFile = platformPath + "\\" + textBoxPlatformName.Text + pic.Extension;
-                pic.CopyTo(destinationFile, true);
-                pic = null;
-            }
+            platform.IconPath = textBoxPlatformIcon.Text;
 
             PlatformBusiness.Set(platform);
             AddToGrid(platform, index);

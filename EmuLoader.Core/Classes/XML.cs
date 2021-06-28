@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using System.Linq;
+using System;
 
 namespace EmuLoader.Core.Classes
 {
     internal static class XML
     {
         internal static XmlDocument xmlConfig;
-        internal static XmlDocument xmlPlatforms;
-        internal static XmlDocument xmlRoms;
+        internal static Dictionary<string, XmlDocument> xmlPlatforms;
+        internal static Dictionary<string, XmlDocument> xmlRoms;
         internal static XmlDocument xmlGenres;
         internal static XmlDocument xmlLabels;
         internal static XmlDocument xmlRomStatus;
@@ -55,6 +57,10 @@ namespace EmuLoader.Core.Classes
             XmlAttribute attrPublisher = xmlConfig.CreateAttribute("ColumnPublisher");
             attrLabels.Value = "true";
             config.Attributes.Append(attrPublisher);
+
+            XmlAttribute attrStatus = xmlConfig.CreateAttribute("ColumnStatus");
+            attrStatus.Value = "true";
+            config.Attributes.Append(attrStatus);
 
             XmlAttribute attrYearReleased = xmlConfig.CreateAttribute("ColumnYearReleased");
             attrYearReleased.Value = "true";
@@ -124,38 +130,40 @@ namespace EmuLoader.Core.Classes
             xmlConfig.Save(Values.xmlPath + "\\" + Values.xmlFileConfig);
         }
 
-        private static void CreateXmlPlatforms()
+        public static void CreateXmlPlatform(string platform)
         {
-            xmlPlatforms = new XmlDocument();
-            XmlDeclaration xmlDeclaration = xmlPlatforms.CreateXmlDeclaration("1.0", "utf-8", null);
-            xmlPlatforms.InsertBefore(xmlDeclaration, xmlPlatforms.DocumentElement);
-            xmlPlatforms.AppendChild(xmlPlatforms.CreateElement("Root"));
+            var xml = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xml.CreateXmlDeclaration("1.0", "utf-8", null);
+            xml.InsertBefore(xmlDeclaration, xml.DocumentElement);
+            xml.AppendChild(xml.CreateElement("Platform"));
 
-            xmlPlatforms.ChildNodes[1].AppendChild(xmlPlatforms.CreateElement("Platforms"));
+            var path = Values.PlatformsPath + "\\" + platform;
 
-            if (!Directory.Exists(Values.xmlPath))
+            if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(Values.xmlPath);
+                Directory.CreateDirectory(path);
             }
 
-            xmlPlatforms.Save(Values.xmlPath + "\\" + Values.xmlFilePlatforms);
+            xml.Save(path + "\\" + "config.xml");
+            xmlPlatforms.Add(platform, xml);
         }
 
-        private static void CreateXmlRoms()
+        public static void CreateXmlRoms(string platform)
         {
-            xmlRoms = new XmlDocument();
-            XmlDeclaration xmlDeclaration = xmlRoms.CreateXmlDeclaration("1.0", "utf-8", null);
-            xmlRoms.InsertBefore(xmlDeclaration, xmlRoms.DocumentElement);
-            xmlRoms.AppendChild(xmlRoms.CreateElement("Root"));
+            var xml = new XmlDocument();
+            XmlDeclaration xmlDeclaration = xml.CreateXmlDeclaration("1.0", "utf-8", null);
+            xml.InsertBefore(xmlDeclaration, xml.DocumentElement);
+            xml.AppendChild(xml.CreateElement("Roms"));
 
-            xmlRoms.ChildNodes[1].AppendChild(xmlRoms.CreateElement("Roms"));
+            var path = Values.PlatformsPath + "\\" + platform;
 
-            if (!Directory.Exists(Values.xmlPath))
+            if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(Values.xmlPath);
+                Directory.CreateDirectory(path);
             }
 
-            xmlRoms.Save(Values.xmlPath + "\\" + Values.xmlFileRoms);
+            xml.Save(path + "\\" + "roms.xml");
+            xmlRoms.Add(platform, xml);
         }
 
         private static void CreateXmlGenres()
@@ -254,57 +262,60 @@ namespace EmuLoader.Core.Classes
             return xmlConfig;
         }
 
-        internal static XmlDocument LoadXmlPlatforms()
+        internal static Dictionary<string, XmlDocument> LoadXmlPlatforms()
         {
-            string path = Values.xmlPath + "\\" + Values.xmlFilePlatforms;
-            xmlPlatforms = new XmlDocument();
+            var platforms = Directory.GetDirectories(Values.PlatformsPath);
+            xmlPlatforms = new Dictionary<string, XmlDocument>();
 
             try
             {
-                if (File.Exists(path))
+                foreach (var platform in platforms)
                 {
-                    xmlPlatforms.Load(path);
-                }
-                else
-                {
-                    CreateXmlPlatforms();
+                    var name = platform.Replace(Values.PlatformsPath + "\\", "");
+                    var files = Directory.GetFiles(platform).ToList();
+
+                    if (!files.Contains(platform + "\\" + Values.PlatformXML)) continue;
+
+                    var config = files.First(x => x == platform + "\\" + Values.PlatformXML);
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(config);
+                    xmlPlatforms.Add(name, doc);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                if (File.Exists(path))
-                {
-                    File.Delete(path);
-                    LoadXmlPlatforms();
-                }
+
             }
 
             return xmlPlatforms;
         }
 
-        internal static XmlDocument LoadXmlRoms()
+        internal static Dictionary<string, XmlDocument> LoadXmlRoms()
         {
+            var platforms = Directory.GetDirectories(Values.PlatformsPath);
             string path = Values.xmlPath + "\\" + Values.xmlFileRoms;
-            xmlRoms = new XmlDocument();
+            xmlRoms = new Dictionary<string, XmlDocument>();
 
             try
             {
-                if (File.Exists(path))
+                foreach (var platform in platforms)
                 {
-                    xmlRoms.Load(path);
-                }
-                else
-                {
-                    CreateXmlRoms();
+                    var name = platform.Replace(Values.PlatformsPath + "\\", "");
+                    var files = Directory.GetFiles(platform).ToList();
+
+                    if (!files.Contains(platform + "\\" + Values.PlatformXML)) continue;
+
+                    if (!files.Contains(platform + "\\" + Values.xmlFileRoms)) continue;
+
+                    var config = files.First(x => x == platform + "\\" + Values.xmlFileRoms);
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(config);
+                    xmlRoms.Add(name, doc);
                 }
             }
             catch
             {
-                if (File.Exists(path))
-                {
-                    File.Delete(path);
-                    LoadXmlRoms();
-                }
+
             }
 
             return xmlRoms;
@@ -428,16 +439,16 @@ namespace EmuLoader.Core.Classes
             xmlConfig.Save(path);
         }
 
-        internal static void SaveXmlPlatforms()
+        internal static void SaveXmlPlatforms(string platform)
         {
-            string path = Values.xmlPath + "\\" + Values.xmlFilePlatforms;
-            xmlPlatforms.Save(path);
+            string path = Values.PlatformsPath + "\\" + platform + "\\" + Values.PlatformXML;
+            xmlPlatforms[platform].Save(path);
         }
 
-        internal static void SaveXmlRoms()
+        internal static void SaveXmlRoms(string platform)
         {
-            string path = Values.xmlPath + "\\" + Values.xmlFileRoms;
-            xmlRoms.Save(path);
+            string path = Values.PlatformsPath + "\\" + platform + "\\" + Values.xmlFileRoms;
+            xmlRoms[platform].Save(path);
         }
 
         internal static void SaveXmlGenres()
@@ -533,51 +544,16 @@ namespace EmuLoader.Core.Classes
 
         #region -- Platform --
 
-        internal static XmlNodeList GetPlatformNodes()
+        public static XmlNode GetPlatformNode(string platform)
         {
-            try
-            {
-                return GetParentNode(xmlPlatforms, "Platforms").ChildNodes;
-            }
-            catch
+            if (!xmlPlatforms.ContainsKey(platform))
             {
                 return null;
             }
-        }
 
-        internal static XmlNode GetPlatformNode(string name)
-        {
-            foreach (XmlNode node in GetPlatformNodes())
-            {
-                if (node.Attributes["Name"].Value == name)
-                {
-                    return node;
-                }
-            }
+            if (xmlPlatforms[platform].ChildNodes.Count != 2) return null;
 
-            return null;
-        }
-
-        internal static bool DeletePlatform(string name)
-        {
-            XmlNode node = null;
-
-            foreach (XmlNode item in GetPlatformNodes())
-            {
-                if (item.Attributes["Name"].Value.ToLower() == name.ToLower())
-                {
-                    node = item;
-                    break;
-                }
-            }
-
-            if (node != null)
-            {
-                GetParentNode(xmlPlatforms, "Platforms").RemoveChild(node);
-                return true;
-            }
-
-            return false;
+            return xmlPlatforms[platform].ChildNodes[1];
         }
 
         #endregion
@@ -694,21 +670,25 @@ namespace EmuLoader.Core.Classes
 
         #region -- Rom --
 
-        internal static XmlNodeList GetRomNodes()
+        public static XmlNode GetRomNodes(string platform)
         {
-            try
-            {
-                return GetParentNode(xmlRoms, "Roms").ChildNodes;
-            }
-            catch
+            if (!xmlRoms.ContainsKey(platform))
             {
                 return null;
             }
+
+            if (xmlRoms[platform].ChildNodes.Count != 2) return null;
+
+            return xmlRoms[platform].ChildNodes[1];
         }
 
-        internal static XmlNode GetRomNode(string path)
+        public static XmlNode GetRomNode(string platform, string path)
         {
-            foreach (XmlNode node in GetRomNodes())
+            var nodes = GetRomNodes(platform);
+
+            if (nodes == null) return null;
+
+            foreach (XmlNode node in nodes)
             {
                 if (node.Attributes["Path"].Value == path)
                 {
@@ -719,11 +699,11 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        internal static bool DelRom(string path)
+        internal static bool DelRom(string platform, string path)
         {
             XmlNode node = null;
 
-            foreach (XmlNode item in GetRomNodes())
+            foreach (XmlNode item in GetRomNodes(platform))
             {
                 if (item.Attributes["Path"].Value == path)
                 {
@@ -734,7 +714,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode(xmlRoms, "Roms").RemoveChild(node);
+                GetParentNode(xmlRoms[platform], "Roms").RemoveChild(node);
                 return true;
             }
 

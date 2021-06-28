@@ -21,6 +21,7 @@ namespace EmuLoader.Core.Models
         public string Id { get; set; }
 
         public Bitmap Icon { get; set; }
+        public string IconPath { get; set; }
 
         public List<Emulator> Emulators { get; set; }
 

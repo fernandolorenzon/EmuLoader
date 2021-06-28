@@ -3,8 +3,11 @@ using EmuLoader.Core.Classes;
 using EmuLoader.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace EmuLoader.Forms
 {
@@ -197,6 +200,77 @@ namespace EmuLoader.Forms
             finally
             {
                 //FormWait.CloseWait();
+            }
+        }
+
+        private void buttonConvertPlatformsXML_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "XML|*.xml";
+            var result = dialog.ShowDialog();
+
+            if (result != DialogResult.OK) return;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(dialog.FileName);
+
+            foreach (XmlNode item in doc.ChildNodes[1].ChildNodes[0].ChildNodes)
+            {
+                var dir = Environment.CurrentDirectory + "\\dump\\" + item.Attributes["Name"].Value;
+                var path = dir + "\\config.xml";
+
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + Environment.NewLine;
+                xml += item.OuterXml;
+
+                File.WriteAllText(path, xml);
+            }
+        }
+
+        private void buttonConvertRomsXML_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "XML|roms.xml";
+            var result = dialog.ShowDialog();
+
+            if (result != DialogResult.OK) return;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(dialog.FileName);
+
+            Dictionary<string, StringBuilder> dic = new Dictionary<string, StringBuilder>();
+
+            foreach (XmlNode item in doc.ChildNodes[1].ChildNodes[0].ChildNodes)
+            {
+                var platform = item.Attributes["Platform"].Value;
+
+                if (!dic.ContainsKey(platform))
+                {
+                    StringBuilder sb = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + Environment.NewLine);
+                    sb.Append("<Roms>" + Environment.NewLine);
+                    dic.Add(platform, sb);
+                }
+
+                dic[platform].Append(item.OuterXml + Environment.NewLine);
+            }
+
+            foreach (var item in dic.Keys)
+            {
+                var dir = Environment.CurrentDirectory + "\\dump\\" + item;
+                var path = dir + "\\roms.xml";
+
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                dic[item].Append("</Roms>" + Environment.NewLine);
+
+                File.WriteAllText(path, dic[item].ToString());
             }
         }
     }

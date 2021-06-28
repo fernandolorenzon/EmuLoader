@@ -212,7 +212,7 @@ namespace EmuLoader.Forms
             try
             {
                 if (updating) return;
-                FilterRoms();
+                timerFilter.Start();
                 FillPlatformFilter();
             }
             catch (Exception ex)
@@ -226,7 +226,7 @@ namespace EmuLoader.Forms
             try
             {
                 if (updating) return;
-                FilterRoms();
+                timerFilter.Start();
                 FillPlatformFilter();
             }
             catch (Exception ex)
@@ -240,7 +240,7 @@ namespace EmuLoader.Forms
             try
             {
                 if (updating) return;
-                FilterRoms();
+                timerFilter.Start();
                 FillPlatformFilter();
             }
             catch (Exception ex)
@@ -254,7 +254,7 @@ namespace EmuLoader.Forms
             try
             {
                 if (updating) return;
-                FilterRoms();
+                timerFilter.Start();
                 FillPlatformFilter();
             }
             catch (Exception ex)

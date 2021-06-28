@@ -284,31 +284,31 @@ namespace EmuLoader.Core.Business
 
         public static string GetPlatformPicture(string platformName)
         {
-            string platformPicsPath = Values.PicturesPath + "\\Platforms\\";
-
-            if (File.Exists(platformPicsPath + platformName + ".ico"))
+            string platformPicsPath = Values.PlatformsPath + "\\" + platformName + "\\" + Values.PlatformIcon;
+            
+            if (File.Exists(platformPicsPath + ".ico"))
             {
-                return platformPicsPath + platformName + ".ico";
+                return platformPicsPath + ".ico";
             }
 
-            if (File.Exists(platformPicsPath + platformName + ".png"))
+            if (File.Exists(platformPicsPath + ".png"))
             {
-                return platformPicsPath + platformName + ".png";
+                return platformPicsPath + ".png";
             }
 
-            if (File.Exists(platformPicsPath + platformName + ".bmp"))
+            if (File.Exists(platformPicsPath + ".bmp"))
             {
-                return platformPicsPath + platformName + ".bmp";
+                return platformPicsPath + ".bmp";
             }
 
-            if (File.Exists(platformPicsPath + platformName + ".gif"))
+            if (File.Exists(platformPicsPath + ".gif"))
             {
-                return platformPicsPath + platformName + ".gif";
+                return platformPicsPath + ".gif";
             }
 
-            if (File.Exists(platformPicsPath + platformName + ".jpg"))
+            if (File.Exists(platformPicsPath + ".jpg"))
             {
-                return platformPicsPath + platformName + ".jpg";
+                return platformPicsPath + ".jpg";
             }
 
             return "";
@@ -320,7 +320,7 @@ namespace EmuLoader.Core.Business
 
             if (rom.Platform != null)
             {
-                result = Values.PicturesPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.FileNameNoExt;
+                result = Values.PlatformsPath + "\\" + rom.Platform.Name + "\\" + type + "\\" + rom.FileNameNoExt;
             }
 
             if (File.Exists(result + ".jpg"))
@@ -541,7 +541,7 @@ namespace EmuLoader.Core.Business
         {
             if (rom == null || string.IsNullOrEmpty(picturePath) || string.IsNullOrEmpty(folder)) return;
 
-            string platformPath = Values.PicturesPath + "\\" + rom.Platform.Name;
+            string platformPath = Values.PlatformsPath + "\\" + rom.Platform.Name;
             string categoryPath = platformPath + "\\" + folder;
 
             if (!Directory.Exists(platformPath))
@@ -804,7 +804,7 @@ namespace EmuLoader.Core.Business
                 picfolder = Values.GameplayFolder;
             }
 
-            var path = Environment.CurrentDirectory + "\\" + Values.PicturesPath + "\\" + platform + "\\" + picfolder;
+            var path = Environment.CurrentDirectory + "\\" + Values.PlatformsPath + "\\" + platform + "\\" + picfolder;
 
             if (!Directory.Exists(path))
             {

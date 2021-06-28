@@ -7,7 +7,7 @@ namespace EmuLoader.Core.Classes
     {
         public static string xmlPath = "data";
         //public static string xmlFile = "data.xml";
-        public static string xmlFilePlatforms = "platforms.xml";
+        //public static string xmlFilePlatforms = "platforms.xml";
         public static string xmlFileLabels = "labels.xml";
         public static string xmlFileGenres = "genres.xml";
         public static string xmlFileRoms = "roms.xml";
@@ -18,7 +18,9 @@ namespace EmuLoader.Core.Classes
         public static List<string> Status = new List<string>() { "Queue", "Playing", "Played", "Finished"};
         
         public static string apikeyfile = "apikey.txt";
-        public static string PicturesPath = "pictures";
+        public static string PlatformsPath = "platforms";
+        public static string PlatformXML = "config.xml";
+        public static string PlatformIcon = "icon";
         public static int max = 255 * 3;
         public static int Threshold = Convert.ToInt32(max / 2);
         public static string BoxartFolder = "boxart";

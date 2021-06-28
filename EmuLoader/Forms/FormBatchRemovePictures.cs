@@ -81,7 +81,7 @@ namespace EmuLoader.Forms
         {
             Platform emu = (Platform)comboBoxChoosePlatform.SelectedItem;
             var roms = RomBusiness.GetAll().Where(x => x.Platform != null && x.Platform.Name == emu.Name).ToList();
-            var path = Environment.CurrentDirectory + "\\" + Values.PicturesPath + "\\" + emu.Name + "\\";
+            var path = Environment.CurrentDirectory + "\\" + Values.PlatformsPath + "\\" + emu.Name + "\\";
             int successfulFind = 0;
 
             var images = new List<string>();

@@ -34,6 +34,8 @@
             this.buttonUpdateNameFromDBName = new System.Windows.Forms.Button();
             this.buttonUpdateAllRomsNames = new System.Windows.Forms.Button();
             this.buttonShowMissingRoms = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonConvertRomsXML = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCleanIncorrectRomPlatform
@@ -95,11 +97,33 @@
             this.buttonShowMissingRoms.UseVisualStyleBackColor = true;
             this.buttonShowMissingRoms.Click += new System.EventHandler(this.buttonShowMissingRoms_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(285, 74);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(131, 80);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "Convert Platform XML";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.buttonConvertPlatformsXML_Click);
+            // 
+            // buttonConvertRomsXML
+            // 
+            this.buttonConvertRomsXML.Location = new System.Drawing.Point(285, 160);
+            this.buttonConvertRomsXML.Name = "buttonConvertRomsXML";
+            this.buttonConvertRomsXML.Size = new System.Drawing.Size(131, 80);
+            this.buttonConvertRomsXML.TabIndex = 42;
+            this.buttonConvertRomsXML.Text = "Convert Roms XML";
+            this.buttonConvertRomsXML.UseVisualStyleBackColor = true;
+            this.buttonConvertRomsXML.Click += new System.EventHandler(this.buttonConvertRomsXML_Click);
+            // 
             // FormAudit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonConvertRomsXML);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonShowMissingRoms);
             this.Controls.Add(this.buttonUpdateNameFromDBName);
             this.Controls.Add(this.buttonUpdateAllRomsNames);
@@ -121,5 +145,7 @@
         private System.Windows.Forms.Button buttonUpdateNameFromDBName;
         private System.Windows.Forms.Button buttonUpdateAllRomsNames;
         private System.Windows.Forms.Button buttonShowMissingRoms;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonConvertRomsXML;
     }
 }
