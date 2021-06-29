@@ -218,13 +218,28 @@ namespace EmuLoader.Core.Business
                 Directory.Delete(date, true);
             }
 
-            Directory.CreateDirectory(date);
+            Directory.CreateDirectory(date + "\\" + Values.xmlPath);
 
-            File.Copy(Values.xmlPath + "\\" + Values.xmlFileConfig, date + "\\" + Values.xmlFileConfig);
-            Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(Values.PlatformsPath, date);
-            //File.Copy(Values.xmlPath + "\\" + Values.xmlFileRoms, date + "\\" + Values.xmlFileRoms);
-            File.Copy(Values.xmlPath + "\\" + Values.xmlFileGenres, date + "\\" + Values.xmlFileGenres);
-            File.Copy(Values.xmlPath + "\\" + Values.xmlFileLabels, date + "\\" + Values.xmlFileLabels);
+            Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(Values.xmlPath, date + "\\" + Values.xmlPath);
+
+
+            var platformnames = Directory.GetDirectories(Values.PlatformsPath);
+
+            foreach (var p in platformnames)
+            {
+                Directory.CreateDirectory(date + "\\" + p);
+
+                if (File.Exists(p + "\\" + Values.xmlFileConfig))
+                {
+                    File.Copy(p + "\\" + Values.xmlFileConfig, date + "\\" + p + "\\" + Values.xmlFileConfig);
+                }
+
+                if (File.Exists(p + "\\" + Values.xmlFileRoms))
+                {
+                    File.Copy(p + "\\" + Values.xmlFileRoms, date + "\\" + p + "\\" + Values.xmlFileRoms);
+                }
+            }
+
             System.IO.Compression.ZipFile.CreateFromDirectory(date, backupname);
             File.Move(backupname, Values.BackupFolder + "\\" + backupname);
             Directory.Delete(date, true);
