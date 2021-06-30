@@ -34,29 +34,33 @@ namespace EmuLoader.Forms
             LoadPictures();
         }
 
-        private void FilterRoms()
+        private void FilterRoms(Filter filter = null)
         {
+            if (updating) return;
+
             FilteredRoms.Clear();
             //DateTime begin = DateTime.Now;
 
-            Filter filter = new Filter();
-            filter.text = textBoxFilter.Text;
-            filter.platform = comboBoxPlatform.Text;
-            filter.label = comboBoxLabels.Text;
-            filter.genre = comboBoxGenre.Text;
-            filter.publisher = comboBoxPublisher.Text;
-            filter.developer = comboBoxDeveloper.Text;
-            filter.year = comboBoxYearReleased.Text;
-            filter.status = comboBoxStatus.Text;
-            filter.favorite = checkBoxFavorite.Checked;
-            filter.text = filter.text.ToLower();
-            filter.textType = comboBoxFilter.Text;
-            filter.arcade = checkBoxArcade.Checked;
-            filter.console = checkBoxConsole.Checked;
-            filter.handheld = checkBoxHandheld.Checked;
-            filter.cd = checkBoxCD.Checked;
-
-            if (updating) return;
+            if (filter == null)
+            {
+                filter = new Filter();
+                filter.text = textBoxFilter.Text;
+                filter.platform = comboBoxPlatform.Text;
+                filter.label = comboBoxLabels.Text;
+                filter.genre = comboBoxGenre.Text;
+                filter.publisher = comboBoxPublisher.Text;
+                filter.developer = comboBoxDeveloper.Text;
+                filter.year = comboBoxYearReleased.Text;
+                filter.status = comboBoxStatus.Text;
+                filter.favorite = checkBoxFavorite.Checked;
+                filter.text = filter.text.ToLower();
+                filter.textType = comboBoxFilter.Text;
+                filter.arcade = checkBoxArcade.Checked;
+                filter.console = checkBoxConsole.Checked;
+                filter.handheld = checkBoxHandheld.Checked;
+                filter.cd = checkBoxCD.Checked;
+                filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Name;
+            }
 
             dataGridView.SuspendLayout();
             Thread.BeginCriticalRegion();
@@ -168,11 +172,9 @@ namespace EmuLoader.Forms
             updating = true;
 
             List<Platform> platforms = PlatformBusiness.GetAllFiltered(checkBoxArcade.Checked, checkBoxConsole.Checked, checkBoxHandheld.Checked, checkBoxCD.Checked).Where(x => x.ShowInFilter).ToList();
-            platforms.Insert(0, new Platform());
+            platforms.Insert(0, new Platform() { Name = ""});
             platforms.Insert(1, new Platform() { Name = "<none>" });
-            comboBoxPlatform.DataSource = platforms;
-            comboBoxPlatform.DisplayMember = "Name";
-            comboBoxPlatform.ValueMember = "Name";
+            comboBoxPlatform.DataSource = platforms.Select(x => x.Name).ToList();
 
             if (string.IsNullOrEmpty(platform))
             {
@@ -180,7 +182,7 @@ namespace EmuLoader.Forms
             }
             else
             {
-                comboBoxPlatform.SelectedValue = platform;
+                comboBoxPlatform.Text = platform;
             }
 
             updating = false;
@@ -192,9 +194,7 @@ namespace EmuLoader.Forms
             List<RomLabel> labels = RomLabelBusiness.GetAll();
             labels.Insert(0, new RomLabel());
             labels.Insert(1, new RomLabel() { Name = "<none>" });
-            comboBoxLabels.DataSource = labels;
-            comboBoxLabels.DisplayMember = "Name";
-            comboBoxLabels.ValueMember = "Name";
+            comboBoxLabels.DataSource = labels.Select(x => x.Name).ToList();
             comboBoxLabels.SelectedIndex = 0;
             updating = false;
         }
@@ -205,9 +205,7 @@ namespace EmuLoader.Forms
             List<Genre> genres = GenreBusiness.GetAll();
             genres.Insert(0, new Genre());
             genres.Insert(1, new Genre() { Name = "<none>" });
-            comboBoxGenre.DataSource = genres;
-            comboBoxGenre.DisplayMember = "Name";
-            comboBoxGenre.ValueMember = "Name";
+            comboBoxGenre.DataSource = genres.Select(x => x.Name).ToList();
 
             if (genre == "")
             {
@@ -215,7 +213,7 @@ namespace EmuLoader.Forms
             }
             else
             {
-                comboBoxGenre.SelectedValue = genre;
+                comboBoxGenre.Text = genre;
             }
 
             updating = false;

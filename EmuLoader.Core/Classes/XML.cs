@@ -752,6 +752,7 @@ namespace EmuLoader.Core.Classes
                     {
                         item.Value = value;
                         ok = true;
+                        break;
                     }
                 }
 

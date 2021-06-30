@@ -71,39 +71,49 @@ namespace EmuLoader.Forms
                 FillYearReleasedFilter();
                 FillStatusFilter();
 
+                updating = true;
                 Filter filter = FilterFunctions.GetFilter();
 
                 textBoxFilter.Text = filter.text;
-                comboBoxFilter.Text = filter.textType;
+
+                if (!string.IsNullOrEmpty(filter.textType))
+                {
+                    comboBoxFilter.Text = filter.textType;
+                }
 
                 if (!string.IsNullOrEmpty(filter.platform))
                 {
-                    comboBoxPlatform.SelectedValue = filter.platform;
+                    comboBoxPlatform.Text = filter.platform;
                 }
 
                 if (!string.IsNullOrEmpty(filter.label))
                 {
-                    comboBoxLabels.SelectedValue = filter.label;
+                    comboBoxLabels.Text = filter.label;
                 }
 
                 if (!string.IsNullOrEmpty(filter.genre))
                 {
-                    comboBoxGenre.SelectedValue = filter.genre;
+                    comboBoxGenre.Text = filter.genre;
+                }
+
+                if (!string.IsNullOrEmpty(filter.status))
+                {
+                    comboBoxStatus.Text = filter.status;
                 }
 
                 if (!string.IsNullOrEmpty(filter.developer))
                 {
-                    comboBoxDeveloper.SelectedText = filter.developer;
+                    comboBoxDeveloper.Text = filter.developer;
                 }
 
                 if (!string.IsNullOrEmpty(filter.publisher))
                 {
-                    comboBoxPublisher.SelectedText = filter.publisher;
+                    comboBoxPublisher.Text = filter.publisher;
                 }
 
                 if (!string.IsNullOrEmpty(filter.year))
                 {
-                    comboBoxYearReleased.SelectedText = filter.year;
+                    comboBoxYearReleased.Text = filter.year;
                 }
 
                 checkBoxFavorite.Checked = filter.favorite;
@@ -112,9 +122,9 @@ namespace EmuLoader.Forms
                 checkBoxHandheld.Checked = filter.handheld;
                 checkBoxCD.Checked = filter.cd;
 
-                FilterRoms();
-
                 updating = false;
+
+                FilterRoms(filter);
                 dataGridView.ClearSelection();
 
                 var height = ConfigBusiness.GetHeight();
@@ -174,11 +184,12 @@ namespace EmuLoader.Forms
             filter.year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
             filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Path;
             filter.text = textBoxFilter.Text;
-            filter.textType = comboBoxFilter.Text;
+            filter.textType = comboBoxFilter.SelectedText;
             filter.favorite = checkBoxFavorite.Checked;
             filter.arcade = checkBoxArcade.Checked;
             filter.console = checkBoxConsole.Checked;
             filter.handheld = checkBoxHandheld.Checked;
+            filter.status = comboBoxStatus.Text;
             filter.cd = checkBoxCD.Checked;
 
             FilterFunctions.SaveFilter(filter);
@@ -715,6 +726,7 @@ namespace EmuLoader.Forms
                 comboBoxDeveloper.SelectedIndex = 0;
                 comboBoxPublisher.SelectedIndex = 0;
                 comboBoxYearReleased.SelectedIndex = 0;
+                comboBoxStatus.SelectedIndex = 0;
                 updating = false;
                 FilterRoms();
                 SelectRandomRom();

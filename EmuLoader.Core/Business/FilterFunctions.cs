@@ -18,6 +18,7 @@ namespace EmuLoader.Core.Business
             XML.SetFilter("Publisher", filter.publisher);
             XML.SetFilter("Developer", filter.developer);
             XML.SetFilter("Year", filter.year);
+            XML.SetFilter("Status", filter.status);
             XML.SetFilter("Favorite", filter.favorite.ToString());
             XML.SetFilter("Rom", filter.rom);
             XML.SetFilter("Arcade", filter.arcade.ToString());
@@ -39,6 +40,7 @@ namespace EmuLoader.Core.Business
             filter.publisher = XML.GetFilter("Publisher");
             filter.developer = XML.GetFilter("Developer");
             filter.year = XML.GetFilter("Year");
+            filter.status = XML.GetFilter("Status");
             var favorite = XML.GetFilter("Favorite");
             filter.favorite = string.IsNullOrEmpty(favorite) ? false : Convert.ToBoolean(favorite);
 
