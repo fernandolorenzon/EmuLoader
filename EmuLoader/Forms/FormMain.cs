@@ -63,7 +63,6 @@ namespace EmuLoader.Forms
                 flowLayoutPanelPictures.Visible = pictureBoxBoxart.Visible || pictureBoxTitle.Visible || pictureBoxGameplay.Visible;
                 //FormMessage.ShowMessage("Filling Grid...");
 
-                FillPlatformFilter();
                 FillLabelFilter();
                 FillGenreFilter();
                 FillPublisherFilter();
@@ -125,6 +124,7 @@ namespace EmuLoader.Forms
                 updating = false;
 
                 FilterRoms(filter);
+                FillPlatformFilter();
                 dataGridView.ClearSelection();
 
                 var height = ConfigBusiness.GetHeight();

@@ -66,7 +66,6 @@ namespace EmuLoader.Forms
             Thread.BeginCriticalRegion();
 
             FilteredRoms = FilterFunctions.FilterRoms(filter);
-            FillPlatformFilter();
 
             Thread.EndCriticalRegion();
             dataGridView.ResumeLayout();
