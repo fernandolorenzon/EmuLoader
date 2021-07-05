@@ -182,9 +182,11 @@ namespace EmuLoader.Forms
             }
             else
             {
+                comboBoxPlatform.SelectedText = platform;
                 comboBoxPlatform.Text = platform;
             }
 
+            buttonRescan.Enabled = comboBoxPlatform.Text != string.Empty;
             updating = false;
         }
 

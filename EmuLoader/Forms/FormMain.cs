@@ -120,11 +120,11 @@ namespace EmuLoader.Forms
                 checkBoxConsole.Checked = filter.console;
                 checkBoxHandheld.Checked = filter.handheld;
                 checkBoxCD.Checked = filter.cd;
+                FillPlatformFilter(filter.platform);
 
                 updating = false;
 
                 FilterRoms(filter);
-                FillPlatformFilter();
                 dataGridView.ClearSelection();
 
                 var height = ConfigBusiness.GetHeight();
@@ -1339,7 +1339,7 @@ namespace EmuLoader.Forms
                 return;
             }
 
-            var platform = (Platform)comboBoxPlatform.SelectedItem;
+            var platform = PlatformBusiness.Get(comboBoxPlatform.Text);
 
             var result = PlatformBusiness.RescanRoms(platform);
 
