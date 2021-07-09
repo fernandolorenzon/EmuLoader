@@ -320,7 +320,7 @@ namespace EmuLoader.Core.Business
                 XML.SaveXmlRomLabels();
             }
 
-            return XML.DelRom(rom.Platform.Name, rom.Path); ;
+            return XML.DelRom(rom.Platform.Name, rom.Path);
         }
 
         public static bool IsRomPack(Rom rom)

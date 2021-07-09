@@ -714,7 +714,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode(xmlRoms[platform], "Roms").RemoveChild(node);
+                xmlRoms[platform].ChildNodes[1].RemoveChild(node);
                 return true;
             }
 
