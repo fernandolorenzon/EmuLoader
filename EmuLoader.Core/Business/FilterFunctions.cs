@@ -20,7 +20,8 @@ namespace EmuLoader.Core.Business
             XML.SetFilter("Year", filter.year);
             XML.SetFilter("Status", filter.status);
             XML.SetFilter("Favorite", filter.favorite.ToString());
-            XML.SetFilter("Rom", filter.rom);
+            XML.SetFilter("RomFile", filter.romfile);
+            XML.SetFilter("RomPlatform", filter.romplatform);
             XML.SetFilter("Arcade", filter.arcade.ToString());
             XML.SetFilter("Console", filter.console.ToString());
             XML.SetFilter("Handheld", filter.handheld.ToString());
@@ -56,7 +57,8 @@ namespace EmuLoader.Core.Business
             var cd = XML.GetFilter("CD");
             filter.cd = string.IsNullOrEmpty(cd) ? false : Convert.ToBoolean(cd);
 
-            filter.rom = XML.GetFilter("Rom");
+            filter.romfile = XML.GetFilter("RomFile");
+            filter.romplatform = XML.GetFilter("RomPlatform");
 
             return filter;
         }

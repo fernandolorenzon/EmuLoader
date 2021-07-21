@@ -45,11 +45,11 @@ namespace EmuLoader.Forms
                 FillPlatformGrid();
                 //FormMessage.ShowMessage("Loading Roms...");
                 
+                columnSeries.Visible = showSeriesToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnRomSeries);
                 columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnPlatform);
                 columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnGenre);
                 columnStatus.Visible = showStatusColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnStatus);
                 columnLabels.Visible = showLabelsColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnLabels);
-                columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnPath);
                 columnRomDBName.Visible = showRomDBNameColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnRomDBName);
                 columnFilename.Visible = showFilenameToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnFileName);
                 columnDeveloper.Visible = showDeveloperColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnDeveloper);
@@ -136,7 +136,7 @@ namespace EmuLoader.Forms
                     this.Width = Convert.ToInt32(width);
                 }
 
-                if (string.IsNullOrEmpty(filter.rom))
+                if (string.IsNullOrEmpty(filter.romfile))
                 {
                     SelectRandomRom();
                 }
@@ -144,7 +144,8 @@ namespace EmuLoader.Forms
                 {
                     for (int i = 0; i < dataGridView.Rows.Count; i++)
                     {
-                        if (dataGridView.Rows[i].Cells[columnRomPath.Index].Value.ToString() == filter.rom)
+                        if (dataGridView.Rows[i].Cells[columnPlatform.Index].Value.ToString() == filter.romplatform &&
+                            dataGridView.Rows[i].Cells[columnFilename.Index].Value.ToString() == filter.romfile)
                         {
                             dataGridView.CurrentCell = dataGridView.Rows[i].Cells[0];
                             break;
@@ -182,7 +183,8 @@ namespace EmuLoader.Forms
             filter.publisher = comboBoxPublisher.SelectedValue == null ? "" : comboBoxPublisher.SelectedValue.ToString();
             filter.developer = comboBoxDeveloper.SelectedValue == null ? "" : comboBoxDeveloper.SelectedValue.ToString();
             filter.year = comboBoxYearReleased.SelectedValue == null ? "" : comboBoxYearReleased.SelectedValue.ToString();
-            filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Path;
+            filter.romfile = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).FileName;
+            filter.romplatform = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Platform.Name;
             filter.text = textBoxFilter.Text;
             filter.textType = comboBoxFilter.SelectedText;
             filter.favorite = checkBoxFavorite.Checked;
@@ -252,26 +254,6 @@ namespace EmuLoader.Forms
                 Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
                 ProcessStartInfo sInfo = new ProcessStartInfo(RomFunctions.GetRomPicture(rom, Values.GameplayFolder));
                 Process.Start(sInfo);
-            }
-            catch (Exception ex)
-            {
-                FormCustomMessage.ShowError(ex.Message);
-            }
-        }
-
-        private void toolStripMenuItemShowPathColumn_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                columnRomPath.Visible = showPathColumnToolStripMenuItem.Checked;
-
-                if (updating) return;
-
-                ConfigBusiness.SetElementVisibility(Column.ColumnPath, columnRomPath.Visible);
-            }
-            catch (OperationCanceledException ioex)
-            {
-                return;
             }
             catch (Exception ex)
             {
@@ -535,7 +517,7 @@ namespace EmuLoader.Forms
                 {
                     Rom rom = (Rom)row.Tag;
 
-                    if (File.Exists(rom.Path))
+                    if (File.Exists(rom.Platform.DefaultRomPath + "\\" + rom.FileName))
                     {
                         row.Cells[ColumnFileExists.Name].Style.BackColor = Color.Green;
                         row.Cells[ColumnFileExists.Name].Value = "OK";
@@ -766,7 +748,7 @@ namespace EmuLoader.Forms
                 DataGridViewRow row = dataGridView.SelectedRows[0];
                 Rom rom = (Rom)row.Tag;
 
-                FileInfo file = new FileInfo(rom.Path);
+                FileInfo file = new FileInfo(rom.Platform.DefaultRomPath + "\\" + rom.FileName);
                 System.Diagnostics.Process.Start("explorer.exe", file.DirectoryName);
             }
             catch (OperationCanceledException ioex)
@@ -1171,7 +1153,7 @@ namespace EmuLoader.Forms
 
                 try
                 {
-                    ProcessStartInfo sInfo = new ProcessStartInfo(rom.Path);
+                    ProcessStartInfo sInfo = new ProcessStartInfo(rom.Platform.DefaultRomPath + "\\" + rom.FileName);
                     Process.Start(sInfo);
                 }
                 catch (Exception ex)

@@ -273,5 +273,27 @@ namespace EmuLoader.Forms
                 File.WriteAllText(path, dic[item].ToString());
             }
         }
+
+        private void buttonChangePath_Click(object sender, EventArgs e)
+        {
+            var dir = Environment.CurrentDirectory + "\\" + Values.PlatformsPath;
+            var dirs = Directory.GetDirectories(dir);
+
+            foreach (var item in dirs)
+            {
+                var platformname = item.Substring(item.LastIndexOf("\\") + 1);
+                var platform = PlatformBusiness.Get(platformname);
+
+                var file = item + "\\roms.xml";
+                
+                if (!File.Exists(file)) continue;
+
+                var text = File.ReadAllText(file);
+                text = text.Replace("Path=", "FileName=");
+                text = text.Replace(platform.DefaultRomPath + "\\", "");
+
+                File.WriteAllText(file, text);
+            }
+        }
     }
 }

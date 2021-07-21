@@ -59,7 +59,8 @@ namespace EmuLoader.Forms
                 filter.console = checkBoxConsole.Checked;
                 filter.handheld = checkBoxHandheld.Checked;
                 filter.cd = checkBoxCD.Checked;
-                filter.rom = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Name;
+                filter.romfile = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Name;
+                filter.romplatform = dataGridView.SelectedRows.Count == 0 ? "" : ((Rom)dataGridView.SelectedRows[0].Tag).Platform.Name;
             }
 
             dataGridView.SuspendLayout();
@@ -97,7 +98,6 @@ namespace EmuLoader.Forms
         private void LoadGridRow(Rom rom, DataGridViewRow row)
         {
             row.Cells[columnRomName.Index].Value = rom.Name;
-            row.Cells[columnRomPath.Index].Value = rom.Path;
             row.Cells[columnRomDBName.Index].Value = rom.DBName;
             row.Cells[columnSeries.Index].Value = rom.Series;
             row.Cells[columnFilename.Index].Value = rom.FileName;

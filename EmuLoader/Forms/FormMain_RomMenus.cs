@@ -259,7 +259,7 @@ namespace EmuLoader.Forms
 
                 if (result.ToString() == "No") return;
 
-                Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(rom.Path,
+                Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(rom.Platform.DefaultRomPath + "\\" + rom.FileName,
                     Microsoft.VisualBasic.FileIO.UIOption.AllDialogs,
                     Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
 

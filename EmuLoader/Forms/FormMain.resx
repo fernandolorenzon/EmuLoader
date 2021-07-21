@@ -267,19 +267,6 @@
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>317, 17</value>
   </metadata>
-  <data name="romsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        WQAAAFkBqp2phgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFpSURBVDhPY6AY
-        uBsIRtlrC8zXVxScRCrWVuT1ZajwF/76c6P3/1/bIknGWb6qtxnqQoR/rGpw+R8REvQ/NzWSKBwf7vt/
-        baPr/+JQzfsMZ9plPy+sdvu/bevO/7t37/5fVVWFF4PUHDt27P+SaheIAa2RIt9BBkyaOPX/tm3biMLz
-        5s1DGADyQmu5xX+2XMf/LJPiicN1wf+nVtqhGsAwOeQ/w7H6/wxH6v4zbC2BsJExSAwkB2KvycNjwMGa
-        /wwzkyDsAg8IBrFBYiA5qJrji4JwGEAMXpP/f1oVkgsmVFv+Zw/U/y+d7kAUFo+y+D+vzh5qQKjw958b
-        fTESycOlAf+XVVuD8aNlgRjyIFwconGPIdFJZHGKq9TR5ZXWL5Elr83x/h/hIwvGIDay3NIK65fh9vLb
-        nA3E26A5goEhzkXx+stVwf+R8YPFAWCMLg5SC9WGAMriPE5WWqKtxGB5EQ5HqDZKAQMDAMMX1TGuBbjX
-        AAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="addRomFileToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAB
@@ -384,6 +371,19 @@
         TkSuQmCC
 </value>
   </data>
+  <data name="romsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        WQAAAFkBqp2phgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFpSURBVDhPY6AY
+        uBsIRtlrC8zXVxScRCrWVuT1ZajwF/76c6P3/1/bIknGWb6qtxnqQoR/rGpw+R8REvQ/NzWSKBwf7vt/
+        baPr/+JQzfsMZ9plPy+sdvu/bevO/7t37/5fVVWFF4PUHDt27P+SaheIAa2RIt9BBkyaOPX/tm3biMLz
+        5s1DGADyQmu5xX+2XMf/LJPiicN1wf+nVtqhGsAwOeQ/w7H6/wxH6v4zbC2BsJExSAwkB2KvycNjwMGa
+        /wwzkyDsAg8IBrFBYiA5qJrji4JwGEAMXpP/f1oVkgsmVFv+Zw/U/y+d7kAUFo+y+D+vzh5qQKjw958b
+        fTESycOlAf+XVVuD8aNlgRjyIFwconGPIdFJZHGKq9TR5ZXWL5Elr83x/h/hIwvGIDay3NIK65fh9vLb
+        nA3E26A5goEhzkXx+stVwf+R8YPFAWCMLg5SC9WGAMriPE5WWqKtxGB5EQ5HqDZKAQMDAMMX1TGuBbjX
+        AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="manageRomToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -468,12 +468,6 @@
         iW/9HwDfKKXokGikyQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="ColumnIcon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="columnPlatforms.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="ColumnIcon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

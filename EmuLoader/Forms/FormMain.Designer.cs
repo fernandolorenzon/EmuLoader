@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonRomOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonRomRemoveRom = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonRomDeleteRomFromDisk = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +63,6 @@
             this.genresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showPathColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFilenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showRomDBNameColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +91,10 @@
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnPlatforms = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
+            this.checkBoxCD = new System.Windows.Forms.CheckBox();
+            this.checkBoxHandheld = new System.Windows.Forms.CheckBox();
+            this.checkBoxConsole = new System.Windows.Forms.CheckBox();
+            this.checkBoxArcade = new System.Windows.Forms.CheckBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             this.comboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -120,7 +123,6 @@
             this.columnRomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRomDBName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnRomPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFilename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -139,10 +141,6 @@
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
-            this.checkBoxArcade = new System.Windows.Forms.CheckBox();
-            this.checkBoxConsole = new System.Windows.Forms.CheckBox();
-            this.checkBoxHandheld = new System.Windows.Forms.CheckBox();
-            this.checkBoxCD = new System.Windows.Forms.CheckBox();
             this.contextMenuStripEditRom.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlatforms)).BeginInit();
@@ -413,7 +411,6 @@
             // columnsToolStripMenuItem
             // 
             this.columnsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showPathColumnToolStripMenuItem,
             this.showFilenameToolStripMenuItem,
             this.showRomDBNameColumnToolStripMenuItem,
             this.showSeriesToolStripMenuItem,
@@ -436,16 +433,6 @@
             this.columnsToolStripMenuItem.Name = "columnsToolStripMenuItem";
             this.columnsToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.columnsToolStripMenuItem.Text = "&Visibility";
-            // 
-            // showPathColumnToolStripMenuItem
-            // 
-            this.showPathColumnToolStripMenuItem.Checked = true;
-            this.showPathColumnToolStripMenuItem.CheckOnClick = true;
-            this.showPathColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showPathColumnToolStripMenuItem.Name = "showPathColumnToolStripMenuItem";
-            this.showPathColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
-            this.showPathColumnToolStripMenuItem.Text = "Show Path Column";
-            this.showPathColumnToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItemShowPathColumn_CheckedChanged);
             // 
             // showFilenameToolStripMenuItem
             // 
@@ -484,7 +471,7 @@
             this.showPlatformColumnToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showPlatformColumnToolStripMenuItem.Name = "showPlatformColumnToolStripMenuItem";
             this.showPlatformColumnToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
-            this.showPlatformColumnToolStripMenuItem.Text = "Show Emulator Column";
+            this.showPlatformColumnToolStripMenuItem.Text = "Show Platform Column";
             this.showPlatformColumnToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItemShowPlatformColumn_CheckedChanged);
             // 
             // showGenreColumnToolStripMenuItem
@@ -752,6 +739,50 @@
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
             // 
+            // checkBoxCD
+            // 
+            this.checkBoxCD.AutoSize = true;
+            this.checkBoxCD.Location = new System.Drawing.Point(238, 94);
+            this.checkBoxCD.Name = "checkBoxCD";
+            this.checkBoxCD.Size = new System.Drawing.Size(41, 18);
+            this.checkBoxCD.TabIndex = 25;
+            this.checkBoxCD.Text = "CD";
+            this.checkBoxCD.UseVisualStyleBackColor = true;
+            this.checkBoxCD.CheckedChanged += new System.EventHandler(this.checkBoxCD_CheckedChanged);
+            // 
+            // checkBoxHandheld
+            // 
+            this.checkBoxHandheld.AutoSize = true;
+            this.checkBoxHandheld.Location = new System.Drawing.Point(154, 94);
+            this.checkBoxHandheld.Name = "checkBoxHandheld";
+            this.checkBoxHandheld.Size = new System.Drawing.Size(78, 18);
+            this.checkBoxHandheld.TabIndex = 24;
+            this.checkBoxHandheld.Text = "Handheld";
+            this.checkBoxHandheld.UseVisualStyleBackColor = true;
+            this.checkBoxHandheld.CheckedChanged += new System.EventHandler(this.checkBoxHandheld_CheckedChanged);
+            // 
+            // checkBoxConsole
+            // 
+            this.checkBoxConsole.AutoSize = true;
+            this.checkBoxConsole.Location = new System.Drawing.Point(78, 94);
+            this.checkBoxConsole.Name = "checkBoxConsole";
+            this.checkBoxConsole.Size = new System.Drawing.Size(70, 18);
+            this.checkBoxConsole.TabIndex = 23;
+            this.checkBoxConsole.Text = "Console";
+            this.checkBoxConsole.UseVisualStyleBackColor = true;
+            this.checkBoxConsole.CheckedChanged += new System.EventHandler(this.checkBoxConsole_CheckedChanged);
+            // 
+            // checkBoxArcade
+            // 
+            this.checkBoxArcade.AutoSize = true;
+            this.checkBoxArcade.Location = new System.Drawing.Point(9, 94);
+            this.checkBoxArcade.Name = "checkBoxArcade";
+            this.checkBoxArcade.Size = new System.Drawing.Size(64, 18);
+            this.checkBoxArcade.TabIndex = 22;
+            this.checkBoxArcade.Text = "Arcade";
+            this.checkBoxArcade.UseVisualStyleBackColor = true;
+            this.checkBoxArcade.CheckedChanged += new System.EventHandler(this.checkBoxArcade_CheckedChanged);
+            // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
@@ -978,18 +1009,18 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.BackgroundColor = System.Drawing.Color.Lavender;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Maroon;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnIconMain,
@@ -999,7 +1030,6 @@
             this.columnRomName,
             this.columnRomDBName,
             this.columnSeries,
-            this.columnRomPath,
             this.columnFilename,
             this.columnPlatform,
             this.columnGenre,
@@ -1014,16 +1044,16 @@
             this.dataGridView.Location = new System.Drawing.Point(0, 141);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1100,13 +1130,6 @@
             this.columnSeries.HeaderText = "Series";
             this.columnSeries.Name = "columnSeries";
             this.columnSeries.ReadOnly = true;
-            // 
-            // columnRomPath
-            // 
-            this.columnRomPath.FillWeight = 10.90591F;
-            this.columnRomPath.HeaderText = "Rom Path";
-            this.columnRomPath.Name = "columnRomPath";
-            this.columnRomPath.ReadOnly = true;
             // 
             // columnFilename
             // 
@@ -1280,50 +1303,6 @@
             this.pictureBoxGameplay.DoubleClick += new System.EventHandler(this.pictureBoxGameplay_DoubleClick);
             this.pictureBoxGameplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameplay_MouseClick);
             // 
-            // checkBoxArcade
-            // 
-            this.checkBoxArcade.AutoSize = true;
-            this.checkBoxArcade.Location = new System.Drawing.Point(9, 94);
-            this.checkBoxArcade.Name = "checkBoxArcade";
-            this.checkBoxArcade.Size = new System.Drawing.Size(64, 18);
-            this.checkBoxArcade.TabIndex = 22;
-            this.checkBoxArcade.Text = "Arcade";
-            this.checkBoxArcade.UseVisualStyleBackColor = true;
-            this.checkBoxArcade.CheckedChanged += new System.EventHandler(this.checkBoxArcade_CheckedChanged);
-            // 
-            // checkBoxConsole
-            // 
-            this.checkBoxConsole.AutoSize = true;
-            this.checkBoxConsole.Location = new System.Drawing.Point(78, 94);
-            this.checkBoxConsole.Name = "checkBoxConsole";
-            this.checkBoxConsole.Size = new System.Drawing.Size(70, 18);
-            this.checkBoxConsole.TabIndex = 23;
-            this.checkBoxConsole.Text = "Console";
-            this.checkBoxConsole.UseVisualStyleBackColor = true;
-            this.checkBoxConsole.CheckedChanged += new System.EventHandler(this.checkBoxConsole_CheckedChanged);
-            // 
-            // checkBoxHandheld
-            // 
-            this.checkBoxHandheld.AutoSize = true;
-            this.checkBoxHandheld.Location = new System.Drawing.Point(154, 94);
-            this.checkBoxHandheld.Name = "checkBoxHandheld";
-            this.checkBoxHandheld.Size = new System.Drawing.Size(78, 18);
-            this.checkBoxHandheld.TabIndex = 24;
-            this.checkBoxHandheld.Text = "Handheld";
-            this.checkBoxHandheld.UseVisualStyleBackColor = true;
-            this.checkBoxHandheld.CheckedChanged += new System.EventHandler(this.checkBoxHandheld_CheckedChanged);
-            // 
-            // checkBoxCD
-            // 
-            this.checkBoxCD.AutoSize = true;
-            this.checkBoxCD.Location = new System.Drawing.Point(238, 94);
-            this.checkBoxCD.Name = "checkBoxCD";
-            this.checkBoxCD.Size = new System.Drawing.Size(41, 18);
-            this.checkBoxCD.TabIndex = 25;
-            this.checkBoxCD.Text = "CD";
-            this.checkBoxCD.UseVisualStyleBackColor = true;
-            this.checkBoxCD.CheckedChanged += new System.EventHandler(this.checkBoxCD_CheckedChanged);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1388,7 +1367,6 @@
         private System.Windows.Forms.ToolStripMenuItem romsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addEditDeleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem columnsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showPathColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showPlatformColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showGenreColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showLabelsColumnToolStripMenuItem;
@@ -1462,7 +1440,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRomDBName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSeries;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnRomPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFilename;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPlatform;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGenre;

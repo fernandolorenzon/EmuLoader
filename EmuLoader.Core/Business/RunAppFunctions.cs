@@ -51,7 +51,7 @@ namespace EmuLoader.Core.Business
             string workdir = index == -1 ? "" : emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
 
             string args = command.Replace("%EMUPATH%", "")
-                        .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                        .Replace("%ROMPATH%", "\"" + rom.Platform.DefaultRomPath + "\\" + rom.FileName + "\"")
                         .Replace("%ROMNAME%", rom.FileNameNoExt)
                         .Replace("%ROMFILE%", rom.FileName);
 
@@ -79,7 +79,7 @@ namespace EmuLoader.Core.Business
             string workdir = index == -1 ? "" : emu.Path.Substring(0, emu.Path.LastIndexOf("\\"));
 
             string args = command.Replace("%EMUPATH%", "")
-                        .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                        .Replace("%ROMPATH%", "\"" + rom.Platform.DefaultRomPath + "\\" + rom.FileName + "\"")
                         .Replace("%ROMNAME%", rom.FileNameNoExt)
                         .Replace("%ROMFILE%", rom.FileName);
 
@@ -123,7 +123,7 @@ namespace EmuLoader.Core.Business
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 
             string arguments = emu.Command.Replace("%EMUPATH%", "\"" + emu.Path + "\"")
-                .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                .Replace("%ROMPATH%", "\"" + rom.Platform.DefaultRomPath + "\\" + rom.FileName + "\"")
                 .Replace("%ROMNAME%", rom.FileNameNoExt)
                 .Replace("%ROMFILE%", rom.FileName);
 
@@ -156,7 +156,7 @@ namespace EmuLoader.Core.Business
             p = Process.Start(startInfo);
 
             string path = emu.Command.Replace("%EMUPATH%", "\"" + emu.Path + "\"")
-                .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                .Replace("%ROMPATH%", "\"" + rom.Platform.DefaultRomPath + "\\" + rom.FileName + "\"")
                 .Replace("%ROMNAME%", rom.FileNameNoExt)
                 .Replace("%ROMFILE%", rom.FileName);
 
@@ -196,7 +196,7 @@ namespace EmuLoader.Core.Business
             string changeDir = "cd " + RomFunctions.GetRomDirectory(emu.Path);
             string exe = emu.Path.Remove(0, emu.Path.LastIndexOf("\\") + 1);
             string path = emu.Command.Replace("%EMUPATH%", "\"" + exe + "\"")
-                .Replace("%ROMPATH%", "\"" + rom.Path + "\"")
+                .Replace("%ROMPATH%", "\"" + rom.Platform.DefaultRomPath + "\\" + rom.FileName + "\"")
                 .Replace("%ROMNAME%", rom.FileNameNoExt)
                 .Replace("%ROMFILE%", rom.FileName);
 

@@ -12,7 +12,8 @@
         public string developer { get; set; }
         public string year { get; set; }
         public bool favorite { get; set; }
-        public string rom { get; set; }
+        public string romfile { get; set; }
+        public string romplatform { get; set; }
         public bool arcade { get; set;}
         public bool console { get; set; }
         public bool handheld { get; set; }

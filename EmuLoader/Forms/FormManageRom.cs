@@ -36,7 +36,7 @@ namespace EmuLoader.Forms
         {
             labelRom.Text = rom.Name;
             SelectedRom = rom;
-            textBoxFileName.Text = rom.Path.Substring(rom.Path.LastIndexOf("\\") + 1);
+            textBoxFileName.Text = rom.FileName;
             textBoxRomName.Text = rom.Name;
             textBoxDBName.Text = rom.DBName;
             textBoxSeries.Text = rom.Series;

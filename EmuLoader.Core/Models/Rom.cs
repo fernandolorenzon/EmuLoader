@@ -22,22 +22,8 @@ namespace EmuLoader.Core.Models
             }
         }
 
-        private string path;
-        public string Path
-        {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                path = value;
-                FileName = RomFunctions.GetFileName(path);
-                FileNameNoExt = RomFunctions.GetFileNameNoExtension(path);
-            }
-        }
-        public string FileName { get; private set; }
-        public string FileNameNoExt { get; private set; }
+        public string FileName { get; set; }
+        public string FileNameNoExt { get; set; }
         public string YearReleased { get; set; }
         public string Developer { get; set; }
         public string Publisher { get; set; }

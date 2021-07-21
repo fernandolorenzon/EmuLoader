@@ -36,6 +36,7 @@
             this.buttonShowMissingRoms = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonConvertRomsXML = new System.Windows.Forms.Button();
+            this.buttonChangePath = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCleanIncorrectRomPlatform
@@ -117,11 +118,22 @@
             this.buttonConvertRomsXML.UseVisualStyleBackColor = true;
             this.buttonConvertRomsXML.Click += new System.EventHandler(this.buttonConvertRomsXML_Click);
             // 
+            // buttonChangePath
+            // 
+            this.buttonChangePath.Location = new System.Drawing.Point(285, 246);
+            this.buttonChangePath.Name = "buttonChangePath";
+            this.buttonChangePath.Size = new System.Drawing.Size(131, 80);
+            this.buttonChangePath.TabIndex = 43;
+            this.buttonChangePath.Text = "Convert Roms XML Path";
+            this.buttonChangePath.UseVisualStyleBackColor = true;
+            this.buttonChangePath.Click += new System.EventHandler(this.buttonChangePath_Click);
+            // 
             // FormAudit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonChangePath);
             this.Controls.Add(this.buttonConvertRomsXML);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonShowMissingRoms);
@@ -147,5 +159,6 @@
         private System.Windows.Forms.Button buttonShowMissingRoms;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonConvertRomsXML;
+        private System.Windows.Forms.Button buttonChangePath;
     }
 }

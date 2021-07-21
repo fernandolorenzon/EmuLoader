@@ -26,13 +26,6 @@ namespace EmuLoader.Core.Classes
             xmlConfig.AppendChild(xmlConfig.CreateElement("Root"));
 
             XmlElement config = xmlConfig.CreateElement("Config");
-            XmlAttribute attrPath = xmlConfig.CreateAttribute("ColumnPath");
-            attrPath.Value = "true";
-            config.Attributes.Append(attrPath);
-
-            XmlAttribute attrDBName = xmlConfig.CreateAttribute("ColumnRomDBName");
-            attrPath.Value = "false";
-            config.Attributes.Append(attrDBName);
 
             XmlAttribute attrFileName = xmlConfig.CreateAttribute("ColumnFileName");
             attrFileName.Value = "false";
@@ -61,6 +54,10 @@ namespace EmuLoader.Core.Classes
             XmlAttribute attrStatus = xmlConfig.CreateAttribute("ColumnStatus");
             attrStatus.Value = "true";
             config.Attributes.Append(attrStatus);
+
+            XmlAttribute attrSeries = xmlConfig.CreateAttribute("ColumnRomSeries");
+            attrSeries.Value = "true";
+            config.Attributes.Append(attrSeries);
 
             XmlAttribute attrYearReleased = xmlConfig.CreateAttribute("ColumnYearReleased");
             attrYearReleased.Value = "true";
@@ -682,7 +679,7 @@ namespace EmuLoader.Core.Classes
             return xmlRoms[platform].ChildNodes[1];
         }
 
-        public static XmlNode GetRomNode(string platform, string path)
+        public static XmlNode GetRomNode(string platform, string file)
         {
             var nodes = GetRomNodes(platform);
 
@@ -690,7 +687,7 @@ namespace EmuLoader.Core.Classes
 
             foreach (XmlNode node in nodes)
             {
-                if (node.Attributes["Path"].Value == path)
+                if (node.Attributes["FileName"].Value == file)
                 {
                     return node;
                 }
@@ -699,13 +696,13 @@ namespace EmuLoader.Core.Classes
             return null;
         }
 
-        internal static bool DelRom(string platform, string path)
+        internal static bool DelRom(string platform, string file)
         {
             XmlNode node = null;
 
             foreach (XmlNode item in GetRomNodes(platform))
             {
-                if (item.Attributes["Path"].Value == path)
+                if (item.Attributes["FileName"].Value == file)
                 {
                     node = item;
                     break;
