@@ -79,10 +79,10 @@ namespace EmuLoader.Core.Business
             return rom;
         }
 
-        public static Rom NewRom(string file, Platform platform)
+        public static Rom NewRom(string file, Platform platform, bool rompack = false)
         {
             var rom = new Rom();
-            rom.FileName = RomFunctions.GetFileName(file);
+            rom.FileName = RomFunctions.GetFileName(file, rompack);
             rom.FileNameNoExt = RomFunctions.GetFileNameNoExtension(file);
             rom.Platform = platform;
 

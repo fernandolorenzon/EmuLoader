@@ -347,10 +347,22 @@ namespace EmuLoader.Core.Business
             return file.Substring(file.LastIndexOf("."));
         }
 
-        public static string GetFileName(string file)
+        public static string GetFileName(string file, bool rompack = false)
         {
             if (string.IsNullOrEmpty(file)) return "";
-            return file.Substring(file.LastIndexOf("\\") + 1);
+
+            if (rompack)
+            {
+                var filename = file.Substring(file.LastIndexOf("\\")+ 1);
+                file = file.Replace("\\" + filename, "");
+                filename = file.Substring(file.LastIndexOf("\\") + 1) + "\\" + filename;
+                return filename;
+            }
+            else
+            {
+                return file.Substring(file.LastIndexOf("\\") + 1);
+            }
+            
         }
 
         public static string GetFileNameNoExtension(string file)
@@ -682,11 +694,11 @@ namespace EmuLoader.Core.Business
 
                         if (exts.Contains(fileExt.Replace(".", "")))
                         {
-                            var rom = RomBusiness.Get(platform.Name, RomFunctions.GetFileName(file));
+                            var rom = RomBusiness.Get(platform.Name, RomFunctions.GetFileName(file, true));
 
                             if (rom == null)
                             {
-                                romList.Add(RomBusiness.NewRom(file, platform));
+                                romList.Add(RomBusiness.NewRom(file, platform, true));
                                 addedAny = true;
                             }
                         }
