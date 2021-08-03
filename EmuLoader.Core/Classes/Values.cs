@@ -178,6 +178,11 @@ namespace EmuLoader.Core.Classes
                     <alias>nintendo-wii-u</alias>
                 </Platform>
                 <Platform>
+                    <id>4971</id>
+                    <name>Nintendo Switch</name>
+                    <alias>nintendo-switch</alias>
+                </Platform>
+                <Platform>
                     <id>1</id>
                     <name>PC</name>
                     <alias>pc</alias>
