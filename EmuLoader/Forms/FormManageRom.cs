@@ -232,7 +232,17 @@ namespace EmuLoader.Forms
 
         private void buttonCopyToRom_Click(object sender, EventArgs e)
         {
-            textBoxRomName.Text = textBoxFileName.Text.Trim().Replace(RomFunctions.GetFileExtension(textBoxFileName.Text), string.Empty);
+            var ext = RomFunctions.GetFileExtension(textBoxFileName.Text);
+
+            if (ext == "")
+            {
+                textBoxRomName.Text = textBoxFileName.Text.Trim();
+            }
+            else
+            {
+                textBoxRomName.Text = textBoxFileName.Text.Trim().Replace(ext, string.Empty);
+            }
+            
         }
 
         private void buttonOpenDB_Click(object sender, EventArgs e)

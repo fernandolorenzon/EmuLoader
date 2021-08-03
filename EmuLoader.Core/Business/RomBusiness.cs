@@ -340,6 +340,19 @@ namespace EmuLoader.Core.Business
             return false;
         }
 
+        public static bool IsRomDir(Rom rom)
+        {
+            if (rom.FileName.IndexOf(".") == -1)
+            {
+                if (Directory.Exists(rom.Platform.DefaultRomPath + "\\" + rom.FileName))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private static XmlNode SetRomNode(string platform)
         {
             var xmlRoms = XML.xmlRoms[platform];

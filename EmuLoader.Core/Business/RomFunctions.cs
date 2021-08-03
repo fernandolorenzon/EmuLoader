@@ -34,44 +34,63 @@ namespace EmuLoader.Core.Business
         {
             if (changeFileName != rom.FileName)
             {
-                string oldFile = rom.FileName;
-                string newFile = string.Empty;
-                string newDir = string.Empty;
-
                 if (RomBusiness.IsRomPack(rom))
                 {
-                    FileInfo file = new FileInfo(rom.FileName);
-                    newDir = file.Directory.Parent.FullName + "\\" + RomFunctions.GetFileNameNoExtension(changeFileName);
-                    newFile = newDir + "\\" + changeFileName;
-                }
-                else
-                {
-                    newFile = RomFunctions.GetRomDirectory(rom.FileName) + "\\" + changeFileName;
-                }
-
-                if (File.Exists(newFile))
-                {
-                    throw new Exception("A file named \"" + newFile + "\" already exists!");
+                    //FileInfo file = new FileInfo(rom.Platform.DefaultRomPath + "\\" + rom.FileName);
+                    //newDir = rom.Platform.DefaultRomPath + "\\" + RomFunctions.GetFileNameNoExtension(changeFileName);
+                    //newFile = newDir + "\\" + changeFileName;
+                    //if (!string.IsNullOrEmpty(newDir))
+                    //{
+                    //    DirectoryInfo oldPathDir = new FileInfo(rom.Platform.DefaultRomPath + "\\" + oldFile).Directory;
+                    //    oldPathDir.MoveTo(rom.Platform.DefaultRomPath + "\\" + newDir);
+                    //    File.Move(rom.Platform.DefaultRomPath + "\\" + newDir + "\\" + rom.FileName, newFile);
+                    //}
+                    return false;
                 }
 
-                if (!string.IsNullOrEmpty(newDir))
+                if (RomBusiness.IsRomDir(rom))
                 {
-                    DirectoryInfo oldPathDir = new FileInfo(oldFile).Directory;
-                    oldPathDir.MoveTo(newDir);
-                    File.Move(newDir + "\\" + rom.FileName, newFile);
-                }
-                else
-                {
-                    File.Move(oldFile, newFile);
+                    return RenameRomDir(rom, changeFileName);
                 }
 
-                //RomBusiness.DeleteRom(rom);
-                rom.FileName = newFile;
+                return RenameRomFileStandard(rom, changeFileName, changeZipFileName);
+            }
 
-                if (changeZipFileName && RomFunctions.GetFileExtension(newFile) == ".zip")
-                {
-                    RomFunctions.ChangeRomNameInsideZip(newFile);
-                }
+            return true;
+        }
+
+        private static bool RenameRomDir(Rom rom, string changeFileName)
+        {
+            string oldFile = rom.Platform.DefaultRomPath + "\\" + rom.FileName;
+            string newFile = rom.Platform.DefaultRomPath + "\\" + changeFileName;
+
+            if (Directory.Exists(newFile))
+            {
+                throw new Exception("A directory named \"" + newFile + "\" already exists!");
+            }
+
+            Directory.Move(oldFile, newFile);
+            rom.FileName = changeFileName;
+
+            return true;
+        }
+
+        private static bool RenameRomFileStandard(Rom rom, string changeFileName, bool changeZipFileName)
+        {
+            string oldFile = rom.Platform.DefaultRomPath + "\\" + rom.FileName;
+            string newFile = rom.Platform.DefaultRomPath + "\\" + changeFileName;
+
+            if (File.Exists(newFile))
+            {
+                throw new Exception("A file named \"" + newFile + "\" already exists!");
+            }
+
+            File.Move(oldFile, newFile);
+            rom.FileName = changeFileName;
+
+            if (changeZipFileName && RomFunctions.GetFileExtension(newFile) == ".zip")
+            {
+                RomFunctions.ChangeRomNameInsideZip(newFile);
             }
 
             return true;
@@ -344,7 +363,16 @@ namespace EmuLoader.Core.Business
         public static string GetFileExtension(string file)
         {
             if (string.IsNullOrEmpty(file)) return "";
-            return file.Substring(file.LastIndexOf("."));
+            var index = file.LastIndexOf(".");
+
+            if (index == -1)
+            {
+                return "";
+            }
+            else
+            {
+                return file.Substring(index);
+            }
         }
 
         public static string GetFileName(string file, bool rompack = false)
