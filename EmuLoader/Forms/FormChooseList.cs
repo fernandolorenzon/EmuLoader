@@ -13,6 +13,7 @@ namespace EmuLoader.Forms
         private static FormChooseList instance;
         private static bool changed = false;
         private List<RomLabel> selectedLabels = null;
+        private List<RomLabel> unselectedLabels = null;
 
         private FormChooseList()
         {
@@ -62,12 +63,17 @@ namespace EmuLoader.Forms
             if (changed)
             {
                 selectedLabels = new List<RomLabel>();
+                unselectedLabels = new List<RomLabel>();
 
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
                     if ((CheckState)row.Cells[columnCheck.Index].Value == CheckState.Checked)
                     {
                         selectedLabels.Add((RomLabel)row.Tag);
+                    }
+                    else if ((CheckState)row.Cells[columnCheck.Index].Value == CheckState.Unchecked)
+                    {
+                        unselectedLabels.Add((RomLabel)row.Tag);
                     }
                 }
             }
@@ -76,9 +82,10 @@ namespace EmuLoader.Forms
             instance.Close();
         }
 
-        public static bool ChooseLabel(List<Rom> roms, out List<RomLabel> selectedLabels)
+        public static bool ChooseLabel(List<Rom> roms, out List<RomLabel> selectedLabels, out List<RomLabel> unselectedLabels)
         {
             selectedLabels = new List<RomLabel>();
+            unselectedLabels = new List<RomLabel>();
             instance = new FormChooseList(typeof(RomLabel));
 
             foreach (DataGridViewRow row in instance.dataGridView.Rows)
@@ -106,7 +113,6 @@ namespace EmuLoader.Forms
 
                 all = found && !notFound;
 
-
                 if (found && all)
                 {
                     row.Cells[instance.columnCheck.Index].Value = CheckState.Checked;
@@ -126,6 +132,8 @@ namespace EmuLoader.Forms
 
             var result = instance.ShowDialogUpdated();
             selectedLabels = instance.selectedLabels;
+            unselectedLabels = instance.unselectedLabels;
+
             return result;
         }
     }

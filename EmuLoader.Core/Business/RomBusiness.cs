@@ -73,7 +73,7 @@ namespace EmuLoader.Core.Business
             }
 
             RomFunctions.SaveRomPictures(rom, boxPath, titlePath, gameplayPath, saveAsJpg);
-            RomLabelsBusiness.SetRomLabel(rom, labels);
+            RomLabelsBusiness.SetRomLabel(rom, labels, null);
             RomStatusBusiness.SetRomStatus(rom, status);
             XML.SaveXmlRoms(rom.Platform.Name);
             return rom;
