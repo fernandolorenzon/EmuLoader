@@ -1358,6 +1358,15 @@ namespace EmuLoader.Forms
             RunAppFunctions.OpenApplication(rom, emu);
         }
 
+        private void buttonOpenEmu_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 0) return;
+            if (comboBoxEmulators.SelectedItem == null) return;
+            Rom rom = (Rom)dataGridView.SelectedRows[0].Tag;
+            Emulator emu = (Emulator)comboBoxEmulators.SelectedItem;
+            RunAppFunctions.RunPlatform(emu);
+        }
+
         #endregion
 
     }

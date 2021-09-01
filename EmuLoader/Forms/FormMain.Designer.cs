@@ -141,6 +141,7 @@
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
+            this.buttonOpenEmu = new System.Windows.Forms.Button();
             this.contextMenuStripEditRom.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlatforms)).BeginInit();
@@ -1197,6 +1198,7 @@
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.panelBottom.Controls.Add(this.buttonOpenEmu);
             this.panelBottom.Controls.Add(this.pictureBoxRun);
             this.panelBottom.Controls.Add(this.comboBoxEmulators);
             this.panelBottom.Controls.Add(this.labelSelectedRoms);
@@ -1302,6 +1304,17 @@
             this.pictureBoxGameplay.TabStop = false;
             this.pictureBoxGameplay.DoubleClick += new System.EventHandler(this.pictureBoxGameplay_DoubleClick);
             this.pictureBoxGameplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameplay_MouseClick);
+            // 
+            // buttonOpenEmu
+            // 
+            this.buttonOpenEmu.ForeColor = System.Drawing.Color.Black;
+            this.buttonOpenEmu.Location = new System.Drawing.Point(482, 3);
+            this.buttonOpenEmu.Name = "buttonOpenEmu";
+            this.buttonOpenEmu.Size = new System.Drawing.Size(75, 23);
+            this.buttonOpenEmu.TabIndex = 21;
+            this.buttonOpenEmu.Text = "Open Emu";
+            this.buttonOpenEmu.UseVisualStyleBackColor = true;
+            this.buttonOpenEmu.Click += new System.EventHandler(this.buttonOpenEmu_Click);
             // 
             // FormMain
             // 
@@ -1454,5 +1467,6 @@
         private System.Windows.Forms.CheckBox checkBoxHandheld;
         private System.Windows.Forms.CheckBox checkBoxConsole;
         private System.Windows.Forms.CheckBox checkBoxArcade;
+        private System.Windows.Forms.Button buttonOpenEmu;
     }
 }

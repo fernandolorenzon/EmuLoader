@@ -274,10 +274,38 @@ namespace EmuLoader.Core.Business
         {
             if (rom.Platform == null)
             {
-                throw new Exception("There ins't a platform associated to this ROM.");
+                throw new Exception("There isn't a platform associated to this ROM.");
             }
 
             OpenApplication(rom);
+        }
+
+        public static void RunPlatform(Emulator emulator)
+        {
+            if (string.IsNullOrEmpty(emulator.Name))
+            {
+                throw new Exception("There isn't a emulator setup.");
+            }
+
+
+            string exe = emulator.Path;
+            var index = emulator.Path.LastIndexOf("\\");
+            string workdir = index == -1 ? "" : emulator.Path.Substring(0, emulator.Path.LastIndexOf("\\"));
+
+            var proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = exe,
+                    Arguments = "",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    WorkingDirectory = workdir
+                }
+            };
+
+            proc.Start();
         }
 
         public static void RunPlatform(Platform platform)
