@@ -32,7 +32,6 @@ namespace EmuLoader.Core.Business
             rom.Series = series;
             rom.IdLocked = idLocked;
             rom.Emulator = emulator;
-
             float ratingParse = 0;
 
             if (float.TryParse(rating, out ratingParse))
@@ -76,6 +75,7 @@ namespace EmuLoader.Core.Business
             RomLabelsBusiness.SetRomLabel(rom, labels, null);
             RomStatusBusiness.SetRomStatus(rom, status);
             XML.SaveXmlRoms(rom.Platform.Name);
+            rom.FileNameNoExt = RomFunctions.GetFileNameNoExtension(romName);
             return rom;
         }
 

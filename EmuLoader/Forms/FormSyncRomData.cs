@@ -492,7 +492,7 @@ namespace EmuLoader.Forms
 
                     if (updateTitle)
                     {
-                        LogMessage("UPDATING TILE PICTURE - " + rom.Name);
+                        LogMessage("UPDATING TITLE PICTURE - " + rom.Name);
                         SyncDataFunctions.SavePictureFromUrl(rom, titleUrl, Values.TitleFolder, checkBoxSaveAsJpg.Checked);
                     }
 
