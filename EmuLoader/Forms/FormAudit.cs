@@ -295,5 +295,32 @@ namespace EmuLoader.Forms
                 File.WriteAllText(file, text);
             }
         }
+
+        private void buttonChangeISOtoCHD_Click(object sender, EventArgs e)
+        {
+            if (comboBoxPlatform.Text == "") return;
+
+            Platform platform = PlatformBusiness.Get(comboBoxPlatform.Text);
+            var roms = RomBusiness.GetAll(platform);
+            int count = 0;
+
+            foreach (var rom in roms)
+            {
+                if (rom.FileName.EndsWith(".cue"))
+                {
+                    var chdpath = platform.DefaultRomPath + "\\" + rom.FileNameNoExt + ".chd";
+
+                    if (File.Exists(chdpath))
+                    {
+                        var old = rom.FileName;
+                        rom.FileName = rom.FileNameNoExt + ".chd";
+                        RomBusiness.SetRom(rom, old);
+                        count++;
+                    }
+                }
+            }
+
+            MessageBox.Show(count.ToString() + " roms updated");
+        }
     }
 }

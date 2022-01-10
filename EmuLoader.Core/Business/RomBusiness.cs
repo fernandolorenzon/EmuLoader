@@ -195,6 +195,18 @@ namespace EmuLoader.Core.Business
             return ret;
         }
 
+        public static bool SetRom(Rom rom, string oldfile)
+        {
+            var ret = Set(rom, oldfile);
+
+            if (ret)
+            {
+                XML.SaveXmlRoms(rom.Platform.Name);
+            }
+
+            return ret;
+        }
+
         public static bool SetRom(List<Rom> roms)
         {
             foreach (var item in roms)

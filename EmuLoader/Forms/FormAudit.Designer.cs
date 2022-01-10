@@ -37,6 +37,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonConvertRomsXML = new System.Windows.Forms.Button();
             this.buttonChangePath = new System.Windows.Forms.Button();
+            this.buttonChangeISOtoCHD = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCleanIncorrectRomPlatform
@@ -128,11 +129,22 @@
             this.buttonChangePath.UseVisualStyleBackColor = true;
             this.buttonChangePath.Click += new System.EventHandler(this.buttonChangePath_Click);
             // 
+            // buttonChangeISOtoCHD
+            // 
+            this.buttonChangeISOtoCHD.Location = new System.Drawing.Point(513, 74);
+            this.buttonChangeISOtoCHD.Name = "buttonChangeISOtoCHD";
+            this.buttonChangeISOtoCHD.Size = new System.Drawing.Size(131, 80);
+            this.buttonChangeISOtoCHD.TabIndex = 44;
+            this.buttonChangeISOtoCHD.Text = "Change ISO to CHD";
+            this.buttonChangeISOtoCHD.UseVisualStyleBackColor = true;
+            this.buttonChangeISOtoCHD.Click += new System.EventHandler(this.buttonChangeISOtoCHD_Click);
+            // 
             // FormAudit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonChangeISOtoCHD);
             this.Controls.Add(this.buttonChangePath);
             this.Controls.Add(this.buttonConvertRomsXML);
             this.Controls.Add(this.button1);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonConvertRomsXML;
         private System.Windows.Forms.Button buttonChangePath;
+        private System.Windows.Forms.Button buttonChangeISOtoCHD;
     }
 }
