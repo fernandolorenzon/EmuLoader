@@ -285,7 +285,7 @@ namespace EmuLoader.Forms
                 var platform = PlatformBusiness.Get(platformname);
 
                 var file = item + "\\roms.xml";
-                
+
                 if (!File.Exists(file)) continue;
 
                 var text = File.ReadAllText(file);

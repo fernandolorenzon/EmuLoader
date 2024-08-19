@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace EmuLoader.Forms
@@ -44,7 +43,7 @@ namespace EmuLoader.Forms
                 Functions.InitXml();
                 FillPlatformGrid();
                 //FormMessage.ShowMessage("Loading Roms...");
-                
+
                 columnSeries.Visible = showSeriesToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnRomSeries);
                 columnPlatform.Visible = showPlatformColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnPlatform);
                 columnGenre.Visible = showGenreColumnToolStripMenuItem.Checked = ConfigBusiness.GetElementVisibility(Column.ColumnGenre);

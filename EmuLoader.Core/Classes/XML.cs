@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Linq;
-using System;
+using System.Xml;
 
 namespace EmuLoader.Core.Classes
 {
@@ -30,6 +30,10 @@ namespace EmuLoader.Core.Classes
             XmlAttribute attrFileName = xmlConfig.CreateAttribute("ColumnFileName");
             attrFileName.Value = "false";
             config.Attributes.Append(attrFileName);
+
+            XmlAttribute attrDBName = xmlConfig.CreateAttribute("ColumnRomDBName");
+            attrDBName.Value = "false";
+            config.Attributes.Append(attrDBName);
 
             XmlAttribute attrPlatform = xmlConfig.CreateAttribute("ColumnPlatform");
             attrPlatform.Value = "true";
@@ -116,6 +120,14 @@ namespace EmuLoader.Core.Classes
             XmlAttribute attrFilterName = xmlConfig.CreateAttribute("Text");
             attrFilterName.Value = "";
             config.Attributes.Append(attrFilterName);
+
+            XmlAttribute attrHeight = xmlConfig.CreateAttribute("Height");
+            attrHeight.Value = "";
+            config.Attributes.Append(attrHeight);
+
+            XmlAttribute attrWidth = xmlConfig.CreateAttribute("Width");
+            attrWidth.Value = "";
+            config.Attributes.Append(attrWidth);
 
             xmlConfig.ChildNodes[1].AppendChild(filter);
 
@@ -261,6 +273,11 @@ namespace EmuLoader.Core.Classes
 
         internal static Dictionary<string, XmlDocument> LoadXmlPlatforms()
         {
+            if (!Directory.Exists(Values.PlatformsPath))
+            {
+                Directory.CreateDirectory(Values.PlatformsPath);
+            }
+
             var platforms = Directory.GetDirectories(Values.PlatformsPath);
             xmlPlatforms = new Dictionary<string, XmlDocument>();
 
@@ -279,7 +296,7 @@ namespace EmuLoader.Core.Classes
                     xmlPlatforms.Add(name, doc);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -656,7 +673,7 @@ namespace EmuLoader.Core.Classes
 
             if (node != null)
             {
-                GetParentNode(xmlGenres,"Genres").RemoveChild(node);
+                GetParentNode(xmlGenres, "Genres").RemoveChild(node);
                 return true;
             }
 

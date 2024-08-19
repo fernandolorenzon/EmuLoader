@@ -133,6 +133,7 @@
             this.columnYearReleased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.buttonOpenEmu = new System.Windows.Forms.Button();
             this.pictureBoxRun = new System.Windows.Forms.PictureBox();
             this.comboBoxEmulators = new System.Windows.Forms.ComboBox();
             this.labelSelectedRoms = new System.Windows.Forms.Label();
@@ -141,7 +142,6 @@
             this.pictureBoxBoxart = new System.Windows.Forms.PictureBox();
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.pictureBoxGameplay = new System.Windows.Forms.PictureBox();
-            this.buttonOpenEmu = new System.Windows.Forms.Button();
             this.contextMenuStripEditRom.SuspendLayout();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlatforms)).BeginInit();
@@ -385,27 +385,27 @@
             this.labelsToolStripMenuItem});
             this.addEditDeleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addEditDeleteToolStripMenuItem.Image")));
             this.addEditDeleteToolStripMenuItem.Name = "addEditDeleteToolStripMenuItem";
-            this.addEditDeleteToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
-            this.addEditDeleteToolStripMenuItem.Text = "&Add/Edit/Delete";
+            this.addEditDeleteToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.addEditDeleteToolStripMenuItem.Text = "&Platforms";
             // 
             // platformsToolStripMenuItem
             // 
             this.platformsToolStripMenuItem.Name = "platformsToolStripMenuItem";
-            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.platformsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.platformsToolStripMenuItem.Text = "Platforms";
             this.platformsToolStripMenuItem.Click += new System.EventHandler(this.managePlatformToolStripButton_Click);
             // 
             // genresToolStripMenuItem
             // 
             this.genresToolStripMenuItem.Name = "genresToolStripMenuItem";
-            this.genresToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.genresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.genresToolStripMenuItem.Text = "Genres";
             this.genresToolStripMenuItem.Click += new System.EventHandler(this.manageGenreToolStripMenuItem_Click);
             // 
             // labelsToolStripMenuItem
             // 
             this.labelsToolStripMenuItem.Name = "labelsToolStripMenuItem";
-            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.labelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.labelsToolStripMenuItem.Text = "Labels";
             this.labelsToolStripMenuItem.Click += new System.EventHandler(this.manageLabelToolStripButton_Click);
             // 
@@ -1212,6 +1212,17 @@
             this.panelBottom.Size = new System.Drawing.Size(880, 30);
             this.panelBottom.TabIndex = 17;
             // 
+            // buttonOpenEmu
+            // 
+            this.buttonOpenEmu.ForeColor = System.Drawing.Color.Black;
+            this.buttonOpenEmu.Location = new System.Drawing.Point(482, 3);
+            this.buttonOpenEmu.Name = "buttonOpenEmu";
+            this.buttonOpenEmu.Size = new System.Drawing.Size(75, 23);
+            this.buttonOpenEmu.TabIndex = 21;
+            this.buttonOpenEmu.Text = "Open Emu";
+            this.buttonOpenEmu.UseVisualStyleBackColor = true;
+            this.buttonOpenEmu.Click += new System.EventHandler(this.buttonOpenEmu_Click);
+            // 
             // pictureBoxRun
             // 
             this.pictureBoxRun.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxRun.Image")));
@@ -1304,17 +1315,6 @@
             this.pictureBoxGameplay.TabStop = false;
             this.pictureBoxGameplay.DoubleClick += new System.EventHandler(this.pictureBoxGameplay_DoubleClick);
             this.pictureBoxGameplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxGameplay_MouseClick);
-            // 
-            // buttonOpenEmu
-            // 
-            this.buttonOpenEmu.ForeColor = System.Drawing.Color.Black;
-            this.buttonOpenEmu.Location = new System.Drawing.Point(482, 3);
-            this.buttonOpenEmu.Name = "buttonOpenEmu";
-            this.buttonOpenEmu.Size = new System.Drawing.Size(75, 23);
-            this.buttonOpenEmu.TabIndex = 21;
-            this.buttonOpenEmu.Text = "Open Emu";
-            this.buttonOpenEmu.UseVisualStyleBackColor = true;
-            this.buttonOpenEmu.Click += new System.EventHandler(this.buttonOpenEmu_Click);
             // 
             // FormMain
             // 
