@@ -1,8 +1,4 @@
-﻿using EmuLoader.Core.Classes;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Xml;
+﻿using System.Drawing;
 namespace EmuLoader.Core.Models
 {
     public class RomLabel : Base

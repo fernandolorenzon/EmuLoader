@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Config ColumnFileName="false" ColumnRomDBName="false" ColumnPlatform="true" ColumnGenre="true" ColumnLabels="true" ColumnDeveloper="" ColumnPublisher="" ColumnStatus="true" ColumnRomSeries="true" ColumnYearReleased="true" ColumnRating="false" BoxArt="true" TitleArt="true" GameplayArt="true" PlatformsList="true" Extension="true" Platform="" Genre="" Label="" Year="" Publisher="" Developer="" Text="" Height="" Width="" />
+  <Filter Text="" TextType="" Platform="" Label="" Genre="" Publisher="" Developer="" Year="" Status="" Favorite="False" RomFile="" RomPlatform="" Arcade="False" Console="False" Handheld="False" CD="False" />
+</Root>

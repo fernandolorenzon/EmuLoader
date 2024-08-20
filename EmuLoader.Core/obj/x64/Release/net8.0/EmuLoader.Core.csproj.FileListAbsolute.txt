@@ -1,0 +1,15 @@
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\bin\x64\Release\net8.0\EmuLoader.Core.deps.json
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\bin\x64\Release\net8.0\EmuLoader.Core.dll
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\bin\x64\Release\net8.0\EmuLoader.Core.pdb
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.csproj.AssemblyReference.cache
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.Properties.ResourceCore.resources
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.csproj.GenerateResource.cache
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.GeneratedMSBuildEditorConfig.editorconfig
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.AssemblyInfoInputs.cache
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.AssemblyInfo.cs
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.csproj.CoreCompileInputs.cache
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.sourcelink.json
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.dll
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\refint\EmuLoader.Core.dll
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\EmuLoader.Core.pdb
+B:\User\Documents\GitHub\EmuLoader\EmuLoader.Core\obj\x64\Release\net8.0\ref\EmuLoader.Core.dll

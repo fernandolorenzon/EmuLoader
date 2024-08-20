@@ -1,11 +1,4 @@
-﻿using EmuLoader.Core.Business;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
-
-namespace EmuLoader.Core.Models
+﻿namespace EmuLoader.Core.Models
 {
     public class Rom : Base
     {

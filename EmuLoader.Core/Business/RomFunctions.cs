@@ -1,11 +1,7 @@
 ﻿using EmuLoader.Core.Classes;
 using EmuLoader.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Xml;
 
 namespace EmuLoader.Core.Business
@@ -304,7 +300,7 @@ namespace EmuLoader.Core.Business
         public static string GetPlatformPicture(string platformName)
         {
             string platformPicsPath = Values.PlatformsPath + "\\" + platformName + "\\" + Values.PlatformIcon;
-            
+
             if (File.Exists(platformPicsPath + ".ico"))
             {
                 return platformPicsPath + ".ico";
@@ -381,7 +377,7 @@ namespace EmuLoader.Core.Business
 
             if (rompack)
             {
-                var filename = file.Substring(file.LastIndexOf("\\")+ 1);
+                var filename = file.Substring(file.LastIndexOf("\\") + 1);
                 file = file.Replace("\\" + filename, "");
                 filename = file.Substring(file.LastIndexOf("\\") + 1) + "\\" + filename;
                 return filename;
@@ -390,7 +386,7 @@ namespace EmuLoader.Core.Business
             {
                 return file.Substring(file.LastIndexOf("\\") + 1);
             }
-            
+
         }
 
         public static string GetFileNameNoExtension(string file)

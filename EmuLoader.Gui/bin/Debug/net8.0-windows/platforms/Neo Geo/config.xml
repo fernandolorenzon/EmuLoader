@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Platform Name="Neo Geo" EmulatorExe="E:\Emuladores\Neo Geo\ngmame\ngmame0228.exe" Color="-16744256" Command="%EMUPATH% %ROMNAME%" ShowInList="True" ShowInFilter="True" Id="24" DefaultRomPath="E:\Emuladores\Neo Geo\Neogeo Roms" DefaultRomExtensions="zip" EmulatorExeAlt="E:\Emuladores\RetroArch\retroarch.exe" CommandAlt="%EMUPATH% -L cores\fbneo_libretro.dll %ROMPATH%" PictureNameByDisplay="False" UseRetroarch="False" DefaultEmulator="" Arcade="False" Console="True" Handheld="False" CD="False">
+  <Emulators>
+    <Emulator Path="E:\Emuladores\Neo Geo\Final Burn Neo\fbneo.exe" Command="%EMUPATH% %ROMNAME%">Final Burn Neo</Emulator>
+    <Emulator Path="E:\Emuladores\RetroArch\retroarch.exe" Command="%EMUPATH% -L cores\fbalpha2012_neogeo_libretro.dll %ROMPATH%">retroarch (fbalpha2012_neogeo)</Emulator>
+  </Emulators>
+</Platform>

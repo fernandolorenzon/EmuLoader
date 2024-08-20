@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Config ColumnFileName="false" ColumnRomDBName="false" ColumnPlatform="true" ColumnGenre="true" ColumnLabels="False" ColumnDeveloper="False" ColumnPublisher="False" ColumnStatus="true" ColumnRomSeries="False" ColumnYearReleased="true" ColumnRating="false" BoxArt="true" TitleArt="true" GameplayArt="true" PlatformsList="False" Extension="true" Platform="" Genre="" Label="" Year="" Publisher="" Developer="" Text="" Height="832" Width="1103" />
+  <Filter Text="" TextType="" Platform="" Label="" Genre="" Publisher="" Developer="" Year="" Status="" Favorite="False" RomFile="ssideki.zip" RomPlatform="Neo Geo" Arcade="False" Console="False" Handheld="False" CD="False" />
+</Root>

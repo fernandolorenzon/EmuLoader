@@ -1,0 +1,282 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject></StartupObject>
+    <ApplicationIcon>icons\EmuLoader.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons\add.png" />
+    <None Remove="icons\add16.png" />
+    <None Remove="icons\block32.png" />
+    <None Remove="icons\browser.png" />
+    <None Remove="icons\cartridge16.png" />
+    <None Remove="icons\checked.png" />
+    <None Remove="icons\CircularProgressAnimation.gif" />
+    <None Remove="icons\clean16.png" />
+    <None Remove="icons\clean32.png" />
+    <None Remove="icons\close16.png" />
+    <None Remove="icons\close32.png" />
+    <None Remove="icons\cloud-computing.png" />
+    <None Remove="icons\cloud-computing16.png" />
+    <None Remove="icons\cloud-computing32.png" />
+    <None Remove="icons\copy.png" />
+    <None Remove="icons\delete (1).png" />
+    <None Remove="icons\delete (2).png" />
+    <None Remove="icons\delete file 16.png" />
+    <None Remove="icons\delete.png" />
+    <None Remove="icons\delete16.png" />
+    <None Remove="icons\delete32.png" />
+    <None Remove="icons\documents.png" />
+    <None Remove="icons\files-and-folders (1).png" />
+    <None Remove="icons\files-and-folders (2).png" />
+    <None Remove="icons\files-and-folders (3).png" />
+    <None Remove="icons\files-and-folders (4).png" />
+    <None Remove="icons\files-and-folders (5).png" />
+    <None Remove="icons\files-and-folders pic add.png" />
+    <None Remove="icons\files-and-folders pic add16.png" />
+    <None Remove="icons\files-and-folders pic remove.png" />
+    <None Remove="icons\files-and-folders pic remove16.png" />
+    <None Remove="icons\files-and-folders pic16.png" />
+    <None Remove="icons\files-and-folders.png" />
+    <None Remove="icons\files-and-folders16.png" />
+    <None Remove="icons\folder (1).png" />
+    <None Remove="icons\folder (2).png" />
+    <None Remove="icons\folder (3).png" />
+    <None Remove="icons\folder (3)16.png" />
+    <None Remove="icons\folder (4).png" />
+    <None Remove="icons\folder add16.png" />
+    <None Remove="icons\folder files add.png" />
+    <None Remove="icons\folder files add16.png" />
+    <None Remove="icons\folder.png" />
+    <None Remove="icons\folder16.png" />
+    <None Remove="icons\folderemu16.png" />
+    <None Remove="icons\game-cartridge (1).png" />
+    <None Remove="icons\game-cartridge.png" />
+    <None Remove="icons\game-controller16.png" />
+    <None Remove="icons\games.png" />
+    <None Remove="icons\games16.png" />
+    <None Remove="icons\gear.png" />
+    <None Remove="icons\gear16.png" />
+    <None Remove="icons\heart.png" />
+    <None Remove="icons\info32.png" />
+    <None Remove="icons\internet.png" />
+    <None Remove="icons\internet32.png" />
+    <None Remove="icons\joystick.png" />
+    <None Remove="icons\label16.png" />
+    <None Remove="icons\like.png" />
+    <None Remove="icons\list32.png" />
+    <None Remove="icons\maintenance16.png" />
+    <None Remove="icons\medical-record.png" />
+    <None Remove="icons\medical-record16.png" />
+    <None Remove="icons\music-mixer.png" />
+    <None Remove="icons\music-mixer16.png" />
+    <None Remove="icons\note16.png" />
+    <None Remove="icons\ok.png" />
+    <None Remove="icons\play-button (1).png" />
+    <None Remove="icons\play-button.png" />
+    <None Remove="icons\plus32.png" />
+    <None Remove="icons\poll16.png" />
+    <None Remove="icons\save-file32.png" />
+    <None Remove="icons\save.png" />
+    <None Remove="icons\save32.png" />
+    <None Remove="icons\settings.png" />
+    <None Remove="icons\settings16.png" />
+    <None Remove="icons\sword.png" />
+    <None Remove="icons\tag32.png" />
+    <None Remove="icons\transfer16.png" />
+    <None Remove="icons\trash.png" />
+    <None Remove="icons\ui (1).png" />
+    <None Remove="icons\ui.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icons\add.png" />
+    <Content Include="icons\add16.png" />
+    <Content Include="icons\block32.png" />
+    <Content Include="icons\browser.png" />
+    <Content Include="icons\cartridge16.png" />
+    <Content Include="icons\checked.png" />
+    <Content Include="icons\CircularProgressAnimation.gif" />
+    <Content Include="icons\clean16.png" />
+    <Content Include="icons\clean32.png" />
+    <Content Include="icons\close16.png" />
+    <Content Include="icons\close32.png" />
+    <Content Include="icons\cloud-computing.png" />
+    <Content Include="icons\cloud-computing16.png" />
+    <Content Include="icons\cloud-computing32.png" />
+    <Content Include="icons\copy.png" />
+    <Content Include="icons\delete (1).png" />
+    <Content Include="icons\delete (2).png" />
+    <Content Include="icons\delete file 16.png" />
+    <Content Include="icons\delete.png" />
+    <Content Include="icons\delete16.png" />
+    <Content Include="icons\delete32.png" />
+    <Content Include="icons\documents.png" />
+    <Content Include="icons\EmuLoader.ico" />
+    <Content Include="icons\files-and-folders (1).png" />
+    <Content Include="icons\files-and-folders (2).png" />
+    <Content Include="icons\files-and-folders (3).png" />
+    <Content Include="icons\files-and-folders (4).png" />
+    <Content Include="icons\files-and-folders (5).png" />
+    <Content Include="icons\files-and-folders pic add.png" />
+    <Content Include="icons\files-and-folders pic add16.png" />
+    <Content Include="icons\files-and-folders pic remove.png" />
+    <Content Include="icons\files-and-folders pic remove16.png" />
+    <Content Include="icons\files-and-folders pic16.png" />
+    <Content Include="icons\files-and-folders.png" />
+    <Content Include="icons\files-and-folders16.png" />
+    <Content Include="icons\folder (1).png" />
+    <Content Include="icons\folder (2).png" />
+    <Content Include="icons\folder (3).png" />
+    <Content Include="icons\folder (3)16.png" />
+    <Content Include="icons\folder (4).png" />
+    <Content Include="icons\folder add16.png" />
+    <Content Include="icons\folder files add.png" />
+    <Content Include="icons\folder files add16.png" />
+    <Content Include="icons\folder.png" />
+    <Content Include="icons\folder16.png" />
+    <Content Include="icons\folderemu16.png" />
+    <Content Include="icons\game-cartridge (1).png" />
+    <Content Include="icons\game-cartridge.png" />
+    <Content Include="icons\game-controller16.png" />
+    <Content Include="icons\games.png" />
+    <Content Include="icons\games16.png" />
+    <Content Include="icons\gear.png" />
+    <Content Include="icons\gear16.png" />
+    <Content Include="icons\heart.png" />
+    <Content Include="icons\info32.png" />
+    <Content Include="icons\internet.png" />
+    <Content Include="icons\internet32.png" />
+    <Content Include="icons\joystick.png" />
+    <Content Include="icons\label16.png" />
+    <Content Include="icons\like.png" />
+    <Content Include="icons\list32.png" />
+    <Content Include="icons\maintenance16.png" />
+    <Content Include="icons\medical-record.png" />
+    <Content Include="icons\medical-record16.png" />
+    <Content Include="icons\music-mixer.png" />
+    <Content Include="icons\music-mixer16.png" />
+    <Content Include="icons\note16.png" />
+    <Content Include="icons\ok.png" />
+    <Content Include="icons\play-button (1).png" />
+    <Content Include="icons\play-button.png" />
+    <Content Include="icons\plus32.png" />
+    <Content Include="icons\poll16.png" />
+    <Content Include="icons\save-file32.png" />
+    <Content Include="icons\save.png" />
+    <Content Include="icons\save32.png" />
+    <Content Include="icons\settings.png" />
+    <Content Include="icons\settings16.png" />
+    <Content Include="icons\sword.png" />
+    <Content Include="icons\tag32.png" />
+    <Content Include="icons\transfer16.png" />
+    <Content Include="icons\trash.png" />
+    <Content Include="icons\ui (1).png" />
+    <Content Include="icons\ui.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmuLoader.Core\EmuLoader.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\FormAddPicFromUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormAudit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormBatchAddPictures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormBatchRemovePictures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormChooseList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormCustomMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormGenre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormMain_GridEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormMain_Menus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormMain_Methods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormMain_RomMenus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormManageRom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormPlatform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormPurgeRomData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormRegisterBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormRename.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormSettingsBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormSyncRomData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormSyncUsingXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Forms\FormMain.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
