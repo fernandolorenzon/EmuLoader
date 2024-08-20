@@ -2,11 +2,11 @@
 *.pdb
 *.exe
 *.suo
-/EmuLoader/bin
-/EmuLoader/obj
-/Tests/bin/Debug
-/Tests/obj
-/Tests/bin/Release
+/EmuLoader.Gui/bin
+/EmuLoader.Gui/obj
+/TestProject/bin/Debug
+/TestProject/obj
+/TestProject/bin/Release
 /EmuLoader.Core/bin/Debug/EmuLoader.Core.dll
 /EmuLoader.Core/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /EmuLoader.Core/obj/Debug/EmuLoader.Core.csproj.FileListAbsolute.txt
