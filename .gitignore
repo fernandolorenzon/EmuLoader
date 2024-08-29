@@ -2,6 +2,11 @@
 *.pdb
 *.exe
 *.suo
+/EmuLoader.Gui/bin/
+/EmuLoader.Gui/obj/Release/
+/EmuLoader.Gui/obj/Release/net8.0-windows/
+/EmuLoader.Core/bin/Debug/
+/EmuLoader.Core/bin/Debug/net8.0/
 /EmuLoader.Gui/bin
 /EmuLoader.Gui/obj
 /TestProject/bin/Debug
@@ -16,3 +21,14 @@
 /EmuLoader.Core/obj/Release
 /EmuLoader.Core/obj/Debug
 /.vs
+/EmuLoader.Gui/obj/Release/net8.0-windows/EmuLoader.Gui.AssemblyInfo.cs
+/EmuLoader.Gui/bin/Release/net8.0-windows/EmuLoader.Gui.dll
+/TestProject/bin/Release/net8.0/EmuLoader.Core.dll
+/TestProject/obj/Release/net8.0/TestProject.dll
+/EmuLoader.Gui/bin/Release/net8.0-windows/Newtonsoft.Json.dll
+/EmuLoader.Core/bin/Debug/net8.0/EmuLoader.Core.dll
+/EmuLoader.Gui/obj/
+/EmuLoader.Gui/obj/Debug/
+/EmuLoader.Gui/obj/Debug/net8.0-windows/
+/EmuLoader.Gui/obj/Debug/net8.0-windows/ref/
+/EmuLoader.Gui/obj/Debug/net8.0-windows/ref/EmuLoader.Gui.dll
