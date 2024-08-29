@@ -20,6 +20,7 @@ namespace EmuLoader.Gui.Forms
             url = url.Replace("boxart", "box");
 
             ProcessStartInfo sInfo = new ProcessStartInfo(url);
+            sInfo.UseShellExecute = true;
             Process.Start(sInfo);
 
             FormAddPicFromUrl form = new FormAddPicFromUrl(rom, imageType);
