@@ -1,13 +1,8 @@
 ﻿using EmuLoader.Core.Business;
 using EmuLoader.Core.Classes;
 using EmuLoader.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 namespace EmuLoader.Gui.Forms
 {
@@ -59,7 +54,7 @@ namespace EmuLoader.Gui.Forms
 
             comboBoxChooseEmulator.ValueMember = "Name";
             comboBoxChooseEmulator.DisplayMember = "Name";
-            comboBoxChooseEmulator.Items.Insert(0, new Emulator() { Name = "<default>"});
+            comboBoxChooseEmulator.Items.Insert(0, new Emulator() { Name = "<default>" });
 
             if (!string.IsNullOrEmpty(rom.Emulator))
             {
@@ -242,7 +237,7 @@ namespace EmuLoader.Gui.Forms
             {
                 textBoxRomName.Text = textBoxFileName.Text.Trim().Replace(ext, string.Empty);
             }
-            
+
         }
 
         private void buttonOpenDB_Click(object sender, EventArgs e)

@@ -1,8 +1,5 @@
-﻿using EmuLoader.Core.Classes;
-using EmuLoader.Core.Models;
-using System;
+﻿using EmuLoader.Core.Models;
 using System.Diagnostics;
-using System.Linq;
 
 namespace EmuLoader.Core.Business
 {
@@ -70,7 +67,7 @@ namespace EmuLoader.Core.Business
 
             proc.Start();
         }
-        
+
         public static void OpenApplication(Rom rom, Emulator emu)
         {
             string exe = emu.Path;

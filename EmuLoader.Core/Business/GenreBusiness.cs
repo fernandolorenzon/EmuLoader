@@ -1,10 +1,6 @@
-﻿using EmuLoader.Core.Business;
-using EmuLoader.Core.Classes;
+﻿using EmuLoader.Core.Classes;
 using EmuLoader.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Xml;
 
 namespace EmuLoader.Core.Business
