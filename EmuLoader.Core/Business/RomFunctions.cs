@@ -652,7 +652,7 @@ namespace EmuLoader.Core.Business
 
             List<Rom> romList = new List<Rom>();
             var files = Directory.GetFiles(directory);
-            var exts = platform.DefaultRomExtensions.Split(',').ToList();
+            var exts = platform.DefaultRomExtensions.Split(',').Select(x => x.Trim()).ToList();
             bool addedAny = false;
 
             foreach (var file in files)

@@ -51,6 +51,19 @@ namespace EmuLoader.Gui.Forms
                 buttonClose.Text = "Cancel and close";
                 buttonAdd.Text = "Save and close";
             }
+            else if (type == typeof(Platform))
+            {
+                List<Platform> platforms = PlatformBusiness.GetAll();
+                platforms.Insert(0, new Platform());
+                comboBox.DataSource = platforms;
+                comboBox.DisplayMember = "Name";
+                comboBox.ValueMember = "Name";
+                labelChoose.Text = "Choose Platform";
+                this.Text = "Choose Platform";
+                buttonCancel.Visible = false;
+                buttonClose.Text = "Cancel and close";
+                buttonAdd.Text = "Save and close";
+            }
             else if (type == typeof(string))
             {
                 var status = Values.Status.ToArray().ToList();

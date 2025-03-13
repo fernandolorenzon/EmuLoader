@@ -142,6 +142,9 @@ namespace EmuLoader.Gui.Forms
 
                 Platform platform = null;
                 FormChoose.ChoosePlatform(out platform);
+
+                if (platform == null) return;
+
                 RomFunctions.AddRomsFiles(platform, open.FileNames);
 
                 FilterRoms();
@@ -151,6 +154,5 @@ namespace EmuLoader.Gui.Forms
                 FormCustomMessage.ShowError(ex.Message);
             }
         }
-
     }
 }
