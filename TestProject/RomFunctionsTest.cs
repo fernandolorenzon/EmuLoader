@@ -8,8 +8,8 @@ namespace Tests
     {
         public void TestMethod1()
         {
-            var romname = RomFunctions.TrimRomName("Battletoads and Double Dragon");
-            var imagename = RomFunctions.TrimRomName("Battletoads & Double Dragon");
+            var romname = RomFunctions.NormalizeRomName("Battletoads and Double Dragon");
+            var imagename = RomFunctions.NormalizeRomName("Battletoads & Double Dragon");
 
             Assert.AreEqual(romname, imagename);
         }

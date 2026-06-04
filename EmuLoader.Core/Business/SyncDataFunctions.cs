@@ -26,11 +26,11 @@ namespace EmuLoader.Core.Business
 
             if (games == null) return string.Empty;
 
-            var romName = RomFunctions.TrimRomName(rom.Name);
+            var romName = RomFunctions.NormalizeRomName(rom.Name);
 
             foreach (var game in games)
             {
-                var gameName = RomFunctions.TrimRomName(game.DBName);
+                var gameName = RomFunctions.NormalizeRomName(game.DBName);
 
                 if (gameName == romName)
                 {

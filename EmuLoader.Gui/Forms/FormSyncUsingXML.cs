@@ -76,7 +76,7 @@ namespace EmuLoader.Gui.Forms
 
                 foreach (var item in roms)
                 {
-                    name = RomFunctions.TrimRomName(item.Name);
+                    name = RomFunctions.NormalizeRomName(item.Name);
 
                     if (!romsDic.ContainsKey(name))
                     {
@@ -86,7 +86,7 @@ namespace EmuLoader.Gui.Forms
 
                 foreach (XmlNode node in list)
                 {
-                    name = RomFunctions.TrimRomName(node.ChildNodes[1].InnerText);
+                    name = RomFunctions.NormalizeRomName(node.ChildNodes[1].InnerText);
 
                     if (!nodesDic.ContainsKey(name))
                     {

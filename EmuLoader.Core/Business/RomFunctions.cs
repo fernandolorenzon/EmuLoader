@@ -2,6 +2,7 @@
 using EmuLoader.Core.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace EmuLoader.Core.Business
@@ -161,45 +162,60 @@ namespace EmuLoader.Core.Business
             newFileName = newFileName.Trim();
         }
 
-        public static string TrimRomName(string name)
+        public static string NormalizeRomName(string name)
         {
-            string trimmed = name.ToLower();
+            if (string.IsNullOrWhiteSpace(name))
+                return string.Empty;
 
-            if (trimmed.IndexOf("/") > -1)
-            {
-                trimmed = trimmed.Substring(0, trimmed.IndexOf("/") - 1);
-                trimmed = trimmed.Trim();
-            }
+            // Get filename only
+            string result = Path.GetFileNameWithoutExtension(name).ToLowerInvariant();
 
-            if (trimmed.LastIndexOf("\\") > -1)
-            {
-                trimmed = trimmed.Substring(trimmed.LastIndexOf("\\") + 1);
-            }
+            // Remove (...) and [...]
+            result = Regex.Replace(result, @"\([^)]*\)", "");
+            result = Regex.Replace(result, @"\[[^\]]*\]", "");
 
-            trimmed = Functions.RemoveSubstring(trimmed, '(', ')');
-            trimmed = Functions.RemoveSubstring(trimmed, '[', ']');
-            trimmed = trimmed.Replace("'s", "").Replace(" no ", "");
-            trimmed = trimmed.Replace(" iv", " 4").Replace(" iii", " 3").Replace(" ii", " 2");
-            trimmed = trimmed.Replace("the ", "").Replace("the_", "").Replace(" the", "").Replace("_the", "");
-            trimmed = trimmed.Replace(".jpg", "").Replace(".gif", "").Replace(".png", "");
-            trimmed = trimmed.Replace(" in ", "").Replace(" on ", "").Replace(" at ", "");
-            trimmed = trimmed.Replace("ou", "o").Replace("uu", "u").Replace("oh", "o").Replace("yu", "u").Replace("yo", "o").Replace("syo", "sho");
-            trimmed = trimmed.Replace("-", "").Replace("_", "").Replace(":", "").Replace("'", "").Replace(".", "").Replace(",", "");
-            trimmed = trimmed.Replace(" and ", "").Replace("versus", "vs");
-            trimmed = trimmed.Replace("aa", "a").Replace("ee", "e").Replace("oo", "o");
-            trimmed = trimmed.Replace("[!]", "").Replace("!", "").Replace("?", "").Replace("&", "").Replace("  ", "").Replace(" ", "").Replace(" ", "");
+            // Normalize roman numerals
+            result = Regex.Replace(result, @"\biv\b", "4");
+            result = Regex.Replace(result, @"\biii\b", "3");
+            result = Regex.Replace(result, @"\bii\b", "2");
 
-            return trimmed;
+            // Remove common filler words
+            result = Regex.Replace(result,
+                @"\b(the|and|in|on|at|no)\b",
+                "",
+                RegexOptions.IgnoreCase);
+
+            // Common replacements
+            result = result
+                .Replace("'s", "")
+                .Replace("versus", "vs");
+
+            // Optional phonetic tweaks
+            result = result
+                .Replace("syo", "sho")
+                .Replace("ou", "o")
+                .Replace("uu", "u")
+                .Replace("oh", "o")
+                .Replace("yu", "u")
+                .Replace("yo", "o")
+                .Replace("aa", "a")
+                .Replace("ee", "e")
+                .Replace("oo", "o");
+
+            // Remove punctuation and whitespace
+            result = Regex.Replace(result, @"[\W_]+", "");
+
+            return result;
         }
 
-        public static bool MatchImagesExact(string[] images, string romName, out string imageFoundPath)
+    public static bool MatchImagesExact(string[] images, string romName, out string imageFoundPath)
         {
             imageFoundPath = string.Empty;
             bool found = false;
 
             foreach (var image in images)
             {
-                string imageTrimmed = RomFunctions.TrimRomName(image);
+                string imageTrimmed = RomFunctions.NormalizeRomName(image);
 
                 if (imageTrimmed == romName)
                 {
@@ -216,12 +232,12 @@ namespace EmuLoader.Core.Business
         {
             imageFoundPath = string.Empty;
             bool found = false;
-            string romTrimmed = RomFunctions.TrimRomName(romName);
+            string romTrimmed = RomFunctions.NormalizeRomName(romName);
             var romRegion = RomFunctions.DetectRegion(romName);
 
             foreach (var image in images)
             {
-                string imageTrimmed = RomFunctions.TrimRomName(image);
+                string imageTrimmed = RomFunctions.NormalizeRomName(image);
 
                 if (imageTrimmed == romTrimmed && imageRegion[RomFunctions.GetFileName(image)] == romRegion)
                 {
@@ -235,7 +251,7 @@ namespace EmuLoader.Core.Business
             {
                 foreach (var image in images)
                 {
-                    string imageTrimmed = RomFunctions.TrimRomName(image);
+                    string imageTrimmed = RomFunctions.NormalizeRomName(image);
 
                     if (imageTrimmed == romTrimmed)
                     {

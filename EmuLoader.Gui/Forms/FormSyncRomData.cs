@@ -237,12 +237,12 @@ namespace EmuLoader.Gui.Forms
                     comboBoxPlatform_SelectedIndexChanged(null, new EventArgs());
                 }
 
-                var romName = RomFunctions.TrimRomName(rom.Name);
+                var romName = RomFunctions.NormalizeRomName(rom.Name);
                 found = false;
 
                 foreach (var game in games)
                 {
-                    var gameName = RomFunctions.TrimRomName(game.DBName);
+                    var gameName = RomFunctions.NormalizeRomName(game.DBName);
 
                     if (romName == gameName)
                     {
