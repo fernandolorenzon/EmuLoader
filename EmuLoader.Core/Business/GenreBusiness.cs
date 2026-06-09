@@ -90,5 +90,28 @@ namespace EmuLoader.Core.Business
             genres.Remove(name.ToLower());
             return XML.DelGenre(name);
         }
+
+        public static bool CloneGenres(Platform source, Platform target)
+        {
+            var romsSource = RomBusiness.GetAll(source);
+            var romsTarget = RomBusiness.GetAll(target).Where(x => x.Genre is null).ToList();
+
+            var changed = new List<Rom>();
+
+            foreach (var romTarget in romsTarget)
+            {
+                var romSource = romsSource.Where(x => RomFunctions.NormalizeRomName(x.Name) == RomFunctions.NormalizeRomName(romTarget.Name)).FirstOrDefault();
+
+                if (romSource != null)
+                {
+                    romTarget.Genre = romSource.Genre;
+                    changed.Add(romTarget);
+                }
+            }
+
+            RomBusiness.SetRom(changed);
+
+            return true;
+        }
     }
 }

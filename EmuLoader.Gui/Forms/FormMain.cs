@@ -988,6 +988,23 @@ namespace EmuLoader.Gui.Forms
             }
         }
 
+        private void cloneGenresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormCloneGenres form = new FormCloneGenres();
+
+                if (form.ShowDialogUpdated())
+                {
+                    FilterRoms();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormCustomMessage.ShowError(ex.Message);
+            }
+        }
+
         private void showBoxArtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

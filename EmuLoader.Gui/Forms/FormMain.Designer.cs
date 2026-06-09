@@ -85,6 +85,7 @@
             this.syncRomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purgeRomDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncUsingRetropieXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cloneGenresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.openAppFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewPlatforms = new System.Windows.Forms.DataGridView();
@@ -614,7 +615,8 @@
             this.romDataOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.syncRomsToolStripMenuItem,
             this.purgeRomDataToolStripMenuItem,
-            this.syncUsingRetropieXMLToolStripMenuItem});
+            this.syncUsingRetropieXMLToolStripMenuItem,
+            this.cloneGenresToolStripMenuItem});
             this.romDataOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("romDataOptionsToolStripMenuItem.Image")));
             this.romDataOptionsToolStripMenuItem.Name = "romDataOptionsToolStripMenuItem";
             this.romDataOptionsToolStripMenuItem.Size = new System.Drawing.Size(132, 20);
@@ -640,6 +642,13 @@
             this.syncUsingRetropieXMLToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.syncUsingRetropieXMLToolStripMenuItem.Text = "Sync Using Retropie XML";
             this.syncUsingRetropieXMLToolStripMenuItem.Click += new System.EventHandler(this.syncUsingRetropieXMLToolStripMenuItem_Click);
+            // 
+            // cloneGenresToolStripMenuItem
+            // 
+            this.cloneGenresToolStripMenuItem.Name = "cloneGenresToolStripMenuItem";
+            this.cloneGenresToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.cloneGenresToolStripMenuItem.Text = "Clone Genres";
+            this.cloneGenresToolStripMenuItem.Click += new System.EventHandler(this.cloneGenresToolStripMenuItem_Click);
             // 
             // toolStripMenuItemSettings
             // 
@@ -1429,6 +1438,7 @@
         private System.Windows.Forms.ToolStripMenuItem showRatingColumnToolStripMenuItem;
         private System.Windows.Forms.Button buttonRescan;
         private System.Windows.Forms.ToolStripMenuItem syncUsingRetropieXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cloneGenresToolStripMenuItem;
         private System.Windows.Forms.Label labelSelectedRoms;
         private System.Windows.Forms.Label labelSelectedRomsCount;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
